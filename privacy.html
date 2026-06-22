@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Privacy Policy — Clinky</title>
+<style>
+:root{--coral:#FF4F62;--ink:#1c1c1e;--muted:#6b6b70;--bg:#FFFBFA;--line:#efe3e1;}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--bg);color:var(--ink);
+font:17px/1.65 -apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+-webkit-font-smoothing:antialiased;}
+.wrap{max-width:760px;margin:0 auto;padding:32px 22px 80px;}
+header.mast{border-bottom:1px solid var(--line);padding-bottom:18px;margin-bottom:8px;}
+.brand{font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:var(--coral);}
+h1{font-size:30px;line-height:1.2;margin:.35em 0 .15em;font-weight:800;letter-spacing:-.01em;}
+.updated{color:var(--muted);font-size:14px;margin:0;}
+nav{display:flex;flex-wrap:wrap;gap:8px 14px;margin:16px 0 0;font-size:14px;}
+nav a{color:var(--muted);text-decoration:none;border:1px solid var(--line);
+padding:5px 12px;border-radius:999px;}
+nav a.active{color:#fff;background:var(--coral);border-color:var(--coral);}
+nav .sep{flex-basis:100%;height:0;}
+h2{font-size:21px;margin:1.9em 0 .5em;font-weight:700;letter-spacing:-.01em;}
+h3{font-size:17px;margin:1.4em 0 .4em;font-weight:700;color:#333;}
+p{margin:.7em 0;}
+ul{margin:.5em 0 .9em;padding-left:1.3em;}
+li{margin:.32em 0;}
+a{color:var(--coral);}
+strong{font-weight:680;}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);
+color:var(--muted);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="mast">
+<div class="brand">Clinky</div>
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: June 22, 2026</p>
+<nav><a href="privacy.html" class="active">Privacy</a><a href="terms.html">Terms</a><span class="sep"></span><a href="privacy-ru.html">Русский</a></nav>
+</header>
+<main>
+<h2>1. Who we are</h2>
+<p>Clinky ("the app", "we", "us") is an iOS application developed by an individual developer based in Belarus. Clinky is a social meeting and drink tracker: it helps you remember the people you meet, the moments you share, and gives you ice-breaker cards for in-person get-togethers.</p>
+<p>If you have any question about this policy or your data, contact us at <strong><a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></strong>.</p>
+<h2>2. The short version</h2>
+<ul>
+<li>Clinky has <strong>no user accounts</strong> and <strong>no login</strong>. You don't create a profile with us.</li>
+<li>Clinky has <strong>no first-party server</strong>. Your friends, meetings, drinks, streaks, achievements, plans and answered ice-breaker cards are stored <strong>only on your device</strong> (in a local database), not on any server we control.</li>
+<li>Three third-party services receive limited data off your device: <strong>Adapty</strong> (subscriptions), <strong>TelemetryDeck</strong> (anonymous product analytics) and <strong>Sentry</strong> (crash reports). What each receives is described below.</li>
+<li>We <strong>do not track you</strong> across other apps or websites, we use <strong>no advertising identifier (IDFA)</strong>, and we <strong>do not sell or share</strong> your personal information for advertising.</li>
+</ul>
+<h2>3. Data that stays only on your device</h2>
+<p>The core content you create in Clinky never leaves your device through us. It is stored in a local database inside the app's private container on your iPhone. This includes:</p>
+<ul>
+<li>Your friends ("Clinkers"), including names and, for friends you import from Contacts, the contact's stable identifier (see Section 6).</li>
+<li>Your meetings, drinks logged, locations you optionally attach to a meeting, streaks, achievements, planned meetings, and which ice-breaker cards you've answered.</li>
+</ul>
+<p>We have no copy of this data, no ability to read it remotely, and no way to recover it for you. If you delete the app, this data is removed from your device.</p>
+<h2>4. Data processed by third-party services (off-device)</h2>
+<p>To run subscriptions, understand how the app is used, and fix crashes, the app sends limited data to three processors. We instruct them to process data only on our behalf.</p>
+<h3>4.1 Adapty — subscriptions and paywall</h3>
+<p>When you view the Clinky Pro paywall, purchase, or restore a subscription, the Adapty SDK communicates with Adapty's servers. Adapty processes, by its design: an <strong>anonymous Adapty profile identifier</strong>, App Store <strong>transaction / receipt data</strong>, your <strong>subscription state</strong>, and standard <strong>device, locale and storefront</strong> information. The Adapty SDK can also access device identifiers such as the <strong>IDFV (vendor identifier)</strong> and your <strong>IP address</strong>.</p>
+<ul>
+<li>We do <strong>not</strong> set a `customerUserId` and do <strong>not</strong> send your name, email or phone to Adapty — your Adapty profile is anonymous.</li>
+<li>The IDFV is a per-vendor device identifier; it is <strong>not</strong> an advertising identifier and is not used to track you across apps. We do not enable any advertising-attribution integration.</li>
+<li><strong>Purpose:</strong> check your Pro entitlement, show and A/B-test the paywall, process purchases and restores.</li>
+<li>Adapty privacy policy: <a href="https://adapty.io/privacy/" target="_blank" rel="noopener">https://adapty.io/privacy/</a></li>
+</ul>
+<h3>4.2 TelemetryDeck — privacy-first product analytics</h3>
+<p>TelemetryDeck receives <strong>aggregate, anonymous usage events</strong> (for example: app opened, meeting created, paywall shown), with parameters limited to bucketed counts, types and flags. The app does <strong>not</strong> send your typed text, friend names, contact identifiers, or any raw IDs in these events. The TelemetryDeck SDK additionally generates its own <strong>anonymized, salted-and-hashed identifier</strong> (not reversible, not shared across apps) plus device/OS/app-version metadata. TelemetryDeck does <strong>not</strong> store IP addresses. By the vendor's own assessment, the data it handles falls outside GDPR/CCPA scope; we nonetheless disclose it here for transparency.</p>
+<ul>
+<li><strong>Purpose:</strong> understand feature usage so we can improve the app.</li>
+<li><strong>Where:</strong> TelemetryDeck servers (EU).</li>
+<li>TelemetryDeck privacy policy: <a href="https://telemetrydeck.com/privacy/" target="_blank" rel="noopener">https://telemetrydeck.com/privacy/</a></li>
+</ul>
+<h3>4.3 Sentry — crash reporting</h3>
+<p>Sentry receives <strong>crash and error reports</strong>: stack traces, breadcrumbs (such as navigation and lifecycle events), and device / OS / app-version metadata, plus a per-install random identifier. We have configured Sentry to <strong>not send personal information by default</strong> (`sendDefaultPii = false`) and to strip user data from events. We do not attach your identity to crash reports.</p>
+<ul>
+<li><strong>Purpose:</strong> diagnose and fix crashes and stability problems.</li>
+<li><strong>Where:</strong> Sentry servers (EU).</li>
+<li>Sentry privacy policy: <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">https://sentry.io/privacy/</a></li>
+</ul>
+<h3>4.4 Apple</h3>
+<p>Purchases are handled by Apple via the App Store / StoreKit, and are governed by Apple's privacy policy. Planned meetings you choose to save go into your own Apple Calendar (see Section 6).</p>
+<h2>5. Tracking and advertising</h2>
+<p>Clinky does <strong>not</strong> track you in the App Store sense: there is <strong>no IDFA / advertising identifier</strong>, no AppTrackingTransparency prompt, no ad networks, and no data brokers. Adapty processes the <strong>IDFV (vendor identifier)</strong> as disclosed in Section 4.1 — this is a per-vendor device identifier, not an advertising identifier and not a cross-app tracking signal. None of the services above are configured to track you across other apps or websites. We do not sell or share your personal information.</p>
+<h2>6. Permissions the app may request</h2>
+<p>Each permission is optional and is used only for the purpose described. iOS will ask before any permission is granted, and you can change or revoke each one at any time in <strong>iOS Settings → Clinky</strong>.</p>
+<ul>
+<li><strong>Contacts (read):</strong> Used so you can quickly add friends. The app reads contact name, phone numbers and photo to show you the picker, but <strong>only the name (in a shortened "First L." form) and the contact's identifier are saved</strong> into your local friends list. <strong>Phone numbers and photos are not stored and never sent off your device.</strong> Contacts are never sent to any third party.</li>
+<li><strong>Calendar (write-only):</strong> Used to add your planned meetings to your own Apple Calendar. The app can only write events (title, notes, time) — it cannot read your calendar. These events live in your Apple Calendar, not on any Clinky server.</li>
+<li><strong>Notifications (local only):</strong> Used for plan reminders, gentle streak reminders, and live-session reminders. These are scheduled locally on your device. Clinky uses <strong>no remote push</strong> and registers no push token.</li>
+<li><strong>Location (when in use, optional):</strong> If you choose to attach a place to a meeting, the app reads a single approximate coordinate and stores it <strong>only on your device</strong> with that meeting. Coordinates are never sent to any server or third party.</li>
+</ul>
+<h2>7. Children</h2>
+<p>Clinky is <strong>rated 17+</strong> in the App Store because it contains references to alcohol — this is a content rating, not a data-processing age. Separately, we do not knowingly process personal data of anyone below the applicable digital-consent age in their country (which is <strong>13 to 16</strong> depending on the jurisdiction, 16 by GDPR default). The app is not directed to children. If you believe a child has used the app, contact us at <a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a> and we will help with deletion where applicable. Note that most of the app's data is on-device only and under your control.</p>
+<h2>8. Legal bases for processing (GDPR)</h2>
+<p>If you are in the European Economic Area or UK, we rely on:</p>
+<ul>
+<li><strong>Performance of a contract (Art. 6(1)(b))</strong> — to process and restore your Clinky Pro subscription (Adapty / Apple).</li>
+<li><strong>Legitimate interests (Art. 6(1)(f))</strong> — to diagnose crashes and keep the app stable (Sentry), balanced against your privacy.</li>
+<li><strong>Consent (Art. 6(1)(a))</strong> — for non-essential product analytics (TelemetryDeck). Where the app presents an analytics consent choice, we process analytics only on that basis, and you can withdraw consent at any time (see Section 11). Where you have not consented, non-essential analytics are not collected.</li>
+</ul>
+<h2>9. Your rights</h2>
+<p><strong>If you are in the EEA / UK (GDPR):</strong> you have the right to access, rectify, erase, restrict, port, and object to processing, to withdraw consent, and to lodge a complaint with your local data protection authority.</p>
+<p><strong>If you are in California (CCPA/CPRA):</strong> you have the right to know what we collect, to delete and correct it, to opt out of "sale" or "sharing" (we do neither), to limit use of sensitive personal information, and to not be discriminated against for exercising these rights.</p>
+<p><strong>Important limitation (GDPR Art. 11).</strong> Because Clinky has no accounts and your core data is stored only on your device, and because the data shared with our processors is anonymized or pseudonymized (anonymous Adapty profile, hashed TelemetryDeck ID, scrubbed Sentry events), <strong>we generally cannot identify a specific individual's records</strong> within that processor data. Where we cannot identify you from the data we hold, we may be unable to act on an access, correction or deletion request for that processor data, and we may ask you for additional information to enable identification, or decline where identification remains impossible. <strong>The primary and most effective way to delete your data is on-device:</strong> delete a friend, a meeting, or the entire app at any time. For matters within our control, contact us at <strong><a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></strong>. We do not sell or share your personal information.</p>
+<h2>10. Data retention</h2>
+<ul>
+<li><strong>On-device data</strong> is kept until you delete it or uninstall the app. We never receive it.</li>
+<li><strong>Analytics and crash data</strong> are retained only as long as needed for the stated purposes, according to each processor's default retention settings.</li>
+<li><strong>Subscription data</strong> is retained by Adapty/Apple for as long as needed to manage your entitlement and as required by their own policies and applicable law.</li>
+</ul>
+<h2>11. Withdrawing consent / opting out</h2>
+<p>You can stop most off-device data sharing by revoking permissions in iOS Settings, by turning off analytics consent in the app (where offered), or by uninstalling the app. To make a request regarding data held by our processors, email <strong><a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></strong>, noting the identification limitation described in Section 9.</p>
+<h2>12. International data transfers and EU representation</h2>
+<p>The developer (the <strong>data controller</strong>) is based in <strong>Belarus</strong>, which is outside the EEA and is <strong>not covered by an EU adequacy decision</strong>. This means that personal data of EEA users is processed by a controller located in a third country without adequacy. We address this through the <strong>data-minimization</strong> described in this policy (no accounts, on-device-only core data, anonymized/pseudonymized processor data) and, where required, appropriate safeguards.</p>
+<p>Our processors operate servers in the <strong>EU and/or the United States</strong>. Where data is transferred outside the EEA/UK to a processor, we rely on appropriate safeguards such as the <strong>EU–US Data Privacy Framework</strong> (where the processor is certified) and <strong>Standard Contractual Clauses (SCCs)</strong>.</p>
+<p><strong>EU representative (GDPR Art. 27).</strong> Clinky is operated by an individual developer and processes only minimal, anonymized or pseudonymized data through the processors described above. We have not appointed a representative in the Union under Article 27; if that changes, we will name our representative here. You can contact us directly about any data matter at <strong><a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></strong>.</p>
+<h2>13. Security</h2>
+<p>Your core data stays on your device, protected by iOS. Data sent to our processors is transmitted over encrypted (HTTPS) connections. No method of transmission or storage is 100% secure, but we keep the data we share to a minimum.</p>
+<h2>14. Changes to this policy</h2>
+<p>We may update this policy from time to time. We will change the "Last updated" date above and, for significant changes, provide a notice in the app or on the policy page. Continued use after an update means you accept the revised policy.</p>
+<h2>15. Contact</h2>
+<p>Questions or requests: <strong><a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></strong></p>
+</main>
+<footer>© 2026 Clinky · Contact: <a href="mailto:evgeniymityulya.ios@gmail.com">evgeniymityulya.ios@gmail.com</a></footer>
+</div>
+</body>
+</html>
