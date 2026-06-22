@@ -3,30 +3,162 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Clinky — Legal</title>
-<style>
-body{margin:0;background:#FFFBFA;color:#1c1c1e;font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;}
-.wrap{max-width:620px;margin:0 auto;padding:64px 22px;}
-.brand{font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#FF4F62;font-size:15px;}
-h1{font-size:30px;font-weight:800;margin:.3em 0 .2em;}
-p{color:#6b6b70;}
-.grid{display:grid;gap:12px;margin-top:26px;}
-a.card{display:block;text-decoration:none;color:#1c1c1e;border:1px solid #efe3e1;
-border-radius:14px;padding:16px 18px;font-weight:600;}
-a.card span{display:block;color:#6b6b70;font-weight:400;font-size:14px;margin-top:2px;}
-</style>
+<meta name="robots" content="index,follow">
+<title data-i18n="meta.title">Clinky — Friends, drinks &amp; games</title>
+<meta name="description" data-i18n-attr="content:meta.desc" content="Clinky helps you see friends more often, break the ice with party-game cards, and collect a 3D memento from every clink. Join the waitlist.">
+<meta property="og:title" content="Clinky — Tap. Clink. Meet again.">
+<meta property="og:description" content="Friends, drinks &amp; games that actually get you talking. Join the waitlist.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 </head>
 <body>
-<div class="wrap">
-<div class="brand">Clinky</div>
-<h1>Legal</h1>
-<p>Tap. Clink. Meet again.</p>
-<div class="grid">
-<a class="card" href="privacy.html">Privacy Policy<span>English</span></a>
-<a class="card" href="privacy-ru.html">Политика конфиденциальности<span>Русский</span></a>
-<a class="card" href="terms.html">Terms of Use<span>English</span></a>
-<a class="card" href="terms-ru.html">Условия использования<span>Русский</span></a>
-</div>
-</div>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <a class="wordmark" href="#top">Clinky</a>
+  <div class="topbar-right">
+    <a class="topbar-cta" href="#join" data-i18n="nav.join">Join waitlist</a>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" class="lang-btn" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <span class="eyebrow" data-i18n="hero.eyebrow">Coming soon to the App Store</span>
+        <h1 data-i18n="hero.title">Friends, drinks &amp; games that actually get you talking.</h1>
+        <p class="lede" data-i18n="hero.lede">Clinky helps you meet up more often, break the ice with party-game cards, and collect a 3D memento from every clink.</p>
+
+        <form id="waitlist" class="waitlist" novalidate>
+          <input type="email" name="email" required autocomplete="email"
+                 class="waitlist-input" data-i18n-attr="placeholder:hero.emailPlaceholder"
+                 placeholder="your@email.com" aria-label="Email">
+          <button type="submit" class="btn-primary" data-i18n="hero.cta">Join the waitlist</button>
+        </form>
+        <p class="microcopy" data-i18n="hero.microcopy">No spam. One email when we launch.</p>
+        <p class="waitlist-done" id="waitlistDone" hidden data-i18n="hero.done">🎉 You're on the list! We'll email you the App Store link at launch.</p>
+      </div>
+
+      <div class="hero-visual">
+        <div class="model-stage">
+          <model-viewer id="drinkModel"
+            src="models/BeerCap.glb"
+            ios-src="models/BeerCap.usdz"
+            ar ar-modes="quick-look webxr scene-viewer"
+            camera-controls auto-rotate touch-action="pan-y"
+            disable-zoom interaction-prompt="none"
+            shadow-intensity="1" exposure="1"
+            alt="Clinky 3D collectible">
+          </model-viewer>
+          <!-- Graceful fallback shown until a GLB is dropped into /models -->
+          <div class="model-fallback" id="modelFallback">
+            <span class="model-glyph" id="modelGlyph">🍺</span>
+            <span class="model-note" data-i18n="hero.model3d">Interactive 3D · tap on iPhone for AR</span>
+          </div>
+        </div>
+        <div class="drink-toggle" role="group" aria-label="Drink">
+          <span class="drink-group-label" data-i18n="hero.drinkGroup">Any drink — even alcohol-free</span>
+          <div class="drink-chips">
+            <button type="button" class="drink-chip is-active" data-drink="beer">🍺 <span data-i18n="drink.beer">Beer</span></button>
+            <button type="button" class="drink-chip" data-drink="coffee">☕ <span data-i18n="drink.coffee">Coffee</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ LIVE / ICE-BREAKERS ============ -->
+  <section class="section live" id="live">
+    <div class="section-head">
+      <span class="kicker" data-i18n="live.kicker">Live</span>
+      <h2 data-i18n="live.title">Cards that break any silence</h2>
+      <p class="section-sub" data-i18n="live.sub">Real questions from the app. Tap through them.</p>
+    </div>
+
+    <div class="live-wrap">
+      <div class="game-tabs" id="gameTabs" role="tablist" aria-label="Games"></div>
+      <div class="ice-card" id="iceCard">
+        <span class="ice-game" id="iceGame"></span>
+        <p class="ice-text" id="iceText"></p>
+        <button type="button" class="btn-ghost" id="iceNext" data-i18n="live.next">Next question</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TAB SHOWCASE ============ -->
+  <section class="section showcase" id="features">
+    <div class="section-head">
+      <span class="kicker" data-i18n="show.kicker">Inside Clinky</span>
+      <h2 data-i18n="show.title">One app, five ways to stay close</h2>
+      <p class="section-sub" data-i18n="show.sub">Tap a tab to look inside.</p>
+    </div>
+
+    <div class="showcase-wrap">
+      <div class="phone">
+        <div class="phone-screen">
+          <div class="screen-art" id="screenArt">
+            <span class="screen-emoji" id="screenEmoji">🏠</span>
+            <span class="screen-cap" id="screenCap"></span>
+            <span class="screen-soon" data-i18n="show.soon">Screenshot coming soon</span>
+          </div>
+        </div>
+        <div class="phone-tabbar" id="phoneTabs" role="tablist" aria-label="App tabs"></div>
+      </div>
+      <div class="showcase-copy">
+        <h3 id="tabTitle"></h3>
+        <p id="tabDesc"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURE GRID ============ -->
+  <section class="section grid-section">
+    <div class="feature-grid">
+      <div class="feature"><span class="f-ico">🔥</span><h4 data-i18n="feat.streaks.t">Meeting streaks</h4><p data-i18n="feat.streaks.d">Keep the run going, week after week.</p></div>
+      <div class="feature"><span class="f-ico">🏆</span><h4 data-i18n="feat.ach.t">Achievements</h4><p data-i18n="feat.ach.d">Unlock badges as your friendships grow.</p></div>
+      <div class="feature"><span class="f-ico">🔔</span><h4 data-i18n="feat.rem.t">Smart reminders</h4><p data-i18n="feat.rem.d">A gentle nudge when it's been too long.</p></div>
+      <div class="feature"><span class="f-ico">🧊</span><h4 data-i18n="feat.coll.t">3D collection</h4><p data-i18n="feat.coll.d">Collect a memento from every clink.</p></div>
+      <div class="feature"><span class="f-ico">🔒</span><h4 data-i18n="feat.priv.t">Private &amp; offline</h4><p data-i18n="feat.priv.d">No accounts. Your data stays on device.</p></div>
+      <div class="feature"><span class="f-ico">📊</span><h4 data-i18n="feat.stats.t">Your stats</h4><p data-i18n="feat.stats.d">See who you see most — and who's overdue.</p></div>
+    </div>
+  </section>
+
+  <!-- ============ FINAL CTA ============ -->
+  <section class="section final-cta" id="join">
+    <h2 data-i18n="final.title">Be first to clink.</h2>
+    <p class="section-sub section-sub--light" data-i18n="final.sub">Join the waitlist — we'll send the App Store link the day it's live.</p>
+    <form class="waitlist waitlist--center" data-shared="1" novalidate>
+      <input type="email" name="email" required autocomplete="email"
+             class="waitlist-input" data-i18n-attr="placeholder:hero.emailPlaceholder" placeholder="your@email.com" aria-label="Email">
+      <button type="submit" class="btn-primary" data-i18n="hero.cta">Join the waitlist</button>
+    </form>
+    <p class="microcopy microcopy--light" data-i18n="hero.microcopy">No spam. One email when we launch.</p>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="footer-brand">Clinky</div>
+  <p class="footer-tag">Tap. Clink. Meet again.</p>
+  <nav class="footer-links">
+    <a id="footPrivacy" href="privacy.html" data-i18n="foot.privacy">Privacy Policy</a>
+    <a id="footTerms" href="terms.html" data-i18n="foot.terms">Terms of Use</a>
+    <a href="mailto:evgeniymityulya.ios@gmail.com" data-i18n="foot.contact">Contact</a>
+  </nav>
+  <p class="footer-copy">© 2026 Clinky</p>
+</footer>
+
+<script src="assets/site.js"></script>
 </body>
 </html>
