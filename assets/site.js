@@ -15,7 +15,8 @@
       "hero.cta": "Join the waitlist",
       "hero.microcopy": "No spam. One email when we launch.",
       "hero.done": "🎉 You're on the list! We'll email you the App Store link at launch.",
-      "hero.model3d": "Interactive 3D · tap on iPhone for AR",
+      "hero.model3d": "Drag to rotate · AR on iPhone",
+      "hero.ar": "View in AR",
       "hero.drinkGroup": "Any drink — even alcohol-free",
       "drink.beer": "Beer",
       "drink.coffee": "Coffee",
@@ -48,7 +49,8 @@
       "hero.cta": "Встать в очередь",
       "hero.microcopy": "Без спама. Одно письмо на релизе.",
       "hero.done": "🎉 Ты в очереди! Пришлём ссылку на App Store, как только выйдем.",
-      "hero.model3d": "Интерактивное 3D · на iPhone тапни для AR",
+      "hero.model3d": "Покрути мышкой · AR на iPhone",
+      "hero.ar": "Смотреть в AR",
       "hero.drinkGroup": "Любой напиток — хоть вообще без алкоголя",
       "drink.beer": "Пиво",
       "drink.coffee": "Кофе",
@@ -92,8 +94,8 @@
   ];
 
   const DRINKS = {
-    beer:   { glyph: "🍺", model: "BeerCap" },
-    coffee: { glyph: "☕", model: "CoffeeCup" },
+    beer:   { usdz: "models/BeerCap.usdz" },
+    coffee: { usdz: "models/CoffeeCup.usdz" },
   };
 
   // ---------- state ----------
@@ -142,29 +144,59 @@
     applyI18n();
   }
 
-  // ---------- 3D drink toggle ----------
-  const model = document.getElementById("drinkModel");
-  const fallback = document.getElementById("modelFallback");
-  const glyph = document.getElementById("modelGlyph");
+  // ---------- 3D spinner (360° frames rendered from the app's USDZ) ----------
+  const SPIN_FRAMES = 36;
+  const spinner = document.getElementById("spinner");
+  const spinImg = document.getElementById("spinImg");
+  const arLink = document.getElementById("arLink");
+  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let drink = "beer", frame = 0, dragging = false, lastX = 0, autoTimer = null;
 
-  function showFallback(on) { if (fallback) fallback.style.display = on ? "flex" : "none"; }
-  if (model) {
-    model.addEventListener("load", () => showFallback(false));
-    model.addEventListener("error", () => showFallback(true)); // GLB not present yet
+  const framePath = (d, i) => `models/spin/${d}_${String(i).padStart(2, "0")}.png`;
+  function preload(d) { for (let i = 0; i < SPIN_FRAMES; i++) { const im = new Image(); im.src = framePath(d, i); } }
+  function showFrame(i) {
+    frame = ((i % SPIN_FRAMES) + SPIN_FRAMES) % SPIN_FRAMES;
+    if (spinImg) spinImg.src = framePath(drink, frame);
   }
+  function startAuto() {
+    if (reduceMotion || autoTimer) return;
+    autoTimer = setInterval(() => { if (!dragging) showFrame(frame + 1); }, 95);
+  }
+  function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
   function setDrink(key) {
-    const d = DRINKS[key]; if (!d) return;
-    if (glyph) glyph.textContent = d.glyph;
-    showFallback(true); // until the new GLB loads
-    if (model) {
-      model.setAttribute("src", `models/${d.model}.glb`);
-      model.setAttribute("ios-src", `models/${d.model}.usdz`);
-    }
+    if (!DRINKS[key]) return;
+    drink = key;
+    preload(key);
+    showFrame(frame);
+    if (arLink) { arLink.href = DRINKS[key].usdz; arLink.hidden = !isIOS; }
     document.querySelectorAll(".drink-chip").forEach((c) =>
       c.classList.toggle("is-active", c.dataset.drink === key));
   }
+  if (spinner) {
+    const onMove = (x) => {
+      if (!dragging) return;
+      const steps = Math.round((x - lastX) / 9);
+      if (steps !== 0) { showFrame(frame - steps); lastX = x; }
+    };
+    spinner.addEventListener("pointerdown", (e) => {
+      e.preventDefault(); dragging = true; lastX = e.clientX;
+      spinner.classList.add("grabbing"); stopAuto();
+    });
+    window.addEventListener("pointermove", (e) => onMove(e.clientX));
+    window.addEventListener("pointerup", () => {
+      if (!dragging) return;
+      dragging = false; spinner.classList.remove("grabbing");
+      setTimeout(startAuto, 1400);
+    });
+    spinner.addEventListener("mouseenter", stopAuto);
+    spinner.addEventListener("mouseleave", () => { if (!dragging) startAuto(); });
+  }
   document.querySelectorAll(".drink-chip").forEach((c) =>
     c.addEventListener("click", () => setDrink(c.dataset.drink)));
+  preload("beer"); preload("coffee");
+  setDrink("beer");
+  startAuto();
 
   // ---------- Live ice-breaker card ----------
   const gameTabsEl = document.getElementById("gameTabs");

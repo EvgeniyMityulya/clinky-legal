@@ -13,7 +13,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
-<script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js"></script>
 </head>
 <body>
 
@@ -51,20 +50,14 @@
 
       <div class="hero-visual">
         <div class="model-stage">
-          <model-viewer id="drinkModel"
-            src="models/BeerCap.glb"
-            ios-src="models/BeerCap.usdz"
-            ar ar-modes="quick-look webxr scene-viewer"
-            camera-controls auto-rotate touch-action="pan-y"
-            disable-zoom interaction-prompt="none"
-            shadow-intensity="1" exposure="1"
-            alt="Clinky 3D collectible">
-          </model-viewer>
-          <!-- Graceful fallback shown until a GLB is dropped into /models -->
-          <div class="model-fallback" id="modelFallback">
-            <span class="model-glyph" id="modelGlyph">🍺</span>
-            <span class="model-note" data-i18n="hero.model3d">Interactive 3D · tap on iPhone for AR</span>
+          <div class="spinner" id="spinner" role="img" aria-label="Clinky 3D collectible — drag to rotate">
+            <img id="spinImg" class="spin-img" alt="Clinky 3D collectible" draggable="false" src="models/spin/beer_00.png">
           </div>
+          <a id="arLink" class="ar-btn" rel="ar" href="models/BeerCap.usdz" hidden>
+            <img class="ar-trigger" alt="" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+            <span data-i18n="hero.ar">View in AR</span>
+          </a>
+          <span class="model-note" data-i18n="hero.model3d">Drag to rotate · AR on iPhone</span>
         </div>
         <div class="drink-toggle" role="group" aria-label="Drink">
           <span class="drink-group-label" data-i18n="hero.drinkGroup">Any drink — even alcohol-free</span>
