@@ -94,8 +94,8 @@
   ];
 
   const DRINKS = {
-    beer:   { usdz: "models/BeerCap.usdz" },
-    coffee: { usdz: "models/CoffeeCup.usdz" },
+    beer:   { glb: "models/BeerCap.glb", usdz: "models/BeerCap.usdz" },
+    coffee: { glb: "models/CoffeeCup.glb", usdz: "models/CoffeeCup.usdz" },
   };
 
   // ---------- state ----------
@@ -144,59 +144,17 @@
     applyI18n();
   }
 
-  // ---------- 3D spinner (360° frames rendered from the app's USDZ) ----------
-  const SPIN_FRAMES = 36;
-  const spinner = document.getElementById("spinner");
-  const spinImg = document.getElementById("spinImg");
-  const arLink = document.getElementById("arLink");
-  const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let drink = "beer", frame = 0, dragging = false, lastX = 0, autoTimer = null;
-
-  const framePath = (d, i) => `models/spin/${d}_${String(i).padStart(2, "0")}.png`;
-  function preload(d) { for (let i = 0; i < SPIN_FRAMES; i++) { const im = new Image(); im.src = framePath(d, i); } }
-  function showFrame(i) {
-    frame = ((i % SPIN_FRAMES) + SPIN_FRAMES) % SPIN_FRAMES;
-    if (spinImg) spinImg.src = framePath(drink, frame);
-  }
-  function startAuto() {
-    if (reduceMotion || autoTimer) return;
-    autoTimer = setInterval(() => { if (!dragging) showFrame(frame + 1); }, 95);
-  }
-  function stopAuto() { if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+  // ---------- 3D viewer (model-viewer GLB + USDZ for AR) ----------
+  const model = document.getElementById("drinkModel");
   function setDrink(key) {
-    if (!DRINKS[key]) return;
-    drink = key;
-    preload(key);
-    showFrame(frame);
-    if (arLink) { arLink.href = DRINKS[key].usdz; arLink.hidden = !isIOS; }
+    if (!DRINKS[key] || !model) return;
+    model.setAttribute("src", DRINKS[key].glb);
+    model.setAttribute("ios-src", DRINKS[key].usdz);
     document.querySelectorAll(".drink-chip").forEach((c) =>
       c.classList.toggle("is-active", c.dataset.drink === key));
   }
-  if (spinner) {
-    const onMove = (x) => {
-      if (!dragging) return;
-      const steps = Math.round((x - lastX) / 9);
-      if (steps !== 0) { showFrame(frame - steps); lastX = x; }
-    };
-    spinner.addEventListener("pointerdown", (e) => {
-      e.preventDefault(); dragging = true; lastX = e.clientX;
-      spinner.classList.add("grabbing"); stopAuto();
-    });
-    window.addEventListener("pointermove", (e) => onMove(e.clientX));
-    window.addEventListener("pointerup", () => {
-      if (!dragging) return;
-      dragging = false; spinner.classList.remove("grabbing");
-      setTimeout(startAuto, 1400);
-    });
-    spinner.addEventListener("mouseenter", stopAuto);
-    spinner.addEventListener("mouseleave", () => { if (!dragging) startAuto(); });
-  }
   document.querySelectorAll(".drink-chip").forEach((c) =>
     c.addEventListener("click", () => setDrink(c.dataset.drink)));
-  preload("beer"); preload("coffee");
-  setDrink("beer");
-  startAuto();
 
   // ---------- Live ice-breaker card ----------
   const gameTabsEl = document.getElementById("gameTabs");

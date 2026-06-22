@@ -10,7 +10,7 @@
 - **Языки:** RU + EN, переключатель с запоминанием выбора, автоопределение из браузера.
 - **Стиль:** яркий малиновый/коралловый bold-герой + светлые секции; шрифт Nunito (заголовки) + DM Sans (текст). Энергично, playful, party/social.
 - **Фишка:** живое 3D (вращаемая пробка пива / стакан кофе) + интерактивная карточка игр с реальными вопросами.
-- **Уже в репо:** легальные страницы, 360°-кадры моделей, USDZ для AR, JSON вопросов, рабочий baseline `index.html`. **Не ломай их.**
+- **Уже в репо:** легальные страницы, **GLB+USDZ 3D-модели** (пиво/кофе) с живым `model-viewer`, JSON вопросов, рабочий baseline `index.html`. **Не ломай их.**
 
 ---
 
@@ -25,7 +25,7 @@
   2. `git commit -m "feat: <что сделал>"` (Conventional Commits, на английском)
   3. `git push origin main` → проверь живую страницу через ~1 мин.
 - **Авторизация для push:** нужен доступ к аккаунту `EvgeniyMityulya`. Владелец выдаёт **Personal Access Token (scope: `repo`)** или пушит сам. Без валидного токена — только локальные коммиты, push владелец делает руками.
-- **Проверка после деплоя:** открой URL выше; убедись, что `index.html`, `assets/*`, `models/spin/*`, `privacy.html` отдают HTTP 200.
+- **Проверка после деплоя:** открой URL выше; убедись, что `index.html`, `assets/*`, `models/*.glb`, `privacy.html` отдают HTTP 200.
 
 ### Структура репозитория
 ```
@@ -36,7 +36,7 @@ clinky-legal/
 │   ├── site.js             ← логика: i18n, спиннер, карточка игр, форма (переделывай)
 │   └── icebreakers.json    ← РЕАЛЬНЫЕ вопросы игр (RU/EN) — используй, можно расширить
 ├── models/
-│   ├── spin/               ← 360°-кадры: beer_00..35.png, coffee_00..35.png (720px, прозрачные)
+│   ├── BeerCap.glb, CoffeeCup.glb   ← inline 3D (model-viewer)
 │   ├── BeerCap.usdz        ← для AR Quick Look на iPhone (rel="ar")
 │   └── CoffeeCup.usdz       ← для AR Quick Look на iPhone
 ├── privacy.html, privacy-ru.html, terms.html, terms-ru.html  ← ЛЕГАЛКА (НЕ ТРОГАТЬ)
@@ -48,7 +48,7 @@ clinky-legal/
 
 ## 2. Что уже есть — НЕ ломать
 - **Легальные страницы** `privacy.html` / `privacy-ru.html` / `terms.html` / `terms-ru.html` — живые, на них ссылается приложение и App Store. Не удалять, не переименовывать. В футере лендинга ссылайся на них **по локали** (RU → `*-ru.html`, EN → без суффикса).
-- **`models/spin/`** — 72 готовых кадра (36 пиво + 36 кофе) для 360°-спиннера. Используй их для интерактивного 3D вместо тяжёлого WebGL.
+- **`models/BeerCap.glb` / `CoffeeCup.glb`** — GLB-модели (Sketchfab, CC-BY-4.0) для живого inline-3D через `<model-viewer>`. Уже подключены в baseline.
 - **`models/*.usdz`** — для AR на iPhone: `<a rel="ar" href="models/BeerCap.usdz"><img …></a>` открывает AR Quick Look в Safari iOS.
 - **`assets/icebreakers.json`** — реальные вопросы из приложения (4 игры, RU/EN). Не подменяй выдуманными.
 - **`.nojekyll`** — оставить.
@@ -84,10 +84,10 @@ clinky-legal/
 
 ## 7. 3D-коллекционные напитки (ассеты готовы)
 - В приложении 5 моделей; для САЙТА используем **только Пиво и Кофе** (алкоголь / без алкоголя — сильный месседж инклюзивности).
-- **Готовые ассеты в `models/spin/`:** по 36 кадров на оборот 360°, 720px, прозрачный фон: `beer_00.png … beer_35.png`, `coffee_00.png … coffee_35.png`.
+- **Готовые ассеты:** `models/BeerCap.glb` + `CoffeeCup.glb` (inline 3D) и `models/*.usdz` (AR на iPhone). Лицензия моделей CC-BY-4.0 → нужна атрибуция авторов (Credits).
   - **Кофе** = красный стакан с крафт-держателем и белой крышкой (в бренде, цветной).
   - **Пиво** = серебристая металлик-пробка (чистый минималистичный объект).
-- **Реализация спиннера (рекомендация):** прелоад кадров, drag/touch вращает (X → индекс кадра), авто-вращение в простое; переключатель 🍺/☕ меняет набор кадров. Уважай `prefers-reduced-motion` (без авто-вращения).
+- **Реализация (готова в baseline):** `<model-viewer src="models/BeerCap.glb" ios-src="models/BeerCap.usdz" ar camera-controls auto-rotate environment-image="neutral">`; чип 🍺/☕ переключает `src`+`ios-src`. AR на iPhone — встроенная кнопка model-viewer.
 - **AR на iPhone:** `<a rel="ar" href="models/BeerCap.usdz">` (и `CoffeeCup.usdz`) — открывает AR Quick Look.
 
 ## 8. Бренд-система
@@ -150,12 +150,7 @@ clinky-legal/
 
 ## 12. Интерактив — требования
 - **i18n RU/EN:** словарь в JS, атрибуты `data-i18n`/`data-i18n-attr`, `localStorage`, автодетект `navigator.language`. Переключатель меняет `<html lang>`, тексты, ссылки легалки (по локали), контент карточки игр и подписи вкладок.
-- **3D-спиннер:** из кадров `models/spin/`. Минимальный приём:
-  ```js
-  const frames = Array.from({length:36}, (_,i)=>`models/spin/${drink}_${String(i).padStart(2,'0')}.png`);
-  // preload → на drag: idx = Math.floor((pointerX/width)*36) % 36; img.src = frames[idx];
-  // idle: автоинкремент idx раз в ~80мс (если не reduced-motion)
-  ```
+- **3D-вьюер:** `<model-viewer>` (CDN, уже подключён) с `src`=`models/<drink>.glb`, `ios-src`=`.usdz`, `camera-controls auto-rotate ar environment-image="neutral"`; чип 🍺/☕ переключает `src`/`ios-src`. Реализовано в baseline `index.html`/`site.js`.
 - **Карточка игр:** `fetch('assets/icebreakers.json')` → табы по `games[].title[lang]` → показывай `questions[i][lang]`, «Следующий вопрос» листает, плавный fade.
 - **Витрина вкладок:** 5 кнопок таб-бара → меняют экран (эмодзи/плейсхолдер) + заголовок/описание (см. копи).
 - **Форма waitlist:** валидация email; пока **бэкенда нет** — на сабмит показывай success-состояние (`hero.done`). Точку интеграции оставь явной: `form.action`/`data-endpoint` под будущий сервис (MailerLite / Kit / Brevo). Не имитируй реальную отправку.

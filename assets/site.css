@@ -66,13 +66,7 @@ section{scroll-margin-top:72px;}
 .hero-visual{display:flex;flex-direction:column;align-items:center;gap:18px;}
 .model-stage{position:relative;width:min(380px,80vw);aspect-ratio:1;border-radius:50%;margin-bottom:30px;
   background:radial-gradient(circle at 50% 38%,rgba(255,255,255,.22),rgba(255,255,255,0) 62%);}
-.spinner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;cursor:grab;touch-action:pan-y;user-select:none;-webkit-user-select:none;}
-.spinner.grabbing{cursor:grabbing;}
-.spin-img{width:92%;height:92%;object-fit:contain;pointer-events:none;-webkit-user-drag:none;filter:drop-shadow(0 22px 26px rgba(0,0,0,.30));}
-.ar-btn{position:absolute;bottom:2px;left:50%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:6px;
-  background:rgba(255,255,255,.92);color:var(--raspberry);font-weight:700;font-size:13px;padding:7px 14px;border-radius:999px;
-  text-decoration:none;box-shadow:var(--shadow-soft);}
-.ar-trigger{width:1px;height:1px;}
+model-viewer{width:100%;height:100%;background:transparent;--poster-color:transparent;}
 .model-note{position:absolute;bottom:-30px;left:0;right:0;text-align:center;font-size:13px;color:rgba(255,255,255,.85);font-weight:600;}
 .drink-toggle{display:flex;flex-direction:column;align-items:center;gap:10px;}
 .drink-group-label{font-size:13px;color:rgba(255,255,255,.85);font-weight:600;}
