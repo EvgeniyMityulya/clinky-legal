@@ -21,15 +21,15 @@
     en: {
       navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'Join waitlist',
       heroEyebrow: 'Coming soon to the App Store',
-      heroTitle: 'Make seeing your friends a game',
-      heroLede: 'Clinky turns any hangout into a game. Break the ice with real cards, log every meet-up, and collect a 3D drink for each clink.',
+      heroTitle: 'Turn hangouts into a game',
+      heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+',
       heroModel: 'Tap the drink to flip it', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through — no download needed.',
-      tapSwipe: 'Tap or swipe the card', dislike: 'Skip', like: 'Like', cardHint: 'Swipe or tap for the next question',
+      tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
       galleryTitle: 'Take a look inside', gallerySub: 'Real screens, straight from the app.',
       whyKicker: 'Why Clinky', whyTitle: "Friendships that don't fade", whySub: 'A few small things that quietly keep your people close.',
       discoverKicker: 'Inside the app', discoverTitle: 'Everything in one calm app', discoverSub: 'No accounts, no clutter — just your people and your moments.',
@@ -54,15 +54,15 @@
     ru: {
       navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Конфиденциальность', navTerms: 'Условия', navJoin: 'В очередь',
       heroEyebrow: 'Скоро в App Store',
-      heroTitle: 'Преврати встречи с друзьями в игру',
-      heroLede: 'Clinky превращает любую встречу в игру. Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
+      heroTitle: 'Преврати встречи в игру',
+      heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+',
       heroModel: 'Нажми, чтобы перевернуть', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай — ничего качать не нужно.',
-      tapSwipe: 'Тап или свайп по карточке', dislike: 'Пропустить', like: 'Нравится', cardHint: 'Свайп или тап — следующий вопрос',
+      tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Свайп вправо — дальше, влево — назад',
       galleryTitle: 'Загляни внутрь', gallerySub: 'Реальные экраны прямо из приложения.',
       whyKicker: 'Почему Clinky', whyTitle: 'Дружба, которая не угасает', whySub: 'Несколько мелочей, которые тихо держат близких рядом.',
       discoverKicker: 'Внутри приложения', discoverTitle: 'Всё в одном спокойном приложении', discoverSub: 'Без аккаунтов и лишнего — только твои люди и моменты.',
@@ -143,15 +143,15 @@
     return '<i class="' + (weight || 'ph') + ' ph-' + name + '" style="font-size:' + (size || 22) + 'px;color:' + (color || 'currentColor') + ';line-height:1;display:inline-flex;flex:none"></i>';
   }
   function sparkle(o) {
-    return '<svg width="' + o.s + '" height="' + o.s + '" viewBox="0 0 24 24" fill="' + (o.c || '#fff') + '" aria-hidden="true" ' +
+    return '<svg width="' + o.s + '" height="' + o.s + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
       'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
-      'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,255,255,.45)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
+      'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,79,98,.4)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
       '<path d="M12 1.2C12.7 10.4 13.4 11 22.8 12C13.4 13 12.7 13.6 12 22.8C11.3 13.6 10.6 13 1.2 12C10.6 11 11.3 10.4 12 1.2Z"/></svg>';
   }
   // one reusable capsule badge (icon-in-circle + label), used everywhere
-  function chip(iconName, label) {
-    return '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 18px 9px 9px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:14px;color:#3a323f">' +
-      '<span class="chip-ic">' + ph(iconName, 17, C, 'ph-fill') + '</span>' + esc(label) + '</span>';
+  function chip(iconName, label, sm) {
+    return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
+      '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + ph(iconName, sm ? 15 : 17, C, 'ph-fill') + '</span>' + esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
@@ -222,7 +222,7 @@
         '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
-      '<nav class="nav-mid" style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:0 8px">' +
+      '<nav class="nav-mid" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px">' +
         '<button data-act="home" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
         '<button data-act="about" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
         '<button data-act="support" style="' + navPill(p === 'support') + '">' + esc(t.navSupport) + '</button>' +
@@ -230,7 +230,7 @@
         '<button data-act="privacy" class="nav-legal" style="' + navPill(p === 'privacy') + '">' + esc(t.navPrivacy) + '</button>' +
         '<button data-act="terms" class="nav-legal" style="' + navPill(p === 'terms') + '">' + esc(t.navTerms) + '</button>' +
       '</nav>' +
-      '<div style="display:flex;align-items:center;gap:10px;flex:none">' +
+      '<div style="display:flex;align-items:center;gap:10px;flex:none;margin-left:auto">' +
         '<button data-act="join" class="join-cta" style="' + join + '">' + esc(t.navJoin) + '</button>' +
         '<div style="' + seg + '">' +
           '<button data-act="en" style="' + langSeg(state.lang === 'en') + '">EN</button>' +
@@ -297,34 +297,34 @@
     var t = tdict(), I = icons(), L = state.lang;
 
     // ---- hero ----
-    var hero = '<section style="position:relative;padding:clamp(118px,15vh,168px) clamp(20px,5vw,72px) clamp(40px,7vh,76px);overflow:hidden;text-align:center">' +
+    var hero = '<section style="position:relative;padding:clamp(90px,11vh,122px) clamp(20px,5vw,72px) clamp(36px,6vh,64px);overflow:hidden;text-align:center">' +
       sparkle({ s: 30, pos: 'top:15%;left:10%', op: 0.7, c: C, glow: 'rgba(255,79,98,.35)', anim: 'twinkle 4s ease-in-out infinite' }) +
       sparkle({ s: 17, pos: 'top:11%;left:22%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
       sparkle({ s: 23, pos: 'top:21%;right:12%', op: 0.62, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.4s ease-in-out .3s infinite' }) +
-      sparkle({ s: 13, pos: 'top:13%;right:27%', op: 0.5, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
+      sparkle({ s: 13, pos: 'top:13%;right:27%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
       sparkle({ s: 16, pos: 'top:33%;left:15%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
       sparkle({ s: 27, pos: 'top:39%;right:8%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
       sparkle({ s: 12, pos: 'top:47%;left:27%', op: 0.42, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
       sparkle({ s: 20, pos: 'bottom:9%;left:12%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .4s infinite' }) +
-      sparkle({ s: 15, pos: 'bottom:15%;right:14%', op: 0.5, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4s ease-in-out .8s infinite' }) +
+      sparkle({ s: 15, pos: 'bottom:15%;right:14%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4s ease-in-out .8s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
         '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 19px;border-radius:999px;background:#FFE7EA;color:#C32748;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 20px -12px rgba(225,29,72,.5)">' +
           '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + ph('app-store-logo', 16, '#C32748', 'ph-fill') + esc(t.heroEyebrow) + '</span>' +
-        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-1.6px;margin:0 0 18px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
-        '<p style="font-size:clamp(16.5px,1.7vw,20px);line-height:1.55;color:#6b6b76;max-width:30em;margin:0 auto 28px">' + esc(t.heroLede) + '</p>' +
+        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
+        '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
         (state.waitlistDone ? '' :
-          '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 0">' +
-            chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
+          '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;margin:18px auto 0;max-width:32em">' +
+            chip('gift', t.trust1, true) + chip('shield-check', t.trust2, true) + chip('apple-logo', t.trust3, true) +
           '</div>') +
       '</div>' +
       '<div style="position:relative;max-width:480px;margin:clamp(20px,4vh,46px) auto 0">' +
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
-          '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,138,151,.12) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0 0 6% 0;width:100%;height:94%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
           '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -386,34 +386,45 @@
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
     var feats = {
       en: [
-        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds — never have I ever, roulette, would-you-rather and more.', n: 1, span: 'span 4' },
-        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink you log.', n: 2, span: 'span 2' },
-        { ic: 'flame', t: 'Meeting streaks', d: 'Keep the run going with the people who matter most.', span: 'span 2' },
-        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge when it has been too long since you met.', span: 'span 2' },
-        { ic: 'trophy', t: 'Achievements', d: 'Unlock dozens of badges — including a few secret ones.', span: 'span 2' },
-        { ic: 'chart-bar', t: 'Your whole social year', d: 'Who you see most, your favourite drinks and how your year adds up — all in clean, private charts.', n: 6, span: 'span 6', wide: true }
+        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds.', n: 1, col: 'span 3', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink you log.', n: 2, col: 'span 3', row: 'span 2', media: 'bleed' },
+        { ic: 'flame', t: 'Meeting streaks', d: 'Keep the run going with the people who matter most.', col: 'span 2', row: 'span 1' },
+        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge when it has been too long.', col: 'span 2', row: 'span 1' },
+        { ic: 'trophy', t: 'Achievements', d: 'Unlock dozens of badges — a few of them secret.', col: 'span 2', row: 'span 1' },
+        { ic: 'chart-bar', t: 'Your social year', d: 'Who you see most, favourite drinks and how the year adds up — in clean, private charts.', n: 6, col: 'span 6', row: 'span 2', media: 'side' }
       ],
       ru: [
-        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды — «я никогда не», рулетка, «что выберешь» и другие.', n: 1, span: 'span 4' },
-        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток, который можно покрутить, за каждый «чок».', n: 2, span: 'span 2' },
-        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее всего.', span: 'span 2' },
-        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко напомним, когда давно не виделись.', span: 'span 2' },
-        { ic: 'trophy', t: 'Достижения', d: 'Открывай десятки наград — включая тайные.', span: 'span 2' },
-        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Кого видишь чаще, любимые напитки и как складывается год — в чистых приватных графиках.', n: 6, span: 'span 6', wide: true }
+        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды.', n: 1, col: 'span 3', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток, который можно покрутить, за каждый «чок».', n: 2, col: 'span 3', row: 'span 2', media: 'bleed' },
+        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее всего.', col: 'span 2', row: 'span 1' },
+        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко напомним, когда давно не виделись.', col: 'span 2', row: 'span 1' },
+        { ic: 'trophy', t: 'Достижения', d: 'Открывай десятки наград — включая тайные.', col: 'span 2', row: 'span 1' },
+        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Кого видишь чаще, любимые напитки и как складывается год — в чистых приватных графиках.', n: 6, col: 'span 6', row: 'span 2', media: 'side' }
       ]
     }[L];
-    function bentoChip(ic) { return '<span style="display:inline-flex;width:44px;height:44px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:14px">' + ph(ic, 22, C, 'ph-fill') + '</span>'; }
+    function bentoChip(ic) { return '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(ic, 21, C, 'ph-fill') + '</span>'; }
+    // phone-UI window: crops the marketing banner off the top, shows the app screen, bleeds off the card bottom
+    function phoneWin(n, ratio) {
+      return '<div style="aspect-ratio:' + ratio + ';overflow:hidden;border-radius:18px 18px 0 0;box-shadow:0 -2px 30px rgba(28,19,38,.16)">' +
+        '<img src="' + shot(n) + '" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 78%"></div>';
+    }
     function bentoCard(f) {
-      var title = '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0 0 7px;color:#1c1326">' + esc(f.t) + '</h3>';
-      var desc = '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0;max-width:34em">' + esc(f.d) + '</p>';
-      if (f.wide) {
-        return '<div class="bento-card" style="grid-column:' + f.span + ';display:flex;gap:clamp(20px,4vw,44px);align-items:center;flex-wrap:wrap">' +
-          '<div style="flex:1;min-width:220px">' + bentoChip(f.ic) + title + desc + '</div>' +
-          '<div style="flex:none;width:clamp(140px,22vw,200px)"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:20px;aspect-ratio:1080/2340;box-shadow:0 22px 40px -20px rgba(28,19,38,.32)"></div>' +
+      var grid = 'grid-column:' + f.col + ';grid-row:' + f.row + ';';
+      var title = '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>';
+      var desc = '<p style="font-size:14px;line-height:1.5;color:#6b6b76;margin:0;max-width:30em">' + esc(f.d) + '</p>';
+      if (f.media === 'side') {
+        return '<div class="bento-card" style="' + grid + 'display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(18px,4vw,40px);padding:clamp(24px,4vw,40px) clamp(24px,4vw,44px) 0;overflow:hidden">' +
+          '<div style="flex:1;min-width:200px;align-self:center;padding-bottom:clamp(24px,4vw,40px)">' + bentoChip(f.ic) + title + desc + '</div>' +
+          '<div style="flex:none;align-self:flex-end;width:clamp(116px,17vw,168px);margin-bottom:-14px">' + phoneWin(f.n, '9/15') + '</div>' +
         '</div>';
       }
-      var shotImg = f.n ? '<div style="margin:18px auto -28px;width:80%;height:176px;border-radius:20px 20px 0 0;overflow:hidden;box-shadow:0 -3px 22px rgba(28,19,38,.1)"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1080/2340"></div>' : '';
-      return '<div class="bento-card" style="grid-column:' + f.span + '">' + bentoChip(f.ic) + title + desc + shotImg + '</div>';
+      if (f.media === 'bleed') {
+        return '<div class="bento-card" style="' + grid + 'display:flex;flex-direction:column;padding:24px 24px 0;overflow:hidden">' +
+          '<div>' + bentoChip(f.ic) + title + desc + '</div>' +
+          '<div style="margin-top:auto;display:flex;justify-content:center;padding-top:16px"><div style="width:64%;margin-bottom:-14px">' + phoneWin(f.n, '9/12') + '</div></div>' +
+        '</div>';
+      }
+      return '<div class="bento-card" style="' + grid + 'padding:24px">' + bentoChip(f.ic) + title + desc + '</div>';
     }
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
@@ -456,10 +467,10 @@
 
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:2px solid #FFD0D8;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 64px -34px rgba(255,79,98,.5)">' +
+      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:3px solid #FFB0BB;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 64px -34px rgba(255,79,98,.5)">' +
         sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
-        sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
         sparkle({ s: 24, pos: 'bottom:18%;right:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
         sparkle({ s: 14, pos: 'bottom:26%;left:16%', op: 0.4, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.8s ease-in-out .8s infinite' }) +
         sparkle({ s: 18, pos: 'bottom:12%;right:30%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .3s infinite' }) +
@@ -495,12 +506,12 @@
             '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
             '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
-              '<button data-act="skip" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
-                '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + icons().skip + '</span>' +
+              '<button data-act="prevq" aria-label="' + esc(t.dislike) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+                '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + ph('arrow-left', 22, '#b9b0b6', 'ph-bold') + '</span>' +
                 '<span style="font-size:12.5px;font-weight:600;color:#a99ea6">' + esc(t.dislike) + '</span>' +
               '</button>' +
-              '<button data-act="like" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
-                '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + icons().heart + '</span>' +
+              '<button data-act="nextq" aria-label="' + esc(t.like) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+                '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 26, '#fff', 'ph-bold') + '</span>' +
                 '<span style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.like) + '</span>' +
               '</button>' +
             '</div>' +
@@ -536,7 +547,7 @@
     return '<div class="page-in">' +
       '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(36px,5vh,56px);text-align:center;overflow:hidden">' +
         sparkle({ s: 20, pos: 'top:24%;left:16%', op: 0.45, c: '#FF4F62', glow: 'rgba(255,79,98,.3)' }) +
-        sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
         '<img src="assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px;color:#1c1326">' + esc(t.aboutTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
@@ -631,7 +642,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { startAnim(); bindModelLoad(); bindScreens(); } else stopAnim();
+    if (state.page === 'home') { startAnim(); bindModelLoad(); } else stopAnim();
   }
 
   // ===== model animation =====
@@ -643,38 +654,11 @@
     showLoader();
     mv.addEventListener('load', hideLoader);
   }
-  // center-focus screens carousel: the card nearest centre scales up, others shrink
-  var screensRAF = false;
-  function focusScreens() {
-    var tr = document.querySelector('.screens-track'); if (!tr) return;
-    var center = tr.scrollLeft + tr.clientWidth / 2, best = null, bestD = 1e9;
-    var cards = tr.querySelectorAll('.screen-card');
-    cards.forEach(function (card) {
-      var cc = card.offsetLeft + card.offsetWidth / 2, d = Math.abs(cc - center);
-      if (d < bestD) { bestD = d; best = card; }
-    });
-    cards.forEach(function (card) { card.classList.toggle('is-focus', card === best); });
-  }
-  function onScreensScroll() {
-    if (screensRAF) return; screensRAF = true;
-    requestAnimationFrame(function () { screensRAF = false; focusScreens(); });
-  }
-  function bindScreens() {
-    var tr = document.querySelector('.screens-track'); if (!tr) return;
-    tr.addEventListener('scroll', onScreensScroll, { passive: true });
-    requestAnimationFrame(function () {
-      var cards = tr.querySelectorAll('.screen-card');
-      if (cards.length) {
-        var mid = cards[Math.floor(cards.length / 2)];
-        tr.scrollLeft = mid.offsetLeft - (tr.clientWidth - mid.offsetWidth) / 2;
-      }
-      focusScreens();
-    });
-  }
   function applyModelAttrs() {
     var mv = document.getElementById('drinkModel');
     if (!mv) return;
     showLoader();
+    try { mv.setAttribute('orientation', '0deg 0deg 0deg'); } catch (e) {}
     mv.setAttribute('src', modelGlb());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
@@ -724,25 +708,33 @@
     tossing = true;
     mv.style.animation = 'none'; void mv.offsetWidth;
     try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
-    if (state.sel !== 'coffee') {
-      // BEER: full coin flip (two 360° tumbles) via CSS rotateX, camera fixed
-      mv.style.animation = 'capFlip 1.35s cubic-bezier(.36,.62,.4,1)';
-      burstSparkles();
-      setTimeout(function () { var m = document.getElementById('drinkModel'); if (m) m.style.animation = ''; tossing = false; }, 1380);
-    } else {
-      // COFFEE: toss up + real 3D spin around the vertical axis (camera theta 360°) + down
-      mv.style.animation = 'tossArc 1.35s cubic-bezier(.4,1.0,.5,1)';
-      puffSteam();
-      var t0 = performance.now(), dur = 1350, base = 18, phi = 80;
-      (function tick(now) {
-        var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
-        var p = Math.min(((now || performance.now()) - t0) / dur, 1);
-        var th = base + 360 * easeIO(p);
-        try { m.cameraOrbit = th.toFixed(1) + 'deg ' + phi + 'deg auto'; } catch (_) {}
-        if (p < 1) requestAnimationFrame(tick);
-        else { try { m.cameraOrbit = base + 'deg ' + phi + 'deg auto'; } catch (_) {} m.style.animation = ''; tossing = false; }
-      })(performance.now());
-    }
+    // CSS does the vertical toss only (a hop) — the spin is honest 3D, driven through the engine
+    mv.style.animation = 'tossArc 1.45s cubic-bezier(.38,1,.5,1)';
+    var coffee = state.sel === 'coffee';
+    if (coffee) puffSteam(); else burstSparkles();
+    var t0 = performance.now(), dur = 1450, base = 18, phi = 80;
+    (function tick(now) {
+      var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
+      var p = Math.min(((now || performance.now()) - t0) / dur, 1);
+      var deg = 360 * easeIO(p);
+      try {
+        if (coffee) {
+          // COFFEE: camera orbits the cup around the vertical axis — you see every side spin past
+          m.cameraOrbit = (base + deg).toFixed(1) + 'deg ' + phi + 'deg auto';
+        } else {
+          // BEER CAP: rotate the model's own geometry (pitch) for a true coin tumble, camera fixed
+          m.setAttribute('orientation', '0deg ' + deg.toFixed(1) + 'deg 0deg');
+        }
+      } catch (_) {}
+      if (p < 1) requestAnimationFrame(tick);
+      else {
+        try {
+          if (coffee) m.cameraOrbit = base + 'deg ' + phi + 'deg auto';
+          else m.setAttribute('orientation', '0deg 0deg 0deg');
+        } catch (_) {}
+        m.style.animation = ''; tossing = false;
+      }
+    })(performance.now());
   }
   function startAnim() {
     stopAnim();
@@ -776,9 +768,9 @@
     card.style.transform = 'translateX(' + (dir * 520) + 'px) rotate(' + (dir * 11) + 'deg)';
     card.style.opacity = '0';
     setTimeout(function () {
-      nextQuestion();
+      if (dir > 0) nextQuestion(); else prevQuestion();
       card.style.transition = 'none';
-      card.style.transform = 'translateX(' + (-dir * 36) + 'px)'; card.style.opacity = '0';
+      card.style.transform = 'translateX(' + (-dir * 40) + 'px)'; card.style.opacity = '0';
       void card.offsetWidth;
       springBack(card);
     }, 260);
@@ -800,7 +792,7 @@
     if (!qdrag) return; var card = qcardEl(); var dx = e.clientX - qdrag.x; var moved = qdrag.moved; qdrag = null;
     if (!card) return;
     if (moved && Math.abs(dx) > 60) qFlyout(dx > 0 ? 1 : -1);
-    else if (!moved) qFlyout(-1);
+    else if (!moved) qFlyout(1);
     else springBack(card);
   }
 
@@ -831,6 +823,7 @@
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
   function nextQuestion() { state.qIndex = (state.qIndex + 1) % GAMES[state.gameIndex].q.length; refreshCard(); }
+  function prevQuestion() { var len = GAMES[state.gameIndex].q.length; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
 
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
@@ -869,9 +862,8 @@
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
       case 'play': playAnim(); break;
-      case 'like': qFlyout(1); break;
-      case 'skip': qFlyout(-1); break;
-      case 'nextq': nextQuestion(); break;
+      case 'nextq': qFlyout(1); break;
+      case 'prevq': qFlyout(-1); break;
       default: if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
     }
   }

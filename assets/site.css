@@ -11,9 +11,6 @@ a{text-decoration:none}
 /* cards */
 .soft-card{background:#fff;border:1px solid #f3eaed;border-radius:24px;box-shadow:0 10px 34px -18px rgba(28,19,38,.18);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
 .soft-card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -22px rgba(225,29,72,.22)}
-/* 3D-tilted phone screenshot */
-.screen3d{transform:rotateY(-15deg) rotateX(4deg);transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:-22px 26px 50px -22px rgba(225,29,72,.45)}
-.screen3d:hover{transform:rotateY(-3deg) rotateX(1deg)}
 /* icons never stretch */
 i[class*="ph-"]{flex:none}
 /* reusable badge icon-in-circle */
@@ -30,19 +27,11 @@ model-viewer::part(default-progress-bar){display:none}
   75%{transform:translateY(-7%) scale(1.02)}
   100%{transform:translateY(0) scale(1)}
 }
-/* beer cap — full coin flip (two 360° tumbles) + toss; pivots at centre */
-@keyframes capFlip{
-  0%{transform:translateY(0) rotateX(0)}
-  22%{transform:translateY(-20%) rotateX(170deg)}
-  50%{transform:translateY(-25%) rotateX(360deg)}
-  78%{transform:translateY(-6%) rotateX(545deg)}
-  100%{transform:translateY(0) rotateX(720deg)}
-}
-/* feature bento (Sheepy-style) */
-.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px}
-.bento-card{background:#f5f2f6;border:1px solid #efe9f1;border-radius:24px;padding:26px;overflow:hidden;position:relative;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+/* feature bento (Sheepy-style) — fixed row unit keeps cards compact (big = 2 rows, small = 1) */
+.bento{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;grid-auto-rows:156px}
+.bento-card{background:#f5f2f6;border:1px solid #efe9f1;border-radius:24px;overflow:hidden;position:relative;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
 .bento-card:hover{transform:translateY(-5px);box-shadow:0 22px 44px -24px rgba(28,19,38,.28)}
-@media(max-width:900px){.bento{grid-template-columns:1fr 1fr}.bento-card{grid-column:auto !important}}
+@media(max-width:900px){.bento{grid-template-columns:1fr 1fr;grid-auto-rows:auto}.bento-card{grid-column:auto !important;grid-row:auto !important;min-height:188px}}
 @media(max-width:560px){.bento{grid-template-columns:1fr}}
 /* process flow timeline */
 .flow{position:relative;max-width:600px;margin:0 auto;display:flex;flex-direction:column}
@@ -55,10 +44,13 @@ model-viewer::part(default-progress-bar){display:none}
 .cta-btn:hover::after{animation:shine .9s ease}
 
 /* screens carousel */
-.screens-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;justify-content:safe center;padding:8px clamp(20px,5vw,72px) 30px;-webkit-overflow-scrolling:touch}
+.screens-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x proximity;justify-content:safe center;padding:42px clamp(20px,5vw,72px) 54px;-webkit-overflow-scrolling:touch}
 .screens-track::-webkit-scrollbar{display:none}.screens-track{scrollbar-width:none}
-.screen-card{flex:none;scroll-snap-align:center;width:240px;border-radius:30px;overflow:hidden;background:#fff;border:1px solid #f1e4e7;box-shadow:0 20px 46px -22px rgba(225,29,72,.36);transform:scale(.88);opacity:.5;transition:transform .45s cubic-bezier(.2,.7,.2,1),opacity .45s ease}
-.screen-card.is-focus{transform:scale(1.06);opacity:1;z-index:2}
+.screen-card{flex:none;scroll-snap-align:center;width:228px;border-radius:30px;overflow:hidden;background:#fff;border:1px solid #f1e4e7;box-shadow:0 18px 42px -22px rgba(225,29,72,.34);transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .4s ease,box-shadow .4s ease}
+@media(hover:hover){
+  .screens-track:hover .screen-card{opacity:.42;transform:scale(.9)}
+  .screens-track .screen-card:hover{opacity:1;transform:scale(1.16);z-index:2;box-shadow:0 32px 64px -26px rgba(225,29,72,.5)}
+}
 
 /* floating hero mini-cards */
 .float-card{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:12px 17px;background:#fff;border:1px solid #f1e4e7;border-radius:16px;box-shadow:0 16px 32px -14px rgba(28,19,38,.3);font-weight:700;font-size:14.5px;color:#1c1326;white-space:nowrap}
