@@ -217,8 +217,18 @@
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
   // Camera nearly side-on like the in-app SceneKit rig (cap: h4/d250 → ~side-on; cup: h6/d12 → phi~63);
   // the diagonal look comes from the MODEL pose, not the camera. Radius keeps the model off the edges.
-  function camOrbit() { return state.sel === 'coffee' ? '0deg 63deg 150%' : '0deg 88deg 165%'; }
+  function camOrbit() { return state.sel === 'coffee' ? '0deg 44deg 150%' : '0deg 88deg 165%'; }
   function fov() { return '30deg'; }
+  // Separate floor shadow (like the in-app SwiftUI ellipse): sits on the ground below the model and
+  // shrinks/fades while it rises during the spin — NOT model-viewer's contact shadow (that glues to the base).
+  function floorShadowStyle() {
+    return state.sel === 'coffee'
+      ? 'left:50%;bottom:6%;width:34%;height:22px;transform:translateX(-50%)'
+      : 'left:50%;bottom:13%;width:48%;height:30px;transform:translateX(-50%)';
+  }
+  function floorShadowCss() {
+    return 'position:absolute;' + floorShadowStyle() + ';background:radial-gradient(ellipse at center,rgba(60,12,26,.36),rgba(60,12,26,.14) 46%,transparent 72%);filter:blur(11px);pointer-events:none;z-index:0';
+  }
   // Resting model orientation ("roll pitch yaw"), ported from CollectibleConfig:
   // beer baseRotationX 34.4° / baseRotationY -33°; coffee yawed so the lid seam faces us.
   function basePitch() { return state.sel === 'coffee' ? 0 : 34; }
@@ -342,7 +352,8 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="1.4" shadow-softness="0.9" tone-mapping="neutral" exposure="1.05" environment-image="assets/studio.hdr" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<div id="floorShadow" style="' + floorShadowCss() + '"></div>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="neutral" exposure="1.05" environment-image="assets/studio.hdr" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -679,6 +690,7 @@
     mv.setAttribute('src', modelGlb());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
+    var fl = document.getElementById('floorShadow'); if (fl) fl.setAttribute('style', floorShadowCss());
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -753,6 +765,8 @@
     if (coffee) { mv.style.animation = 'cupBob .7s cubic-bezier(.34,0,.32,1)'; puffSteam(); }
     else burstSparkles();
     var dur = coffee ? 700 : 900, t0 = performance.now();
+    var fl = document.getElementById('floorShadow');
+    if (fl) { fl.style.animation = 'none'; void fl.offsetWidth; fl.style.animation = 'floorPulse ' + dur + 'ms cubic-bezier(.38,1,.5,1)'; }
     var pitch0 = basePitch(), yaw0 = baseYaw(), rest = baseOrient();
     (function tick(now) {
       if (myToken !== animToken) return; // a newer spin / drink switch took over
