@@ -135,8 +135,8 @@
 
   const SRC = { beer: 'models/BeerCap.glb', coffee: 'models/CoffeeCup.glb' };
   const PRESET = {
-    beer:   { fov:32, rx:18,  ry:-25, rz:0, oX:0, oY:0.20, oZ:0, scale:1.0,  met:1.00, rou:0.30, lAzim:35, lElev:55, lInt:2.4, aInt:0.55, env:'', envInt:1.0, tone:'aces', exp:1.10, shOp:0.32, shBlur:6, camA:35, camE:12, camD:6 },
-    coffee: { fov:32, rx:0,   ry:0,   rz:0, oX:0, oY:0.05, oZ:0, scale:1.0,  met:0.52, rou:0.42, lAzim:30, lElev:60, lInt:2.2, aInt:0.6,  env:'', envInt:1.0, tone:'neutral', exp:1.10, shOp:0.4, shBlur:5, camA:25, camE:18, camD:6 }
+    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.22, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[0,0.6,0] },
+    coffee: { fov:35, rx:0,  ry:45, rz:0, oX:0, oY:0.00, oZ:0, scale:1.0, met:0.52, rou:0.42, lAzim:20, lElev:44, lInt:4.5, aInt:0.65, env:'assets/env_photostudio.hdr', envInt:1.00, tone:'aces', exp:0.80, shOp:0.30, shBlur:10, camA:42.4, camE:23.7, camD:7.26, target:[0.02,1.19,-0.12] }
   };
 
   const errEl = document.getElementById('err');
@@ -227,7 +227,7 @@
     // push preset into controls
     for (const [id,v] of Object.entries({fov:P.fov,rX:P.rx,rY:P.ry,rZ:P.rz,oX:P.oX,oY:P.oY,oZ:P.oZ,scale:P.scale,met:P.met,rou:P.rou,lAzim:P.lAzim,lElev:P.lElev,lInt:P.lInt,aInt:P.aInt,envInt:P.envInt,exp:P.exp,shOp:P.shOp,shBlur:P.shBlur})) $(id).value=v;
     $('env').value = P.env; $('tone').value = P.tone;
-    controls.target.set(0, 0.6, 0);
+    controls.target.set(P.target[0], P.target[1], P.target[2]);
     placeCameraFromPreset(P);
     setEnv();
     loader.load(SRC[d], gltf=>{
