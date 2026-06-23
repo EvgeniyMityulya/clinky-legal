@@ -24,7 +24,7 @@
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iOS 17+',
-      heroModel: 'Tap the drink to flip it', screensHint: 'Swipe to browse the screens',
+      heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
@@ -57,7 +57,7 @@
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iOS 17+',
-      heroModel: 'Нажми, чтобы перевернуть', screensHint: 'Листай, чтобы посмотреть экраны',
+      heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
@@ -183,9 +183,16 @@
     var b = 'border:1px solid #ece0e3;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
     return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:#8a8190;';
   }
-  function drinkSeg(active) {
-    var b = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;transition:all .25s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:Nunito,sans-serif;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
+  function drinkToggle() {
+    var t = tdict();
+    var btn = 'position:relative;z-index:1;width:128px;border:0;background:transparent;cursor:pointer;padding:15px 0;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:color .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;';
+    var thumbX = state.sel === 'coffee' ? '128px' : '0';
+    return '<div style="display:flex;justify-content:center;margin:18px 0 0">' +
+      '<div style="position:relative;display:inline-flex;padding:5px;border-radius:999px;background:#fff;border:1px solid #f0dde1;box-shadow:0 12px 28px -12px rgba(28,19,38,.24)">' +
+        '<div id="drinkThumb" style="position:absolute;top:5px;bottom:5px;left:5px;width:128px;border-radius:999px;background:#FF4F62;box-shadow:0 10px 20px -6px rgba(255,79,98,.7);transition:transform .36s cubic-bezier(.34,1.4,.5,1);transform:translateX(' + thumbX + ')"></div>' +
+        '<button id="chipBeer" data-act="beer" style="' + btn + 'color:' + (state.sel === 'beer' ? '#fff' : '#6b6b76') + '">' + ph('beer-bottle', 18, state.sel === 'beer' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.beer) + '</button>' +
+        '<button id="chipCoffee" data-act="coffee" style="' + btn + 'color:' + (state.sel === 'coffee' ? '#fff' : '#6b6b76') + '">' + ph('coffee', 18, state.sel === 'coffee' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.coffee) + '</button>' +
+      '</div></div>';
   }
   function gameIcon(i, color, s) {
     var names = ['eye-slash', 'target', 'chat-circle', 'arrows-left-right'];
@@ -208,10 +215,21 @@
   // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
-  // Camera static (matches in-app); model spins. Radius 160% pulls the camera back so the cap never
+  // Camera static (matches in-app); model spins. Radius pulls the camera back so the cap never
   // clips — even mid-flip when it stands vertical. Coffee phi 50 → looks slightly down at the cup.
   function camOrbit() { return state.sel === 'coffee' ? '0deg 50deg 160%' : '26deg 60deg 165%'; }
   function fov() { return '30deg'; }
+  // Resting model orientation ("roll pitch yaw"): beer leans slightly left (roll); coffee yaws so the
+  // lid seam faces us square-on. Spin animations compose on top of these and reset back to them.
+  function baseRoll() { return state.sel === 'coffee' ? 0 : -10; }
+  function baseYaw() { return state.sel === 'coffee' ? -16 : 0; }
+  function baseOrient() { return baseRoll() + 'deg 0deg ' + baseYaw() + 'deg'; }
+  // Floor shadow tuned per drink (beer = wide flat disc; coffee = narrow tall cup).
+  function shadowStyle() {
+    return state.sel === 'coffee'
+      ? 'left:34%;right:34%;bottom:9%;height:24px;background:radial-gradient(ellipse at center,rgba(70,12,28,.34),transparent 72%)'
+      : 'left:20%;right:20%;bottom:21%;height:34px;background:radial-gradient(ellipse at center,rgba(70,12,28,.34),transparent 70%)';
+  }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -325,23 +343,20 @@
             chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
           '</div>') +
       '</div>' +
-      '<div style="position:relative;max-width:560px;margin:clamp(20px,4vh,46px) auto 0">' +
+      '<div style="position:relative;max-width:500px;margin:clamp(16px,3vh,38px) auto 0">' +
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
-          '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,138,151,.12) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div style="position:absolute;left:22%;right:22%;bottom:19%;height:30px;background:radial-gradient(ellipse at center,rgba(70,12,28,.32),transparent 70%);filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div id="modelShadow" style="position:absolute;' + shadowStyle() + ';filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite"></div>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="neutral" exposure="1.15" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
-          '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
-          '<div class="float-card" style="bottom:18%;right:-2%;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
-          '<div style="position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:center;gap:8px;z-index:3">' +
-            '<button id="chipBeer" data-act="beer" style="' + drinkSeg(state.sel === 'beer') + '">' + esc(t.beer) + '</button>' +
-            '<button id="chipCoffee" data-act="coffee" style="' + drinkSeg(state.sel === 'coffee') + '">' + esc(t.coffee) + '</button>' +
-          '</div>' +
+          '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
+          '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
-        '<p style="font-size:13px;color:#a99ea6;margin:14px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#a99ea6;margin:6px 0 0">' + esc(t.heroModel) + '</p>' +
+        drinkToggle() +
       '</div>' +
     '</section>';
 
@@ -667,10 +682,11 @@
     var mv = document.getElementById('drinkModel');
     if (!mv) return;
     showLoader();
-    try { mv.setAttribute('orientation', '0deg 0deg 0deg'); } catch (e) {}
+    try { mv.setAttribute('orientation', baseOrient()); } catch (e) {}
     mv.setAttribute('src', modelGlb());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
+    var sh = document.getElementById('modelShadow'); if (sh) sh.setAttribute('style', 'position:absolute;' + shadowStyle() + ';filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite');
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -689,6 +705,27 @@
         an.onfinish = function () { el.remove(); };
       })(s);
     }
+  }
+  function plusOne() {
+    var card = document.querySelector('[data-act="plusone"]');
+    var fx = document.getElementById('fxLayer');
+    if (!card || !fx) return;
+    var fr = fx.getBoundingClientRect(), cr = card.getBoundingClientRect();
+    var x = cr.left + cr.width / 2 - fr.left, y = cr.top - fr.top;
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+    var s = document.createElement('span');
+    s.textContent = '+1';
+    s.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;transform:translate(-50%,-50%);font-family:Nunito,sans-serif;font-weight:900;font-size:' + (20 + Math.random() * 8) + 'px;color:#FF4F62;text-shadow:0 4px 12px rgba(255,79,98,.4);will-change:transform,opacity';
+    fx.appendChild(s);
+    var dx = (Math.random() - 0.5) * 36;
+    var an = s.animate([
+      { transform: 'translate(-50%,-50%) scale(.5)', opacity: 0 },
+      { transform: 'translate(calc(-50% + ' + (dx * 0.4) + 'px),-90%) scale(1.1)', opacity: 1, offset: 0.3 },
+      { transform: 'translate(calc(-50% + ' + dx + 'px),-220%) scale(.8)', opacity: 0 }
+    ], { duration: 900, easing: 'cubic-bezier(.2,.7,.2,1)' });
+    an.onfinish = function () { s.remove(); };
+    var chip = card.querySelector('.chip-ic');
+    if (chip) { chip.style.animation = 'none'; void chip.offsetWidth; chip.style.animation = 'quickPulse .4s ease'; }
   }
   function puffSteam() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -724,17 +761,18 @@
     if (coffee) { mv.style.animation = 'cupBob .7s cubic-bezier(.34,0,.32,1)'; puffSteam(); }
     else burstSparkles();
     var dur = coffee ? 700 : 900, t0 = performance.now();
+    var roll = baseRoll(), yaw = baseYaw(), rest = baseOrient();
     (function tick(now) {
       if (myToken !== animToken) return; // a newer spin / drink switch took over
       var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
       var p = Math.min(((now || performance.now()) - t0) / dur, 1);
       var deg = 360 * easeIO(p);
       try {
-        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + deg.toFixed(1) + 'deg');   // +360 around Y (vertical spin)
-        else m.setAttribute('orientation', '0deg ' + (-deg).toFixed(1) + 'deg 0deg');         // -360 around X (forward roll)
+        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + (yaw + deg).toFixed(1) + 'deg');   // +360 around Y (vertical spin), keeps the centred yaw
+        else m.setAttribute('orientation', roll + 'deg ' + (-deg).toFixed(1) + 'deg 0deg');           // -360 around X (forward roll), keeps the left lean
       } catch (_) {}
       if (p < 1) requestAnimationFrame(tick);
-      else { try { m.setAttribute('orientation', '0deg 0deg 0deg'); } catch (_) {} m.style.animation = ''; tossing = false; }
+      else { try { m.setAttribute('orientation', rest); } catch (_) {} m.style.animation = ''; tossing = false; }
     })(performance.now());
   }
   function startAnim() {
@@ -817,9 +855,11 @@
   function setDrink(d) {
     if (state.sel === d) return;
     state.sel = d;
+    var thumb = document.getElementById('drinkThumb');
+    if (thumb) thumb.style.transform = d === 'coffee' ? 'translateX(128px)' : 'translateX(0)';
     var b = document.getElementById('chipBeer'), c = document.getElementById('chipCoffee');
-    if (b) b.setAttribute('style', drinkSeg(d === 'beer'));
-    if (c) c.setAttribute('style', drinkSeg(d === 'coffee'));
+    if (b) { b.style.color = d === 'beer' ? '#fff' : '#6b6b76'; var bi = b.querySelector('i'); if (bi) bi.style.color = d === 'beer' ? '#fff' : '#b9b0b6'; }
+    if (c) { c.style.color = d === 'coffee' ? '#fff' : '#6b6b76'; var ci = c.querySelector('i'); if (ci) ci.style.color = d === 'coffee' ? '#fff' : '#b9b0b6'; }
     tossing = false; animToken++;       // cancel any in-flight spin so the view resets cleanly
     applyModelAttrs();                  // snap straight to the canonical orientation + camera (no stuck angle)
     var mvp = document.getElementById('drinkModel');
@@ -866,6 +906,7 @@
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
       case 'play': playAnim(); break;
+      case 'plusone': plusOne(); break;
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
       default: if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
