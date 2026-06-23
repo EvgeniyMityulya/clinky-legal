@@ -23,7 +23,7 @@
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
-      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+',
+      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to flip it', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
@@ -56,7 +56,7 @@
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
-      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+',
+      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми, чтобы перевернуть', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
@@ -143,7 +143,8 @@
     return '<i class="' + (weight || 'ph') + ' ph-' + name + '" style="font-size:' + (size || 22) + 'px;color:' + (color || 'currentColor') + ';line-height:1;display:inline-flex;flex:none"></i>';
   }
   function sparkle(o) {
-    return '<svg width="' + o.s + '" height="' + o.s + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
+    var sz = Math.round((o.s || 16) * 1.5);
+    return '<svg width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
       'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
       'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,79,98,.4)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
       '<path d="M12 1.2C12.7 10.4 13.4 11 22.8 12C13.4 13 12.7 13.6 12 22.8C11.3 13.6 10.6 13 1.2 12C10.6 11 11.3 10.4 12 1.2Z"/></svg>';
@@ -307,6 +308,10 @@
       sparkle({ s: 12, pos: 'top:47%;left:27%', op: 0.42, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
       sparkle({ s: 20, pos: 'bottom:9%;left:12%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .4s infinite' }) +
       sparkle({ s: 15, pos: 'bottom:15%;right:14%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4s ease-in-out .8s infinite' }) +
+      sparkle({ s: 22, pos: 'top:8%;left:34%', op: 0.55, c: C, glow: 'rgba(255,79,98,.32)', anim: 'twinkle 4.8s ease-in-out 1.1s infinite' }) +
+      sparkle({ s: 18, pos: 'top:44%;right:18%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.6s ease-in-out .25s infinite' }) +
+      sparkle({ s: 14, pos: 'bottom:24%;left:30%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
+      sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
         '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 19px;border-radius:999px;background:#FFE7EA;color:#C32748;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 20px -12px rgba(225,29,72,.5)">' +
           '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + ph('app-store-logo', 16, '#C32748', 'ph-fill') + esc(t.heroEyebrow) + '</span>' +
@@ -314,8 +319,8 @@
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
         (state.waitlistDone ? '' :
-          '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:center;margin:18px auto 0;max-width:32em">' +
-            chip('gift', t.trust1, true) + chip('shield-check', t.trust2, true) + chip('apple-logo', t.trust3, true) +
+          '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px auto 0;max-width:38em">' +
+            chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
           '</div>') +
       '</div>' +
       '<div style="position:relative;max-width:480px;margin:clamp(20px,4vh,46px) auto 0">' +
@@ -323,8 +328,8 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,138,151,.12) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0 0 6% 0;width:100%;height:94%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<div style="position:absolute;left:14%;right:14%;bottom:17%;height:26px;background:radial-gradient(ellipse at center,rgba(60,10,25,.2),transparent 72%);filter:blur(12px);pointer-events:none"></div>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0 0 6% 0;width:100%;height:94%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
           '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -386,20 +391,20 @@
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
     var feats = {
       en: [
-        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds.', n: 1, col: 'span 3', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink you log.', n: 2, col: 'span 3', row: 'span 2', media: 'bleed' },
-        { ic: 'flame', t: 'Meeting streaks', d: 'Keep the run going with the people who matter most.', col: 'span 2', row: 'span 1' },
-        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge when it has been too long.', col: 'span 2', row: 'span 1' },
-        { ic: 'trophy', t: 'Achievements', d: 'Unlock dozens of badges — a few of them secret.', col: 'span 2', row: 'span 1' },
-        { ic: 'chart-bar', t: 'Your social year', d: 'Who you see most, favourite drinks and how the year adds up — in clean, private charts.', n: 6, col: 'span 6', row: 'span 2', media: 'side' }
+        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds.', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink.', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'flame', t: 'Meeting streaks', d: 'Hold a run with the people who matter.', col: 'span 1', row: 'span 1' },
+        { ic: 'bell', t: 'Smart reminders', d: 'A nudge when it has been too long.', col: 'span 1', row: 'span 1' },
+        { ic: 'trophy', t: 'Achievements', d: 'Dozens of badges — a few of them secret.', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'chart-bar', t: 'Your social year', d: 'Favourite people, drinks and how the year adds up.', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
       ],
       ru: [
-        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды.', n: 1, col: 'span 3', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток, который можно покрутить, за каждый «чок».', n: 2, col: 'span 3', row: 'span 2', media: 'bleed' },
-        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее всего.', col: 'span 2', row: 'span 1' },
-        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко напомним, когда давно не виделись.', col: 'span 2', row: 'span 1' },
-        { ic: 'trophy', t: 'Достижения', d: 'Открывай десятки наград — включая тайные.', col: 'span 2', row: 'span 1' },
-        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Кого видишь чаще, любимые напитки и как складывается год — в чистых приватных графиках.', n: 6, col: 'span 6', row: 'span 2', media: 'side' }
+        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды.', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок».', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее.', col: 'span 1', row: 'span 1' },
+        { ic: 'bell', t: 'Умные напоминания', d: 'Напомним, когда давно не виделись.', col: 'span 1', row: 'span 1' },
+        { ic: 'trophy', t: 'Достижения', d: 'Десятки наград — включая тайные.', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Любимые люди, напитки и как сложился год.', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
       ]
     }[L];
     function bentoChip(ic) { return '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(ic, 21, C, 'ph-fill') + '</span>'; }
@@ -474,6 +479,8 @@
         sparkle({ s: 24, pos: 'bottom:18%;right:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
         sparkle({ s: 14, pos: 'bottom:26%;left:16%', op: 0.4, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.8s ease-in-out .8s infinite' }) +
         sparkle({ s: 18, pos: 'bottom:12%;right:30%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .3s infinite' }) +
+        sparkle({ s: 20, pos: 'top:40%;left:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
+        sparkle({ s: 16, pos: 'top:46%;right:9%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.6s ease-in-out .5s infinite' }) +
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
           '<img src="assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
@@ -698,7 +705,7 @@
       })(s, i);
     }
   }
-  var tossing = false;
+  var tossing = false, animToken = 0;
   function easeIO(p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
   function playAnim() {
     var mv = document.getElementById('drinkModel');
@@ -706,6 +713,7 @@
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) { mv.style.animation = 'none'; void mv.offsetWidth; mv.style.animation = 'quickPulse .5s ease'; return; }
     tossing = true;
+    var myToken = ++animToken;
     mv.style.animation = 'none'; void mv.offsetWidth;
     try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
     // CSS does the vertical toss only (a hop) — the spin is honest 3D, driven through the engine
@@ -714,6 +722,7 @@
     if (coffee) puffSteam(); else burstSparkles();
     var t0 = performance.now(), dur = 1450, base = 18, phi = 80;
     (function tick(now) {
+      if (myToken !== animToken) return; // a newer animation / drink switch took over
       var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
       var p = Math.min(((now || performance.now()) - t0) / dur, 1);
       var deg = 360 * easeIO(p);
@@ -722,8 +731,8 @@
           // COFFEE: camera orbits the cup around the vertical axis — you see every side spin past
           m.cameraOrbit = (base + deg).toFixed(1) + 'deg ' + phi + 'deg auto';
         } else {
-          // BEER CAP: rotate the model's own geometry (pitch) for a true coin tumble, camera fixed
-          m.setAttribute('orientation', '0deg ' + deg.toFixed(1) + 'deg 0deg');
+          // BEER CAP: rotate the model's own geometry (negative pitch → tumbles AWAY from viewer)
+          m.setAttribute('orientation', '0deg ' + (-deg).toFixed(1) + 'deg 0deg');
         }
       } catch (_) {}
       if (p < 1) requestAnimationFrame(tick);
@@ -819,6 +828,7 @@
     var b = document.getElementById('chipBeer'), c = document.getElementById('chipCoffee');
     if (b) b.setAttribute('style', drinkSeg(d === 'beer'));
     if (c) c.setAttribute('style', drinkSeg(d === 'coffee'));
+    tossing = false; animToken++;       // cancel any in-flight spin so the view resets cleanly
     applyModelAttrs(); playAnim();
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
