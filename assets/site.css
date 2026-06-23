@@ -11,20 +11,23 @@ a{text-decoration:none}
 /* cards */
 .soft-card{background:#fff;border:1px solid #f3eaed;border-radius:24px;box-shadow:0 10px 34px -18px rgba(28,19,38,.18);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
 .soft-card:hover{transform:translateY(-6px);box-shadow:0 26px 50px -22px rgba(225,29,72,.22)}
-.dark-card{background:#1c1326;color:#FFFBFA;border-radius:28px;overflow:hidden;box-shadow:0 24px 56px -24px rgba(28,19,38,.5);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
-.dark-card:hover{transform:translateY(-6px)}
+/* 3D-tilted phone screenshot */
+.screen3d{transform:rotateY(-15deg) rotateX(4deg);transition:transform .5s cubic-bezier(.2,.7,.2,1);box-shadow:-22px 26px 50px -22px rgba(225,29,72,.45)}
+.screen3d:hover{transform:rotateY(-3deg) rotateX(1deg)}
+/* icons never stretch */
+i[class*="ph-"]{flex:none}
 .cta-btn{position:relative;overflow:hidden}
 .cta-btn::after{content:"";position:absolute;top:0;left:0;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-180%) skewX(-18deg)}
 .cta-btn:hover::after{animation:shine .9s ease}
 
 /* screens carousel */
-.screens-track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px clamp(20px,5vw,72px) 28px;-webkit-overflow-scrolling:touch}
+.screens-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;padding:24px clamp(20px,5vw,72px) 36px;-webkit-overflow-scrolling:touch;perspective:1700px}
 .screens-track::-webkit-scrollbar{display:none}.screens-track{scrollbar-width:none}
-.screen-card{flex:none;scroll-snap-align:center;width:236px;border-radius:30px;overflow:hidden;background:#fff;border:1px solid #f1e4e7;box-shadow:0 18px 44px -20px rgba(225,29,72,.28);transition:transform .4s cubic-bezier(.2,.7,.2,1)}
-.screen-card:hover{transform:translateY(-8px) scale(1.015)}
+.screen-card{flex:none;scroll-snap-align:center;width:236px;border-radius:30px;overflow:hidden;background:#fff;border:1px solid #f1e4e7;box-shadow:-16px 22px 46px -22px rgba(225,29,72,.4);transform:rotateY(-14deg) rotateX(3deg) scale(.95);transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.screen-card:hover{transform:rotateY(-3deg) scale(1.02)}
 
 /* floating hero mini-cards */
-.float-card{position:absolute;display:inline-flex;align-items:center;gap:9px;padding:10px 14px;background:#fff;border:1px solid #f1e4e7;border-radius:16px;box-shadow:0 14px 30px -14px rgba(28,19,38,.28);font-weight:700;font-size:13px;color:#1c1326;white-space:nowrap}
+.float-card{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:12px 17px;background:#fff;border:1px solid #f1e4e7;border-radius:16px;box-shadow:0 16px 32px -14px rgba(28,19,38,.3);font-weight:700;font-size:14.5px;color:#1c1326;white-space:nowrap}
 
 @keyframes shine{from{transform:translateX(-180%) skewX(-18deg)}to{transform:translateX(220%) skewX(-18deg)}}
 @keyframes floatSlow{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,-20px)}}

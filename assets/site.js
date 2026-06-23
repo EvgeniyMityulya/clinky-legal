@@ -26,7 +26,7 @@
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+',
       heroModel: 'Tap the drink · AR on iPhone', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
-      emailPh: 'you@email.com', beer: 'Beer', coffee: 'Coffee',
+      emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through — no download needed.',
       tapSwipe: 'Tap or swipe the card', dislike: 'Skip', like: 'Like', cardHint: 'Swipe or tap for the next question',
@@ -52,14 +52,14 @@
       footRights: 'Made for people who would rather meet up.'
     },
     ru: {
-      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navJoin: 'В очередь',
+      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Конфиденциальность', navTerms: 'Условия', navJoin: 'В очередь',
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи с друзьями в игру',
       heroLede: 'Clinky превращает любую встречу в игру. Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+',
       heroModel: 'Нажми на напиток · AR на iPhone', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
-      emailPh: 'ты@почта.com', beer: 'Пиво', coffee: 'Кофе',
+      emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай — ничего качать не нужно.',
       tapSwipe: 'Тап или свайп по карточке', dislike: 'Пропустить', like: 'Нравится', cardHint: 'Свайп или тап — следующий вопрос',
@@ -149,8 +149,8 @@
       '<path d="M12 2C13.2 8.2 15.8 10.8 22 12C15.8 13.2 13.2 15.8 12 22C10.8 15.8 8.2 13.2 2 12C8.2 10.8 10.8 8.2 12 2Z"/></svg>';
   }
   function trustChip(icon, label) {
-    return '<span style="display:inline-flex;align-items:center;gap:8px;padding:8px 15px 8px 8px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 6px 18px -10px rgba(28,19,38,.18);font-weight:700;font-size:13px;color:#3a323f">' +
-      '<span style="width:24px;height:24px;border-radius:50%;background:#FFE2E6;display:inline-flex;align-items:center;justify-content:center">' + icon + '</span>' + esc(label) + '</span>';
+    return '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 18px 9px 9px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:14px;color:#3a323f">' +
+      '<span style="width:30px;height:30px;border-radius:50%;background:#FFE2E6;display:inline-flex;align-items:center;justify-content:center">' + icon + '</span>' + esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
@@ -174,8 +174,8 @@
     return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
   }
   function langSeg(active) {
-    var b = 'border:0;cursor:pointer;border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;transition:all .25s;';
-    return active ? b + 'background:#1c1326;color:#fff;' : b + 'background:transparent;color:#6b6b76;';
+    var b = 'border:0;cursor:pointer;border-radius:999px;padding:6px 13px;font-weight:800;font-size:13px;transition:all .25s;';
+    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 14px -6px rgba(255,79,98,.7);' : b + 'background:transparent;color:#6b6b76;';
   }
   function langSegDark(active) {
     var b = 'border:1px solid #ece0e3;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
@@ -282,9 +282,9 @@
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;max-width:32em;text-align:left;animation:popIn .5s ease both">' +
         '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#3a323f">' + esc(t.heroDone) + '</span></div>';
     }
-    return '<form data-form="waitlist" style="display:flex;gap:10px;max-width:30em;margin:0 auto;flex-wrap:wrap">' +
-        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:200px;border:1px solid #efe1e4;border-radius:15px;padding:16px 18px;font-size:15.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 8px 24px -16px rgba(28,19,38,.3)">' +
-        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:15px;padding:16px 26px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.7);transition:transform .2s,box-shadow .2s;white-space:nowrap">' + esc(t.heroCta) + '</button>' +
+    return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:0 auto;flex-wrap:wrap">' +
+        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid #efe1e4;border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
+        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75);transition:transform .2s,box-shadow .2s;white-space:nowrap">' + esc(t.heroCta) + '</button>' +
       '</form>';
   }
 
@@ -294,31 +294,38 @@
 
     // ---- hero ----
     var hero = '<section style="position:relative;padding:clamp(118px,15vh,168px) clamp(20px,5vw,72px) clamp(40px,7vh,76px);overflow:hidden;text-align:center">' +
-      sparkle({ s: 24, pos: 'top:17%;left:11%', op: 0.5, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
-      sparkle({ s: 14, pos: 'top:24%;right:15%', op: 0.5, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.2s ease-in-out .5s infinite' }) +
-      sparkle({ s: 17, pos: 'top:12%;right:31%', op: 0.45, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4.4s ease-in-out .3s infinite' }) +
-      sparkle({ s: 12, pos: 'top:30%;left:24%', op: 0.4, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out .9s infinite' }) +
+      sparkle({ s: 30, pos: 'top:15%;left:10%', op: 0.7, c: C, glow: 'rgba(255,79,98,.35)', anim: 'twinkle 4s ease-in-out infinite' }) +
+      sparkle({ s: 17, pos: 'top:11%;left:22%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
+      sparkle({ s: 23, pos: 'top:21%;right:12%', op: 0.62, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.4s ease-in-out .3s infinite' }) +
+      sparkle({ s: 13, pos: 'top:13%;right:27%', op: 0.5, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
+      sparkle({ s: 16, pos: 'top:33%;left:15%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
+      sparkle({ s: 27, pos: 'top:39%;right:8%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
+      sparkle({ s: 12, pos: 'top:47%;left:27%', op: 0.42, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
+      sparkle({ s: 20, pos: 'bottom:9%;left:12%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .4s infinite' }) +
+      sparkle({ s: 15, pos: 'bottom:15%;right:14%', op: 0.5, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4s ease-in-out .8s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
-        '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFE7EA;color:#C32748;font-weight:800;font-size:13px;margin-bottom:22px">' +
-          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + '</span>' +
+        '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 19px;border-radius:999px;background:#FFE7EA;color:#C32748;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 20px -12px rgba(225,29,72,.5)">' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + ph('app-store-logo', 16, '#C32748', 'ph-fill') + esc(t.heroEyebrow) + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-1.6px;margin:0 0 18px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16.5px,1.7vw,20px);line-height:1.55;color:#6b6b76;max-width:30em;margin:0 auto 28px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
         (state.waitlistDone ? '' :
           '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 0">' +
-            trustChip(ph('gift', 14, '#E11D48', 'ph-fill'), t.trust1) +
-            trustChip(ph('shield-check', 14, '#E11D48', 'ph-fill'), t.trust2) +
-            trustChip(ph('apple-logo', 14, '#E11D48', 'ph-fill'), t.trust3) +
+            trustChip(ph('gift', 17, '#E11D48', 'ph-fill'), t.trust1) +
+            trustChip(ph('shield-check', 17, '#E11D48', 'ph-fill'), t.trust2) +
+            trustChip(ph('apple-logo', 17, '#E11D48', 'ph-fill'), t.trust3) +
           '</div>') +
       '</div>' +
-      '<div style="position:relative;max-width:460px;margin:clamp(20px,4vh,46px) auto 0">' +
+      '<div style="position:relative;max-width:480px;margin:clamp(20px,4vh,46px) auto 0">' +
+        sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
+        sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:900px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
           '<model-viewer id="drinkModel" src="' + modelGlb() + '" ios-src="' + modelUsdz() + '" alt="Clinky 3D collectible" ar ar-modes="quick-look webxr" auto-rotate auto-rotate-delay="0" rotation-per-second="' + rotSpeed() + '" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="160" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 60%;--poster-color:transparent;background-color:transparent"></model-viewer>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
-          '<div class="float-card" style="top:13%;left:-1%;animation:bobA 7s ease-in-out infinite">' + ph('flame', 16, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
-          '<div class="float-card" style="bottom:19%;right:-1%;animation:bobB 8s ease-in-out infinite">' + ph('cube', 16, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
+          '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite">' + ph('flame', 19, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
+          '<div class="float-card" style="bottom:18%;right:-2%;animation:bobB 8s ease-in-out infinite">' + ph('cube', 19, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
           '<div style="position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:center;gap:8px;z-index:3">' +
             '<button id="chipBeer" data-act="beer" style="' + drinkSeg(state.sel === 'beer') + '">' + esc(t.beer) + '</button>' +
             '<button id="chipCoffee" data-act="coffee" style="' + drinkSeg(state.sel === 'coffee') + '">' + esc(t.coffee) + '</button>' +
@@ -330,8 +337,8 @@
 
     // ---- social proof strip (pills) ----
     var proofData = {
-      en: [{ t: '100% private — no accounts', ic: ph('lock-simple', 17, C, 'ph-fill') }, { t: 'Works fully offline', ic: ph('wifi-slash', 17, C, 'ph-fill') }, { t: 'Free to join', ic: ph('gift', 17, C, 'ph-fill') }],
-      ru: [{ t: '100% приватно — без аккаунтов', ic: ph('lock-simple', 17, C, 'ph-fill') }, { t: 'Полностью офлайн', ic: ph('wifi-slash', 17, C, 'ph-fill') }, { t: 'Очередь бесплатна', ic: ph('gift', 17, C, 'ph-fill') }]
+      en: [{ t: 'No sign-up needed', ic: ph('user-circle', 18, C, 'ph-fill') }, { t: 'Your data stays on your phone', ic: ph('device-mobile', 18, C, 'ph-fill') }, { t: 'Free to join', ic: ph('gift', 18, C, 'ph-fill') }],
+      ru: [{ t: 'Без регистрации', ic: ph('user-circle', 18, C, 'ph-fill') }, { t: 'Всё на твоём телефоне', ic: ph('device-mobile', 18, C, 'ph-fill') }, { t: 'Бесплатно', ic: ph('gift', 18, C, 'ph-fill') }]
     }[L];
     var proof = '<section style="padding:8px clamp(20px,5vw,72px) 10px"><div style="max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center">' +
       proofData.map(function (p) { return '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 6px 18px -12px rgba(28,19,38,.2);font-size:13.5px;font-weight:600;color:#5d5660">' + p.ic + esc(p.t) + '</span>'; }).join('') +
@@ -378,28 +385,28 @@
       ru: { wide: { t: 'Все встречи — в одном месте', d: 'Отмечай, кого видел и что пили, и смотри, как складываются серии и весь твой год — спокойно, приватно, только твоё.', n: 4 }, a: { t: 'Напиток за «чок»', d: 'Крути и собирай 3D-сувенир с каждой встречи.', n: 2 }, b: { t: 'Твой год встреч', d: 'Кого видишь чаще и как всё складывается.', n: 6 } }
     }[L];
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
-    function darkCardWide(o) {
-      return '<div class="dark-card" style="grid-column:1 / -1;display:flex;gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(26px,4vw,42px);flex-wrap:wrap">' +
+    function discoverCardWide(o) {
+      return '<div class="soft-card" style="grid-column:1 / -1;display:flex;gap:clamp(20px,4vw,52px);align-items:center;padding:clamp(28px,4vw,44px);flex-wrap:wrap;border-top:3px solid #FF4F62">' +
         '<div style="flex:1;min-width:230px">' +
-          '<span style="display:inline-flex;width:48px;height:48px;border-radius:14px;background:rgba(255,79,98,.18);align-items:center;justify-content:center;margin-bottom:16px">' + ph('calendar-check', 24, '#FF8A97', 'ph-fill') + '</span>' +
-          '<h3 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.6vw,29px);margin:0 0 10px;letter-spacing:-.5px">' + esc(o.wide.t) + '</h3>' +
-          '<p style="font-size:15.5px;line-height:1.6;color:rgba(255,251,250,.68);margin:0;max-width:30em">' + esc(o.wide.d) + '</p>' +
+          '<span style="display:inline-flex;width:50px;height:50px;border-radius:15px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:16px">' + ph('calendar-check', 24, C, 'ph-fill') + '</span>' +
+          '<h3 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.6vw,29px);margin:0 0 10px;letter-spacing:-.5px;color:#1c1326">' + esc(o.wide.t) + '</h3>' +
+          '<p style="font-size:15.5px;line-height:1.6;color:#6b6b76;margin:0;max-width:30em">' + esc(o.wide.d) + '</p>' +
         '</div>' +
-        '<div style="flex:none;width:clamp(150px,22vw,196px)"><img src="' + shot(o.wide.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:20px;aspect-ratio:1080/2340;box-shadow:0 24px 44px -18px rgba(0,0,0,.6)"></div>' +
+        '<div style="flex:none;width:clamp(150px,22vw,196px);perspective:1100px"><img class="screen3d" src="' + shot(o.wide.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:22px;aspect-ratio:1080/2340"></div>' +
       '</div>';
     }
-    function darkCardSmall(card, iconName) {
-      return '<div class="dark-card" style="display:flex;flex-direction:column;padding:26px 26px 0">' +
-        '<span style="display:inline-flex;width:46px;height:46px;border-radius:14px;background:rgba(255,79,98,.18);align-items:center;justify-content:center;margin-bottom:14px">' + ph(iconName, 22, '#FF8A97', 'ph-fill') + '</span>' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 8px">' + esc(card.t) + '</h3>' +
-        '<p style="font-size:14.5px;line-height:1.55;color:rgba(255,251,250,.64);margin:0 0 20px">' + esc(card.d) + '</p>' +
-        '<img src="' + shot(card.n) + '" alt="" loading="lazy" style="display:block;width:74%;margin:auto auto 0;border-radius:18px 18px 0 0;aspect-ratio:1080/1500;object-fit:cover;object-position:top;box-shadow:0 -6px 28px rgba(0,0,0,.35)">' +
+    function discoverCardSmall(card, iconName) {
+      return '<div class="soft-card" style="display:flex;flex-direction:column;padding:26px 26px 0;overflow:hidden">' +
+        '<span style="display:inline-flex;width:48px;height:48px;border-radius:14px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:14px">' + ph(iconName, 22, C, 'ph-fill') + '</span>' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 8px;color:#1c1326">' + esc(card.t) + '</h3>' +
+        '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0 0 22px">' + esc(card.d) + '</p>' +
+        '<div style="perspective:1000px;width:74%;margin:auto auto 0"><img class="screen3d" src="' + shot(card.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:18px 18px 0 0;aspect-ratio:1080/1500;object-fit:cover;object-position:top"></div>' +
       '</div>';
     }
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
       '<div class="discover-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">' +
-        darkCardWide(disco) + darkCardSmall(disco.a, 'cube') + darkCardSmall(disco.b, 'chart-bar') +
+        discoverCardWide(disco) + discoverCardSmall(disco.a, 'cube') + discoverCardSmall(disco.b, 'chart-bar') +
       '</div>' +
     '</div></section>';
 
@@ -485,10 +492,10 @@
     '</section>';
   }
   function renderGameTabs() {
-    var L = state.lang, I = icons();
-    var tabIcons = [I.never, I.target, I.bubble, I.swap];
+    var L = state.lang;
     return GAMES.map(function (g, i) {
-      return '<button data-act="g' + i + '" style="' + pill(i === state.gameIndex) + '">' + tabIcons[i] + esc(g.title[L]) + '</button>';
+      var active = i === state.gameIndex;
+      return '<button data-act="g' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[L]) + '</button>';
     }).join('');
   }
   function renderQcat() { return gameIcon(state.gameIndex, '#E11D48', 17) + esc(GAMES[state.gameIndex].title[state.lang]); }
