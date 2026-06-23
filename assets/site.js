@@ -324,7 +324,7 @@
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 55%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
           '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -412,7 +412,7 @@
           '<div style="flex:none;width:clamp(140px,22vw,200px)"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:20px;aspect-ratio:1080/2340;box-shadow:0 22px 40px -20px rgba(28,19,38,.32)"></div>' +
         '</div>';
       }
-      var shotImg = f.n ? '<div style="margin:18px -6px -26px;border-radius:16px 16px 0 0;overflow:hidden"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:16px 16px 0 0;aspect-ratio:1080/760;object-fit:cover;object-position:top"></div>' : '';
+      var shotImg = f.n ? '<div style="margin:18px auto -28px;width:80%;height:176px;border-radius:20px 20px 0 0;overflow:hidden;box-shadow:0 -3px 22px rgba(28,19,38,.1)"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;height:auto;aspect-ratio:1080/2340"></div>' : '';
       return '<div class="bento-card" style="grid-column:' + f.span + '">' + bentoChip(f.ic) + title + desc + shotImg + '</div>';
     }
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
@@ -456,19 +456,19 @@
 
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:linear-gradient(155deg,#2c1422 0%,#1c1326 70%);color:#FFFBFA;padding:clamp(42px,6vw,72px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 60px -30px rgba(28,19,38,.6)">' +
-        sparkle({ s: 26, pos: 'top:14%;left:12%', op: 0.9, anim: 'twinkle 4s ease-in-out infinite' }) +
-        sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.7, anim: 'twinkle 5s ease-in-out .6s infinite' }) +
-        sparkle({ s: 13, pos: 'top:18%;right:24%', op: 0.65, anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
-        sparkle({ s: 22, pos: 'bottom:18%;right:13%', op: 0.85, anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
-        sparkle({ s: 14, pos: 'bottom:26%;left:16%', op: 0.6, anim: 'twinkle 3.8s ease-in-out .8s infinite' }) +
-        sparkle({ s: 17, pos: 'bottom:12%;right:30%', op: 0.7, anim: 'twinkle 5.2s ease-in-out .3s infinite' }) +
+      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:2px solid #FFD0D8;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 64px -34px rgba(255,79,98,.5)">' +
+        sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
+        sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
+        sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        sparkle({ s: 24, pos: 'bottom:18%;right:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
+        sparkle({ s: 14, pos: 'bottom:26%;left:16%', op: 0.4, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.8s ease-in-out .8s infinite' }) +
+        sparkle({ s: 18, pos: 'bottom:12%;right:30%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .3s infinite' }) +
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
-          '<img src="assets/clinky-icon.png" alt="Clinky" style="width:66px;height:66px;border-radius:19px;margin:0 auto 18px;box-shadow:0 14px 30px -10px rgba(120,10,30,.7);display:block">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px">' + esc(t.finalTitle) + '</h2>' +
-          '<p style="font-size:16.5px;color:rgba(255,251,250,.72);margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
+          '<img src="assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
+          '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
           '<div id="wl2">' + waitlistForm() + '</div>' +
-          (state.waitlistDone ? '' : '<p style="font-size:13px;color:rgba(255,251,250,.74);margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
+          (state.waitlistDone ? '' : '<p style="font-size:13px;color:#a99ea6;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
         '</div>' +
       '</div>' +
     '</section>';
@@ -495,11 +495,11 @@
             '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
             '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
-              '<button data-act="nextq" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+              '<button data-act="skip" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + icons().skip + '</span>' +
                 '<span style="font-size:12.5px;font-weight:600;color:#a99ea6">' + esc(t.dislike) + '</span>' +
               '</button>' +
-              '<button data-act="nextq" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+              '<button data-act="like" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + icons().heart + '</span>' +
                 '<span style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.like) + '</span>' +
               '</button>' +
@@ -631,7 +631,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { startAnim(); bindModelLoad(); } else stopAnim();
+    if (state.page === 'home') { startAnim(); bindModelLoad(); bindScreens(); } else stopAnim();
   }
 
   // ===== model animation =====
@@ -642,6 +642,34 @@
     if (mv.loaded) { hideLoader(); return; }
     showLoader();
     mv.addEventListener('load', hideLoader);
+  }
+  // center-focus screens carousel: the card nearest centre scales up, others shrink
+  var screensRAF = false;
+  function focusScreens() {
+    var tr = document.querySelector('.screens-track'); if (!tr) return;
+    var center = tr.scrollLeft + tr.clientWidth / 2, best = null, bestD = 1e9;
+    var cards = tr.querySelectorAll('.screen-card');
+    cards.forEach(function (card) {
+      var cc = card.offsetLeft + card.offsetWidth / 2, d = Math.abs(cc - center);
+      if (d < bestD) { bestD = d; best = card; }
+    });
+    cards.forEach(function (card) { card.classList.toggle('is-focus', card === best); });
+  }
+  function onScreensScroll() {
+    if (screensRAF) return; screensRAF = true;
+    requestAnimationFrame(function () { screensRAF = false; focusScreens(); });
+  }
+  function bindScreens() {
+    var tr = document.querySelector('.screens-track'); if (!tr) return;
+    tr.addEventListener('scroll', onScreensScroll, { passive: true });
+    requestAnimationFrame(function () {
+      var cards = tr.querySelectorAll('.screen-card');
+      if (cards.length) {
+        var mid = cards[Math.floor(cards.length / 2)];
+        tr.scrollLeft = mid.offsetLeft - (tr.clientWidth - mid.offsetWidth) / 2;
+      }
+      focusScreens();
+    });
   }
   function applyModelAttrs() {
     var mv = document.getElementById('drinkModel');
@@ -687,8 +715,7 @@
     }
   }
   var tossing = false;
-  function modelTheta() { return state.sel === 'coffee' ? 18 : 25; }
-  function modelPhi() { return state.sel === 'coffee' ? 80 : 62; }
+  function easeIO(p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; }
   function playAnim() {
     var mv = document.getElementById('drinkModel');
     if (!mv || tossing) return;
@@ -696,22 +723,26 @@
     if (reduce) { mv.style.animation = 'none'; void mv.offsetWidth; mv.style.animation = 'quickPulse .5s ease'; return; }
     tossing = true;
     mv.style.animation = 'none'; void mv.offsetWidth;
-    mv.style.animation = 'tossArc 1.2s cubic-bezier(.4,1.05,.5,1)';      // throw arc (vertical)
-    (state.sel !== 'coffee') ? burstSparkles() : puffSteam();
     try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
-    var t0 = performance.now(), dur = 1200, theta = modelTheta(), base = modelPhi();
-    function tick(now) {
-      var m = document.getElementById('drinkModel');
-      if (!m) { tossing = false; return; }
-      var p = Math.min((now - t0) / dur, 1);
-      var tri = p < 0.5 ? p * 2 : 2 - p * 2;                              // 0 -> 1 -> 0 (over and back)
-      var e = tri < 0.5 ? 2 * tri * tri : 1 - Math.pow(-2 * tri + 2, 2) / 2;
-      var phi = base + (150 - base) * e;                                  // honest 3D tumble: camera over the top -> underside -> back
-      try { m.cameraOrbit = theta + 'deg ' + phi.toFixed(1) + 'deg auto'; } catch (_) {}
-      if (p < 1) requestAnimationFrame(tick);
-      else { try { m.cameraOrbit = theta + 'deg ' + base + 'deg auto'; } catch (_) {} m.style.animation = ''; tossing = false; }
+    if (state.sel !== 'coffee') {
+      // BEER: full coin flip (two 360° tumbles) via CSS rotateX, camera fixed
+      mv.style.animation = 'capFlip 1.35s cubic-bezier(.36,.62,.4,1)';
+      burstSparkles();
+      setTimeout(function () { var m = document.getElementById('drinkModel'); if (m) m.style.animation = ''; tossing = false; }, 1380);
+    } else {
+      // COFFEE: toss up + real 3D spin around the vertical axis (camera theta 360°) + down
+      mv.style.animation = 'tossArc 1.35s cubic-bezier(.4,1.0,.5,1)';
+      puffSteam();
+      var t0 = performance.now(), dur = 1350, base = 18, phi = 80;
+      (function tick(now) {
+        var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
+        var p = Math.min(((now || performance.now()) - t0) / dur, 1);
+        var th = base + 360 * easeIO(p);
+        try { m.cameraOrbit = th.toFixed(1) + 'deg ' + phi + 'deg auto'; } catch (_) {}
+        if (p < 1) requestAnimationFrame(tick);
+        else { try { m.cameraOrbit = base + 'deg ' + phi + 'deg auto'; } catch (_) {} m.style.animation = ''; tossing = false; }
+      })(performance.now());
     }
-    requestAnimationFrame(tick);
   }
   function startAnim() {
     stopAnim();
@@ -769,7 +800,7 @@
     if (!qdrag) return; var card = qcardEl(); var dx = e.clientX - qdrag.x; var moved = qdrag.moved; qdrag = null;
     if (!card) return;
     if (moved && Math.abs(dx) > 60) qFlyout(dx > 0 ? 1 : -1);
-    else if (!moved) { nextQuestion(); springBack(card); }
+    else if (!moved) qFlyout(-1);
     else springBack(card);
   }
 
@@ -838,6 +869,8 @@
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
       case 'play': playAnim(); break;
+      case 'like': qFlyout(1); break;
+      case 'skip': qFlyout(-1); break;
       case 'nextq': nextQuestion(); break;
       default: if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
     }
