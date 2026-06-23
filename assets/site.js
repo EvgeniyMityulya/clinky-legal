@@ -24,7 +24,7 @@
       heroTitle: 'Make seeing your friends a game',
       heroLede: 'Clinky turns any hangout into a game. Break the ice with real cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+',
-      heroModel: 'Tap the drink · AR on iPhone', screensHint: 'Swipe to browse the screens',
+      heroModel: 'Tap the drink to flip it', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
@@ -57,7 +57,7 @@
       heroTitle: 'Преврати встречи с друзьями в игру',
       heroLede: 'Clinky превращает любую встречу в игру. Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+',
-      heroModel: 'Нажми на напиток · AR на iPhone', screensHint: 'Листай, чтобы посмотреть экраны',
+      heroModel: 'Нажми, чтобы перевернуть', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
@@ -146,11 +146,12 @@
     return '<svg width="' + o.s + '" height="' + o.s + '" viewBox="0 0 24 24" fill="' + (o.c || '#fff') + '" aria-hidden="true" ' +
       'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
       'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,255,255,.45)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
-      '<path d="M12 2C13.2 8.2 15.8 10.8 22 12C15.8 13.2 13.2 15.8 12 22C10.8 15.8 8.2 13.2 2 12C8.2 10.8 10.8 8.2 12 2Z"/></svg>';
+      '<path d="M12 1.2C12.7 10.4 13.4 11 22.8 12C13.4 13 12.7 13.6 12 22.8C11.3 13.6 10.6 13 1.2 12C10.6 11 11.3 10.4 12 1.2Z"/></svg>';
   }
-  function trustChip(icon, label) {
+  // one reusable capsule badge (icon-in-circle + label), used everywhere
+  function chip(iconName, label) {
     return '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 18px 9px 9px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:14px;color:#3a323f">' +
-      '<span style="width:30px;height:30px;border-radius:50%;background:#FFE2E6;display:inline-flex;align-items:center;justify-content:center">' + icon + '</span>' + esc(label) + '</span>';
+      '<span class="chip-ic">' + ph(iconName, 17, C, 'ph-fill') + '</span>' + esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
@@ -276,15 +277,18 @@
   }
 
   // ===== waitlist form =====
-  function waitlistForm() {
+  function waitlistForm(onColor) {
     var t = tdict();
     if (state.waitlistDone) {
-      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;max-width:32em;text-align:left;animation:popIn .5s ease both">' +
+      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#FFF0F2') + ';border:1px solid ' + (onColor ? 'transparent' : '#ffd9de') + ';max-width:32em;text-align:left;animation:popIn .5s ease both">' +
         '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#3a323f">' + esc(t.heroDone) + '</span></div>';
     }
+    var btn = onColor
+      ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
+      : 'color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
     return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:0 auto;flex-wrap:wrap">' +
-        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid #efe1e4;border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
-        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75);transition:transform .2s,box-shadow .2s;white-space:nowrap">' + esc(t.heroCta) + '</button>' +
+        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
+        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap;' + btn + '">' + esc(t.heroCta) + '</button>' +
       '</form>';
   }
 
@@ -311,21 +315,20 @@
         '<div id="wl1">' + waitlistForm() + '</div>' +
         (state.waitlistDone ? '' :
           '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 0">' +
-            trustChip(ph('gift', 17, '#E11D48', 'ph-fill'), t.trust1) +
-            trustChip(ph('shield-check', 17, '#E11D48', 'ph-fill'), t.trust2) +
-            trustChip(ph('apple-logo', 17, '#E11D48', 'ph-fill'), t.trust3) +
+            chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
           '</div>') +
       '</div>' +
       '<div style="position:relative;max-width:480px;margin:clamp(20px,4vh,46px) auto 0">' +
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
-        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:900px;cursor:pointer">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" ios-src="' + modelUsdz() + '" alt="Clinky 3D collectible" ar ar-modes="quick-look webxr" auto-rotate auto-rotate-delay="0" rotation-per-second="' + rotSpeed() + '" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="160" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 60%;--poster-color:transparent;background-color:transparent"></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="160" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 55%;--poster-color:transparent;background-color:transparent;animation:coinFlip 3.6s ease-in-out infinite"><div slot="progress-bar"></div></model-viewer>' +
+          '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
-          '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite">' + ph('flame', 19, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
-          '<div class="float-card" style="bottom:18%;right:-2%;animation:bobB 8s ease-in-out infinite">' + ph('cube', 19, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
+          '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
+          '<div class="float-card" style="bottom:18%;right:-2%;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
           '<div style="position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:center;gap:8px;z-index:3">' +
             '<button id="chipBeer" data-act="beer" style="' + drinkSeg(state.sel === 'beer') + '">' + esc(t.beer) + '</button>' +
             '<button id="chipCoffee" data-act="coffee" style="' + drinkSeg(state.sel === 'coffee') + '">' + esc(t.coffee) + '</button>' +
@@ -337,11 +340,11 @@
 
     // ---- social proof strip (pills) ----
     var proofData = {
-      en: [{ t: 'No sign-up needed', ic: ph('user-circle', 18, C, 'ph-fill') }, { t: 'Your data stays on your phone', ic: ph('device-mobile', 18, C, 'ph-fill') }, { t: 'Free to join', ic: ph('gift', 18, C, 'ph-fill') }],
-      ru: [{ t: 'Без регистрации', ic: ph('user-circle', 18, C, 'ph-fill') }, { t: 'Всё на твоём телефоне', ic: ph('device-mobile', 18, C, 'ph-fill') }, { t: 'Бесплатно', ic: ph('gift', 18, C, 'ph-fill') }]
+      en: [{ t: 'No sign-up needed', ic: 'user-circle' }, { t: 'Your data stays on your phone', ic: 'device-mobile' }, { t: 'Free to join', ic: 'gift' }],
+      ru: [{ t: 'Без регистрации', ic: 'user-circle' }, { t: 'Всё на твоём телефоне', ic: 'device-mobile' }, { t: 'Бесплатно', ic: 'gift' }]
     }[L];
-    var proof = '<section style="padding:8px clamp(20px,5vw,72px) 10px"><div style="max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center">' +
-      proofData.map(function (p) { return '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 6px 18px -12px rgba(28,19,38,.2);font-size:13.5px;font-weight:600;color:#5d5660">' + p.ic + esc(p.t) + '</span>'; }).join('') +
+    var proof = '<section style="padding:8px clamp(20px,5vw,72px) 10px"><div style="max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:11px 12px;justify-content:center">' +
+      proofData.map(function (p) { return chip(p.ic, p.t); }).join('') +
       '</div></section>';
 
     // ---- screens carousel ----
@@ -414,16 +417,17 @@
     var card = renderQuestionSection();
 
     // ---- how it works ----
+    var wp = ph('users-three', 26, '#fff', 'ph-fill'), wg = ph('game-controller', 26, '#fff', 'ph-fill'), wc = ph('cube', 26, '#fff', 'ph-fill');
     var stepData = {
       en: [
-        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', ic: I.people },
-        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', ic: I.game },
-        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', ic: I.cube }
+        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', ic: wp },
+        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', ic: wg },
+        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', ic: wc }
       ],
       ru: [
-        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', ic: I.people },
-        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', ic: I.game },
-        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', ic: I.cube }
+        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', ic: wp },
+        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', ic: wg },
+        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', ic: wc }
       ]
     }[L];
     var how = '<section style="padding:clamp(40px,6vh,80px) clamp(20px,5vw,72px) clamp(50px,8vh,96px)"><div style="max-width:1000px;margin:0 auto">' +
@@ -442,13 +446,17 @@
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
       '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:linear-gradient(150deg,#FF5167,#E11D48 60%,#C81E45);color:#FFFBFA;padding:clamp(42px,6vw,72px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 60px -30px rgba(225,29,72,.7)">' +
-        sparkle({ s: 22, pos: 'top:16%;left:13%', op: 0.85, anim: 'twinkle 4s ease-in-out infinite' }) +
-        sparkle({ s: 14, pos: 'bottom:20%;right:15%', op: 0.7, anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        sparkle({ s: 26, pos: 'top:14%;left:12%', op: 0.9, anim: 'twinkle 4s ease-in-out infinite' }) +
+        sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.7, anim: 'twinkle 5s ease-in-out .6s infinite' }) +
+        sparkle({ s: 13, pos: 'top:18%;right:24%', op: 0.65, anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        sparkle({ s: 22, pos: 'bottom:18%;right:13%', op: 0.85, anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
+        sparkle({ s: 14, pos: 'bottom:26%;left:16%', op: 0.6, anim: 'twinkle 3.8s ease-in-out .8s infinite' }) +
+        sparkle({ s: 17, pos: 'bottom:12%;right:30%', op: 0.7, anim: 'twinkle 5.2s ease-in-out .3s infinite' }) +
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
           '<img src="assets/clinky-icon.png" alt="Clinky" style="width:66px;height:66px;border-radius:19px;margin:0 auto 18px;box-shadow:0 14px 30px -10px rgba(120,10,30,.7);display:block">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px">' + esc(t.finalTitle) + '</h2>' +
           '<p style="font-size:16.5px;color:rgba(255,251,250,.88);margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
-          '<div id="wl2">' + waitlistForm() + '</div>' +
+          '<div id="wl2">' + waitlistForm(true) + '</div>' +
           (state.waitlistDone ? '' : '<p style="font-size:13px;color:rgba(255,251,250,.74);margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
         '</div>' +
       '</div>' +
@@ -603,7 +611,7 @@
   var $hdr, $main, $ftr;
   function updateHeaderBg() {
     var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3.5vw,40px);transition:background .35s ease,box-shadow .35s ease;';
-    var bg = state.scrolled ? 'background:rgba(255,248,244,.92);box-shadow:0 6px 24px -10px rgba(28,19,38,.18);backdrop-filter:blur(10px);' : 'background:transparent;';
+    var bg = state.scrolled ? 'background:rgba(255,255,255,.9);box-shadow:0 6px 24px -10px rgba(28,19,38,.16);backdrop-filter:blur(12px);' : 'background:transparent;';
     if ($hdr) $hdr.setAttribute('style', base + bg);
   }
   function paintHeader() { $hdr.innerHTML = renderHeader(); updateHeaderBg(); }
@@ -612,26 +620,25 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') startAnim(); else stopAnim();
+    if (state.page === 'home') { startAnim(); bindModelLoad(); } else stopAnim();
   }
 
   // ===== model animation =====
+  function showLoader() { var l = document.getElementById('mvLoader'); if (l) l.style.display = 'flex'; }
+  function hideLoader() { var l = document.getElementById('mvLoader'); if (l) l.style.display = 'none'; }
+  function bindModelLoad() {
+    var mv = document.getElementById('drinkModel'); if (!mv) return;
+    if (mv.loaded) { hideLoader(); return; }
+    showLoader();
+    mv.addEventListener('load', hideLoader);
+  }
   function applyModelAttrs() {
     var mv = document.getElementById('drinkModel');
     if (!mv) return;
+    showLoader();
     mv.setAttribute('src', modelGlb());
-    mv.setAttribute('ios-src', modelUsdz());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
-    mv.setAttribute('rotation-per-second', rotSpeed());
-  }
-  function spinModel(deg) {
-    var mv = document.getElementById('drinkModel');
-    if (!mv || !mv.getCameraOrbit) return;
-    try {
-      var o = mv.getCameraOrbit();
-      mv.cameraOrbit = (o.theta * 180 / Math.PI + deg) + 'deg ' + (o.phi * 180 / Math.PI) + 'deg auto';
-    } catch (e) {}
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -673,24 +680,14 @@
     if (!mv) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     mv.style.animation = 'none'; void mv.offsetWidth;
-    if (reduce) { mv.style.animation = 'quickPulse .5s ease'; return; }
-    var beer = state.sel !== 'coffee';
-    mv.style.animation = (beer ? 'capPop .72s' : 'cupCheers .82s') + ' cubic-bezier(.34,1.56,.64,1)';
-    try { mv.removeAttribute('auto-rotate'); } catch (e) {}
-    if (beer) { spinModel(360); burstSparkles(); } else { spinModel(70); puffSteam(); }
+    mv.style.animation = reduce ? 'quickPulse .5s ease' : 'coinFlip 1.25s cubic-bezier(.4,1.25,.5,1)';
+    (state.sel !== 'coffee') ? burstSparkles() : puffSteam();
     try { if (navigator.vibrate) navigator.vibrate(10); } catch (e) {}
     clearTimeout(animBack);
-    animBack = setTimeout(function () { mv.style.animation = 'none'; try { mv.setAttribute('auto-rotate', ''); } catch (e) {} }, 950);
+    animBack = setTimeout(function () { mv.style.animation = reduce ? '' : 'coinFlip 3.6s ease-in-out infinite'; }, 1250);
   }
-  function startAnim() {
-    stopAnim();
-    animKickoff = setTimeout(function () { if (state.page === 'home') playAnim(); }, 2400);
-    animTimer = setInterval(function () { if (state.page === 'home' && !document.hidden) playAnim(); }, 5600);
-  }
-  function stopAnim() {
-    if (animTimer) { clearInterval(animTimer); animTimer = null; }
-    if (animKickoff) { clearTimeout(animKickoff); animKickoff = null; }
-  }
+  function startAnim() { /* idle coin-flip loops via CSS inline animation */ }
+  function stopAnim() { if (animBack) { clearTimeout(animBack); animBack = null; } }
 
   // ===== question card in-place + swipe =====
   function animQ() {
