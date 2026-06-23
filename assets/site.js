@@ -215,21 +215,15 @@
   // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
-  // Camera static (matches in-app); model spins. Radius pulls the camera back so the cap never
-  // clips — even mid-flip when it stands vertical. Coffee phi 50 → looks slightly down at the cup.
-  function camOrbit() { return state.sel === 'coffee' ? '0deg 50deg 160%' : '26deg 60deg 165%'; }
+  // Camera nearly side-on like the in-app SceneKit rig (cap: h4/d250 → ~side-on; cup: h6/d12 → phi~63);
+  // the diagonal look comes from the MODEL pose, not the camera. Radius keeps the model off the edges.
+  function camOrbit() { return state.sel === 'coffee' ? '0deg 63deg 150%' : '0deg 88deg 165%'; }
   function fov() { return '30deg'; }
-  // Resting model orientation ("roll pitch yaw"): beer leans slightly left (roll); coffee yaws so the
-  // lid seam faces us square-on. Spin animations compose on top of these and reset back to them.
-  function baseRoll() { return state.sel === 'coffee' ? 0 : -10; }
-  function baseYaw() { return state.sel === 'coffee' ? -16 : 0; }
-  function baseOrient() { return baseRoll() + 'deg 0deg ' + baseYaw() + 'deg'; }
-  // Floor shadow tuned per drink (beer = wide flat disc; coffee = narrow tall cup).
-  function shadowStyle() {
-    return state.sel === 'coffee'
-      ? 'left:34%;right:34%;bottom:9%;height:24px;background:radial-gradient(ellipse at center,rgba(70,12,28,.34),transparent 72%)'
-      : 'left:20%;right:20%;bottom:21%;height:34px;background:radial-gradient(ellipse at center,rgba(70,12,28,.34),transparent 70%)';
-  }
+  // Resting model orientation ("roll pitch yaw"), ported from CollectibleConfig:
+  // beer baseRotationX 34.4° / baseRotationY -33°; coffee yawed so the lid seam faces us.
+  function basePitch() { return state.sel === 'coffee' ? 0 : 34; }
+  function baseYaw() { return state.sel === 'coffee' ? 29 : -33; }
+  function baseOrient() { return '0deg ' + basePitch() + 'deg ' + baseYaw() + 'deg'; }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -348,10 +342,9 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="modelShadow" style="position:absolute;' + shadowStyle() + ';filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="neutral" exposure="1.15" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="1.4" shadow-softness="0.9" tone-mapping="neutral" exposure="1.05" environment-image="assets/studio.hdr" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
-          '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
+          '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
@@ -686,7 +679,6 @@
     mv.setAttribute('src', modelGlb());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
-    var sh = document.getElementById('modelShadow'); if (sh) sh.setAttribute('style', 'position:absolute;' + shadowStyle() + ';filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite');
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -761,15 +753,15 @@
     if (coffee) { mv.style.animation = 'cupBob .7s cubic-bezier(.34,0,.32,1)'; puffSteam(); }
     else burstSparkles();
     var dur = coffee ? 700 : 900, t0 = performance.now();
-    var roll = baseRoll(), yaw = baseYaw(), rest = baseOrient();
+    var pitch0 = basePitch(), yaw0 = baseYaw(), rest = baseOrient();
     (function tick(now) {
       if (myToken !== animToken) return; // a newer spin / drink switch took over
       var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
       var p = Math.min(((now || performance.now()) - t0) / dur, 1);
       var deg = 360 * easeIO(p);
       try {
-        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + (yaw + deg).toFixed(1) + 'deg');   // +360 around Y (vertical spin), keeps the centred yaw
-        else m.setAttribute('orientation', roll + 'deg ' + (-deg).toFixed(1) + 'deg 0deg');           // -360 around X (forward roll), keeps the left lean
+        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + (yaw0 + deg).toFixed(1) + 'deg');           // +360 around Y (vertical spin), keeps the centred yaw
+        else m.setAttribute('orientation', '0deg ' + (pitch0 - deg).toFixed(1) + 'deg ' + yaw0 + 'deg');     // -360 around X (forward roll), keeps the in-app lean
       } catch (_) {}
       if (p < 1) requestAnimationFrame(tick);
       else { try { m.setAttribute('orientation', rest); } catch (_) {} m.style.animation = ''; tossing = false; }
