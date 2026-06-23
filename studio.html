@@ -14,6 +14,14 @@
   #floorWrap{position:absolute;left:50%;bottom:18%;width:48%;height:34px;transform:translateX(-50%);pointer-events:none}
   #floorShadow{width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(48,8,20,.5),rgba(48,8,20,.22) 44%,transparent 70%);filter:blur(9px)}
   @keyframes floorPulse{0%,100%{transform:scale(1);opacity:1}46%{transform:scale(.58);opacity:.38}}
+  /* axis gizmo (bottom-left), rotates with the camera so you can read orientation + where the ground is */
+  #gizmo{position:absolute;left:26px;bottom:26px;width:84px;height:84px;perspective:340px;pointer-events:none;z-index:5}
+  #gizmo .inner{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+  #gizmo .ax{position:absolute;left:0;top:0;width:36px;height:3px;transform-origin:0 50%;transform-style:preserve-3d;border-radius:2px}
+  #gizmo .ax span{position:absolute;right:-13px;top:-8px;font:700 11px sans-serif}
+  #gizmo .axX{background:#ff3b30;transform:rotateY(0deg)}#gizmo .axX span{color:#ff3b30}
+  #gizmo .axY{background:#34c759;transform:rotateZ(-90deg)}#gizmo .axY span{color:#34c759}
+  #gizmo .axZ{background:#0a84ff;transform:rotateY(-90deg)}#gizmo .axZ span{color:#0a84ff}
   #panel{width:340px;flex:none;background:#fff;border-left:1px solid #eee;padding:16px 16px 28px;overflow-y:auto;height:100vh}
   h1{font-size:15px;margin:0 0 4px}
   .hint{font-size:11.5px;color:#888;margin:0 0 14px;line-height:1.5}
@@ -36,10 +44,17 @@
 </head>
 <body>
   <div id="stage">
+    <div id="gizmo" aria-hidden="true">
+      <div class="inner">
+        <div class="ax axX"><span>X</span></div>
+        <div class="ax axY"><span>Y</span></div>
+        <div class="ax axZ"><span>Z</span></div>
+      </div>
+    </div>
     <div id="floorWrap"><div id="floorShadow"></div></div>
     <model-viewer id="mv" src="models/BeerCap.glb" camera-controls interaction-prompt="none"
       camera-orbit="0deg 88deg 165%" field-of-view="30deg" orientation="0deg 34deg -33deg"
-      min-camera-orbit="-180deg 0deg 1%" max-camera-orbit="180deg 180deg 400%"
+      min-camera-orbit="auto 5deg auto" max-camera-orbit="auto 175deg auto"
       min-field-of-view="8deg" max-field-of-view="60deg"
       shadow-intensity="0" tone-mapping="neutral" exposure="1.25" environment-image="assets/studio.hdr"></model-viewer>
   </div>
@@ -55,6 +70,11 @@
     <button id="play" style="width:100%;margin:0 0 14px;padding:11px;border:0;border-radius:10px;background:#1c1326;color:#fff;font-weight:800;font-size:13.5px;cursor:pointer" onclick="playSpin()">▶︎ Проиграть анимацию (тап по модели)</button>
 
     <div class="grp">Окружение / свет</div>
+    <div class="seg">
+      <button id="bSky" onclick="toggleSky()">🌅 Фон (видеть свет)</button>
+      <button id="bGround" onclick="toggleGround()">🟫 Пол (тень-якорь)</button>
+    </div>
+    <div class="small">Фон показывает HDR-сцену — видно, откуда падает свет. Пол включает реальную контактную тень — видно, где земля. Перед копированием выключи оба (на сайте их нет).</div>
     <div class="row">
       <label>HDR-окружение</label>
       <select id="env" onchange="apply()">
@@ -129,6 +149,7 @@
     mv.setAttribute('tone-mapping', val('tone'));
     mv.setAttribute('field-of-view', val('fov') + 'deg');
     mv.setAttribute('environment-image', val('env'));
+    if (skyOn) mv.setAttribute('skybox-image', val('env'));
     mv.setAttribute('orientation', val('roll') + 'deg ' + val('pitch') + 'deg ' + val('yaw') + 'deg');
     writeOut();
   }
@@ -178,7 +199,7 @@
 
   // last-saved presets (paste from configs); studio starts here so you keep tuning
   var PRESET = {
-    beer:   { orbit:'0.1deg 88deg 33.5m',     fov:30, roll:0, pitch:34,  yaw:-33, env:'legacy', tone:'aces',    exp:1.25, met:1.00, rou:0.30, shOp:0.40, shW:90, shH:80, shB:26, shX:0, shBl:15 },
+    beer:   { orbit:'0.1deg 88deg 47.95m',    fov:30, roll:4, pitch:32,  yaw:-30, env:'legacy', tone:'aces',    exp:1.25, met:1.00, rou:0.30, shOp:0.44, shW:90, shH:80, shB:28, shX:11, shBl:11 },
     coffee: { orbit:'28.9deg 62.5deg 2.64m',  fov:30, roll:0, pitch:-4,  yaw:30,  env:'legacy', tone:'neutral', exp:1.25, met:0.52, rou:0.42, shOp:0.74, shW:81, shH:50, shB:25, shX:0, shBl:17 }
   };
   function setVal(id,v){ document.getElementById(id).value = v; }
@@ -217,11 +238,33 @@
     });
   }
 
+  // skybox (see the light) + ground (real contact shadow) toggles
+  var skyOn = false, groundOn = false;
+  function toggleSky(){
+    skyOn = !skyOn;
+    document.getElementById('bSky').classList.toggle('on', skyOn);
+    mv.setAttribute('skybox-image', skyOn ? val('env') : '');
+  }
+  function toggleGround(){
+    groundOn = !groundOn;
+    document.getElementById('bGround').classList.toggle('on', groundOn);
+    mv.setAttribute('shadow-intensity', groundOn ? '2' : '0');
+    mv.setAttribute('shadow-softness', '0.8');
+    document.getElementById('floorWrap').style.display = groundOn ? 'none' : '';
+  }
+
+  // axis gizmo follows the camera so you can read orientation + where the ground (Y-up) is
+  var giz = document.querySelector('#gizmo .inner');
+  function updateGizmo(theta, phi){
+    if (giz) giz.style.transform = 'rotateX(' + (phi - 90) + 'deg) rotateY(' + (-theta) + 'deg)';
+  }
+
   // live camera readout as you drag
   mv.addEventListener('camera-change', function(){
     try {
       var o = mv.getCameraOrbit();
       liveCam = (o.theta*180/Math.PI).toFixed(1) + 'deg ' + (o.phi*180/Math.PI).toFixed(1) + 'deg ' + o.radius.toFixed(2) + 'm';
+      updateGizmo(o.theta*180/Math.PI, o.phi*180/Math.PI);
       writeOut();
     } catch(e){}
   });

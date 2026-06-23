@@ -217,8 +217,8 @@
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
   // Per-drink 3D scene config — dialed in via studio.html and pasted here.
   var DRINK_CFG = {
-    beer:   { orbit: '0.1deg 88deg 33.5m', fov: '30deg', orient: '0deg 34deg -33deg', tone: 'aces',    exposure: '1.25', env: 'legacy', metal: 1.0,  rough: 0.30,
-              shadow: { op: 0.40, w: '90%', h: '80px', b: '26%', blur: '15px', x: '0%' } },
+    beer:   { orbit: '0.1deg 88deg 47.95m', fov: '30deg', orient: '4deg 32deg -30deg', tone: 'aces',    exposure: '1.25', env: 'legacy', metal: 1.0,  rough: 0.30,
+              shadow: { op: 0.44, w: '90%', h: '80px', b: '28%', blur: '11px', x: '11%' } },
     coffee: { orbit: '28.9deg 62.5deg 2.64m', fov: '30deg', orient: '0deg -4deg 30deg', tone: 'neutral', exposure: '1.25', env: 'legacy', metal: 0.52, rough: 0.42,
               shadow: { op: 0.74, w: '81%', h: '50px', b: '25%', blur: '17px', x: '0%' } }
   };
