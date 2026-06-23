@@ -208,9 +208,9 @@
   // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
-  // Mirrors the in-app SceneKit cameras (BeerCap: h4/d250 → near side-on; CoffeeCup: h6/d12 → phi~63),
-  // both FOV 30; radius 112% leaves margin so the auto-frame never clips the frame edge.
-  function camOrbit() { return state.sel === 'coffee' ? '0deg 63deg 112%' : '26deg 60deg 112%'; }
+  // Camera static (matches in-app); model spins. Radius 160% pulls the camera back so the cap never
+  // clips — even mid-flip when it stands vertical. Coffee phi 50 → looks slightly down at the cup.
+  function camOrbit() { return state.sel === 'coffee' ? '0deg 50deg 160%' : '26deg 60deg 165%'; }
   function fov() { return '30deg'; }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
@@ -325,7 +325,7 @@
             chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
           '</div>') +
       '</div>' +
-      '<div style="position:relative;max-width:480px;margin:clamp(20px,4vh,46px) auto 0">' +
+      '<div style="position:relative;max-width:560px;margin:clamp(20px,4vh,46px) auto 0">' +
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
