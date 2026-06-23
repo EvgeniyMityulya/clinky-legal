@@ -208,8 +208,10 @@
   // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
-  function camOrbit() { return state.sel === 'coffee' ? '18deg 80deg auto' : '25deg 62deg auto'; }
-  function fov() { return state.sel === 'coffee' ? '35deg' : '40deg'; }
+  // Mirrors the in-app SceneKit cameras (BeerCap: h4/d250 → near side-on; CoffeeCup: h6/d12 → phi~63),
+  // both FOV 30; radius 112% leaves margin so the auto-frame never clips the frame edge.
+  function camOrbit() { return state.sel === 'coffee' ? '0deg 63deg 112%' : '26deg 60deg 112%'; }
+  function fov() { return '30deg'; }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -329,7 +331,7 @@
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,138,151,.12) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:22%;right:22%;bottom:19%;height:30px;background:radial-gradient(ellipse at center,rgba(70,12,28,.32),transparent 70%);filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0 0 6% 0;width:100%;height:94%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
           '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -714,35 +716,25 @@
     if (reduce) { mv.style.animation = 'none'; void mv.offsetWidth; mv.style.animation = 'quickPulse .5s ease'; return; }
     tossing = true;
     var myToken = ++animToken;
-    mv.style.animation = 'none'; void mv.offsetWidth;
-    try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
-    // CSS does the vertical toss only (a hop) — the spin is honest 3D, driven through the engine
-    mv.style.animation = 'tossArc 1.45s cubic-bezier(.38,1,.5,1)';
     var coffee = state.sel === 'coffee';
-    if (coffee) puffSteam(); else burstSparkles();
-    var t0 = performance.now(), dur = 1450, base = 18, phi = 80;
+    try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
+    // Match the in-app SceneKit tap animation: the MODEL spins in place, the camera never moves.
+    // Coffee = bobAndSpin (rise/fall + Y spin, 0.7s); Beer = forwardRoll (X tumble, 0.9s, no bob).
+    mv.style.animation = 'none'; void mv.offsetWidth;
+    if (coffee) { mv.style.animation = 'cupBob .7s cubic-bezier(.34,0,.32,1)'; puffSteam(); }
+    else burstSparkles();
+    var dur = coffee ? 700 : 900, t0 = performance.now();
     (function tick(now) {
-      if (myToken !== animToken) return; // a newer animation / drink switch took over
+      if (myToken !== animToken) return; // a newer spin / drink switch took over
       var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
       var p = Math.min(((now || performance.now()) - t0) / dur, 1);
       var deg = 360 * easeIO(p);
       try {
-        if (coffee) {
-          // COFFEE: camera orbits the cup around the vertical axis — you see every side spin past
-          m.cameraOrbit = (base + deg).toFixed(1) + 'deg ' + phi + 'deg auto';
-        } else {
-          // BEER CAP: rotate the model's own geometry (negative pitch → tumbles AWAY from viewer)
-          m.setAttribute('orientation', '0deg ' + (-deg).toFixed(1) + 'deg 0deg');
-        }
+        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + deg.toFixed(1) + 'deg');   // +360 around Y (vertical spin)
+        else m.setAttribute('orientation', '0deg ' + (-deg).toFixed(1) + 'deg 0deg');         // -360 around X (forward roll)
       } catch (_) {}
       if (p < 1) requestAnimationFrame(tick);
-      else {
-        try {
-          if (coffee) m.cameraOrbit = base + 'deg ' + phi + 'deg auto';
-          else m.setAttribute('orientation', '0deg 0deg 0deg');
-        } catch (_) {}
-        m.style.animation = ''; tossing = false;
-      }
+      else { try { m.setAttribute('orientation', '0deg 0deg 0deg'); } catch (_) {} m.style.animation = ''; tossing = false; }
     })(performance.now());
   }
   function startAnim() {
