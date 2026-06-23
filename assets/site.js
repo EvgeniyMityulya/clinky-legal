@@ -209,7 +209,7 @@
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
   function camOrbit() { return state.sel === 'coffee' ? '18deg 80deg auto' : '25deg 62deg auto'; }
-  function fov() { return state.sel === 'coffee' ? '27deg' : '30deg'; }
+  function fov() { return state.sel === 'coffee' ? '35deg' : '40deg'; }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -328,7 +328,7 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,138,151,.12) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div style="position:absolute;left:14%;right:14%;bottom:17%;height:26px;background:radial-gradient(ellipse at center,rgba(60,10,25,.2),transparent 72%);filter:blur(12px);pointer-events:none"></div>' +
+          '<div style="position:absolute;left:22%;right:22%;bottom:19%;height:30px;background:radial-gradient(ellipse at center,rgba(70,12,28,.32),transparent 70%);filter:blur(13px);pointer-events:none;animation:shadowBreathe 5s ease-in-out infinite"></div>' +
           '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0 0 6% 0;width:100%;height:94%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
@@ -418,9 +418,9 @@
       var title = '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>';
       var desc = '<p style="font-size:14px;line-height:1.5;color:#6b6b76;margin:0;max-width:30em">' + esc(f.d) + '</p>';
       if (f.media === 'side') {
-        return '<div class="bento-card" style="' + grid + 'display:flex;flex-wrap:wrap;align-items:stretch;gap:clamp(18px,4vw,40px);padding:clamp(24px,4vw,40px) clamp(24px,4vw,44px) 0;overflow:hidden">' +
-          '<div style="flex:1;min-width:200px;align-self:center;padding-bottom:clamp(24px,4vw,40px)">' + bentoChip(f.ic) + title + desc + '</div>' +
-          '<div style="flex:none;align-self:flex-end;width:clamp(116px,17vw,168px);margin-bottom:-14px">' + phoneWin(f.n, '9/15') + '</div>' +
+        return '<div class="bento-card" style="' + grid + 'position:relative;padding:24px;overflow:hidden">' +
+          '<div style="position:relative;z-index:1;max-width:60%">' + bentoChip(f.ic) + title + desc + '</div>' +
+          '<div style="position:absolute;right:16px;bottom:-16px;width:38%;max-width:150px">' + phoneWin(f.n, '9/13') + '</div>' +
         '</div>';
       }
       if (f.media === 'bleed') {
@@ -829,7 +829,9 @@
     if (b) b.setAttribute('style', drinkSeg(d === 'beer'));
     if (c) c.setAttribute('style', drinkSeg(d === 'coffee'));
     tossing = false; animToken++;       // cancel any in-flight spin so the view resets cleanly
-    applyModelAttrs(); playAnim();
+    applyModelAttrs();                  // snap straight to the canonical orientation + camera (no stuck angle)
+    var mvp = document.getElementById('drinkModel');
+    if (mvp) { mvp.style.animation = 'none'; void mvp.offsetWidth; mvp.style.animation = 'quickPulse .5s ease'; }
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
   function nextQuestion() { state.qIndex = (state.qIndex + 1) % GAMES[state.gameIndex].q.length; refreshCard(); }
