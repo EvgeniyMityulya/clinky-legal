@@ -1,39 +1,38 @@
 /* ============================================================
-   Clinky — landing logic (vanilla port of Clinky.dc.html).
-   No framework. State -> render(html string) -> #app.
-   3D hero uses <model-viewer> with the real GLB/USDZ in /models.
+   Clinky — landing logic. Clean/minimal (homify structure +
+   Sheepy softness + Clinky brand: cream bg, coral accent).
+   Vanilla, no framework. 3D hero via <model-viewer> + real GLB.
    ============================================================ */
 (function () {
   'use strict';
 
-  // ===== integration config =====
-  var EO_ACTION = '';          // EmailOctopus embedded-form action URL (waitlist). Empty => just confirm locally.
+  var EO_ACTION = '';          // EmailOctopus embedded-form action URL (waitlist). Empty => confirm locally.
   var SUPPORT_ENDPOINT = '';   // optional POST endpoint for support; empty => mailto
   var CONTACT_EMAIL = 'evgeniymityulya.ios@gmail.com';
   var C = '#FF4F62';
 
-  // ===== state =====
   var state = {
     lang: 'en', page: 'home', scrolled: false, sel: 'beer',
     gameIndex: 0, qIndex: 0, waitlistDone: false, supportDone: false
   };
-  var animTimer = null, animBack = null, animKickoff = null;
+  var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
 
-  // ===== content =====
   var DICT = {
     en: {
       navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'Join waitlist',
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Make seeing your friends a game',
       heroLede: 'Clinky turns any hangout into a game. Break the ice with real cards, log every meet-up, and collect a 3D drink for each clink.',
-      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+', swipeHint: 'Hover to take a closer look',
+      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iPhone · iOS 17+',
+      heroModel: 'Tap the drink · AR on iPhone', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'you@email.com', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
-      gamesSub: 'These are real cards from the app. Pick a game and tap through — no download needed.',
-      tapSwipe: 'Tap or swipe', dislike: 'Skip', like: 'Like', cardHint: 'Tap the card for the next question',
-      galleryTitle: 'Take a look inside', gallerySub: 'Real screens straight from the app.',
-      featTitle: 'Everything in one app', featSub: 'No accounts. No clutter. Just your people.',
+      gamesSub: 'These are real cards from the app. Pick a game and swipe through — no download needed.',
+      tapSwipe: 'Tap or swipe the card', dislike: 'Skip', like: 'Like', cardHint: 'Swipe or tap for the next question',
+      galleryTitle: 'Take a look inside', gallerySub: 'Real screens, straight from the app.',
+      whyKicker: 'Why Clinky', whyTitle: "Friendships that don't fade", whySub: 'A few small things that quietly keep your people close.',
+      discoverKicker: 'Inside the app', discoverTitle: 'Everything in one calm app', discoverSub: 'No accounts, no clutter — just your people and your moments.',
       howKicker: 'How it works', howTitle: 'Three taps to a better hangout',
       finalTitle: 'Be first to clink', finalSub: "Join the waitlist — we'll send the App Store link the day Clinky is live.",
       aboutTitle: 'About Clinky',
@@ -53,18 +52,20 @@
       footRights: 'Made for people who would rather meet up.'
     },
     ru: {
-      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'В очередь',
+      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navJoin: 'В очередь',
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи с друзьями в игру',
       heroLede: 'Clinky превращает любую встречу в игру. Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
-      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+', swipeHint: 'Наведи, чтобы рассмотреть',
+      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iPhone · iOS 17+',
+      heroModel: 'Нажми на напиток · AR на iPhone', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'ты@почта.com', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай — ничего качать не нужно.',
-      tapSwipe: 'Тап или свайп', dislike: 'Пропустить', like: 'Нравится', cardHint: 'Нажми на карточку — будет следующий вопрос',
+      tapSwipe: 'Тап или свайп по карточке', dislike: 'Пропустить', like: 'Нравится', cardHint: 'Свайп или тап — следующий вопрос',
       galleryTitle: 'Загляни внутрь', gallerySub: 'Реальные экраны прямо из приложения.',
-      featTitle: 'Всё в одном приложении', featSub: 'Без аккаунтов и лишнего. Только твои люди.',
+      whyKicker: 'Почему Clinky', whyTitle: 'Дружба, которая не угасает', whySub: 'Несколько мелочей, которые тихо держат близких рядом.',
+      discoverKicker: 'Внутри приложения', discoverTitle: 'Всё в одном спокойном приложении', discoverSub: 'Без аккаунтов и лишнего — только твои люди и моменты.',
       howKicker: 'Как это работает', howTitle: 'Три шага к лучшей встрече',
       finalTitle: 'Будь первым, кто чокнется', finalSub: 'Встань в очередь — пришлём ссылку на App Store в день релиза Clinky.',
       aboutTitle: 'О Clinky',
@@ -141,60 +142,68 @@
   function ph(name, size, color, weight) {
     return '<i class="' + (weight || 'ph') + ' ph-' + name + '" style="font-size:' + (size || 22) + 'px;color:' + (color || 'currentColor') + ';line-height:1;display:inline-flex;flex:none"></i>';
   }
-  function overHero() { return (state.page === 'home' || state.page === 'about') && !state.scrolled; }
+  function sparkle(o) {
+    return '<svg width="' + o.s + '" height="' + o.s + '" viewBox="0 0 24 24" fill="' + (o.c || '#fff') + '" aria-hidden="true" ' +
+      'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
+      'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,255,255,.45)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
+      '<path d="M12 2C13.2 8.2 15.8 10.8 22 12C15.8 13.2 13.2 15.8 12 22C10.8 15.8 8.2 13.2 2 12C8.2 10.8 10.8 8.2 12 2Z"/></svg>';
+  }
+  function trustChip(icon, label) {
+    return '<span style="display:inline-flex;align-items:center;gap:8px;padding:8px 15px 8px 8px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 6px 18px -10px rgba(28,19,38,.18);font-weight:700;font-size:13px;color:#3a323f">' +
+      '<span style="width:24px;height:24px;border-radius:50%;background:#FFE2E6;display:inline-flex;align-items:center;justify-content:center">' + icon + '</span>' + esc(label) + '</span>';
+  }
+  function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
+  function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
+  function subsec(s) { return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + esc(s) + '</p>'; }
+  function coralBtn(label, act, extra) {
+    return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
+  }
+  function renderQcount() {
+    var len = GAMES[state.gameIndex].q.length;
+    var n = (state.qIndex % len) + 1;
+    return state.lang === 'ru' ? ('вопрос ' + n + ' из ' + len) : ('question ' + n + ' of ' + len);
+  }
 
-  // ===== style builders =====
-  function navPill(active, light) {
-    var b = "border:0;cursor:pointer;border-radius:999px;padding:8px 15px;font-weight:700;font-size:14px;white-space:nowrap;transition:all .22s;font-family:'DM Sans',sans-serif;";
-    if (active) return b + (light ? 'background:#FFFBFA;color:#E11D48;box-shadow:0 4px 14px rgba(120,10,30,.22);' : 'background:#FF4F62;color:#fff;box-shadow:0 6px 16px rgba(255,79,98,.35);');
-    return b + 'background:transparent;color:' + (light ? 'rgba(255,251,250,.92)' : '#6b6b76') + ';';
+  // segmented / pill styles
+  function navPill(active) {
+    var b = 'border:0;cursor:pointer;border-radius:999px;padding:8px 15px;font-weight:700;font-size:14px;white-space:nowrap;transition:all .22s;font-family:DM Sans,sans-serif;';
+    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 16px -6px rgba(255,79,98,.6);' : b + 'background:transparent;color:#6b6b76;';
   }
   function pill(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14.5px;transition:all .22s;display:inline-flex;align-items:center;gap:7px;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px rgba(255,79,98,.32);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
+    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
   }
-  function langSeg(active, light) {
+  function langSeg(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;transition:all .25s;';
-    return active ? b + 'background:' + (light ? '#FFFBFA' : '#1c1326') + ';color:' + (light ? '#C32748' : '#fff') + ';' : b + 'background:transparent;color:' + (light ? 'rgba(255,251,250,.85)' : '#6b6b76') + ';';
+    return active ? b + 'background:#1c1326;color:#fff;' : b + 'background:transparent;color:#6b6b76;';
   }
   function langSegDark(active) {
-    var b = 'border:1px solid rgba(255,255,255,.2);cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
-    return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:rgba(255,251,250,.7);';
+    var b = 'border:1px solid #ece0e3;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
+    return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:#8a8190;';
   }
   function drinkSeg(active) {
-    var b = 'border:0;cursor:pointer;border-radius:999px;padding:9px 16px;font-weight:700;font-size:14px;transition:all .25s;backdrop-filter:blur(6px);white-space:nowrap;display:inline-flex;align-items:center;gap:6px;';
-    return active ? b + 'background:#FFFBFA;color:#C32748;box-shadow:0 6px 16px rgba(0,0,0,.2);' : b + 'background:rgba(255,255,255,.18);color:#FFFBFA;border:1px solid rgba(255,255,255,.32);';
+    var b = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;transition:all .25s;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;font-family:Nunito,sans-serif;';
+    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
   }
   function gameIcon(i, color, s) {
     var names = ['eye-slash', 'target', 'chat-circle', 'arrows-left-right'];
     return ph(names[i] || names[3], s || 18, color, 'ph-bold');
   }
-
   function icons() {
     return {
-      people: ph('users-three', 28, C, 'ph-fill'),
-      cupBig: ph('coffee', 28, C, 'ph-fill'),
-      game: ph('game-controller', 28, C, 'ph-fill'),
-      chat: ph('chat-teardrop-dots', 30, C, 'ph-fill'),
-      flame: ph('flame', 26, C, 'ph-fill'),
-      cube: ph('cube', 26, C, 'ph-fill'),
-      chart: ph('chart-bar', 26, C, 'ph-fill'),
-      mail: ph('envelope', 18, 'currentColor'),
-      apple: ph('apple-logo', 20, 'currentColor', 'ph-fill'),
-      check: ph('check-circle', 24, '#fff', 'ph-fill'),
-      checkPink: ph('check-circle', 24, '#FF4F62', 'ph-fill'),
-      checkMini: ph('check', 15, '#FFD166', 'ph-bold'),
-      skip: ph('x', 22, '#b9b0b6', 'ph-bold'),
-      heart: ph('heart', 26, '#fff', 'ph-fill'),
-      never: gameIcon(0, '#6b6b76', 18),
-      target: gameIcon(1, '#6b6b76', 18),
-      bubble: gameIcon(2, '#6b6b76', 18),
-      swap: gameIcon(3, '#6b6b76', 18)
+      people: ph('users-three', 26, C, 'ph-fill'), cupBig: ph('coffee', 26, C, 'ph-fill'),
+      game: ph('game-controller', 26, C, 'ph-fill'), chat: ph('chat-teardrop-dots', 30, C, 'ph-fill'),
+      flame: ph('flame', 24, C, 'ph-fill'), cube: ph('cube', 24, C, 'ph-fill'), chart: ph('chart-bar', 24, C, 'ph-fill'),
+      lock: ph('lock-simple', 24, C, 'ph-fill'), bell: ph('bell', 24, C, 'ph-fill'),
+      mail: ph('envelope', 18, 'currentColor'), apple: ph('apple-logo', 18, 'currentColor', 'ph-fill'),
+      check: ph('check-circle', 24, '#fff', 'ph-fill'), checkPink: ph('check-circle', 24, '#FF4F62', 'ph-fill'),
+      skip: ph('x', 22, '#b9b0b6', 'ph-bold'), heart: ph('heart', 26, '#fff', 'ph-fill'),
+      never: gameIcon(0, '#6b6b76', 18), target: gameIcon(1, '#6b6b76', 18), bubble: gameIcon(2, '#6b6b76', 18), swap: gameIcon(3, '#6b6b76', 18)
     };
   }
   function pchk() { return ph('check', 15, '#FF4F62', 'ph-bold'); }
 
-  // ===== model attrs =====
+  // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
   function camOrbit() { return state.sel === 'coffee' ? '18deg 80deg auto' : '25deg 62deg auto'; }
@@ -203,63 +212,62 @@
 
   // ===== header / footer =====
   function renderHeader() {
-    var t = tdict(), oh = overHero(), p = state.page;
-    var seg = 'display:flex;padding:4px;border-radius:999px;flex:none;backdrop-filter:blur(6px);background:' + (oh ? 'rgba(255,255,255,.18)' : 'rgba(28,19,38,.06)') + ';border:' + (oh ? '1px solid rgba(255,255,255,.26)' : '1px solid rgba(28,19,38,.08)') + ';';
-    var word = "font-family:'Nunito',sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:" + (oh ? '#FFFBFA' : '#1c1326') + ';';
-    var navDiv = 'width:1px;height:20px;background:' + (oh ? 'rgba(255,255,255,.3)' : 'rgba(28,19,38,.12)') + ';margin:0 6px;flex:none;';
-    var join = "border:0;cursor:pointer;border-radius:999px;padding:9px 17px;font-weight:800;font-size:14px;font-family:'Nunito',sans-serif;white-space:nowrap;transition:transform .2s,box-shadow .2s;" + (oh ? 'background:#FFFBFA;color:#E11D48;' : 'background:#FF4F62;color:#fff;box-shadow:0 6px 16px rgba(255,79,98,.35);');
+    var t = tdict(), p = state.page;
+    var seg = 'display:flex;padding:4px;border-radius:999px;flex:none;background:rgba(28,19,38,.05);border:1px solid rgba(28,19,38,.08)';
+    var join = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;font-family:Nunito,sans-serif;white-space:nowrap;transition:transform .2s;background:#FF4F62;color:#fff;box-shadow:0 8px 18px -8px rgba(255,79,98,.7)';
+    var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
       '<button data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:none">' +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:38px;height:38px;border-radius:11px;box-shadow:0 5px 16px rgba(225,29,72,.35)">' +
-        '<span style="' + word + '">Clinky</span>' +
+        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
+        '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
       '<nav class="nav-mid" style="flex:1;display:flex;align-items:center;justify-content:center;gap:4px;padding:0 8px">' +
-        '<button data-act="home" style="' + navPill(p === 'home', oh) + '">' + esc(t.navHome) + '</button>' +
-        '<button data-act="about" style="' + navPill(p === 'about', oh) + '">' + esc(t.navAbout) + '</button>' +
-        '<button data-act="support" style="' + navPill(p === 'support', oh) + '">' + esc(t.navSupport) + '</button>' +
+        '<button data-act="home" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
+        '<button data-act="about" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
+        '<button data-act="support" style="' + navPill(p === 'support') + '">' + esc(t.navSupport) + '</button>' +
         '<span class="nav-legal" style="' + navDiv + '"></span>' +
-        '<button data-act="privacy" class="nav-legal" style="' + navPill(p === 'privacy', oh) + '">' + esc(t.navPrivacy) + '</button>' +
-        '<button data-act="terms" class="nav-legal" style="' + navPill(p === 'terms', oh) + '">' + esc(t.navTerms) + '</button>' +
+        '<button data-act="privacy" class="nav-legal" style="' + navPill(p === 'privacy') + '">' + esc(t.navPrivacy) + '</button>' +
+        '<button data-act="terms" class="nav-legal" style="' + navPill(p === 'terms') + '">' + esc(t.navTerms) + '</button>' +
       '</nav>' +
       '<div style="display:flex;align-items:center;gap:10px;flex:none">' +
         '<button data-act="join" class="join-cta" style="' + join + '">' + esc(t.navJoin) + '</button>' +
         '<div style="' + seg + '">' +
-          '<button data-act="en" style="' + langSeg(state.lang === 'en', oh) + '">EN</button>' +
-          '<button data-act="ru" style="' + langSeg(state.lang === 'ru', oh) + '">RU</button>' +
+          '<button data-act="en" style="' + langSeg(state.lang === 'en') + '">EN</button>' +
+          '<button data-act="ru" style="' + langSeg(state.lang === 'ru') + '">RU</button>' +
         '</div>' +
       '</div>';
   }
 
   function renderFooter() {
     var t = tdict(), I = icons();
-    var lnk = "background:transparent;border:0;cursor:pointer;font-size:14.5px;color:rgba(255,251,250,.82);padding:0;font-family:'DM Sans',sans-serif";
+    var lnk = 'background:transparent;border:0;cursor:pointer;font-size:14.5px;color:#6b6b76;padding:0;font-family:DM Sans,sans-serif';
+    var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#a99ea6;margin-bottom:2px';
     return '' +
-      '<div style="height:clamp(44px,6vh,64px)"></div>' +
       '<div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
         '<div style="max-width:300px">' +
           '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">' +
-            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:38px;height:38px;border-radius:11px">' +
-            '<span style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:23px">Clinky</span>' +
+            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
+            '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;color:#1c1326">Clinky</span>' +
           '</div>' +
-          '<p style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15px;color:rgba(255,251,250,.92);margin:0 0 8px">Tap. Clink. Meet again.</p>' +
-          '<p style="font-size:13.5px;color:rgba(255,251,250,.5);margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
-          '<div style="display:inline-flex;align-items:center;gap:10px;padding:10px 16px;border-radius:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);font-size:13.5px;font-weight:600;color:rgba(255,251,250,.88)">' + I.apple + esc(t.footComingSoon) + '</div>' +
+          '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">Tap. Clink. Meet again.</p>' +
+          '<p style="font-size:13.5px;color:#8a8190;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
+          '<div style="display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:12px;background:#fff;border:1px solid #f1e4e7;font-size:13.5px;font-weight:700;color:#3a323f">' + I.apple + esc(t.footComingSoon) + '</div>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
-          '<div style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,251,250,.4);margin-bottom:2px">' + esc(t.footProduct) + '</div>' +
+          '<div style="' + head + '">' + esc(t.footProduct) + '</div>' +
           '<button data-act="home" style="' + lnk + '">' + esc(t.navHome) + '</button>' +
           '<button data-act="about" style="' + lnk + '">' + esc(t.navAbout) + '</button>' +
           '<button data-act="support" style="' + lnk + '">' + esc(t.navSupport) + '</button>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
-          '<div style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:rgba(255,251,250,.4);margin-bottom:2px">' + esc(t.footLegalReach) + '</div>' +
+          '<div style="' + head + '">' + esc(t.footLegalReach) + '</div>' +
           '<button data-act="privacy" style="' + lnk + '">' + esc(t.navPrivacy) + '</button>' +
           '<button data-act="terms" style="' + lnk + '">' + esc(t.navTerms) + '</button>' +
-          '<a href="mailto:' + CONTACT_EMAIL + '" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:rgba(255,251,250,.82)">' + I.mail + esc(t.footEmail) + '</a>' +
+          '<a href="mailto:' + CONTACT_EMAIL + '" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:#6b6b76">' + I.mail + esc(t.footEmail) + '</a>' +
         '</div>' +
       '</div>' +
-      '<div style="max-width:1080px;margin:34px auto 0;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
-        '<span style="font-size:12.5px;color:rgba(255,251,250,.45)">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
+      '<div style="max-width:1080px;margin:32px auto 0;padding-top:20px;border-top:1px solid #f0e4e3;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
+        '<span style="font-size:12.5px;color:#a99ea6">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
         '<div style="display:flex;gap:6px">' +
           '<button data-act="en" style="' + langSegDark(state.lang === 'en') + '">EN</button>' +
           '<button data-act="ru" style="' + langSegDark(state.lang === 'ru') + '">RU</button>' +
@@ -268,16 +276,15 @@
   }
 
   // ===== waitlist form =====
-  function waitlistForm(centered) {
+  function waitlistForm() {
     var t = tdict();
     if (state.waitlistDone) {
-      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:18px 22px;border-radius:18px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.32);max-width:31em;animation:popIn .5s ease both">' +
-        '<span style="display:inline-flex;flex:none">' + icons().check + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45">' + esc(t.heroDone) + '</span></div>';
+      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;max-width:32em;text-align:left;animation:popIn .5s ease both">' +
+        '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#3a323f">' + esc(t.heroDone) + '</span></div>';
     }
-    var formStyle = centered ? 'display:flex;gap:10px;max-width:30em;margin:0 auto;flex-wrap:wrap' : 'display:flex;gap:10px;max-width:31em';
-    return '<form data-form="waitlist" style="' + formStyle + '">' +
-        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:' + (centered ? '200px' : '160px') + ';border:0;border-radius:15px;padding:' + (centered ? '16px 18px' : '17px 18px') + ';font-size:15.5px;background:#FFFBFA;color:#1c1326;outline:none;box-shadow:0 10px 30px rgba(120,10,30,.28)">' +
-        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:15px;padding:' + (centered ? '16px 26px' : '17px 26px') + ';font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15.5px;color:#3a1a02;background:linear-gradient(180deg,#FFD75E,#FFB92E);box-shadow:0 12px 28px rgba(180,110,10,.42);transition:transform .2s,box-shadow .2s;white-space:nowrap">' + esc(t.heroCta) + '</button>' +
+    return '<form data-form="waitlist" style="display:flex;gap:10px;max-width:30em;margin:0 auto;flex-wrap:wrap">' +
+        '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:200px;border:1px solid #efe1e4;border-radius:15px;padding:16px 18px;font-size:15.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 8px 24px -16px rgba(28,19,38,.3)">' +
+        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:15px;padding:16px 26px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.7);transition:transform .2s,box-shadow .2s;white-space:nowrap">' + esc(t.heroCta) + '</button>' +
       '</form>';
   }
 
@@ -285,181 +292,195 @@
   function renderHome() {
     var t = tdict(), I = icons(), L = state.lang;
 
-    var hero = '<section style="position:relative;background:linear-gradient(165deg,#FF5C6E 0%,#E11D48 56%,#C21540 100%);color:#FFFBFA;padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(60px,10vh,104px);overflow:hidden">' +
-      '<div data-blob="1" style="position:absolute;width:540px;height:540px;border-radius:50%;background:radial-gradient(circle,rgba(255,184,140,.5),transparent 66%);top:-14%;left:-12%;animation:meshA 16s ease-in-out infinite;pointer-events:none;will-change:transform;filter:blur(8px)"></div>' +
-      '<div data-blob="2" style="position:absolute;width:480px;height:480px;border-radius:50%;background:radial-gradient(circle,rgba(255,86,128,.5),transparent 66%);bottom:-18%;right:-10%;animation:meshB 19s ease-in-out infinite;pointer-events:none;will-change:transform;filter:blur(8px)"></div>' +
-      '<div style="position:absolute;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(255,209,102,.3),transparent 64%);top:28%;left:38%;animation:floatSlow 14s ease-in-out infinite;pointer-events:none"></div>' +
-      '<div style="position:absolute;color:#fff;font-size:24px;top:15%;right:30%;animation:twinkle 4s ease-in-out infinite;pointer-events:none">✦</div>' +
-      '<div style="position:absolute;color:#fff;font-size:14px;top:27%;right:24%;animation:twinkle 3.2s ease-in-out infinite .5s;pointer-events:none">✦</div>' +
-      '<div style="position:absolute;color:rgba(255,255,255,.7);font-size:13px;bottom:26%;left:9%;animation:twinkle 3.6s ease-in-out infinite .9s;pointer-events:none">✦</div>' +
-      '<div style="position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:4px 4px"></div>' +
-      '<div style="position:relative;max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(28px,5vw,64px);align-items:center" class="hero-grid">' +
-        '<div>' +
-          '<div class="hero-eyebrow" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);font-weight:700;font-size:13.5px;margin-bottom:24px;backdrop-filter:blur(6px);white-space:nowrap">' +
-            '<span style="width:8px;height:8px;border-radius:50%;background:#FFD166;box-shadow:0 0 10px #FFD166;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) +
-          '</div>' +
-          '<h1 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(40px,5.8vw,66px);line-height:1.04;letter-spacing:-1.8px;margin:0 0 20px;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
-          '<p style="font-size:clamp(16.5px,1.55vw,20px);line-height:1.55;color:rgba(255,251,250,.9);max-width:30em;margin:0 0 30px">' + esc(t.heroLede) + '</p>' +
-          '<div id="wl1">' + waitlistForm(false) + '</div>' +
-          (state.waitlistDone ? '' :
-          '<div class="hero-trust" style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin:18px 2px 0;font-size:13px;font-weight:600;color:rgba(255,251,250,.84)">' +
-            '<span style="display:inline-flex;align-items:center;gap:6px">' + I.checkMini + esc(t.trust1) + '</span>' +
-            '<span style="display:inline-flex;align-items:center;gap:6px">' + I.checkMini + esc(t.trust2) + '</span>' +
-            '<span style="display:inline-flex;align-items:center;gap:6px">' + I.checkMini + esc(t.trust3) + '</span>' +
+    // ---- hero ----
+    var hero = '<section style="position:relative;padding:clamp(118px,15vh,168px) clamp(20px,5vw,72px) clamp(40px,7vh,76px);overflow:hidden;text-align:center">' +
+      sparkle({ s: 24, pos: 'top:17%;left:11%', op: 0.5, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
+      sparkle({ s: 14, pos: 'top:24%;right:15%', op: 0.5, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.2s ease-in-out .5s infinite' }) +
+      sparkle({ s: 17, pos: 'top:12%;right:31%', op: 0.45, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 4.4s ease-in-out .3s infinite' }) +
+      sparkle({ s: 12, pos: 'top:30%;left:24%', op: 0.4, c: '#FF4F62', glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out .9s infinite' }) +
+      '<div style="position:relative;max-width:720px;margin:0 auto">' +
+        '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFE7EA;color:#C32748;font-weight:800;font-size:13px;margin-bottom:22px">' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + '</span>' +
+        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(38px,6vw,64px);line-height:1.04;letter-spacing:-1.6px;margin:0 0 18px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
+        '<p style="font-size:clamp(16.5px,1.7vw,20px);line-height:1.55;color:#6b6b76;max-width:30em;margin:0 auto 28px">' + esc(t.heroLede) + '</p>' +
+        '<div id="wl1">' + waitlistForm() + '</div>' +
+        (state.waitlistDone ? '' :
+          '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:18px 0 0">' +
+            trustChip(ph('gift', 14, '#E11D48', 'ph-fill'), t.trust1) +
+            trustChip(ph('shield-check', 14, '#E11D48', 'ph-fill'), t.trust2) +
+            trustChip(ph('apple-logo', 14, '#E11D48', 'ph-fill'), t.trust3) +
           '</div>') +
-        '</div>' +
-        '<div style="position:relative">' +
-          '<div data-act="play" style="position:relative;aspect-ratio:1/1;max-width:520px;margin:0 auto;perspective:900px;cursor:pointer">' +
-            '<div style="position:absolute;inset:4% 4% 6%;background:radial-gradient(circle at 50% 52%,rgba(255,209,102,.4),rgba(255,140,120,.12) 45%,transparent 66%);pointer-events:none"></div>' +
-            '<div style="position:absolute;left:18%;right:18%;bottom:14%;height:26px;background:radial-gradient(ellipse at center,rgba(60,10,25,.4),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-            '<model-viewer id="drinkModel" src="' + modelGlb() + '" ios-src="' + modelUsdz() + '" alt="Clinky 3D collectible" ar ar-modes="quick-look webxr" auto-rotate auto-rotate-delay="0" rotation-per-second="' + rotSpeed() + '" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="180" shadow-intensity="0.85" exposure="1.05" environment-image="neutral" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 60%;--poster-color:transparent;background-color:transparent"></model-viewer>' +
-            '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
-            '<div style="position:absolute;left:0;right:0;bottom:14px;display:flex;justify-content:center;gap:8px;z-index:3">' +
-              '<button id="chipBeer" data-act="beer" style="' + drinkSeg(state.sel === 'beer') + '">' + esc(t.beer) + '</button>' +
-              '<button id="chipCoffee" data-act="coffee" style="' + drinkSeg(state.sel === 'coffee') + '">' + esc(t.coffee) + '</button>' +
-            '</div>' +
+      '</div>' +
+      '<div style="position:relative;max-width:460px;margin:clamp(20px,4vh,46px) auto 0">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:900px;cursor:pointer">' +
+          '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" ios-src="' + modelUsdz() + '" alt="Clinky 3D collectible" ar ar-modes="quick-look webxr" auto-rotate auto-rotate-delay="0" rotation-per-second="' + rotSpeed() + '" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="160" shadow-intensity="0.6" shadow-softness="1" exposure="1.05" environment-image="neutral" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 60%;--poster-color:transparent;background-color:transparent"></model-viewer>' +
+          '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
+          '<div class="float-card" style="top:13%;left:-1%;animation:bobA 7s ease-in-out infinite">' + ph('flame', 16, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
+          '<div class="float-card" style="bottom:19%;right:-1%;animation:bobB 8s ease-in-out infinite">' + ph('cube', 16, '#FF4F62', 'ph-fill') + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
+          '<div style="position:absolute;left:0;right:0;bottom:6px;display:flex;justify-content:center;gap:8px;z-index:3">' +
+            '<button id="chipBeer" data-act="beer" style="' + drinkSeg(state.sel === 'beer') + '">' + esc(t.beer) + '</button>' +
+            '<button id="chipCoffee" data-act="coffee" style="' + drinkSeg(state.sel === 'coffee') + '">' + esc(t.coffee) + '</button>' +
           '</div>' +
         '</div>' +
+        '<p style="font-size:13px;color:#a99ea6;margin:14px 0 0">' + esc(t.heroModel) + '</p>' +
       '</div>' +
     '</section>';
 
+    // ---- social proof strip (pills) ----
     var proofData = {
-      en: [{ t: '100% private — no accounts', ic: ph('lock-simple', 18, C, 'ph-fill') }, { t: 'Works fully offline', ic: ph('wifi-slash', 18, C, 'ph-fill') }, { t: 'Free to join the waitlist', ic: ph('gift', 18, C, 'ph-fill') }],
-      ru: [{ t: '100% приватно — без аккаунтов', ic: ph('lock-simple', 18, C, 'ph-fill') }, { t: 'Работает полностью офлайн', ic: ph('wifi-slash', 18, C, 'ph-fill') }, { t: 'Очередь — бесплатно', ic: ph('gift', 18, C, 'ph-fill') }]
+      en: [{ t: '100% private — no accounts', ic: ph('lock-simple', 17, C, 'ph-fill') }, { t: 'Works fully offline', ic: ph('wifi-slash', 17, C, 'ph-fill') }, { t: 'Free to join', ic: ph('gift', 17, C, 'ph-fill') }],
+      ru: [{ t: '100% приватно — без аккаунтов', ic: ph('lock-simple', 17, C, 'ph-fill') }, { t: 'Полностью офлайн', ic: ph('wifi-slash', 17, C, 'ph-fill') }, { t: 'Очередь бесплатна', ic: ph('gift', 17, C, 'ph-fill') }]
     }[L];
-    var proof = '<section style="background:#FFF8F4;border-bottom:1px solid #f4e7ea;padding:18px clamp(20px,5vw,72px)">' +
-      '<div style="max-width:1000px;margin:0 auto;display:flex;flex-wrap:wrap;gap:14px 38px;justify-content:center;align-items:center">' +
-      proofData.map(function (p) { return '<span style="display:inline-flex;align-items:center;gap:9px;font-size:14px;font-weight:600;color:#5d5660">' + p.ic + esc(p.t) + '</span>'; }).join('') +
+    var proof = '<section style="padding:8px clamp(20px,5vw,72px) 10px"><div style="max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:10px 12px;justify-content:center">' +
+      proofData.map(function (p) { return '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 6px 18px -12px rgba(28,19,38,.2);font-size:13.5px;font-weight:600;color:#5d5660">' + p.ic + esc(p.t) + '</span>'; }).join('') +
       '</div></section>';
 
-    var card = renderQuestionSection();
-
-    var galBase = [1, 2, 3, 4, 5, 6, 7];
-    var galItems = galBase.concat(galBase).map(function (n) {
-      return '<div class="gcard" style="flex:none;width:240px;border-radius:30px;overflow:hidden;box-shadow:0 18px 42px rgba(225,29,72,.18);background:#fff">' +
-        '<img src="assets/shots/' + L + '-' + n + '.jpg" alt="Clinky screen" loading="lazy" draggable="false" style="display:block;width:100%;aspect-ratio:1080/2340;height:auto;-webkit-user-drag:none"></div>';
+    // ---- screens carousel ----
+    var screensCards = [1, 2, 3, 4, 5, 6, 7].map(function (n) {
+      return '<div class="screen-card"><img src="assets/shots/' + L + '-' + n + '.jpg" alt="Clinky screen" loading="lazy" draggable="false" style="display:block;width:100%;height:auto;aspect-ratio:1080/2340;-webkit-user-drag:none"></div>';
     }).join('');
-    var gallery = '<section style="background:linear-gradient(180deg,#FFF1ED,#FFF8F4);padding:clamp(58px,9vh,104px) 0">' +
-      '<div style="max-width:1080px;margin:0 auto 6px;padding:0 clamp(20px,5vw,72px);text-align:center">' +
-        '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 10px;text-wrap:balance">' + esc(t.galleryTitle) + '</h2>' +
-        '<p style="font-size:16.5px;color:#6b6b76;margin:0">' + esc(t.gallerySub) + '</p>' +
-      '</div>' +
-      '<div class="mwrap"><div class="marquee" id="clinkygal">' + galItems + '</div></div>' +
-      '<p style="text-align:center;font-size:13.5px;color:#a99ea6;margin:6px 0 0">' + esc(t.swipeHint) + '</p>' +
+    var screens = '<section style="padding:clamp(50px,8vh,92px) 0 clamp(28px,5vh,46px)">' +
+      '<div style="max-width:1080px;margin:0 auto 24px;padding:0 clamp(20px,5vw,72px);text-align:center">' + kicker(L === 'ru' ? 'Экраны' : 'Screens') + h2sec(t.galleryTitle) + subsec(t.gallerySub) + '</div>' +
+      '<div class="screens-track">' + screensCards + '</div>' +
+      '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:0">' + esc(t.screensHint) + '</p>' +
     '</section>';
 
-    var stepData = {
+    // ---- why Clinky ----
+    var whyCards = {
       en: [
-        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all', ic: I.people },
-        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking', ic: I.game },
-        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log', ic: I.cube }
+        { ic: I.flame, t: 'Meeting streaks', d: 'Hold a streak with the people who matter, and a gentle nudge when it has been too long.' },
+        { ic: I.cube, t: 'A 3D collection', d: 'Earn a collectible drink for every clink — your friendships, on a shelf.' },
+        { ic: I.lock, t: 'Private & offline', d: 'No accounts, no servers — everything stays on your phone.' }
       ],
       ru: [
-        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без', ic: I.people },
-        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды', ic: I.game },
-        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок»', ic: I.cube }
+        { ic: I.flame, t: 'Серии встреч', d: 'Держи серию с близкими и получай мягкое напоминание, когда давно не виделись.' },
+        { ic: I.cube, t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок» — твоя дружба на полке.' },
+        { ic: I.lock, t: 'Приватно и офлайн', d: 'Без аккаунтов и серверов — всё остаётся на твоём телефоне.' }
       ]
     }[L];
-    var how = '<section style="background:#FFFBFA;padding:clamp(56px,8vh,96px) clamp(20px,5vw,72px)">' +
-      '<div style="max-width:1000px;margin:0 auto">' +
-      '<div style="text-align:center;margin-bottom:46px">' +
-        '<div style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(t.howKicker) + '</div>' +
-        '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0;text-wrap:balance">' + esc(t.howTitle) + '</h2>' +
+    var why = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(28px,5vw,60px);align-items:center" class="why-grid">' +
+      '<div>' + kicker(t.whyKicker) + h2sec(t.whyTitle) + '<p style="font-size:16.5px;color:#6b6b76;margin:0 0 24px;max-width:24em">' + esc(t.whySub) + '</p>' + coralBtn(t.heroCta, 'join') + '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:14px">' +
+        whyCards.map(function (c) {
+          return '<div class="soft-card" style="display:flex;gap:16px;align-items:flex-start;padding:20px 22px">' +
+            '<span style="flex:none;width:48px;height:48px;border-radius:14px;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + c.ic + '</span>' +
+            '<div><h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 5px;color:#1c1326">' + esc(c.t) + '</h3>' +
+            '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0">' + esc(c.d) + '</p></div></div>';
+        }).join('') +
       '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:22px" class="feat-grid">' +
+    '</div></section>';
+
+    // ---- discover (dark cards) ----
+    var disco = {
+      en: { wide: { t: 'All your meet-ups, in one place', d: 'Log who you saw and what you drank, then watch your streaks and your year add up — calm, private, yours.', n: 4 }, a: { t: 'A drink per clink', d: 'Spin and keep a 3D collectible from every meet-up.', n: 2 }, b: { t: 'Your social year', d: 'See who you see most and how it all adds up.', n: 6 } },
+      ru: { wide: { t: 'Все встречи — в одном месте', d: 'Отмечай, кого видел и что пили, и смотри, как складываются серии и весь твой год — спокойно, приватно, только твоё.', n: 4 }, a: { t: 'Напиток за «чок»', d: 'Крути и собирай 3D-сувенир с каждой встречи.', n: 2 }, b: { t: 'Твой год встреч', d: 'Кого видишь чаще и как всё складывается.', n: 6 } }
+    }[L];
+    function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
+    function darkCardWide(o) {
+      return '<div class="dark-card" style="grid-column:1 / -1;display:flex;gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(26px,4vw,42px);flex-wrap:wrap">' +
+        '<div style="flex:1;min-width:230px">' +
+          '<span style="display:inline-flex;width:48px;height:48px;border-radius:14px;background:rgba(255,79,98,.18);align-items:center;justify-content:center;margin-bottom:16px">' + ph('calendar-check', 24, '#FF8A97', 'ph-fill') + '</span>' +
+          '<h3 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.6vw,29px);margin:0 0 10px;letter-spacing:-.5px">' + esc(o.wide.t) + '</h3>' +
+          '<p style="font-size:15.5px;line-height:1.6;color:rgba(255,251,250,.68);margin:0;max-width:30em">' + esc(o.wide.d) + '</p>' +
+        '</div>' +
+        '<div style="flex:none;width:clamp(150px,22vw,196px)"><img src="' + shot(o.wide.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:20px;aspect-ratio:1080/2340;box-shadow:0 24px 44px -18px rgba(0,0,0,.6)"></div>' +
+      '</div>';
+    }
+    function darkCardSmall(card, iconName) {
+      return '<div class="dark-card" style="display:flex;flex-direction:column;padding:26px 26px 0">' +
+        '<span style="display:inline-flex;width:46px;height:46px;border-radius:14px;background:rgba(255,79,98,.18);align-items:center;justify-content:center;margin-bottom:14px">' + ph(iconName, 22, '#FF8A97', 'ph-fill') + '</span>' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 8px">' + esc(card.t) + '</h3>' +
+        '<p style="font-size:14.5px;line-height:1.55;color:rgba(255,251,250,.64);margin:0 0 20px">' + esc(card.d) + '</p>' +
+        '<img src="' + shot(card.n) + '" alt="" loading="lazy" style="display:block;width:74%;margin:auto auto 0;border-radius:18px 18px 0 0;aspect-ratio:1080/1500;object-fit:cover;object-position:top;box-shadow:0 -6px 28px rgba(0,0,0,.35)">' +
+      '</div>';
+    }
+    var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
+      '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
+      '<div class="discover-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">' +
+        darkCardWide(disco) + darkCardSmall(disco.a, 'cube') + darkCardSmall(disco.b, 'chart-bar') +
+      '</div>' +
+    '</div></section>';
+
+    // ---- interactive question mini-game ----
+    var card = renderQuestionSection();
+
+    // ---- how it works ----
+    var stepData = {
+      en: [
+        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', ic: I.people },
+        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', ic: I.game },
+        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', ic: I.cube }
+      ],
+      ru: [
+        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', ic: I.people },
+        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', ic: I.game },
+        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', ic: I.cube }
+      ]
+    }[L];
+    var how = '<section style="padding:clamp(40px,6vh,80px) clamp(20px,5vw,72px) clamp(50px,8vh,96px)"><div style="max-width:1000px;margin:0 auto">' +
+      '<div style="text-align:center;margin-bottom:42px">' + kicker(t.howKicker) + h2sec(t.howTitle) + '</div>' +
+      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="feat-grid">' +
       stepData.map(function (s) {
-        return '<div style="text-align:center;padding:8px">' +
-          '<div style="position:relative;width:64px;height:64px;border-radius:20px;background:linear-gradient(165deg,#FF6B7A,#E11D48);display:flex;align-items:center;justify-content:center;margin:0 auto 18px;box-shadow:0 12px 26px rgba(225,29,72,.28);color:#fff">' + s.ic +
-            '<span style="position:absolute;top:-9px;right:-9px;width:27px;height:27px;border-radius:50%;background:#1c1326;color:#fff;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #FFFBFA">' + s.n + '</span></div>' +
-          '<h3 style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:19px;margin:0 0 8px">' + esc(s.t) + '</h3>' +
+        return '<div class="soft-card" style="text-align:center;padding:30px 22px">' +
+          '<div style="position:relative;width:60px;height:60px;border-radius:18px;background:linear-gradient(165deg,#FF8A97,#E11D48);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 14px 26px -12px rgba(225,29,72,.7);color:#fff">' + s.ic +
+            '<span style="position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:#1c1326;color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #FFF8F4">' + s.n + '</span></div>' +
+          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 7px;color:#1c1326">' + esc(s.t) + '</h3>' +
           '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0 auto;max-width:22em">' + esc(s.d) + '</p>' +
         '</div>';
       }).join('') +
       '</div></div></section>';
 
-    var spotData = {
-      en: [
-        { t: 'Keep your streaks alive', d: 'See who you meet most, hold a streak with the people who matter, and get a gentle nudge when it has been too long', n: 3, ic: I.flame, points: ['Meeting streaks', 'Smart reminders'] },
-        { t: 'A souvenir from every clink', d: 'Every meet-up you log earns a collectible 3D drink you can spin and keep — your friendships, on a shelf', n: 2, ic: I.cube, points: ['3D collectibles', 'Unlockable achievements'] },
-        { t: 'Your whole social year', d: 'Who you see most, your favourite drinks and how your year adds up — all in clean, private charts', n: 6, ic: I.chart, points: ['Personal stats', 'Private & offline'] }
-      ],
-      ru: [
-        { t: 'Держи серию встреч', d: 'Смотри, кого видишь чаще, держи серию с близкими и получай мягкое напоминание, когда давно не виделись', n: 3, ic: I.flame, points: ['Серии встреч', 'Умные напоминания'] },
-        { t: 'Сувенир за каждый «чок»', d: 'Каждая отмеченная встреча приносит коллекционный 3D-напиток, который можно покрутить и оставить себе', n: 2, ic: I.cube, points: ['3D-коллекция', 'Достижения'] },
-        { t: 'Твой год встреч', d: 'Кого видишь чаще, любимые напитки и как складывается год — в чистых приватных графиках', n: 6, ic: I.chart, points: ['Личная статистика', 'Приватно и офлайн'] }
-      ]
-    }[L];
-    var spots = '<section style="background:#FFF8F4;padding:clamp(60px,9vh,108px) clamp(20px,5vw,72px)">' +
-      '<div style="max-width:1040px;margin:0 auto">' +
-      '<div style="text-align:center;margin-bottom:clamp(40px,6vh,60px)">' +
-        '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;text-wrap:balance">' + esc(t.featTitle) + '</h2>' +
-        '<p style="font-size:16.5px;color:#6b6b76;margin:0">' + esc(t.featSub) + '</p>' +
-      '</div>' +
-      spotData.map(function (s, i) {
-        var pts = s.points.map(function (pt) { return '<span style="display:inline-flex;align-items:center;gap:9px;font-size:14.5px;font-weight:600;color:#1c1326">' + pchk() + esc(pt) + '</span>'; }).join('');
-        return '<div class="spot-row" style="display:flex;gap:clamp(30px,5vw,68px);align-items:center;margin-bottom:clamp(40px,6vh,70px);flex-direction:' + (i % 2 ? 'row-reverse' : 'row') + '">' +
-          '<div style="flex:1;min-width:0">' +
-            '<span style="display:inline-flex;width:52px;height:52px;border-radius:15px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:18px">' + s.ic + '</span>' +
-            '<h3 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(22px,2.9vw,31px);letter-spacing:-.6px;margin:0 0 13px;line-height:1.1;text-wrap:balance">' + esc(s.t) + '</h3>' +
-            '<p style="font-size:16px;line-height:1.6;color:#6b6b76;margin:0 0 16px;max-width:30em">' + esc(s.d) + '</p>' +
-            '<div style="display:flex;flex-direction:column;gap:9px">' + pts + '</div>' +
-          '</div>' +
-          '<div style="flex:none;width:clamp(208px,26vw,264px)">' +
-            '<img src="assets/shots/' + L + '-' + s.n + '.jpg" alt="Clinky app screen" loading="lazy" draggable="false" style="display:block;width:100%;aspect-ratio:1290/2796;border-radius:28px;box-shadow:0 26px 56px rgba(225,29,72,.22)">' +
-          '</div>' +
-        '</div>';
-      }).join('') +
-      '</div></section>';
-
-    var finalCta = '<section style="position:relative;background:linear-gradient(150deg,#FF5167,#E11D48 60%,#C81E45);color:#FFFBFA;padding:clamp(64px,10vh,118px) clamp(20px,5vw,72px);overflow:hidden;text-align:center">' +
-      '<div style="position:absolute;color:#fff;font-size:22px;top:18%;left:14%;animation:twinkle 4s ease-in-out infinite;pointer-events:none">✦</div>' +
-      '<div style="position:absolute;color:#fff;font-size:15px;bottom:20%;right:16%;animation:twinkle 3.4s ease-in-out infinite .4s;pointer-events:none">✦</div>' +
-      '<div style="position:relative;max-width:600px;margin:0 auto">' +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;margin:0 auto 20px;box-shadow:0 14px 34px rgba(120,10,30,.4);display:block">' +
-        '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,50px);line-height:1.04;letter-spacing:-1.2px;margin:0 0 14px;text-wrap:balance">' + esc(t.finalTitle) + '</h2>' +
-        '<p style="font-size:17px;color:rgba(255,251,250,.88);margin:0 auto 28px;max-width:30em">' + esc(t.finalSub) + '</p>' +
-        '<div id="wl2">' + waitlistForm(true) + '</div>' +
-        (state.waitlistDone ? '' : '<p style="font-size:13px;color:rgba(255,251,250,.74);margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
+    // ---- final CTA (contained coral block) ----
+    var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
+      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:linear-gradient(150deg,#FF5167,#E11D48 60%,#C81E45);color:#FFFBFA;padding:clamp(42px,6vw,72px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 60px -30px rgba(225,29,72,.7)">' +
+        sparkle({ s: 22, pos: 'top:16%;left:13%', op: 0.85, anim: 'twinkle 4s ease-in-out infinite' }) +
+        sparkle({ s: 14, pos: 'bottom:20%;right:15%', op: 0.7, anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        '<div style="position:relative;max-width:540px;margin:0 auto">' +
+          '<img src="assets/clinky-icon.png" alt="Clinky" style="width:66px;height:66px;border-radius:19px;margin:0 auto 18px;box-shadow:0 14px 30px -10px rgba(120,10,30,.7);display:block">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px">' + esc(t.finalTitle) + '</h2>' +
+          '<p style="font-size:16.5px;color:rgba(255,251,250,.88);margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
+          '<div id="wl2">' + waitlistForm() + '</div>' +
+          (state.waitlistDone ? '' : '<p style="font-size:13px;color:rgba(255,251,250,.74);margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
+        '</div>' +
       '</div>' +
     '</section>';
 
-    return '<div class="page-in">' + hero + proof + card + gallery + how + spots + finalCta + '</div>';
+    return '<div class="page-in">' + hero + proof + screens + why + discover + card + how + finalCta + '</div>';
   }
 
   function renderQuestionSection() {
     var t = tdict();
-    return '<section style="background:#FFFBFA;padding:clamp(58px,9vh,104px) clamp(16px,4vw,72px)">' +
-      '<div style="max-width:760px;margin:0 auto;text-align:center">' +
-        '<div style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:13px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(t.gamesKicker) + '</div>' +
-        '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;text-wrap:balance">' + esc(t.gamesTitle) + '</h2>' +
-        '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:32em">' + esc(t.gamesSub) + '</p>' +
-      '</div>' +
-      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:30px auto 22px;max-width:760px">' + renderGameTabs() + '</div>' +
+    return '<section style="padding:clamp(50px,8vh,96px) clamp(16px,4vw,72px)">' +
+      '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>' +
+      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 22px;max-width:760px">' + renderGameTabs() + '</div>' +
       '<div style="max-width:430px;margin:0 auto">' +
-        '<div data-act="nextq" style="position:relative;cursor:pointer;border-radius:30px;background:#fff;box-shadow:0 24px 56px rgba(225,29,72,.15);padding:26px 26px 24px;overflow:hidden">' +
+        '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #f3eaed;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
-            '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
+            '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
           '</div>' +
           '<div style="position:relative;min-height:120px;display:flex;align-items:center;justify-content:center;margin:8px 0 16px;padding:0 14px">' +
-            '<span style="position:absolute;top:-8px;left:-2px;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">“</span>' +
-            '<p id="qline" style="text-align:center;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;text-wrap:pretty">' + renderQline() + '</p>' +
-            '<span style="position:absolute;bottom:-20px;right:-2px;font-family:\'Nunito\',sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">”</span>' +
+            '<span style="position:absolute;top:-8px;left:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">“</span>' +
+            '<p id="qline" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;text-wrap:pretty">' + renderQline() + '</p>' +
+            '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">”</span>' +
           '</div>' +
           '<div style="border-top:1px solid #f1e6e9;padding-top:16px">' +
-            '<div style="text-align:center;font-size:13px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
+            '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
+            '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
               '<button data-act="nextq" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + icons().skip + '</span>' +
                 '<span style="font-size:12.5px;font-weight:600;color:#a99ea6">' + esc(t.dislike) + '</span>' +
               '</button>' +
               '<button data-act="nextq" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
-                '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(255,79,98,.45)">' + icons().heart + '</span>' +
+                '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + icons().heart + '</span>' +
                 '<span style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.like) + '</span>' +
               '</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
-        '<p style="text-align:center;font-size:13.5px;color:#a99ea6;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
+        '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
       '</div>' +
     '</section>';
   }
@@ -470,41 +491,38 @@
       return '<button data-act="g' + i + '" style="' + pill(i === state.gameIndex) + '">' + tabIcons[i] + esc(g.title[L]) + '</button>';
     }).join('');
   }
-  function renderQcat() {
-    var L = state.lang, gi = state.gameIndex;
-    return gameIcon(gi, '#E11D48', 17) + esc(GAMES[gi].title[L]);
-  }
+  function renderQcat() { return gameIcon(state.gameIndex, '#E11D48', 17) + esc(GAMES[state.gameIndex].title[state.lang]); }
   function renderQline() {
     var L = state.lang, cg = GAMES[state.gameIndex];
     var qStr = cg.q[state.qIndex % cg.q.length][L];
-    return qStr.split('*').map(function (seg, i) {
-      return '<span style="color:' + (i % 2 ? '#FF4F62' : '#1c1326') + '">' + esc(seg) + '</span>';
-    }).join('');
+    return qStr.split('*').map(function (seg, i) { return '<span style="color:' + (i % 2 ? '#FF4F62' : '#1c1326') + '">' + esc(seg) + '</span>'; }).join('');
   }
 
   // ===== ABOUT =====
   function renderAbout() {
     var t = tdict(), I = icons();
     var pillar = function (ic, ti, de) {
-      return '<div style="border-radius:24px;padding:30px;background:#fff;border:1px solid #f3eaed;box-shadow:0 8px 26px rgba(28,19,38,.05)">' +
-        '<span style="display:flex;width:54px;height:54px;border-radius:16px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:16px">' + ic + '</span>' +
-        '<h3 style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:19px;margin:0 0 8px">' + esc(ti) + '</h3>' +
+      return '<div class="soft-card" style="padding:28px 26px">' +
+        '<span style="display:flex;width:52px;height:52px;border-radius:15px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:16px">' + ic + '</span>' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 7px;color:#1c1326">' + esc(ti) + '</h3>' +
         '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0">' + esc(de) + '</p></div>';
     };
     return '<div class="page-in">' +
-      '<section style="background:linear-gradient(168deg,#FF5C6E,#E11D48 70%,#C21540);color:#FFFBFA;padding:clamp(112px,15vh,140px) clamp(20px,5vw,72px) clamp(44px,6vh,64px);text-align:center">' +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:80px;height:80px;border-radius:22px;margin:0 auto 22px;box-shadow:0 16px 38px rgba(120,10,30,.4);display:block">' +
-        '<h1 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px">' + esc(t.aboutTitle) + '</h1>' +
-        '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:rgba(255,251,250,.9);max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
+      '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(36px,5vh,56px);text-align:center;overflow:hidden">' +
+        sparkle({ s: 20, pos: 'top:24%;left:16%', op: 0.45, c: '#FF4F62', glow: 'rgba(255,79,98,.3)' }) +
+        sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FFB42E', glow: 'rgba(255,180,46,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
+        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px;color:#1c1326">' + esc(t.aboutTitle) + '</h1>' +
+        '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
-      '<section style="background:#FFFBFA;padding:clamp(48px,7vh,84px) clamp(20px,5vw,72px)">' +
+      '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
         '<div style="max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
         '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:14px">Tap. Clink. Meet again.</div>' +
-          '<p style="font-size:16px;line-height:1.65;color:#6b6b76;margin:0">' + esc(t.aboutMission) + '</p>' +
-          '<button data-act="join" style="margin-top:30px;border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 10px 26px rgba(255,79,98,.4);transition:transform .2s">' + esc(t.heroCta) + '</button>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:14px">Tap. Clink. Meet again.</div>' +
+          '<p style="font-size:16px;line-height:1.65;color:#6b6b76;margin:0 0 28px">' + esc(t.aboutMission) + '</p>' +
+          coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
   }
@@ -513,28 +531,28 @@
   function renderSupport() {
     var t = tdict(), I = icons();
     var body = state.supportDone
-      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45">' + esc(t.supDone) + '</span></div>'
+      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#3a323f">' + esc(t.supDone) + '</span></div>'
       : '<form data-form="support" style="display:flex;flex-direction:column;gap:12px">' +
           '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
-          '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 10px 26px rgba(255,79,98,.4)">' + esc(t.supSend) + '</button>' +
+          '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
           '<p style="font-size:12.5px;color:#a99ea6;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
     var faqHtml = FAQ[state.lang].map(function (f) {
-      return '<div style="border-radius:16px;background:#fff;border:1px solid #f3eaed;padding:18px 20px">' +
-        '<div style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:15.5px;margin-bottom:6px">' + esc(f.q) + '</div>' +
+      return '<div class="soft-card" style="padding:18px 20px">' +
+        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;margin-bottom:6px;color:#1c1326">' + esc(f.q) + '</div>' +
         '<div style="font-size:14.5px;line-height:1.55;color:#6b6b76">' + esc(f.a) + '</div></div>';
     }).join('');
-    return '<div class="page-in"><section style="background:#FFFBFA;padding:clamp(118px,17vh,160px) clamp(20px,5vw,72px) clamp(56px,9vh,104px)">' +
+    return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:560px;margin:0 auto">' +
         '<div style="text-align:center;margin-bottom:30px">' +
-          '<span style="display:flex;width:58px;height:58px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + I.chat + '</span>' +
-          '<h1 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 10px">' + esc(t.supTitle) + '</h1>' +
+          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + I.chat + '</span>' +
+          '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 10px;color:#1c1326">' + esc(t.supTitle) + '</h1>' +
           '<p style="font-size:16px;color:#6b6b76;margin:0">' + esc(t.supSub) + '</p>' +
         '</div>' + body +
         '<div style="margin-top:46px">' +
-          '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:20px;margin:0 0 16px;text-align:center">FAQ</h2>' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 16px;text-align:center;color:#1c1326">FAQ</h2>' +
           '<div style="display:flex;flex-direction:column;gap:10px">' + faqHtml + '</div>' +
         '</div>' +
       '</div></section></div>';
@@ -548,19 +566,19 @@
     var sections = src[state.lang] || [];
     var body = sections.map(function (sec) {
       var inner = '';
-      if (sec.h) inner += '<h2 style="font-family:\'Nunito\',sans-serif;font-weight:800;font-size:19px;margin:0 0 8px;color:#1c1326">' + esc(sec.h) + '</h2>';
+      if (sec.h) inner += '<h2 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0 0 8px;color:#1c1326">' + esc(sec.h) + '</h2>';
       inner += sec.b.map(function (bl) {
-        if (bl[0] === 'h3') return '<h3 style="font-family:\'Nunito\',sans-serif;font-weight:700;font-size:16px;margin:18px 0 6px;color:#3a323f">' + esc(bl[1]) + '</h3>';
+        if (bl[0] === 'h3') return '<h3 style="font-family:Nunito,sans-serif;font-weight:700;font-size:16px;margin:18px 0 6px;color:#3a323f">' + esc(bl[1]) + '</h3>';
         if (bl[0] === 'ul') return '<ul style="margin:.5em 0 .9em;padding-left:1.3em">' + bl[1].map(function (li) { return '<li style="font-size:15px;line-height:1.65;color:#5d5660;margin:.35em 0">' + esc(li) + '</li>'; }).join('') + '</ul>';
         return '<p style="font-size:15px;line-height:1.7;color:#5d5660;margin:.6em 0">' + esc(bl[1]) + '</p>';
       }).join('');
       return '<div style="margin-bottom:22px">' + inner + '</div>';
     }).join('');
-    return '<div class="page-in"><section style="background:#FFFBFA;padding:clamp(118px,17vh,160px) clamp(20px,5vw,72px) clamp(56px,9vh,104px)">' +
+    return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:680px;margin:0 auto">' +
-        '<h1 style="font-family:\'Nunito\',sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px">' + esc(title) + '</h1>' +
+        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
         '<p style="font-size:13.5px;color:#a99ea6;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
-        '<div style="margin-top:30px;padding:18px 20px;border-radius:16px;background:#FFF6F4;border:1px solid #ffe0e4;font-size:13.5px;color:#8a8190;line-height:1.6">' + esc(t.docContact) + '</div>' +
+        '<div style="margin-top:30px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid #f1e4e7;font-size:13.5px;color:#8a8190;line-height:1.6">' + esc(t.docContact) + '</div>' +
       '</div></section></div>';
   }
 
@@ -577,11 +595,8 @@
   // ===== paint =====
   var $hdr, $main, $ftr;
   function updateHeaderBg() {
-    var oh = overHero();
     var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3.5vw,40px);transition:background .35s ease,box-shadow .35s ease;';
-    var bg = (state.scrolled || !oh)
-      ? 'background:rgba(255,251,250,.94);box-shadow:0 6px 24px rgba(28,19,38,.08);backdrop-filter:blur(10px);'
-      : 'background:rgba(225,29,72,0);';
+    var bg = state.scrolled ? 'background:rgba(255,248,244,.92);box-shadow:0 6px 24px -10px rgba(28,19,38,.18);backdrop-filter:blur(10px);' : 'background:transparent;';
     if ($hdr) $hdr.setAttribute('style', base + bg);
   }
   function paintHeader() { $hdr.innerHTML = renderHeader(); updateHeaderBg(); }
@@ -608,9 +623,7 @@
     if (!mv || !mv.getCameraOrbit) return;
     try {
       var o = mv.getCameraOrbit();
-      var thetaDeg = o.theta * 180 / Math.PI + deg;
-      var phiDeg = o.phi * 180 / Math.PI;
-      mv.cameraOrbit = thetaDeg + 'deg ' + phiDeg + 'deg auto';
+      mv.cameraOrbit = (o.theta * 180 / Math.PI + deg) + 'deg ' + (o.phi * 180 / Math.PI) + 'deg auto';
     } catch (e) {}
   }
   function burstSparkles() {
@@ -636,12 +649,12 @@
     var r = fx.getBoundingClientRect(), cx = r.width / 2, cy = r.height * 0.4;
     for (var i = 0; i < 2; i++) {
       var s = document.createElement('span');
-      s.style.cssText = 'position:absolute;left:' + (cx + (i ? 13 : -13)) + 'px;top:' + cy + 'px;width:18px;height:24px;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(5px)';
+      s.style.cssText = 'position:absolute;left:' + (cx + (i ? 13 : -13)) + 'px;top:' + cy + 'px;width:18px;height:24px;border-radius:50%;background:rgba(180,150,150,.45);filter:blur(5px)';
       fx.appendChild(s);
       (function (el, idx) {
         var an = el.animate([
           { transform: 'translate(-50%,0) scale(.6)', opacity: 0 },
-          { transform: 'translate(-50%,-14px) scale(1)', opacity: 0.7, offset: 0.4 },
+          { transform: 'translate(-50%,-14px) scale(1)', opacity: 0.6, offset: 0.4 },
           { transform: 'translate(-50%,-34px) scale(1.5)', opacity: 0 }
         ], { duration: 560, delay: idx * 130, easing: 'ease-out' });
         an.onfinish = function () { el.remove(); };
@@ -660,22 +673,19 @@
     if (beer) { spinModel(360); burstSparkles(); } else { spinModel(70); puffSteam(); }
     try { if (navigator.vibrate) navigator.vibrate(10); } catch (e) {}
     clearTimeout(animBack);
-    animBack = setTimeout(function () {
-      mv.style.animation = 'none';
-      try { mv.setAttribute('auto-rotate', ''); } catch (e) {}
-    }, 950);
+    animBack = setTimeout(function () { mv.style.animation = 'none'; try { mv.setAttribute('auto-rotate', ''); } catch (e) {} }, 950);
   }
   function startAnim() {
     stopAnim();
     animKickoff = setTimeout(function () { if (state.page === 'home') playAnim(); }, 2400);
-    animTimer = setInterval(function () { if (state.page === 'home' && !document.hidden) playAnim(); }, 5200);
+    animTimer = setInterval(function () { if (state.page === 'home' && !document.hidden) playAnim(); }, 5600);
   }
   function stopAnim() {
     if (animTimer) { clearInterval(animTimer); animTimer = null; }
     if (animKickoff) { clearTimeout(animKickoff); animKickoff = null; }
   }
 
-  // ===== question card in-place =====
+  // ===== question card in-place + swipe =====
   function animQ() {
     var el = document.getElementById('qline');
     if (el) { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = 'qSwap .42s cubic-bezier(.2,.7,.2,1)'; }
@@ -683,33 +693,61 @@
     if (c) { c.style.animation = 'none'; void c.offsetWidth; c.style.animation = 'catPop .42s cubic-bezier(.2,.7,.2,1)'; }
   }
   function refreshCard() {
-    var tabs = document.getElementById('gameTabs');
-    if (tabs) tabs.innerHTML = renderGameTabs();
+    var tabs = document.getElementById('gameTabs'); if (tabs) tabs.innerHTML = renderGameTabs();
     var c = document.getElementById('qcat'); if (c) c.innerHTML = renderQcat();
     var l = document.getElementById('qline'); if (l) l.innerHTML = renderQline();
+    var n = document.getElementById('qcount'); if (n) n.innerHTML = esc(renderQcount());
     animQ();
+  }
+  function qcardEl() { return document.getElementById('qcard'); }
+  function springBack(card) { card.style.transition = 'transform .3s cubic-bezier(.2,.7,.2,1),opacity .3s'; card.style.transform = ''; card.style.opacity = ''; }
+  function qFlyout(dir) {
+    var card = qcardEl(); if (!card) return;
+    card.style.transition = 'transform .26s ease-in,opacity .26s ease-in';
+    card.style.transform = 'translateX(' + (dir * 520) + 'px) rotate(' + (dir * 11) + 'deg)';
+    card.style.opacity = '0';
+    setTimeout(function () {
+      nextQuestion();
+      card.style.transition = 'none';
+      card.style.transform = 'translateX(' + (-dir * 36) + 'px)'; card.style.opacity = '0';
+      void card.offsetWidth;
+      springBack(card);
+    }, 260);
+  }
+  function onPointerDown(e) {
+    var card = qcardEl(); if (!card || !e.target.closest('#qcard')) return;
+    if (e.target.closest('button')) return;
+    qdrag = { x: e.clientX, moved: false };
+    card.style.transition = 'none';
+  }
+  function onPointerMove(e) {
+    if (!qdrag) return; var card = qcardEl(); if (!card) return;
+    var dx = e.clientX - qdrag.x;
+    if (Math.abs(dx) > 4) qdrag.moved = true;
+    card.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.03) + 'deg)';
+    card.style.opacity = String(1 - Math.min(Math.abs(dx) / 700, 0.25));
+  }
+  function onPointerUp(e) {
+    if (!qdrag) return; var card = qcardEl(); var dx = e.clientX - qdrag.x; var moved = qdrag.moved; qdrag = null;
+    if (!card) return;
+    if (moved && Math.abs(dx) > 60) qFlyout(dx > 0 ? 1 : -1);
+    else if (!moved) { nextQuestion(); springBack(card); }
+    else springBack(card);
   }
 
   // ===== actions =====
   function setLang(lang) {
     try { localStorage.setItem('clinky_lang', lang); } catch (e) {}
-    document.documentElement.lang = lang;
-    state.lang = lang;
-    paint();
+    document.documentElement.lang = lang; state.lang = lang; paint();
   }
   function setPage(page) {
     state.page = page;
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) { window.scrollTo(0, 0); }
-    state.scrolled = window.scrollY > 24;
-    paint();
+    state.scrolled = window.scrollY > 24; paint();
   }
-  function joinCta() {
-    if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); }
-    else scrollWaitlist();
-  }
+  function joinCta() { if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
   function scrollWaitlist() {
-    var f = document.querySelector('input[type="email"]');
-    if (!f) return;
+    var f = document.querySelector('input[type="email"]'); if (!f) return;
     var y = f.getBoundingClientRect().top + window.scrollY - 120;
     window.scrollTo({ top: y, behavior: 'smooth' });
     setTimeout(function () { try { f.focus({ preventScroll: true }); } catch (e) {} }, 500);
@@ -720,56 +758,39 @@
     var b = document.getElementById('chipBeer'), c = document.getElementById('chipCoffee');
     if (b) b.setAttribute('style', drinkSeg(d === 'beer'));
     if (c) c.setAttribute('style', drinkSeg(d === 'coffee'));
-    applyModelAttrs();
-    playAnim();
+    applyModelAttrs(); playAnim();
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
-  function nextQuestion() {
-    var g = GAMES[state.gameIndex];
-    state.qIndex = (state.qIndex + 1) % g.q.length;
-    refreshCard();
-  }
+  function nextQuestion() { state.qIndex = (state.qIndex + 1) % GAMES[state.gameIndex].q.length; refreshCard(); }
 
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
     if (!/.+@.+\..+/.test(email)) return;
     if (EO_ACTION) { try { fetch(EO_ACTION, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (e) {} }
     state.waitlistDone = true;
-    var done = waitlistForm(false);
+    var done = waitlistForm();
     var w1 = document.getElementById('wl1'); if (w1) w1.innerHTML = done;
     var w2 = document.getElementById('wl2'); if (w2) w2.innerHTML = done;
     document.querySelectorAll('.hero-trust').forEach(function (n) { n.style.display = 'none'; });
   }
   function submitSupport(form) {
-    var name = (form.contactName.value || '').trim(),
-        email = (form.email.value || '').trim(),
-        msg = (form.message.value || '').trim();
+    var name = (form.contactName.value || '').trim(), email = (form.email.value || '').trim(), msg = (form.message.value || '').trim();
     if (!name || !/.+@.+\..+/.test(email) || !msg) return;
-    if (SUPPORT_ENDPOINT) {
-      try { fetch(SUPPORT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (e) {}
-    } else {
+    if (SUPPORT_ENDPOINT) { try { fetch(SUPPORT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (e) {} }
+    else {
       var subject = 'Clinky support — ' + name;
       var body = 'From: ' + name + ' <' + email + '>\n\n' + msg;
       window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
     }
-    state.supportDone = true;
-    paint();
+    state.supportDone = true; paint();
   }
 
-  // ===== scroll =====
   function onScroll() {
     var s = window.scrollY > 24;
-    if (s !== state.scrolled) { state.scrolled = s; paintHeader(); }
-    var y = window.scrollY;
-    var b1 = document.querySelector('[data-blob="1"]'), b2 = document.querySelector('[data-blob="2"]');
-    if (b1) b1.style.transform = 'translateY(' + (y * 0.04) + 'px)';
-    if (b2) b2.style.transform = 'translateY(' + (-y * 0.03) + 'px)';
+    if (s !== state.scrolled) { state.scrolled = s; updateHeaderBg(); }
   }
-
-  // ===== events =====
   function onClick(e) {
-    var el = e.target.closest('[data-act]');
-    if (!el) return;
+    var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
       case 'home': case 'about': case 'support': case 'privacy': case 'terms': setPage(a); break;
@@ -784,28 +805,26 @@
     }
   }
   function onSubmit(e) {
-    var form = e.target.closest('form[data-form]');
-    if (!form) return;
+    var form = e.target.closest('form[data-form]'); if (!form) return;
     e.preventDefault();
-    if (form.getAttribute('data-form') === 'waitlist') submitWaitlist(form);
-    else submitSupport(form);
+    if (form.getAttribute('data-form') === 'waitlist') submitWaitlist(form); else submitSupport(form);
   }
 
-  // ===== mount =====
   function mount() {
     var app = document.getElementById('app');
-    app.innerHTML = '<header id="hdr"></header><main id="main"></main><footer id="ftr" style="position:relative;background:#241019;color:#FFFBFA;padding:0 clamp(20px,5vw,72px) 36px;overflow:hidden"></footer>';
-    $hdr = document.getElementById('hdr');
-    $main = document.getElementById('main');
-    $ftr = document.getElementById('ftr');
+    app.innerHTML = '<header id="hdr"></header><main id="main"></main><footer id="ftr" style="background:#fff;border-top:1px solid #f0e4e3;padding:clamp(44px,6vh,64px) clamp(20px,5vw,72px) 40px"></footer>';
+    $hdr = document.getElementById('hdr'); $main = document.getElementById('main'); $ftr = document.getElementById('ftr');
 
     var lang = 'en';
     try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
-    state.lang = lang;
-    document.documentElement.lang = lang;
+    state.lang = lang; document.documentElement.lang = lang;
 
     document.addEventListener('click', onClick);
     document.addEventListener('submit', onSubmit);
+    document.addEventListener('pointerdown', onPointerDown);
+    document.addEventListener('pointermove', onPointerMove);
+    document.addEventListener('pointerup', onPointerUp);
+    document.addEventListener('pointercancel', function () { if (qdrag) { var c = qcardEl(); qdrag = null; if (c) springBack(c); } });
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('visibilitychange', function () { if (state.page === 'home' && !document.hidden) startAnim(); });
 
