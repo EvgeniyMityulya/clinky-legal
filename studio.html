@@ -11,10 +11,7 @@
   body{margin:0;font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:#FFF8F4;color:#1c1326;display:flex;min-height:100vh}
   #stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 42%,#fff,#FFF1EC)}
   model-viewer{width:100%;height:100vh;--poster-color:transparent;background:transparent}
-  #floorWrap{position:absolute;left:50%;bottom:18%;width:48%;height:34px;transform:translateX(-50%);pointer-events:none}
-  #floorShadow{width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(48,8,20,.5),rgba(48,8,20,.22) 44%,transparent 70%);filter:blur(9px)}
-  @keyframes floorPulse{0%,100%{transform:scale(1);opacity:1}46%{transform:scale(.58);opacity:.38}}
-  /* axis gizmo (bottom-left), rotates with the camera so you can read orientation + where the ground is */
+  /* axis gizmo (bottom-left), rotates with the camera so you can read orientation + where the ground (Y-up) is */
   #gizmo{position:absolute;left:26px;bottom:26px;width:84px;height:84px;perspective:340px;pointer-events:none;z-index:5}
   #gizmo .inner{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
   #gizmo .ax{position:absolute;left:0;top:0;width:36px;height:3px;transform-origin:0 50%;transform-style:preserve-3d;border-radius:2px}
@@ -35,8 +32,8 @@
   .seg button{flex:1;padding:9px 0;border:1px solid #e3dadd;border-radius:10px;background:#fff;font-size:13px;font-weight:700;cursor:pointer}
   .seg button.on{background:#FF4F62;color:#fff;border-color:#FF4F62}
   .div{height:1px;background:#f0e8ea;margin:16px 0}
-  .small{font-size:11px;color:#999;margin:2px 0 10px}
-  textarea{width:100%;height:188px;border:1px solid #e3dadd;border-radius:10px;padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#fbf7f8;color:#1c1326;resize:vertical}
+  .small{font-size:11px;color:#999;margin:2px 0 10px;line-height:1.5}
+  textarea{width:100%;height:176px;border:1px solid #e3dadd;border-radius:10px;padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;background:#fbf7f8;color:#1c1326;resize:vertical}
   #copy{width:100%;margin-top:8px;padding:11px;border:0;border-radius:10px;background:#FF4F62;color:#fff;font-weight:800;font-size:14px;cursor:pointer}
   #copy.ok{background:#1faa59}
   .grp{font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#b9b0b6;margin:4px 0 10px}
@@ -51,17 +48,16 @@
         <div class="ax axZ"><span>Z</span></div>
       </div>
     </div>
-    <div id="floorWrap"><div id="floorShadow"></div></div>
     <model-viewer id="mv" src="models/BeerCap.glb" camera-controls interaction-prompt="none"
       camera-orbit="0deg 88deg 165%" field-of-view="30deg" orientation="0deg 34deg -33deg"
       min-camera-orbit="auto 5deg auto" max-camera-orbit="auto 175deg auto"
       min-field-of-view="8deg" max-field-of-view="60deg"
-      shadow-intensity="0" tone-mapping="neutral" exposure="1.25" environment-image="assets/studio.hdr"></model-viewer>
+      shadow-intensity="1.8" shadow-softness="0.9" tone-mapping="aces" exposure="1.25" environment-image="legacy"></model-viewer>
   </div>
 
   <div id="panel">
     <h1>🎬 Clinky Studio</h1>
-    <p class="hint">Крути камеру мышкой. Подбери свет, тень, материал. Внизу — готовый конфиг: нажми «Скопировать» и пришли мне (отдельно для пива и кофе).</p>
+    <p class="hint">Крути камеру мышкой. Тень теперь настоящая (движок строит её сам из геометрии — наклон/форма правильные автоматически). Подбери ракурс, свет, материал, тень — внизу готовый конфиг, жми «Скопировать» и пришли (отдельно пиво и кофе).</p>
 
     <div class="seg">
       <button id="dBeer" class="on" onclick="setDrink('beer')">🍺 Пиво</button>
@@ -70,19 +66,16 @@
     <button id="play" style="width:100%;margin:0 0 14px;padding:11px;border:0;border-radius:10px;background:#1c1326;color:#fff;font-weight:800;font-size:13.5px;cursor:pointer" onclick="playSpin()">▶︎ Проиграть анимацию (тап по модели)</button>
 
     <div class="grp">Окружение / свет</div>
-    <div class="seg">
-      <button id="bSky" onclick="toggleSky()">🌅 Фон (видеть свет)</button>
-      <button id="bGround" onclick="toggleGround()">🟫 Пол (тень-якорь)</button>
-    </div>
-    <div class="small">Фон показывает HDR-сцену — видно, откуда падает свет. Пол включает реальную контактную тень — видно, где земля. Перед копированием выключи оба (на сайте их нет).</div>
+    <button id="bSky" style="width:100%;margin:0 0 8px;padding:10px;border:1px solid #e3dadd;border-radius:10px;background:#fff;font-weight:700;font-size:13px;cursor:pointer" onclick="toggleSky()">🌅 Показать фон (видеть, откуда свет)</button>
+    <div class="small">Фон показывает HDR-сцену — видно, где источник света. Перед копированием выключи (на сайте фона нет, но свет от HDR остаётся).</div>
     <div class="row">
       <label>HDR-окружение</label>
       <select id="env" onchange="apply()">
+        <option value="legacy">Legacy (встроенный)</option>
+        <option value="neutral">Neutral (встроенный)</option>
         <option value="assets/studio.hdr">brown_photostudio (тёплый)</option>
         <option value="assets/env_studio8.hdr">studio_small_08</option>
         <option value="assets/env_photostudio.hdr">photo_studio_01</option>
-        <option value="neutral">Neutral (встроенный)</option>
-        <option value="legacy">Legacy (встроенный)</option>
         <option value="">— нет —</option>
       </select>
     </div>
@@ -99,20 +92,16 @@
     <div class="row"><label>Exposure <b id="vExp">1.25</b></label><input type="range" id="exp" min="0" max="3" step="0.05" value="1.25" oninput="apply()"></div>
 
     <div class="div"></div>
-    <div class="grp">Тень (на полу)</div>
-    <div class="small">Отдельная тень на полу под моделью (как в приложении). Усаживается при кручении на боевом сайте.</div>
-    <div class="row"><label>Непрозрачность <b id="vShOp">0.50</b></label><input type="range" id="shOp" min="0" max="1" step="0.02" value="0.5" oninput="applyShadow()"></div>
-    <div class="row"><label>Ширина % <b id="vShW">56</b></label><input type="range" id="shW" min="15" max="90" step="1" value="56" oninput="applyShadow()"></div>
-    <div class="row"><label>Высота px <b id="vShH">36</b></label><input type="range" id="shH" min="8" max="80" step="1" value="36" oninput="applyShadow()"></div>
-    <div class="row"><label>Снизу % <b id="vShB">14</b></label><input type="range" id="shB" min="0" max="45" step="1" value="14" oninput="applyShadow()"></div>
-    <div class="row"><label>Сдвиг по X % <b id="vShX">0</b></label><input type="range" id="shX" min="-50" max="50" step="1" value="0" oninput="applyShadow()"></div>
-    <div class="row"><label>Размытие px <b id="vShBl">9</b></label><input type="range" id="shBl" min="0" max="30" step="1" value="9" oninput="applyShadow()"></div>
+    <div class="grp">Тень (реальная, на полу)</div>
+    <div class="small">Контактная тень движка — форма считается автоматически. Интенсивность = насколько тёмная; мягкость = размытость краёв.</div>
+    <div class="row"><label>Интенсивность <b id="vShInt">1.8</b></label><input type="range" id="shInt" min="0" max="5" step="0.1" value="1.8" oninput="apply()"></div>
+    <div class="row"><label>Мягкость <b id="vShSoft">0.9</b></label><input type="range" id="shSoft" min="0" max="1" step="0.05" value="0.9" oninput="apply()"></div>
 
     <div class="div"></div>
     <div class="grp">Материал (металлик)</div>
     <div class="small">Сделать крышку блестящей: metalness ↑, roughness ↓.</div>
-    <div class="row"><label>Metalness <b id="vMet">—</b></label><input type="range" id="met" min="0" max="1" step="0.02" value="0.55" oninput="applyMat()"></div>
-    <div class="row"><label>Roughness <b id="vRou">—</b></label><input type="range" id="rou" min="0" max="1" step="0.02" value="0.35" oninput="applyMat()"></div>
+    <div class="row"><label>Metalness <b id="vMet">—</b></label><input type="range" id="met" min="0" max="1" step="0.02" value="1.0" oninput="applyMat()"></div>
+    <div class="row"><label>Roughness <b id="vRou">—</b></label><input type="range" id="rou" min="0" max="1" step="0.02" value="0.3" oninput="applyMat()"></div>
 
     <div class="div"></div>
     <div class="grp">Поза модели (наклон)</div>
@@ -123,8 +112,8 @@
 
     <div class="div"></div>
     <div class="grp">Камера</div>
-    <div class="small">Крути мышкой. Значения камеры обновляются автоматически ниже.</div>
-    <div class="row"><label>Field of view <b id="vFov">30</b></label><input type="range" id="fov" min="10" max="60" step="1" value="30" oninput="apply()"></div>
+    <div class="small">Крути мышкой (свободно вверх/вниз и по кругу), колесо — зум. Значения камеры обновляются ниже автоматически.</div>
+    <div class="row"><label>Field of view <b id="vFov">30</b></label><input type="range" id="fov" min="8" max="60" step="1" value="30" oninput="apply()"></div>
 
     <div class="div"></div>
     <div class="grp">Готовый конфиг → пришли мне</div>
@@ -137,6 +126,7 @@
   var SRC = { beer: 'models/BeerCap.glb', coffee: 'models/CoffeeCup.glb' };
   var drink = 'beer';
   var liveCam = '0deg 88deg 165%';
+  var skyOn = false;
 
   function val(id){ return document.getElementById(id).value; }
   function setTxt(id,v){ document.getElementById(id).textContent = v; }
@@ -144,35 +134,25 @@
   function apply(){
     setTxt('vExp', parseFloat(val('exp')).toFixed(2));
     setTxt('vFov', val('fov'));
+    setTxt('vShInt', parseFloat(val('shInt')).toFixed(1));
+    setTxt('vShSoft', parseFloat(val('shSoft')).toFixed(2));
     setTxt('vRoll', val('roll')); setTxt('vPitch', val('pitch')); setTxt('vYaw', val('yaw'));
     mv.setAttribute('exposure', val('exp'));
     mv.setAttribute('tone-mapping', val('tone'));
     mv.setAttribute('field-of-view', val('fov') + 'deg');
     mv.setAttribute('environment-image', val('env'));
     if (skyOn) mv.setAttribute('skybox-image', val('env'));
+    mv.setAttribute('shadow-intensity', val('shInt'));
+    mv.setAttribute('shadow-softness', val('shSoft'));
     mv.setAttribute('orientation', val('roll') + 'deg ' + val('pitch') + 'deg ' + val('yaw') + 'deg');
     writeOut();
   }
-  function applyShadow(){
-    setTxt('vShOp', parseFloat(val('shOp')).toFixed(2));
-    setTxt('vShW', val('shW')); setTxt('vShH', val('shH')); setTxt('vShB', val('shB')); setTxt('vShBl', val('shBl')); setTxt('vShX', val('shX'));
-    var op = parseFloat(val('shOp'));
-    var fw = document.getElementById('floorWrap'), fs = document.getElementById('floorShadow');
-    fw.style.width = val('shW') + '%';
-    fw.style.height = val('shH') + 'px';
-    fw.style.bottom = val('shB') + '%';
-    fw.style.transform = 'translateX(calc(-50% + ' + val('shX') + '%))';
-    fs.style.filter = 'blur(' + val('shBl') + 'px)';
-    fs.style.background = 'radial-gradient(ellipse at center,rgba(48,8,20,' + op + '),rgba(48,8,20,' + (op*0.45).toFixed(3) + ') 44%,transparent 70%)';
-    writeOut();
-  }
+
   var spinning = false;
   function playSpin(){
     if (spinning) return; spinning = true;
     var roll=parseFloat(val('roll'))||0, pitch=parseFloat(val('pitch'))||0, yaw=parseFloat(val('yaw'))||0;
     var coffee = drink==='coffee', dur = coffee?700:900, t0 = performance.now();
-    var fs = document.getElementById('floorShadow');
-    fs.style.animation='none'; void fs.offsetWidth; fs.style.animation='floorPulse '+dur+'ms cubic-bezier(.38,1,.5,1)';
     function ease(p){ return p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2; }
     (function tick(now){
       var p = Math.min(((now||performance.now())-t0)/dur,1), deg=360*ease(p);
@@ -182,6 +162,7 @@
       else { mv.setAttribute('orientation', roll+'deg '+pitch+'deg '+yaw+'deg'); spinning=false; }
     })(performance.now());
   }
+
   var mats = [];
   function applyMat(){
     setTxt('vMet', parseFloat(val('met')).toFixed(2));
@@ -199,8 +180,8 @@
 
   // last-saved presets (paste from configs); studio starts here so you keep tuning
   var PRESET = {
-    beer:   { orbit:'0.1deg 88deg 47.95m',    fov:30, roll:4, pitch:32,  yaw:-30, env:'legacy', tone:'aces',    exp:1.25, met:1.00, rou:0.30, shOp:0.44, shW:90, shH:80, shB:28, shX:11, shBl:11 },
-    coffee: { orbit:'28.9deg 62.5deg 2.64m',  fov:30, roll:0, pitch:-4,  yaw:30,  env:'legacy', tone:'neutral', exp:1.25, met:0.52, rou:0.42, shOp:0.74, shW:81, shH:50, shB:25, shX:0, shBl:17 }
+    beer:   { orbit:'0.1deg 88deg 47.95m',    fov:30, roll:4, pitch:32, yaw:-30, env:'legacy', tone:'aces',    exp:1.25, met:1.00, rou:0.30, shInt:1.8, shSoft:0.9 },
+    coffee: { orbit:'28.9deg 62.5deg 2.64m',  fov:30, roll:0, pitch:-4, yaw:30,  env:'legacy', tone:'neutral', exp:1.25, met:0.52, rou:0.42, shInt:2.0, shSoft:0.8 }
   };
   function setVal(id,v){ document.getElementById(id).value = v; }
   function setDrink(d){
@@ -212,22 +193,23 @@
     mv.setAttribute('camera-orbit', P.orbit); liveCam = P.orbit;
     setVal('fov',P.fov); setVal('roll',P.roll); setVal('pitch',P.pitch); setVal('yaw',P.yaw);
     setVal('env',P.env); setVal('tone',P.tone); setVal('exp',P.exp); setVal('met',P.met); setVal('rou',P.rou);
-    setVal('shOp',P.shOp); setVal('shW',P.shW); setVal('shH',P.shH); setVal('shB',P.shB); setVal('shX',P.shX); setVal('shBl',P.shBl);
-    apply(); applyShadow(); applyMat();
+    setVal('shInt',P.shInt); setVal('shSoft',P.shSoft);
+    apply(); applyMat();
   }
 
   function writeOut(){
     var cfg =
       "// === " + drink.toUpperCase() + " ===\n" +
-      "cameraOrbit: '" + liveCam + "'\n" +
-      "fieldOfView: '" + val('fov') + "deg'\n" +
-      "orientation: '" + val('roll') + "deg " + val('pitch') + "deg " + val('yaw') + "deg'\n" +
-      "environment: '" + val('env') + "'\n" +
-      "toneMapping:  '" + val('tone') + "'\n" +
-      "exposure:     " + parseFloat(val('exp')).toFixed(2) + "\n" +
-      "metalness:    " + parseFloat(val('met')).toFixed(2) + "\n" +
-      "roughness:    " + parseFloat(val('rou')).toFixed(2) + "\n" +
-      "shadow: { opacity:" + parseFloat(val('shOp')).toFixed(2) + ", width:'" + val('shW') + "%', height:'" + val('shH') + "px', bottom:'" + val('shB') + "%', x:'" + val('shX') + "%', blur:'" + val('shBl') + "px' }";
+      "cameraOrbit:    '" + liveCam + "'\n" +
+      "fieldOfView:    '" + val('fov') + "deg'\n" +
+      "orientation:    '" + val('roll') + "deg " + val('pitch') + "deg " + val('yaw') + "deg'\n" +
+      "environment:    '" + val('env') + "'\n" +
+      "toneMapping:    '" + val('tone') + "'\n" +
+      "exposure:       " + parseFloat(val('exp')).toFixed(2) + "\n" +
+      "metalness:      " + parseFloat(val('met')).toFixed(2) + "\n" +
+      "roughness:      " + parseFloat(val('rou')).toFixed(2) + "\n" +
+      "shadowIntensity: " + parseFloat(val('shInt')).toFixed(1) + "\n" +
+      "shadowSoftness:  " + parseFloat(val('shSoft')).toFixed(2);
     document.getElementById('out').value = cfg;
   }
   function copyCfg(){
@@ -238,19 +220,13 @@
     });
   }
 
-  // skybox (see the light) + ground (real contact shadow) toggles
-  var skyOn = false, groundOn = false;
   function toggleSky(){
     skyOn = !skyOn;
-    document.getElementById('bSky').classList.toggle('on', skyOn);
+    var b = document.getElementById('bSky');
+    b.style.background = skyOn ? '#FF4F62' : '#fff';
+    b.style.color = skyOn ? '#fff' : '#1c1326';
+    b.style.borderColor = skyOn ? '#FF4F62' : '#e3dadd';
     mv.setAttribute('skybox-image', skyOn ? val('env') : '');
-  }
-  function toggleGround(){
-    groundOn = !groundOn;
-    document.getElementById('bGround').classList.toggle('on', groundOn);
-    mv.setAttribute('shadow-intensity', groundOn ? '2' : '0');
-    mv.setAttribute('shadow-softness', '0.8');
-    document.getElementById('floorWrap').style.display = groundOn ? 'none' : '';
   }
 
   // axis gizmo follows the camera so you can read orientation + where the ground (Y-up) is
@@ -259,7 +235,6 @@
     if (giz) giz.style.transform = 'rotateX(' + (phi - 90) + 'deg) rotateY(' + (-theta) + 'deg)';
   }
 
-  // live camera readout as you drag
   mv.addEventListener('camera-change', function(){
     try {
       var o = mv.getCameraOrbit();

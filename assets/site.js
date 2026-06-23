@@ -217,26 +217,14 @@
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
   // Per-drink 3D scene config — dialed in via studio.html and pasted here.
   var DRINK_CFG = {
-    beer:   { orbit: '0.1deg 88deg 47.95m', fov: '30deg', orient: '4deg 32deg -30deg', tone: 'aces',    exposure: '1.25', env: 'legacy', metal: 1.0,  rough: 0.30,
-              shadow: { op: 0.44, w: '90%', h: '80px', b: '28%', blur: '11px', x: '11%' } },
-    coffee: { orbit: '28.9deg 62.5deg 2.64m', fov: '30deg', orient: '0deg -4deg 30deg', tone: 'neutral', exposure: '1.25', env: 'legacy', metal: 0.52, rough: 0.42,
-              shadow: { op: 0.74, w: '81%', h: '50px', b: '25%', blur: '17px', x: '0%' } }
+    beer:   { orbit: '0.1deg 88deg 47.95m', fov: '30deg', orient: '4deg 32deg -30deg', tone: 'aces',    exposure: '1.25', env: 'legacy', metal: 1.0,  rough: 0.30, shInt: '1.8', shSoft: '0.9' },
+    coffee: { orbit: '28.9deg 62.5deg 2.64m', fov: '30deg', orient: '0deg -4deg 30deg', tone: 'neutral', exposure: '1.25', env: 'legacy', metal: 0.52, rough: 0.42, shInt: '2.0', shSoft: '0.8' }
   };
   function dcfg() { return DRINK_CFG[state.sel] || DRINK_CFG.beer; }
   function camOrbit() { return dcfg().orbit; }
   function fov() { return dcfg().fov; }
   function baseOrient() { return dcfg().orient; }
   function orientParts() { var p = dcfg().orient.split(/deg\s*/); return { roll: parseFloat(p[0]) || 0, pitch: parseFloat(p[1]) || 0, yaw: parseFloat(p[2]) || 0 }; }
-  // Floor shadow = a wrapper (position/size/offset) + inner (gradient/blur). The spin animates only the
-  // inner (scale+fade) so the wrapper's x-offset is never lost.
-  function floorWrapCss() {
-    var s = dcfg().shadow;
-    return 'position:absolute;left:50%;bottom:' + s.b + ';width:' + s.w + ';height:' + s.h + ';transform:translateX(calc(-50% + ' + s.x + '));pointer-events:none;z-index:0';
-  }
-  function floorInnerCss() {
-    var s = dcfg().shadow;
-    return 'width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(48,8,20,' + s.op + '),rgba(48,8,20,' + (s.op * 0.45).toFixed(3) + ') 44%,transparent 70%);filter:blur(' + s.blur + ')';
-  }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -355,8 +343,7 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="floorWrap" style="' + floorWrapCss() + '"><div id="floorShadow" style="' + floorInnerCss() + '"></div></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="' + dcfg().tone + '" exposure="' + dcfg().exposure + '" environment-image="' + dcfg().env + '" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="' + dcfg().shInt + '" shadow-softness="' + dcfg().shSoft + '" tone-mapping="' + dcfg().tone + '" exposure="' + dcfg().exposure + '" environment-image="' + dcfg().env + '" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -709,8 +696,8 @@
     mv.setAttribute('tone-mapping', dcfg().tone);
     mv.setAttribute('exposure', dcfg().exposure);
     mv.setAttribute('environment-image', dcfg().env);
-    var fw = document.getElementById('floorWrap'); if (fw) fw.setAttribute('style', floorWrapCss());
-    var fl = document.getElementById('floorShadow'); if (fl) fl.setAttribute('style', floorInnerCss());
+    mv.setAttribute('shadow-intensity', dcfg().shInt);
+    mv.setAttribute('shadow-softness', dcfg().shSoft);
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -781,12 +768,8 @@
     try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
     // Match the in-app SceneKit tap animation: the MODEL spins in place, the camera never moves.
     // Coffee = bobAndSpin (rise/fall + Y spin, 0.7s); Beer = forwardRoll (X tumble, 0.9s, no bob).
-    mv.style.animation = 'none'; void mv.offsetWidth;
-    if (coffee) { mv.style.animation = 'cupBob .7s cubic-bezier(.34,0,.32,1)'; puffSteam(); }
-    else burstSparkles();
+    if (coffee) puffSteam(); else burstSparkles();
     var dur = coffee ? 700 : 900, t0 = performance.now();
-    var fl = document.getElementById('floorShadow');
-    if (fl) { fl.style.animation = 'none'; void fl.offsetWidth; fl.style.animation = 'floorPulse ' + dur + 'ms cubic-bezier(.38,1,.5,1)'; }
     var op = orientParts(), rest = baseOrient();
     (function tick(now) {
       if (myToken !== animToken) return; // a newer spin / drink switch took over
