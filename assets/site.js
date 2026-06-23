@@ -324,7 +324,7 @@
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:6% 6% 9%;border-radius:50%;background:radial-gradient(circle at 50% 45%,rgba(255,79,98,.16),rgba(255,180,46,.1) 46%,transparent 68%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div style="position:absolute;left:17%;right:17%;bottom:13%;height:22px;background:radial-gradient(ellipse at center,rgba(60,10,25,.16),transparent 72%);filter:blur(9px);pointer-events:none"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="160" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 55%;--poster-color:transparent;background-color:transparent;animation:coinFlip 3.6s ease-in-out infinite"><div slot="progress-bar"></div></model-viewer>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" min-camera-orbit="auto 8deg auto" max-camera-orbit="auto 172deg auto" field-of-view="' + fov() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0.7" shadow-softness="1" exposure="1.1" environment-image="neutral" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 55%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:2"></div>' +
           '<div class="float-card" style="top:12%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -382,70 +382,81 @@
       '</div>' +
     '</div></section>';
 
-    // ---- discover (dark cards) ----
-    var disco = {
-      en: { wide: { t: 'All your meet-ups, in one place', d: 'Log who you saw and what you drank, then watch your streaks and your year add up — calm, private, yours.', n: 4 }, a: { t: 'A drink per clink', d: 'Spin and keep a 3D collectible from every meet-up.', n: 2 }, b: { t: 'Your social year', d: 'See who you see most and how it all adds up.', n: 6 } },
-      ru: { wide: { t: 'Все встречи — в одном месте', d: 'Отмечай, кого видел и что пили, и смотри, как складываются серии и весь твой год — спокойно, приватно, только твоё.', n: 4 }, a: { t: 'Напиток за «чок»', d: 'Крути и собирай 3D-сувенир с каждой встречи.', n: 2 }, b: { t: 'Твой год встреч', d: 'Кого видишь чаще и как всё складывается.', n: 6 } }
-    }[L];
+    // ---- feature bento (Sheepy-style) ----
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
-    function discoverCardWide(o) {
-      return '<div class="soft-card" style="grid-column:1 / -1;display:flex;gap:clamp(20px,4vw,52px);align-items:center;padding:clamp(28px,4vw,44px);flex-wrap:wrap;border-top:3px solid #FF4F62">' +
-        '<div style="flex:1;min-width:230px">' +
-          '<span style="display:inline-flex;width:50px;height:50px;border-radius:15px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:16px">' + ph('calendar-check', 24, C, 'ph-fill') + '</span>' +
-          '<h3 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.6vw,29px);margin:0 0 10px;letter-spacing:-.5px;color:#1c1326">' + esc(o.wide.t) + '</h3>' +
-          '<p style="font-size:15.5px;line-height:1.6;color:#6b6b76;margin:0;max-width:30em">' + esc(o.wide.d) + '</p>' +
-        '</div>' +
-        '<div style="flex:none;width:clamp(150px,22vw,196px);perspective:1100px"><img class="screen3d" src="' + shot(o.wide.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:22px;aspect-ratio:1080/2340"></div>' +
-      '</div>';
-    }
-    function discoverCardSmall(card, iconName) {
-      return '<div class="soft-card" style="display:flex;flex-direction:column;padding:26px 26px 0;overflow:hidden">' +
-        '<span style="display:inline-flex;width:48px;height:48px;border-radius:14px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:14px">' + ph(iconName, 22, C, 'ph-fill') + '</span>' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 8px;color:#1c1326">' + esc(card.t) + '</h3>' +
-        '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0 0 22px">' + esc(card.d) + '</p>' +
-        '<div style="perspective:1000px;width:74%;margin:auto auto 0"><img class="screen3d" src="' + shot(card.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:18px 18px 0 0;aspect-ratio:1080/1500;object-fit:cover;object-position:top"></div>' +
-      '</div>';
+    var feats = {
+      en: [
+        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds — never have I ever, roulette, would-you-rather and more.', n: 1, span: 'span 4' },
+        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink you log.', n: 2, span: 'span 2' },
+        { ic: 'flame', t: 'Meeting streaks', d: 'Keep the run going with the people who matter most.', span: 'span 2' },
+        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge when it has been too long since you met.', span: 'span 2' },
+        { ic: 'trophy', t: 'Achievements', d: 'Unlock dozens of badges — including a few secret ones.', span: 'span 2' },
+        { ic: 'chart-bar', t: 'Your whole social year', d: 'Who you see most, your favourite drinks and how your year adds up — all in clean, private charts.', n: 6, span: 'span 6', wide: true }
+      ],
+      ru: [
+        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды — «я никогда не», рулетка, «что выберешь» и другие.', n: 1, span: 'span 4' },
+        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток, который можно покрутить, за каждый «чок».', n: 2, span: 'span 2' },
+        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее всего.', span: 'span 2' },
+        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко напомним, когда давно не виделись.', span: 'span 2' },
+        { ic: 'trophy', t: 'Достижения', d: 'Открывай десятки наград — включая тайные.', span: 'span 2' },
+        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Кого видишь чаще, любимые напитки и как складывается год — в чистых приватных графиках.', n: 6, span: 'span 6', wide: true }
+      ]
+    }[L];
+    function bentoChip(ic) { return '<span style="display:inline-flex;width:44px;height:44px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:14px">' + ph(ic, 22, C, 'ph-fill') + '</span>'; }
+    function bentoCard(f) {
+      var title = '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0 0 7px;color:#1c1326">' + esc(f.t) + '</h3>';
+      var desc = '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0;max-width:34em">' + esc(f.d) + '</p>';
+      if (f.wide) {
+        return '<div class="bento-card" style="grid-column:' + f.span + ';display:flex;gap:clamp(20px,4vw,44px);align-items:center;flex-wrap:wrap">' +
+          '<div style="flex:1;min-width:220px">' + bentoChip(f.ic) + title + desc + '</div>' +
+          '<div style="flex:none;width:clamp(140px,22vw,200px)"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:20px;aspect-ratio:1080/2340;box-shadow:0 22px 40px -20px rgba(28,19,38,.32)"></div>' +
+        '</div>';
+      }
+      var shotImg = f.n ? '<div style="margin:18px -6px -26px;border-radius:16px 16px 0 0;overflow:hidden"><img src="' + shot(f.n) + '" alt="" loading="lazy" style="display:block;width:100%;border-radius:16px 16px 0 0;aspect-ratio:1080/760;object-fit:cover;object-position:top"></div>' : '';
+      return '<div class="bento-card" style="grid-column:' + f.span + '">' + bentoChip(f.ic) + title + desc + shotImg + '</div>';
     }
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
-      '<div class="discover-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:18px">' +
-        discoverCardWide(disco) + discoverCardSmall(disco.a, 'cube') + discoverCardSmall(disco.b, 'chart-bar') +
-      '</div>' +
+      '<div class="bento">' + feats.map(bentoCard).join('') + '</div>' +
     '</div></section>';
 
     // ---- interactive question mini-game ----
     var card = renderQuestionSection();
 
     // ---- how it works ----
-    var wp = ph('users-three', 26, '#fff', 'ph-fill'), wg = ph('game-controller', 26, '#fff', 'ph-fill'), wc = ph('cube', 26, '#fff', 'ph-fill');
+    var cp = ph('users-three', 18, C, 'ph-fill'), cg = ph('game-controller', 18, C, 'ph-fill'), cc = ph('cube', 18, C, 'ph-fill');
     var stepData = {
       en: [
-        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', ic: wp },
-        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', ic: wg },
-        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', ic: wc }
+        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', cic: cp },
+        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', cic: cg },
+        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', cic: cc }
       ],
       ru: [
-        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', ic: wp },
-        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', ic: wg },
-        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', ic: wc }
+        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', cic: cp },
+        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', cic: cg },
+        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', cic: cc }
       ]
     }[L];
     var how = '<section style="padding:clamp(40px,6vh,80px) clamp(20px,5vw,72px) clamp(50px,8vh,96px)"><div style="max-width:1000px;margin:0 auto">' +
-      '<div style="text-align:center;margin-bottom:42px">' + kicker(t.howKicker) + h2sec(t.howTitle) + '</div>' +
-      '<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="feat-grid">' +
+      '<div style="text-align:center;margin-bottom:clamp(34px,5vh,52px)">' + kicker(t.howKicker) + h2sec(t.howTitle) + '</div>' +
+      '<div class="flow">' +
       stepData.map(function (s) {
-        return '<div class="soft-card" style="text-align:center;padding:30px 22px">' +
-          '<div style="position:relative;width:60px;height:60px;border-radius:18px;background:linear-gradient(165deg,#FF8A97,#E11D48);display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 14px 26px -12px rgba(225,29,72,.7);color:#fff">' + s.ic +
-            '<span style="position:absolute;top:-8px;right:-8px;width:26px;height:26px;border-radius:50%;background:#1c1326;color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;border:2px solid #FFF8F4">' + s.n + '</span></div>' +
-          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 7px;color:#1c1326">' + esc(s.t) + '</h3>' +
-          '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0 auto;max-width:22em">' + esc(s.d) + '</p>' +
+        return '<div class="flow-step">' +
+          '<div class="flow-num">' + s.n + '</div>' +
+          '<div style="padding-top:3px">' +
+            '<div style="display:inline-flex;align-items:center;gap:9px;margin-bottom:6px">' +
+              '<span style="display:inline-flex;width:34px;height:34px;border-radius:10px;background:#FFE2E6;align-items:center;justify-content:center">' + s.cic + '</span>' +
+              '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0;color:#1c1326">' + esc(s.t) + '</h3>' +
+            '</div>' +
+            '<p style="font-size:15px;line-height:1.55;color:#6b6b76;margin:0;max-width:32em">' + esc(s.d) + '</p>' +
+          '</div>' +
         '</div>';
       }).join('') +
       '</div></div></section>';
 
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:linear-gradient(150deg,#FF5167,#E11D48 60%,#C81E45);color:#FFFBFA;padding:clamp(42px,6vw,72px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 60px -30px rgba(225,29,72,.7)">' +
+      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:linear-gradient(155deg,#2c1422 0%,#1c1326 70%);color:#FFFBFA;padding:clamp(42px,6vw,72px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 60px -30px rgba(28,19,38,.6)">' +
         sparkle({ s: 26, pos: 'top:14%;left:12%', op: 0.9, anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.7, anim: 'twinkle 5s ease-in-out .6s infinite' }) +
         sparkle({ s: 13, pos: 'top:18%;right:24%', op: 0.65, anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
@@ -455,8 +466,8 @@
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
           '<img src="assets/clinky-icon.png" alt="Clinky" style="width:66px;height:66px;border-radius:19px;margin:0 auto 18px;box-shadow:0 14px 30px -10px rgba(120,10,30,.7);display:block">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px">' + esc(t.finalTitle) + '</h2>' +
-          '<p style="font-size:16.5px;color:rgba(255,251,250,.88);margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
-          '<div id="wl2">' + waitlistForm(true) + '</div>' +
+          '<p style="font-size:16.5px;color:rgba(255,251,250,.72);margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
+          '<div id="wl2">' + waitlistForm() + '</div>' +
           (state.waitlistDone ? '' : '<p style="font-size:13px;color:rgba(255,251,250,.74);margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
         '</div>' +
       '</div>' +
@@ -675,19 +686,42 @@
       })(s, i);
     }
   }
+  var tossing = false;
+  function modelTheta() { return state.sel === 'coffee' ? 18 : 25; }
+  function modelPhi() { return state.sel === 'coffee' ? 80 : 62; }
   function playAnim() {
     var mv = document.getElementById('drinkModel');
-    if (!mv) return;
+    if (!mv || tossing) return;
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduce) { mv.style.animation = 'none'; void mv.offsetWidth; mv.style.animation = 'quickPulse .5s ease'; return; }
+    tossing = true;
     mv.style.animation = 'none'; void mv.offsetWidth;
-    mv.style.animation = reduce ? 'quickPulse .5s ease' : 'coinFlip 1.25s cubic-bezier(.4,1.25,.5,1)';
+    mv.style.animation = 'tossArc 1.2s cubic-bezier(.4,1.05,.5,1)';      // throw arc (vertical)
     (state.sel !== 'coffee') ? burstSparkles() : puffSteam();
-    try { if (navigator.vibrate) navigator.vibrate(10); } catch (e) {}
-    clearTimeout(animBack);
-    animBack = setTimeout(function () { mv.style.animation = reduce ? '' : 'coinFlip 3.6s ease-in-out infinite'; }, 1250);
+    try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
+    var t0 = performance.now(), dur = 1200, theta = modelTheta(), base = modelPhi();
+    function tick(now) {
+      var m = document.getElementById('drinkModel');
+      if (!m) { tossing = false; return; }
+      var p = Math.min((now - t0) / dur, 1);
+      var tri = p < 0.5 ? p * 2 : 2 - p * 2;                              // 0 -> 1 -> 0 (over and back)
+      var e = tri < 0.5 ? 2 * tri * tri : 1 - Math.pow(-2 * tri + 2, 2) / 2;
+      var phi = base + (150 - base) * e;                                  // honest 3D tumble: camera over the top -> underside -> back
+      try { m.cameraOrbit = theta + 'deg ' + phi.toFixed(1) + 'deg auto'; } catch (_) {}
+      if (p < 1) requestAnimationFrame(tick);
+      else { try { m.cameraOrbit = theta + 'deg ' + base + 'deg auto'; } catch (_) {} m.style.animation = ''; tossing = false; }
+    }
+    requestAnimationFrame(tick);
   }
-  function startAnim() { /* idle coin-flip loops via CSS inline animation */ }
-  function stopAnim() { if (animBack) { clearTimeout(animBack); animBack = null; } }
+  function startAnim() {
+    stopAnim();
+    animKickoff = setTimeout(playAnim, 1800);
+    animTimer = setInterval(function () { if (state.page === 'home' && !document.hidden) playAnim(); }, 4400);
+  }
+  function stopAnim() {
+    if (animTimer) { clearInterval(animTimer); animTimer = null; }
+    if (animKickoff) { clearTimeout(animKickoff); animKickoff = null; }
+  }
 
   // ===== question card in-place + swipe =====
   function animQ() {
