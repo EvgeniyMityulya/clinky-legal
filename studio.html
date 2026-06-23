@@ -54,7 +54,11 @@
       <button id="dCoffee" onclick="S.setDrink('coffee')">☕ Кофе</button>
     </div>
     <button class="wbtn" style="background:#1c1326;color:#fff;border:0" onclick="S.play()">▶︎ Проиграть анимацию (тап по модели)</button>
-    <button id="bHelp" class="wbtn on" onclick="S.toggleHelpers()">🧭 Оси + сетка пола (вкл/выкл)</button>
+    <div class="seg">
+      <button id="bDragCam" class="on" onclick="S.setDrag(false)">🎥 Крутить камеру</button>
+      <button id="bDragModel" onclick="S.setDrag(true)">🧊 Крутить модель</button>
+    </div>
+    <button id="bHelp" class="wbtn on" onclick="S.toggleHelpers()">🧭 Оси + сетка + 💡 свет (вкл/выкл)</button>
 
     <div class="div"></div>
     <div class="grp">Свет (направленный)</div>
@@ -182,6 +186,14 @@
     const grid = new THREE.GridHelper(12, 12, 0xff8a97, 0xf0d8dc);
     grid.name = 'grid'; scene.add(grid);
 
+    // light indicator: a "sun" sphere + helper showing where the light is and how it falls
+    const sun = new THREE.Mesh(new THREE.SphereGeometry(0.22,18,18), new THREE.MeshBasicMaterial({ color:0xffc233 }));
+    sun.name = 'sun'; scene.add(sun);
+    const dirHelper = new THREE.DirectionalLightHelper(dirLight, 1.4, 0xffaa00);
+    dirHelper.name = 'dirHelper'; scene.add(dirHelper);
+    const sunLine = new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]), new THREE.LineBasicMaterial({ color:0xffb020 }));
+    sunLine.name = 'sunLine'; scene.add(sunLine);
+
     modelRoot = new THREE.Group();
     poseGroup = new THREE.Group();
     modelRoot.add(poseGroup);
@@ -265,8 +277,11 @@
 
     dirLight.intensity = val('lInt');
     const lphi = D2R(90 - val('lElev')), lth = D2R(val('lAzim'));
-    dirLight.position.setFromSphericalCoords(10, lphi, lth).add(controls.target);
+    dirLight.position.setFromSphericalCoords(6, lphi, lth).add(controls.target);
     dirLight.target.position.copy(controls.target); dirLight.target.updateMatrixWorld();
+    const sun = scene.getObjectByName('sun'); if (sun) sun.position.copy(dirLight.position);
+    const dh = scene.getObjectByName('dirHelper'); if (dh) dh.update();
+    const sl = scene.getObjectByName('sunLine'); if (sl) sl.geometry.setFromPoints([dirLight.position.clone(), controls.target.clone()]);
     ambLight.intensity = val('aInt');
     groundMat.opacity = val('shOp');
     dirLight.shadow.radius = val('shBlur');
@@ -305,9 +320,19 @@
   function toggleHelpers(){
     const on = !$('bHelp').classList.contains('on');
     $('bHelp').classList.toggle('on', on);
-    scene.getObjectByName('grid').visible = on;
+    ['grid','sun','dirHelper','sunLine'].forEach(n=>{ const o=scene.getObjectByName(n); if(o) o.visible=on; });
     scene.children.forEach(o=>{ if(o.isAxesHelper) o.visible=on; });
   }
+
+  // drag mode: rotate the camera (OrbitControls) OR rotate the model itself (turntable)
+  let dragModel=false, pdrag=null;
+  function setDrag(model){
+    dragModel = model;
+    $('bDragCam').classList.toggle('on', !model);
+    $('bDragModel').classList.toggle('on', model);
+    controls.enableRotate = !model;
+  }
+  function clamp(v,a,b){ return Math.max(a,Math.min(b,v)); }
 
   function camSpherical(){
     const off = camera.position.clone().sub(controls.target);
@@ -338,10 +363,18 @@ shadow:   { opacity:${val('shOp').toFixed(2)}, softness:${val('shBlur')} }`;
 
   function loop(){ controls.update(); renderer.render(scene,camera); }
 
-  // expose for inline onclick / oninput
-  window.S = { setDrink, setEnv, upd, play, toggleHelpers, copy };
+  // drag the model itself (turntable) when in model mode
+  function bindModelDrag(){
+    const cv = $('cv');
+    cv.addEventListener('pointerdown', e=>{ if(!dragModel||spinning)return; pdrag={x:e.clientX,y:e.clientY,rx:val('rX'),ry:val('rY')}; });
+    window.addEventListener('pointermove', e=>{ if(!pdrag)return; const dx=e.clientX-pdrag.x, dy=e.clientY-pdrag.y; $('rY').value=Math.round(clamp(pdrag.ry+dx*0.5,-180,180)); $('rX').value=Math.round(clamp(pdrag.rx+dy*0.5,-180,180)); upd(); });
+    window.addEventListener('pointerup', ()=>{ pdrag=null; });
+  }
 
-  try { init(); } catch(e){ fail(e); }
+  // expose for inline onclick / oninput
+  window.S = { setDrink, setEnv, upd, play, toggleHelpers, copy, setDrag };
+
+  try { init(); bindModelDrag(); } catch(e){ fail(e); }
 </script>
 </body>
 </html>
