@@ -11,7 +11,9 @@
   body{margin:0;font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:#FFF8F4;color:#1c1326;display:flex;min-height:100vh}
   #stage{flex:1;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 42%,#fff,#FFF1EC)}
   model-viewer{width:100%;height:100vh;--poster-color:transparent;background:transparent}
-  #floorShadow{position:absolute;left:50%;bottom:18%;width:48%;height:34px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(48,8,20,.5),rgba(48,8,20,.22) 44%,transparent 70%);filter:blur(9px);pointer-events:none}
+  #floorWrap{position:absolute;left:50%;bottom:18%;width:48%;height:34px;transform:translateX(-50%);pointer-events:none}
+  #floorShadow{width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(48,8,20,.5),rgba(48,8,20,.22) 44%,transparent 70%);filter:blur(9px)}
+  @keyframes floorPulse{0%,100%{transform:scale(1);opacity:1}46%{transform:scale(.58);opacity:.38}}
   #panel{width:340px;flex:none;background:#fff;border-left:1px solid #eee;padding:16px 16px 28px;overflow-y:auto;height:100vh}
   h1{font-size:15px;margin:0 0 4px}
   .hint{font-size:11.5px;color:#888;margin:0 0 14px;line-height:1.5}
@@ -34,9 +36,11 @@
 </head>
 <body>
   <div id="stage">
-    <div id="floorShadow"></div>
+    <div id="floorWrap"><div id="floorShadow"></div></div>
     <model-viewer id="mv" src="models/BeerCap.glb" camera-controls interaction-prompt="none"
       camera-orbit="0deg 88deg 165%" field-of-view="30deg" orientation="0deg 34deg -33deg"
+      min-camera-orbit="-180deg 0deg 1%" max-camera-orbit="180deg 180deg 400%"
+      min-field-of-view="8deg" max-field-of-view="60deg"
       shadow-intensity="0" tone-mapping="neutral" exposure="1.25" environment-image="assets/studio.hdr"></model-viewer>
   </div>
 
@@ -48,6 +52,7 @@
       <button id="dBeer" class="on" onclick="setDrink('beer')">🍺 Пиво</button>
       <button id="dCoffee" onclick="setDrink('coffee')">☕ Кофе</button>
     </div>
+    <button id="play" style="width:100%;margin:0 0 14px;padding:11px;border:0;border-radius:10px;background:#1c1326;color:#fff;font-weight:800;font-size:13.5px;cursor:pointer" onclick="playSpin()">▶︎ Проиграть анимацию (тап по модели)</button>
 
     <div class="grp">Окружение / свет</div>
     <div class="row">
@@ -80,6 +85,7 @@
     <div class="row"><label>Ширина % <b id="vShW">56</b></label><input type="range" id="shW" min="15" max="90" step="1" value="56" oninput="applyShadow()"></div>
     <div class="row"><label>Высота px <b id="vShH">36</b></label><input type="range" id="shH" min="8" max="80" step="1" value="36" oninput="applyShadow()"></div>
     <div class="row"><label>Снизу % <b id="vShB">14</b></label><input type="range" id="shB" min="0" max="45" step="1" value="14" oninput="applyShadow()"></div>
+    <div class="row"><label>Сдвиг по X % <b id="vShX">0</b></label><input type="range" id="shX" min="-50" max="50" step="1" value="0" oninput="applyShadow()"></div>
     <div class="row"><label>Размытие px <b id="vShBl">9</b></label><input type="range" id="shBl" min="0" max="30" step="1" value="9" oninput="applyShadow()"></div>
 
     <div class="div"></div>
@@ -128,15 +134,32 @@
   }
   function applyShadow(){
     setTxt('vShOp', parseFloat(val('shOp')).toFixed(2));
-    setTxt('vShW', val('shW')); setTxt('vShH', val('shH')); setTxt('vShB', val('shB')); setTxt('vShBl', val('shBl'));
+    setTxt('vShW', val('shW')); setTxt('vShH', val('shH')); setTxt('vShB', val('shB')); setTxt('vShBl', val('shBl')); setTxt('vShX', val('shX'));
     var op = parseFloat(val('shOp'));
-    var fs = document.getElementById('floorShadow');
-    fs.style.width = val('shW') + '%';
-    fs.style.height = val('shH') + 'px';
-    fs.style.bottom = val('shB') + '%';
+    var fw = document.getElementById('floorWrap'), fs = document.getElementById('floorShadow');
+    fw.style.width = val('shW') + '%';
+    fw.style.height = val('shH') + 'px';
+    fw.style.bottom = val('shB') + '%';
+    fw.style.transform = 'translateX(calc(-50% + ' + val('shX') + '%))';
     fs.style.filter = 'blur(' + val('shBl') + 'px)';
-    fs.style.background = 'radial-gradient(ellipse at center,rgba(48,8,20,' + op + '),rgba(48,8,20,' + (op*0.44).toFixed(3) + ') 44%,transparent 70%)';
+    fs.style.background = 'radial-gradient(ellipse at center,rgba(48,8,20,' + op + '),rgba(48,8,20,' + (op*0.45).toFixed(3) + ') 44%,transparent 70%)';
     writeOut();
+  }
+  var spinning = false;
+  function playSpin(){
+    if (spinning) return; spinning = true;
+    var roll=parseFloat(val('roll'))||0, pitch=parseFloat(val('pitch'))||0, yaw=parseFloat(val('yaw'))||0;
+    var coffee = drink==='coffee', dur = coffee?700:900, t0 = performance.now();
+    var fs = document.getElementById('floorShadow');
+    fs.style.animation='none'; void fs.offsetWidth; fs.style.animation='floorPulse '+dur+'ms cubic-bezier(.38,1,.5,1)';
+    function ease(p){ return p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2; }
+    (function tick(now){
+      var p = Math.min(((now||performance.now())-t0)/dur,1), deg=360*ease(p);
+      if (coffee) mv.setAttribute('orientation', roll+'deg '+pitch+'deg '+(yaw+deg).toFixed(1)+'deg');
+      else mv.setAttribute('orientation', roll+'deg '+(pitch-deg).toFixed(1)+'deg '+yaw+'deg');
+      if (p<1) requestAnimationFrame(tick);
+      else { mv.setAttribute('orientation', roll+'deg '+pitch+'deg '+yaw+'deg'); spinning=false; }
+    })(performance.now());
   }
   var mats = [];
   function applyMat(){
@@ -153,15 +176,23 @@
     applyMat();
   }
 
+  // last-saved presets (paste from configs); studio starts here so you keep tuning
+  var PRESET = {
+    beer:   { orbit:'0.1deg 88deg 33.5m',     fov:30, roll:0, pitch:34,  yaw:-33, env:'legacy', tone:'aces',    exp:1.25, met:1.00, rou:0.30, shOp:0.40, shW:90, shH:80, shB:26, shX:0, shBl:15 },
+    coffee: { orbit:'28.9deg 62.5deg 2.64m',  fov:30, roll:0, pitch:-4,  yaw:30,  env:'legacy', tone:'neutral', exp:1.25, met:0.52, rou:0.42, shOp:0.74, shW:81, shH:50, shB:25, shX:0, shBl:17 }
+  };
+  function setVal(id,v){ document.getElementById(id).value = v; }
   function setDrink(d){
     drink = d;
     document.getElementById('dBeer').classList.toggle('on', d==='beer');
     document.getElementById('dCoffee').classList.toggle('on', d==='coffee');
+    var P = PRESET[d];
     mv.setAttribute('src', SRC[d]);
-    // sensible per-drink starting pose
-    if (d==='coffee'){ document.getElementById('pitch').value=0; document.getElementById('yaw').value=29; mv.setAttribute('camera-orbit','0deg 38deg 150%'); }
-    else { document.getElementById('pitch').value=34; document.getElementById('yaw').value=-33; mv.setAttribute('camera-orbit','0deg 88deg 165%'); }
-    apply();
+    mv.setAttribute('camera-orbit', P.orbit); liveCam = P.orbit;
+    setVal('fov',P.fov); setVal('roll',P.roll); setVal('pitch',P.pitch); setVal('yaw',P.yaw);
+    setVal('env',P.env); setVal('tone',P.tone); setVal('exp',P.exp); setVal('met',P.met); setVal('rou',P.rou);
+    setVal('shOp',P.shOp); setVal('shW',P.shW); setVal('shH',P.shH); setVal('shB',P.shB); setVal('shX',P.shX); setVal('shBl',P.shBl);
+    apply(); applyShadow(); applyMat();
   }
 
   function writeOut(){
@@ -175,7 +206,7 @@
       "exposure:     " + parseFloat(val('exp')).toFixed(2) + "\n" +
       "metalness:    " + parseFloat(val('met')).toFixed(2) + "\n" +
       "roughness:    " + parseFloat(val('rou')).toFixed(2) + "\n" +
-      "shadow: { opacity:" + parseFloat(val('shOp')).toFixed(2) + ", width:'" + val('shW') + "%', height:'" + val('shH') + "px', bottom:'" + val('shB') + "%', blur:'" + val('shBl') + "px' }";
+      "shadow: { opacity:" + parseFloat(val('shOp')).toFixed(2) + ", width:'" + val('shW') + "%', height:'" + val('shH') + "px', bottom:'" + val('shB') + "%', x:'" + val('shX') + "%', blur:'" + val('shBl') + "px' }";
     document.getElementById('out').value = cfg;
   }
   function copyCfg(){
@@ -196,7 +227,7 @@
   });
   mv.addEventListener('load', grabMats);
 
-  apply(); applyShadow();
+  setDrink('beer');
 </script>
 </body>
 </html>

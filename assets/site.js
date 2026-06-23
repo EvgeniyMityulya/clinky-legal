@@ -215,25 +215,28 @@
   // model attrs
   function modelGlb() { return state.sel === 'coffee' ? 'models/CoffeeCup.glb' : 'models/BeerCap.glb'; }
   function modelUsdz() { return state.sel === 'coffee' ? 'models/CoffeeCup.usdz' : 'models/BeerCap.usdz'; }
-  // Camera nearly side-on like the in-app SceneKit rig (cap: h4/d250 → ~side-on; cup: h6/d12 → phi~63);
-  // the diagonal look comes from the MODEL pose, not the camera. Radius keeps the model off the edges.
-  function camOrbit() { return state.sel === 'coffee' ? '0deg 38deg 150%' : '0deg 88deg 165%'; }
-  function fov() { return '30deg'; }
-  // Separate floor shadow (like the in-app SwiftUI ellipse): sits on the ground below the model and
-  // shrinks/fades while it rises during the spin — NOT model-viewer's contact shadow (that glues to the base).
-  function floorShadowStyle() {
-    return state.sel === 'coffee'
-      ? 'left:50%;bottom:5%;width:40%;height:26px;transform:translateX(-50%)'
-      : 'left:50%;bottom:14%;width:56%;height:36px;transform:translateX(-50%)';
+  // Per-drink 3D scene config — dialed in via studio.html and pasted here.
+  var DRINK_CFG = {
+    beer:   { orbit: '0.1deg 88deg 33.5m', fov: '30deg', orient: '0deg 34deg -33deg', tone: 'aces',    exposure: '1.25', env: 'legacy', metal: 1.0,  rough: 0.30,
+              shadow: { op: 0.40, w: '90%', h: '80px', b: '26%', blur: '15px', x: '0%' } },
+    coffee: { orbit: '28.9deg 62.5deg 2.64m', fov: '30deg', orient: '0deg -4deg 30deg', tone: 'neutral', exposure: '1.25', env: 'legacy', metal: 0.52, rough: 0.42,
+              shadow: { op: 0.74, w: '81%', h: '50px', b: '25%', blur: '17px', x: '0%' } }
+  };
+  function dcfg() { return DRINK_CFG[state.sel] || DRINK_CFG.beer; }
+  function camOrbit() { return dcfg().orbit; }
+  function fov() { return dcfg().fov; }
+  function baseOrient() { return dcfg().orient; }
+  function orientParts() { var p = dcfg().orient.split(/deg\s*/); return { roll: parseFloat(p[0]) || 0, pitch: parseFloat(p[1]) || 0, yaw: parseFloat(p[2]) || 0 }; }
+  // Floor shadow = a wrapper (position/size/offset) + inner (gradient/blur). The spin animates only the
+  // inner (scale+fade) so the wrapper's x-offset is never lost.
+  function floorWrapCss() {
+    var s = dcfg().shadow;
+    return 'position:absolute;left:50%;bottom:' + s.b + ';width:' + s.w + ';height:' + s.h + ';transform:translateX(calc(-50% + ' + s.x + '));pointer-events:none;z-index:0';
   }
-  function floorShadowCss() {
-    return 'position:absolute;' + floorShadowStyle() + ';background:radial-gradient(ellipse at center,rgba(48,8,20,.5),rgba(48,8,20,.22) 44%,transparent 70%);filter:blur(9px);pointer-events:none;z-index:0';
+  function floorInnerCss() {
+    var s = dcfg().shadow;
+    return 'width:100%;height:100%;background:radial-gradient(ellipse at center,rgba(48,8,20,' + s.op + '),rgba(48,8,20,' + (s.op * 0.45).toFixed(3) + ') 44%,transparent 70%);filter:blur(' + s.blur + ')';
   }
-  // Resting model orientation ("roll pitch yaw"), ported from CollectibleConfig:
-  // beer baseRotationX 34.4° / baseRotationY -33°; coffee yawed so the lid seam faces us.
-  function basePitch() { return state.sel === 'coffee' ? 0 : 34; }
-  function baseYaw() { return state.sel === 'coffee' ? 29 : -33; }
-  function baseOrient() { return '0deg ' + basePitch() + 'deg ' + baseYaw() + 'deg'; }
   function rotSpeed() { return state.sel === 'coffee' ? '16deg' : '18deg'; }
 
   // ===== header / footer =====
@@ -352,8 +355,8 @@
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="floorShadow" style="' + floorShadowCss() + '"></div>' +
-          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="neutral" exposure="1.25" environment-image="assets/studio.hdr" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
+          '<div id="floorWrap" style="' + floorWrapCss() + '"><div id="floorShadow" style="' + floorInnerCss() + '"></div></div>' +
+          '<model-viewer id="drinkModel" src="' + modelGlb() + '" alt="Clinky 3D collectible" camera-orbit="' + camOrbit() + '" field-of-view="' + fov() + '" orientation="' + baseOrient() + '" interaction-prompt="none" disable-tap disable-zoom interpolation-decay="120" shadow-intensity="0" tone-mapping="' + dcfg().tone + '" exposure="' + dcfg().exposure + '" environment-image="' + dcfg().env + '" reveal="auto" style="position:absolute;inset:0;width:100%;height:100%;transform-origin:50% 50%;--poster-color:transparent;background-color:transparent"><div slot="progress-bar"></div></model-viewer>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:1"><span class="mv-spin"></span></div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
@@ -676,11 +679,24 @@
   // ===== model animation =====
   function showLoader() { var l = document.getElementById('mvLoader'); if (l) l.style.display = 'flex'; }
   function hideLoader() { var l = document.getElementById('mvLoader'); if (l) l.style.display = 'none'; }
+  function applyMaterial() {
+    var mv = document.getElementById('drinkModel');
+    if (!mv || !mv.model) return;
+    var c = dcfg();
+    try {
+      mv.model.materials.forEach(function (m) {
+        if (!m.pbrMetallicRoughness) return;
+        m.pbrMetallicRoughness.setMetallicFactor(c.metal);
+        m.pbrMetallicRoughness.setRoughnessFactor(c.rough);
+      });
+    } catch (e) {}
+  }
   function bindModelLoad() {
     var mv = document.getElementById('drinkModel'); if (!mv) return;
-    if (mv.loaded) { hideLoader(); return; }
-    showLoader();
-    mv.addEventListener('load', hideLoader);
+    if (mv.loaded) { hideLoader(); applyMaterial(); }
+    else showLoader();
+    if (mv._lbound) return; mv._lbound = true;
+    mv.addEventListener('load', function () { hideLoader(); applyMaterial(); });
   }
   function applyModelAttrs() {
     var mv = document.getElementById('drinkModel');
@@ -690,7 +706,11 @@
     mv.setAttribute('src', modelGlb());
     mv.setAttribute('camera-orbit', camOrbit());
     mv.setAttribute('field-of-view', fov());
-    var fl = document.getElementById('floorShadow'); if (fl) fl.setAttribute('style', floorShadowCss());
+    mv.setAttribute('tone-mapping', dcfg().tone);
+    mv.setAttribute('exposure', dcfg().exposure);
+    mv.setAttribute('environment-image', dcfg().env);
+    var fw = document.getElementById('floorWrap'); if (fw) fw.setAttribute('style', floorWrapCss());
+    var fl = document.getElementById('floorShadow'); if (fl) fl.setAttribute('style', floorInnerCss());
   }
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
@@ -767,15 +787,15 @@
     var dur = coffee ? 700 : 900, t0 = performance.now();
     var fl = document.getElementById('floorShadow');
     if (fl) { fl.style.animation = 'none'; void fl.offsetWidth; fl.style.animation = 'floorPulse ' + dur + 'ms cubic-bezier(.38,1,.5,1)'; }
-    var pitch0 = basePitch(), yaw0 = baseYaw(), rest = baseOrient();
+    var op = orientParts(), rest = baseOrient();
     (function tick(now) {
       if (myToken !== animToken) return; // a newer spin / drink switch took over
       var m = document.getElementById('drinkModel'); if (!m) { tossing = false; return; }
       var p = Math.min(((now || performance.now()) - t0) / dur, 1);
       var deg = 360 * easeIO(p);
       try {
-        if (coffee) m.setAttribute('orientation', '0deg 0deg ' + (yaw0 + deg).toFixed(1) + 'deg');           // +360 around Y (vertical spin), keeps the centred yaw
-        else m.setAttribute('orientation', '0deg ' + (pitch0 - deg).toFixed(1) + 'deg ' + yaw0 + 'deg');     // -360 around X (forward roll), keeps the in-app lean
+        if (coffee) m.setAttribute('orientation', op.roll + 'deg ' + op.pitch + 'deg ' + (op.yaw + deg).toFixed(1) + 'deg');   // +360 around Y (vertical spin), keeps the pose
+        else m.setAttribute('orientation', op.roll + 'deg ' + (op.pitch - deg).toFixed(1) + 'deg ' + op.yaw + 'deg');          // -360 around X (forward roll), keeps the lean
       } catch (_) {}
       if (p < 1) requestAnimationFrame(tick);
       else { try { m.setAttribute('orientation', rest); } catch (_) {} m.style.animation = ''; tossing = false; }
