@@ -316,8 +316,8 @@
       sparkle({ s: 14, pos: 'bottom:24%;left:30%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
-        '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 19px;border-radius:999px;background:#FFE7EA;color:#C32748;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 20px -12px rgba(225,29,72,.5)">' +
-          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + ph('app-store-logo', 16, '#C32748', 'ph-fill') + esc(t.heroEyebrow) + '</span>' +
+        '<span style="display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:999px;background:#fff;border:1.5px solid #FFC4CE;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 10px 26px -10px rgba(255,79,98,.42)">' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + ph('app-store-logo', 17, '#E11D48', 'ph-fill') + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
@@ -479,7 +479,7 @@
 
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:3px solid #FFB0BB;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 34px 64px -34px rgba(255,79,98,.5)">' +
+      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
         sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
         sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +

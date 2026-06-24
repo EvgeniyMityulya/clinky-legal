@@ -10,8 +10,8 @@ a{text-decoration:none}
 #app{min-height:100vh}
 
 /* cards — one unified surface across the whole site: white fill + soft light-grey hairline */
-.soft-card{position:relative;background:#fff;border:1px solid var(--cardBorder);border-radius:24px;box-shadow:0 10px 30px -20px rgba(28,19,38,.16);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
-.soft-card:hover{z-index:3;transform:translateY(-4px);box-shadow:0 22px 44px -26px rgba(28,19,38,.26)}
+.soft-card{position:relative;background:#fff;border:1px solid var(--cardBorder);border-radius:24px;box-shadow:0 12px 32px -20px rgba(255,79,98,.28);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.soft-card:hover{z-index:3;transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(255,79,98,.38)}
 /* icons never stretch */
 i[class*="ph-"]{flex:none}
 /* reusable badge icon-in-circle */
@@ -22,8 +22,8 @@ model-viewer::part(default-progress-bar){display:none}
 @keyframes spin{to{transform:rotate(360deg)}}
 /* feature bento (Sheepy-style) — fixed row unit keeps cards compact (big = 2 rows, small = 1) */
 .bento{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;grid-auto-rows:168px}
-.bento-card{background:#fff;border:1px solid var(--cardBorder);border-radius:24px;overflow:hidden;position:relative;box-shadow:0 10px 30px -20px rgba(28,19,38,.16);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
-.bento-card:hover{z-index:3;transform:translateY(-5px);box-shadow:0 22px 44px -26px rgba(28,19,38,.26)}
+.bento-card{background:#fff;border:1px solid var(--cardBorder);border-radius:24px;overflow:hidden;position:relative;box-shadow:0 12px 32px -20px rgba(255,79,98,.26);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
+.bento-card:hover{z-index:3;transform:translateY(-5px);box-shadow:0 24px 48px -24px rgba(255,79,98,.38)}
 @media(max-width:900px){.bento{grid-template-columns:1fr 1fr;grid-auto-rows:auto}.bento-card{grid-column:auto !important;grid-row:auto !important;min-height:188px}}
 @media(max-width:560px){.bento{grid-template-columns:1fr}}
 /* process flow timeline */
@@ -39,7 +39,7 @@ model-viewer::part(default-progress-bar){display:none}
 /* screens carousel */
 .screens-track{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x proximity;justify-content:safe center;padding:54px clamp(20px,5vw,72px) 64px;-webkit-overflow-scrolling:touch}
 .screens-track::-webkit-scrollbar{display:none}.screens-track{scrollbar-width:none}
-.screen-card{flex:none;scroll-snap-align:center;width:260px;border-radius:32px;overflow:hidden;background:#fff;border:1px solid var(--cardBorder);box-shadow:0 18px 42px -24px rgba(28,19,38,.28);transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .4s ease,box-shadow .4s ease}
+.screen-card{flex:none;scroll-snap-align:center;width:260px;border-radius:32px;overflow:hidden;background:#fff;border:1px solid var(--cardBorder);box-shadow:0 18px 42px -22px rgba(255,79,98,.34);transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .4s ease,box-shadow .4s ease}
 @media(hover:hover){
   /* dim only the NON-hovered siblings (so the hovered card itself grows, no specificity clash) */
   .screens-track:has(.screen-card:hover) .screen-card:not(:hover){opacity:.4;transform:scale(.9)}
@@ -47,7 +47,7 @@ model-viewer::part(default-progress-bar){display:none}
 }
 
 /* floating hero mini-cards */
-.float-card{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:12px 17px;background:#fff;border:1px solid var(--cardBorder);border-radius:16px;box-shadow:0 16px 32px -16px rgba(28,19,38,.28);font-weight:700;font-size:14.5px;color:#1c1326;white-space:nowrap}
+.float-card{position:absolute;display:inline-flex;align-items:center;gap:10px;padding:12px 17px;background:#fff;border:1px solid var(--cardBorder);border-radius:16px;box-shadow:0 16px 34px -16px rgba(255,79,98,.3);font-weight:700;font-size:14.5px;color:#1c1326;white-space:nowrap}
 
 @keyframes shine{from{transform:translateX(-180%) skewX(-18deg)}to{transform:translateX(220%) skewX(-18deg)}}
 @keyframes floatSlow{0%,100%{transform:translate(0,0)}50%{transform:translate(-14px,-20px)}}
