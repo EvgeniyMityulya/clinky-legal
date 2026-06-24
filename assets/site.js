@@ -23,7 +23,7 @@
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
-      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'Free to join', trust2: 'No spam, ever', trust3: 'iOS 17+',
+      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up needed', trust2: 'No spam, ever', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
@@ -56,7 +56,7 @@
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
-      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Бесплатно', trust2: 'Без спама', trust3: 'iOS 17+',
+      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
@@ -338,14 +338,14 @@
         '<div id="wl1">' + waitlistForm() + '</div>' +
         (state.waitlistDone ? '' :
           '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px auto 0;max-width:38em">' +
-            chip('gift', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
+            chip('user-circle', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
           '</div>') +
       '</div>' +
       '<div style="position:relative;max-width:500px;margin:clamp(16px,3vh,38px) auto 0">' +
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
-          '<div style="position:absolute;inset:8% 10% 6%;border-radius:50%;background:radial-gradient(ellipse 50% 48% at 50% 48%,rgba(255,79,98,.26),rgba(255,138,151,.1) 40%,transparent 64%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
@@ -364,15 +364,6 @@
         drinkToggle() +
       '</div>' +
     '</section>';
-
-    // ---- social proof strip (pills) ----
-    var proofData = {
-      en: [{ t: 'No sign-up needed', ic: 'user-circle' }, { t: 'Your data stays on your phone', ic: 'device-mobile' }, { t: 'Free to join', ic: 'gift' }],
-      ru: [{ t: 'Без регистрации', ic: 'user-circle' }, { t: 'Всё на твоём телефоне', ic: 'device-mobile' }, { t: 'Бесплатно', ic: 'gift' }]
-    }[L];
-    var proof = '<section style="padding:8px clamp(20px,5vw,72px) 10px"><div style="max-width:760px;margin:0 auto;display:flex;flex-wrap:wrap;gap:11px 12px;justify-content:center">' +
-      proofData.map(function (p) { return chip(p.ic, p.t); }).join('') +
-      '</div></section>';
 
     // ---- screens carousel ----
     var screensCards = [1, 2, 3, 4, 5, 6, 7].map(function (n) {
@@ -513,7 +504,7 @@
       '</div>' +
     '</section>';
 
-    return '<div class="page-in">' + hero + proof + screens + why + discover + card + how + finalCta + '</div>';
+    return '<div class="page-in">' + hero + screens + why + discover + card + how + finalCta + '</div>';
   }
 
   function renderQuestionSection() {
