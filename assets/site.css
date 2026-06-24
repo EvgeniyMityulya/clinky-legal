@@ -9,13 +9,6 @@ a{text-decoration:none}
 :focus-visible{outline:3px solid #FF4F62;outline-offset:3px}
 #app{min-height:100vh}
 
-/* premium odometer counter — rolling digit wheels in per-digit cards, tabular, transform-only */
-.odo{display:inline-flex;align-items:center;font-variant-numeric:tabular-nums}
-.odo-col{display:inline-flex;background:#fff;border:1px solid #f4dde2;border-radius:.16em;box-shadow:0 8px 20px -10px rgba(255,79,98,.4);padding:.12em .1em;margin:0 .05em}
-.odo-win{height:1em;line-height:1;overflow:hidden}
-.odo-strip{display:flex;flex-direction:column;will-change:transform}
-.odo-cell{height:1em;line-height:1;display:flex;align-items:center;justify-content:center;width:.66em;font-variant-numeric:tabular-nums}
-.odo-sep{display:inline-block;width:.16em}
 /* cards — one unified surface across the whole site: white fill + soft light-grey hairline */
 .soft-card{position:relative;background:#fff;border:1px solid var(--cardBorder);border-radius:24px;box-shadow:0 12px 32px -20px rgba(255,79,98,.28);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
 .soft-card:hover{z-index:3;transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(255,79,98,.38)}

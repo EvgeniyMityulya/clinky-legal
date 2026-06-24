@@ -235,64 +235,46 @@
   // 3D hero is rendered by assets/hero3d.js (three.js). site.js only drives it via window.ClinkyHero.
   function hero() { return window.ClinkyHero; }
 
-  // ===== global clink counter — premium odometer, real shared value via abacus free API =====
+  // ===== global clink counter — smooth count-up roll, real shared value via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var clinkValue = null, odoDigits = 0, clinkBusy = false, clinkTimer = null;
-  function odoReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
-  function odoGroup(s) { // pad to >=2, returns array of chars incl thin-space separators
-    while (s.length < 2) s = '0' + s;
-    var out = [], n = s.length;
-    for (var i = 0; i < n; i++) { if (i > 0 && (n - i) % 3 === 0) out.push(' '); out.push(s[i]); }
-    return out;
-  }
-  // build the wheel structure for the given number of digit columns
-  function odoBuild(chars) {
-    var html = '';
-    for (var i = 0; i < chars.length; i++) {
-      if (chars[i] === ' ') { html += '<span class="odo-sep"></span>'; continue; }
-      var cells = '';
-      for (var d = 0; d <= 9; d++) cells += '<span class="odo-cell">' + d + '</span>';
-      html += '<span class="odo-col"><span class="odo-win"><span class="odo-strip">' + cells + '</span></span></span>';
-    }
-    var el = document.getElementById('odo'); if (el) el.innerHTML = html;
-    odoDigits = chars.length;
-  }
-  function odoSet(value, animate) {
-    var el = document.getElementById('odo'); if (!el) return;
-    var chars = odoGroup(String(Math.max(0, Math.round(value))));
-    if (chars.length !== odoDigits) odoBuild(chars);
-    var strips = el.querySelectorAll('.odo-strip'), si = 0, reduce = odoReduce();
-    for (var i = 0; i < chars.length; i++) {
-      if (chars[i] === ' ') continue;
-      var strip = strips[si++]; if (!strip) continue;
-      var d = +chars[i];
-      // stagger so columns settle left→right; rightmost (fast-changing) leads
-      strip.style.transition = (animate && !reduce) ? 'transform .9s cubic-bezier(.2,.85,.2,1) ' + (i * 60) + 'ms' : 'none';
-      strip.style.transform = 'translateY(-' + d + 'em)';
-    }
+  var clinkValue = null, clinkShown = 0, clinkBusy = false, clinkRAF = null, clinkTimer = null;
+  function clinkReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function fmtNum(n) { return Math.round(n).toLocaleString('en-US'); }   // thousands separators (commas)
+  function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
+  function animateClink(to) {
+    var el = document.getElementById('clinkNum'); if (!el) return;
+    if (clinkRAF) cancelAnimationFrame(clinkRAF);
+    var from = clinkShown;
+    if (clinkReduce() || from === to) { clinkShown = to; setClinkText(to); return; }
+    var t0 = performance.now(), dur = Math.min(1500, 450 + Math.abs(to - from) * 5);
+    (function tick(now) {
+      var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);   // ease-out roll
+      clinkShown = from + (to - from) * e; setClinkText(clinkShown);
+      if (p < 1) clinkRAF = requestAnimationFrame(tick);
+      else { clinkShown = to; setClinkText(to); }
+    })(performance.now());
   }
   function loadClinkCount() {
-    odoSet(0, false);                                  // reserve layout at 0 (no CLS), then roll up
+    clinkShown = 0; setClinkText(0);
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; requestAnimationFrame(function () { odoSet(d.value, true); }); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; animateClink(d.value); } })
       .catch(function () {});
   }
   function bumpClink() {
-    if (clinkBusy || clinkValue == null) return;   // ignore taps until the current roll finishes (no spam / double-count)
+    if (clinkBusy || clinkValue == null) return;   // ignore taps until the roll finishes (no spam / double-count)
     clinkBusy = true;
     clinkValue += 1;
-    odoSet(clinkValue, true);                       // optimistic roll
+    animateClink(clinkValue);                       // smooth +1 roll (no abrupt jump)
     if (clinkTimer) clearTimeout(clinkTimer);
-    clinkTimer = setTimeout(function () { clinkBusy = false; }, 1000);   // ~roll duration + stagger
+    clinkTimer = setTimeout(function () { clinkBusy = false; }, 750);
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; odoSet(d.value, false); } })
+      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; animateClink(d.value); } })
       .catch(function () {});
   }
-  function clinkReady() { return !clinkBusy && clinkValue != null; }
 
   // ===== header / footer =====
   function renderHeader() {
@@ -391,7 +373,7 @@
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
-          '<div class="hero-icon" style="display:flex;margin:0 0 18px">' +
+          '<div class="hero-icon" style="display:flex;justify-content:center;margin:0 0 18px">' +
             '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
           '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:18px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
@@ -408,9 +390,9 @@
             '</div>') +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
-        '<div data-act="play" style="position:relative;aspect-ratio:1/0.82;perspective:1000px;cursor:pointer">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/0.72;perspective:1000px;cursor:pointer;outline:2px solid red">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
+          '<div id="heroMount" style="position:absolute;inset:0;z-index:1;outline:2px dashed rgba(0,120,255,.7)"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
               '<svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)">' +
@@ -572,7 +554,7 @@
     // ---- global clink counter (premium odometer) ----
     var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        '<div id="odo" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(48px,7.5vw,84px);line-height:1;color:#FF4F62;justify-content:center"></div>' +
+        '<div id="clinkNum" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(50px,8vw,88px);letter-spacing:-1.5px;line-height:1;color:#FF4F62;font-variant-numeric:tabular-nums">0</div>' +
         '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#FF4F62;margin:14px 0 0">' + esc(t.counterLabel) + '</div>' +
       '</div>' +
     '</section>';
