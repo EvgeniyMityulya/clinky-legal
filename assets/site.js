@@ -170,8 +170,8 @@
   }
   // hero trust chip — equal medium width, icon pinned left, label centered (no width jumping)
   function heroChip(iconName, label) {
-    return '<span style="display:inline-flex;align-items:center;width:148px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13px;color:#3a323f">' +
-      '<span class="chip-ic" style="width:24px;height:24px;flex:none">' + (iconName === 'apple-logo' ? appleMark(14, C) : ph(iconName, 14, C, 'ph-fill')) + '</span>' +
+    return '<span style="display:inline-flex;align-items:center;gap:8px;width:152px;padding:7px 16px 7px 7px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13px;color:#3a323f">' +
+      '<span class="chip-ic" style="width:26px;height:26px;flex:none">' + (iconName === 'apple-logo' ? appleMark(14, C) : ph(iconName, 14, C, 'ph-fill')) + '</span>' +
       '<span style="flex:1;text-align:center">' + esc(label) + '</span></span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
@@ -252,7 +252,7 @@
       if (chars[i] === ' ') { html += '<span class="odo-sep"></span>'; continue; }
       var cells = '';
       for (var d = 0; d <= 9; d++) cells += '<span class="odo-cell">' + d + '</span>';
-      html += '<span class="odo-col"><span class="odo-strip">' + cells + '</span></span>';
+      html += '<span class="odo-col"><span class="odo-win"><span class="odo-strip">' + cells + '</span></span></span>';
     }
     var el = document.getElementById('odo'); if (el) el.innerHTML = html;
     odoDigits = chars.length;
@@ -301,7 +301,7 @@
     var join = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;font-family:Nunito,sans-serif;white-space:nowrap;transition:transform .2s;background:#FF4F62;color:#fff;box-shadow:0 8px 18px -8px rgba(255,79,98,.7)';
     var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
-      '<button data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:none">' +
+      '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:none;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
         '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
@@ -391,7 +391,10 @@
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
-          '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:20px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+          '<div class="hero-icon" style="display:flex;margin:0 0 18px">' +
+            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+          '</div>' +
+          '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:18px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
             '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
               '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
               '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
@@ -405,9 +408,9 @@
             '</div>') +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
-        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer;outline:2px dashed rgba(0,120,255,.7)">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/0.82;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="heroMount" style="position:absolute;inset:0;z-index:1;outline:2px solid red;outline-offset:-1px"></div>' +
+          '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
               '<svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)">' +
@@ -421,7 +424,7 @@
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:-72px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:-8px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
       '</div>' +
       '</div>' +
@@ -567,9 +570,9 @@
     '</section>';
 
     // ---- global clink counter (premium odometer) ----
-    var counter = '<section style="padding:clamp(30px,6vh,64px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
+    var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        '<div id="odo" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(52px,8.5vw,92px);letter-spacing:-2px;line-height:1;color:#1c1326;justify-content:center"></div>' +
+        '<div id="odo" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(48px,7.5vw,84px);line-height:1;color:#FF4F62;justify-content:center"></div>' +
         '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#FF4F62;margin:14px 0 0">' + esc(t.counterLabel) + '</div>' +
       '</div>' +
     '</section>';
@@ -725,6 +728,9 @@
     var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3.5vw,40px);transition:background .35s ease,box-shadow .35s ease;';
     var bg = state.scrolled ? 'background:rgba(255,255,255,.9);box-shadow:0 6px 24px -10px rgba(28,19,38,.16);backdrop-filter:blur(12px);' : 'background:transparent;';
     if ($hdr) $hdr.setAttribute('style', base + bg);
+    // header logo hidden at the top of Home (the hero already shows the big icon); fades in on scroll
+    var logo = document.getElementById('hdrLogo');
+    if (logo) { var show = state.scrolled || state.page !== 'home'; logo.style.opacity = show ? '1' : '0'; logo.style.pointerEvents = show ? 'auto' : 'none'; }
   }
   function paintHeader() { $hdr.innerHTML = renderHeader(); updateHeaderBg(); }
   function paint() {

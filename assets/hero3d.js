@@ -9,7 +9,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const CFG = {
   beer: {
     src: 'models/BeerCap.glb',
-    camera: { azim: 35.0, elev: 12.0, dist: 7.35, fov: 30 }, target: [0, 0.70, -0.03],
+    camera: { azim: 35.0, elev: 12.0, dist: 8.4, fov: 30 }, target: [0, 0.70, -0.03],
     offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
@@ -17,7 +17,7 @@ const CFG = {
   },
   coffee: {
     src: 'models/CoffeeCup.glb',
-    camera: { azim: 42.4, elev: 23.7, dist: 6.00, fov: 35 }, target: [-0.01, 1.00, 0.02],
+    camera: { azim: 42.4, elev: 23.7, dist: 6.8, fov: 35 }, target: [-0.01, 1.00, 0.02],
     offset: [0, 0, 0], scale: 1.0, rotation: [0, 45, 0],
     light: { azim: 20, elev: 44, intensity: 4.5 }, ambient: 0.65,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.0, tone: 'aces', exposure: 0.8,
