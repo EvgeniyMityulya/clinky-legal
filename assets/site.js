@@ -441,8 +441,8 @@
             '</div>' +
           '</div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
-          '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
-          '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
+          '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div></div>' +
+          '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div></div>' +
         '</div>' +
         '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:10px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
@@ -825,36 +825,34 @@
     if (state.sel === 'coffee') puffSteam(); else burstSparkles();
     if (hero()) hero().play();
   }
-  // floating badges turn TOWARD the scene centre — strongest when the cursor is centred (focus on the 3D),
-  // flattening out as the cursor reaches the edges. Black shadow shifts toward centre for depth.
+  // float badges turn TOWARD the scene centre (strongest when cursor is centred → focus on the 3D; flat at edges),
+  // with a black shadow cast OUTWARD from the centre (light feels central) + a little cursor-follow for life.
+  // Parallax lives on .float-inner; the idle bob stays on the outer .float-card → no conflict, smooth return.
   function bindHeroParallax() {
     var play = document.querySelector('[data-act="play"]'); if (!play || play._px) return; play._px = true;
-    var cards = [].slice.call(play.querySelectorAll('.float-card'));
+    var inners = [].slice.call(play.querySelectorAll('.float-inner'));
     function measure() {
       var pc = play.getBoundingClientRect();
-      cards.forEach(function (c) {
-        var cr = c.getBoundingClientRect();
+      inners.forEach(function (el) {
+        var cr = el.getBoundingClientRect();
         var vx = (pc.left + pc.width / 2) - (cr.left + cr.width / 2), vy = (pc.top + pc.height / 2) - (cr.top + cr.height / 2);
-        var len = Math.hypot(vx, vy) || 1; c._dir = [vx / len, vy / len];   // unit vector from the badge toward centre
+        var len = Math.hypot(vx, vy) || 1; el._dir = [vx / len, vy / len];   // unit vector from badge → centre
       });
     }
-    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease'; });
     play.addEventListener('pointermove', function (e) {
-      if (!cards[0] || !cards[0]._dir) measure();
-      play._over = true;
+      if (!inners[0] || !inners[0]._dir) measure();
       var r = play.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
       var p = Math.max(0, 1 - 2 * Math.hypot(nx, ny));   // 1 at centre → 0 at edges
-      cards.forEach(function (c) {
-        var dx = c._dir[0], dy = c._dir[1];
-        c.style.animation = 'none';
-        c.style.transform = 'perspective(700px) translate(' + (dx * 12 * p).toFixed(1) + 'px,' + (dy * 9 * p).toFixed(1) + 'px) rotateY(' + (dx * 20 * p).toFixed(1) + 'deg) rotateX(' + (-dy * 16 * p).toFixed(1) + 'deg)';
-        c.style.boxShadow = (dx * 22 * p).toFixed(1) + 'px ' + (10 + dy * 22 * p).toFixed(1) + 'px 34px -8px rgba(0,0,0,' + (0.12 + 0.16 * p).toFixed(2) + ')';
+      inners.forEach(function (el) {
+        var dx = el._dir[0], dy = el._dir[1];
+        var rotY = dx * 20 * p + nx * 12;                 // face centre (scaled by p) + a touch of cursor-follow
+        var rotX = -dy * 16 * p - ny * 10;
+        el.style.transform = 'perspective(700px) translate(' + (dx * 11 * p).toFixed(1) + 'px,' + (dy * 8 * p).toFixed(1) + 'px) rotateY(' + rotY.toFixed(1) + 'deg) rotateX(' + rotX.toFixed(1) + 'deg)';
+        el.style.boxShadow = (-dx * 24 * p).toFixed(1) + 'px ' + (12 - dy * 22 * p).toFixed(1) + 'px 36px -8px rgba(0,0,0,' + (0.14 + 0.16 * p).toFixed(2) + ')';   // shadow OUTWARD from centre
       });
     });
     play.addEventListener('pointerleave', function () {
-      play._over = false;
-      cards.forEach(function (c) { c.style.transform = ''; c.style.boxShadow = ''; });   // smoothly transitions back to rest
-      setTimeout(function () { if (!play._over) cards.forEach(function (c) { c.style.animation = c.dataset.anim; }); }, 440);   // restore idle bob only after the return finishes
+      inners.forEach(function (el) { el.style.transform = ''; el.style.boxShadow = ''; });   // smooth transition back; bob keeps running on the outer layer
     });
   }
   function startAnim() {
