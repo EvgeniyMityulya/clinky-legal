@@ -345,7 +345,7 @@
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
-          '<div style="position:absolute;inset:-10% -6% -4%;border-radius:50%;background:radial-gradient(ellipse 62% 58% at 50% 40%,rgba(255,79,98,.30),rgba(255,138,151,.16) 44%,rgba(255,138,151,.05) 64%,transparent 78%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div style="position:absolute;inset:8% 10% 6%;border-radius:50%;background:radial-gradient(ellipse 50% 48% at 50% 48%,rgba(255,79,98,.26),rgba(255,138,151,.1) 40%,transparent 64%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
@@ -360,7 +360,7 @@
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#a99ea6;margin:6px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#a99ea6;margin:-34px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
       '</div>' +
     '</section>';
