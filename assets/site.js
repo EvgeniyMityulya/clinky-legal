@@ -293,7 +293,7 @@
   }
 
   // ===== waitlist form =====
-  function waitlistForm(onColor) {
+  function waitlistForm(onColor, left) {
     var t = tdict();
     if (state.waitlistDone) {
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#FFF0F2') + ';border:1px solid ' + (onColor ? 'transparent' : '#ffd9de') + ';max-width:32em;text-align:left;animation:popIn .5s ease both">' +
@@ -302,7 +302,7 @@
     var btn = onColor
       ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
       : 'color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
-    return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:0 auto;flex-wrap:wrap">' +
+    return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:' + (left ? '0' : '0 auto') + ';flex-wrap:wrap">' +
         '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
         '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap;' + btn + '">' + esc(t.heroCta) + '</button>' +
       '</form>';
@@ -312,39 +312,33 @@
   function renderHome() {
     var t = tdict(), I = icons(), L = state.lang;
 
-    // ---- hero ----
-    var hero = '<section style="position:relative;padding:clamp(90px,11vh,122px) clamp(20px,5vw,72px) clamp(36px,6vh,64px);overflow:hidden;text-align:center">' +
-      sparkle({ s: 30, pos: 'top:15%;left:10%', op: 0.7, c: C, glow: 'rgba(255,79,98,.35)', anim: 'twinkle 4s ease-in-out infinite' }) +
-      sparkle({ s: 17, pos: 'top:11%;left:22%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
-      sparkle({ s: 23, pos: 'top:21%;right:12%', op: 0.62, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.4s ease-in-out .3s infinite' }) +
-      sparkle({ s: 13, pos: 'top:13%;right:27%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
-      sparkle({ s: 16, pos: 'top:33%;left:15%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
-      sparkle({ s: 27, pos: 'top:39%;right:8%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
-      sparkle({ s: 12, pos: 'top:47%;left:27%', op: 0.42, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
-      sparkle({ s: 20, pos: 'bottom:9%;left:12%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5.2s ease-in-out .4s infinite' }) +
-      sparkle({ s: 15, pos: 'bottom:15%;right:14%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4s ease-in-out .8s infinite' }) +
-      sparkle({ s: 22, pos: 'top:8%;left:34%', op: 0.55, c: C, glow: 'rgba(255,79,98,.32)', anim: 'twinkle 4.8s ease-in-out 1.1s infinite' }) +
-      sparkle({ s: 18, pos: 'top:44%;right:18%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.6s ease-in-out .25s infinite' }) +
-      sparkle({ s: 14, pos: 'bottom:24%;left:30%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
-      sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
-      '<div style="position:relative;max-width:720px;margin:0 auto">' +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:62px;height:62px;border-radius:18px;display:block;margin:0 auto 16px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
-        '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-          '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
-            '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
-            '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
-          '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
-        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
-        '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
-        '<div id="wl1">' + waitlistForm() + '</div>' +
-        (state.waitlistDone ? '' :
-          '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px auto 0;max-width:38em">' +
-            chip('user-circle', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
-          '</div>') +
-      '</div>' +
-      '<div style="position:relative;max-width:500px;margin:clamp(16px,3vh,38px) auto 0">' +
-        sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
-        sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
+    // ---- hero (two-column: text left, 3D right) ----
+    var hero = '<section style="position:relative;padding:clamp(80px,9vh,112px) clamp(20px,5vw,72px) clamp(40px,6vh,68px);overflow:hidden">' +
+      sparkle({ s: 30, pos: 'top:15%;left:8%', op: 0.7, c: C, glow: 'rgba(255,79,98,.35)', anim: 'twinkle 4s ease-in-out infinite' }) +
+      sparkle({ s: 17, pos: 'top:62%;left:14%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
+      sparkle({ s: 23, pos: 'top:18%;right:10%', op: 0.62, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.4s ease-in-out .3s infinite' }) +
+      sparkle({ s: 13, pos: 'top:11%;right:30%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
+      sparkle({ s: 16, pos: 'bottom:14%;left:5%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
+      sparkle({ s: 27, pos: 'bottom:12%;right:7%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
+      sparkle({ s: 14, pos: 'top:40%;right:46%', op: 0.42, c: '#FF8A97', glow: 'rgba(255,138,151,.28)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
+      sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
+      '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
+        '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
+          '<img src="assets/clinky-icon.png" alt="Clinky" class="hero-icon" style="width:60px;height:60px;border-radius:18px;display:block;margin:0 0 16px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+          '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:22px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+            '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
+              '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
+              '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
+            '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
+          '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-1.4px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
+          '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.55;color:#6b6b76;max-width:30em;margin:0 0 26px">' + esc(t.heroLede) + '</p>' +
+          '<div id="wl1">' + waitlistForm(false, true) + '</div>' +
+          (state.waitlistDone ? '' :
+            '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-start;margin:20px 0 0">' +
+              chip('user-circle', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
+            '</div>') +
+        '</div>' +
+      '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
@@ -361,8 +355,9 @@
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#a99ea6;margin:-34px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:-26px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
+      '</div>' +
       '</div>' +
     '</section>';
 
