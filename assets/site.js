@@ -593,7 +593,7 @@
     var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
         kicker(t.counterKicker) +
-        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);letter-spacing:-2px;line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
+        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
         subsec(t.counterLabel) +
       '</div>' +
     '</section>';
@@ -825,21 +825,25 @@
     if (state.sel === 'coffee') puffSteam(); else burstSparkles();
     if (hero()) hero().play();
   }
-  // floating badges drift toward the cursor (parallax) — feels 3D
+  // floating badges drift + tilt toward the cursor (parallax), with the shadow shifting for depth
   function bindHeroParallax() {
     var play = document.querySelector('[data-act="play"]'); if (!play || play._px) return; play._px = true;
     var cards = [].slice.call(play.querySelectorAll('.float-card'));
-    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .3s cubic-bezier(.2,.7,.2,1)'; });
+    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease'; });
     play.addEventListener('pointermove', function (e) {
+      play._over = true;
       var r = play.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
       cards.forEach(function (c, i) {
         var d = i ? -1 : 1;
         c.style.animation = 'none';
         c.style.transform = 'perspective(700px) translate(' + (nx * 24 * d).toFixed(1) + 'px,' + (ny * 18 * d).toFixed(1) + 'px) rotateX(' + (-ny * 12).toFixed(1) + 'deg) rotateY(' + (nx * 14).toFixed(1) + 'deg)';
+        c.style.boxShadow = (-nx * 26).toFixed(1) + 'px ' + (18 - ny * 14).toFixed(1) + 'px 38px -14px rgba(255,79,98,.45)';
       });
     });
     play.addEventListener('pointerleave', function () {
-      cards.forEach(function (c) { c.style.transform = ''; c.style.animation = c.dataset.anim; });
+      play._over = false;
+      cards.forEach(function (c) { c.style.transform = ''; c.style.boxShadow = ''; });   // smoothly transitions back to rest
+      setTimeout(function () { if (!play._over) cards.forEach(function (c) { c.style.animation = c.dataset.anim; }); }, 380);   // restore idle bob only after the return finishes
     });
   }
   function startAnim() {
