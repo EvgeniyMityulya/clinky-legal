@@ -12,22 +12,22 @@ const CFG = {
     offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
-    material: { metalness: 1.0, roughness: 0.22 }, shadow: { opacity: 0.2, softness: 5 }
+    material: { metalness: 1.0, roughness: 0.40 }, shadow: { opacity: 0.2, softness: 5 }
   },
   coffee: {
     src: 'models/CoffeeCup.glb',
-    camera: { azim: 42.4, elev: 23.7, dist: 7.26, fov: 35 }, target: [0.02, 1.19, -0.12],
+    camera: { azim: 42.4, elev: 23.7, dist: 5.65, fov: 35 }, target: [0.02, 1.19, -0.12],
     offset: [0, 0, 0], scale: 1.0, rotation: [0, 45, 0],
     light: { azim: 20, elev: 44, intensity: 4.5 }, ambient: 0.65,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.0, tone: 'aces', exposure: 0.8,
-    material: { metalness: 0.52, roughness: 0.42 }, shadow: { opacity: 0.3, softness: 10 }
+    material: { metalness: 0.52, roughness: 0.30 }, shadow: { opacity: 0.3, softness: 10 }
   }
 };
 const D2R = THREE.MathUtils.degToRad;
 const TONE = { aces: THREE.ACESFilmicToneMapping, neutral: THREE.NeutralToneMapping, agx: THREE.AgXToneMapping, linear: THREE.LinearToneMapping };
 
 let renderer, scene, camera, dirLight, ambLight, groundMat, modelRoot, poseGroup, pmrem;
-let canvas, drink = 'beer', dirty = false, spinning = false, queuedDrink = null;
+let canvas, drink = 'beer', dirty = false, spinning = false, queuedDrink = null, spinToken = 0, groundedY = 0;
 const holders = {};       // src -> normalized Group
 const envCache = {};      // url -> PMREM texture
 let pendingEnv = null;
@@ -112,15 +112,16 @@ function applyConfig(d) {
   const c = CFG[d];
   const holder = holders[c.src];
   if (!holder) return;
+  spinToken++; spinning = false;   // cancel any in-flight spin so it can't bleed onto the new model
   // swap model
   while (poseGroup.children.length) poseGroup.remove(poseGroup.children[0]);
   poseGroup.add(holder);
   poseGroup.rotation.set(D2R(c.rotation[0]), D2R(c.rotation[1]), D2R(c.rotation[2]));
 
   const size = holder.userData.size || new THREE.Vector3(2, 2, 2);
-  const baseLift = size.y / 2;
-  modelRoot.position.set(c.offset[0], baseLift + c.offset[1], c.offset[2]);
+  groundedY = size.y / 2 + c.offset[1];
   modelRoot.scale.setScalar(c.scale);
+  modelRoot.position.set(c.offset[0], groundedY, c.offset[2]);
 
   holder.traverse(function (o) {
     if (o.isMesh && o.material) {
@@ -172,15 +173,17 @@ function play() {
   if (!holder || spinning) return;
   if (reduceMotion()) return;
   spinning = true;
+  const myToken = ++spinToken;
   try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
   const coffee = drink === 'coffee', dur = 900, t0 = performance.now();
   const rx0 = D2R(c.rotation[0]), ry0 = D2R(c.rotation[1]), rz0 = D2R(c.rotation[2]);
-  const baseLift = (holder.userData.size.y / 2) + c.offset[1];
+  const baseY = groundedY;
   const riseH = (coffee ? 0.5 : 0.22) * holder.userData.size.y;
   (function tick(now) {
+    if (myToken !== spinToken) return;   // a drink switch / newer spin took over → abandon
     const p = Math.min((now - t0) / dur, 1);
     const deg = 2 * Math.PI * easeIO(p);
-    modelRoot.position.y = baseLift + Math.sin(Math.PI * p) * riseH;
+    modelRoot.position.y = baseY + Math.sin(Math.PI * p) * riseH;
     if (coffee) {
       const wob = D2R(10) * Math.sin(Math.PI * p);
       poseGroup.rotation.set(rx0 + wob * Math.cos(deg), ry0 + deg, rz0 + wob * Math.sin(deg));
@@ -189,7 +192,7 @@ function play() {
     }
     dirty = true;
     if (p < 1) requestAnimationFrame(tick);
-    else { spinning = false; poseGroup.rotation.set(rx0, ry0, rz0); modelRoot.position.y = baseLift; dirty = true; }
+    else { spinning = false; poseGroup.rotation.set(rx0, ry0, rz0); modelRoot.position.y = baseY; dirty = true; }
   })(performance.now());
 }
 

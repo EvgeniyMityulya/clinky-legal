@@ -135,8 +135,8 @@
 
   const SRC = { beer: 'models/BeerCap.glb', coffee: 'models/CoffeeCup.glb' };
   const PRESET = {
-    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.22, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[0,0.6,0] },
-    coffee: { fov:35, rx:0,  ry:45, rz:0, oX:0, oY:0.00, oZ:0, scale:1.0, met:0.52, rou:0.42, lAzim:20, lElev:44, lInt:4.5, aInt:0.65, env:'assets/env_photostudio.hdr', envInt:1.00, tone:'aces', exp:0.80, shOp:0.30, shBlur:10, camA:42.4, camE:23.7, camD:7.26, target:[0.02,1.19,-0.12] }
+    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.40, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[0,0.6,0] },
+    coffee: { fov:35, rx:0,  ry:45, rz:0, oX:0, oY:0.00, oZ:0, scale:1.0, met:0.52, rou:0.30, lAzim:20, lElev:44, lInt:4.5, aInt:0.65, env:'assets/env_photostudio.hdr', envInt:1.00, tone:'aces', exp:0.80, shOp:0.30, shBlur:10, camA:42.4, camE:23.7, camD:5.65, target:[0.02,1.19,-0.12] }
   };
 
   const errEl = document.getElementById('err');
@@ -223,6 +223,7 @@
     drink = d;
     $('dBeer').classList.toggle('on', d==='beer');
     $('dCoffee').classList.toggle('on', d==='coffee');
+    spinTok++; spinning = false;   // cancel any in-flight spin so it can't bleed onto the new model
     const P = PRESET[d];
     // push preset into controls
     for (const [id,v] of Object.entries({fov:P.fov,rX:P.rx,rY:P.ry,rZ:P.rz,oX:P.oX,oY:P.oY,oZ:P.oZ,scale:P.scale,met:P.met,rou:P.rou,lAzim:P.lAzim,lElev:P.lElev,lInt:P.lInt,aInt:P.aInt,envInt:P.envInt,exp:P.exp,shOp:P.shOp,shBlur:P.shBlur})) $(id).value=v;
@@ -292,15 +293,17 @@
     writeOut();
   }
 
-  let spinning=false;
+  let spinning=false, spinTok=0;
   function play(){
     if (spinning || !current) return; spinning=true;
+    const mt = ++spinTok;
     const coffee = drink==='coffee', dur = coffee?900:900, t0=performance.now();
     const rx0=D2R(val('rX')), ry0=D2R(val('rY')), rz0=D2R(val('rZ'));
     const baseLift = modelSize.y/2 + val('oY');
     const riseH = coffee ? modelSize.y*0.5 : modelSize.y*0.25;
     const ease = p => p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
     function tick(now){
+      if (mt !== spinTok) return;   // drink switch / newer spin took over
       const p = Math.min((now-t0)/dur,1);
       const deg = 2*Math.PI*ease(p);
       const lift = Math.sin(Math.PI*p)*riseH; // up then down
