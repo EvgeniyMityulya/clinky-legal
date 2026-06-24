@@ -25,6 +25,7 @@
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
+      counterLabel: 'clinks and counting', counterSub: 'Tap the drink above to add yours 🍻',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
@@ -58,6 +59,7 @@
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
+      counterLabel: 'чоков уже сделано', counterSub: 'Чокнись с напитком выше — добавь свой 🍻',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
@@ -232,6 +234,38 @@
 
   // 3D hero is rendered by assets/hero3d.js (three.js). site.js only drives it via window.ClinkyHero.
   function hero() { return window.ClinkyHero; }
+
+  // ===== global clink counter (real, shared via abacus free counter API) =====
+  var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
+  var clinkValue = null, clinkRAF = null;
+  function fmtNum(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
+  function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
+  function animateClink(from, to) {
+    var el = document.getElementById('clinkNum'); if (!el) return;
+    if (clinkRAF) cancelAnimationFrame(clinkRAF);
+    var t0 = performance.now(), dur = 1100;
+    (function tick(now) {
+      var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
+      setClinkText(from + (to - from) * e);
+      if (p < 1) clinkRAF = requestAnimationFrame(tick);
+    })(performance.now());
+  }
+  function loadClinkCount() {
+    if (typeof fetch !== 'function') return;
+    fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; animateClink(0, d.value); } })
+      .catch(function () {});
+  }
+  function bumpClink() {
+    var el = document.getElementById('clinkNum');
+    if (el && clinkValue != null) { clinkValue += 1; setClinkText(clinkValue); el.style.animation = 'none'; void el.offsetWidth; el.style.animation = 'quickPulse .4s ease'; }
+    if (typeof fetch !== 'function') return;
+    fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
+      .then(function (r) { return r.json(); })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; setClinkText(d.value); } })
+      .catch(function () {});
+  }
 
   // ===== header / footer =====
   function renderHeader() {
@@ -508,7 +542,19 @@
       '</div>' +
     '</section>';
 
-    return '<div class="page-in">' + hero + screens + why + discover + card + how + finalCta + '</div>';
+    // ---- global clink counter ----
+    var counter = '<section style="padding:clamp(28px,5vh,52px) clamp(20px,5vw,72px) clamp(10px,2vh,20px)">' +
+      '<div style="max-width:560px;margin:0 auto;text-align:center">' +
+        '<div style="display:inline-flex;align-items:center;gap:10px;font-family:Nunito,sans-serif;font-weight:900;letter-spacing:-1.5px;line-height:1;color:#FF4F62">' +
+          ph('wine', 38, C, 'ph-fill') +
+          '<span id="clinkNum" style="font-size:clamp(44px,7vw,72px)">0</span>' +
+        '</div>' +
+        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(15px,2vw,18px);color:#1c1326;margin:6px 0 4px">' + esc(t.counterLabel) + '</div>' +
+        '<div style="font-size:13.5px;color:#a99ea6">' + esc(t.counterSub) + '</div>' +
+      '</div>' +
+    '</section>';
+
+    return '<div class="page-in">' + hero + counter + screens + why + discover + card + how + finalCta + '</div>';
   }
 
   function renderQuestionSection() {
@@ -666,7 +712,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); } else stopAnim();
+    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); } else stopAnim();
   }
 
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
@@ -859,7 +905,7 @@
       case 'join': joinCta(); break;
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
-      case 'play': playAnim(); break;
+      case 'play': playAnim(); bumpClink(); break;
       case 'plusone': plusOne(); break;
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
