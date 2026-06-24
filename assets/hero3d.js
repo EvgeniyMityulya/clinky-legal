@@ -16,7 +16,7 @@ const CFG = {
   },
   coffee: {
     src: 'models/CoffeeCup.glb',
-    camera: { azim: 42.4, elev: 23.7, dist: 5.65, fov: 35 }, target: [0.02, 1.19, -0.12],
+    camera: { azim: 42.4, elev: 23.7, dist: 6.00, fov: 35 }, target: [-0.01, 1.00, 0.02],
     offset: [0, 0, 0], scale: 1.0, rotation: [0, 45, 0],
     light: { azim: 20, elev: 44, intensity: 4.5 }, ambient: 0.65,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.0, tone: 'aces', exposure: 0.8,
@@ -183,15 +183,13 @@ function play() {
     if (myToken !== spinToken) return;   // a drink switch / newer spin took over → abandon
     const p = Math.min((now - t0) / dur, 1);
     const deg = 2 * Math.PI * easeIO(p);
-    // toss: quick ease-out up, then a fall that softens into the floor (no wooden snap / extra hop)
-    var lp; if (p < 0.32) { var u = p / 0.32; lp = 1 - (1 - u) * (1 - u); } else { var q = (p - 0.32) / 0.68; lp = (1 - q) * (1 - q); }
+    // toss: main hop then a small soft secondary bounce on landing
+    var lp;
+    if (p < 0.62) lp = Math.sin(Math.PI * (p / 0.62));
+    else lp = 0.16 * Math.sin(Math.PI * ((p - 0.62) / 0.38));
     modelRoot.position.y = baseY + lp * riseH;
-    if (coffee) {
-      const wob = D2R(10) * Math.sin(Math.PI * p);
-      poseGroup.rotation.set(rx0 + wob * Math.cos(deg), ry0 + deg, rz0 + wob * Math.sin(deg));
-    } else {
-      poseGroup.rotation.set(rx0 - deg, ry0, rz0);
-    }
+    if (coffee) poseGroup.rotation.set(rx0, ry0 + deg, rz0);   // calm spin around its own vertical axis
+    else poseGroup.rotation.set(rx0 - deg, ry0, rz0);          // forward roll for the cap
     dirty = true;
     if (p < 1) requestAnimationFrame(tick);
     else { spinning = false; poseGroup.rotation.set(rx0, ry0, rz0); modelRoot.position.y = baseY; dirty = true; }
