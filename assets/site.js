@@ -434,7 +434,7 @@
           '<div class="float-card" style="top:8%;left:-2%;animation:bobA 7s ease-in-out infinite"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:-8px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:10px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
       '</div>' +
       '</div>' +

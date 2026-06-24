@@ -17,7 +17,7 @@ const CFG = {
   },
   coffee: {
     src: 'models/CoffeeCup.glb',
-    camera: { azim: 45.0, elev: 22.3, dist: 5.31, fov: 35 }, target: [-0.15, 1.42, -0.14],
+    camera: { azim: 45.0, elev: 22.3, dist: 5.31, fov: 35 }, target: [-0.10, 1.26, -0.09],
     offset: [0, 0, 0], scale: 1.0, rotation: [0, 45, 0],
     light: { azim: 20, elev: 44, intensity: 4.5 }, ambient: 0.65,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.0, tone: 'aces', exposure: 0.8,
