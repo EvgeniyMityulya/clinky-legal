@@ -24,17 +24,17 @@
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
-      heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
+      heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'drinks clinked so far — add yours',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through — no download needed.',
       tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
-      galleryTitle: 'Take a look inside', gallerySub: 'Real screens, straight from the app.',
-      whyKicker: 'Why Clinky', whyTitle: "Friendships that don't fade", whySub: 'A few small things that quietly keep your people close.',
+      problemKicker: 'Sound familiar?', problemTitle: '“Let’s catch up soon” — then another six months slip by',
+      problemBody: 'The people you love are right there. But life gets busy — weeks turn into months and you drift apart, not because you stopped caring, but because nothing reminds you.',
+      problemTurn: 'Clinky nudges you gently and turns seeing them into something you actually want to keep doing.',
       discoverKicker: 'Inside the app', discoverTitle: 'Everything in one calm app', discoverSub: 'No accounts, no clutter — just your people and your moments.',
-      howKicker: 'How it works', howTitle: 'Three taps to a better hangout',
       finalTitle: 'Be first to clink', finalSub: "Join the waitlist — we'll send the App Store link the day Clinky is live.",
       aboutTitle: 'About Clinky',
       aboutLede: 'Clinky is an iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
@@ -58,17 +58,17 @@
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
-      heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
+      heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Живой счётчик', counterLabel: 'напитков чокнуто — добавь свой',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай — ничего качать не нужно.',
       tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Свайп вправо — дальше, влево — назад',
-      galleryTitle: 'Загляни внутрь', gallerySub: 'Реальные экраны прямо из приложения.',
-      whyKicker: 'Почему Clinky', whyTitle: 'Дружба, которая не угасает', whySub: 'Несколько мелочей, которые тихо держат близких рядом.',
+      problemKicker: 'Знакомо?', problemTitle: '«Давай как-нибудь увидимся» — и снова полгода тишины',
+      problemBody: 'Близкие люди рядом. Но жизнь занятая: недели превращаются в месяцы, и связь тихо угасает — не потому что разлюбил, а потому что некому напомнить.',
+      problemTurn: 'Clinky мягко напоминает и превращает встречи в то, что хочется повторять.',
       discoverKicker: 'Внутри приложения', discoverTitle: 'Всё в одном спокойном приложении', discoverSub: 'Без аккаунтов и лишнего — только твои люди и моменты.',
-      howKicker: 'Как это работает', howTitle: 'Три шага к лучшей встрече',
       finalTitle: 'Будь первым, кто чокнется', finalSub: 'Встань в очередь — пришлём ссылку на App Store в день релиза Clinky.',
       aboutTitle: 'О Clinky',
       aboutLede: 'Clinky — iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
@@ -450,39 +450,17 @@
       '</div>' +
     '</section>';
 
-    // ---- screens carousel ----
-    var screensCards = [1, 2, 3, 4, 5, 6, 7].map(function (n) {
-      return '<div class="screen-card"><img src="assets/shots/' + L + '-' + n + '.jpg" alt="Clinky screen" loading="lazy" draggable="false" style="display:block;width:100%;height:auto;aspect-ratio:1080/2340;-webkit-user-drag:none"></div>';
-    }).join('');
-    var screens = '<section style="padding:clamp(50px,8vh,92px) 0 clamp(28px,5vh,46px)">' +
-      '<div style="max-width:1080px;margin:0 auto 24px;padding:0 clamp(20px,5vw,72px);text-align:center">' + kicker(L === 'ru' ? 'Экраны' : 'Screens') + h2sec(t.galleryTitle) + subsec(t.gallerySub) + '</div>' +
-      '<div class="screens-track">' + screensCards + '</div>' +
-    '</section>';
-
-    // ---- why Clinky ----
-    var whyCards = {
-      en: [
-        { ic: I.flame, t: 'Meeting streaks', d: 'Hold a streak with the people who matter, and a gentle nudge when it has been too long.' },
-        { ic: I.cube, t: 'A 3D collection', d: 'Earn a collectible drink for every clink — your friendships, on a shelf.' },
-        { ic: I.lock, t: 'Private & offline', d: 'No accounts, no servers — everything stays on your phone.' }
-      ],
-      ru: [
-        { ic: I.flame, t: 'Серии встреч', d: 'Держи серию с близкими и получай мягкое напоминание, когда давно не виделись.' },
-        { ic: I.cube, t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок» — твоя дружба на полке.' },
-        { ic: I.lock, t: 'Приватно и офлайн', d: 'Без аккаунтов и серверов — всё остаётся на твоём телефоне.' }
-      ]
-    }[L];
-    var why = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(28px,5vw,60px);align-items:center" class="why-grid">' +
-      '<div>' + kicker(t.whyKicker) + h2sec(t.whyTitle) + '<p style="font-size:16.5px;color:#6b6b76;margin:0 0 24px;max-width:24em">' + esc(t.whySub) + '</p>' + coralBtn(t.heroCta, 'join') + '</div>' +
-      '<div style="display:flex;flex-direction:column;gap:14px">' +
-        whyCards.map(function (c) {
-          return '<div class="soft-card" style="display:flex;gap:16px;align-items:flex-start;padding:20px 22px">' +
-            '<span style="flex:none;width:48px;height:48px;border-radius:14px;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + c.ic + '</span>' +
-            '<div><h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 5px;color:#1c1326">' + esc(c.t) + '</h3>' +
-            '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0">' + esc(c.d) + '</p></div></div>';
-        }).join('') +
+    // ---- problem hook (emotional, problem → turn) ----
+    var problem = '<section style="position:relative;padding:clamp(56px,9vh,108px) clamp(20px,5vw,72px);overflow:hidden">' +
+      sparkle({ s: 18, pos: 'top:20%;left:13%', op: 0.4, c: '#FF8A97', glow: 'rgba(255,138,151,.28)', anim: 'twinkle 4.6s ease-in-out infinite' }) +
+      sparkle({ s: 14, pos: 'bottom:22%;right:15%', op: 0.4, c: C, glow: 'rgba(255,79,98,.26)', anim: 'twinkle 4s ease-in-out .6s infinite' }) +
+      '<div style="position:relative;max-width:680px;margin:0 auto;text-align:center">' +
+        kicker(t.problemKicker) +
+        h2sec(t.problemTitle) +
+        '<p style="font-size:clamp(16px,1.6vw,18.5px);line-height:1.6;color:#6b6b76;margin:0 auto 22px;max-width:30em">' + esc(t.problemBody) + '</p>' +
+        '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(18px,2vw,22px);line-height:1.35;color:#FF4F62;margin:0 auto;max-width:26em">' + esc(t.problemTurn) + '</p>' +
       '</div>' +
-    '</div></section>';
+    '</section>';
 
     // ---- feature bento (Sheepy-style) ----
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
@@ -536,37 +514,6 @@
     // ---- interactive question mini-game ----
     var card = renderQuestionSection();
 
-    // ---- how it works ----
-    var cp = ph('users-three', 18, C, 'ph-fill'), cg = ph('game-controller', 18, C, 'ph-fill'), cc = ph('cube', 18, C, 'ph-fill');
-    var stepData = {
-      en: [
-        { n: '1', t: 'Log a meet-up', d: 'Mark who you saw and what you drank — beer, coffee or nothing at all.', cic: cp },
-        { n: '2', t: 'Play a card', d: 'Break the ice with party-game cards that get any table talking.', cic: cg },
-        { n: '3', t: 'Collect a 3D drink', d: 'Earn a collectible souvenir for every clink you log.', cic: cc }
-      ],
-      ru: [
-        { n: '1', t: 'Отметь встречу', d: 'Запиши, кого видел и что пили — пиво, кофе или вообще без.', cic: cp },
-        { n: '2', t: 'Сыграй в карточку', d: 'Разговори компанию карточками-играми за секунды.', cic: cg },
-        { n: '3', t: 'Забери 3D-напиток', d: 'Получай коллекционный сувенир за каждый «чок».', cic: cc }
-      ]
-    }[L];
-    var how = '<section style="padding:clamp(40px,6vh,80px) clamp(20px,5vw,72px) clamp(50px,8vh,96px)"><div style="max-width:1000px;margin:0 auto">' +
-      '<div style="text-align:center;margin-bottom:clamp(34px,5vh,52px)">' + kicker(t.howKicker) + h2sec(t.howTitle) + '</div>' +
-      '<div class="flow">' +
-      stepData.map(function (s) {
-        return '<div class="flow-step">' +
-          '<div class="flow-num">' + s.n + '</div>' +
-          '<div style="padding-top:3px">' +
-            '<div style="display:inline-flex;align-items:center;gap:9px;margin-bottom:6px">' +
-              '<span style="display:inline-flex;width:34px;height:34px;border-radius:10px;background:#FFE2E6;align-items:center;justify-content:center">' + s.cic + '</span>' +
-              '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0;color:#1c1326">' + esc(s.t) + '</h3>' +
-            '</div>' +
-            '<p style="font-size:15px;line-height:1.55;color:#6b6b76;margin:0;max-width:32em">' + esc(s.d) + '</p>' +
-          '</div>' +
-        '</div>';
-      }).join('') +
-      '</div></div></section>';
-
     // ---- final CTA (contained coral block) ----
     var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
       '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
@@ -597,7 +544,7 @@
       '</div>' +
     '</section>';
 
-    return '<div class="page-in">' + hero + counter + screens + why + discover + card + how + finalCta + '</div>';
+    return '<div class="page-in">' + hero + problem + discover + card + counter + finalCta + '</div>';
   }
 
   function renderQuestionSection() {
