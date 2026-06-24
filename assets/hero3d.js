@@ -3,12 +3,13 @@
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 
 // Per-drink config — tuned in studio.html, kept as the source of truth here.
 const CFG = {
   beer: {
     src: 'models/BeerCap.glb',
-    camera: { azim: 35.0, elev: 12.0, dist: 7.35, fov: 30 }, target: [-0.01, 1.20, -0.15],
+    camera: { azim: 35.0, elev: 12.0, dist: 7.35, fov: 30 }, target: [0, 0.70, -0.03],
     offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
@@ -28,9 +29,9 @@ const TONE = { aces: THREE.ACESFilmicToneMapping, neutral: THREE.NeutralToneMapp
 
 let renderer, scene, camera, dirLight, ambLight, groundMat, modelRoot, poseGroup, pmrem;
 let canvas, drink = 'beer', dirty = false, spinning = false, queuedDrink = null, spinToken = 0, groundedY = 0;
+let ready = false;        // first paint only after the active model AND the environment are loaded
 const holders = {};       // src -> normalized Group
-const envCache = {};      // url -> PMREM texture
-let pendingEnv = null;
+const progress = { model: 0, env: 0 };   // 0..1 each → combined load %
 
 function reduceMotion() {
   return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -38,7 +39,8 @@ function reduceMotion() {
 
 function init() {
   canvas = document.createElement('canvas');
-  canvas.style.cssText = 'width:100%;height:100%;display:block';
+  // hidden until everything is ready, so the un-lit (black, metallic-no-env) first frame never shows
+  canvas.style.cssText = 'width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease';
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   } catch (e) { console.error('hero3d: WebGL unavailable', e); return; }
@@ -73,9 +75,27 @@ function init() {
   modelRoot.add(poseGroup);
   scene.add(modelRoot);
 
+  if (queuedDrink) { drink = queuedDrink; queuedDrink = null; }
+
+  // ---- environment (needed before first paint — metallic with no env renders black) ----
+  function useRoomEnv() {
+    try { scene.environment = pmrem.fromScene(new RoomEnvironment(), 0.04).texture; } catch (e) {}
+    progress.env = 1; updateLoader(); checkReady();
+  }
+  new RGBELoader().load(CFG[drink].env,
+    function (hdr) {
+      hdr.mapping = THREE.EquirectangularReflectionMapping;
+      scene.environment = pmrem.fromEquirectangular(hdr).texture; hdr.dispose();
+      progress.env = 1; updateLoader(); checkReady();
+    },
+    function (e) { if (e && e.lengthComputable) { progress.env = e.loaded / e.total; updateLoader(); } },
+    useRoomEnv   // network/parse error → neutral room env so nothing stays black
+  );
+
+  // ---- models: active drink reports progress + gates reveal; the other preloads quietly ----
   const loader = new GLTFLoader();
-  let loaded = 0;
   Object.keys(CFG).forEach(function (k) {
+    const isActive = CFG[k].src === CFG[drink].src;
     loader.load(CFG[k].src, function (gltf) {
       const m = gltf.scene;
       const box = new THREE.Box3().setFromObject(m);
@@ -88,24 +108,35 @@ function init() {
       holder.add(m); holder.scale.setScalar(norm);
       holder.userData.size = sz.multiplyScalar(norm);
       holders[CFG[k].src] = holder;
-      loaded++;
-      if (CFG[drink].src === CFG[k].src) applyConfig(drink);
-    }, undefined, function (e) { console.error('hero3d: model load failed', e); });
+      if (isActive) { progress.model = 1; updateLoader(); }
+      checkReady();
+    }, function (e) {
+      if (isActive && e && e.lengthComputable) { progress.model = e.loaded / e.total; updateLoader(); }
+    }, function (e) { console.error('hero3d: model load failed', e); });
   });
 
   window.addEventListener('resize', function () { resize(); dirty = true; });
   renderer.setAnimationLoop(loop);
-  if (queuedDrink) { drink = queuedDrink; queuedDrink = null; }
 }
 
-function loadEnv(url, cb) {
-  if (!url) { cb(null); return; }
-  if (envCache[url]) { cb(envCache[url]); return; }
-  new RGBELoader().load(url, function (hdr) {
-    hdr.mapping = THREE.EquirectangularReflectionMapping;
-    const tex = pmrem.fromEquirectangular(hdr).texture;
-    hdr.dispose(); envCache[url] = tex; cb(tex);
-  }, undefined, function () { cb(null); });
+function updateLoader() {
+  const pct = Math.round((progress.model * 0.55 + progress.env * 0.45) * 100);
+  const arc = document.getElementById('mvProgArc');
+  if (arc) arc.style.strokeDashoffset = (163.36 * (1 - pct / 100)).toFixed(1);
+  const t = document.getElementById('mvPct');
+  if (t) t.textContent = pct + '%';
+}
+
+function checkReady() {
+  if (ready) return;
+  if (scene.environment && holders[CFG[drink].src]) {
+    applyConfig(drink);
+    ready = true;
+    const l = document.getElementById('mvLoader');
+    if (l) { l.style.opacity = '0'; setTimeout(function () { l.style.display = 'none'; }, 300); }
+    canvas.style.opacity = '1';
+    dirty = true;
+  }
 }
 
 function applyConfig(d) {
@@ -145,19 +176,11 @@ function applyConfig(d) {
   dirLight.shadow.radius = c.shadow.softness;
   ambLight.intensity = c.ambient;
   groundMat.opacity = c.shadow.opacity;
-  // tone
+  // tone (env itself is loaded once in init and shared by both drinks)
   renderer.toneMapping = TONE[c.tone] || THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = c.exposure;
-  // env
-  if (pendingEnv !== c.env) {
-    pendingEnv = c.env;
-    loadEnv(c.env, function (tex) { scene.environment = tex; dirty = true; });
-  }
-  hideSiteLoader();
   dirty = true;
 }
-
-function hideSiteLoader() { var l = document.getElementById('mvLoader'); if (l) l.style.display = 'none'; }
 
 function resize() {
   const mount = canvas.parentElement; if (!mount) return;
@@ -199,8 +222,11 @@ function play() {
 function loop() {
   const mount = document.getElementById('heroMount');
   if (mount) {
-    if (canvas.parentElement !== mount) { mount.appendChild(canvas); resize(); dirty = true; }
-    if (dirty || spinning) { renderer.render(scene, camera); dirty = false; }
+    if (canvas.parentElement !== mount) {
+      mount.appendChild(canvas); resize(); dirty = true;
+      if (ready) { canvas.style.opacity = '1'; const l = document.getElementById('mvLoader'); if (l) l.style.display = 'none'; }
+    }
+    if (ready && (dirty || spinning)) { renderer.render(scene, camera); dirty = false; }
   }
 }
 

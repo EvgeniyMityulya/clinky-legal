@@ -9,7 +9,7 @@
   *{box-sizing:border-box}
   body{margin:0;font-family:-apple-system,system-ui,'Segoe UI',sans-serif;background:#FFF8F4;color:#1c1326;display:flex;min-height:100vh;overflow:hidden}
   #stage{flex:1;position:relative;background:radial-gradient(circle at 50% 42%,#fff,#FFF1EC)}
-  #cv{width:100%;height:100vh;display:block}
+  #cv{width:100%;height:100vh;display:block;opacity:0;transition:opacity .5s ease}
   #panel{width:340px;flex:none;background:#fff;border-left:1px solid #eee;padding:16px 16px 40px;overflow-y:auto;height:100vh}
   h1{font-size:15px;margin:0 0 4px}
   .hint{font-size:11.5px;color:#888;margin:0 0 14px;line-height:1.5}
@@ -135,7 +135,7 @@
 
   const SRC = { beer: 'models/BeerCap.glb', coffee: 'models/CoffeeCup.glb' };
   const PRESET = {
-    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.40, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[-0.01,1.20,-0.15] },
+    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.40, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[0,0.70,-0.03] },
     coffee: { fov:35, rx:0,  ry:45, rz:0, oX:0, oY:0.00, oZ:0, scale:1.0, met:0.52, rou:0.30, lAzim:20, lElev:44, lInt:4.5, aInt:0.65, env:'assets/env_photostudio.hdr', envInt:1.00, tone:'aces', exp:0.80, shOp:0.30, shBlur:10, camA:42.4, camE:23.7, camD:6.00, target:[-0.01,1.00,0.02] }
   };
 
@@ -244,18 +244,22 @@
       holder.add(m); holder.scale.setScalar(norm);
       modelSize = sz.multiplyScalar(norm);
       current = holder; poseGroup.add(holder);
+      mReady = true; sReveal();
       upd();
     }, undefined, fail);
     upd();
   }
 
+  // reveal the canvas only once model + env are ready, so no black (un-lit metallic) flash
+  let mReady = false, eReady = false;
+  function sReveal(){ if (mReady && eReady) $('cv').style.opacity = '1'; }
   function setEnv(){
     const v = $('env').value;
-    if (!v){ scene.environment = null; upd(); return; }
+    if (!v){ scene.environment = null; eReady = true; sReveal(); upd(); return; }
     new RGBELoader().load(v, hdr=>{
       hdr.mapping = THREE.EquirectangularReflectionMapping;
       const env = pmrem.fromEquirectangular(hdr).texture;
-      scene.environment = env; hdr.dispose(); upd();
+      scene.environment = env; hdr.dispose(); eReady = true; sReveal(); upd();
     }, undefined, fail);
   }
 
