@@ -237,7 +237,7 @@
 
   // ===== global clink counter — premium odometer, real shared value via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var clinkValue = null, odoDigits = 0;
+  var clinkValue = null, odoDigits = 0, clinkBusy = false, clinkTimer = null;
   function odoReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
   function odoGroup(s) { // pad to >=2, returns array of chars incl thin-space separators
     while (s.length < 2) s = '0' + s;
@@ -280,13 +280,19 @@
       .catch(function () {});
   }
   function bumpClink() {
-    if (clinkValue != null) { clinkValue += 1; odoSet(clinkValue, true); }   // optimistic roll
+    if (clinkBusy || clinkValue == null) return;   // ignore taps until the current roll finishes (no spam / double-count)
+    clinkBusy = true;
+    clinkValue += 1;
+    odoSet(clinkValue, true);                       // optimistic roll
+    if (clinkTimer) clearTimeout(clinkTimer);
+    clinkTimer = setTimeout(function () { clinkBusy = false; }, 1000);   // ~roll duration + stagger
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; odoSet(d.value, true); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; odoSet(d.value, false); } })
       .catch(function () {});
   }
+  function clinkReady() { return !clinkBusy && clinkValue != null; }
 
   // ===== header / footer =====
   function renderHeader() {
@@ -399,9 +405,9 @@
             '</div>') +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
-        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer;outline:2px dashed rgba(0,120,255,.7)">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
+          '<div id="heroMount" style="position:absolute;inset:0;z-index:1;outline:2px solid red;outline-offset:-1px"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
               '<svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)">' +
