@@ -142,11 +142,17 @@
   function ph(name, size, color, weight) {
     return '<i class="' + (weight || 'ph') + ' ph-' + name + '" style="font-size:' + (size || 22) + 'px;color:' + (color || 'currentColor') + ';line-height:1;display:inline-flex;flex:none"></i>';
   }
-  // real Apple logo as inline SVG (the Phosphor font glyph rendered non-proportional/stretched)
+  // inline SVGs (Phosphor font glyphs rendered non-proportional). Square viewBox → never cropped.
   function appleMark(size, color) {
-    var s = size || 16, w = Math.round(s * 0.84);
-    return '<svg width="' + w + '" height="' + s + '" viewBox="0 0 814 1000" fill="' + (color || 'currentColor') + '" aria-hidden="true" style="display:inline-block;flex:none;vertical-align:middle">' +
-      '<path d="M788 340c-6 4-114 65-114 200 0 156 137 211 141 212-1 3-22 75-72 149-43 64-89 128-159 128s-88-41-169-41c-79 0-107 42-171 42s-109-59-159-132C-9 757-58 524 26 363 67 287 142 239 222 238c64-1 124 43 163 43 37 0 110-53 186-53 29 0 132 3 200 99zM554 130c34-40 58-96 58-152 0-8-1-16-2-22-55 2-121 37-160 83-31 35-60 91-60 147 0 9 2 18 2 21 4 1 9 1 14 1 50 0 113-33 148-78z"/></svg>';
+    var s = size || 16;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 24 24" fill="' + (color || 'currentColor') + '" aria-hidden="true" style="display:inline-block;flex:none;vertical-align:middle">' +
+      '<path d="M16.365 1.43c0 1.14-.493 2.27-1.177 3.08-.744.9-1.99 1.57-2.987 1.57-.12 0-.23-.02-.3-.03-.01-.06-.04-.22-.04-.39 0-1.15.572-2.27 1.206-2.98.804-.94 2.142-1.64 3.248-1.68.03.13.05.28.05.43zm4.565 15.71c-.03.07-.463 1.58-1.518 3.12-.945 1.34-1.94 2.71-3.43 2.71-1.517 0-1.9-.88-3.63-.88-1.698 0-2.302.91-3.67.91-1.377 0-2.332-1.26-3.428-2.8-1.287-1.82-2.323-4.63-2.323-7.28 0-4.28 2.797-6.55 5.552-6.55 1.448 0 2.675.95 3.6.95.865 0 2.222-1.01 3.902-1.01.613 0 2.886.06 4.374 2.19-.13.09-2.383 1.37-2.383 4.19 0 3.26 2.854 4.42 2.955 4.45z"/></svg>';
+  }
+  // App Store mark (the Phosphor app-store-logo "A" — the one the founder specified)
+  function appStoreMark(size, color) {
+    var s = size || 16;
+    return '<svg width="' + s + '" height="' + s + '" viewBox="0 0 256 256" fill="' + (color || 'currentColor') + '" aria-hidden="true" style="display:inline-block;flex:none;vertical-align:middle">' +
+      '<path d="M64.34,196.07l-9.45,16a8,8,0,1,1-13.78-8.14l9.46-16a8,8,0,1,1,13.77,8.14ZM232,152H184.2l-30.73-52a8,8,0,1,0-13.77,8.14l61.41,103.93a8,8,0,0,0,13.78-8.14L193.66,168H232a8,8,0,0,0,0-16Zm-89.53,0H90.38L158.89,36.07a8,8,0,0,0-13.78-8.14L128,56.89l-17.11-29a8,8,0,1,0-13.78,8.14l21.6,36.55L71.8,152H24a8,8,0,0,0,0,16H142.47a8,8,0,1,0,0-16Z"></path></svg>';
   }
   function sparkle(o) {
     var sz = Math.round((o.s || 16) * 1.5);
@@ -210,7 +216,7 @@
       game: ph('game-controller', 26, C, 'ph-fill'), chat: ph('chat-teardrop-dots', 30, C, 'ph-fill'),
       flame: ph('flame', 24, C, 'ph-fill'), cube: ph('cube', 24, C, 'ph-fill'), chart: ph('chart-bar', 24, C, 'ph-fill'),
       lock: ph('lock-simple', 24, C, 'ph-fill'), bell: ph('bell', 24, C, 'ph-fill'),
-      mail: ph('envelope', 18, 'currentColor'), apple: appleMark(16, 'currentColor'),
+      mail: ph('envelope', 18, 'currentColor'), apple: appStoreMark(16, 'currentColor'),
       check: ph('check-circle', 24, '#fff', 'ph-fill'), checkPink: ph('check-circle', 24, '#FF4F62', 'ph-fill'),
       skip: ph('x', 22, '#b9b0b6', 'ph-bold'), heart: ph('heart', 26, '#fff', 'ph-fill'),
       never: gameIcon(0, '#6b6b76', 18), target: gameIcon(1, '#6b6b76', 18), bubble: gameIcon(2, '#6b6b76', 18), swap: gameIcon(3, '#6b6b76', 18)
@@ -323,7 +329,7 @@
       sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
         '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 20px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + appleMark(15, '#1c1326') + '</span>' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + appStoreMark(16, '#1c1326') + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
