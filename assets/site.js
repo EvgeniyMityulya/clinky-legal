@@ -170,9 +170,9 @@
   }
   // hero trust chip — equal medium width, icon pinned left, label centered (no width jumping)
   function heroChip(iconName, label) {
-    return '<span style="display:inline-flex;align-items:center;gap:8px;width:152px;padding:7px 16px 7px 7px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13px;color:#3a323f">' +
+    return '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 18px 7px 7px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13px;color:#3a323f;white-space:nowrap">' +
       '<span class="chip-ic" style="width:26px;height:26px;flex:none">' + (iconName === 'apple-logo' ? appleMark(14, C) : ph(iconName, 14, C, 'ph-fill')) + '</span>' +
-      '<span style="flex:1;text-align:center">' + esc(label) + '</span></span>';
+      esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
@@ -235,29 +235,41 @@
   // 3D hero is rendered by assets/hero3d.js (three.js). site.js only drives it via window.ClinkyHero.
   function hero() { return window.ClinkyHero; }
 
-  // ===== global clink counter — smooth count-up roll, real shared value via abacus free API =====
+  // ===== global clink counter — rolling odometer (digits fall from above), shared via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var clinkValue = null, clinkShown = 0, clinkBusy = false, clinkRAF = null, clinkTimer = null, clinkRevealed = false, clinkObs = null;
-  function fmtNum(n) { return Math.round(n).toLocaleString('en-US'); }   // thousands separators (commas)
-  function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
-  function animateClink(to) {
-    var el = document.getElementById('clinkNum'); if (!el) return;
-    if (clinkRAF) cancelAnimationFrame(clinkRAF);
-    var from = clinkShown;
-    if (from === to) { clinkShown = to; setClinkText(to); return; }
-    var t0 = performance.now(), dur = Math.min(1800, 700 + Math.abs(to - from) * 6);   // count-up always plays (feature)
-    (function tick(now) {
-      var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);   // ease-out roll
-      clinkShown = from + (to - from) * e; setClinkText(clinkShown);
-      if (p < 1) clinkRAF = requestAnimationFrame(tick);
-      else { clinkShown = to; setClinkText(to); }
-    })(performance.now());
+  var CLINK_LOOPS = 2, CLINK_REST = CLINK_LOOPS * 10;   // ribbon: 0-9 repeated, rest digit lives in the last loop
+  var clinkValue = null, clinkCols = 0, clinkBusy = false, clinkTimer = null, clinkRevealed = false, clinkObs = null;
+  function clinkEl() { return document.getElementById('clinkNum'); }
+  function clinkColsFor(v) { return Math.max(1, String(Math.max(0, Math.round(v))).length); }
+  function clinkBuild(cols) {
+    var el = clinkEl(); if (!el) return;
+    var html = '';
+    for (var pos = 0; pos < cols; pos++) {
+      var pfr = cols - 1 - pos;
+      if (pos > 0 && pfr % 3 === 2) html += '<span class="odo-sep">,</span>';
+      var cells = '';
+      for (var k = 0; k <= CLINK_REST + 9; k++) cells += '<span class="odo-cell">' + (k % 10) + '</span>';
+      html += '<span class="odo-col"><span class="odo-strip" style="transform:translateY(0)">' + cells + '</span></span>';
+    }
+    el.innerHTML = html; clinkCols = cols;
   }
-  function clinkMaybeReveal() {   // run the count-up only once it scrolls into view (and the value is loaded)
-    if (clinkRevealed && clinkValue != null) animateClink(clinkValue);
+  function clinkRoll(value, animate, fromTop) {
+    var el = clinkEl(); if (!el) return;
+    var s = String(Math.max(0, Math.round(value))), cols = s.length;
+    if (cols !== clinkCols) clinkBuild(cols);
+    var strips = el.querySelectorAll('.odo-strip');
+    for (var pos = 0; pos < cols; pos++) {
+      var strip = strips[pos]; if (!strip) continue;
+      var d = +s[pos], idx = CLINK_REST + d;
+      if (fromTop) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetWidth; }   // start at the top (shows 0), then drop
+      strip.style.transition = animate ? 'transform 1.05s cubic-bezier(.2,.8,.2,1) ' + (pos * 80) + 'ms' : 'none';
+      strip.style.transform = 'translateY(-' + idx + 'em)';
+    }
   }
+  function clinkPrime(v) { clinkBuild(clinkColsFor(v)); }   // reserve correct width, strips at top (showing 0)
+  function clinkMaybeReveal() { if (clinkRevealed && clinkValue != null) clinkRoll(clinkValue, true, true); }
   function bindClinkReveal() {
-    var el = document.getElementById('clinkNum'); if (!el) return;
+    var el = clinkEl(); if (!el) return;
     clinkRevealed = false;
     if (typeof IntersectionObserver !== 'function') { clinkRevealed = true; clinkMaybeReveal(); return; }
     if (clinkObs) clinkObs.disconnect();
@@ -267,25 +279,25 @@
     clinkObs.observe(el);
   }
   function loadClinkCount() {
-    clinkShown = 0; setClinkText(0);
+    clinkBuild(2);   // placeholder width at "00" (top), rolled in on reveal
     bindClinkReveal();
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; clinkMaybeReveal(); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; if (!clinkRevealed) clinkPrime(d.value); clinkMaybeReveal(); } })
       .catch(function () {});
   }
   function bumpClink() {
     if (clinkBusy || clinkValue == null) return;   // ignore taps until the roll finishes (no spam / double-count)
     clinkBusy = true;
     clinkValue += 1;
-    animateClink(clinkValue);                       // smooth +1 roll (no abrupt jump)
+    clinkRoll(clinkValue, true, false);            // roll the digit(s) up one notch
     if (clinkTimer) clearTimeout(clinkTimer);
-    clinkTimer = setTimeout(function () { clinkBusy = false; }, 750);
+    clinkTimer = setTimeout(function () { clinkBusy = false; }, 1150);
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; animateClink(d.value); } })
+      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; clinkRoll(d.value, true, false); } })
       .catch(function () {});
   }
 
@@ -570,7 +582,7 @@
     var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
         '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a99ea6;margin:0 0 10px">' + esc(t.counterLabel) + '</div>' +
-        '<div id="clinkNum" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(50px,8vw,88px);letter-spacing:-1.5px;line-height:1;color:#FF4F62;font-variant-numeric:tabular-nums">0</div>' +
+        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(50px,8vw,88px);letter-spacing:-1.5px;line-height:1;color:#FF4F62"></div>' +
       '</div>' +
     '</section>';
 
