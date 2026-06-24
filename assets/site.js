@@ -457,7 +457,6 @@
     var screens = '<section style="padding:clamp(50px,8vh,92px) 0 clamp(28px,5vh,46px)">' +
       '<div style="max-width:1080px;margin:0 auto 24px;padding:0 clamp(20px,5vw,72px);text-align:center">' + kicker(L === 'ru' ? 'Экраны' : 'Screens') + h2sec(t.galleryTitle) + subsec(t.gallerySub) + '</div>' +
       '<div class="screens-track">' + screensCards + '</div>' +
-      '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:0">' + esc(t.screensHint) + '</p>' +
     '</section>';
 
     // ---- why Clinky ----
