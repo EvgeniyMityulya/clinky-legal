@@ -238,15 +238,14 @@
   // ===== global clink counter — smooth count-up roll, real shared value via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
   var clinkValue = null, clinkShown = 0, clinkBusy = false, clinkRAF = null, clinkTimer = null, clinkRevealed = false, clinkObs = null;
-  function clinkReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
   function fmtNum(n) { return Math.round(n).toLocaleString('en-US'); }   // thousands separators (commas)
   function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
   function animateClink(to) {
     var el = document.getElementById('clinkNum'); if (!el) return;
     if (clinkRAF) cancelAnimationFrame(clinkRAF);
     var from = clinkShown;
-    if (clinkReduce() || from === to) { clinkShown = to; setClinkText(to); return; }
-    var t0 = performance.now(), dur = Math.min(1500, 450 + Math.abs(to - from) * 5);
+    if (from === to) { clinkShown = to; setClinkText(to); return; }
+    var t0 = performance.now(), dur = Math.min(1800, 700 + Math.abs(to - from) * 6);   // count-up always plays (feature)
     (function tick(now) {
       var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);   // ease-out roll
       clinkShown = from + (to - from) * e; setClinkText(clinkShown);
