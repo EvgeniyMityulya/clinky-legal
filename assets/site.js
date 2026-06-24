@@ -166,6 +166,11 @@
     return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
       '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + (iconName === 'apple-logo' ? appleMark(sm ? 14 : 16, C) : ph(iconName, sm ? 15 : 17, C, 'ph-fill')) + '</span>' + esc(label) + '</span>';
   }
+  // stretched trust chip — equal width, fills the row symmetrically (hero only)
+  function trustChip(iconName, label) {
+    return '<span style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 8px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13.5px;color:#3a323f;white-space:nowrap">' +
+      '<span class="chip-ic" style="width:26px;height:26px">' + (iconName === 'apple-logo' ? appleMark(15, C) : ph(iconName, 15, C, 'ph-fill')) + '</span>' + esc(label) + '</span>';
+  }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
   function subsec(s) { return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + esc(s) + '</p>'; }
@@ -324,7 +329,10 @@
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
-          '<img src="assets/clinky-icon.png" alt="Clinky" class="hero-icon" style="width:60px;height:60px;border-radius:18px;display:block;margin:0 0 16px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+          '<div class="hero-icon" style="display:flex;align-items:center;gap:11px;margin:0 0 20px">' +
+            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:46px;height:46px;border-radius:14px;box-shadow:0 12px 26px -12px rgba(225,29,72,.5)">' +
+            '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:24px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
+          '</div>' +
           '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:22px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
             '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
               '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
@@ -334,8 +342,8 @@
           '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.55;color:#6b6b76;max-width:30em;margin:0 0 26px">' + esc(t.heroLede) + '</p>' +
           '<div id="wl1">' + waitlistForm(false, true) + '</div>' +
           (state.waitlistDone ? '' :
-            '<div class="hero-trust" style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:flex-start;margin:20px 0 0">' +
-              chip('user-circle', t.trust1) + chip('shield-check', t.trust2) + chip('apple-logo', t.trust3) +
+            '<div class="hero-trust" style="display:flex;align-items:stretch;gap:10px;max-width:32em;margin:18px 0 0">' +
+              trustChip('user-circle', t.trust1) + trustChip('shield-check', t.trust2) + trustChip('apple-logo', t.trust3) +
             '</div>') +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
