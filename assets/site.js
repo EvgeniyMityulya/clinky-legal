@@ -19,23 +19,23 @@
 
   var DICT = {
     en: {
-      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'Join waitlist',
+      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'Try it first!',
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
-      heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
-      heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
+      heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
+      heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
-      counterKicker: 'Live counter', counterLabel: 'drinks clinked so far — add yours',
+      counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
-      gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
-      gamesSub: 'These are real cards from the app. Pick a game and swipe through — no download needed.',
+      gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
+      gamesSub: 'These are real cards from the app. Pick a game and swipe through',
       tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
-      problemKicker: 'Sound familiar?', problemTitle: '“Let’s catch up soon” — then another six months slip by',
-      problemBody: 'The people you love are right there. But life gets busy — weeks turn into months and you drift apart, not because you stopped caring, but because nothing reminds you.',
-      problemTurn: 'Clinky nudges you gently and turns seeing them into something you actually want to keep doing.',
-      discoverKicker: 'Inside the app', discoverTitle: 'Everything in one calm app', discoverSub: 'No accounts, no clutter — just your people and your moments.',
-      finalTitle: 'Be first to clink', finalSub: "Join the waitlist — we'll send the App Store link the day Clinky is live.",
+      problemKicker: 'Sound familiar?', problemTitle: 'Getting everyone together can be a real quest!',
+      problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
+      problemTurn: 'Clinky helps you meet up more often and have the kind of time you want to repeat!',
+      discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just your people and your moments.',
+      finalTitle: 'Round up your friends and clink first!', finalSub: "Drop your email and we'll let you know on launch day!",
       aboutTitle: 'About Clinky',
       aboutLede: 'Clinky is an iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
@@ -53,23 +53,23 @@
       footRights: 'Made for people who would rather meet up.'
     },
     ru: {
-      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Конфиденциальность', navTerms: 'Условия', navJoin: 'В очередь',
+      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navJoin: 'Хочу первым!',
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
-      heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
-      heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
+      heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
+      heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
-      counterKicker: 'Живой счётчик', counterLabel: 'напитков чокнуто — добавь свой',
+      counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
-      gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
-      gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай — ничего качать не нужно.',
-      tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Свайп вправо — дальше, влево — назад',
-      problemKicker: 'Знакомо?', problemTitle: '«Давай как-нибудь увидимся» — и снова полгода тишины',
-      problemBody: 'Близкие люди рядом. Но жизнь занятая: недели превращаются в месяцы, и связь тихо угасает — не потому что разлюбил, а потому что некому напомнить.',
-      problemTurn: 'Clinky мягко напоминает и превращает встречи в то, что хочется повторять.',
-      discoverKicker: 'Внутри приложения', discoverTitle: 'Всё в одном спокойном приложении', discoverSub: 'Без аккаунтов и лишнего — только твои люди и моменты.',
-      finalTitle: 'Будь первым, кто чокнется', finalSub: 'Встань в очередь — пришлём ссылку на App Store в день релиза Clinky.',
+      gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
+      gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
+      tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
+      problemKicker: 'Знакомо?', problemTitle: 'Собраться компанией бывает та ещё задачка!',
+      problemBody: 'То все заняты и встреча уезжает на „как-нибудь потом“, то собрались, а разговор буксует. С лёгким напоминанием и парой игр всё идёт куда веселее!',
+      problemTurn: 'Clinky помогает видеться чаще и проводить время так, что хочется повторить!',
+      discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только твои люди и моменты.',
+      finalTitle: 'Собери друзей и чокнись первым!', finalSub: 'Оставь почту, и мы напишем тебе в день релиза!',
       aboutTitle: 'О Clinky',
       aboutLede: 'Clinky — iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
@@ -400,7 +400,6 @@
     // ---- hero (two-column: text left, 3D right) ----
     var hero = '<section style="position:relative;padding:clamp(80px,9vh,112px) clamp(20px,5vw,72px) clamp(40px,6vh,68px);overflow:hidden">' +
       sparkle({ s: 30, pos: 'top:15%;left:8%', op: 0.7, c: C, glow: 'rgba(255,79,98,.35)', anim: 'twinkle 4s ease-in-out infinite' }) +
-      sparkle({ s: 17, pos: 'top:62%;left:14%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
       sparkle({ s: 23, pos: 'top:18%;right:10%', op: 0.62, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.4s ease-in-out .3s infinite' }) +
       sparkle({ s: 13, pos: 'top:11%;right:30%', op: 0.5, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
       sparkle({ s: 16, pos: 'bottom:14%;left:5%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
@@ -466,20 +465,20 @@
     function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
     var feats = {
       en: [
-        { ic: 'game-controller', t: 'Ice-breaker games', d: 'Real party-game cards that get any table talking in seconds.', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink.', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'flame', t: 'Meeting streaks', d: 'Hold a run with the people who matter.', col: 'span 1', row: 'span 1' },
-        { ic: 'bell', t: 'Smart reminders', d: 'A nudge when it has been too long.', col: 'span 1', row: 'span 1' },
-        { ic: 'trophy', t: 'Achievements', d: 'Dozens of badges — a few of them secret.', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'chart-bar', t: 'Your social year', d: 'Favourite people, drinks and how the year adds up.', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
+        { ic: 'game-controller', t: 'Icebreakers', d: 'Real cards that get any table talking in seconds', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'flame', t: 'Meeting streaks', d: 'Keep your streak going with the people close to you', col: 'span 1', row: 'span 1' },
+        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge so you never forget a friend', col: 'span 1', row: 'span 1' },
+        { ic: 'trophy', t: 'Achievements', d: 'Dozens of badges, some of them secret', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'chart-bar', t: 'Analytics', d: 'Clear charts of your friends, drinks and meet-ups', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
       ],
       ru: [
-        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки-ice-breaker, что разговорят любой стол за секунды.', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок».', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию с теми, кто важнее.', col: 'span 1', row: 'span 1' },
-        { ic: 'bell', t: 'Умные напоминания', d: 'Напомним, когда давно не виделись.', col: 'span 1', row: 'span 1' },
-        { ic: 'trophy', t: 'Достижения', d: 'Десятки наград — включая тайные.', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'chart-bar', t: 'Твой год встреч', d: 'Любимые люди, напитки и как сложился год.', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
+        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки, что разговорят любой стол за секунды', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
+        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок»', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию встреч с близкими', col: 'span 1', row: 'span 1' },
+        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко подскажем, чтобы ты никого не забыл', col: 'span 1', row: 'span 1' },
+        { ic: 'trophy', t: 'Достижения', d: 'Десятки наград, включая тайные', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
+        { ic: 'chart-bar', t: 'Аналитика встреч', d: 'Графики и факты о твоих друзьях, напитках и встречах', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
       ]
     }[L];
     function bentoChip(ic) { return '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(ic, 21, C, 'ph-fill') + '</span>'; }
@@ -544,7 +543,7 @@
       '</div>' +
     '</section>';
 
-    return '<div class="page-in">' + hero + problem + discover + card + counter + finalCta + '</div>';
+    return '<div class="page-in">' + hero + counter + problem + discover + card + finalCta + '</div>';
   }
 
   function renderQuestionSection() {
