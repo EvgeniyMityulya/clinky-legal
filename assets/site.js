@@ -25,7 +25,7 @@
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
-      counterLabel: 'drinks clinked so far',
+      counterKicker: 'Live counter', counterLabel: 'drinks clinked so far — add yours',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
@@ -59,7 +59,7 @@
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
-      counterLabel: 'напитков уже чокнуто',
+      counterKicker: 'Живой счётчик', counterLabel: 'напитков чокнуто — добавь свой',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
@@ -262,7 +262,8 @@
       var strip = strips[pos]; if (!strip) continue;
       var d = +s[pos], idx = CLINK_REST + d;
       if (fromTop) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetWidth; }   // start at the top (shows 0), then drop
-      strip.style.transition = animate ? 'transform 1.05s cubic-bezier(.2,.8,.2,1) ' + (pos * 80) + 'ms' : 'none';
+      // left→right cascade: highest place lands first, rightmost settles last
+      strip.style.transition = animate ? 'transform 1s cubic-bezier(.2,.8,.2,1) ' + (pos * 170) + 'ms' : 'none';
       strip.style.transform = 'translateY(-' + idx + 'em)';
     }
   }
@@ -581,8 +582,9 @@
     // ---- global clink counter (premium odometer) ----
     var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a99ea6;margin:0 0 10px">' + esc(t.counterLabel) + '</div>' +
-        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(50px,8vw,88px);letter-spacing:-1.5px;line-height:1;color:#FF4F62"></div>' +
+        kicker(t.counterKicker) +
+        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);letter-spacing:-2px;line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
+        subsec(t.counterLabel) +
       '</div>' +
     '</section>';
 
