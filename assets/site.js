@@ -328,8 +328,11 @@
       sparkle({ s: 14, pos: 'bottom:24%;left:30%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
-        '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 20px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + '<span style="margin-left:-4px;display:inline-flex">' + appStoreMark(17, '#1c1326') + '</span></span>' +
+        '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+          '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
+            '<span style="position:absolute;inset:0;border-radius:50%;background:#FF4F62;animation:liveRing 1.7s ease-out infinite"></span>' +
+            '<span style="position:absolute;inset:0;border-radius:50%;background:#FF4F62;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
+          '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#E11D48') + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
