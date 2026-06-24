@@ -428,9 +428,9 @@
             '</div>') +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
-        '<div data-act="play" style="position:relative;aspect-ratio:1/0.62;perspective:1000px;cursor:pointer;outline:2px solid red">' +
+        '<div data-act="play" style="position:relative;aspect-ratio:1/0.62;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="heroMount" style="position:absolute;inset:0;z-index:1;outline:2px dashed rgba(0,120,255,.7)"></div>' +
+          '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
               '<svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)">' +
