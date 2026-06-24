@@ -25,7 +25,7 @@
       heroLede: 'Break the ice with real party-game cards, log every meet-up, and collect a 3D drink for each clink.',
       heroCta: 'Join the waitlist', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it', screensHint: 'Swipe to browse the screens',
-      counterLabel: 'clinks and counting', counterSub: 'Tap the drink above to add yours 🍻',
+      counterLabel: 'drinks clinked so far',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right here', gamesTitle: 'Cards that break any silence',
@@ -59,7 +59,7 @@
       heroLede: 'Разговори компанию реальными карточками, отмечай встречи и собирай 3D-напиток за каждый «чок».',
       heroCta: 'Встать в очередь', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить', screensHint: 'Листай, чтобы посмотреть экраны',
-      counterLabel: 'чоков уже сделано', counterSub: 'Чокнись с напитком выше — добавь свой 🍻',
+      counterLabel: 'напитков уже чокнуто',
       heroDone: 'Ты в очереди. Пришлём ссылку на App Store, как только Clinky выйдет.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо тут', gamesTitle: 'Карточки, что разговорят любую компанию',
@@ -235,35 +235,56 @@
   // 3D hero is rendered by assets/hero3d.js (three.js). site.js only drives it via window.ClinkyHero.
   function hero() { return window.ClinkyHero; }
 
-  // ===== global clink counter (real, shared via abacus free counter API) =====
+  // ===== global clink counter — premium odometer, real shared value via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var clinkValue = null, clinkRAF = null;
-  function fmtNum(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' '); }
-  function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
-  function animateClink(from, to) {
-    var el = document.getElementById('clinkNum'); if (!el) return;
-    if (clinkRAF) cancelAnimationFrame(clinkRAF);
-    var t0 = performance.now(), dur = 1100;
-    (function tick(now) {
-      var p = Math.min((now - t0) / dur, 1), e = 1 - Math.pow(1 - p, 3);
-      setClinkText(from + (to - from) * e);
-      if (p < 1) clinkRAF = requestAnimationFrame(tick);
-    })(performance.now());
+  var clinkValue = null, odoDigits = 0;
+  function odoReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
+  function odoGroup(s) { // pad to >=2, returns array of chars incl thin-space separators
+    while (s.length < 2) s = '0' + s;
+    var out = [], n = s.length;
+    for (var i = 0; i < n; i++) { if (i > 0 && (n - i) % 3 === 0) out.push(' '); out.push(s[i]); }
+    return out;
+  }
+  // build the wheel structure for the given number of digit columns
+  function odoBuild(chars) {
+    var html = '';
+    for (var i = 0; i < chars.length; i++) {
+      if (chars[i] === ' ') { html += '<span class="odo-sep"></span>'; continue; }
+      var cells = '';
+      for (var d = 0; d <= 9; d++) cells += '<span class="odo-cell">' + d + '</span>';
+      html += '<span class="odo-col"><span class="odo-strip">' + cells + '</span></span>';
+    }
+    var el = document.getElementById('odo'); if (el) el.innerHTML = html;
+    odoDigits = chars.length;
+  }
+  function odoSet(value, animate) {
+    var el = document.getElementById('odo'); if (!el) return;
+    var chars = odoGroup(String(Math.max(0, Math.round(value))));
+    if (chars.length !== odoDigits) odoBuild(chars);
+    var strips = el.querySelectorAll('.odo-strip'), si = 0, reduce = odoReduce();
+    for (var i = 0; i < chars.length; i++) {
+      if (chars[i] === ' ') continue;
+      var strip = strips[si++]; if (!strip) continue;
+      var d = +chars[i];
+      // stagger so columns settle left→right; rightmost (fast-changing) leads
+      strip.style.transition = (animate && !reduce) ? 'transform .9s cubic-bezier(.2,.85,.2,1) ' + (i * 60) + 'ms' : 'none';
+      strip.style.transform = 'translateY(-' + d + 'em)';
+    }
   }
   function loadClinkCount() {
+    odoSet(0, false);                                  // reserve layout at 0 (no CLS), then roll up
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; animateClink(0, d.value); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; requestAnimationFrame(function () { odoSet(d.value, true); }); } })
       .catch(function () {});
   }
   function bumpClink() {
-    var el = document.getElementById('clinkNum');
-    if (el && clinkValue != null) { clinkValue += 1; setClinkText(clinkValue); el.style.animation = 'none'; void el.offsetWidth; el.style.animation = 'quickPulse .4s ease'; }
+    if (clinkValue != null) { clinkValue += 1; odoSet(clinkValue, true); }   // optimistic roll
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; setClinkText(d.value); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; odoSet(d.value, true); } })
       .catch(function () {});
   }
 
@@ -542,15 +563,11 @@
       '</div>' +
     '</section>';
 
-    // ---- global clink counter ----
-    var counter = '<section style="padding:clamp(28px,5vh,52px) clamp(20px,5vw,72px) clamp(10px,2vh,20px)">' +
+    // ---- global clink counter (premium odometer) ----
+    var counter = '<section style="padding:clamp(30px,6vh,64px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        '<div style="display:inline-flex;align-items:center;gap:10px;font-family:Nunito,sans-serif;font-weight:900;letter-spacing:-1.5px;line-height:1;color:#FF4F62">' +
-          ph('wine', 38, C, 'ph-fill') +
-          '<span id="clinkNum" style="font-size:clamp(44px,7vw,72px)">0</span>' +
-        '</div>' +
-        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(15px,2vw,18px);color:#1c1326;margin:6px 0 4px">' + esc(t.counterLabel) + '</div>' +
-        '<div style="font-size:13.5px;color:#a99ea6">' + esc(t.counterSub) + '</div>' +
+        '<div id="odo" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(52px,8.5vw,92px);letter-spacing:-2px;line-height:1;color:#1c1326;justify-content:center"></div>' +
+        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#FF4F62;margin:14px 0 0">' + esc(t.counterLabel) + '</div>' +
       '</div>' +
     '</section>';
 
