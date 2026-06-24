@@ -166,6 +166,12 @@
     return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
       '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + (iconName === 'apple-logo' ? appleMark(sm ? 14 : 16, C) : ph(iconName, sm ? 15 : 17, C, 'ph-fill')) + '</span>' + esc(label) + '</span>';
   }
+  // hero trust chip — equal medium width, icon pinned left, label centered (no width jumping)
+  function heroChip(iconName, label) {
+    return '<span style="display:inline-flex;align-items:center;width:148px;padding:8px 14px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -12px rgba(255,79,98,.3);font-weight:700;font-size:13px;color:#3a323f">' +
+      '<span class="chip-ic" style="width:24px;height:24px;flex:none">' + (iconName === 'apple-logo' ? appleMark(14, C) : ph(iconName, 14, C, 'ph-fill')) + '</span>' +
+      '<span style="flex:1;text-align:center">' + esc(label) + '</span></span>';
+  }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
   function subsec(s) { return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + esc(s) + '</p>'; }
@@ -322,25 +328,25 @@
       sparkle({ s: 27, pos: 'bottom:12%;right:7%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
       sparkle({ s: 14, pos: 'top:40%;right:46%', op: 0.42, c: '#FF8A97', glow: 'rgba(255,138,151,.28)', anim: 'twinkle 3.2s ease-in-out .7s infinite' }) +
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
-      '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
+      '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:flex-start;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;margin:0 0 18px">' +
             '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
-          '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:18px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-            '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
+          '<span style="display:inline-flex;align-items:center;gap:7px;padding:6px 14px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;margin-bottom:18px;box-shadow:0 10px 22px -10px rgba(225,29,72,.55);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+            '<span style="position:relative;width:7px;height:7px;display:inline-flex;flex:none">' +
               '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
               '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
-            '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
+            '</span>' + esc(t.heroEyebrow) + appStoreMark(14, '#fff') + '</span>' +
           '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-1.4px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
           '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.5;color:#6b6b76;max-width:30em;margin:0 0 20px">' + esc(t.heroLede) + '</p>' +
           '<div id="wl1">' + waitlistForm(false, true) + '</div>' +
           (state.waitlistDone ? '' :
             '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:16px 0 0">' +
-              chip('user-circle', t.trust1, true) + chip('shield-check', t.trust2, true) + chip('apple-logo', t.trust3, true) +
+              heroChip('user-circle', t.trust1) + heroChip('shield-check', t.trust2) + heroChip('apple-logo', t.trust3) +
             '</div>') +
         '</div>' +
-      '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
+      '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:480px;margin:-72px auto 0">' +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
