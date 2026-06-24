@@ -237,7 +237,7 @@
 
   // ===== global clink counter — smooth count-up roll, real shared value via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var clinkValue = null, clinkShown = 0, clinkBusy = false, clinkRAF = null, clinkTimer = null;
+  var clinkValue = null, clinkShown = 0, clinkBusy = false, clinkRAF = null, clinkTimer = null, clinkRevealed = false, clinkObs = null;
   function clinkReduce() { return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches; }
   function fmtNum(n) { return Math.round(n).toLocaleString('en-US'); }   // thousands separators (commas)
   function setClinkText(n) { var el = document.getElementById('clinkNum'); if (el) el.textContent = fmtNum(n); }
@@ -254,12 +254,26 @@
       else { clinkShown = to; setClinkText(to); }
     })(performance.now());
   }
+  function clinkMaybeReveal() {   // run the count-up only once it scrolls into view (and the value is loaded)
+    if (clinkRevealed && clinkValue != null) animateClink(clinkValue);
+  }
+  function bindClinkReveal() {
+    var el = document.getElementById('clinkNum'); if (!el) return;
+    clinkRevealed = false;
+    if (typeof IntersectionObserver !== 'function') { clinkRevealed = true; clinkMaybeReveal(); return; }
+    if (clinkObs) clinkObs.disconnect();
+    clinkObs = new IntersectionObserver(function (ents) {
+      ents.forEach(function (e) { if (e.isIntersecting) { clinkRevealed = true; clinkMaybeReveal(); clinkObs.disconnect(); } });
+    }, { threshold: 0.4 });
+    clinkObs.observe(el);
+  }
   function loadClinkCount() {
     clinkShown = 0; setClinkText(0);
+    bindClinkReveal();
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; animateClink(d.value); } })
+      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; clinkMaybeReveal(); } })
       .catch(function () {});
   }
   function bumpClink() {
@@ -373,14 +387,16 @@
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
-          '<div class="hero-icon" style="display:flex;justify-content:center;margin:0 0 18px">' +
+          '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
             '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
-          '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:18px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-            '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
-              '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
-              '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
-            '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
+          '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
+            '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+              '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
+                '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
+                '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
+              '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
+          '</div>' +
           '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-1.4px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
           '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.5;color:#6b6b76;max-width:30em;margin:0 0 20px">' + esc(t.heroLede) + '</p>' +
           '<div id="wl1">' + waitlistForm(false, true) + '</div>' +
@@ -554,8 +570,8 @@
     // ---- global clink counter (premium odometer) ----
     var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
       '<div style="max-width:560px;margin:0 auto;text-align:center">' +
+        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#a99ea6;margin:0 0 10px">' + esc(t.counterLabel) + '</div>' +
         '<div id="clinkNum" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(50px,8vw,88px);letter-spacing:-1.5px;line-height:1;color:#FF4F62;font-variant-numeric:tabular-nums">0</div>' +
-        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:3px;text-transform:uppercase;color:#FF4F62;margin:14px 0 0">' + esc(t.counterLabel) + '</div>' +
       '</div>' +
     '</section>';
 
