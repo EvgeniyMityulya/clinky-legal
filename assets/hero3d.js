@@ -8,7 +8,7 @@ import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
 const CFG = {
   beer: {
     src: 'models/BeerCap.glb',
-    camera: { azim: 35.0, elev: 12.0, dist: 7.35, fov: 30 }, target: [0, 0.6, 0],
+    camera: { azim: 35.0, elev: 12.0, dist: 7.35, fov: 30 }, target: [-0.01, 1.20, -0.15],
     offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
@@ -178,12 +178,14 @@ function play() {
   const coffee = drink === 'coffee', dur = 900, t0 = performance.now();
   const rx0 = D2R(c.rotation[0]), ry0 = D2R(c.rotation[1]), rz0 = D2R(c.rotation[2]);
   const baseY = groundedY;
-  const riseH = (coffee ? 0.5 : 0.22) * holder.userData.size.y;
+  const riseH = (coffee ? 0.30 : 0.16) * holder.userData.size.y;
   (function tick(now) {
     if (myToken !== spinToken) return;   // a drink switch / newer spin took over → abandon
     const p = Math.min((now - t0) / dur, 1);
     const deg = 2 * Math.PI * easeIO(p);
-    modelRoot.position.y = baseY + Math.sin(Math.PI * p) * riseH;
+    // toss: quick ease-out up, then a fall that softens into the floor (no wooden snap / extra hop)
+    var lp; if (p < 0.32) { var u = p / 0.32; lp = 1 - (1 - u) * (1 - u); } else { var q = (p - 0.32) / 0.68; lp = (1 - q) * (1 - q); }
+    modelRoot.position.y = baseY + lp * riseH;
     if (coffee) {
       const wob = D2R(10) * Math.sin(Math.PI * p);
       poseGroup.rotation.set(rx0 + wob * Math.cos(deg), ry0 + deg, rz0 + wob * Math.sin(deg));

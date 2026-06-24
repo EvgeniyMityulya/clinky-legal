@@ -135,7 +135,7 @@
 
   const SRC = { beer: 'models/BeerCap.glb', coffee: 'models/CoffeeCup.glb' };
   const PRESET = {
-    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.40, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[0,0.6,0] },
+    beer:   { fov:30, rx:20, ry:0,  rz:0, oX:0, oY:0.86, oZ:0, scale:1.0, met:1.00, rou:0.40, lAzim:14, lElev:34, lInt:2.4, aInt:1.00, env:'assets/env_photostudio.hdr', envInt:1.15, tone:'aces', exp:1.00, shOp:0.20, shBlur:5,  camA:35.0, camE:12.0, camD:7.35, target:[-0.01,1.20,-0.15] },
     coffee: { fov:35, rx:0,  ry:45, rz:0, oX:0, oY:0.00, oZ:0, scale:1.0, met:0.52, rou:0.30, lAzim:20, lElev:44, lInt:4.5, aInt:0.65, env:'assets/env_photostudio.hdr', envInt:1.00, tone:'aces', exp:0.80, shOp:0.30, shBlur:10, camA:42.4, camE:23.7, camD:5.65, target:[0.02,1.19,-0.12] }
   };
 
@@ -300,14 +300,14 @@
     const coffee = drink==='coffee', dur = coffee?900:900, t0=performance.now();
     const rx0=D2R(val('rX')), ry0=D2R(val('rY')), rz0=D2R(val('rZ'));
     const baseLift = modelSize.y/2 + val('oY');
-    const riseH = coffee ? modelSize.y*0.5 : modelSize.y*0.25;
+    const riseH = coffee ? modelSize.y*0.30 : modelSize.y*0.16;
     const ease = p => p<0.5 ? 2*p*p : 1-Math.pow(-2*p+2,2)/2;
     function tick(now){
       if (mt !== spinTok) return;   // drink switch / newer spin took over
       const p = Math.min((now-t0)/dur,1);
       const deg = 2*Math.PI*ease(p);
-      const lift = Math.sin(Math.PI*p)*riseH; // up then down
-      modelRoot.position.y = baseLift + lift;
+      let lp; if (p<0.32){ const u=p/0.32; lp=1-(1-u)*(1-u); } else { const q=(p-0.32)/0.68; lp=(1-q)*(1-q); }
+      modelRoot.position.y = baseLift + lp*riseH;
       if (coffee){
         const wob = D2R(10)*Math.sin(Math.PI*p);          // conical wobble grows then settles
         poseGroup.rotation.set(rx0 + wob*Math.cos(deg), ry0 + deg, rz0 + wob*Math.sin(deg));
