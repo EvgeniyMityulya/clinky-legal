@@ -13,8 +13,8 @@ a{text-decoration:none}
 .odo{display:inline-flex;align-items:center;justify-content:center;font-variant-numeric:tabular-nums}
 .odo-col{display:inline-block;height:1em;line-height:1;overflow:hidden;vertical-align:top}
 .odo-strip{display:flex;flex-direction:column;will-change:transform}
-.odo-cell{line-height:1;display:flex;align-items:center;justify-content:center;width:.72em}
-.odo-sep{display:inline-flex;align-items:center;justify-content:center;width:.32em}
+.odo-cell{line-height:1;display:flex;align-items:center;justify-content:center;width:.64em}
+.odo-sep{display:inline-flex;align-items:center;justify-content:center;width:.24em}
 /* cards — one unified surface across the whole site: white fill + soft light-grey hairline */
 .soft-card{position:relative;background:#fff;border:1px solid var(--cardBorder);border-radius:24px;box-shadow:0 12px 32px -20px rgba(255,79,98,.28);transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease}
 .soft-card:hover{z-index:3;transform:translateY(-4px);box-shadow:0 24px 48px -24px rgba(255,79,98,.38)}

@@ -825,25 +825,36 @@
     if (state.sel === 'coffee') puffSteam(); else burstSparkles();
     if (hero()) hero().play();
   }
-  // floating badges drift + tilt toward the cursor (parallax), with the shadow shifting for depth
+  // floating badges turn TOWARD the scene centre — strongest when the cursor is centred (focus on the 3D),
+  // flattening out as the cursor reaches the edges. Black shadow shifts toward centre for depth.
   function bindHeroParallax() {
     var play = document.querySelector('[data-act="play"]'); if (!play || play._px) return; play._px = true;
     var cards = [].slice.call(play.querySelectorAll('.float-card'));
-    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease'; });
+    function measure() {
+      var pc = play.getBoundingClientRect();
+      cards.forEach(function (c) {
+        var cr = c.getBoundingClientRect();
+        var vx = (pc.left + pc.width / 2) - (cr.left + cr.width / 2), vy = (pc.top + pc.height / 2) - (cr.top + cr.height / 2);
+        var len = Math.hypot(vx, vy) || 1; c._dir = [vx / len, vy / len];   // unit vector from the badge toward centre
+      });
+    }
+    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .4s cubic-bezier(.2,.7,.2,1),box-shadow .4s ease'; });
     play.addEventListener('pointermove', function (e) {
+      if (!cards[0] || !cards[0]._dir) measure();
       play._over = true;
       var r = play.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
-      cards.forEach(function (c, i) {
-        var d = i ? -1 : 1;
+      var p = Math.max(0, 1 - 2 * Math.hypot(nx, ny));   // 1 at centre → 0 at edges
+      cards.forEach(function (c) {
+        var dx = c._dir[0], dy = c._dir[1];
         c.style.animation = 'none';
-        c.style.transform = 'perspective(700px) translate(' + (nx * 24 * d).toFixed(1) + 'px,' + (ny * 18 * d).toFixed(1) + 'px) rotateX(' + (-ny * 12).toFixed(1) + 'deg) rotateY(' + (nx * 14).toFixed(1) + 'deg)';
-        c.style.boxShadow = (-nx * 26).toFixed(1) + 'px ' + (18 - ny * 14).toFixed(1) + 'px 38px -14px rgba(255,79,98,.45)';
+        c.style.transform = 'perspective(700px) translate(' + (dx * 12 * p).toFixed(1) + 'px,' + (dy * 9 * p).toFixed(1) + 'px) rotateY(' + (dx * 20 * p).toFixed(1) + 'deg) rotateX(' + (-dy * 16 * p).toFixed(1) + 'deg)';
+        c.style.boxShadow = (dx * 22 * p).toFixed(1) + 'px ' + (10 + dy * 22 * p).toFixed(1) + 'px 34px -8px rgba(0,0,0,' + (0.12 + 0.16 * p).toFixed(2) + ')';
       });
     });
     play.addEventListener('pointerleave', function () {
       play._over = false;
       cards.forEach(function (c) { c.style.transform = ''; c.style.boxShadow = ''; });   // smoothly transitions back to rest
-      setTimeout(function () { if (!play._over) cards.forEach(function (c) { c.style.animation = c.dataset.anim; }); }, 380);   // restore idle bob only after the return finishes
+      setTimeout(function () { if (!play._over) cards.forEach(function (c) { c.style.animation = c.dataset.anim; }); }, 440);   // restore idle bob only after the return finishes
     });
   }
   function startAnim() {
