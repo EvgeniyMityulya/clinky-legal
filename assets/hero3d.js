@@ -9,7 +9,7 @@ import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
 const CFG = {
   beer: {
     src: 'models/BeerCap.glb',
-    camera: { azim: 35.0, elev: 26.0, dist: 4.66, fov: 30 }, target: [-0.13, 1.00, -0.11],
+    camera: { azim: 35.0, elev: 26.0, dist: 4.0, fov: 30 }, target: [-0.09, 0.90, -0.08],
     offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
