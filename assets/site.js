@@ -238,37 +238,40 @@
   // ===== global clink counter — rolling odometer (digits fall from above), shared via abacus free API =====
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
   var CLINK_LOOPS = 2, CLINK_REST = CLINK_LOOPS * 10;   // ribbon: 0-9 repeated, rest digit lives in the last loop
+  var CLINK_CELL = 1.2;                                  // cell height in em (>1 so tall glyphs aren't clipped)
   var clinkValue = null, clinkCols = 0, clinkBusy = false, clinkTimer = null, clinkRevealed = false, clinkObs = null;
   function clinkEl() { return document.getElementById('clinkNum'); }
   function clinkColsFor(v) { return Math.max(1, String(Math.max(0, Math.round(v))).length); }
   function clinkBuild(cols) {
     var el = clinkEl(); if (!el) return;
-    var html = '';
+    var ch = CLINK_CELL + 'em', html = '';
     for (var pos = 0; pos < cols; pos++) {
       var pfr = cols - 1 - pos;
       if (pos > 0 && pfr % 3 === 2) html += '<span class="odo-sep">,</span>';
       var cells = '';
-      for (var k = 0; k <= CLINK_REST + 9; k++) cells += '<span class="odo-cell">' + (k % 10) + '</span>';
-      html += '<span class="odo-col"><span class="odo-strip" style="transform:translateY(0)">' + cells + '</span></span>';
+      for (var k = 0; k <= CLINK_REST + 9; k++) cells += '<span class="odo-cell" style="height:' + ch + '">' + (k % 10) + '</span>';
+      html += '<span class="odo-col" style="height:' + ch + '"><span class="odo-strip" style="transform:translateY(0)">' + cells + '</span></span>';
     }
     el.innerHTML = html; clinkCols = cols;
   }
-  function clinkRoll(value, animate, fromTop) {
+  function clinkRoll(value, fromTop) {
     var el = clinkEl(); if (!el) return;
     var s = String(Math.max(0, Math.round(value))), cols = s.length;
     if (cols !== clinkCols) clinkBuild(cols);
     var strips = el.querySelectorAll('.odo-strip');
+    // duration scales a bit with digit count so big numbers still read; gentle ease-in start (not abrupt)
+    var dur = fromTop ? (1.1 + cols * 0.16) : 0.95, stag = fromTop ? 210 : 70, ease = 'cubic-bezier(.42,.06,.22,1)';
     for (var pos = 0; pos < cols; pos++) {
       var strip = strips[pos]; if (!strip) continue;
       var d = +s[pos], idx = CLINK_REST + d;
       if (fromTop) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetWidth; }   // start at the top (shows 0), then drop
-      // left→right cascade: highest place lands first, rightmost settles last
-      strip.style.transition = animate ? 'transform 1s cubic-bezier(.2,.8,.2,1) ' + (pos * 170) + 'ms' : 'none';
-      strip.style.transform = 'translateY(-' + idx + 'em)';
+      strip.style.transition = 'transform ' + dur + 's ' + ease + ' ' + (pos * stag) + 'ms';   // left→right cascade
+      strip.style.transform = 'translateY(-' + (idx * CLINK_CELL).toFixed(3) + 'em)';
     }
+    return dur * 1000 + (cols - 1) * stag;   // total animation time
   }
   function clinkPrime(v) { clinkBuild(clinkColsFor(v)); }   // reserve correct width, strips at top (showing 0)
-  function clinkMaybeReveal() { if (clinkRevealed && clinkValue != null) clinkRoll(clinkValue, true, true); }
+  function clinkMaybeReveal() { if (clinkRevealed && clinkValue != null) clinkRoll(clinkValue, true); }
   function bindClinkReveal() {
     var el = clinkEl(); if (!el) return;
     clinkRevealed = false;
@@ -279,9 +282,15 @@
     }, { threshold: 0.4 });
     clinkObs.observe(el);
   }
+  function clinkDebugValue() {   // ?clink=123456 → test the odometer at any width (not sent to server)
+    try { var q = new URLSearchParams(location.search).get('clink'); if (q != null && /^\d+$/.test(q)) return parseInt(q, 10); } catch (e) {}
+    return null;
+  }
   function loadClinkCount() {
     clinkBuild(2);   // placeholder width at "00" (top), rolled in on reveal
     bindClinkReveal();
+    var dbg = clinkDebugValue();
+    if (dbg != null) { clinkValue = dbg; clinkPrime(dbg); clinkMaybeReveal(); return; }   // debug override, skip server
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
@@ -292,13 +301,14 @@
     if (clinkBusy || clinkValue == null) return;   // ignore taps until the roll finishes (no spam / double-count)
     clinkBusy = true;
     clinkValue += 1;
-    clinkRoll(clinkValue, true, false);            // roll the digit(s) up one notch
+    var t = clinkRoll(clinkValue, false);          // roll the digit(s) up one notch
     if (clinkTimer) clearTimeout(clinkTimer);
-    clinkTimer = setTimeout(function () { clinkBusy = false; }, 1150);
+    clinkTimer = setTimeout(function () { clinkBusy = false; }, (t || 1000) + 100);
+    if (clinkDebugValue() != null) return;         // in debug mode don't touch the server
     if (typeof fetch !== 'function') return;
     fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
       .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; clinkRoll(d.value, true, false); } })
+      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; clinkRoll(d.value, false); } })
       .catch(function () {});
   }
 
@@ -749,7 +759,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); } else stopAnim();
+    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); } else stopAnim();
   }
 
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
@@ -814,6 +824,23 @@
     if (reduce) return;
     if (state.sel === 'coffee') puffSteam(); else burstSparkles();
     if (hero()) hero().play();
+  }
+  // floating badges drift toward the cursor (parallax) — feels 3D
+  function bindHeroParallax() {
+    var play = document.querySelector('[data-act="play"]'); if (!play || play._px) return; play._px = true;
+    var cards = [].slice.call(play.querySelectorAll('.float-card'));
+    cards.forEach(function (c) { c.dataset.anim = c.style.animation; c.style.transition = 'transform .3s cubic-bezier(.2,.7,.2,1)'; });
+    play.addEventListener('pointermove', function (e) {
+      var r = play.getBoundingClientRect(), nx = (e.clientX - r.left) / r.width - 0.5, ny = (e.clientY - r.top) / r.height - 0.5;
+      cards.forEach(function (c, i) {
+        var d = i ? -1 : 1;
+        c.style.animation = 'none';
+        c.style.transform = 'perspective(700px) translate(' + (nx * 24 * d).toFixed(1) + 'px,' + (ny * 18 * d).toFixed(1) + 'px) rotateX(' + (-ny * 12).toFixed(1) + 'deg) rotateY(' + (nx * 14).toFixed(1) + 'deg)';
+      });
+    });
+    play.addEventListener('pointerleave', function () {
+      cards.forEach(function (c) { c.style.transform = ''; c.style.animation = c.dataset.anim; });
+    });
   }
   function startAnim() {
     stopAnim();
