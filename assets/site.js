@@ -142,6 +142,12 @@
   function ph(name, size, color, weight) {
     return '<i class="' + (weight || 'ph') + ' ph-' + name + '" style="font-size:' + (size || 22) + 'px;color:' + (color || 'currentColor') + ';line-height:1;display:inline-flex;flex:none"></i>';
   }
+  // real Apple logo as inline SVG (the Phosphor font glyph rendered non-proportional/stretched)
+  function appleMark(size, color) {
+    var s = size || 16, w = Math.round(s * 0.84);
+    return '<svg width="' + w + '" height="' + s + '" viewBox="0 0 814 1000" fill="' + (color || 'currentColor') + '" aria-hidden="true" style="display:inline-block;flex:none;vertical-align:middle">' +
+      '<path d="M788 340c-6 4-114 65-114 200 0 156 137 211 141 212-1 3-22 75-72 149-43 64-89 128-159 128s-88-41-169-41c-79 0-107 42-171 42s-109-59-159-132C-9 757-58 524 26 363 67 287 142 239 222 238c64-1 124 43 163 43 37 0 110-53 186-53 29 0 132 3 200 99zM554 130c34-40 58-96 58-152 0-8-1-16-2-22-55 2-121 37-160 83-31 35-60 91-60 147 0 9 2 18 2 21 4 1 9 1 14 1 50 0 113-33 148-78z"/></svg>';
+  }
   function sparkle(o) {
     var sz = Math.round((o.s || 16) * 1.5);
     return '<svg width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
@@ -152,7 +158,7 @@
   // one reusable capsule badge (icon-in-circle + label), used everywhere
   function chip(iconName, label, sm) {
     return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
-      '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + ph(iconName, sm ? 15 : 17, C, 'ph-fill') + '</span>' + esc(label) + '</span>';
+      '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + (iconName === 'apple-logo' ? appleMark(sm ? 14 : 16, C) : ph(iconName, sm ? 15 : 17, C, 'ph-fill')) + '</span>' + esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
@@ -204,7 +210,7 @@
       game: ph('game-controller', 26, C, 'ph-fill'), chat: ph('chat-teardrop-dots', 30, C, 'ph-fill'),
       flame: ph('flame', 24, C, 'ph-fill'), cube: ph('cube', 24, C, 'ph-fill'), chart: ph('chart-bar', 24, C, 'ph-fill'),
       lock: ph('lock-simple', 24, C, 'ph-fill'), bell: ph('bell', 24, C, 'ph-fill'),
-      mail: ph('envelope', 18, 'currentColor'), apple: ph('apple-logo', 18, 'currentColor', 'ph-fill'),
+      mail: ph('envelope', 18, 'currentColor'), apple: appleMark(16, 'currentColor'),
       check: ph('check-circle', 24, '#fff', 'ph-fill'), checkPink: ph('check-circle', 24, '#FF4F62', 'ph-fill'),
       skip: ph('x', 22, '#b9b0b6', 'ph-bold'), heart: ph('heart', 26, '#fff', 'ph-fill'),
       never: gameIcon(0, '#6b6b76', 18), target: gameIcon(1, '#6b6b76', 18), bubble: gameIcon(2, '#6b6b76', 18), swap: gameIcon(3, '#6b6b76', 18)
@@ -317,7 +323,7 @@
       sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
         '<span style="display:inline-flex;align-items:center;gap:9px;padding:9px 20px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + ph('apple-logo', 16, '#1c1326', 'ph-fill') + '</span>' +
+          '<span style="width:8px;height:8px;border-radius:50%;background:#FF4F62;box-shadow:0 0 10px #FF4F62;animation:pulse 2.2s ease-in-out infinite"></span>' + esc(t.heroEyebrow) + appleMark(15, '#1c1326') + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
