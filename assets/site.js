@@ -202,7 +202,7 @@
     return '<div style="display:flex;justify-content:center;margin:18px 0 0">' +
       '<div style="position:relative;display:inline-flex;padding:5px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 12px 28px -12px rgba(28,19,38,.24)">' +
         '<div id="drinkThumb" style="position:absolute;top:5px;bottom:5px;left:5px;width:128px;border-radius:999px;background:#FF4F62;box-shadow:0 10px 20px -6px rgba(255,79,98,.7);transition:transform .36s cubic-bezier(.34,1.4,.5,1);transform:translateX(' + thumbX + ')"></div>' +
-        '<button id="chipBeer" data-act="beer" style="' + btn + 'color:' + (state.sel === 'beer' ? '#fff' : '#6b6b76') + '">' + ph('beer-bottle', 18, state.sel === 'beer' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.beer) + '</button>' +
+        '<button id="chipBeer" data-act="beer" style="' + btn + 'color:' + (state.sel === 'beer' ? '#fff' : '#6b6b76') + '"><span style="display:inline-flex;transform:rotate(45deg)">' + ph('beer-bottle', 18, state.sel === 'beer' ? '#fff' : '#b9b0b6', 'ph-fill') + '</span>' + esc(t.beer) + '</button>' +
         '<button id="chipCoffee" data-act="coffee" style="' + btn + 'color:' + (state.sel === 'coffee' ? '#fff' : '#6b6b76') + '">' + ph('coffee', 18, state.sel === 'coffee' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.coffee) + '</button>' +
       '</div></div>';
   }
@@ -328,11 +328,11 @@
       sparkle({ s: 14, pos: 'bottom:24%;left:30%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
       sparkle({ s: 20, pos: 'top:28%;left:6%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .95s infinite' }) +
       '<div style="position:relative;max-width:720px;margin:0 auto">' +
-        '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+        '<span style="display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:linear-gradient(180deg,#fff,#FFF4F6);border:1.5px solid #FFB8C3;color:#1c1326;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;margin-bottom:24px;box-shadow:0 8px 22px -12px rgba(255,79,98,.45);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
           '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
             '<span style="position:absolute;inset:0;border-radius:50%;background:#FF4F62;animation:liveRing 1.7s ease-out infinite"></span>' +
             '<span style="position:absolute;inset:0;border-radius:50%;background:#FF4F62;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
-          '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#E11D48') + '</span>' +
+          '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#1c1326') + '</span>' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(33px,5vw,54px);line-height:1.05;letter-spacing:-1.2px;margin:0 0 16px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.5;color:#6b6b76;max-width:27em;margin:0 auto 26px">' + esc(t.heroLede) + '</p>' +
         '<div id="wl1">' + waitlistForm() + '</div>' +
