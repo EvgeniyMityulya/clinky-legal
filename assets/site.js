@@ -151,7 +151,7 @@
   }
   // one reusable capsule badge (icon-in-circle + label), used everywhere
   function chip(iconName, label, sm) {
-    return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #f1e4e7;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
+    return '<span style="display:inline-flex;align-items:center;gap:' + (sm ? '7px' : '9px') + ';padding:' + (sm ? '6px 14px 6px 6px' : '9px 18px 9px 9px') + ';border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 8px 20px -10px rgba(28,19,38,.2);font-weight:700;font-size:' + (sm ? '13px' : '14px') + ';color:#3a323f">' +
       '<span class="chip-ic"' + (sm ? ' style="width:26px;height:26px"' : '') + '>' + ph(iconName, sm ? 15 : 17, C, 'ph-fill') + '</span>' + esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
@@ -173,14 +173,14 @@
   }
   function pill(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14.5px;transition:all .22s;display:inline-flex;align-items:center;gap:7px;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #f0dde1;';
+    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #e9e6ec;';
   }
   function langSeg(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:6px 13px;font-weight:800;font-size:13px;transition:all .25s;';
     return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 14px -6px rgba(255,79,98,.7);' : b + 'background:transparent;color:#6b6b76;';
   }
   function langSegDark(active) {
-    var b = 'border:1px solid #ece0e3;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
+    var b = 'border:1px solid #e9e6ec;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
     return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:#8a8190;';
   }
   function drinkToggle() {
@@ -188,7 +188,7 @@
     var btn = 'position:relative;z-index:1;width:128px;border:0;background:transparent;cursor:pointer;padding:15px 0;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:color .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;';
     var thumbX = state.sel === 'coffee' ? '128px' : '0';
     return '<div style="display:flex;justify-content:center;margin:18px 0 0">' +
-      '<div style="position:relative;display:inline-flex;padding:5px;border-radius:999px;background:#fff;border:1px solid #f0dde1;box-shadow:0 12px 28px -12px rgba(28,19,38,.24)">' +
+      '<div style="position:relative;display:inline-flex;padding:5px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 12px 28px -12px rgba(28,19,38,.24)">' +
         '<div id="drinkThumb" style="position:absolute;top:5px;bottom:5px;left:5px;width:128px;border-radius:999px;background:#FF4F62;box-shadow:0 10px 20px -6px rgba(255,79,98,.7);transition:transform .36s cubic-bezier(.34,1.4,.5,1);transform:translateX(' + thumbX + ')"></div>' +
         '<button id="chipBeer" data-act="beer" style="' + btn + 'color:' + (state.sel === 'beer' ? '#fff' : '#6b6b76') + '">' + ph('beer-bottle', 18, state.sel === 'beer' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.beer) + '</button>' +
         '<button id="chipCoffee" data-act="coffee" style="' + btn + 'color:' + (state.sel === 'coffee' ? '#fff' : '#6b6b76') + '">' + ph('coffee', 18, state.sel === 'coffee' ? '#fff' : '#b9b0b6', 'ph-fill') + esc(t.coffee) + '</button>' +
@@ -256,7 +256,7 @@
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">Tap. Clink. Meet again.</p>' +
           '<p style="font-size:13.5px;color:#8a8190;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
-          '<div style="display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:12px;background:#fff;border:1px solid #f1e4e7;font-size:13.5px;font-weight:700;color:#3a323f">' + I.apple + esc(t.footComingSoon) + '</div>' +
+          '<div style="display:inline-flex;align-items:center;gap:9px;padding:9px 15px;border-radius:12px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;font-weight:700;color:#3a323f">' + I.apple + esc(t.footComingSoon) + '</div>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footProduct) + '</div>' +
@@ -271,7 +271,7 @@
           '<a href="mailto:' + CONTACT_EMAIL + '" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:#6b6b76">' + I.mail + esc(t.footEmail) + '</a>' +
         '</div>' +
       '</div>' +
-      '<div style="max-width:1080px;margin:32px auto 0;padding-top:20px;border-top:1px solid #f0e4e3;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
+      '<div style="max-width:1080px;margin:32px auto 0;padding-top:20px;border-top:1px solid #e9e6ec;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
         '<span style="font-size:12.5px;color:#a99ea6">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
         '<div style="display:flex;gap:6px">' +
           '<button data-act="en" style="' + langSegDark(state.lang === 'en') + '">EN</button>' +
@@ -330,7 +330,7 @@
         sparkle({ s: 16, pos: 'top:4%;left:4%', op: 0.6, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.6s ease-in-out infinite' }) +
         sparkle({ s: 12, pos: 'top:10%;right:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.2s ease-in-out .5s infinite' }) +
         '<div data-act="play" style="position:relative;aspect-ratio:1/1;perspective:1000px;cursor:pointer">' +
-          '<div style="position:absolute;inset:1%;border-radius:50%;background:radial-gradient(circle at 50% 46%,rgba(255,79,98,.34),rgba(255,138,151,.18) 38%,rgba(255,138,151,.06) 56%,transparent 70%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
+          '<div style="position:absolute;inset:-10% -6% -4%;border-radius:50%;background:radial-gradient(ellipse 62% 58% at 50% 40%,rgba(255,79,98,.30),rgba(255,138,151,.16) 44%,rgba(255,138,151,.05) 64%,transparent 78%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
@@ -507,7 +507,7 @@
       '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>' +
       '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 22px;max-width:760px">' + renderGameTabs() + '</div>' +
       '<div style="max-width:430px;margin:0 auto">' +
-        '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #f3eaed;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
+        '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
             '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
           '</div>' +
@@ -516,7 +516,7 @@
             '<p id="qline" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;text-wrap:pretty">' + renderQline() + '</p>' +
             '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">”</span>' +
           '</div>' +
-          '<div style="border-top:1px solid #f1e6e9;padding-top:16px">' +
+          '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
             '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
             '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
@@ -584,9 +584,9 @@
     var body = state.supportDone
       ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#3a323f">' + esc(t.supDone) + '</span></div>'
       : '<form data-form="support" style="display:flex;flex-direction:column;gap:12px">' +
-          '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
-          '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
-          '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #ece7ea;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
+          '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
+          '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
+          '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
           '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
           '<p style="font-size:12.5px;color:#a99ea6;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
@@ -629,7 +629,7 @@
       '<div style="max-width:680px;margin:0 auto">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
         '<p style="font-size:13.5px;color:#a99ea6;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
-        '<div style="margin-top:30px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid #f1e4e7;font-size:13.5px;color:#8a8190;line-height:1.6">' + esc(t.docContact) + '</div>' +
+        '<div style="margin-top:30px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;color:#8a8190;line-height:1.6">' + esc(t.docContact) + '</div>' +
       '</div></section></div>';
   }
 
@@ -864,7 +864,7 @@
 
   function mount() {
     var app = document.getElementById('app');
-    app.innerHTML = '<header id="hdr"></header><main id="main"></main><footer id="ftr" style="background:#fff;border-top:1px solid #f0e4e3;padding:clamp(44px,6vh,64px) clamp(20px,5vw,72px) 40px"></footer>';
+    app.innerHTML = '<header id="hdr"></header><main id="main"></main><footer id="ftr" style="background:#fff;border-top:1px solid #e9e6ec;padding:clamp(44px,6vh,64px) clamp(20px,5vw,72px) 40px"></footer>';
     $hdr = document.getElementById('hdr'); $main = document.getElementById('main'); $ftr = document.getElementById('ftr');
 
     var lang = 'en';

@@ -88,7 +88,7 @@ function init() {
       scene.environment = pmrem.fromEquirectangular(hdr).texture; hdr.dispose();
       progress.env = 1; updateLoader(); checkReady();
     },
-    function (e) { if (e && e.lengthComputable) { progress.env = e.loaded / e.total; updateLoader(); } },
+    function (e) { if (e && e.lengthComputable && e.total) { progress.env = Math.min(1, e.loaded / e.total); updateLoader(); } },
     useRoomEnv   // network/parse error → neutral room env so nothing stays black
   );
 
@@ -111,7 +111,7 @@ function init() {
       if (isActive) { progress.model = 1; updateLoader(); }
       checkReady();
     }, function (e) {
-      if (isActive && e && e.lengthComputable) { progress.model = e.loaded / e.total; updateLoader(); }
+      if (isActive && e && e.lengthComputable && e.total) { progress.model = Math.min(1, e.loaded / e.total); updateLoader(); }
     }, function (e) { console.error('hero3d: model load failed', e); });
   });
 
@@ -120,7 +120,7 @@ function init() {
 }
 
 function updateLoader() {
-  const pct = Math.round((progress.model * 0.55 + progress.env * 0.45) * 100);
+  const pct = Math.min(100, Math.round((progress.model * 0.55 + progress.env * 0.45) * 100));
   const arc = document.getElementById('mvProgArc');
   if (arc) arc.style.strokeDashoffset = (163.36 * (1 - pct / 100)).toFixed(1);
   const t = document.getElementById('mvPct');
