@@ -251,7 +251,7 @@
       { h: '5. Your Content and Data', b: [
         P('Clinky is offline-first and stores your content — including your friends ("Clinkers"), meetings, drinks, plans, collectibles, and ice-breaker answers — locally on your device. This data belongs to you. We do not host it on our own servers and, except for the limited third-party services described in our Privacy Policy, it does not leave your device.'),
         P('You are responsible for your content and for maintaining your own backups. Because your data is stored locally, deleting the App or your device data may permanently remove your content, and we cannot recover it for you.'),
-        P('Your use of the App is also subject to our Privacy Policy, available at: https://evgeniymityulya.github.io/clinky-legal/privacy.html')
+        P('Your use of the App is also subject to our Privacy Policy, available at: https://clinkyapp.com/privacy.html')
       ]},
       { h: '6. Intellectual Property', b: [
         P('The App and all related content, design, graphics, text, software, and trademarks — including the names "Clinky", "Clinkers", "Clink", and "Pro", the Clinky logo, and the ice-breaker question library — are owned by us or our licensors and are protected by intellectual property laws.'),
@@ -329,7 +329,7 @@
       { h: '5. Ваш контент и данные', b: [
         P('Clinky работает по принципу offline-first и хранит ваш контент — включая ваших друзей («Clinkers»), встречи, напитки, планы, коллекционные предметы и ответы на ice-breaker вопросы — локально на вашем устройстве. Эти данные принадлежат вам. Мы не размещаем их на собственных серверах, и, за исключением ограниченных сторонних сервисов, описанных в нашей Политике конфиденциальности, они не покидают ваше устройство.'),
         P('Вы несёте ответственность за свой контент и за создание собственных резервных копий. Поскольку ваши данные хранятся локально, удаление Приложения или данных устройства может безвозвратно удалить ваш контент, и мы не сможем его восстановить.'),
-        P('Использование вами Приложения также регулируется нашей Политикой конфиденциальности, доступной по адресу: https://evgeniymityulya.github.io/clinky-legal/privacy-ru.html')
+        P('Использование вами Приложения также регулируется нашей Политикой конфиденциальности, доступной по адресу: https://clinkyapp.com/privacy-ru.html')
       ]},
       { h: '6. Интеллектуальная собственность', b: [
         P('Приложение и весь связанный с ним контент, дизайн, графика, текст, программное обеспечение и товарные знаки — включая названия «Clinky», «Clinkers», «Clink» и «Pro», логотип Clinky и библиотеку ice-breaker вопросов — принадлежат нам или нашим лицензиарам и защищены законодательством об интеллектуальной собственности.'),
