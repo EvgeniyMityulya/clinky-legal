@@ -14,7 +14,7 @@
   var C = '#FF4F62';
 
   var state = {
-    lang: 'en', page: 'home', scrolled: false, sel: 'beer',
+    lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false,
     gameIndex: 0, qIndex: 0, waitlistDone: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
@@ -160,7 +160,7 @@
   }
   function sparkle(o) {
     var sz = Math.round((o.s || 16) * 1.5);
-    return '<svg width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
+    return '<svg class="spark" width="' + sz + '" height="' + sz + '" viewBox="0 0 24 24" fill="' + (o.c || C) + '" aria-hidden="true" ' +
       'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
       'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,79,98,.4)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
       '<path d="M12 1.2C12.7 10.4 13.4 11 22.8 12C13.4 13 12.7 13.6 12 22.8C11.3 13.6 10.6 13 1.2 12C10.6 11 11.3 10.4 12 1.2Z"/></svg>';
@@ -339,7 +339,17 @@
           '<button data-act="en" style="' + langSeg(state.lang === 'en') + '">EN</button>' +
           '<button data-act="ru" style="' + langSeg(state.lang === 'ru') + '">RU</button>' +
         '</div>' +
-      '</div>';
+        '<button data-act="menu" class="nav-burger" aria-label="Menu" style="display:none;align-items:center;justify-content:center;width:42px;height:42px;border-radius:13px;border:1px solid rgba(28,19,38,.1);background:#fff;cursor:pointer;flex:none">' +
+          ph(state.menuOpen ? 'x' : 'list', 22, '#1c1326', 'ph-bold') +
+        '</button>' +
+      '</div>' +
+      (state.menuOpen ? '<div class="nav-menu" style="position:absolute;top:calc(100% + 8px);right:clamp(14px,3.5vw,40px);left:clamp(14px,3.5vw,40px);background:#fff;border:1px solid #ece7ec;border-radius:18px;box-shadow:0 18px 40px -18px rgba(28,19,38,.3);padding:8px;display:flex;flex-direction:column;gap:2px;z-index:70;animation:popIn .2s ease both">' +
+        ['home', 'about', 'support', 'privacy', 'terms'].map(function (pg) {
+          var label = { home: t.navHome, about: t.navAbout, support: t.navSupport, privacy: t.navPrivacy, terms: t.navTerms }[pg];
+          var on = p === pg;
+          return '<button data-act="' + pg + '" style="text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326') + '">' + esc(label) + '</button>';
+        }).join('') +
+      '</div>' : '');
   }
 
   function renderFooter() {
@@ -477,7 +487,7 @@
       rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко подскажем, чтобы ты никого не забыл', 'A gentle nudge so you never forget a friend') }
     };
     function bHead(f, mw) {
-      return '<div style="position:relative;z-index:4;max-width:' + (mw || '60%') + '">' +
+      return '<div class="bento-head" style="position:relative;z-index:4;max-width:' + (mw || '60%') + '">' +
         '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
         '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>' +
         '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(f.d) + '</p>' +
@@ -505,11 +515,11 @@
     }).join('');
     var cellIce = '<div class="bento-card" style="grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;padding:26px">' +
         bHead(FC.ic, '54%') +
-        '<div id="ibDeck" style="position:absolute;left:50%;bottom:46px;width:300px;height:258px;transform:translateX(-50%);cursor:grab;touch-action:pan-y">' + ibDeckImgs + '</div>' +
+        '<div id="ibDeck" class="bento-media" style="position:absolute;left:50%;bottom:46px;width:300px;height:258px;transform:translateX(-50%);cursor:grab;touch-action:pan-y">' + ibDeckImgs + '</div>' +
       '</div>';
     var cellCol = '<div class="bento-card" style="grid-column:3/5;grid-row:1/2;position:relative;overflow:visible;padding:26px;z-index:3">' +
         bHead(FC.col, '60%') +
-        '<img src="' + capImg + '" alt="" style="position:absolute;right:-34px;top:22px;width:236px;filter:drop-shadow(7px 9px 6px rgba(28,19,38,.30)) drop-shadow(13px 17px 16px rgba(28,19,38,.13));z-index:2">' +
+        '<img src="' + capImg + '" alt="" class="bento-media" style="position:absolute;right:-34px;top:22px;width:236px;filter:drop-shadow(7px 9px 6px rgba(28,19,38,.30)) drop-shadow(13px 17px 16px rgba(28,19,38,.13));z-index:2">' +
       '</div>';
     var cellStr = '<div class="bento-card" style="grid-column:3/4;grid-row:2/3;position:relative;overflow:hidden;padding:20px">' +
         '<div style="position:relative;z-index:4">' +
@@ -519,7 +529,7 @@
           '</div>' +
           '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.str.d) + '</p>' +
         '</div>' +
-        '<img src="assets/bento/streak-' + L + '.png?v=2" alt="" loading="lazy" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
+        '<img src="assets/bento/streak-' + L + '.png?v=2" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
       '</div>';
     var cellAch = '<div class="bento-card" style="grid-column:4/5;grid-row:2/3;position:relative;overflow:visible;padding:20px;z-index:2">' +
         '<div style="position:relative;z-index:4">' +
@@ -529,12 +539,12 @@
           '</div>' +
           '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.ach.d) + '</p>' +
         '</div>' +
-        '<img src="assets/bento/ach-' + L + '.png?v=4" loading="lazy" alt="" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
+        '<img src="assets/bento/ach-' + L + '.png?v=4" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
       '</div>';
     var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
         bHead(FC.an, '40%') +
-        '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
-        '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
+        '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
+        '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
       '</div>';
     var cellRem = '<div class="bento-card" style="grid-column:3/5;grid-row:3/4;position:relative;overflow:hidden;padding:24px">' +
         '<div style="position:relative;z-index:4">' +
@@ -544,7 +554,7 @@
           '</div>' +
           '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(FC.rem.d) + '</p>' +
         '</div>' +
-        '<img src="assets/bento/notif-' + L + '.png" alt="" loading="lazy" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
+        '<img src="assets/bento/notif-' + L + '.png" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
       '</div>';
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
@@ -1023,7 +1033,8 @@
     var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
-      case 'home': case 'about': case 'support': case 'privacy': case 'terms': setPage(a); break;
+      case 'home': case 'about': case 'support': case 'privacy': case 'terms': state.menuOpen = false; setPage(a); break;
+      case 'menu': state.menuOpen = !state.menuOpen; paintHeader(); break;
       case 'en': setLang('en'); break;
       case 'ru': setLang('ru'); break;
       case 'join': joinCta(); break;
