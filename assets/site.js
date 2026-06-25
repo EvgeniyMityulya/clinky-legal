@@ -6,7 +6,9 @@
 (function () {
   'use strict';
 
-  var EO_ACTION = '';          // EmailOctopus embedded-form action URL (waitlist). Empty => confirm locally.
+  var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4gv-C4NlkexGgz-lbDvD7xm0RU5BxsCVe2eLvof-DYLDNN_ZGKafpijywAQQZEh6IYw/exec'; // Google Apps Script -> Sheet
+  var GEO = {};   // {country, city}, best-effort from a free IP lookup
+  try { fetch('https://ipwho.is/').then(function (r) { return r.json(); }).then(function (d) { if (d && d.success !== false) { GEO.country = d.country || ''; GEO.city = d.city || ''; } }).catch(function () {}); } catch (e) {}
   var SUPPORT_ENDPOINT = '';   // optional POST endpoint for support; empty => mailto
   var CONTACT_EMAIL = 'evgeniymityulya.ios@gmail.com';
   var C = '#FF4F62';
@@ -389,6 +391,7 @@
       : 'color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
     return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:' + (left ? '0' : '0 auto') + ';flex-wrap:wrap">' +
         '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
+        '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">' +
         '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap;' + btn + '">' + esc(t.heroCta) + '</button>' +
       '</form>';
   }
@@ -461,53 +464,91 @@
       '</div>' +
     '</section>';
 
-    // ---- feature bento (Sheepy-style) ----
-    function shot(n) { return 'assets/shots/' + L + '-' + n + '.jpg'; }
-    var feats = {
-      en: [
-        { ic: 'game-controller', t: 'Icebreakers', d: 'Real cards that get any table talking in seconds', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D collection', d: 'A spin-able collectible drink for every clink', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'flame', t: 'Meeting streaks', d: 'Keep your streak going with the people close to you', col: 'span 1', row: 'span 1' },
-        { ic: 'bell', t: 'Smart reminders', d: 'A gentle nudge so you never forget a friend', col: 'span 1', row: 'span 1' },
-        { ic: 'trophy', t: 'Achievements', d: 'Dozens of badges, some of them secret', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'chart-bar', t: 'Analytics', d: 'Clear charts of your friends, drinks and meet-ups', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
-      ],
-      ru: [
-        { ic: 'game-controller', t: 'Карточки-игры', d: 'Реальные карточки, что разговорят любой стол за секунды', n: 1, col: 'span 2', row: 'span 2', media: 'bleed' },
-        { ic: 'cube', t: '3D-коллекция', d: 'Коллекционный напиток за каждый «чок»', n: 2, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'flame', t: 'Серии встреч', d: 'Держи серию встреч с близкими', col: 'span 1', row: 'span 1' },
-        { ic: 'bell', t: 'Умные напоминания', d: 'Мягко подскажем, чтобы ты никого не забыл', col: 'span 1', row: 'span 1' },
-        { ic: 'trophy', t: 'Достижения', d: 'Десятки наград, включая тайные', n: 7, col: 'span 2', row: 'span 1', media: 'side' },
-        { ic: 'chart-bar', t: 'Аналитика встреч', d: 'Графики и факты о твоих друзьях, напитках и встречах', n: 6, col: 'span 2', row: 'span 1', media: 'side' }
-      ]
-    }[L];
-    function bentoChip(ic) { return '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(ic, 21, C, 'ph-fill') + '</span>'; }
-    // phone-UI window: crops the marketing banner off the top, shows the app screen, bleeds off the card bottom
-    function phoneWin(n, ratio) {
-      return '<div style="aspect-ratio:' + ratio + ';overflow:hidden;border-radius:18px 18px 0 0;box-shadow:0 -2px 30px rgba(28,19,38,.16)">' +
-        '<img src="' + shot(n) + '" alt="" loading="lazy" style="display:block;width:100%;height:100%;object-fit:cover;object-position:50% 78%"></div>';
+    // ---- feature bento (Sheepy-style tilted compositions) ----
+    function bshot(n) { return 'assets/shots/en-' + n + '.jpg'; } // TODO swap to assets/bento/* finals
+    var capImg = 'assets/bento/drink.png';
+    function L2(ru, en) { return L === 'ru' ? ru : en; }
+    var FC = {
+      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды', 'Real cards that get any table talking in seconds') },
+      col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Коллекционный напиток за каждый «чок»', 'A collectible drink for every clink') },
+      str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Держи серию встреч с близкими', 'Keep your streak going with the people close to you') },
+      ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Десятки наград, включая тайные', 'Dozens of badges, some of them secret') },
+      an:  { ic: 'chart-bar', t: L2('Аналитика встреч', 'Analytics'), d: L2('Графики и факты о твоих друзьях, напитках и встречах', 'Clear charts of your friends, drinks and meet-ups') },
+      rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко подскажем, чтобы ты никого не забыл', 'A gentle nudge so you never forget a friend') }
+    };
+    function bHead(f, mw) {
+      return '<div style="position:relative;z-index:4;max-width:' + (mw || '60%') + '">' +
+        '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>' +
+        '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(f.d) + '</p>' +
+      '</div>';
     }
-    function bentoCard(f) {
-      var grid = 'grid-column:' + f.col + ';grid-row:' + f.row + ';';
-      var title = '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>';
-      var desc = '<p style="font-size:14px;line-height:1.5;color:#6b6b76;margin:0;max-width:30em">' + esc(f.d) + '</p>';
-      if (f.media === 'side') {
-        return '<div class="bento-card" style="' + grid + 'position:relative;padding:24px;overflow:hidden">' +
-          '<div style="position:relative;z-index:1;max-width:60%">' + bentoChip(f.ic) + title + desc + '</div>' +
-          '<div style="position:absolute;right:16px;bottom:-16px;width:38%;max-width:150px">' + phoneWin(f.n, '9/13') + '</div>' +
-        '</div>';
-      }
-      if (f.media === 'bleed') {
-        return '<div class="bento-card" style="' + grid + 'display:flex;flex-direction:column;padding:24px 24px 0;overflow:hidden">' +
-          '<div>' + bentoChip(f.ic) + title + desc + '</div>' +
-          '<div style="margin-top:auto;display:flex;justify-content:center;padding-top:16px"><div style="width:64%;margin-bottom:-14px">' + phoneWin(f.n, '9/12') + '</div></div>' +
-        '</div>';
-      }
-      return '<div class="bento-card" style="' + grid + 'padding:24px">' + bentoChip(f.ic) + title + desc + '</div>';
+    function scr(src, css) {
+      return '<img src="' + src + '" loading="lazy" alt="" style="position:absolute;border-radius:22px;border:3px solid #fff;box-shadow:0 26px 54px -22px rgba(28,19,38,.32);object-fit:cover;' + css + '">';
     }
+    function badge(icon, bg, css) {
+      return '<span style="position:absolute;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;background:' + bg + ';border:3px solid #fff;box-shadow:0 16px 28px -10px rgba(28,19,38,.42);' + css + '">' + ph(icon, 22, '#fff', 'ph-fill') + '</span>';
+    }
+    function donut(pct, css) {
+      var r = 30, c = 2 * Math.PI * r, off = c * (1 - pct / 100);
+      return '<div style="position:absolute;width:84px;height:84px;border-radius:50%;background:#fff;box-shadow:0 18px 34px -14px rgba(28,19,38,.34);display:flex;align-items:center;justify-content:center;' + css + '">' +
+        '<svg width="72" height="72" viewBox="0 0 72 72" style="transform:rotate(-90deg)">' +
+          '<circle cx="36" cy="36" r="' + r + '" fill="none" stroke="#FFE2E6" stroke-width="9"></circle>' +
+          '<circle cx="36" cy="36" r="' + r + '" fill="none" stroke="#FF4F62" stroke-width="9" stroke-linecap="round" stroke-dasharray="' + c.toFixed(1) + '" stroke-dashoffset="' + off.toFixed(1) + '"></circle>' +
+        '</svg>' +
+        '<span style="position:absolute;font-family:Nunito,sans-serif;font-weight:900;font-size:15px;color:#1c1326">' + pct + '%</span>' +
+      '</div>';
+    }
+    var ibThemes = ['nhi', 'rou', 'tam', 'wyr'];
+    var ibDeckImgs = ibThemes.map(function (th) {
+      return '<img class="ibd-card" src="assets/bento/ib-' + th + '-' + L + '.png" loading="lazy" alt="" draggable="false" style="position:absolute;left:0;top:0;width:100%;transform-origin:center;user-select:none;-webkit-user-drag:none">';
+    }).join('');
+    var cellIce = '<div class="bento-card" style="grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;padding:26px">' +
+        bHead(FC.ic, '54%') +
+        '<div id="ibDeck" style="position:absolute;left:50%;bottom:46px;width:300px;height:258px;transform:translateX(-50%);cursor:grab;touch-action:pan-y">' + ibDeckImgs + '</div>' +
+      '</div>';
+    var cellCol = '<div class="bento-card" style="grid-column:3/5;grid-row:1/2;position:relative;overflow:visible;padding:26px;z-index:3">' +
+        bHead(FC.col, '60%') +
+        '<img src="' + capImg + '" alt="" style="position:absolute;right:-34px;top:22px;width:236px;filter:drop-shadow(7px 9px 6px rgba(28,19,38,.30)) drop-shadow(13px 17px 16px rgba(28,19,38,.13));z-index:2">' +
+      '</div>';
+    var cellStr = '<div class="bento-card" style="grid-column:3/4;grid-row:2/3;position:relative;overflow:hidden;padding:20px">' +
+        '<div style="position:relative;z-index:4">' +
+          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">' +
+            '<span style="display:inline-flex;width:40px;height:40px;border-radius:12px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.str.ic, 20, C, 'ph-fill') + '</span>' +
+            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.str.t) + '</h3>' +
+          '</div>' +
+          '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.str.d) + '</p>' +
+        '</div>' +
+        '<img src="assets/bento/streak-' + L + '.png?v=2" alt="" loading="lazy" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
+      '</div>';
+    var cellAch = '<div class="bento-card" style="grid-column:4/5;grid-row:2/3;position:relative;overflow:visible;padding:20px;z-index:2">' +
+        '<div style="position:relative;z-index:4">' +
+          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">' +
+            '<span style="display:inline-flex;width:40px;height:40px;border-radius:12px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.ach.ic, 20, C, 'ph-fill') + '</span>' +
+            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.ach.t) + '</h3>' +
+          '</div>' +
+          '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.ach.d) + '</p>' +
+        '</div>' +
+        '<img src="assets/bento/ach-' + L + '.png?v=4" loading="lazy" alt="" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
+      '</div>';
+    var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
+        bHead(FC.an, '40%') +
+        '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
+        '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
+      '</div>';
+    var cellRem = '<div class="bento-card" style="grid-column:3/5;grid-row:3/4;position:relative;overflow:hidden;padding:24px">' +
+        '<div style="position:relative;z-index:4">' +
+          '<div style="display:flex;align-items:center;gap:11px;margin-bottom:7px">' +
+            '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.rem.ic, 21, C, 'ph-fill') + '</span>' +
+            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.rem.t) + '</h3>' +
+          '</div>' +
+          '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(FC.rem.d) + '</p>' +
+        '</div>' +
+        '<img src="assets/bento/notif-' + L + '.png" alt="" loading="lazy" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
+      '</div>';
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
-      '<div class="bento">' + feats.map(bentoCard).join('') + '</div>' +
+      '<div class="bento">' + cellIce + cellCol + cellStr + cellAch + cellAn + cellRem + '</div>' +
     '</div></section>';
 
     // ---- interactive question mini-game ----
@@ -704,7 +745,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); } else stopAnim();
+    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); bindIcebreakerDeck(); } else stopAnim();
   }
 
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
@@ -773,6 +814,53 @@
   // float badges turn TOWARD the scene centre (strongest when cursor is centred → focus on the 3D; flat at edges),
   // with a black shadow cast OUTWARD from the centre (light feels central) + a little cursor-follow for life.
   // Parallax lives on .float-inner; the idle bob stays on the outer .float-card → no conflict, smooth return.
+  var _ibActive = null;
+  function _ibWin() {
+    if (window.__ibWinBound) return; window.__ibWinBound = true;
+    window.addEventListener('pointermove', function (e) { if (_ibActive) _ibActive.move(e); });
+    window.addEventListener('pointerup', function (e) { if (_ibActive) _ibActive.up(e); });
+    window.addEventListener('pointercancel', function (e) { if (_ibActive) _ibActive.up(e); });
+    window.addEventListener('blur', function () { if (_ibActive) _ibActive.up(); });
+  }
+  function bindIcebreakerDeck() {
+    var deck = document.getElementById('ibDeck'); if (!deck || deck._wired) return; deck._wired = true;
+    var order = [].slice.call(deck.querySelectorAll('.ibd-card')); if (!order.length) return;
+    var EASE = 'transform .5s cubic-bezier(.22,.61,.36,1), opacity .4s ease', busy = false, sx = 0, dx = 0, drag = false;
+    function applySlot(c, slot) {
+      c.style.transform = 'translate(' + (slot * 16) + 'px,' + (slot * 6) + 'px) rotate(' + (slot * 2.6) + 'deg) scale(' + (1 - slot * 0.035) + ')';
+      c.style.zIndex = String(100 - slot);
+      c.style.opacity = '1';
+      c.style.filter = slot === 0 ? 'drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10))' : 'drop-shadow(0 4px 7px rgba(28,19,38,.10))';
+    }
+    function render(withT) { order.forEach(function (c, s) { c.style.transition = withT ? EASE : 'none'; applySlot(c, s); }); }
+    render(false);
+    function next(dir) {
+      if (busy) return; busy = true;
+      var leaving = order[0]; order.push(order.shift());
+      render(true);                       // remaining cards glide up to their new slots
+      leaving.style.transition = EASE; leaving.style.zIndex = '200';
+      leaving.style.transform = 'translateX(' + (dir * 165) + '%) rotate(' + (dir * 13) + 'deg) scale(.95)'; leaving.style.opacity = '0';
+      setTimeout(function () {
+        leaving.style.transition = 'none';
+        applySlot(leaving, order.indexOf(leaving));   // snap transform to back slot while invisible
+        leaving.style.opacity = '0';
+        void deck.offsetWidth;
+        leaving.style.transition = 'opacity .4s ease';
+        leaving.style.opacity = '1';                  // fade in softly at the back (no abrupt pop)
+        busy = false;
+      }, 440);
+    }
+    function move(e) { if (!drag) return; dx = e.clientX - sx; var f = order[0]; if (f) { f.style.transition = 'none'; f.style.transform = 'translateX(' + dx + 'px) rotate(' + (dx * 0.05) + 'deg)'; } }
+    function up() {
+      if (!drag) return; drag = false; deck.style.cursor = 'grab';
+      if (Math.abs(dx) > 45) next(dx < 0 ? -1 : 1);      // swipe either way -> next, exits in drag direction
+      else if (Math.abs(dx) < 9) next(1);                // tap -> next
+      else { var f = order[0]; if (f) { f.style.transition = EASE; applySlot(f, 0); } }   // tiny drag -> snap back
+    }
+    deck.addEventListener('pointerdown', function (e) { if (busy) return; drag = true; sx = e.clientX; dx = 0; deck.style.cursor = 'grabbing'; });
+    _ibActive = { move: move, up: up };   // release/move handled at window level so dragging off-screen never hangs
+    _ibWin();
+  }
   function bindHeroParallax() {
     var play = document.querySelector('[data-act="play"]'); if (!play || play._px) return; play._px = true;
     var inners = [].slice.call(play.querySelectorAll('.float-inner'));
@@ -865,9 +953,13 @@
     try { localStorage.setItem('clinky_lang', lang); } catch (e) {}
     document.documentElement.lang = lang; state.lang = lang; paint();
   }
+  var PAGES = { home: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  function pageFromHash() { var h = (location.hash || '').replace(/^#\/?/, '').toLowerCase(); return PAGES[h] ? h : 'home'; }
   function setPage(page) {
     state.page = page;
-    try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e) { window.scrollTo(0, 0); }
+    var h = page === 'home' ? '' : '#' + page;
+    try { if ((location.hash || '') !== h) history.replaceState(null, '', h || (location.pathname + location.search)); } catch (e) {}
+    try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
     state.scrolled = window.scrollY > 24; paint();
   }
   function joinCta() { if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
@@ -893,8 +985,18 @@
 
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
-    if (!/.+@.+\..+/.test(email)) return;
-    if (EO_ACTION) { try { fetch(EO_ACTION, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (e) {} }
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
+    try {
+      var params = new URLSearchParams();
+      params.set('email', email);
+      params.set('hp', (form.hp && form.hp.value) || '');
+      params.set('country', GEO.country || '');
+      params.set('city', GEO.city || '');
+      params.set('lang', state.lang || navigator.language || '');
+      params.set('drink', state.sel || '');
+      params.set('referrer', document.referrer || '');
+      fetch(WAITLIST_ENDPOINT, { method: 'POST', mode: 'no-cors', body: params });
+    } catch (e) {}
     state.waitlistDone = true;
     var done = waitlistForm();
     var w1 = document.getElementById('wl1'); if (w1) w1.innerHTML = done;
@@ -948,6 +1050,8 @@
     var lang = 'en';
     try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
+    state.page = pageFromHash();
+    window.addEventListener('hashchange', function () { var p = pageFromHash(); if (p !== state.page) setPage(p); });
 
     document.addEventListener('click', onClick);
     document.addEventListener('submit', onSubmit);
