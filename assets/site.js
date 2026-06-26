@@ -39,10 +39,11 @@
       discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just your people and your moments.',
       finalTitle: 'Round up your friends and clink first!', finalSub: "Drop your email and we'll let you know on launch day!",
       aboutTitle: 'About Clinky',
+      slogan: "Bring your friends, we'll bring the fun!",
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
       p1t: "Don't lose touch", p1d: "Remember who you saw, when, and who you haven't met in a while.",
-      p2t: 'Clink with anything', p2d: "Coffee, tea or beer. It's the meet-up that matters, not the drink.",
+      p2t: 'Clink with anything', p2d: "Coffee, tea, a glass of wine or a beer. What matters is you're together!",
       p3t: 'Party games', p3d: 'Icebreaker cards that get any table talking in seconds.',
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
       supName: 'Your name', supEmailPh: 'you@email.com', supMsgPh: 'Tell us what happened or what you have in mind…',
@@ -73,10 +74,11 @@
       discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только твои люди и моменты.',
       finalTitle: 'Собери друзей и чокнись первым!', finalSub: 'Оставь почту, и мы напишем тебе в день релиза!',
       aboutTitle: 'О Clinky',
+      slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
       p1t: 'Не теряй друзей', p1d: 'Помни, кого и когда видел и с кем давно не пересекался.',
-      p2t: 'Чокнись чем угодно', p2d: 'Хоть кофе, хоть чай. Важна встреча, а не алкоголь.',
+      p2t: 'Чокнись чем угодно', p2d: 'Кофе, чай, бокал вина или пиво. Главное, что вы вместе!',
       p3t: 'Игры для компании', p3d: 'Карточки-игры, которые разговорят любой стол за секунды.',
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
       supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
@@ -382,7 +384,7 @@
             '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
             '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;color:#1c1326">Clinky</span>' +
           '</div>' +
-          '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">Tap. Clink. Meet again.</p>' +
+          '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">' + esc(t.slogan) + '</p>' +
           '<p style="font-size:13.5px;color:#8a8190;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
           '<div style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;font-weight:700;color:#3a323f">' + esc(t.footComingSoon) + I.apple + '</div>' +
         '</div>' +
@@ -505,10 +507,13 @@
       an:  { ic: 'chart-bar', t: L2('Аналитика встреч', 'Analytics'), d: L2('Графики и факты о твоих друзьях, напитках и встречах', 'Clear charts of your friends, drinks and meet-ups') },
       rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко подскажем, чтобы ты никого не забыл', 'A gentle nudge so you never forget a friend') }
     };
+    // Unified bento header: icon BESIDE title (one row), description below.
     function bHead(f, mw) {
-      return '<div class="bento-head" style="position:relative;z-index:4;max-width:' + (mw || '60%') + '">' +
-        '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 6px;color:#1c1326">' + esc(f.t) + '</h3>' +
+      return '<div class="bento-head" style="position:relative;z-index:4;max-width:' + (mw || '100%') + '">' +
+        '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">' +
+          '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
+          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(f.t) + '</h3>' +
+        '</div>' +
         '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(f.d) + '</p>' +
       '</div>';
     }
@@ -541,38 +546,20 @@
         '<img src="' + capImg + '" alt="" class="bento-media" style="position:absolute;right:-34px;top:22px;width:236px;filter:drop-shadow(7px 9px 6px rgba(28,19,38,.30)) drop-shadow(13px 17px 16px rgba(28,19,38,.13));z-index:2">' +
       '</div>';
     var cellStr = '<div class="bento-card" style="grid-column:3/4;grid-row:2/3;position:relative;overflow:hidden;padding:20px">' +
-        '<div style="position:relative;z-index:4">' +
-          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">' +
-            '<span style="display:inline-flex;width:40px;height:40px;border-radius:12px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.str.ic, 20, C, 'ph-fill') + '</span>' +
-            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.str.t) + '</h3>' +
-          '</div>' +
-          '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.str.d) + '</p>' +
-        '</div>' +
+        bHead(FC.str, '100%') +
         '<img src="assets/bento/streak-' + L + '.png?v=3" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
       '</div>';
     var cellAch = '<div class="bento-card" style="grid-column:4/5;grid-row:2/3;position:relative;overflow:visible;padding:20px;z-index:2">' +
-        '<div style="position:relative;z-index:4">' +
-          '<div style="display:flex;align-items:center;gap:10px;margin-bottom:7px">' +
-            '<span style="display:inline-flex;width:40px;height:40px;border-radius:12px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.ach.ic, 20, C, 'ph-fill') + '</span>' +
-            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.ach.t) + '</h3>' +
-          '</div>' +
-          '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.ach.d) + '</p>' +
-        '</div>' +
+        bHead(FC.ach, '100%') +
         '<img src="assets/bento/ach-' + L + '.png?v=5" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
       '</div>';
     var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
-        bHead(FC.an, '40%') +
+        bHead(FC.an, '58%') +
         '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
         '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
       '</div>';
     var cellRem = '<div class="bento-card" style="grid-column:3/5;grid-row:3/4;position:relative;overflow:hidden;padding:24px">' +
-        '<div style="position:relative;z-index:4">' +
-          '<div style="display:flex;align-items:center;gap:11px;margin-bottom:7px">' +
-            '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(FC.rem.ic, 21, C, 'ph-fill') + '</span>' +
-            '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(FC.rem.t) + '</h3>' +
-          '</div>' +
-          '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0">' + esc(FC.rem.d) + '</p>' +
-        '</div>' +
+        bHead(FC.rem, '100%') +
         '<img src="assets/bento/notif-' + L + '.png" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
       '</div>';
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
@@ -686,7 +673,7 @@
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
         '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">Tap. Clink. Meet again.</div>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">' + esc(t.slogan) + '</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
