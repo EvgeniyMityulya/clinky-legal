@@ -223,8 +223,10 @@ function play() {
     if (p < 0.62) lp = Math.sin(Math.PI * (p / 0.62));
     else lp = 0.16 * Math.sin(Math.PI * ((p - 0.62) / 0.38));
     modelRoot.position.y = baseY + lp * riseH;
-    if (coffee) poseGroup.rotation.set(rx0, ry0 + deg, rz0);   // calm spin around its own vertical axis
-    else poseGroup.rotation.set(rx0 - deg, ry0, rz0);          // forward roll for the cap
+    if (coffee) {
+      const tilt = D2R(24) * Math.sin(Math.PI * p);            // lean sideways and back, like a spinning top
+      poseGroup.rotation.set(rx0, ry0 + deg, rz0 + tilt);
+    } else poseGroup.rotation.set(rx0 - deg, ry0, rz0);         // forward roll for the cap
     dirty = true;
     if (p < 1) requestAnimationFrame(tick);
     else { spinning = false; poseGroup.rotation.set(rx0, ry0, rz0); modelRoot.position.y = baseY; dirty = true; }
