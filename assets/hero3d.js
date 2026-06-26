@@ -185,8 +185,8 @@ function applyConfig(d) {
 // Zoom the model in on small screens so it reads bigger (stronger on phones).
 function heroDistMul() {
   var w = window.innerWidth;
-  if (w < 560) return 0.70;
-  if (w < 960) return 0.82;
+  if (w < 560) return 0.90;
+  if (w < 960) return 0.95;
   return 1;
 }
 function resize() {
