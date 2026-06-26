@@ -655,9 +655,11 @@
   function renderAbout() {
     var t = tdict(), I = icons();
     var pillar = function (ic, ti, de) {
-      return '<div class="soft-card" style="padding:28px 26px">' +
-        '<span style="display:flex;width:52px;height:52px;border-radius:15px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:16px">' + ic + '</span>' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0 0 7px;color:#1c1326">' + esc(ti) + '</h3>' +
+      return '<div class="soft-card" style="padding:26px;text-align:left">' +
+        '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">' +
+          '<span style="display:flex;width:48px;height:48px;border-radius:14px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ic + '</span>' +
+          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(ti) + '</h3>' +
+        '</div>' +
         '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0">' + esc(de) + '</p></div>';
     };
     return '<div class="page-in">' +
