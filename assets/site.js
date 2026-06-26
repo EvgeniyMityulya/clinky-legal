@@ -46,11 +46,12 @@
       p2t: 'Clink with anything', p2d: "Coffee, tea, a glass of wine or a beer. What matters is you're together!",
       p3t: 'Party games', p3d: 'Icebreaker cards that get any table talking in seconds.',
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
-      supName: 'Your name', supEmailPh: 'you@email.com', supMsgPh: 'Tell us what happened or what you have in mind…',
+      supName: 'Name', supEmailPh: 'Email', supMsgPh: 'Description',
       supSend: 'Send message', supNote: 'We usually reply within a day.',
       supDone: 'Thanks! We got your message and will reply soon.',
       privTitle: 'Privacy Policy', termsTitle: 'Terms of Use', docUpdated: 'Last updated: June 22, 2026',
       docContact: 'Questions about this document? Email us at support@clinkyapp.com and we will help.',
+      docContactCta: 'Contact support',
       footNote: 'Track meet-ups, play party-game cards and collect 3D mementos.',
       footComingSoon: 'Coming to the App Store', footProduct: 'Product', footLegalReach: 'Legal & contact', footEmail: 'Email us',
       footRights: 'For people who value real meet-ups.'
@@ -81,11 +82,12 @@
       p2t: 'Чокнись чем угодно', p2d: 'Кофе, чай, бокал вина или пиво. Главное, что вы вместе!',
       p3t: 'Игры для компании', p3d: 'Карточки-игры, которые разговорят любой стол за секунды.',
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
-      supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
+      supName: 'Имя', supEmailPh: 'Почта', supMsgPh: 'Описание',
       supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
       supDone: 'Спасибо! Мы получили твоё сообщение и скоро ответим.',
       privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 22 июня 2026 г.',
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
+      docContactCta: 'Написать в поддержку',
       footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
       footComingSoon: 'Скоро в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
       footRights: 'Для тех, кто ценит живые встречи.'
@@ -740,7 +742,7 @@
       '<div style="max-width:680px;margin:0 auto">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
         '<p style="font-size:13.5px;color:#a99ea6;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
-        '<div style="margin-top:30px;padding:18px 20px;border-radius:16px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;color:#8a8190;line-height:1.6">' + esc(t.docContact) + '</div>' +
+        '<div style="margin-top:30px;text-align:center">' + coralBtn(t.docContactCta, 'support') + '</div>' +
       '</div></section></div>';
   }
 
