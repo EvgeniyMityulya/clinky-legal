@@ -500,7 +500,7 @@
     var capImg = 'assets/bento/drink.png';
     function L2(ru, en) { return L === 'ru' ? ru : en; }
     var FC = {
-      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Рулетка», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. Never Have I Ever, Roulette, Tell a Moment and Would You Rather, four games in all.') },
+      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Рулетка», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. "Never Have I Ever", "Roulette", "Tell a Moment" and "Would You Rather", four games in all.') },
       col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» добавляет в коллекцию 3D-напиток своего вида. Чем больше встреч, тем полнее коллекция!', 'Each clink adds a 3D drink, unique to its kind. The more you meet, the fuller it gets!') },
       str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Держи серию встреч с близкими', 'Keep your streak going with the people close to you') },
       ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и новые знакомства. Есть и секретные!', 'Badges for meet-ups, streaks and new friends. Some are secret!') },
@@ -539,7 +539,7 @@
       return '<img class="ibd-card" src="assets/bento/ib-' + th + '-' + L + '.png" loading="lazy" alt="" draggable="false" style="position:absolute;left:0;top:0;width:100%;transform-origin:center;user-select:none;-webkit-user-drag:none">';
     }).join('');
     var cellIce = '<div class="bento-card" style="grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;padding:26px">' +
-        bHead(FC.ic, '74%') +
+        bHead(FC.ic, '84%') +
         '<div id="ibDeck" class="bento-media" style="position:absolute;left:50%;bottom:46px;width:300px;height:258px;transform:translateX(-50%);cursor:grab;touch-action:pan-y">' + ibDeckImgs + '</div>' +
       '</div>';
     var cellCol = '<div class="bento-card" style="grid-column:3/5;grid-row:1/2;position:relative;overflow:visible;padding:26px;z-index:3">' +
@@ -555,7 +555,7 @@
         '<img src="assets/bento/ach-' + L + '.png?v=5" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
       '</div>';
     var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
-        bHead(FC.an, '100%', '232px') +
+        bHead(FC.an, '100%', '185px') +
         '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
         '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
       '</div>';
