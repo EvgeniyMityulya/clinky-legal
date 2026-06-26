@@ -15,7 +15,7 @@
 
   var state = {
     lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false,
-    gameIndex: 0, qIndex: 0, waitlistDone: false, supportDone: false
+    gameIndex: 0, qIndex: 0, waitlistDone: false, waitlistDup: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
 
@@ -29,6 +29,7 @@
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
+      heroDup: "This email is already on the list! We'll be in touch on launch day.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through',
@@ -65,6 +66,7 @@
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
       heroDone: 'Ты в очереди! Пришлём ссылку на App Store, как только Clinky выйдет.',
+      heroDup: 'Эта почта уже в списке! Напишем в день релиза.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
@@ -423,7 +425,7 @@
     var t = tdict();
     if (state.waitlistDone) {
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .5s ease both">' +
-        '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(t.heroDone) + '</span></div>';
+        '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(state.waitlistDup ? t.heroDup : t.heroDone) + '</span></div>';
     }
     var btn = onColor
       ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
@@ -1041,18 +1043,25 @@
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
+    var params = new URLSearchParams();
+    params.set('email', email);
+    params.set('hp', (form.hp && form.hp.value) || '');
+    params.set('country', GEO.country || '');
+    params.set('city', GEO.city || '');
+    params.set('lang', state.lang || navigator.language || '');
+    params.set('drink', state.sel || '');
+    params.set('referrer', document.referrer || '');
+    state.waitlistDone = true; state.waitlistDup = false;
+    paintWaitlistDone();
+    // Read the response so we can tell "already on the list" from a fresh signup.
     try {
-      var params = new URLSearchParams();
-      params.set('email', email);
-      params.set('hp', (form.hp && form.hp.value) || '');
-      params.set('country', GEO.country || '');
-      params.set('city', GEO.city || '');
-      params.set('lang', state.lang || navigator.language || '');
-      params.set('drink', state.sel || '');
-      params.set('referrer', document.referrer || '');
-      fetch(WAITLIST_ENDPOINT, { method: 'POST', mode: 'no-cors', body: params });
+      fetch(WAITLIST_ENDPOINT, { method: 'POST', body: params })
+        .then(function (r) { return r.json(); })
+        .then(function (d) { if (d && d.dup) { state.waitlistDup = true; paintWaitlistDone(); } })
+        .catch(function () {});
     } catch (e) {}
-    state.waitlistDone = true;
+  }
+  function paintWaitlistDone() {
     var done = waitlistForm();
     var w1 = document.getElementById('wl1'); if (w1) w1.innerHTML = done;
     var w2 = document.getElementById('wl2'); if (w2) w2.innerHTML = done;
