@@ -676,7 +676,7 @@
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
         '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">' + esc(t.slogan) + '</div>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + esc(t.slogan) + '</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
@@ -1104,6 +1104,11 @@
     try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
     state.page = pageFromHash();
+    try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting
+      var demo = new URLSearchParams(location.search).get('demo');
+      if (demo === 'support') { state.page = 'support'; state.supportDone = true; }
+      else if (demo === 'waitlist') { state.waitlistDone = true; }
+    } catch (e) {}
     window.addEventListener('hashchange', function () { var p = pageFromHash(); if (p !== state.page) setPage(p); });
 
     document.addEventListener('click', onClick);
