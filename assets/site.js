@@ -41,8 +41,8 @@
       aboutTitle: 'About Clinky',
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
-      p1t: 'A friends tracker', p1d: "Remember who you saw, when, and who you haven't met in a while.",
-      p2t: 'Any drink', p2d: 'Beer, coffee, tea or nothing at all — Clinky is about meeting, not drinking.',
+      p1t: "Don't lose touch", p1d: "Remember who you saw, when, and who you haven't met in a while.",
+      p2t: 'Clink with anything', p2d: "Coffee, tea or beer. It's the meet-up that matters, not the drink.",
       p3t: 'Party games', p3d: 'Icebreaker cards that get any table talking in seconds.',
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
       supName: 'Your name', supEmailPh: 'you@email.com', supMsgPh: 'Tell us what happened or what you have in mind…',
@@ -75,8 +75,8 @@
       aboutTitle: 'О Clinky',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
-      p1t: 'Трекер друзей', p1d: 'Помни, кого и когда видел и с кем давно не пересекался.',
-      p2t: 'Любой напиток', p2d: 'Пиво, кофе, чай или вообще без — Clinky про встречи, а не про алкоголь.',
+      p1t: 'Не теряй друзей', p1d: 'Помни, кого и когда видел и с кем давно не пересекался.',
+      p2t: 'Чокнись чем угодно', p2d: 'Хоть кофе, хоть чай. Важна встреча, а не алкоголь.',
       p3t: 'Игры для компании', p3d: 'Карточки-игры, которые разговорят любой стол за секунды.',
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
       supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
@@ -686,8 +686,7 @@
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
         '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:14px">Tap. Clink. Meet again.</div>' +
-          '<p style="font-size:16px;line-height:1.65;color:#6b6b76;margin:0 0 28px">' + esc(t.aboutMission) + '</p>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">Tap. Clink. Meet again.</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
