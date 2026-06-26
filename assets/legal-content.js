@@ -9,13 +9,13 @@
   window.PRIVACY = {
     en: [
       { h: '1. Who we are', b: [
-        P('Clinky ("the app", "we", "us") is an iOS application developed by an individual developer based in Belarus. Clinky is a social meeting and drink tracker: it helps you remember the people you meet, the moments you share, and gives you ice-breaker cards for in-person get-togethers.'),
-        P('If you have any question about this policy or your data, contact us at evgeniymityulya.ios@gmail.com.')
+        P('Clinky ("the app", "we", "us") is an iOS application developed by an individual developer based in Belarus. Clinky is a social meeting and drink tracker: it helps you remember the people you meet, the moments you share, and gives you icebreaker cards for in-person get-togethers.'),
+        P('If you have any question about this policy or your data, contact us at support@clinkyapp.com.')
       ]},
       { h: '2. The short version', b: [
         UL([
           'Clinky has no user accounts and no login. You don’t create a profile with us.',
-          'Clinky has no first-party server. Your friends, meetings, drinks, streaks, achievements, plans and answered ice-breaker cards are stored only on your device (in a local database), not on any server we control.',
+          'Clinky has no first-party server. Your friends, meetings, drinks, streaks, achievements, plans and answered icebreaker cards are stored only on your device (in a local database), not on any server we control.',
           'Three third-party services receive limited data off your device: Adapty (subscriptions), TelemetryDeck (anonymous product analytics) and Sentry (crash reports). What each receives is described below.',
           'We do not track you across other apps or websites, we use no advertising identifier (IDFA), and we do not sell or share your personal information for advertising.'
         ])
@@ -24,7 +24,7 @@
         P('The core content you create in Clinky never leaves your device through us. It is stored in a local database inside the app’s private container on your iPhone. This includes:'),
         UL([
           'Your friends ("Clinkers"), including names and, for friends you import from Contacts, the contact’s stable identifier (see Section 6).',
-          'Your meetings, drinks logged, locations you optionally attach to a meeting, streaks, achievements, planned meetings, and which ice-breaker cards you’ve answered.'
+          'Your meetings, drinks logged, locations you optionally attach to a meeting, streaks, achievements, planned meetings, and which icebreaker cards you’ve answered.'
         ]),
         P('We have no copy of this data, no ability to read it remotely, and no way to recover it for you. If you delete the app, this data is removed from your device.')
       ]},
@@ -68,7 +68,7 @@
         ])
       ]},
       { h: '7. Children', b: [
-        P('Clinky is rated 17+ in the App Store because it contains references to alcohol — this is a content rating, not a data-processing age. Separately, we do not knowingly process personal data of anyone below the applicable digital-consent age in their country (which is 13 to 16 depending on the jurisdiction, 16 by GDPR default). The app is not directed to children. If you believe a child has used the app, contact us at evgeniymityulya.ios@gmail.com and we will help with deletion where applicable. Note that most of the app’s data is on-device only and under your control.')
+        P('Clinky is rated 17+ in the App Store because it contains references to alcohol — this is a content rating, not a data-processing age. Separately, we do not knowingly process personal data of anyone below the applicable digital-consent age in their country (which is 13 to 16 depending on the jurisdiction, 16 by GDPR default). The app is not directed to children. If you believe a child has used the app, contact us at support@clinkyapp.com and we will help with deletion where applicable. Note that most of the app’s data is on-device only and under your control.')
       ]},
       { h: '8. Legal bases for processing (GDPR)', b: [
         P('If you are in the European Economic Area or UK, we rely on:'),
@@ -81,7 +81,7 @@
       { h: '9. Your rights', b: [
         P('If you are in the EEA / UK (GDPR): you have the right to access, rectify, erase, restrict, port, and object to processing, to withdraw consent, and to lodge a complaint with your local data protection authority.'),
         P('If you are in California (CCPA/CPRA): you have the right to know what we collect, to delete and correct it, to opt out of "sale" or "sharing" (we do neither), to limit use of sensitive personal information, and to not be discriminated against for exercising these rights.'),
-        P('Important limitation (GDPR Art. 11). Because Clinky has no accounts and your core data is stored only on your device, and because the data shared with our processors is anonymized or pseudonymized (anonymous Adapty profile, hashed TelemetryDeck ID, scrubbed Sentry events), we generally cannot identify a specific individual’s records within that processor data. Where we cannot identify you from the data we hold, we may be unable to act on an access, correction or deletion request for that processor data, and we may ask you for additional information to enable identification, or decline where identification remains impossible. The primary and most effective way to delete your data is on-device: delete a friend, a meeting, or the entire app at any time. For matters within our control, contact us at evgeniymityulya.ios@gmail.com. We do not sell or share your personal information.')
+        P('Important limitation (GDPR Art. 11). Because Clinky has no accounts and your core data is stored only on your device, and because the data shared with our processors is anonymized or pseudonymized (anonymous Adapty profile, hashed TelemetryDeck ID, scrubbed Sentry events), we generally cannot identify a specific individual’s records within that processor data. Where we cannot identify you from the data we hold, we may be unable to act on an access, correction or deletion request for that processor data, and we may ask you for additional information to enable identification, or decline where identification remains impossible. The primary and most effective way to delete your data is on-device: delete a friend, a meeting, or the entire app at any time. For matters within our control, contact us at support@clinkyapp.com. We do not sell or share your personal information.')
       ]},
       { h: '10. Data retention', b: [
         UL([
@@ -91,12 +91,12 @@
         ])
       ]},
       { h: '11. Withdrawing consent / opting out', b: [
-        P('You can stop most off-device data sharing by revoking permissions in iOS Settings, by turning off analytics consent in the app (where offered), or by uninstalling the app. To make a request regarding data held by our processors, email evgeniymityulya.ios@gmail.com, noting the identification limitation described in Section 9.')
+        P('You can stop most off-device data sharing by revoking permissions in iOS Settings, by turning off analytics consent in the app (where offered), or by uninstalling the app. To make a request regarding data held by our processors, email support@clinkyapp.com, noting the identification limitation described in Section 9.')
       ]},
       { h: '12. International data transfers and EU representation', b: [
         P('The developer (the data controller) is based in Belarus, which is outside the EEA and is not covered by an EU adequacy decision. This means that personal data of EEA users is processed by a controller located in a third country without adequacy. We address this through the data-minimization described in this policy (no accounts, on-device-only core data, anonymized/pseudonymized processor data) and, where required, appropriate safeguards.'),
         P('Our processors operate servers in the EU and/or the United States. Where data is transferred outside the EEA/UK to a processor, we rely on appropriate safeguards such as the EU–US Data Privacy Framework (where the processor is certified) and Standard Contractual Clauses (SCCs).'),
-        P('EU representative (GDPR Art. 27). Clinky is operated by an individual developer and processes only minimal, anonymized or pseudonymized data through the processors described above. We have not appointed a representative in the Union under Article 27; if that changes, we will name our representative here. You can contact us directly about any data matter at evgeniymityulya.ios@gmail.com.')
+        P('EU representative (GDPR Art. 27). Clinky is operated by an individual developer and processes only minimal, anonymized or pseudonymized data through the processors described above. We have not appointed a representative in the Union under Article 27; if that changes, we will name our representative here. You can contact us directly about any data matter at support@clinkyapp.com.')
       ]},
       { h: '13. Security', b: [
         P('Your core data stays on your device, protected by iOS. Data sent to our processors is transmitted over encrypted (HTTPS) connections. No method of transmission or storage is 100% secure, but we keep the data we share to a minimum.')
@@ -105,18 +105,18 @@
         P('We may update this policy from time to time. We will change the "Last updated" date above and, for significant changes, provide a notice in the app or on the policy page. Continued use after an update means you accept the revised policy.')
       ]},
       { h: '15. Contact', b: [
-        P('Questions or requests: evgeniymityulya.ios@gmail.com')
+        P('Questions or requests: support@clinkyapp.com')
       ]}
     ],
     ru: [
       { h: '1. Кто мы', b: [
-        P('Clinky («приложение», «мы») — это приложение для iOS, разработанное частным разработчиком, находящимся в Беларуси. Clinky — это социальный трекер встреч и напитков: он помогает помнить людей, с которыми вы встречаетесь, и моменты, которые вы разделили, а также даёт ice-breaker карточки для живого общения.'),
-        P('По любым вопросам об этой политике или ваших данных пишите на evgeniymityulya.ios@gmail.com.')
+        P('Clinky («приложение», «мы») — это приложение для iOS, разработанное частным разработчиком, находящимся в Беларуси. Clinky — это социальный трекер встреч и напитков: он помогает помнить людей, с которыми вы встречаетесь, и моменты, которые вы разделили, а также даёт карточки-игры для живого общения.'),
+        P('По любым вопросам об этой политике или ваших данных пишите на support@clinkyapp.com.')
       ]},
       { h: '2. Кратко', b: [
         UL([
           'В Clinky нет аккаунтов и нет входа в систему. Вы не создаёте у нас профиль.',
-          'У Clinky нет собственного сервера. Ваши друзья, встречи, напитки, серии, достижения, планы и отвеченные ice-breaker карточки хранятся только на вашем устройстве (в локальной базе данных), а не на наших серверах.',
+          'У Clinky нет собственного сервера. Ваши друзья, встречи, напитки, серии, достижения, планы и отвеченные карточки-игры хранятся только на вашем устройстве (в локальной базе данных), а не на наших серверах.',
           'Три сторонних сервиса получают ограниченные данные за пределами устройства: Adapty (подписки), TelemetryDeck (анонимная продуктовая аналитика) и Sentry (отчёты о сбоях). Что именно получает каждый — описано ниже.',
           'Мы не отслеживаем вас в других приложениях или на сайтах, не используем рекламный идентификатор (IDFA) и не продаём и не передаём ваши персональные данные для рекламы.'
         ])
@@ -125,7 +125,7 @@
         P('Основной контент, который вы создаёте в Clinky, никогда не покидает ваше устройство через нас. Он хранится в локальной базе данных в приватном контейнере приложения на вашем iPhone. Сюда входит:'),
         UL([
           'Ваши друзья («Clinkers»), включая имена и — для друзей, импортированных из Контактов — стабильный идентификатор контакта (см. раздел 6).',
-          'Ваши встречи, записанные напитки, места, которые вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные ice-breaker карточки.'
+          'Ваши встречи, записанные напитки, места, которые вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные карточки-игры.'
         ]),
         P('У нас нет копии этих данных, нет возможности читать их удалённо и нет способа восстановить их для вас. При удалении приложения эти данные удаляются с устройства.')
       ]},
@@ -169,7 +169,7 @@
         ])
       ]},
       { h: '7. Дети', b: [
-        P('Clinky имеет возрастной рейтинг 17+ в App Store, поскольку содержит упоминания алкоголя, — это рейтинг контента, а не возраст обработки данных. Отдельно: мы сознательно не обрабатываем персональные данные лиц младше применимого в их стране возраста цифрового согласия (который составляет от 13 до 16 лет в зависимости от юрисдикции, 16 по умолчанию GDPR). Приложение не предназначено для детей. Если вы считаете, что приложением воспользовался ребёнок, напишите нам на evgeniymityulya.ios@gmail.com, и мы поможем с удалением там, где это применимо. Обратите внимание, что большая часть данных приложения хранится только на устройстве и находится под вашим контролем.')
+        P('Clinky имеет возрастной рейтинг 17+ в App Store, поскольку содержит упоминания алкоголя, — это рейтинг контента, а не возраст обработки данных. Отдельно: мы сознательно не обрабатываем персональные данные лиц младше применимого в их стране возраста цифрового согласия (который составляет от 13 до 16 лет в зависимости от юрисдикции, 16 по умолчанию GDPR). Приложение не предназначено для детей. Если вы считаете, что приложением воспользовался ребёнок, напишите нам на support@clinkyapp.com, и мы поможем с удалением там, где это применимо. Обратите внимание, что большая часть данных приложения хранится только на устройстве и находится под вашим контролем.')
       ]},
       { h: '8. Правовые основания обработки (GDPR)', b: [
         P('Если вы находитесь в Европейской экономической зоне или Великобритании, мы опираемся на:'),
@@ -182,7 +182,7 @@
       { h: '9. Ваши права', b: [
         P('Если вы в ЕЭЗ / Великобритании (GDPR): вы имеете право на доступ, исправление, удаление, ограничение, перенос и возражение против обработки, на отзыв согласия, а также на подачу жалобы в местный орган по защите данных.'),
         P('Если вы в Калифорнии (CCPA/CPRA): вы имеете право знать, что мы собираем, удалять и исправлять эти данные, отказаться от «продажи» или «передачи» (мы не делаем ни того, ни другого), ограничивать использование чувствительных персональных данных и не подвергаться дискриминации за реализацию этих прав.'),
-        P('Важное ограничение (ст. 11 GDPR). Поскольку в Clinky нет аккаунтов и ваши основные данные хранятся только на устройстве, а данные, передаваемые нашим обработчикам, анонимизированы или псевдонимизированы (анонимный профиль Adapty, хешированный ID TelemetryDeck, очищенные события Sentry), мы, как правило, не можем идентифицировать записи конкретного лица в этих данных обработчиков. Если мы не можем идентифицировать вас по имеющимся у нас данным, мы можем быть не в состоянии выполнить запрос на доступ, исправление или удаление этих данных обработчика, можем запросить у вас дополнительную информацию для идентификации или отказать, если идентификация остаётся невозможной. Основной и наиболее эффективный способ удаления ваших данных — на устройстве: удалите друга, встречу или всё приложение в любой момент. По вопросам в пределах нашего контроля пишите на evgeniymityulya.ios@gmail.com. Мы не продаём и не передаём ваши персональные данные.')
+        P('Важное ограничение (ст. 11 GDPR). Поскольку в Clinky нет аккаунтов и ваши основные данные хранятся только на устройстве, а данные, передаваемые нашим обработчикам, анонимизированы или псевдонимизированы (анонимный профиль Adapty, хешированный ID TelemetryDeck, очищенные события Sentry), мы, как правило, не можем идентифицировать записи конкретного лица в этих данных обработчиков. Если мы не можем идентифицировать вас по имеющимся у нас данным, мы можем быть не в состоянии выполнить запрос на доступ, исправление или удаление этих данных обработчика, можем запросить у вас дополнительную информацию для идентификации или отказать, если идентификация остаётся невозможной. Основной и наиболее эффективный способ удаления ваших данных — на устройстве: удалите друга, встречу или всё приложение в любой момент. По вопросам в пределах нашего контроля пишите на support@clinkyapp.com. Мы не продаём и не передаём ваши персональные данные.')
       ]},
       { h: '10. Хранение данных', b: [
         UL([
@@ -192,12 +192,12 @@
         ])
       ]},
       { h: '11. Отзыв согласия / отказ', b: [
-        P('Вы можете прекратить большую часть передачи данных за пределы устройства, отозвав разрешения в Настройках iOS, отключив согласие на аналитику в приложении (где предлагается) или удалив приложение. Чтобы подать запрос в отношении данных, находящихся у наших обработчиков, напишите на evgeniymityulya.ios@gmail.com, учитывая ограничение идентификации, описанное в разделе 9.')
+        P('Вы можете прекратить большую часть передачи данных за пределы устройства, отозвав разрешения в Настройках iOS, отключив согласие на аналитику в приложении (где предлагается) или удалив приложение. Чтобы подать запрос в отношении данных, находящихся у наших обработчиков, напишите на support@clinkyapp.com, учитывая ограничение идентификации, описанное в разделе 9.')
       ]},
       { h: '12. Международная передача данных и представительство в ЕС', b: [
         P('Разработчик (оператор данных) находится в Беларуси, которая расположена за пределами ЕЭЗ и не охвачена решением ЕС об адекватности. Это означает, что персональные данные пользователей ЕЭЗ обрабатываются оператором, находящимся в третьей стране без статуса адекватности. Мы решаем это через минимизацию данных, описанную в этой политике (нет аккаунтов, основные данные только на устройстве, анонимизированные/псевдонимизированные данные обработчиков), и, где требуется, надлежащие гарантии.'),
         P('Наши обработчики используют серверы в ЕС и/или США. Когда данные передаются за пределы ЕЭЗ/Великобритании обработчику, мы опираемся на надлежащие гарантии, такие как EU–US Data Privacy Framework (если обработчик сертифицирован) и Стандартные договорные положения (SCC).'),
-        P('Представитель в ЕС (ст. 27 GDPR). Clinky разрабатывается частным разработчиком и обрабатывает лишь минимальные, анонимизированные или псевдонимизированные данные через перечисленных выше обработчиков. Мы не назначили представителя в Союзе согласно статье 27; если это изменится, мы укажем представителя здесь. По любым вопросам о данных вы можете связаться с нами напрямую: evgeniymityulya.ios@gmail.com.')
+        P('Представитель в ЕС (ст. 27 GDPR). Clinky разрабатывается частным разработчиком и обрабатывает лишь минимальные, анонимизированные или псевдонимизированные данные через перечисленных выше обработчиков. Мы не назначили представителя в Союзе согласно статье 27; если это изменится, мы укажем представителя здесь. По любым вопросам о данных вы можете связаться с нами напрямую: support@clinkyapp.com.')
       ]},
       { h: '13. Безопасность', b: [
         P('Ваши основные данные остаются на устройстве, под защитой iOS. Данные, отправляемые нашим обработчикам, передаются по зашифрованным (HTTPS) соединениям. Ни один способ передачи или хранения не является на 100% безопасным, но мы сводим передаваемые данные к минимуму.')
@@ -206,7 +206,7 @@
         P('Мы можем время от времени обновлять эту политику. Мы изменим дату «Последнее обновление» выше и, при существенных изменениях, разместим уведомление в приложении или на странице политики. Продолжение использования после обновления означает принятие изменённой политики.')
       ]},
       { h: '15. Контакты', b: [
-        P('Вопросы или запросы: evgeniymityulya.ios@gmail.com')
+        P('Вопросы или запросы: support@clinkyapp.com')
       ]}
     ]
   };
@@ -249,12 +249,12 @@
         P('Clinky helps you track meetings and drinks with friends. You are solely responsible for your own choices, including any decisions related to alcohol consumption. Clinky does not encourage excessive or irresponsible drinking. If you choose to drink, please drink responsibly.')
       ]},
       { h: '5. Your Content and Data', b: [
-        P('Clinky is offline-first and stores your content — including your friends ("Clinkers"), meetings, drinks, plans, collectibles, and ice-breaker answers — locally on your device. This data belongs to you. We do not host it on our own servers and, except for the limited third-party services described in our Privacy Policy, it does not leave your device.'),
+        P('Clinky is offline-first and stores your content — including your friends ("Clinkers"), meetings, drinks, plans, collectibles, and icebreaker answers — locally on your device. This data belongs to you. We do not host it on our own servers and, except for the limited third-party services described in our Privacy Policy, it does not leave your device.'),
         P('You are responsible for your content and for maintaining your own backups. Because your data is stored locally, deleting the App or your device data may permanently remove your content, and we cannot recover it for you.'),
         P('Your use of the App is also subject to our Privacy Policy, available at: https://clinkyapp.com/privacy.html')
       ]},
       { h: '6. Intellectual Property', b: [
-        P('The App and all related content, design, graphics, text, software, and trademarks — including the names "Clinky", "Clinkers", "Clink", and "Pro", the Clinky logo, and the ice-breaker question library — are owned by us or our licensors and are protected by intellectual property laws.'),
+        P('The App and all related content, design, graphics, text, software, and trademarks — including the names "Clinky", "Clinkers", "Clink", and "Pro", the Clinky logo, and the icebreaker question library — are owned by us or our licensors and are protected by intellectual property laws.'),
         P('Except for the limited license granted in Section 2, these Terms do not grant you any right, title, or interest in the App, its content, or our brand. You may not use our trademarks without our prior written permission.')
       ]},
       { h: '7. Disclaimers — No Warranty', b: [
@@ -287,7 +287,7 @@
       ]},
       { h: '14. Contact', b: [
         P('If you have any questions about these Terms, contact us at:'),
-        P('evgeniymityulya.ios@gmail.com')
+        P('support@clinkyapp.com')
       ]}
     ],
     ru: [
@@ -327,12 +327,12 @@
         P('Clinky помогает вам отслеживать встречи и напитки с друзьями. Вы несёте полную ответственность за собственный выбор, включая любые решения, связанные с употреблением алкоголя. Clinky не поощряет чрезмерное или безответственное употребление алкоголя. Если вы решите употреблять алкоголь, пожалуйста, делайте это ответственно.')
       ]},
       { h: '5. Ваш контент и данные', b: [
-        P('Clinky работает по принципу offline-first и хранит ваш контент — включая ваших друзей («Clinkers»), встречи, напитки, планы, коллекционные предметы и ответы на ice-breaker вопросы — локально на вашем устройстве. Эти данные принадлежат вам. Мы не размещаем их на собственных серверах, и, за исключением ограниченных сторонних сервисов, описанных в нашей Политике конфиденциальности, они не покидают ваше устройство.'),
+        P('Clinky работает по принципу offline-first и хранит ваш контент — включая ваших друзей («Clinkers»), встречи, напитки, планы, коллекционные предметы и ответы на вопросы из карточек-игр — локально на вашем устройстве. Эти данные принадлежат вам. Мы не размещаем их на собственных серверах, и, за исключением ограниченных сторонних сервисов, описанных в нашей Политике конфиденциальности, они не покидают ваше устройство.'),
         P('Вы несёте ответственность за свой контент и за создание собственных резервных копий. Поскольку ваши данные хранятся локально, удаление Приложения или данных устройства может безвозвратно удалить ваш контент, и мы не сможем его восстановить.'),
         P('Использование вами Приложения также регулируется нашей Политикой конфиденциальности, доступной по адресу: https://clinkyapp.com/privacy-ru.html')
       ]},
       { h: '6. Интеллектуальная собственность', b: [
-        P('Приложение и весь связанный с ним контент, дизайн, графика, текст, программное обеспечение и товарные знаки — включая названия «Clinky», «Clinkers», «Clink» и «Pro», логотип Clinky и библиотеку ice-breaker вопросов — принадлежат нам или нашим лицензиарам и защищены законодательством об интеллектуальной собственности.'),
+        P('Приложение и весь связанный с ним контент, дизайн, графика, текст, программное обеспечение и товарные знаки — включая названия «Clinky», «Clinkers», «Clink» и «Pro», логотип Clinky и библиотеку вопросов из карточек-игр — принадлежат нам или нашим лицензиарам и защищены законодательством об интеллектуальной собственности.'),
         P('За исключением ограниченной лицензии, предоставленной в Разделе 2, настоящие Условия не предоставляют вам никаких прав на Приложение, его контент или наш бренд. Вы не вправе использовать наши товарные знаки без нашего предварительного письменного разрешения.')
       ]},
       { h: '7. Отказ от гарантий', b: [
@@ -365,7 +365,7 @@
       ]},
       { h: '14. Контакты', b: [
         P('Если у вас есть вопросы о настоящих Условиях, свяжитесь с нами по адресу:'),
-        P('evgeniymityulya.ios@gmail.com')
+        P('support@clinkyapp.com')
       ]}
     ]
   };
