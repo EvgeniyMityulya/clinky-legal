@@ -94,7 +94,7 @@ model-viewer::part(default-progress-bar){display:none}
   .hero-trust{margin-left:auto !important;margin-right:auto !important;max-width:32em}
   .float-card{display:none !important}   /* hide floating badges once the hero stacks */
   .hero-stage{aspect-ratio:1/0.72 !important}   /* a touch taller stage on small screens */
-  .spark{display:none !important}   /* decorative sparkles overlap centered content once stacked */
+  .spark-mid{display:none !important}   /* hide only the centre sparkle that overlaps the lede when stacked */
 }
 /* drink toggle: full size on desktop, shrinks uniformly as the screen narrows */
 .drink-toggle{transform-origin:center}
