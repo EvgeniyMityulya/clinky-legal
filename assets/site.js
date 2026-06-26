@@ -48,10 +48,10 @@
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
       supName: 'Your name', supEmailPh: 'you@email.com', supMsgPh: 'Tell us what happened or what you have in mind…',
       supSend: 'Send message', supNote: 'We usually reply within a day.',
-      supDone: "Thanks! We got your message and will get back soon. A confirmation just landed in your inbox.",
+      supDone: 'Thanks! We got your message and will reply soon.',
       privTitle: 'Privacy Policy', termsTitle: 'Terms of Use', docUpdated: 'Last updated: June 22, 2026',
       docContact: 'Questions about this document? Email us at support@clinkyapp.com and we will help.',
-      footNote: 'A social tracker for the people, drinks and moments worth remembering.',
+      footNote: 'Track meet-ups, play party-game cards and collect 3D mementos.',
       footComingSoon: 'Coming to the App Store', footProduct: 'Product', footLegalReach: 'Legal & contact', footEmail: 'Email us',
       footRights: 'For people who value real meet-ups.'
     },
@@ -83,10 +83,10 @@
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
       supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
       supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
-      supDone: 'Спасибо! Сообщение получили и скоро ответим. Подтверждение уже улетело тебе на почту.',
+      supDone: 'Спасибо! Мы получили Ваше сообщение и скоро ответим.',
       privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 22 июня 2026 г.',
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
-      footNote: 'Социальный трекер людей, напитков и моментов, которые стоит помнить.',
+      footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
       footComingSoon: 'Скоро в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
       footRights: 'Для тех, кто ценит живые встречи.'
     }
