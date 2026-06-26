@@ -166,7 +166,7 @@ function applyConfig(d) {
   const tgt = new THREE.Vector3().fromArray(c.target);
   // camera
   const phi = D2R(90 - c.camera.elev), th = D2R(c.camera.azim);
-  camera.position.setFromSphericalCoords(c.camera.dist, phi, th).add(tgt);
+  camera.position.setFromSphericalCoords(c.camera.dist * heroDistMul(), phi, th).add(tgt);
   camera.fov = c.camera.fov; camera.updateProjectionMatrix();
   camera.lookAt(tgt);
   // light
@@ -182,12 +182,19 @@ function applyConfig(d) {
   dirty = true;
 }
 
+// Zoom the model in on small screens so it reads bigger on phones.
+function heroDistMul() { return window.innerWidth < 700 ? 0.85 : 1; }
 function resize() {
   const mount = canvas.parentElement; if (!mount) return;
   const w = mount.clientWidth, h = mount.clientHeight;
   if (!w || !h) return;
   renderer.setSize(w, h, false);
   camera.aspect = w / h; camera.updateProjectionMatrix();
+  const c = CFG[drink];
+  const tgt = new THREE.Vector3().fromArray(c.target);
+  const phi = D2R(90 - c.camera.elev), th = D2R(c.camera.azim);
+  camera.position.setFromSphericalCoords(c.camera.dist * heroDistMul(), phi, th).add(tgt);
+  camera.lookAt(tgt);
 }
 
 const easeIO = function (p) { return p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2; };
