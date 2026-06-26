@@ -441,7 +441,7 @@
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
-            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+            '<img src="assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
           '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
             '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
@@ -548,7 +548,7 @@
           '</div>' +
           '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.str.d) + '</p>' +
         '</div>' +
-        '<img src="assets/bento/streak-' + L + '.png?v=2" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
+        '<img src="assets/bento/streak-' + L + '.png?v=3" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
       '</div>';
     var cellAch = '<div class="bento-card" style="grid-column:4/5;grid-row:2/3;position:relative;overflow:visible;padding:20px;z-index:2">' +
         '<div style="position:relative;z-index:4">' +
@@ -558,7 +558,7 @@
           '</div>' +
           '<p style="font-size:13px;line-height:1.45;color:#6b6b76;margin:0">' + esc(FC.ach.d) + '</p>' +
         '</div>' +
-        '<img src="assets/bento/ach-' + L + '.png?v=4" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
+        '<img src="assets/bento/ach-' + L + '.png?v=5" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
       '</div>';
     var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
         bHead(FC.an, '40%') +
