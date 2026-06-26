@@ -439,7 +439,7 @@
       sparkle({ s: 16, pos: 'bottom:14%;left:5%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 3.8s ease-in-out .5s infinite' }) +
       sparkle({ s: 27, pos: 'bottom:12%;right:7%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
       sparkle({ s: 14, pos: 'top:40%;right:46%', op: 0.42, c: '#FF8A97', glow: 'rgba(255,138,151,.28)', anim: 'twinkle 3.2s ease-in-out .7s infinite', cls: 'spark-mid' }) +
-      sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite' }) +
+      sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite', cls: 'spark-mid' }) +
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
@@ -772,25 +772,34 @@
     var fx = document.getElementById('fxLayer'); if (!fx) return;
     try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
     var r = fx.getBoundingClientRect(), cx = r.width / 2, cy = r.height * 0.46;
-    var N = 10, ring = Math.min(r.width, r.height) * 0.32;   // start on a ring AROUND the drink, not on it
+
+    // "ping" shockwave ring popping out from the centre
+    var pulse = document.createElement('span');
+    pulse.style.cssText = 'position:absolute;left:' + cx + 'px;top:' + cy + 'px;width:44px;height:44px;margin:-22px 0 0 -22px;border-radius:50%;border:3px solid rgba(255,79,98,.75);box-shadow:0 0 12px rgba(255,79,98,.45);will-change:transform,opacity';
+    fx.appendChild(pulse);
+    pulse.animate([
+      { transform: 'scale(.15)', opacity: 0.95 },
+      { transform: 'scale(1.9)', opacity: 0 }
+    ], { duration: 520, easing: 'cubic-bezier(.2,.7,.2,1)' }).onfinish = function () { pulse.remove(); };
+
+    // particles shooting from the centre outward with a springy overshoot (cartoon "poink")
+    var N = 11;
     for (var i = 0; i < N; i++) {
-      var a = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.5;
-      var sx = cx + Math.cos(a) * ring, sy = cy + Math.sin(a) * ring * 0.82;
+      var a = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.4;
       var white = i % 2 === 0;                                 // alternate white + coral so it pops on any drink
       var col = white ? '#fff' : '#FF4F62';
       var glow = white ? 'rgba(255,79,98,.6)' : 'rgba(255,255,255,.85)';
       var s = document.createElement('span'); s.textContent = '✦';
-      s.style.cssText = 'position:absolute;left:' + sx + 'px;top:' + sy + 'px;font-size:' + (13 + Math.random() * 10) + 'px;color:' + col + ';text-shadow:0 0 7px ' + glow + ';will-change:transform,opacity';
+      s.style.cssText = 'position:absolute;left:' + cx + 'px;top:' + cy + 'px;font-size:' + (13 + Math.random() * 9) + 'px;color:' + col + ';text-shadow:0 0 7px ' + glow + ';will-change:transform,opacity';
       fx.appendChild(s);
-      var dist = 30 + Math.random() * 38;
-      (function (el, ang, d) {
-        var an = el.animate([
-          { transform: 'translate(-50%,-50%) scale(.2) rotate(0deg)', opacity: 0 },
-          { transform: 'translate(-50%,-50%) scale(1.15) rotate(40deg)', opacity: 1, offset: 0.3 },
-          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * d) + 'px), calc(-50% + ' + (Math.sin(ang) * d) + 'px)) scale(.3) rotate(120deg)', opacity: 0 }
-        ], { duration: 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
-        an.onfinish = function () { el.remove(); };
-      })(s, a, dist);
+      var d = 62 + Math.random() * 44;
+      (function (el, ang, dist) {
+        el.animate([
+          { transform: 'translate(-50%,-50%) scale(0) rotate(0deg)', opacity: 0, offset: 0 },
+          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * dist * 0.6) + 'px), calc(-50% + ' + (Math.sin(ang) * dist * 0.6) + 'px)) scale(1.3) rotate(60deg)', opacity: 1, offset: 0.45 },
+          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * dist) + 'px), calc(-50% + ' + (Math.sin(ang) * dist) + 'px)) scale(.25) rotate(130deg)', opacity: 0, offset: 1 }
+        ], { duration: 780, easing: 'cubic-bezier(.34,1.56,.5,1)' }).onfinish = function () { el.remove(); };
+      })(s, a, d);
     }
   }
   function plusOne() {
