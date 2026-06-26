@@ -10,7 +10,7 @@ const CFG = {
   beer: {
     src: 'models/BeerCap.glb',
     camera: { azim: 39.6, elev: 14.0, dist: 5.47, fov: 30 }, target: [-0.10, 1.10, -0.09],
-    offset: [0, 0.86, 0], scale: 1.0, rotation: [20, 0, 0],
+    offset: [0, 0.86, 0], scale: 1.15, rotation: [20, 0, 0],
     light: { azim: 14, elev: 34, intensity: 2.4 }, ambient: 1.0,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.15, tone: 'aces', exposure: 1.0,
     material: { metalness: 1.0, roughness: 0.40 }, shadow: { opacity: 0.2, softness: 5 }
@@ -18,7 +18,7 @@ const CFG = {
   coffee: {
     src: 'models/CoffeeCup.glb',
     camera: { azim: 45.0, elev: 22.3, dist: 5.31, fov: 35 }, target: [-0.08, 1.21, -0.08],
-    offset: [0, 0, 0], scale: 1.0, rotation: [0, 45, 0],
+    offset: [0, 0, 0], scale: 1.15, rotation: [0, 45, 0],
     light: { azim: 20, elev: 44, intensity: 4.5 }, ambient: 0.65,
     env: 'assets/env_photostudio.hdr', envIntensity: 1.0, tone: 'aces', exposure: 0.8,
     material: { metalness: 0.52, roughness: 0.30 }, shadow: { opacity: 0.3, softness: 10 }
