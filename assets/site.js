@@ -315,7 +315,7 @@
           else if (!clinkRevealed) clinkPrime(d.value);
         })
         .catch(function () {});
-    }, 15000);
+    }, 10000);
   }
   function stopClinkPoll() { if (clinkPoll) { clearInterval(clinkPoll); clinkPoll = null; } }
   function bumpClink() {
@@ -918,13 +918,25 @@
       inners.forEach(function (el) { el.style.transform = ''; el.style.boxShadow = ''; });   // smooth transition back; bob keeps running on the outer layer
     });
   }
+  // Idle 3D nudge: one gentle play ~1s after the screen appears, then only every 20s of inactivity.
+  var AUTO_FIRST = 1000, AUTO_EVERY = 20000;
+  function scheduleAnim() {
+    if (animTimer) clearTimeout(animTimer);
+    animTimer = setTimeout(function () {
+      if (state.page === 'home' && !document.hidden) playAnim();
+      scheduleAnim();   // re-arm the next idle nudge
+    }, AUTO_EVERY);
+  }
   function startAnim() {
     stopAnim();
-    animKickoff = setTimeout(playAnim, 1800);
-    animTimer = setInterval(function () { if (state.page === 'home' && !document.hidden) playAnim(); }, 4400);
+    animKickoff = setTimeout(function () { playAnim(); scheduleAnim(); }, AUTO_FIRST);
+  }
+  function resetAnim() {   // user tapped -> push the next idle nudge a full cycle away (no back-to-back)
+    if (animKickoff) { clearTimeout(animKickoff); animKickoff = null; }
+    scheduleAnim();
   }
   function stopAnim() {
-    if (animTimer) { clearInterval(animTimer); animTimer = null; }
+    if (animTimer) { clearTimeout(animTimer); animTimer = null; }
     if (animKickoff) { clearTimeout(animKickoff); animKickoff = null; }
   }
 
@@ -1065,7 +1077,7 @@
       case 'join': joinCta(); break;
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
-      case 'play': playAnim(); bumpClink(); break;
+      case 'play': playAnim(); bumpClink(); resetAnim(); break;
       case 'plusone': plusOne(); break;
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
@@ -1096,7 +1108,7 @@
     document.addEventListener('pointerup', onPointerUp);
     document.addEventListener('pointercancel', function () { if (qdrag) { var c = qcardEl(); qdrag = null; if (c) springBack(c); } });
     window.addEventListener('scroll', onScroll, { passive: true });
-    document.addEventListener('visibilitychange', function () { if (state.page === 'home' && !document.hidden) startAnim(); });
+    document.addEventListener('visibilitychange', function () { if (state.page === 'home' && !document.hidden) scheduleAnim(); });
 
     paint();
     onScroll();
