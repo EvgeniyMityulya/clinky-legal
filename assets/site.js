@@ -7,8 +7,9 @@
   'use strict';
 
   var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4gv-C4NlkexGgz-lbDvD7xm0RU5BxsCVe2eLvof-DYLDNN_ZGKafpijywAQQZEh6IYw/exec'; // Google Apps Script -> Sheet
-  var GEO = {};   // {country, city}, best-effort from a free IP lookup
-  try { fetch('https://ipwho.is/').then(function (r) { return r.json(); }).then(function (d) { if (d && d.success !== false) { GEO.country = d.country || ''; GEO.city = d.city || ''; } }).catch(function () {}); } catch (e) {}
+  var GEO = {};   // {country, city, code}, best-effort from a free IP lookup
+  var RU_LOCALES = { RU: 1, BY: 1, KZ: 1, KG: 1, UA: 1, MD: 1, AM: 1, AZ: 1, GE: 1, TJ: 1, TM: 1, UZ: 1 };
+  try { fetch('https://ipwho.is/').then(function (r) { return r.json(); }).then(function (d) { if (d && d.success !== false) { GEO.country = d.country || ''; GEO.city = d.city || ''; GEO.code = d.country_code || ''; applyGeoLang(); } }).catch(function () {}); } catch (e) {}
   var SUPPORT_ENDPOINT = WAITLIST_ENDPOINT;   // same Apps Script web app; routed by type=support
   var CONTACT_EMAIL = 'support@clinkyapp.com';
   var C = '#FF4F62';
@@ -1017,6 +1018,17 @@
     try { localStorage.setItem('clinky_lang', lang); } catch (e) {}
     document.documentElement.lang = lang; state.lang = lang; paint();
   }
+  // Country fallback: switch to RU for Russian-speaking countries — only if the visitor hasn't
+  // chosen a language and the browser wasn't already Russian. Not persisted (re-checked each visit).
+  function applyGeoLang() {
+    try {
+      if (localStorage.getItem('clinky_lang')) return;
+      if (!state || state.lang === 'ru') return;
+      if (!RU_LOCALES[(GEO.code || '').toUpperCase()]) return;
+      if (!document.getElementById('main')) return;   // app not mounted yet
+      state.lang = 'ru'; document.documentElement.lang = 'ru'; paint();
+    } catch (e) {}
+  }
   var PAGES = { home: 1, about: 1, support: 1, privacy: 1, terms: 1 };
   function pageFromHash() { var h = (location.hash || '').replace(/^#\/?/, '').toLowerCase(); return PAGES[h] ? h : 'home'; }
   function setPage(page) {
@@ -1153,6 +1165,7 @@
 
     paint();
     onScroll();
+    applyGeoLang();   // in case geo already resolved before mount
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
