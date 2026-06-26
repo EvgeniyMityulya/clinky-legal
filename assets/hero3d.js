@@ -182,8 +182,13 @@ function applyConfig(d) {
   dirty = true;
 }
 
-// Zoom the model in on small screens so it reads bigger on phones.
-function heroDistMul() { return window.innerWidth < 700 ? 0.85 : 1; }
+// Zoom the model in on small screens so it reads bigger (stronger on phones).
+function heroDistMul() {
+  var w = window.innerWidth;
+  if (w < 560) return 0.70;
+  if (w < 960) return 0.82;
+  return 1;
+}
 function resize() {
   const mount = canvas.parentElement; if (!mount) return;
   const w = mount.clientWidth, h = mount.clientHeight;
