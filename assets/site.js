@@ -83,7 +83,7 @@
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
       supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
       supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
-      supDone: 'Спасибо! Мы получили Ваше сообщение и скоро ответим.',
+      supDone: 'Спасибо! Мы получили твоё сообщение и скоро ответим.',
       privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 22 июня 2026 г.',
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
       footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
@@ -166,6 +166,12 @@
       'style="position:absolute;' + o.pos + ';opacity:' + (o.op == null ? 0.6 : o.op) + ';pointer-events:none;' +
       'filter:drop-shadow(0 0 5px ' + (o.glow || 'rgba(255,79,98,.4)') + ');animation:' + (o.anim || 'twinkle 4s ease-in-out infinite') + '">' +
       '<path d="M12 1.2C12.7 10.4 13.4 11 22.8 12C13.4 13 12.7 13.6 12 22.8C11.3 13.6 10.6 13 1.2 12C10.6 11 11.3 10.4 12 1.2Z"/></svg>';
+  }
+  // slogan: keep each clause unbreakable so it wraps right after the comma (or stays on one line)
+  function sloganHTML(s) {
+    var i = s.indexOf(', ');
+    if (i < 0) return esc(s);
+    return '<span style="white-space:nowrap">' + esc(s.slice(0, i + 1)) + '</span> <span style="white-space:nowrap">' + esc(s.slice(i + 2)) + '</span>';
   }
   // one reusable capsule badge (icon-in-circle + label), used everywhere
   function chip(iconName, label, sm) {
@@ -676,7 +682,7 @@
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
         '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + esc(t.slogan) + '</div>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
