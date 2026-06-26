@@ -9,8 +9,8 @@
   var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4gv-C4NlkexGgz-lbDvD7xm0RU5BxsCVe2eLvof-DYLDNN_ZGKafpijywAQQZEh6IYw/exec'; // Google Apps Script -> Sheet
   var GEO = {};   // {country, city}, best-effort from a free IP lookup
   try { fetch('https://ipwho.is/').then(function (r) { return r.json(); }).then(function (d) { if (d && d.success !== false) { GEO.country = d.country || ''; GEO.city = d.city || ''; } }).catch(function () {}); } catch (e) {}
-  var SUPPORT_ENDPOINT = '';   // optional POST endpoint for support; empty => mailto
-  var CONTACT_EMAIL = 'evgeniymityulya.ios@gmail.com';
+  var SUPPORT_ENDPOINT = WAITLIST_ENDPOINT;   // same Apps Script web app; routed by type=support
+  var CONTACT_EMAIL = 'support@clinkyapp.com';
   var C = '#FF4F62';
 
   var state = {
@@ -46,8 +46,8 @@
       p3t: 'Party games', p3d: 'Ice-breaker cards that get any table talking in seconds.',
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
       supName: 'Your name', supEmailPh: 'you@email.com', supMsgPh: 'Tell us what happened or what you have in mind…',
-      supSend: 'Send message', supNote: 'Opens your mail app, addressed straight to the Clinky team.',
-      supDone: "Thanks — your message is on its way. We'll get back to you soon.",
+      supSend: 'Send message', supNote: 'We usually reply within a day.',
+      supDone: "Thanks! We got your message and will get back soon. A confirmation just landed in your inbox.",
       privTitle: 'Privacy Policy', termsTitle: 'Terms of Use', docUpdated: 'Last updated: June 22, 2026',
       docContact: 'Questions about this document? Email us at evgeniymityulya.ios@gmail.com and we will help.',
       footNote: 'A social tracker for the people, drinks and moments worth remembering.',
@@ -80,8 +80,8 @@
       p3t: 'Игры для компании', p3d: 'Карточки-ice-breaker, которые разговорят любой стол за секунды.',
       supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
       supName: 'Как тебя зовут', supEmailPh: 'ты@почта.com', supMsgPh: 'Расскажи, что случилось или что задумал…',
-      supSend: 'Отправить', supNote: 'Откроется почтовый клиент с письмом прямо команде Clinky.',
-      supDone: 'Спасибо — письмо отправляется. Скоро ответим.',
+      supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
+      supDone: 'Спасибо! Сообщение получили и скоро ответим. Подтверждение уже улетело тебе на почту.',
       privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 22 июня 2026 г.',
       docContact: 'Вопросы по документу? Напиши на evgeniymityulya.ios@gmail.com — поможем.',
       footNote: 'Социальный трекер людей, напитков и моментов, которые стоит помнить.',
@@ -680,6 +680,7 @@
     var body = state.supportDone
       ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#3a323f">' + esc(t.supDone) + '</span></div>'
       : '<form data-form="support" style="display:flex;flex-direction:column;gap:12px">' +
+          '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +
           '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
@@ -1015,13 +1016,18 @@
   }
   function submitSupport(form) {
     var name = (form.contactName.value || '').trim(), email = (form.email.value || '').trim(), msg = (form.message.value || '').trim();
-    if (!name || !/.+@.+\..+/.test(email) || !msg) return;
-    if (SUPPORT_ENDPOINT) { try { fetch(SUPPORT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: new FormData(form) }); } catch (e) {} }
-    else {
-      var subject = 'Clinky support — ' + name;
-      var body = 'From: ' + name + ' <' + email + '>\n\n' + msg;
-      window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-    }
+    if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !msg) return;
+    try {
+      var params = new URLSearchParams();
+      params.set('type', 'support');
+      params.set('name', name);
+      params.set('email', email);
+      params.set('message', msg);
+      params.set('hp', (form.hp && form.hp.value) || '');
+      params.set('lang', state.lang || navigator.language || '');
+      params.set('referrer', document.referrer || '');
+      fetch(SUPPORT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: params });
+    } catch (e) {}
     state.supportDone = true; paint();
   }
 
