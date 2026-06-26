@@ -15,7 +15,7 @@
 
   var state = {
     lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false,
-    gameIndex: 0, qIndex: 0, waitlistDone: false, waitlistDup: false, supportDone: false
+    gameIndex: 0, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
 
@@ -30,6 +30,7 @@
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       heroDup: "This email is already on the list! We'll be in touch on launch day.",
+      heroSending: 'One sec, adding you…',
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through',
@@ -67,6 +68,7 @@
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
       heroDone: 'Ты в очереди! Пришлём ссылку на App Store, как только Clinky выйдет.',
       heroDup: 'Эта почта уже в списке! Напишем в день релиза.',
+      heroSending: 'Секундочку, добавляем…',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
@@ -423,6 +425,11 @@
   // ===== waitlist form =====
   function waitlistForm(onColor, left) {
     var t = tdict();
+    if (state.waitlistLoading) {
+      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .4s ease both">' +
+        '<span style="width:20px;height:20px;border-radius:50%;border:2.5px solid #FFE2E6;border-top-color:#FF4F62;animation:spin .7s linear infinite;flex:none"></span>' +
+        '<span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(t.heroSending) + '</span></div>';
+    }
     if (state.waitlistDone) {
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .5s ease both">' +
         '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(state.waitlistDup ? t.heroDup : t.heroDone) + '</span></div>';
@@ -1051,15 +1058,22 @@
     params.set('lang', state.lang || navigator.language || '');
     params.set('drink', state.sel || '');
     params.set('referrer', document.referrer || '');
-    state.waitlistDone = true; state.waitlistDup = false;
+    // Show a loading state first; reveal the final result only once the server answers (no flicker).
+    state.waitlistLoading = true; state.waitlistDone = false; state.waitlistDup = false;
     paintWaitlistDone();
-    // Read the response so we can tell "already on the list" from a fresh signup.
+    var settled = false;
+    function finish(dup) {
+      if (settled) return; settled = true;
+      state.waitlistLoading = false; state.waitlistDone = true; state.waitlistDup = !!dup;
+      paintWaitlistDone();
+    }
     try {
       fetch(WAITLIST_ENDPOINT, { method: 'POST', body: params })
         .then(function (r) { return r.json(); })
-        .then(function (d) { if (d && d.dup) { state.waitlistDup = true; paintWaitlistDone(); } })
-        .catch(function () {});
-    } catch (e) {}
+        .then(function (d) { finish(d && d.dup); })
+        .catch(function () { finish(false); });
+    } catch (e) { finish(false); }
+    setTimeout(function () { finish(false); }, 6000);   // safety: never hang on the spinner
   }
   function paintWaitlistDone() {
     var done = waitlistForm();
