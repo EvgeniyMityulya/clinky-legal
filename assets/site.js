@@ -241,7 +241,7 @@
   var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
   var CLINK_LOOPS = 2, CLINK_REST = CLINK_LOOPS * 10;   // ribbon: 0-9 repeated, rest digit lives in the last loop
   var CLINK_CELL = 1.2;                                  // cell height in em (>1 so tall glyphs aren't clipped)
-  var clinkValue = null, clinkCols = 0, clinkBusy = false, clinkTimer = null, clinkRevealed = false, clinkObs = null;
+  var clinkValue = null, clinkCols = 0, clinkBusy = false, clinkTimer = null, clinkRevealed = false, clinkObs = null, clinkPoll = null;
   function clinkEl() { return document.getElementById('clinkNum'); }
   function clinkColsFor(v) { return Math.max(1, String(Math.max(0, Math.round(v))).length); }
   function clinkBuild(cols) {
@@ -298,7 +298,26 @@
       .then(function (r) { return r.json(); })
       .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; if (!clinkRevealed) clinkPrime(d.value); clinkMaybeReveal(); } })
       .catch(function () {});
+    startClinkPoll();
   }
+  // Poll the shared total so other people's clinks roll in live for everyone online.
+  function startClinkPoll() {
+    stopClinkPoll();
+    if (clinkDebugValue() != null || typeof fetch !== 'function') return;
+    clinkPoll = setInterval(function () {
+      if (document.hidden || clinkBusy) return;     // skip when tab hidden or a roll is in progress
+      fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
+        .then(function (r) { return r.json(); })
+        .then(function (d) {
+          if (typeof d.value !== 'number' || d.value === clinkValue) return;
+          clinkValue = d.value;
+          if (clinkRevealed && !clinkBusy) clinkRoll(d.value, false);
+          else if (!clinkRevealed) clinkPrime(d.value);
+        })
+        .catch(function () {});
+    }, 15000);
+  }
+  function stopClinkPoll() { if (clinkPoll) { clearInterval(clinkPoll); clinkPoll = null; } }
   function bumpClink() {
     if (clinkBusy || clinkValue == null) return;   // ignore taps until the roll finishes (no spam / double-count)
     clinkBusy = true;
@@ -756,7 +775,7 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); bindIcebreakerDeck(); } else stopAnim();
+    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); bindIcebreakerDeck(); } else { stopAnim(); stopClinkPoll(); }
   }
 
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
