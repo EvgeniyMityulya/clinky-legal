@@ -53,7 +53,7 @@
       docContact: 'Questions about this document? Email us at support@clinkyapp.com and we will help.',
       footNote: 'A social tracker for the people, drinks and moments worth remembering.',
       footComingSoon: 'Coming to the App Store', footProduct: 'Product', footLegalReach: 'Legal & contact', footEmail: 'Email us',
-      footRights: 'Made for people who would rather meet up.'
+      footRights: 'For people who value real meet-ups.'
     },
     ru: {
       navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navJoin: 'Хочу первым!',
@@ -88,7 +88,7 @@
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
       footNote: 'Социальный трекер людей, напитков и моментов, которые стоит помнить.',
       footComingSoon: 'Скоро в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
-      footRights: 'Сделано для тех, кто лучше встретится.'
+      footRights: 'Для тех, кто ценит живые встречи.'
     }
   };
 
@@ -414,8 +414,8 @@
   function waitlistForm(onColor, left) {
     var t = tdict();
     if (state.waitlistDone) {
-      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#FFF0F2') + ';border:1px solid ' + (onColor ? 'transparent' : '#ffd9de') + ';max-width:32em;text-align:left;animation:popIn .5s ease both">' +
-        '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#3a323f">' + esc(t.heroDone) + '</span></div>';
+      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1px solid ' + (onColor ? 'transparent' : '#ece7ec') + ';box-shadow:0 10px 26px -16px rgba(28,19,38,.22);max-width:32em;text-align:left;animation:popIn .5s ease both">' +
+        '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(t.heroDone) + '</span></div>';
     }
     var btn = onColor
       ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
@@ -686,7 +686,7 @@
   function renderSupport() {
     var t = tdict(), I = icons();
     var body = state.supportDone
-      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#FFF0F2;border:1px solid #ffd9de;animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#3a323f">' + esc(t.supDone) + '</span></div>'
+      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#ffffff;border:1px solid #ece7ec;box-shadow:0 12px 28px -16px rgba(28,19,38,.22);animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#1c1326">' + esc(t.supDone) + '</span></div>'
       : '<form data-form="support" style="display:flex;flex-direction:column;gap:12px">' +
           '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +
           '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
