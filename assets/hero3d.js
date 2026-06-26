@@ -40,7 +40,7 @@ function reduceMotion() {
 function init() {
   canvas = document.createElement('canvas');
   // hidden until everything is ready, so the un-lit (black, metallic-no-env) first frame never shows
-  canvas.style.cssText = 'width:100%;height:100%;display:block;opacity:0;transition:opacity .5s ease';
+  canvas.style.cssText = 'width:100%;height:100%;display:block;opacity:0;transition:opacity .25s ease';
   try {
     renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   } catch (e) { console.error('hero3d: WebGL unavailable', e); return; }
@@ -249,8 +249,17 @@ window.ClinkyHero = {
   setDrink: function (d) {
     if (d !== 'beer' && d !== 'coffee') return;
     drink = d;
-    if (renderer && holders[CFG[d].src]) applyConfig(d);
-    else queuedDrink = d;
+    if (!(renderer && holders[CFG[d].src])) { queuedDrink = d; return; }
+    if (!canvas) { applyConfig(d); return; }
+    // smooth cross-fade: fade out, swap the model while hidden, fade the new one in
+    canvas.style.opacity = '0';
+    setTimeout(function () {
+      if (drink !== d) return;            // a newer switch took over
+      applyConfig(d);
+      dirty = true;
+      try { renderer.render(scene, camera); } catch (e) {}   // draw new model before it fades in
+      canvas.style.opacity = '1';
+    }, 270);
   },
   play: play,
   isReady: function () { return !!renderer; }

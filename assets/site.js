@@ -533,7 +533,7 @@
           '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
           '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(f.t) + '</h3>' +
         '</div>' +
-        '<p style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0' + (descMw ? ';max-width:' + descMw : '') + '">' + esc(f.d) + '</p>' +
+        '<p class="bento-desc" style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0' + (descMw ? ';max-width:' + descMw : '') + '">' + esc(f.d) + '</p>' +
       '</div>';
     }
     function scr(src, css) {
