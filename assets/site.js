@@ -414,7 +414,7 @@
   function waitlistForm(onColor, left) {
     var t = tdict();
     if (state.waitlistDone) {
-      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1px solid ' + (onColor ? 'transparent' : '#ece7ec') + ';box-shadow:0 10px 26px -16px rgba(28,19,38,.22);max-width:32em;text-align:left;animation:popIn .5s ease both">' +
+      return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .5s ease both">' +
         '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(t.heroDone) + '</span></div>';
     }
     var btn = onColor
@@ -686,7 +686,7 @@
   function renderSupport() {
     var t = tdict(), I = icons();
     var body = state.supportDone
-      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#ffffff;border:1px solid #ece7ec;box-shadow:0 12px 28px -16px rgba(28,19,38,.22);animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#1c1326">' + esc(t.supDone) + '</span></div>'
+      ? '<div style="display:flex;align-items:center;gap:14px;padding:22px 24px;border-radius:18px;background:#ffffff;border:1.5px solid #ffc9d0;box-shadow:0 12px 28px -16px rgba(255,79,98,.28);animation:popIn .5s ease both"><span style="display:inline-flex;flex:none">' + I.checkPink + '</span><span style="font-weight:600;font-size:15.5px;line-height:1.45;color:#1c1326">' + esc(t.supDone) + '</span></div>'
       : '<form data-form="support" style="display:flex;flex-direction:column;gap:12px">' +
           '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">' +
           '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
