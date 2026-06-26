@@ -504,7 +504,7 @@
       col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» добавляет в коллекцию 3D-напиток своего вида. Чем больше встреч, тем полнее коллекция!', 'Each clink adds a 3D drink, unique to its kind. The more you meet, the fuller it gets!') },
       str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Держи серию встреч с близкими', 'Keep your streak going with the people close to you') },
       ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и новые знакомства. Есть и секретные!', 'Badges for meet-ups, streaks and new friends. Some are secret!') },
-      an:  { ic: 'chart-bar', t: L2('Аналитика встреч', 'Analytics'), d: L2('Графики и факты о твоих друзьях, напитках и встречах', 'Clear charts of your friends, drinks and meet-ups') },
+      an:  { ic: 'chart-bar', t: L2('Аналитика', 'Analytics'), d: L2('Графики и факты о твоих друзьях, напитках и встречах', 'Clear charts of your friends, drinks and meet-ups') },
       rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко подскажем, чтобы ты никого не забыл', 'A gentle nudge so you never forget a friend') }
     };
     // Unified bento header: icon BESIDE title (one row), description below.
