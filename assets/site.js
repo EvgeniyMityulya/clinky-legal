@@ -770,20 +770,27 @@
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
+    try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
     var r = fx.getBoundingClientRect(), cx = r.width / 2, cy = r.height * 0.46;
-    for (var i = 0; i < 6; i++) {
+    var N = 10, ring = Math.min(r.width, r.height) * 0.32;   // start on a ring AROUND the drink, not on it
+    for (var i = 0; i < N; i++) {
+      var a = (Math.PI * 2 * i) / N + (Math.random() - 0.5) * 0.5;
+      var sx = cx + Math.cos(a) * ring, sy = cy + Math.sin(a) * ring * 0.82;
+      var white = i % 2 === 0;                                 // alternate white + coral so it pops on any drink
+      var col = white ? '#fff' : '#FF4F62';
+      var glow = white ? 'rgba(255,79,98,.6)' : 'rgba(255,255,255,.85)';
       var s = document.createElement('span'); s.textContent = '✦';
-      s.style.cssText = 'position:absolute;left:' + cx + 'px;top:' + cy + 'px;font-size:' + (12 + Math.random() * 9) + 'px;color:#FF4F62;will-change:transform,opacity';
+      s.style.cssText = 'position:absolute;left:' + sx + 'px;top:' + sy + 'px;font-size:' + (13 + Math.random() * 10) + 'px;color:' + col + ';text-shadow:0 0 7px ' + glow + ';will-change:transform,opacity';
       fx.appendChild(s);
-      var a = (Math.PI * 2 * i) / 6 + Math.random() * 0.4, d = 58 + Math.random() * 42;
-      (function (el) {
+      var dist = 30 + Math.random() * 38;
+      (function (el, ang, d) {
         var an = el.animate([
-          { transform: 'translate(-50%,-50%) scale(.3) rotate(0deg)', opacity: 0 },
-          { transform: 'translate(-50%,-50%) scale(1) rotate(35deg)', opacity: 1, offset: 0.3 },
-          { transform: 'translate(calc(-50% + ' + (Math.cos(a) * d) + 'px), calc(-50% + ' + (Math.sin(a) * d) + 'px)) scale(.35) rotate(90deg)', opacity: 0 }
-        ], { duration: 680, easing: 'cubic-bezier(.2,.7,.2,1)' });
+          { transform: 'translate(-50%,-50%) scale(.2) rotate(0deg)', opacity: 0 },
+          { transform: 'translate(-50%,-50%) scale(1.15) rotate(40deg)', opacity: 1, offset: 0.3 },
+          { transform: 'translate(calc(-50% + ' + (Math.cos(ang) * d) + 'px), calc(-50% + ' + (Math.sin(ang) * d) + 'px)) scale(.3) rotate(120deg)', opacity: 0 }
+        ], { duration: 800, easing: 'cubic-bezier(.2,.7,.2,1)' });
         an.onfinish = function () { el.remove(); };
-      })(s);
+      })(s, a, dist);
     }
   }
   function plusOne() {
@@ -827,7 +834,7 @@
   function playAnim() {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reduce) return;
-    if (state.sel === 'coffee') puffSteam(); else burstSparkles();
+    burstSparkles();
     if (hero()) hero().play();
   }
   // float badges turn TOWARD the scene centre (strongest when cursor is centred → focus on the 3D; flat at edges),
