@@ -1059,6 +1059,23 @@
   function nextQuestion() { state.qIndex = (state.qIndex + 1) % GAMES[state.gameIndex].q.length; refreshCard(); }
   function prevQuestion() { var len = GAMES[state.gameIndex].q.length; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
 
+  // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
+  function captureSource() {
+    var src = '';
+    try { src = (new URLSearchParams(location.search).get('utm_source') || '').toLowerCase().trim().slice(0, 40); } catch (e) {}
+    try {
+      if (src) sessionStorage.setItem('clinky_src', src);
+      else src = sessionStorage.getItem('clinky_src') || '';
+    } catch (e) {}
+    try {
+      if (src && !sessionStorage.getItem('clinky_src_hit')) {
+        sessionStorage.setItem('clinky_src_hit', '1');
+        var vp = new URLSearchParams(); vp.set('type', 'visit'); vp.set('source', src);
+        fetch(WAITLIST_ENDPOINT, { method: 'POST', body: vp, keepalive: true }).catch(function () {});
+      }
+    } catch (e) {}
+    return src;
+  }
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
@@ -1070,6 +1087,7 @@
     params.set('lang', state.lang || navigator.language || '');
     params.set('drink', state.sel || '');
     params.set('referrer', document.referrer || '');
+    params.set('source', state.source || '');
     // Show a loading state first; reveal the final result only once the server answers (no flicker).
     state.waitlistLoading = true; state.waitlistDone = false; state.waitlistDup = false;
     paintWaitlistDone();
@@ -1146,6 +1164,7 @@
     var lang = 'en';
     try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
+    try { state.source = captureSource(); } catch (e) {}
     state.page = pageFromHash();
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting
       var demo = new URLSearchParams(location.search).get('demo');
