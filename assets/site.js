@@ -101,32 +101,32 @@
 
   var GAMES = [
     { title: { en: 'Never have I ever', ru: 'Я никогда не' }, q: [
-      { en: "Never have I ever texted an ex at 3 a.m.", ru: 'Я никогда не писал бывшим в три часа ночи' },
       { en: "Never have I ever flirted for a discount or a free drink", ru: 'Я никогда не флиртовал ради скидки или бесплатного напитка' },
       { en: "Never have I ever liked someone's old photo and panic-unliked it a second later", ru: 'Я никогда не лайкал старое фото человека и тут же в панике убирал лайк' },
+      { en: "Never have I ever texted an ex at 3 a.m.", ru: 'Я никогда не писал бывшим в три часа ночи' },
       { en: "Never have I ever screenshotted a chat to dissect it with a friend", ru: 'Я никогда не делал скриншот переписки, чтобы разобрать её с другом' },
       { en: "Never have I ever googled someone before meeting them and then acted surprised to hear it all", ru: 'Я никогда не гуглил человека перед встречей и делал вид, что узнаю всё впервые' }
     ]},
     { title: { en: 'Roulette', ru: 'Рулетка' }, q: [
       { en: "*Alex*, tell us the moment with *Sam* when you knew you'd be real friends", ru: '*Аня*, расскажи случай с *Максом*, после которого ты поняла, что вы точно подружитесь' },
-      { en: "*Alex*, what's a piece of advice from *Sam* you still think about?", ru: '*Аня*, какой совет *Макса* ты до сих пор вспоминаешь?' },
-      { en: "*Alex*, what does *Sam* do that instantly lifts your mood?", ru: '*Аня*, что *Макс* делает такого, что сразу поднимает тебе настроение?' },
+      { en: "*Alex*, when did *Sam* last genuinely surprise you?", ru: '*Аня*, когда *Макс* последний раз тебя по-настоящему удивил?' },
       { en: "*Alex*, what kind of adventure would you take *Sam* on, and why?", ru: '*Аня*, в какое приключение ты бы взяла *Макса* напарником и почему?' },
-      { en: "*Alex*, when did *Sam* last genuinely surprise you?", ru: '*Аня*, когда *Макс* последний раз тебя по-настоящему удивил?' }
+      { en: "*Alex*, what's a piece of advice from *Sam* you still think about?", ru: '*Аня*, какой совет *Макса* ты до сих пор вспоминаешь?' },
+      { en: "*Alex*, what does *Sam* do that instantly lifts your mood?", ru: '*Аня*, что *Макс* делает такого, что сразу поднимает тебе настроение?' }
     ]},
     { title: { en: 'Tell a moment', ru: 'Расскажи момент' }, q: [
       { en: "Tell us about a decision that changed your whole year", ru: 'Расскажи о решении, которое изменило твой год' },
+      { en: "Tell us about a book or film that stuck with you for ages", ru: 'Расскажи о книге или фильме, который застрял в голове надолго' },
       { en: "Tell us about a time a stranger made your day", ru: 'Расскажи случай, когда незнакомец сделал твой день' },
       { en: "Tell us about the most spontaneous trip you've ever taken", ru: 'Расскажи о самой спонтанной поездке в твоей жизни' },
-      { en: "Tell us about something you got by accident that became a favorite", ru: 'Расскажи о вещи, которая досталась случайно, а стала любимой' },
-      { en: "Tell us about a book or film that stuck with you for ages", ru: 'Расскажи о книге или фильме, который застрял в голове надолго' }
+      { en: "Tell us about something you got by accident that became a favorite", ru: 'Расскажи о вещи, которая досталась случайно, а стала любимой' }
     ]},
     { title: { en: 'Would you rather', ru: 'Что выберешь' }, q: [
+      { en: "Would you rather have a perfect memory for faces or for names?", ru: 'Что выберешь, идеальную память на лица или на имена?' },
+      { en: "Would you rather recall the taste of any dish or the tune of any song?", ru: 'Что выберешь, помнить вкус любого блюда или мелодию любой песни?' },
       { en: "Would you rather remember every dream or feel fully rested after 4 hours of sleep?", ru: 'Что выберешь, помнить каждый свой сон или высыпаться за 4 часа?' },
       { en: "Would you rather speak every language or talk to every animal?", ru: 'Что выберешь, говорить на всех языках или со всеми животными?' },
-      { en: "Would you rather have a perfect memory for faces or for names?", ru: 'Что выберешь, идеальную память на лица или на имена?' },
-      { en: "Would you rather teleport but only home, or fly but very slowly?", ru: 'Что выберешь, телепортироваться только домой или летать, но очень медленно?' },
-      { en: "Would you rather recall the taste of any dish or the tune of any song?", ru: 'Что выберешь, помнить вкус любого блюда или мелодию любой песни?' }
+      { en: "Would you rather teleport but only home, or fly but very slowly?", ru: 'Что выберешь, телепортироваться только домой или летать, но очень медленно?' }
     ]}
   ];
 
