@@ -9,20 +9,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
 <style>*{box-sizing:border-box;margin:0}
-body{background:#FFF8F4;font-family:'DM Sans',system-ui,sans-serif;color:#2a2330;line-height:1.65;padding:40px 20px}
+body{background:#FFF8F4;font-family:'DM Sans',system-ui,sans-serif;color:#2a2330;line-height:1.65;padding:24px 20px 56px}
+.site-head{max-width:720px;margin:0 auto 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:9px;font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#1c1326;text-decoration:none}
+.brand img{width:30px;height:30px;border-radius:8px}
+.site-head nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.site-head nav a{font-size:14px;font-weight:700;color:#6b6b76;text-decoration:none;padding:7px 13px;border-radius:999px}
+.site-head nav a:hover{color:#1c1326}
+.site-head nav a.on{background:#E11D48;color:#fff}
+.site-head nav a.lang{border:1px solid #e6dfe4;color:#1c1326}
 .doc{max-width:720px;margin:0 auto;background:#fff;border:1px solid #ece7ec;border-radius:24px;box-shadow:0 18px 48px -30px rgba(225,29,72,.3);padding:clamp(28px,5vw,56px)}
-.back{display:inline-block;margin-bottom:22px;color:#E11D48;text-decoration:none;font-weight:700;font-size:14px}
 h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(26px,5vw,34px);color:#1c1326;margin-bottom:6px}
 .updated{color:#a99ea6;font-size:14px;margin-bottom:28px}
 h2{font-family:'Nunito',sans-serif;font-weight:800;font-size:20px;color:#1c1326;margin:30px 0 10px}
 h3{font-weight:700;font-size:16px;color:#1c1326;margin:18px 0 8px}
 p{margin:0 0 12px;color:#3a3340}
 ul{margin:0 0 14px;padding-left:22px}li{margin:0 0 8px;color:#3a3340}
-a{color:#E11D48;text-decoration:none;word-break:break-word}a:hover{text-decoration:underline}</style>
+a{color:#E11D48;text-decoration:none;word-break:break-word}.doc a:hover{text-decoration:underline}</style>
 </head>
 <body>
+<header class="site-head">
+<a class="brand" href="/"><img src="assets/clinky-icon.png" alt="">Clinky</a>
+<nav><a href="/privacy-ru">Приватность</a><a href="/terms-ru" class="on">Условия</a><a href="/support">Поддержка</a><a class="lang" href="/terms">EN</a></nav>
+</header>
 <main class="doc">
-<a class="back" href="/">← clinkyapp.com</a>
 <h1>Условия использования</h1>
 <p class="updated">Последнее обновление: 22 июня 2026 г.</p>
 <p>Настоящие Условия использования («Условия») регулируют использование вами мобильного приложения Clinky («Clinky», «Приложение», «мы», «нас» или «наш»). Пожалуйста, внимательно прочитайте их. Загружая, устанавливая или используя Приложение, вы соглашаетесь с настоящими Условиями.</p>

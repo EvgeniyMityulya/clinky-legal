@@ -10,35 +10,39 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@800;900&display=swap" rel="stylesheet">
 <style>
   *{box-sizing:border-box;margin:0}
-  body{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:32px;
-    font-family:'DM Sans',system-ui,sans-serif;color:#1c1326;
-    background:radial-gradient(60% 60% at 50% 30%, #FFE7EA 0%, #FFF3EF 50%, #FFF8F4 100%)}
-  .card{width:100%;max-width:480px;background:#fff;border:1px solid #ece7ec;border-radius:24px;
+  body{background:#FFF8F4;font-family:'DM Sans',system-ui,sans-serif;color:#2a2330;line-height:1.6;padding:24px 20px 56px}
+  .site-head{max-width:720px;margin:0 auto 22px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+  .brand{display:flex;align-items:center;gap:9px;font-family:'Nunito',sans-serif;font-weight:900;font-size:20px;color:#1c1326;text-decoration:none}
+  .brand img{width:30px;height:30px;border-radius:8px}
+  .site-head nav{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+  .site-head nav a{font-size:14px;font-weight:700;color:#6b6b76;text-decoration:none;padding:7px 13px;border-radius:999px}
+  .site-head nav a:hover{color:#1c1326}
+  .site-head nav a.on{background:#E11D48;color:#fff}
+  .card{max-width:480px;margin:0 auto;background:#fff;border:1px solid #ece7ec;border-radius:24px;
     box-shadow:0 18px 48px -28px rgba(225,29,72,.35);padding:36px 32px;text-align:center}
-  .ic{width:72px;height:72px;border-radius:18px;display:block;margin:0 auto 18px;box-shadow:0 8px 18px rgba(28,19,38,.18)}
-  h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;margin-bottom:8px}
-  p{font-size:16px;line-height:1.55;color:#6b6b76;margin-bottom:6px}
+  h1{font-family:'Nunito',sans-serif;font-weight:900;font-size:26px;margin-bottom:8px;color:#1c1326}
+  p{font-size:16px;color:#6b6b76;margin-bottom:6px}
   a.mail{display:inline-block;margin:14px 0;font-family:'Nunito',sans-serif;font-weight:800;font-size:18px;color:#E11D48;text-decoration:none}
   .ru{margin-top:22px;padding-top:20px;border-top:1px solid #f1eaed}
-  .foot{margin-top:24px;font-size:13px}
-  .foot a{color:#a99ea6;text-decoration:none;margin:0 6px}
 </style>
 </head>
 <body>
-  <div class="card">
-    <img class="ic" src="assets/clinky-icon.png" alt="Clinky">
-    <h1>Need a hand?</h1>
-    <p>We read every message and reply quickly.</p>
+<header class="site-head">
+  <a class="brand" href="/"><img src="assets/clinky-icon.png" alt="">Clinky</a>
+  <nav>
+    <a href="/privacy">Privacy</a>
+    <a href="/terms">Terms</a>
+    <a href="/support" class="on">Support</a>
+  </nav>
+</header>
+<main class="card">
+  <h1>Need a hand?</h1>
+  <p>We read every message and reply quickly.</p>
+  <a class="mail" href="mailto:support@clinkyapp.com">support@clinkyapp.com</a>
+  <div class="ru">
+    <p><strong>Нужна помощь?</strong> Напиши нам, ответим в ближайшее время.</p>
     <a class="mail" href="mailto:support@clinkyapp.com">support@clinkyapp.com</a>
-    <div class="ru">
-      <p><strong>Нужна помощь?</strong> Напиши нам, ответим в ближайшее время.</p>
-      <a class="mail" href="mailto:support@clinkyapp.com">support@clinkyapp.com</a>
-    </div>
-    <div class="foot">
-      <a href="/">clinkyapp.com</a> ·
-      <a href="/privacy">Privacy</a> ·
-      <a href="/terms">Terms</a>
-    </div>
   </div>
+</main>
 </body>
 </html>
