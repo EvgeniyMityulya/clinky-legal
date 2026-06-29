@@ -24,7 +24,7 @@
         P('The core content you create in Clinky never leaves your device through us. It is stored in a local database inside the app’s private container on your iPhone. This includes:'),
         UL([
           'Your friends ("Clinkers"), including names and, for friends you import from Contacts, the contact’s stable identifier (see Section 6).',
-          'Your meetings, drinks logged, locations you optionally attach to a meeting, streaks, achievements, planned meetings, and which icebreaker cards you’ve answered.'
+          'Your meetings, drinks logged, the place name (a text label you type, never a GPS coordinate) you optionally attach to a meeting, streaks, achievements, planned meetings, and which icebreaker cards you’ve answered.'
         ]),
         P('We have no copy of this data, no ability to read it remotely, and no way to recover it for you. If you delete the app, this data is removed from your device.')
       ]},
@@ -63,8 +63,7 @@
         UL([
           'Contacts (read): Used so you can quickly add friends. The app reads contact name, phone numbers and photo to show you the picker, but only the name (in a shortened "First L." form) and the contact’s identifier are saved into your local friends list. Phone numbers and photos are not stored and never sent off your device. Contacts are never sent to any third party.',
           'Calendar (write-only): Used to add your planned meetings to your own Apple Calendar. The app can only write events (title, notes, time) — it cannot read your calendar. These events live in your Apple Calendar, not on any Clinky server.',
-          'Notifications (local only): Used for plan reminders, gentle streak reminders, and live-session reminders. These are scheduled locally on your device. Clinky uses no remote push and registers no push token.',
-          'Location (when in use, optional): If you choose to attach a place to a meeting, the app reads a single approximate coordinate and stores it only on your device with that meeting. Coordinates are never sent to any server or third party.'
+          'Notifications (local only): Used for plan reminders, gentle streak reminders, and live-session reminders. These are scheduled locally on your device. Clinky uses no remote push and registers no push token.'
         ])
       ]},
       { h: '7. Children', b: [
@@ -125,7 +124,7 @@
         P('Основной контент, который вы создаёте в Clinky, никогда не покидает ваше устройство через нас. Он хранится в локальной базе данных в приватном контейнере приложения на вашем iPhone. Сюда входит:'),
         UL([
           'Ваши друзья («Clinkers»), включая имена и — для друзей, импортированных из Контактов — стабильный идентификатор контакта (см. раздел 6).',
-          'Ваши встречи, записанные напитки, места, которые вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные карточки-игры.'
+          'Ваши встречи, записанные напитки, название места (текстовая метка, которую вы вводите, а не GPS-координата), которое вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные карточки-игры.'
         ]),
         P('У нас нет копии этих данных, нет возможности читать их удалённо и нет способа восстановить их для вас. При удалении приложения эти данные удаляются с устройства.')
       ]},
@@ -164,8 +163,7 @@
         UL([
           'Контакты (чтение): Используется, чтобы быстро добавлять друзей. Приложение читает имя контакта, номера телефонов и фото, чтобы показать вам список выбора, но сохраняются только имя (в сокращённом виде «Имя Ф.») и идентификатор контакта в ваш локальный список друзей. Номера телефонов и фото не сохраняются и никогда не покидают ваше устройство. Контакты никогда не передаются третьим лицам.',
           'Календарь (только запись): Используется для добавления ваших запланированных встреч в ваш собственный Apple Calendar. Приложение может только создавать события (заголовок, заметки, время) — оно не может читать ваш календарь. Эти события находятся в вашем Apple Calendar, а не на серверах Clinky.',
-          'Уведомления (только локальные): Используются для напоминаний о планах, мягких напоминаний о сериях и напоминаний во время живых сессий. Они планируются локально на вашем устройстве. Clinky не использует удалённые push-уведомления и не регистрирует push-токен.',
-          'Геолокация (при использовании, необязательно): Если вы решите прикрепить место к встрече, приложение считывает одну приблизительную координату и сохраняет её только на вашем устройстве вместе с этой встречей. Координаты никогда не отправляются на сервер или третьим лицам.'
+          'Уведомления (только локальные): Используются для напоминаний о планах, мягких напоминаний о сериях и напоминаний во время живых сессий. Они планируются локально на вашем устройстве. Clinky не использует удалённые push-уведомления и не регистрирует push-токен.'
         ])
       ]},
       { h: '7. Дети', b: [
