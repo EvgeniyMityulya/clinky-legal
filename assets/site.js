@@ -1030,11 +1030,20 @@
     } catch (e) {}
   }
   var PAGES = { home: 1, about: 1, support: 1, privacy: 1, terms: 1 };
-  function pageFromHash() { var h = (location.hash || '').replace(/^#\/?/, '').toLowerCase(); return PAGES[h] ? h : 'home'; }
+  // clean path routing (no hash): / , /about , /support , /privacy , /terms (+ -ru entry variants)
+  function pageFromPath() {
+    var seg = (location.pathname || '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
+    if (seg.slice(-3) === '-ru') seg = seg.slice(0, -3);   // privacy-ru -> privacy (locale set at mount)
+    return PAGES[seg] ? seg : 'home';
+  }
   function setPage(page) {
     state.page = page;
-    var h = page === 'home' ? '' : '#' + page;
-    try { if ((location.hash || '') !== h) history.replaceState(null, '', h || (location.pathname + location.search)); } catch (e) {}
+    try {
+      var cur = (location.pathname || '/').replace(/\.html$/, '').replace(/^\/+|\/+$/g, '').toLowerCase();
+      if (cur.slice(-3) === '-ru') cur = cur.slice(0, -3);
+      var tgt = page === 'home' ? '' : page;
+      if (cur !== tgt) history.pushState(null, '', '/' + tgt);
+    } catch (e) {}
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
     state.scrolled = window.scrollY > 24; paint();
   }
@@ -1163,15 +1172,20 @@
 
     var lang = 'en';
     try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
+    try {   // deterministic locale entry for /privacy-ru and ?lang= (used by App Store Connect URLs)
+      var qlang = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
+      if (qlang === 'ru' || qlang === 'en') lang = qlang;
+      else if (/-ru(\.html)?\/?$/i.test(location.pathname)) lang = 'ru';
+    } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
     try { state.source = captureSource(); } catch (e) {}
-    state.page = pageFromHash();
+    state.page = pageFromPath();
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting
       var demo = new URLSearchParams(location.search).get('demo');
       if (demo === 'support') { state.page = 'support'; state.supportDone = true; }
       else if (demo === 'waitlist') { state.waitlistDone = true; }
     } catch (e) {}
-    window.addEventListener('hashchange', function () { var p = pageFromHash(); if (p !== state.page) setPage(p); });
+    window.addEventListener('popstate', function () { var p = pageFromPath(); state.page = p; try { window.scrollTo(0, 0); } catch (e) {} state.scrolled = window.scrollY > 24; paint(); });
 
     document.addEventListener('click', onClick);
     document.addEventListener('submit', onSubmit);
