@@ -62,7 +62,7 @@
         P('Each permission is optional and is used only for the purpose described. iOS will ask before any permission is granted, and you can change or revoke each one at any time in iOS Settings → Clinky.'),
         UL([
           'Contacts (read): Used so you can quickly add friends. The app reads contact name, phone numbers and photo to show you the picker, but only the name (in a shortened "First L." form) and the contact’s identifier are saved into your local friends list. Phone numbers and photos are not stored and never sent off your device. Contacts are never sent to any third party.',
-          'Calendar (write-only): Used to add your planned meetings to your own Apple Calendar. The app can only write events (title, notes, time) — it cannot read your calendar. These events live in your Apple Calendar, not on any Clinky server.',
+          'Calendar (full access): Used to add your planned meetings to your own Apple Calendar, and to update or remove those same events when you reschedule, start, or delete a meeting. Apple grants this as full access because removing or editing an event requires looking it up first, but Clinky only ever touches the events it created — it does not read, show, or use any of your other calendar entries. These events live in your Apple Calendar, not on any Clinky server.',
           'Notifications (local only): Used for plan reminders, gentle streak reminders, and live-session reminders. These are scheduled locally on your device. Clinky uses no remote push and registers no push token.'
         ])
       ]},
@@ -162,7 +162,7 @@
         P('Каждое разрешение необязательно и используется только для описанной цели. iOS спросит вас перед предоставлением любого разрешения, и вы можете изменить или отозвать каждое в любой момент в Настройках iOS → Clinky.'),
         UL([
           'Контакты (чтение): Используется, чтобы быстро добавлять друзей. Приложение читает имя контакта, номера телефонов и фото, чтобы показать вам список выбора, но сохраняются только имя (в сокращённом виде «Имя Ф.») и идентификатор контакта в ваш локальный список друзей. Номера телефонов и фото не сохраняются и никогда не покидают ваше устройство. Контакты никогда не передаются третьим лицам.',
-          'Календарь (только запись): Используется для добавления ваших запланированных встреч в ваш собственный Apple Calendar. Приложение может только создавать события (заголовок, заметки, время) — оно не может читать ваш календарь. Эти события находятся в вашем Apple Calendar, а не на серверах Clinky.',
+          'Календарь (полный доступ): Используется для добавления ваших запланированных встреч в ваш собственный Apple Calendar, а также для изменения или удаления этих же событий, когда вы переносите, начинаете или удаляете встречу. Apple предоставляет это как полный доступ, потому что для удаления или изменения события его нужно сначала найти, но Clinky работает только с событиями, которые создал сам — он не читает, не показывает и не использует другие записи вашего календаря. Эти события находятся в вашем Apple Calendar, а не на серверах Clinky.',
           'Уведомления (только локальные): Используются для напоминаний о планах, мягких напоминаний о сериях и напоминаний во время живых сессий. Они планируются локально на вашем устройстве. Clinky не использует удалённые push-уведомления и не регистрирует push-токен.'
         ])
       ]},
