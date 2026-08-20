@@ -286,6 +286,9 @@ for (const s of SHELLS) {
       '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://unpkg.com" crossorigin>');
   }
 
+
+  html = html.replace('three@0.160.0/build/three.module.js', 'three@0.160.0/build/three.module.min.js');
+
   writeFileSync(s.file, html);
   console.log(`patched ${s.file.padEnd(16)} ${(html.length / 1024).toFixed(1)} KB`);
 }

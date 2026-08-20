@@ -1177,6 +1177,7 @@
     setTimeout(function () { try { f.focus({ preventScroll: true }); } catch (e) {} }, 500);
   }
   function setDrink(d) {
+    if (window.ClinkyHeroBoot) window.ClinkyHeroBoot();
     if (state.sel === d) return;
     state.sel = d;
     var thumb = document.getElementById('drinkThumb');
@@ -1275,7 +1276,7 @@
       case 'join': joinCta(); break;
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
-      case 'play': playAnim(); bumpClink(); resetAnim(); break;
+      case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); bumpClink(); resetAnim(); break;
       case 'plusone': plusOne(); break;
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;

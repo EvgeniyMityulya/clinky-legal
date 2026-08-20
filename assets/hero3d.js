@@ -1,9 +1,24 @@
 // Clinky hero — three.js collectible renderer (mirrors studio.html scene math).
 // Persistent canvas + renderer; site.js (classic script) drives it via window.ClinkyHero.
-import * as THREE from 'three';
-import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
-import { RGBELoader } from 'three/addons/loaders/RGBELoader.js';
-import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+// three.js is ~600 KB and parsing it costs ~1.8 s of main thread on a phone, so it is
+// imported on demand: after first paint on desktop, on first interaction on mobile.
+let THREE, GLTFLoader, RGBELoader, RoomEnvironment, D2R, TONE;
+
+async function ensureDeps() {
+  if (THREE) return;
+  const [three, gltf, rgbe, room] = await Promise.all([
+    import('three'),
+    import('three/addons/loaders/GLTFLoader.js'),
+    import('three/addons/loaders/RGBELoader.js'),
+    import('three/addons/environments/RoomEnvironment.js')
+  ]);
+  THREE = three;
+  GLTFLoader = gltf.GLTFLoader;
+  RGBELoader = rgbe.RGBELoader;
+  RoomEnvironment = room.RoomEnvironment;
+  D2R = THREE.MathUtils.degToRad;
+  TONE = { aces: THREE.ACESFilmicToneMapping, neutral: THREE.NeutralToneMapping, agx: THREE.AgXToneMapping, linear: THREE.LinearToneMapping };
+}
 
 // Per-drink config — tuned in studio.html, kept as the source of truth here.
 const CFG = {
@@ -24,8 +39,6 @@ const CFG = {
     material: { metalness: 0.52, roughness: 0.30 }, shadow: { opacity: 0.3, softness: 10 }
   }
 };
-const D2R = THREE.MathUtils.degToRad;
-const TONE = { aces: THREE.ACESFilmicToneMapping, neutral: THREE.NeutralToneMapping, agx: THREE.AgXToneMapping, linear: THREE.LinearToneMapping };
 
 let renderer, scene, camera, dirLight, ambLight, groundMat, modelRoot, poseGroup, pmrem;
 let canvas, drink = 'beer', dirty = false, spinning = false, queuedDrink = null, spinToken = 0, groundedY = 0;
@@ -37,7 +50,11 @@ function reduceMotion() {
   return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
-function init() {
+let booting = false;
+async function init() {
+  if (renderer || booting) return;
+  booting = true;
+  await ensureDeps();
   canvas = document.createElement('canvas');
   // hidden until everything is ready, so the un-lit (black, metallic-no-env) first frame never shows
   canvas.style.cssText = 'width:100%;height:100%;display:block;opacity:0;transition:opacity .25s ease';
@@ -268,14 +285,73 @@ window.ClinkyHero = {
   isReady: function () { return !!renderer; }
 };
 
-// The 3D hero is decorative: start it only after first paint so it never delays
-// LCP. three.js, the HDR env map and the models are ~2.8 MB combined.
-function boot() {
-  var start = function () {
-    if (window.requestIdleCallback) requestIdleCallback(init, { timeout: 1200 });
-    else setTimeout(init, 200);
+// Boot strategy: the hero is decorative, so nothing heavy runs before first paint.
+// Desktop starts it once the page is idle; phones show a static cap and load three.js
+// only when the visitor actually taps the stage (or switches drink).
+const PLACEHOLDER_SRC = 'assets/bento/drink.png';
+
+function showPlaceholder() {
+  const mount = document.getElementById('heroMount');
+  if (!mount || mount.querySelector('[data-hero-still]')) return false;
+  const img = document.createElement('img');
+  img.src = PLACEHOLDER_SRC;
+  img.alt = '';
+  img.setAttribute('data-hero-still', '1');
+  img.decoding = 'async';
+  img.style.cssText = 'width:100%;height:100%;object-fit:contain;display:block;pointer-events:none';
+  mount.appendChild(img);
+  const loader = document.getElementById('mvLoader');
+  if (loader) loader.style.display = 'none';
+  return true;
+}
+
+function dropPlaceholder() {
+  const still = document.querySelector('[data-hero-still]');
+  if (still && still.parentElement) still.parentElement.removeChild(still);
+}
+
+function wantsLightHero() {
+  if (window.innerWidth < 900) return true;
+  const c = navigator.connection;
+  if (c && (c.saveData || /2g|slow-2g|3g/.test(c.effectiveType || ''))) return true;
+  return (navigator.hardwareConcurrency || 8) <= 4;
+}
+
+let bootRequested = false;
+function bootHero() {
+  if (bootRequested) return;
+  bootRequested = true;
+  dropPlaceholder();
+  init();
+}
+
+function waitForMount(attempt) {
+  if (showPlaceholder()) return;
+  if ((attempt || 0) > 40) return;
+  setTimeout(function () { waitForMount((attempt || 0) + 1); }, 120);
+}
+
+function armLazyBoot() {
+  waitForMount(0);
+  const stage = document.querySelector('[data-act="play"]');
+  const target = stage || document;
+  const once = { once: true, passive: true };
+  target.addEventListener('pointerdown', bootHero, once);
+  target.addEventListener('touchstart', bootHero, once);
+}
+
+function scheduleHero() {
+  if (wantsLightHero()) { armLazyBoot(); return; }
+  const start = function () {
+    if (window.requestIdleCallback) requestIdleCallback(bootHero, { timeout: 1500 });
+    else setTimeout(bootHero, 300);
   };
   if (document.readyState === 'complete') start();
   else window.addEventListener('load', start, { once: true });
 }
-boot();
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleHero);
+else scheduleHero();
+
+// site.js can ask for the hero explicitly (drink switch, spin button)
+window.ClinkyHeroBoot = bootHero;
