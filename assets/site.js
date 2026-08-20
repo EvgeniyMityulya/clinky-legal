@@ -205,7 +205,6 @@
         '<div class="faq-body">' + esc(f.a) + '</div></details>';
     }).join('') + '</div>';
   }
-  function questionsHref() { return state.lang === 'ru' ? '/ru/questions/' : '/questions/'; }
   function faqAccordion(items) {
     return '<div class="faq-acc">' + items.map(function (f) {
       return '<details><summary>' + esc(f.q) + '</summary>' +
@@ -482,7 +481,6 @@
           '<button data-act="games" style="' + lnk + '">' + esc(t.navGames) + '</button>' +
           '<button data-act="about" style="' + lnk + '">' + esc(t.navAbout) + '</button>' +
           '<button data-act="support" style="' + lnk + '">' + esc(t.navSupport) + '</button>' +
-          '<a href="' + questionsHref() + '" style="' + lnk + ';text-decoration:none">' + esc(t.navQuestions) + '</a>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footLegalReach) + '</div>' +

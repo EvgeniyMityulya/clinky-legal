@@ -28,18 +28,14 @@ if (!/gamesAll:/.test(js)) {
   js = js.replace("tapSwipe: 'Тап или свайп по карточке'", "gamesAll: 'Как в это играть', tapSwipe: 'Тап или свайп по карточке'");
 }
 
-const helpers = `  function questionsHref() { return state.lang === 'ru' ? '/ru/questions/' : '/questions/'; }
-  function faqAccordion(items) {
+const helpers = `  function faqAccordion(items) {
     return '<div class="faq-acc">' + items.map(function (f) {
       return '<details><summary>' + esc(f.q) + '</summary>' +
         '<div class="faq-body">' + esc(f.a) + '</div></details>';
     }).join('') + '</div>';
   }
 `;
-if (!/function questionsHref/.test(js)) js = js.replace('  function esc(s) {', helpers + '  function esc(s) {');
-else if (!/function faqAccordion/.test(js)) {
-  js = js.replace(/  function questionsHref\(\)[^\n]*\n/, (m) => m + helpers.split('\n').slice(1).join('\n'));
-}
+if (!/function faqAccordion/.test(js)) js = js.replace('  function esc(s) {', helpers + '  function esc(s) {');
 
 const sectionRe = /  function renderFaqSection\(\) \{[\s\S]*?\n  \}\n/;
 js = js.replace(sectionRe, '');
@@ -54,10 +50,6 @@ js = js.replace(/faqKicker: '[^']*', faqTitle: '[^']*', /g, '');
 const supportOld = /    var faqHtml = FAQ\[state\.lang\]\.map\(function \(f\) \{[\s\S]*?\}\)\.join\(''\);/;
 if (supportOld.test(js)) js = js.replace(supportOld, '    var faqHtml = faqAccordion(FAQ[state.lang]);');
 
-const footerAnchor = "'<button data-act=\"support\" style=\"' + lnk + '\">' + esc(t.navSupport) + '</button>' +";
-if (js.includes(footerAnchor) && !js.includes("questionsHref() + '\" style=\"' + lnk")) {
-  js = js.replace(footerAnchor, footerAnchor + "\n          '<a href=\"' + questionsHref() + '\" style=\"' + lnk + ';text-decoration:none\">' + esc(t.navQuestions) + '</a>' +");
-}
 
 const hintLine = "'<p style=\"text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0\">' + esc(t.cardHint) + '</p>' +";
 if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
