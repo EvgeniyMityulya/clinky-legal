@@ -12,6 +12,8 @@ const PAGES = [
 // Each page ships an EN and a RU address, linked by hreflang in the shells.
 const URLS = [
   { path: '/', pri: '1.0', alt: '/ru/' },
+  { path: '/play/never-have-i-ever', pri: '0.9', alt: '/ru/play/ya-nikogda-ne' },
+  { path: '/ru/play/ya-nikogda-ne', pri: '0.9', alt: '/play/never-have-i-ever' },
   { path: '/ru/', pri: '1.0', alt: '/' },
   ...PAGES.map((p) => ({ path: `/${p.path}`, pri: p.pri, alt: `/ru/${p.path}` })),
   ...PAGES.map((p) => ({ path: `/ru/${p.path}`, pri: p.pri, alt: `/${p.path}` }))

@@ -191,6 +191,43 @@ ${faqHtml(FAQ_GAMES[loc])}
 </div>`;
 }
 
+
+let WEB_DECK_CACHE = null;
+function webDeck() {
+  if (WEB_DECK_CACHE) return WEB_DECK_CACHE;
+  const w = {};
+  new Function('window', readFileSync('assets/web-deck.js', 'utf8'))(w);
+  WEB_DECK_CACHE = w.CLINKY_WEB_DECK || { games: {}, limit: 8 };
+  return WEB_DECK_CACHE;
+}
+
+function playPrerender(s) {
+  const loc = s.loc;
+  const deck = webDeck();
+  const game = GAMES_META.find((g) => g.id === s.play) || GAMES_META[0];
+  const cards = ((deck.games[s.play] || {})[loc] || []).slice(0, 5);
+  const t = loc === 'ru'
+    ? { h1: `Играть в «${game.title.ru}» онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+        how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
+        nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
+    : { h1: `Play ${game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
+        how: 'How to play', cards: 'Example cards', faq: 'Questions about the games', limit: `${deck.limit} free cards a day, refreshed daily.`,
+        nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
+
+  return `<div id="prerender">
+<nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<h1>${esc(t.h1)}</h1>
+<p>${esc(t.lede)}</p>
+<p>${esc(t.limit)}</p>
+<h2>${esc(t.how)}</h2>
+<p>${game.how[loc].map((x) => esc(x)).join(' · ')}</p>
+<h2>${esc(t.cards)}</h2>
+<ul>${cards.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
+<h2>${esc(t.faq)}</h2>
+${faqHtml(FAQ_GAMES[loc])}
+</div>`;
+}
+
 function jsonld(s) {
   const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
   const canonicalForSchema = s.canonicalOverride ? `${SITE}${s.canonicalOverride}` : canonical;
@@ -288,7 +325,7 @@ for (const s of SHELLS) {
 
   html = html.replace(/<noscript[\s\S]*?<\/noscript>\n?/, '');
 
-  const body = s.home ? homePrerender(s.loc) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s));
+  const body = s.home ? homePrerender(s.loc) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s)));
   const appBlock = `<div id="app"><!-- prerender:start -->\n${body}\n<!-- prerender:end --></div>`;
   if (/<!-- prerender:start -->/.test(html)) {
     html = html.replace(/<div id="app"><!-- prerender:start -->[\s\S]*?<!-- prerender:end --><\/div>/, appBlock);

@@ -102,6 +102,22 @@ export const SHELLS = [
     ogDescription: 'Условия, которые действуют при использовании Clinky.'
   },
   {
+    file: 'play/never-have-i-ever.html', loc: 'en', path: '/play/never-have-i-ever', altRu: '/ru/play/ya-nikogda-ne',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
+    title: 'Never Have I Ever Online — Free Cards, No Sign-Up',
+    description: 'Play Never Have I Ever in your browser: tap for a fresh card, no sign-up, nothing to install. Rules, a no-drinking version and a new set of cards every day.',
+    ogTitle: 'Never Have I Ever — play online, free',
+    ogDescription: 'Tap for a card and let the table do the rest. Free, no sign-up.'
+  },
+  {
+    file: 'ru/play/ya-nikogda-ne.html', loc: 'ru', path: '/ru/play/ya-nikogda-ne', altEn: '/play/never-have-i-ever',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
+    title: 'Играть в «Я никогда не» онлайн — карточки бесплатно',
+    description: 'Играй в «Я никогда не» прямо в браузере: жми и тяни новую карточку, без регистрации и установки. Правила, версия без алкоголя и новые карточки каждый день.',
+    ogTitle: '«Я никогда не» — играть онлайн, бесплатно',
+    ogDescription: 'Тяни карточку, дальше всё сделает компания. Бесплатно, без регистрации.'
+  },
+  {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,
     title: 'Page Not Found — Clinky',
     description: 'That page does not exist. Head back to the Clinky home page or browse the free question packs.',

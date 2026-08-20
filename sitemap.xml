@@ -7,6 +7,18 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://clinkyapp.com/play/never-have-i-ever</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/ya-nikogda-ne"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/never-have-i-ever"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/play/ya-nikogda-ne</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/never-have-i-ever"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/ya-nikogda-ne"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://clinkyapp.com/ru/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/"/>

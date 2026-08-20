@@ -21,7 +21,7 @@
   var C = '#FF4F62';
 
   var state = {
-    lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false,
+    lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false, playSlug: 'never-have-i-ever', playIndex: 0,
     gameIndex: 0, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
@@ -49,7 +49,12 @@
       finalTitle: 'Round up your friends and clink first!', finalSub: "Drop your email and we'll let you know on launch day!",
       gamesPageTitle: 'Games for any table',
       gamesPageSub: 'Pick a game and flick through real cards from the app.',
-      howTitle: 'How to play', stepLabel: 'Step', gamesFaqTitle: 'Questions about the games',
+      howTitle: 'How to play', stepLabel: 'Step',
+      playTitle: 'Play {game} online', playSub: 'Tap for a new card. No sign-up, nothing to install.',
+      playNext: 'Next card', playLeft: '{n} cards left today', playHint: 'Free cards reset every day',
+      playLoading: 'Shuffling the deck…',
+      playDoneTitle: 'That is today\u2019s deck',
+      playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
       slogan: "Bring your friends, we'll bring the fun!",
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
@@ -90,7 +95,12 @@
       finalTitle: 'Собери друзей и чокнись первым!', finalSub: 'Оставь почту, и мы напишем тебе в день релиза!',
       gamesPageTitle: 'Игры для компании',
       gamesPageSub: 'Выбери игру и полистай настоящие карточки из приложения.',
-      howTitle: 'Как играть', stepLabel: 'Шаг', gamesFaqTitle: 'Вопросы про игры',
+      howTitle: 'Как играть', stepLabel: 'Шаг',
+      playTitle: 'Играть в «{game}» онлайн', playSub: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+      playNext: 'Дальше', playLeft: 'осталось карточек сегодня: {n}', playHint: 'Бесплатные карточки обновляются каждый день',
+      playLoading: 'Тасуем колоду…',
+      playDoneTitle: 'На сегодня колода закончилась',
+      playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
       slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
@@ -792,6 +802,94 @@
     '</div>';
   }
 
+  // ===== PLAY (web deck with a daily limit) =====
+  var DECK_KEY = 'clinky.web.deck';
+  function deckState() {
+    var today = new Date().toISOString().slice(0, 10);
+    try {
+      var raw = JSON.parse(localStorage.getItem(DECK_KEY) || '{}');
+      if (raw.day !== today) return { day: today, used: 0, seen: [] };
+      return { day: today, used: raw.used || 0, seen: raw.seen || [] };
+    } catch (e) { return { day: today, used: 0, seen: [] }; }
+  }
+  function saveDeck(st) { try { localStorage.setItem(DECK_KEY, JSON.stringify(st)); } catch (e) {} }
+  function deckLimit() { return (window.CLINKY_WEB_DECK && window.CLINKY_WEB_DECK.limit) || 8; }
+  function deckCards() {
+    var d = window.CLINKY_WEB_DECK;
+    if (!d) return [];
+    var game = (PLAY_SLUGS[state.playSlug] || {}).id || 'never_have_i';
+    return (d.games[game] || {})[state.lang] || [];
+  }
+  var _deckLoading = false;
+  function ensureDeck(cb) {
+    if (window.CLINKY_WEB_DECK) { cb(); return; }
+    if (_deckLoading) return;
+    _deckLoading = true;
+    var sc = document.createElement('script');
+    sc.src = '/assets/web-deck.js';
+    sc.onload = function () { _deckLoading = false; cb(); };
+    sc.onerror = function () { _deckLoading = false; };
+    document.head.appendChild(sc);
+  }
+
+  function renderPlayCard() {
+    var t = tdict(), cards = deckCards(), st = deckState(), limit = deckLimit();
+    if (!cards.length) return '<p style="text-align:center;color:#a99ea6;font-size:14px">' + esc(t.playLoading) + '</p>';
+    if (st.used >= limit) {
+      return '<div class="soft-card" style="padding:32px 28px;text-align:center;border-radius:30px">' +
+        '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(20px,2.6vw,26px);color:#1c1326;margin-bottom:10px">' + esc(t.playDoneTitle) + '</div>' +
+        '<p style="font-size:15.5px;color:#6b6b76;margin:0 auto 22px;max-width:26em">' + esc(t.playDoneBody) + '</p>' +
+        coralBtn(t.heroCta, 'join') +
+      '</div>';
+    }
+    var idx = state.playIndex % cards.length;
+    return '<div class="qcard" style="max-width:430px;margin:0 auto">' +
+      '<div class="qbody" style="position:relative;min-height:132px;display:flex;align-items:center;justify-content:center;margin:6px 0 16px;padding:0 14px">' +
+        '<p id="playLine" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;color:#1c1326">' + esc(cards[idx]) + '</p>' +
+      '</div>' +
+      '<div class="qfoot" style="border-top:1px solid #e9e6ec;padding-top:16px">' +
+        '<p class="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin:0 0 5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</p>' +
+        '<div class="qnav" style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:10px">' +
+          '<button data-act="playnext" class="qbtn next" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+            '<span class="circle" style="width:62px;height:62px;border-radius:50%;background:#FF4F62;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 24, '#fff', 'ph-bold') + '</span>' +
+            '<span class="lbl" style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.playNext) + '</span>' +
+          '</button>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  function renderPlay() {
+    var t = tdict(), meta = PLAY_SLUGS[state.playSlug] || {};
+    var gameTitle = GAMES[0].title[state.lang];
+    ensureDeck(function () { var m = document.getElementById('playMount'); if (m) m.innerHTML = renderPlayCard(); });
+    return '<div class="page-in">' +
+      '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
+        '<div style="max-width:760px;margin:0 auto;text-align:center">' +
+          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(0, C, 26) + '</span>' +
+          h2sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
+        '</div>' +
+      '</section>' +
+      '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
+        '<div id="playMount">' + renderPlayCard() + '</div>' +
+        '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.playHint) + '</p>' +
+      '</section>' +
+      '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
+        '<div style="max-width:720px;margin:0 auto">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 14px;color:#1c1326">' + esc(t.howTitle) + '</h2>' +
+          '<div id="howWrap">' + renderHowStrip() + '</div>' +
+        '</div>' +
+      '</section>' +
+      '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(30px,5vh,50px)">' +
+        '<div style="max-width:720px;margin:0 auto">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
+          faqAccordion(FAQ_GAMES[state.lang]) +
+        '</div>' +
+      '</section>' +
+      renderFinalCta() +
+    '</div>';
+  }
+
   // ===== ABOUT =====
   function renderAbout() {
     var t = tdict(), I = icons();
@@ -889,6 +987,7 @@
 
   function renderMain() {
     switch (state.page) {
+      case 'play': return renderPlay();
       case 'games': return renderGames();
       case 'about': return renderAbout();
       case 'support': return renderSupport();
@@ -1167,7 +1266,11 @@
       state.lang = 'ru'; document.documentElement.lang = 'ru'; paint();
     } catch (e) {}
   }
-  var PAGES = { home: 1, games: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  var PAGES = { home: 1, games: 1, play: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  var PLAY_SLUGS = {
+    'never-have-i-ever': { id: 'never_have_i', lang: 'en' },
+    'ya-nikogda-ne': { id: 'never_have_i', lang: 'ru' }
+  };
   // clean path routing (no hash): / , /about , /support , /privacy , /terms (+ -ru entry variants)
   function pathSegment() {
     var seg = (location.pathname || '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
@@ -1182,9 +1285,24 @@
   }
   function pageFromPath() {
     var seg = pathSegment();
+    if (seg.indexOf('play/') === 0) {
+      var slug = seg.slice(5);
+      if (PLAY_SLUGS[slug]) { state.playSlug = slug; return 'play'; }
+    }
     return PAGES[seg] ? seg : 'home';
   }
+  function playSlugFor(gameId, lang) {
+    for (var k in PLAY_SLUGS) {
+      if (PLAY_SLUGS[k].id === gameId && PLAY_SLUGS[k].lang === lang) return k;
+    }
+    return null;
+  }
   function pathFor(page, lang) {
+    if (page === 'play') {
+      var cur = PLAY_SLUGS[state.playSlug] || { id: 'never_have_i' };
+      var slug = playSlugFor(cur.id, lang) || state.playSlug;
+      return (lang === 'ru' ? '/ru/play/' : '/play/') + slug;
+    }
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
@@ -1306,6 +1424,20 @@
       case 'coffee': setDrink('coffee'); break;
       case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); bumpClink(); resetAnim(); break;
       case 'plusone': plusOne(); break;
+      case 'playnext': {
+        var st = deckState(), lim = deckLimit();
+        if (st.used < lim) {
+          st.used += 1; saveDeck(st);
+          state.playIndex = (state.playIndex + 1) % Math.max(1, deckCards().length);
+          var m = document.getElementById('playMount');
+          if (m) {
+            m.innerHTML = renderPlayCard();
+            var line = document.getElementById('playLine');
+            if (line) { line.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)'; }
+          }
+        }
+        break;
+      }
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
       default: if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
