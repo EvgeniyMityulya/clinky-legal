@@ -22,7 +22,7 @@
 
   var DICT = {
     en: {
-      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navJoin: 'Try it first!',
+      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navGames: 'Games', navJoin: 'Try it first!',
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
@@ -35,12 +35,15 @@
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through',
-      tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
+      gamesAll: 'See how to play', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
       problemKicker: 'Sound familiar?', problemTitle: 'Getting everyone together can be a real quest!',
       problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
       problemTurn: 'Clinky helps you meet up more often and have the kind of time you want to repeat!',
       discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just your people and your moments.',
       finalTitle: 'Round up your friends and clink first!', finalSub: "Drop your email and we'll let you know on launch day!",
+      gamesPageTitle: 'Games for any table',
+      gamesPageSub: 'Pick a game and flick through real cards from the app.',
+      howTitle: 'How to play', stepLabel: 'Step', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
       slogan: "Bring your friends, we'll bring the fun!",
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
@@ -60,7 +63,7 @@
       footRights: 'For people who value real meet-ups.'
     },
     ru: {
-      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navJoin: 'Хочу первым!',
+      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navGames: 'Игры', navJoin: 'Хочу первым!',
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
@@ -73,12 +76,15 @@
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
-      tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
+      gamesAll: 'Как в это играть', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
       problemKicker: 'Знакомо?', problemTitle: 'Собраться компанией бывает та ещё задачка!',
       problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт куда веселее!',
       problemTurn: 'Clinky помогает видеться чаще и проводить время так, что хочется повторить!',
       discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только твои люди и моменты.',
       finalTitle: 'Собери друзей и чокнись первым!', finalSub: 'Оставь почту, и мы напишем тебе в день релиза!',
+      gamesPageTitle: 'Игры для компании',
+      gamesPageSub: 'Выбери игру и полистай настоящие карточки из приложения.',
+      howTitle: 'Как играть', stepLabel: 'Шаг', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
       slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
@@ -100,28 +106,40 @@
   };
 
   var GAMES = [
-    { title: { en: 'Never have I ever', ru: 'Я никогда не' }, q: [
+    { title: { en: 'Never have I ever', ru: 'Я никогда не' }, how: {
+      en: ['Read the card out loud, exactly as written', 'Whoever has done it owns up to the table', 'And tells the story behind that card'],
+      ru: ['Читаешь карточку вслух, ровно как написано', 'Кто это делал, тот признаётся всей компании', 'И сразу рассказывает историю за карточкой']
+    }, q: [
       { en: "Never have I ever flirted for a discount or a free drink", ru: 'Я никогда не флиртовал ради скидки или бесплатного напитка' },
       { en: "Never have I ever liked someone's old photo and panic-unliked it a second later", ru: 'Я никогда не лайкал старое фото человека и тут же в панике убирал лайк' },
       { en: "Never have I ever texted an ex at 3 a.m.", ru: 'Я никогда не писал бывшим в три часа ночи' },
       { en: "Never have I ever screenshotted a chat to dissect it with a friend", ru: 'Я никогда не делал скриншот переписки, чтобы разобрать её с другом' },
       { en: "Never have I ever googled someone before meeting them and then acted surprised to hear it all", ru: 'Я никогда не гуглил человека перед встречей и делал вид, что узнаю всё впервые' }
     ]},
-    { title: { en: 'Roulette', ru: 'Рулетка' }, q: [
+    { title: { en: 'Roulette', ru: 'Рулетка' }, how: {
+      en: ['The card picks two people from the table', 'The first answers the question about the second', 'Then the second adds their side of it'],
+      ru: ['Карточка сама выбирает двоих из компании', 'Первый отвечает на вопрос про второго', 'Второй добавляет свою версию той истории']
+    }, q: [
       { en: "*Alex*, tell us the moment with *Sam* when you knew you'd be real friends", ru: '*Аня*, расскажи случай с *Максом*, после которого ты поняла, что вы точно подружитесь' },
       { en: "*Alex*, when did *Sam* last genuinely surprise you?", ru: '*Аня*, когда *Макс* последний раз тебя по-настоящему удивил?' },
       { en: "*Alex*, what kind of adventure would you take *Sam* on, and why?", ru: '*Аня*, в какое приключение ты бы взяла *Макса* напарником и почему?' },
       { en: "*Alex*, what's a piece of advice from *Sam* you still think about?", ru: '*Аня*, какой совет *Макса* ты до сих пор вспоминаешь?' },
       { en: "*Alex*, what does *Sam* do that instantly lifts your mood?", ru: '*Аня*, что *Макс* делает такого, что сразу поднимает тебе настроение?' }
     ]},
-    { title: { en: 'Tell a moment', ru: 'Расскажи момент' }, q: [
+    { title: { en: 'Tell a moment', ru: 'Расскажи момент' }, how: {
+      en: ['Ask one person rather than the whole table', 'Let the silence sit for a few seconds', 'Follow up on one detail from the answer'],
+      ru: ['Спрашиваешь одного человека, а не весь стол', 'Даёшь тишине повисеть пару секунд', 'Уточняешь одну деталь из его ответа']
+    }, q: [
       { en: "Tell us about a decision that changed your whole year", ru: 'Расскажи о решении, которое изменило твой год' },
       { en: "Tell us about a book or film that stuck with you for ages", ru: 'Расскажи о книге или фильме, который застрял в голове надолго' },
       { en: "Tell us about a time a stranger made your day", ru: 'Расскажи случай, когда незнакомец сделал твой день' },
       { en: "Tell us about the most spontaneous trip you've ever taken", ru: 'Расскажи о самой спонтанной поездке в твоей жизни' },
       { en: "Tell us about something you got by accident that became a favorite", ru: 'Расскажи о вещи, которая досталась случайно, а стала любимой' }
     ]},
-    { title: { en: 'Would you rather', ru: 'Что выберешь' }, q: [
+    { title: { en: 'Would you rather', ru: 'Что выберешь' }, how: {
+      en: ['Read both options out loud, without hints', 'Everyone picks a side before explaining', 'Then each side defends its own choice'],
+      ru: ['Читаешь оба варианта вслух, без подсказок', 'Все выбирают сторону до объяснений', 'Потом каждая сторона защищает свою']
+    }, q: [
       { en: "Would you rather have a perfect memory for faces or for names?", ru: 'Что выберешь, идеальную память на лица или на имена?' },
       { en: "Would you rather recall the taste of any dish or the tune of any song?", ru: 'Что выберешь, помнить вкус любого блюда или мелодию любой песни?' },
       { en: "Would you rather remember every dream or feel fully rested after 4 hours of sleep?", ru: 'Что выберешь, помнить каждый свой сон или высыпаться за 4 часа?' },
@@ -130,22 +148,64 @@
     ]}
   ];
 
-  var FAQ = {
+  var FAQ_GAMES = {
     en: [
-      { q: 'When does Clinky launch?', a: "Soon. Join the waitlist and we'll email you the App Store link the day it's live." },
-      { q: 'Is it free?', a: 'Yes — Clinky is free to start. An optional Clinky Pro will unlock a few extras.' },
-      { q: 'What about my data?', a: 'Clinky is offline-first with no accounts. Your data stays on your device — we never see it.' },
-      { q: 'Which devices are supported?', a: 'iPhone on iOS 17 and later.' }
+      { q: "Is there a limit on how many cards I can draw?", a: "On the free plan you get three new cards a day across all four games together. Pro removes the limit, and cards you already drew stay readable either way." },
+      { q: "Can I switch games in the middle of an evening?", a: "Any time. Switching does not reset anything, and the cards you already played stay marked as played." },
+      { q: "Does it work with no internet?", a: "Fully. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing." },
+      { q: "Are the questions we played saved?", a: "Every card you draw is saved to that meet-up, so you can look back at what you talked about. The ones you liked are collected as favourites." },
+      { q: "Do the same cards come round again?", a: "Not inside one evening. And a card you did not like can be hidden so it stops appearing." },
+      { q: "How many people do you need?", a: "Three games work from two people. Roulette needs three, because its cards ask one person about another." }
     ],
     ru: [
-      { q: 'Когда выйдет Clinky?', a: 'Скоро. Встань в очередь — пришлём ссылку на App Store в день релиза.' },
-      { q: 'Это бесплатно?', a: 'Да — Clinky бесплатен на старте. Опциональный Clinky Pro откроет пару дополнений.' },
-      { q: 'А что с моими данными?', a: 'Clinky работает офлайн и без аккаунтов. Данные остаются на твоём устройстве — мы их не видим.' },
-      { q: 'Какие устройства поддерживаются?', a: 'iPhone на iOS 17 и новее.' }
+      { q: "Есть лимит на количество карточек?", a: "На бесплатном тарифе три новых карточки в день на все четыре игры вместе. Pro снимает лимит, а уже вытянутые карточки остаются доступными в любом случае." },
+      { q: "Можно менять игру посреди вечера?", a: "В любой момент. Переключение ничего не сбрасывает, а карточки, в которые уже играли, остаются отмеченными." },
+      { q: "Работает без интернета?", a: "Полностью. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет." },
+      { q: "Сохраняются ли вопросы, которые мы прошли?", a: "Каждая вытянутая карточка сохраняется к этой встрече, так что можно вернуться и посмотреть, о чём говорили. Понравившиеся собираются в избранных." },
+      { q: "Карточки повторяются?", a: "Внутри одного вечера нет. А карточку, которая не понравилась, можно скрыть, и она перестанет попадаться." },
+      { q: "Сколько нужно человек?", a: "Три игры работают от двух человек. «Рулетке» нужны трое, потому что её карточки спрашивают одного про другого." }
+    ]
+  };
+
+  var FAQ = {
+    en: [
+      { q: "When does Clinky launch?", a: "Soon. Join the waitlist and we'll email you the App Store link the day it's live." },
+      { q: "Is it free?", a: "Yes, Clinky is free to start. An optional Clinky Pro will unlock a few extras." },
+      { q: "Does the app work without drinking?", a: "Completely. A clink can be coffee, tea or water, and every question game plays the same way. Nothing in the app requires alcohol." },
+      { q: "Does Clinky work offline?", a: "Yes, the whole app does. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing and there is no server to be down." },
+      { q: "What about my data?", a: "Clinky is offline-first with no accounts. Your data stays on your device and we never see it." },
+      { q: "Which devices are supported?", a: "iPhone on iOS 17 and later." }
+    ],
+    ru: [
+      { q: "Когда выйдет Clinky?", a: "Скоро. Встань в очередь, пришлём ссылку на App Store в день релиза." },
+      { q: "Это бесплатно?", a: "Да, Clinky бесплатен на старте. Опциональный Clinky Pro откроет пару дополнений." },
+      { q: "А без алкоголя приложение работает?", a: "Полностью. Чокнуться можно кофе, чаем или водой, и все игры с вопросами идут точно так же. Ничто в приложении не требует алкоголя." },
+      { q: "Clinky работает офлайн?", a: "Да, целиком. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет, и падать нечему." },
+      { q: "А что с моими данными?", a: "Clinky работает офлайн и без аккаунтов. Данные остаются на твоём устройстве, мы их не видим." },
+      { q: "Какие устройства поддерживаются?", a: "iPhone на iOS 17 и новее." }
     ]
   };
 
   // ===== helpers =====
+  function faqAccordion(items) {
+    return '<div class="faq-acc">' + items.map(function (f) {
+      return '<details><summary>' + esc(f.q) + '</summary>' +
+        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+    }).join('') + '</div>';
+  }
+  function faqAccordion(items) {
+    return '<div class="faq-acc">' + items.map(function (f) {
+      return '<details><summary>' + esc(f.q) + '</summary>' +
+        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+    }).join('') + '</div>';
+  }
+  function questionsHref() { return state.lang === 'ru' ? '/ru/questions/' : '/questions/'; }
+  function faqAccordion(items) {
+    return '<div class="faq-acc">' + items.map(function (f) {
+      return '<details><summary>' + esc(f.q) + '</summary>' +
+        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+    }).join('') + '</div>';
+  }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function tdict() {
     var raw = DICT[state.lang], t = {};
@@ -361,6 +421,7 @@
       '</button>' +
       '<nav class="nav-mid" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px">' +
         '<button data-act="home" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
+        '<button data-act="games" style="' + navPill(p === 'games') + '">' + esc(t.navGames) + '</button>' +
         '<button data-act="about" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
         '<button data-act="support" style="' + navPill(p === 'support') + '">' + esc(t.navSupport) + '</button>' +
         '<span class="nav-legal" style="' + navDiv + '"></span>' +
@@ -404,8 +465,10 @@
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footProduct) + '</div>' +
           '<button data-act="home" style="' + lnk + '">' + esc(t.navHome) + '</button>' +
+          '<button data-act="games" style="' + lnk + '">' + esc(t.navGames) + '</button>' +
           '<button data-act="about" style="' + lnk + '">' + esc(t.navAbout) + '</button>' +
           '<button data-act="support" style="' + lnk + '">' + esc(t.navSupport) + '</button>' +
+          '<a href="' + questionsHref() + '" style="' + lnk + ';text-decoration:none">' + esc(t.navQuestions) + '</a>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footLegalReach) + '</div>' +
@@ -590,7 +653,23 @@
     var card = renderQuestionSection();
 
     // ---- final CTA (contained coral block) ----
-    var finalCta = '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
+    var finalCta = renderFinalCta();
+
+    // ---- global clink counter (premium odometer) ----
+    var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
+      '<div style="max-width:560px;margin:0 auto;text-align:center">' +
+        kicker(t.counterKicker) +
+        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
+        subsec(t.counterLabel) +
+      '</div>' +
+    '</section>';
+
+    return '<div class="page-in">' + hero + counter + problem + discover + card + finalCta + '</div>';
+  }
+
+  function renderFinalCta() {
+    var t = tdict();
+    return '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
       '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
         sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
@@ -609,24 +688,14 @@
         '</div>' +
       '</div>' +
     '</section>';
-
-    // ---- global clink counter (premium odometer) ----
-    var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
-      '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        kicker(t.counterKicker) +
-        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
-        subsec(t.counterLabel) +
-      '</div>' +
-    '</section>';
-
-    return '<div class="page-in">' + hero + counter + problem + discover + card + finalCta + '</div>';
   }
 
-  function renderQuestionSection() {
+  function renderQuestionSection(opts) {
     var t = tdict();
-    return '<section style="padding:clamp(50px,8vh,96px) clamp(16px,4vw,72px)">' +
-      '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>' +
-      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 22px;max-width:760px">' + renderGameTabs() + '</div>' +
+    var tight = opts && opts.hideHeading;
+    return '<section style="padding:' + (tight ? 'clamp(18px,3vh,30px)' : 'clamp(50px,8vh,96px)') + ' clamp(16px,4vw,72px) clamp(50px,8vh,96px)">' +
+      ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>') +
+      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 10px;max-width:760px">' + renderGameTabs() + '</div>' +
       '<div style="max-width:430px;margin:0 auto">' +
         '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
@@ -653,9 +722,27 @@
           '</div>' +
         '</div>' +
         '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
+        ((opts && opts.hideHeading) ? '' : '') +
+        ((opts && opts.hideHeading) ? '' : '<p style="text-align:center;margin:14px 0 0"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#E11D48">' + esc(t.gamesAll) + ' →</button></p>') +
       '</div>' +
     '</section>';
   }
+  function renderHowStrip() {
+    var t = tdict(), L = state.lang, steps = (GAMES[state.gameIndex].how || {})[L] || [];
+    if (!steps.length) return '';
+    return '<div id="howStrip" style="max-width:960px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">' +
+      steps.map(function (line, i) {
+        return '<div class="soft-card" style="padding:18px 20px 20px;text-align:left">' +
+          '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">' +
+            '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
+            '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#E11D48">' + esc(t.stepLabel) + '</span>' +
+          '</div>' +
+          '<p style="margin:0;min-height:2.9em;font-size:15.5px;line-height:1.45;color:#6b6b76;text-wrap:balance">' + esc(line) + '</p>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
   function renderGameTabs() {
     var L = state.lang;
     return GAMES.map(function (g, i) {
@@ -668,6 +755,29 @@
     var L = state.lang, cg = GAMES[state.gameIndex];
     var qStr = cg.q[state.qIndex % cg.q.length][L];
     return qStr.split('*').map(function (seg, i) { return '<span style="color:' + (i % 2 ? '#FF4F62' : '#1c1326') + '">' + esc(seg) + '</span>'; }).join('');
+  }
+
+  function renderGames() {
+    var t = tdict();
+    return '<div class="page-in">' +
+      '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(24px,4vh,34px)">' +
+        '<div style="max-width:760px;margin:0 auto;text-align:center">' +
+          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + icons().game + '</span>' +
+          h2sec(t.gamesPageTitle) + subsec(t.gamesPageSub) +
+        '</div>' +
+      '</section>' +
+      '<section style="padding:0 clamp(20px,5vw,72px)">' +
+        '<div id="howWrap">' + renderHowStrip() + '</div>' +
+      '</section>' +
+      renderQuestionSection({ hideHeading: true }) +
+      '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
+        '<div style="max-width:720px;margin:0 auto">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
+          faqAccordion(FAQ_GAMES[state.lang]) +
+        '</div>' +
+      '</section>' +
+      renderFinalCta() +
+    '</div>';
   }
 
   // ===== ABOUT =====
@@ -713,11 +823,7 @@
           '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
           '<p style="font-size:12.5px;color:#a99ea6;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
-    var faqHtml = FAQ[state.lang].map(function (f) {
-      return '<div class="soft-card" style="padding:18px 20px">' +
-        '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;margin-bottom:6px;color:#1c1326">' + esc(f.q) + '</div>' +
-        '<div style="font-size:14.5px;line-height:1.55;color:#6b6b76">' + esc(f.a) + '</div></div>';
-    }).join('');
+    var faqHtml = faqAccordion(FAQ[state.lang]);
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:560px;margin:0 auto">' +
         '<div style="text-align:center;margin-bottom:30px">' +
@@ -758,6 +864,7 @@
 
   function renderMain() {
     switch (state.page) {
+      case 'games': return renderGames();
       case 'about': return renderAbout();
       case 'support': return renderSupport();
       case 'privacy': return renderLegal('privacy');
@@ -974,6 +1081,7 @@
     var tabs = document.getElementById('gameTabs'); if (tabs) tabs.innerHTML = renderGameTabs();
     var c = document.getElementById('qcat'); if (c) c.innerHTML = renderQcat();
     var l = document.getElementById('qline'); if (l) l.innerHTML = renderQline();
+    var hw = document.getElementById('howWrap'); if (hw) hw.innerHTML = renderHowStrip();
     var n = document.getElementById('qcount'); if (n) n.innerHTML = esc(renderQcount());
     animQ();
   }
@@ -1029,7 +1137,7 @@
       state.lang = 'ru'; document.documentElement.lang = 'ru'; paint();
     } catch (e) {}
   }
-  var PAGES = { home: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  var PAGES = { home: 1, games: 1, about: 1, support: 1, privacy: 1, terms: 1 };
   // clean path routing (no hash): / , /about , /support , /privacy , /terms (+ -ru entry variants)
   function pageFromPath() {
     var seg = (location.pathname || '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
@@ -1145,7 +1253,7 @@
     var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
-      case 'home': case 'about': case 'support': case 'privacy': case 'terms': state.menuOpen = false; setPage(a); break;
+      case 'home': case 'games': case 'about': case 'support': case 'privacy': case 'terms': state.menuOpen = false; setPage(a); break;
       case 'menu': state.menuOpen = !state.menuOpen; paintHeader(); break;
       case 'en': setLang('en'); break;
       case 'ru': setLang('ru'); break;

@@ -1,0 +1,71 @@
+import { readFileSync, writeFileSync } from 'node:fs';
+import { FAQ_SUPPORT } from './faq_support.mjs';
+import { FAQ_GAMES } from './faq_games.mjs';
+
+const FILE = 'assets/site.js';
+let js = readFileSync(FILE, 'utf8');
+const before = js.length;
+
+const faqLiteral = 'var FAQ = {\n' + ['en', 'ru'].map((l) =>
+  `    ${l}: [\n` + FAQ_SUPPORT[l].map((f) =>
+    `      { q: ${JSON.stringify(f.q)}, a: ${JSON.stringify(f.a)} }`).join(',\n') + '\n    ]'
+).join(',\n') + '\n  };';
+
+
+const gamesLiteral = 'var FAQ_GAMES = {\n' + ['en', 'ru'].map((l) =>
+  `    ${l}: [\n` + FAQ_GAMES[l].map((f) =>
+    `      { q: ${JSON.stringify(f.q)}, a: ${JSON.stringify(f.a)} }`).join(',\n') + '\n    ]'
+).join(',\n') + '\n  };';
+const gamesRe = /var FAQ_GAMES = \{[\s\S]*?\n  \};/;
+if (gamesRe.test(js)) js = js.replace(gamesRe, gamesLiteral);
+
+const faqRe = /var FAQ = \{[\s\S]*?\n  \};/;
+if (!faqRe.test(js)) throw new Error('FAQ block not found');
+js = js.replace(faqRe, faqLiteral);
+
+if (!/gamesAll:/.test(js)) {
+  js = js.replace("tapSwipe: 'Tap or swipe the card'", "gamesAll: 'See how to play', tapSwipe: 'Tap or swipe the card'");
+  js = js.replace("tapSwipe: 'Тап или свайп по карточке'", "gamesAll: 'Как в это играть', tapSwipe: 'Тап или свайп по карточке'");
+}
+
+const helpers = `  function questionsHref() { return state.lang === 'ru' ? '/ru/questions/' : '/questions/'; }
+  function faqAccordion(items) {
+    return '<div class="faq-acc">' + items.map(function (f) {
+      return '<details><summary>' + esc(f.q) + '</summary>' +
+        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+    }).join('') + '</div>';
+  }
+`;
+if (!/function questionsHref/.test(js)) js = js.replace('  function esc(s) {', helpers + '  function esc(s) {');
+else if (!/function faqAccordion/.test(js)) {
+  js = js.replace(/  function questionsHref\(\)[^\n]*\n/, (m) => m + helpers.split('\n').slice(1).join('\n'));
+}
+
+const sectionRe = /  function renderFaqSection\(\) \{[\s\S]*?\n  \}\n/;
+js = js.replace(sectionRe, '');
+
+js = js.replace(
+  "return '<div class=\"page-in\">' + hero + counter + problem + discover + card + renderFaqSection() + finalCta + '</div>';",
+  "return '<div class=\"page-in\">' + hero + counter + problem + discover + card + finalCta + '</div>';"
+);
+js = js.replace(/, faqKicker: '[^']*', faqTitle: '[^']*'/g, '');
+js = js.replace(/faqKicker: '[^']*', faqTitle: '[^']*', /g, '');
+
+const supportOld = /    var faqHtml = FAQ\[state\.lang\]\.map\(function \(f\) \{[\s\S]*?\}\)\.join\(''\);/;
+if (supportOld.test(js)) js = js.replace(supportOld, '    var faqHtml = faqAccordion(FAQ[state.lang]);');
+
+const footerAnchor = "'<button data-act=\"support\" style=\"' + lnk + '\">' + esc(t.navSupport) + '</button>' +";
+if (js.includes(footerAnchor) && !js.includes("questionsHref() + '\" style=\"' + lnk")) {
+  js = js.replace(footerAnchor, footerAnchor + "\n          '<a href=\"' + questionsHref() + '\" style=\"' + lnk + ';text-decoration:none\">' + esc(t.navQuestions) + '</a>' +");
+}
+
+const hintLine = "'<p style=\"text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0\">' + esc(t.cardHint) + '</p>' +";
+if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
+  js = js.replace(hintLine, hintLine + "\n        '<p style=\"text-align:center;margin:14px 0 0\"><a href=\"' + questionsHref() + '\" style=\"font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none\">' + esc(t.gamesAll) + ' →</a></p>' +");
+}
+
+
+writeFileSync(FILE, js);
+console.log(`site.js: ${before} -> ${js.length} bytes`);
+console.log('checks:', ['faqAccordion', 'faq-acc', 'renderFaqSection() + finalCta', 'faqHtml = faqAccordion']
+  .map((k) => `${k}=${js.includes(k)}`).join('  '));

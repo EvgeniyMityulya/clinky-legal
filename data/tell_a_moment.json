@@ -1,0 +1,1402 @@
+[
+  {
+    "id": "tam-001",
+    "text": {
+      "en": "Tell us about your most cringe-worthy moment from school",
+      "ru": "Расскажи самый неловкий момент в школе"
+    }
+  },
+  {
+    "id": "tam-002",
+    "text": {
+      "en": "Tell us about a time you genuinely shocked yourself",
+      "ru": "Расскажи момент, когда ты сильнее всего удивил себя самого"
+    }
+  },
+  {
+    "id": "tam-003",
+    "text": {
+      "en": "Tell us about a gift you'll remember for the rest of your life",
+      "ru": "Расскажи о подарке, который ты запомнил на всю жизнь"
+    }
+  },
+  {
+    "id": "tam-004",
+    "text": {
+      "en": "Tell us about the strangest dream you've ever had",
+      "ru": "Расскажи самый странный сон, который тебе снился"
+    }
+  },
+  {
+    "id": "tam-005",
+    "text": {
+      "en": "Tell us about a place you're dying to go back to",
+      "ru": "Расскажи о месте, куда хочешь обязательно вернуться"
+    }
+  },
+  {
+    "id": "tam-006",
+    "text": {
+      "en": "Tell us about a decision that completely changed your life",
+      "ru": "Расскажи о решении, которое поменяло твою жизнь"
+    }
+  },
+  {
+    "id": "tam-007",
+    "text": {
+      "en": "Tell us about a travel moment you'll never forget",
+      "ru": "Расскажи случай из путешествия, который запомнился навсегда"
+    }
+  },
+  {
+    "id": "tam-008",
+    "text": {
+      "en": "Tell us about the most epic mess-up at your first job",
+      "ru": "Расскажи про самый эпичный косяк на первой работе"
+    }
+  },
+  {
+    "id": "tam-009",
+    "text": {
+      "en": "Tell us about the boldest thing you ever got away with",
+      "ru": "Расскажи про самое дерзкое, что когда-то сошло тебе с рук"
+    }
+  },
+  {
+    "id": "tam-010",
+    "text": {
+      "en": "Tell us about a childhood dream that never came true",
+      "ru": "Расскажи про мечту из детства, которая так и не сбылась"
+    }
+  },
+  {
+    "id": "tam-011",
+    "text": {
+      "en": "Tell us about the moment you realized childhood was over",
+      "ru": "Расскажи про момент, когда понял, что детство кончилось"
+    }
+  },
+  {
+    "id": "tam-012",
+    "text": {
+      "en": "Tell us about a family tradition only your family had",
+      "ru": "Расскажи про семейную традицию, которая была только у вас"
+    }
+  },
+  {
+    "id": "tam-013",
+    "text": {
+      "en": "Tell us about the first thing you ever saved up for and bought yourself",
+      "ru": "Расскажи про первое, что ты накопил и купил сам"
+    }
+  },
+  {
+    "id": "tam-014",
+    "text": {
+      "en": "Tell us about a smell or taste that instantly drops you back into childhood",
+      "ru": "Расскажи про запах или вкус, который мгновенно возвращает в детство"
+    }
+  },
+  {
+    "id": "tam-015",
+    "text": {
+      "en": "Tell us about who you wanted to be when you were seven",
+      "ru": "Расскажи про то, кем ты хотел стать в семь лет"
+    }
+  },
+  {
+    "id": "tam-016",
+    "text": {
+      "en": "Tell us about a day you'd live over again exactly as it was",
+      "ru": "Расскажи про день, который хотел бы прожить заново"
+    }
+  },
+  {
+    "id": "tam-017",
+    "text": {
+      "en": "Tell us about someone who changed your life without ever knowing it",
+      "ru": "Расскажи про человека, который изменил твою жизнь, сам того не зная"
+    }
+  },
+  {
+    "id": "tam-018",
+    "text": {
+      "en": "Tell us about a compliment you've held onto for years",
+      "ru": "Расскажи про комплимент, который запомнил навсегда"
+    }
+  },
+  {
+    "id": "tam-019",
+    "text": {
+      "en": "Tell us about a time you were truly terrified for someone else",
+      "ru": "Расскажи про момент, когда тебе было по-настоящему страшно за другого"
+    }
+  },
+  {
+    "id": "tam-020",
+    "text": {
+      "en": "Tell us about the kindest thing a total stranger ever did for you",
+      "ru": "Расскажи про самое доброе, что для тебя сделал незнакомец"
+    }
+  },
+  {
+    "id": "tam-021",
+    "text": {
+      "en": "Tell us about a choice you're still proud of to this day",
+      "ru": "Расскажи про решение, которым гордишься до сих пор"
+    }
+  },
+  {
+    "id": "tam-022",
+    "text": {
+      "en": "Tell us about a time someone understood you without a single word",
+      "ru": "Расскажи про момент, когда тебя поняли без слов"
+    }
+  },
+  {
+    "id": "tam-023",
+    "text": {
+      "en": "Tell us about one thing you'd change about your past if you could",
+      "ru": "Расскажи про то, что изменил бы в прошлом, если бы мог"
+    }
+  },
+  {
+    "id": "tam-024",
+    "text": {
+      "en": "Tell us about a moment of pure, uncomplicated happiness",
+      "ru": "Расскажи про момент чистого, ничем не омрачённого счастья"
+    }
+  },
+  {
+    "id": "tam-025",
+    "text": {
+      "en": "Tell us about a time you changed your mind at the very last second",
+      "ru": "Расскажи про момент, когда передумал в последнюю секунду"
+    }
+  },
+  {
+    "id": "tam-026",
+    "text": {
+      "en": "Tell us about something you put off forever and finally went for",
+      "ru": "Расскажи про то, что долго откладывал, а потом решился"
+    }
+  },
+  {
+    "id": "tam-027",
+    "text": {
+      "en": "Tell us about the hardest 'thank you' you ever had to say",
+      "ru": "Расскажи про самое сложное «спасибо», что тебе пришлось сказать"
+    }
+  },
+  {
+    "id": "tam-028",
+    "text": {
+      "en": "Tell us about a time you were proud of yourself but told no one",
+      "ru": "Расскажи про момент, когда гордился собой, но никому не сказал"
+    }
+  },
+  {
+    "id": "tam-029",
+    "text": {
+      "en": "Tell us about something that felt like the end of the world but turned out to be a beginning",
+      "ru": "Расскажи про то, что считал концом света, а оказалось началом"
+    }
+  },
+  {
+    "id": "tam-030",
+    "text": {
+      "en": "Tell us about someone you still want to call out of the blue",
+      "ru": "Расскажи про человека, которому до сих пор хочешь позвонить"
+    }
+  },
+  {
+    "id": "tam-031",
+    "text": {
+      "en": "Tell us about your most awkward moment on a date",
+      "ru": "Расскажи про самый неловкий момент на свидании"
+    }
+  },
+  {
+    "id": "tam-032",
+    "text": {
+      "en": "Tell us about something everyone calls cringe that you secretly love",
+      "ru": "Расскажи про то, что все считают зашкваром, а тебя почему-то от этого прёт"
+    }
+  },
+  {
+    "id": "tam-033",
+    "text": {
+      "en": "Tell us about the most ridiculous reason you were ever late",
+      "ru": "Расскажи про случай, когда опоздал самым нелепым образом"
+    }
+  },
+  {
+    "id": "tam-034",
+    "text": {
+      "en": "Tell us about a time you tried to impress someone and crashed hard",
+      "ru": "Расскажи про момент, когда пытался произвести впечатление и провалился"
+    }
+  },
+  {
+    "id": "tam-035",
+    "text": {
+      "en": "Tell us about the most absurd excuse you've ever made up",
+      "ru": "Расскажи про самую абсурдную отговорку, которую придумывал"
+    }
+  },
+  {
+    "id": "tam-036",
+    "text": {
+      "en": "Tell us about a time someone pointed out something about you that you'd never noticed yourself",
+      "ru": "Расскажи про случай, когда узнал о себе что-то неожиданное от других"
+    }
+  },
+  {
+    "id": "tam-037",
+    "text": {
+      "en": "Tell us about the most spontaneous trip of your life",
+      "ru": "Расскажи про самую спонтанную поездку в твоей жизни"
+    }
+  },
+  {
+    "id": "tam-038",
+    "text": {
+      "en": "Tell us about the strangest thing you've ever eaten",
+      "ru": "Расскажи про самое странное блюдо, которое пробовал"
+    }
+  },
+  {
+    "id": "tam-039",
+    "text": {
+      "en": "Tell us about a habit you just can't seem to kick",
+      "ru": "Расскажи про привычку, от которой не можешь избавиться"
+    }
+  },
+  {
+    "id": "tam-040",
+    "text": {
+      "en": "Tell us about the best random conversation you've had with a stranger",
+      "ru": "Расскажи про лучший случайный разговор с незнакомцем"
+    }
+  },
+  {
+    "id": "tam-041",
+    "text": {
+      "en": "Tell us about the weirdest place you've ever fallen asleep",
+      "ru": "Расскажи про самое необычное место, где тебе доводилось спать"
+    }
+  },
+  {
+    "id": "tam-042",
+    "text": {
+      "en": "Tell us about a skill you're secretly proud of",
+      "ru": "Расскажи про навык, которым втайне гордишься"
+    }
+  },
+  {
+    "id": "tam-043",
+    "text": {
+      "en": "Tell us about the most absurd thing you've ever spent money on",
+      "ru": "Расскажи про самую абсурдную трату в твоей жизни"
+    }
+  },
+  {
+    "id": "tam-044",
+    "text": {
+      "en": "Tell us about something you used to collect or hoard",
+      "ru": "Расскажи про то, что коллекционировал или собирал"
+    }
+  },
+  {
+    "id": "tam-045",
+    "text": {
+      "en": "Tell us about your perfect day spent completely alone",
+      "ru": "Расскажи про идеальный день, проведённый в одиночестве"
+    }
+  },
+  {
+    "id": "tam-046",
+    "text": {
+      "en": "Tell us about the strangest coincidence that's ever happened to you",
+      "ru": "Расскажи про самое странное совпадение, что с тобой случалось"
+    }
+  },
+  {
+    "id": "tam-047",
+    "text": {
+      "en": "Tell us about a habit you picked up from your parents",
+      "ru": "Расскажи про привычку, которую перенял у родителей"
+    }
+  },
+  {
+    "id": "tam-048",
+    "text": {
+      "en": "Tell us about the one thing you never leave the house without",
+      "ru": "Расскажи про вещь, без которой не выходишь из дома"
+    }
+  },
+  {
+    "id": "tam-049",
+    "text": {
+      "en": "Tell us about a ritual that helps you get your head straight",
+      "ru": "Расскажи про ритуал, который помогает тебе собраться"
+    }
+  },
+  {
+    "id": "tam-050",
+    "text": {
+      "en": "Tell us about something you keep for no reason at all",
+      "ru": "Расскажи про вещь, которую хранишь без всякой причины"
+    }
+  },
+  {
+    "id": "tam-051",
+    "text": {
+      "en": "Tell us about the weirdest advice that actually worked",
+      "ru": "Расскажи про самый странный совет, который оказался полезным"
+    }
+  },
+  {
+    "id": "tam-052",
+    "text": {
+      "en": "Tell us about the best thing you ever bought for almost nothing",
+      "ru": "Расскажи про лучшую покупку за небольшие деньги"
+    }
+  },
+  {
+    "id": "tam-053",
+    "text": {
+      "en": "Tell us about the oldest photo on your phone",
+      "ru": "Расскажи про самое старое фото на твоём телефоне"
+    }
+  },
+  {
+    "id": "tam-054",
+    "text": {
+      "en": "Tell us about a friendship that started terribly and became important",
+      "ru": "Расскажи про знакомство, которое начиналось ужасно, а стало важным"
+    }
+  },
+  {
+    "id": "tam-055",
+    "text": {
+      "en": "Tell us about a time someone did something that made you see them completely differently",
+      "ru": "Расскажи про поступок, который удивил тебя в другом человеке"
+    }
+  },
+  {
+    "id": "tam-056",
+    "text": {
+      "en": "Tell us about a tradition you want to start",
+      "ru": "Расскажи про традицию, которую хочешь завести"
+    }
+  },
+  {
+    "id": "tam-057",
+    "text": {
+      "en": "Tell us about the moment a random group of people started to feel like home",
+      "ru": "Расскажи про момент, когда случайная компания стала родной"
+    }
+  },
+  {
+    "id": "tam-058",
+    "text": {
+      "en": "Tell us about words someone once said to you that you still repeat to yourself",
+      "ru": "Расскажи про слова, которые тебе когда-то сказали, а ты до сих пор повторяешь их себе"
+    }
+  },
+  {
+    "id": "tam-059",
+    "text": {
+      "en": "Tell us about a tiny thing you did on autopilot that turned someone's whole day around",
+      "ru": "Расскажи про маленький поступок, который ты сделал на автомате, а кому-то он перевернул день"
+    }
+  },
+  {
+    "id": "tam-060",
+    "text": {
+      "en": "Tell us about a time you reached out first even though you were terrified to",
+      "ru": "Расскажи про момент, когда ты сделал шаг навстречу первым, хотя жутко боялся"
+    }
+  },
+  {
+    "id": "tam-061",
+    "text": {
+      "en": "Tell us about an ordinary day you replay more often than every holiday combined",
+      "ru": "Расскажи про обычный день, который ты вспоминаешь чаще, чем все праздники вместе взятые"
+    }
+  },
+  {
+    "id": "tam-062",
+    "text": {
+      "en": "Tell us about a teacher or coach who somehow made you believe in yourself",
+      "ru": "Расскажи про учителя или тренера, из-за которого ты вдруг в себя поверил"
+    }
+  },
+  {
+    "id": "tam-063",
+    "text": {
+      "en": "Tell us about a random thing a stranger said that stuck with you for years",
+      "ru": "Расскажи про случайную фразу незнакомца, которая засела в голове на годы"
+    }
+  },
+  {
+    "id": "tam-064",
+    "text": {
+      "en": "Tell us about the moment you realized you'd outgrown your old crowd",
+      "ru": "Расскажи про момент, когда понял, что вырос из старой компании"
+    }
+  },
+  {
+    "id": "tam-065",
+    "text": {
+      "en": "Tell us about a 'no' you're now grateful you got",
+      "ru": "Расскажи про «нет», за которое теперь благодаришь судьбу"
+    }
+  },
+  {
+    "id": "tam-066",
+    "text": {
+      "en": "Tell us about a phone call after which everything went differently",
+      "ru": "Расскажи про телефонный звонок, после которого всё пошло иначе"
+    }
+  },
+  {
+    "id": "tam-067",
+    "text": {
+      "en": "Tell us about a book, film or song that left you a slightly different person",
+      "ru": "Расскажи про книгу, фильм или песню, после которых ты стал немного другим"
+    }
+  },
+  {
+    "id": "tam-068",
+    "text": {
+      "en": "Tell us about advice you ignored back then and really shouldn't have",
+      "ru": "Расскажи про совет, который ты тогда проигнорировал, а зря"
+    }
+  },
+  {
+    "id": "tam-069",
+    "text": {
+      "en": "Tell us about the person around whom you first let yourself be fully you",
+      "ru": "Расскажи про человека, рядом с которым ты впервые позволил себе быть собой"
+    }
+  },
+  {
+    "id": "tam-070",
+    "text": {
+      "en": "Tell us about the moment you realized your parents are just people too",
+      "ru": "Расскажи про момент, когда понял, что родители тоже просто люди"
+    }
+  },
+  {
+    "id": "tam-071",
+    "text": {
+      "en": "Tell us about praise from the one person you never expected it from",
+      "ru": "Расскажи про похвалу от того, от кого ты совсем её не ждал"
+    }
+  },
+  {
+    "id": "tam-072",
+    "text": {
+      "en": "Tell us about something someone handed you that came to mean more to you than to them",
+      "ru": "Расскажи про вещь, которую тебе кто-то отдал, и она стала для тебя важнее, чем для него"
+    }
+  },
+  {
+    "id": "tam-073",
+    "text": {
+      "en": "Tell us about the time you confidently called someone the wrong name and realized it way too late",
+      "ru": "Расскажи, как однажды уверенно назвал человека не тем именем и понял это слишком поздно"
+    }
+  },
+  {
+    "id": "tam-074",
+    "text": {
+      "en": "Tell us about a text you sent to the completely wrong chat and what happened next",
+      "ru": "Расскажи про сообщение, которое отправил не в тот чат — и что было дальше"
+    }
+  },
+  {
+    "id": "tam-075",
+    "text": {
+      "en": "Tell us about the time you waved back at someone who was waving at the person behind you",
+      "ru": "Расскажи, как помахал в ответ человеку, который махал вообще не тебе"
+    }
+  },
+  {
+    "id": "tam-076",
+    "text": {
+      "en": "Tell us about trying to look like a pro at the gym and getting defeated by one simple machine",
+      "ru": "Расскажи, как пытался выглядеть уверенно в спортзале и опозорился на каком-то простом тренажёре"
+    }
+  },
+  {
+    "id": "tam-077",
+    "text": {
+      "en": "Tell us about a tiny lie you told and then spent the whole evening covering up",
+      "ru": "Расскажи, как однажды соврал по мелочи, а потом всё вечер выкручивался, чтобы не спалиться"
+    }
+  },
+  {
+    "id": "tam-078",
+    "text": {
+      "en": "Tell us about the time someone caught you talking to yourself out loud",
+      "ru": "Расскажи, как тебя поймали, когда ты разговаривал сам с собой вслух"
+    }
+  },
+  {
+    "id": "tam-079",
+    "text": {
+      "en": "Tell us about desperately pretending to recognize someone you had absolutely no memory of",
+      "ru": "Расскажи, как изо всех сил делал вид, что узнал человека, которого вообще не помнил"
+    }
+  },
+  {
+    "id": "tam-080",
+    "text": {
+      "en": "Tell us about accidentally calling your teacher or boss 'mom' or 'dad' and wanting to disappear",
+      "ru": "Расскажи, как назвал учителя или начальника «мам» или «пап» и хотел провалиться сквозь землю"
+    }
+  },
+  {
+    "id": "tam-081",
+    "text": {
+      "en": "Tell us about the time autocorrect betrayed you spectacularly in an important message",
+      "ru": "Расскажи, как ставил автокоррект на место, а он подставил тебя по полной в важном сообщении"
+    }
+  },
+  {
+    "id": "tam-082",
+    "text": {
+      "en": "Tell us about photobombing a stranger's photoshoot or livestream in the most ridiculous way",
+      "ru": "Расскажи, как зашёл в кадр чужой фотосессии или прямого эфира самым нелепым образом"
+    }
+  },
+  {
+    "id": "tam-083",
+    "text": {
+      "en": "Tell us about that time you liked a very old photo deep in someone's profile and got caught",
+      "ru": "Расскажи, как однажды лайкнул очень старое фото в чужом профиле и спалился"
+    }
+  },
+  {
+    "id": "tam-084",
+    "text": {
+      "en": "Tell us about singing or dancing your heart out before noticing you had an audience",
+      "ru": "Расскажи, как спел или станцевал не зная, что на тебя смотрят"
+    }
+  },
+  {
+    "id": "tam-085",
+    "text": {
+      "en": "Tell us about hitting 'reply all' instead of replying privately and the whole office finding out",
+      "ru": "Расскажи, как нажал «ответить всем» вместо личного сообщения и весь офис узнал лишнее"
+    }
+  },
+  {
+    "id": "tam-086",
+    "text": {
+      "en": "Tell us about faking expertise on a topic until someone asked you to explain in detail",
+      "ru": "Расскажи, как притворялся, что разбираешься в теме, пока тебя не попросили объяснить подробнее"
+    }
+  },
+  {
+    "id": "tam-087",
+    "text": {
+      "en": "Tell us about the time you forgot your camera or mic was on during a call",
+      "ru": "Расскажи, как однажды забыл, что у тебя включена камера или микрофон на звонке"
+    }
+  },
+  {
+    "id": "tam-088",
+    "text": {
+      "en": "Tell us about a time you got on the wrong bus or train and it turned out even better than the plan",
+      "ru": "Расскажи про случай, когда ты сел не в тот автобус или поезд, а вышло даже круче, чем планировал"
+    }
+  },
+  {
+    "id": "tam-089",
+    "text": {
+      "en": "Tell us about the craziest idea your friends talked you into at three in the morning",
+      "ru": "Расскажи про самую безумную идею, на которую тебя подбили друзья в три часа ночи"
+    }
+  },
+  {
+    "id": "tam-090",
+    "text": {
+      "en": "Tell us about something you ate just to be polite and then regretted with your whole body",
+      "ru": "Расскажи про блюдо, которое ты съел из вежливости, а потом жалел всем телом"
+    }
+  },
+  {
+    "id": "tam-091",
+    "text": {
+      "en": "Tell us about the most ridiculous place night caught you with no plan for where to sleep",
+      "ru": "Расскажи про самое нелепое место, где тебя застала ночь без плана, где спать"
+    }
+  },
+  {
+    "id": "tam-092",
+    "text": {
+      "en": "Tell us about an animal that randomly became the main character of your trip",
+      "ru": "Расскажи про животное, которое внезапно стало главным героем твоего путешествия"
+    }
+  },
+  {
+    "id": "tam-093",
+    "text": {
+      "en": "Tell us about a local who invited you somewhere and you actually went",
+      "ru": "Расскажи про местного жителя, который позвал тебя куда-то, и ты согласился"
+    }
+  },
+  {
+    "id": "tam-094",
+    "text": {
+      "en": "Tell us about the thing you brought home from a trip that you now can't explain why you bought",
+      "ru": "Расскажи про вещь, которую ты привёз из поездки, и теперь не можешь объяснить зачем"
+    }
+  },
+  {
+    "id": "tam-095",
+    "text": {
+      "en": "Tell us about the time you ended up at someone else's party or wedding completely by accident",
+      "ru": "Расскажи про случай, когда ты попал на чужой праздник или свадьбу совершенно случайно"
+    }
+  },
+  {
+    "id": "tam-096",
+    "text": {
+      "en": "Tell us about the weirdest job or gig you signed up for just for a single day",
+      "ru": "Расскажи про самую странную работу или подработку, на которую ты подписался на один день"
+    }
+  },
+  {
+    "id": "tam-097",
+    "text": {
+      "en": "Tell us about a dare or bet that took you somewhere you'd never have gone on your own",
+      "ru": "Расскажи про спор, который завёл тебя куда-то, куда ты бы сам ни за что не пошёл"
+    }
+  },
+  {
+    "id": "tam-098",
+    "text": {
+      "en": "Tell us about the street-stall food you decided to try against all common sense",
+      "ru": "Расскажи про еду с уличного лотка, которую ты решился попробовать вопреки здравому смыслу"
+    }
+  },
+  {
+    "id": "tam-099",
+    "text": {
+      "en": "Tell us about the time you went to see someone off and somehow ended up leaving with them",
+      "ru": "Расскажи про случай, когда ты поехал провожать кого-то и сам незаметно уехал с ними"
+    }
+  },
+  {
+    "id": "tam-100",
+    "text": {
+      "en": "Tell us about the strangest vehicle you've ever had to get somewhere on",
+      "ru": "Расскажи про самое странное транспортное средство, на котором тебе доводилось куда-то добираться"
+    }
+  },
+  {
+    "id": "tam-101",
+    "text": {
+      "en": "Tell us about a song where you'd been belting out completely wrong lyrics your whole life",
+      "ru": "Расскажи про песню, в которой ты всю жизнь пел совершенно не те слова"
+    }
+  },
+  {
+    "id": "tam-102",
+    "text": {
+      "en": "Tell us about losing it laughing at the most serious, least appropriate moment",
+      "ru": "Расскажи, как не смог сдержать смех в самый серьёзный, неподходящий момент"
+    }
+  },
+  {
+    "id": "tam-103",
+    "text": {
+      "en": "Tell us about botching a greeting — handshake, hug and cheek-kiss all colliding into one awkward tangle",
+      "ru": "Расскажи, как не угадал с приветствием — рукопожатие, обнимашки и поцелуй в щёку слились в неловкий клубок"
+    }
+  },
+  {
+    "id": "tam-104",
+    "text": {
+      "en": "Tell us about how you met your closest friend",
+      "ru": "Расскажи, как ты познакомился со своим самым близким другом"
+    }
+  },
+  {
+    "id": "tam-105",
+    "text": {
+      "en": "Tell us about something wild you did for love that you'd never admit to your mom",
+      "ru": "Расскажи про безумство ради любви, в котором ни за что не признался бы маме"
+    }
+  },
+  {
+    "id": "tam-106",
+    "text": {
+      "en": "Tell us about your first kiss and how it actually went",
+      "ru": "Расскажи про свой первый поцелуй — как всё прошло на самом деле"
+    }
+  },
+  {
+    "id": "tam-107",
+    "text": {
+      "en": "Tell us about walking full speed into a glass door you swore was open",
+      "ru": "Расскажи, как на полном ходу влетел в стеклянную дверь, которую принял за открытую"
+    }
+  },
+  {
+    "id": "tam-108",
+    "text": {
+      "en": "Tell us about the time you managed to get lost in your own city",
+      "ru": "Расскажи, как умудрился заблудиться в собственном городе"
+    }
+  },
+  {
+    "id": "tam-109",
+    "text": {
+      "en": "Tell us about locking yourself out in the most ridiculous state imaginable",
+      "ru": "Расскажи, как захлопнул дверь и остался на улице в самом нелепом виде"
+    }
+  },
+  {
+    "id": "tam-110",
+    "text": {
+      "en": "Tell us about hugging the wrong person from behind, certain it was someone you knew",
+      "ru": "Расскажи, как обнял сзади не того человека, будучи уверенным, что это твой"
+    }
+  },
+  {
+    "id": "tam-111",
+    "text": {
+      "en": "Tell us about confidently walking into the wrong meeting or class and just sitting down",
+      "ru": "Расскажи, как уверенно зашёл не на ту встречу или не в ту аудиторию и сел как ни в чём не бывало"
+    }
+  },
+  {
+    "id": "tam-112",
+    "text": {
+      "en": "Tell us about your card getting declined at the worst possible moment with an audience",
+      "ru": "Расскажи, как карта отказалась оплачивать в самый ответственный момент при свидетелях"
+    }
+  },
+  {
+    "id": "tam-113",
+    "text": {
+      "en": "Tell us about showing up to a party wildly over- or underdressed, the only one like that",
+      "ru": "Расскажи, как пришёл на вечеринку совершенно не по дресс-коду — один такой на весь зал"
+    }
+  },
+  {
+    "id": "tam-114",
+    "text": {
+      "en": "Tell us about a word you'd been saying wrong for years until someone finally caught it",
+      "ru": "Расскажи про слово, которое ты годами произносил неправильно, пока тебя не поймали"
+    }
+  },
+  {
+    "id": "tam-115",
+    "text": {
+      "en": "Tell us about spending a whole evening with food in your teeth and nobody saying a word",
+      "ru": "Расскажи, как проходил весь вечер с зеленью в зубах, и никто не намекнул"
+    }
+  },
+  {
+    "id": "tam-116",
+    "text": {
+      "en": "Tell us about the time your pants ripped at the worst possible moment",
+      "ru": "Расскажи, как порвал штаны в самый неподходящий момент"
+    }
+  },
+  {
+    "id": "tam-117",
+    "text": {
+      "en": "Tell us about pocket-dialing someone who then heard absolutely everything",
+      "ru": "Расскажи, как нечаянно позвонил кому-то из кармана, и тебя прекрасно услышали"
+    }
+  },
+  {
+    "id": "tam-118",
+    "text": {
+      "en": "Tell us about dialing the wrong number and chatting away before realizing it wasn't them",
+      "ru": "Расскажи, как набрал не тот номер и долго болтал, прежде чем понял, что говоришь не с тем"
+    }
+  },
+  {
+    "id": "tam-119",
+    "text": {
+      "en": "Tell us about trying an internet life hack that went gloriously wrong",
+      "ru": "Расскажи, как повторил лайфхак из интернета, и всё пошло наперекосяк"
+    }
+  },
+  {
+    "id": "tam-120",
+    "text": {
+      "en": "Tell us about cooking something ambitious for guests that turned into a disaster",
+      "ru": "Расскажи, как замахнулся на сложное блюдо для гостей, а вышла катастрофа"
+    }
+  },
+  {
+    "id": "tam-121",
+    "text": {
+      "en": "Tell us about confidently giving someone directions and sending them completely the wrong way",
+      "ru": "Расскажи, как уверенно объяснил кому-то дорогу, а потом понял, что отправил совсем не туда"
+    }
+  },
+  {
+    "id": "tam-122",
+    "text": {
+      "en": "Tell us about confidently blurting out an answer that turned out to be hilariously wrong",
+      "ru": "Расскажи, как уверенно выдал ответ на уроке или совещании, а он оказался полным мимо"
+    }
+  },
+  {
+    "id": "tam-123",
+    "text": {
+      "en": "Tell us about getting stuck somewhere ridiculous — a turnstile, an elevator, a too-small chair",
+      "ru": "Расскажи, как застрял в самом нелепом месте — в турникете, лифте или узком кресле"
+    }
+  },
+  {
+    "id": "tam-124",
+    "text": {
+      "en": "Tell us about mistaking a mannequin or statue for a real person and trying to talk to it",
+      "ru": "Расскажи, как принял манекен или статую за живого человека и попытался с ним заговорить"
+    }
+  },
+  {
+    "id": "tam-125",
+    "text": {
+      "en": "Tell us about fiercely defending a 'fact' that turned out to be completely made up",
+      "ru": "Расскажи, как с пеной у рта отстаивал «факт», который оказался полной выдумкой"
+    }
+  },
+  {
+    "id": "tam-126",
+    "text": {
+      "en": "Tell us about bragging about something right before karma hit you instantly",
+      "ru": "Расскажи, как чем-то похвастался, и тут же прилетела карма"
+    }
+  },
+  {
+    "id": "tam-127",
+    "text": {
+      "en": "Tell us about getting into the wrong car or knocking on the wrong door and not realizing right away",
+      "ru": "Расскажи, как сел не в ту машину или постучал не в ту дверь и не сразу это понял"
+    }
+  },
+  {
+    "id": "tam-128",
+    "text": {
+      "en": "Tell us about losing a bet and paying it off with the most humiliating forfeit in public",
+      "ru": "Расскажи, как проиграл спор и на людях отрабатывал самый позорный фант"
+    }
+  },
+  {
+    "id": "tam-129",
+    "text": {
+      "en": "Tell us about your phone blasting an embarrassing ringtone in dead silence",
+      "ru": "Расскажи, как твой телефон громко заорал позорным рингтоном в полной тишине"
+    }
+  },
+  {
+    "id": "tam-130",
+    "text": {
+      "en": "Tell us about grabbing the karaoke mic and the whole thing going epically off the rails",
+      "ru": "Расскажи, как вышел в караоке и всё пошло вразнос самым эпичным образом"
+    }
+  },
+  {
+    "id": "tam-131",
+    "text": {
+      "en": "Tell us about slipping like a cartoon and of course someone caught it on video",
+      "ru": "Расскажи, как поскользнулся прямо как в комедии, и это, конечно же, сняли на видео"
+    }
+  },
+  {
+    "id": "tam-132",
+    "text": {
+      "en": "Tell us about mistaking an ordinary passerby for a celebrity and nearly asking for an autograph",
+      "ru": "Расскажи, как принял обычного прохожего за знаменитость и чуть не попросил автограф"
+    }
+  },
+  {
+    "id": "tam-133",
+    "text": {
+      "en": "Tell us about getting busted for checking someone out a little too openly",
+      "ru": "Расскажи, как спалился, что слишком откровенно кого-то разглядываешь"
+    }
+  },
+  {
+    "id": "tam-134",
+    "text": {
+      "en": "Tell us about going in for a kiss and landing absolutely everywhere but the target",
+      "ru": "Расскажи, как промахнулся с поцелуем и попал куда угодно, только не туда, куда целился"
+    }
+  },
+  {
+    "id": "tam-135",
+    "text": {
+      "en": "Tell us about prepping the perfect pickup line and blanking completely at the crucial moment",
+      "ru": "Расскажи, как заготовил идеальную фразу для знакомства, а в нужный момент всё вылетело из головы"
+    }
+  },
+  {
+    "id": "tam-136",
+    "text": {
+      "en": "Tell us about being mistaken for staff in a shop and just deciding to play along",
+      "ru": "Расскажи, как тебя приняли за сотрудника в магазине, и ты решил подыграть"
+    }
+  },
+  {
+    "id": "tam-137",
+    "text": {
+      "en": "Tell us about admiring yourself in a shop window and catching someone watching",
+      "ru": "Расскажи, как засмотрелся на себя в отражении витрины и поймал чужой взгляд"
+    }
+  },
+  {
+    "id": "tam-138",
+    "text": {
+      "en": "Tell us about trying to sneak out quietly and making enough noise to wake the whole house",
+      "ru": "Расскажи, как пытался уйти по-тихому, а нашумел так, что разбудил весь дом"
+    }
+  },
+  {
+    "id": "tam-139",
+    "text": {
+      "en": "Tell us about enthusiastically retelling a story to the very person who was in it",
+      "ru": "Расскажи, как с азартом пересказывал историю человеку, который сам был её главным героем"
+    }
+  },
+  {
+    "id": "tam-140",
+    "text": {
+      "en": "Tell us about assembling furniture and ending up with a suspicious pile of leftover parts",
+      "ru": "Расскажи, как собирал мебель, а в конце осталась подозрительная горка лишних деталей"
+    }
+  },
+  {
+    "id": "tam-141",
+    "text": {
+      "en": "Tell us about dozing off on public transport and waking up clear across the city",
+      "ru": "Расскажи, как уснул в транспорте и уехал в другой конец города"
+    }
+  },
+  {
+    "id": "tam-142",
+    "text": {
+      "en": "Tell us about opening the wrong door and walking straight into someone's private moment",
+      "ru": "Расскажи, как открыл не ту дверь и попал в чей-то очень личный или странный момент"
+    }
+  },
+  {
+    "id": "tam-143",
+    "text": {
+      "en": "Tell us about overestimating yourself on the dance floor and going down in style",
+      "ru": "Расскажи, как на танцполе переоценил свои силы и эффектно сложился"
+    }
+  },
+  {
+    "id": "tam-144",
+    "text": {
+      "en": "Tell us about the moment you realized you'd fallen for someone",
+      "ru": "Расскажи про момент, когда понял, что влюбился"
+    }
+  },
+  {
+    "id": "tam-145",
+    "text": {
+      "en": "Tell us about your first love and what made you fall for them",
+      "ru": "Расскажи про свою первую любовь и за что ты в неё влюбился"
+    }
+  },
+  {
+    "id": "tam-146",
+    "text": {
+      "en": "Tell us about the moment a friendship turned into something more",
+      "ru": "Расскажи про момент, когда дружба вдруг переросла во что-то большее"
+    }
+  },
+  {
+    "id": "tam-147",
+    "text": {
+      "en": "Tell us about a crush you never worked up the nerve to confess",
+      "ru": "Расскажи про симпатию, в которой ты так и не признался"
+    }
+  },
+  {
+    "id": "tam-148",
+    "text": {
+      "en": "Tell us about the boldest move you ever made to get someone's attention",
+      "ru": "Расскажи про самый смелый ход, на который ты решился ради чьего-то внимания"
+    }
+  },
+  {
+    "id": "tam-149",
+    "text": {
+      "en": "Tell us about a time someone showed up for you when you least expected it",
+      "ru": "Расскажи про случай, когда человек оказался рядом, когда ты совсем этого не ждал"
+    }
+  },
+  {
+    "id": "tam-150",
+    "text": {
+      "en": "Tell us about the friend who saw you at your worst and stayed anyway",
+      "ru": "Расскажи про друга, который видел тебя в худшем состоянии и всё равно остался рядом"
+    }
+  },
+  {
+    "id": "tam-151",
+    "text": {
+      "en": "Tell us about a version of yourself you've outgrown and don't miss at all",
+      "ru": "Расскажи про версию себя, которую ты перерос и совсем по ней не скучаешь"
+    }
+  },
+  {
+    "id": "tam-152",
+    "text": {
+      "en": "Tell us about a conversation that flipped the way you see things",
+      "ru": "Расскажи про разговор, который перевернул твой взгляд на вещи"
+    }
+  },
+  {
+    "id": "tam-153",
+    "text": {
+      "en": "Tell us about a moment you were genuinely proud of someone else",
+      "ru": "Расскажи про момент, когда ты по-настоящему гордился другим человеком"
+    }
+  },
+  {
+    "id": "tam-154",
+    "text": {
+      "en": "Tell us about a moment you felt truly loved",
+      "ru": "Расскажи про момент, когда почувствовал себя по-настоящему любимым"
+    }
+  },
+  {
+    "id": "tam-155",
+    "text": {
+      "en": "Tell us about a time you chose yourself and walked away from what was dragging you down",
+      "ru": "Расскажи про момент, когда выбрал себя и ушёл от того, что тянуло вниз"
+    }
+  },
+  {
+    "id": "tam-156",
+    "text": {
+      "en": "Tell us about a time you stood up for someone",
+      "ru": "Расскажи про случай, когда ты вступился за кого-то"
+    }
+  },
+  {
+    "id": "tam-157",
+    "text": {
+      "en": "Tell us about the bravest thing you did for someone you cared about",
+      "ru": "Расскажи про самое смелое, что ты сделал ради дорогого тебе человека"
+    }
+  },
+  {
+    "id": "tam-158",
+    "text": {
+      "en": "Tell us about the moment you knew someone was going to matter to you",
+      "ru": "Расскажи про момент, когда понял, что этот человек станет для тебя важным"
+    }
+  },
+  {
+    "id": "tam-159",
+    "text": {
+      "en": "Tell us about a glance across the room that started the whole thing",
+      "ru": "Расскажи про взгляд через всю комнату, с которого всё началось"
+    }
+  },
+  {
+    "id": "tam-160",
+    "text": {
+      "en": "Tell us about a message you rewrote a hundred times before sending it to your crush",
+      "ru": "Расскажи про сообщение, которое ты сто раз переписывал, прежде чем отправить тому, кто нравился"
+    }
+  },
+  {
+    "id": "tam-161",
+    "text": {
+      "en": "Tell us about a friend who became like family over the years",
+      "ru": "Расскажи про друга, который со временем стал тебе как родной"
+    }
+  },
+  {
+    "id": "tam-162",
+    "text": {
+      "en": "Tell us about the moment you stopped caring what other people think",
+      "ru": "Расскажи про момент, когда перестал переживать, что подумают другие"
+    }
+  },
+  {
+    "id": "tam-163",
+    "text": {
+      "en": "Tell us about reconnecting with someone after years apart",
+      "ru": "Расскажи про встречу с человеком, с которым не виделся много лет"
+    }
+  },
+  {
+    "id": "tam-164",
+    "text": {
+      "en": "Tell us about a kindness shown to you that you've quietly paid forward ever since",
+      "ru": "Расскажи про доброту, которую тебе однажды проявили, а ты с тех пор тихо передаёшь её дальше"
+    }
+  },
+  {
+    "id": "tam-165",
+    "text": {
+      "en": "Tell us about getting lost in a foreign city with no language and no idea which way to go",
+      "ru": "Расскажи, как заблудился в чужом городе, не зная ни языка, ни куда идти"
+    }
+  },
+  {
+    "id": "tam-166",
+    "text": {
+      "en": "Tell us about missing a flight or a train and the chaos that kicked off after",
+      "ru": "Расскажи, как опоздал на самолёт или поезд и что за хаос начался потом"
+    }
+  },
+  {
+    "id": "tam-167",
+    "text": {
+      "en": "Tell us about hitching a ride and who ended up picking you up",
+      "ru": "Расскажи, как ловил попутку и кто в итоге тебя подобрал"
+    }
+  },
+  {
+    "id": "tam-168",
+    "text": {
+      "en": "Tell us about the first time you went for something extreme — a jump, a height, or a depth",
+      "ru": "Расскажи, как впервые решился на что-то экстремальное — прыжок, высоту или глубину"
+    }
+  },
+  {
+    "id": "tam-169",
+    "text": {
+      "en": "Tell us about the most impulsive decision you ever made right there on the spot",
+      "ru": "Расскажи про самое импульсивное решение, которое принял прямо на месте, не раздумывая"
+    }
+  },
+  {
+    "id": "tam-170",
+    "text": {
+      "en": "Tell us about the most rebellious thing you pulled as a teenager",
+      "ru": "Расскажи про самую бунтарскую выходку из своего подросткового возраста"
+    }
+  },
+  {
+    "id": "tam-171",
+    "text": {
+      "en": "Tell us about saying yes when every sensible part of you was screaming no",
+      "ru": "Расскажи, как сказал «да», когда всё разумное в тебе кричало «нет»"
+    }
+  },
+  {
+    "id": "tam-172",
+    "text": {
+      "en": "Tell us about your very first concert",
+      "ru": "Расскажи про свой самый первый концерт"
+    }
+  },
+  {
+    "id": "tam-173",
+    "text": {
+      "en": "Tell us about your first tattoo, or whatever else you did to yourself on impulse",
+      "ru": "Расскажи про первую татуировку или про то, что ещё сделал с собой на импульсе"
+    }
+  },
+  {
+    "id": "tam-174",
+    "text": {
+      "en": "Tell us about a time someone tried to scam you on a trip and how you wriggled out",
+      "ru": "Расскажи, как тебя пытались развести в поездке и как ты выкрутился"
+    }
+  },
+  {
+    "id": "tam-175",
+    "text": {
+      "en": "Tell us about a custom or tradition abroad that genuinely caught you off guard",
+      "ru": "Расскажи про обычай или традицию в другой стране, которые тебя по-настоящему удивили"
+    }
+  },
+  {
+    "id": "tam-176",
+    "text": {
+      "en": "Tell us about the time you just confessed your feelings to someone when you could've stayed quiet",
+      "ru": "Расскажи, как взял и признался кому-то в чувствах, хотя мог промолчать"
+    }
+  },
+  {
+    "id": "tam-177",
+    "text": {
+      "en": "Tell us about walking up to a stranger to ask for their number or a date",
+      "ru": "Расскажи, как подошёл к незнакомцу и попросил номер или позвал на свидание"
+    }
+  },
+  {
+    "id": "tam-178",
+    "text": {
+      "en": "Tell us about breaking a rule you don't regret one bit",
+      "ru": "Расскажи, как нарушил правило и ни капли об этом не жалеешь"
+    }
+  },
+  {
+    "id": "tam-179",
+    "text": {
+      "en": "Tell us about the most daring swim of your life — where, in what, or with nothing on at all",
+      "ru": "Расскажи про самое дерзкое купание в твоей жизни — где и в чём, или вообще без всего"
+    }
+  },
+  {
+    "id": "tam-180",
+    "text": {
+      "en": "Tell us about bluffing your way past the door like you totally belonged",
+      "ru": "Расскажи, как сделал вид, что ты тут свой, и прошёл туда, куда не пускали"
+    }
+  },
+  {
+    "id": "tam-181",
+    "text": {
+      "en": "Tell us about the first time you stood up to someone bigger or older than you",
+      "ru": "Расскажи, как впервые дал отпор тому, кто был сильнее или старше"
+    }
+  },
+  {
+    "id": "tam-182",
+    "text": {
+      "en": "Tell us about finally doing the exact thing you swore you'd never do",
+      "ru": "Расскажи, как всё-таки сделал то, что клялся не делать никогда"
+    }
+  },
+  {
+    "id": "tam-183",
+    "text": {
+      "en": "Tell us about a night that started with a single drink and turned into a whole adventure",
+      "ru": "Расскажи про вечер, который начинался с одного бокала, а превратился в целое приключение"
+    }
+  },
+  {
+    "id": "tam-184",
+    "text": {
+      "en": "Tell us about a place that turned out nothing like it looked in the photos",
+      "ru": "Расскажи про место, которое в реальности оказалось совсем не таким, как на картинках"
+    }
+  },
+  {
+    "id": "tam-185",
+    "text": {
+      "en": "Tell us about being on the road with almost no money and how you made it work",
+      "ru": "Расскажи, как оказался в дороге почти без денег и как из этого выкручивался"
+    }
+  },
+  {
+    "id": "tam-186",
+    "text": {
+      "en": "Tell us about getting something important across to someone you shared not a single word of language with",
+      "ru": "Расскажи, как объяснил что-то важное человеку, с которым у вас не было ни одного общего слова"
+    }
+  },
+  {
+    "id": "tam-187",
+    "text": {
+      "en": "Tell us about a travel photo with a story behind it that nobody believes",
+      "ru": "Расскажи про фото из поездки, за которым стоит история, в которую никто не верит"
+    }
+  },
+  {
+    "id": "tam-188",
+    "text": {
+      "en": "Tell us about a travel moment when you felt like the main character in a movie",
+      "ru": "Расскажи про момент в поездке, когда ты почувствовал себя героем фильма"
+    }
+  },
+  {
+    "id": "tam-189",
+    "text": {
+      "en": "Tell us about a kiss that happened in the most unexpected place",
+      "ru": "Расскажи про поцелуй, который случился в самом неожиданном месте"
+    }
+  },
+  {
+    "id": "tam-190",
+    "text": {
+      "en": "Tell us about the most spontaneous thing you did with someone you'd only just met",
+      "ru": "Расскажи про самое спонтанное, что вытворил с человеком, которого только что встретил"
+    }
+  },
+  {
+    "id": "tam-191",
+    "text": {
+      "en": "Tell us about the worst haircut of your life and how long you hid it under a hat",
+      "ru": "Расскажи про худшую стрижку в твоей жизни и сколько ты потом прятал её под шапкой"
+    }
+  },
+  {
+    "id": "tam-192",
+    "text": {
+      "en": "Tell us about something you believed as a kid for embarrassingly long",
+      "ru": "Расскажи, во что ты свято верил в детстве неприлично долго"
+    }
+  },
+  {
+    "id": "tam-193",
+    "text": {
+      "en": "Tell us about the dumbest way you hurt yourself out of absolutely nowhere",
+      "ru": "Расскажи, как травмировался самым глупым образом буквально на ровном месте"
+    }
+  },
+  {
+    "id": "tam-194",
+    "text": {
+      "en": "Tell us about the boldest move someone ever pulled to win you over — and yeah, it worked",
+      "ru": "Расскажи про самый дерзкий ход, который кто-то провернул, чтобы добиться тебя, — и ведь сработало"
+    }
+  },
+  {
+    "id": "tam-195",
+    "text": {
+      "en": "Tell us about an irrational fear you can finally laugh about now",
+      "ru": "Расскажи про свой иррациональный страх, над которым ты теперь смеёшься сам"
+    }
+  },
+  {
+    "id": "tam-196",
+    "text": {
+      "en": "Tell us about ducking into a shop or playing blind just to dodge someone on the street",
+      "ru": "Расскажи, как нырнул в магазин или сделал вид, что не заметил, лишь бы не столкнуться с кем-то на улице"
+    }
+  },
+  {
+    "id": "tam-197",
+    "text": {
+      "en": "Tell us about a nickname that stuck to you and how you earned it",
+      "ru": "Расскажи про прозвище, которое к тебе прилипло, и за что ты его заработал"
+    }
+  },
+  {
+    "id": "tam-198",
+    "text": {
+      "en": "Tell us about a long chat where you only later realized you two meant totally different things",
+      "ru": "Расскажи, как вы с кем-то долго болтали и только потом поняли, что говорили про совершенно разные вещи"
+    }
+  },
+  {
+    "id": "tam-199",
+    "text": {
+      "en": "Tell us about getting so worked up over a trivial game like your whole honor was on the line",
+      "ru": "Расскажи, как из-за пустяковой игры ты завёлся так, будто на кону была вся твоя честь"
+    }
+  },
+  {
+    "id": "tam-200",
+    "text": {
+      "en": "Tell us what you'd frantically delete from your phone if your screen got thrown up on the big screen",
+      "ru": "Расскажи, что бы ты в панике стирал с телефона, если бы твой экран вдруг вывели на большой экран"
+    }
+  }
+]

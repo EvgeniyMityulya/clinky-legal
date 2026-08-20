@@ -1,0 +1,1602 @@
+[
+  {
+    "id": "nhi-001",
+    "theme": "quirks",
+    "text": {
+      "en": "Never have I ever greeted a stranger's dog with way more enthusiasm than I gave the owner",
+      "ru": "Я никогда не здоровался с чужой собакой охотнее, чем с её хозяином"
+    }
+  },
+  {
+    "id": "nhi-002",
+    "theme": "quirks",
+    "text": {
+      "en": "Never have I ever rehearsed an entire conversation in my head with someone I hadn't even met yet",
+      "ru": "Я никогда не придумывал целые диалоги в голове с теми, кого только собирался встретить"
+    }
+  },
+  {
+    "id": "nhi-003",
+    "theme": "quirks",
+    "text": {
+      "en": "Never have I ever saved something too nice 'for a special occasion' that never actually came",
+      "ru": "Я никогда не хранил слишком хорошую вещь «для особого случая», который так и не наступил"
+    }
+  },
+  {
+    "id": "nhi-004",
+    "theme": "quirks",
+    "text": {
+      "en": "Never have I ever remembered a random stranger and later wondered how their life turned out",
+      "ru": "Я никогда не запоминал случайного прохожего и потом гадал, как сложилась его жизнь"
+    }
+  },
+  {
+    "id": "nhi-005",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever gone down a 2 a.m. rabbit hole of my own old photos and chats",
+      "ru": "Я никогда не залипал ночью на своих старых фото и переписках"
+    }
+  },
+  {
+    "id": "nhi-006",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever panic-unliked a random old photo the second I accidentally tapped it",
+      "ru": "Я никогда не убирал в панике случайный лайк на чужом старом фото"
+    }
+  },
+  {
+    "id": "nhi-007",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever screenshotted a chat just so I could dissect it with a friend",
+      "ru": "Я никогда не делал скриншот переписки, чтобы обсудить её с другом"
+    }
+  },
+  {
+    "id": "nhi-008",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a message to entirely the wrong person",
+      "ru": "Я никогда не отправлял сообщение не тому человеку"
+    }
+  },
+  {
+    "id": "nhi-009",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever left a message sitting in drafts that I never worked up the nerve to send",
+      "ru": "Я никогда не держал в черновиках сообщение, которое так и не решился отправить"
+    }
+  },
+  {
+    "id": "nhi-010",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever scrolled back through old chats with someone I haven't spoken to in ages",
+      "ru": "Я никогда не пересматривал переписку с человеком, с которым давно не общаюсь"
+    }
+  },
+  {
+    "id": "nhi-011",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever kept a contact in my phone that I haven't called in years",
+      "ru": "Я никогда не хранил в контактах номер, которым не пользовался годами"
+    }
+  },
+  {
+    "id": "nhi-012",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever typed out a whole paragraph, deleted it, and just sent 'ok'",
+      "ru": "Я никогда не писал длинное сообщение, стирал и отправлял короткое «ок»"
+    }
+  },
+  {
+    "id": "nhi-013",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever pulled up an old photo just to remember who I used to be back then",
+      "ru": "Я никогда не возвращался к старому фото, чтобы вспомнить, каким был тогда"
+    }
+  },
+  {
+    "id": "nhi-014",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sat on a reply so I wouldn't look too eager",
+      "ru": "Я никогда не тянул с ответом, чтобы не показаться слишком заинтересованным"
+    }
+  },
+  {
+    "id": "nhi-015",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever reread a whole conversation hunting for the exact moment it all went sideways",
+      "ru": "Я никогда не перечитывал переписку, выискивая, где всё пошло не так"
+    }
+  },
+  {
+    "id": "nhi-016",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever teared up at a commercial",
+      "ru": "Я никогда не плакал от рекламы"
+    }
+  },
+  {
+    "id": "nhi-017",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever put a song on repeat purely because it pins down one specific moment",
+      "ru": "Я никогда не переслушивал песню только потому, что она напоминает один момент"
+    }
+  },
+  {
+    "id": "nhi-018",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever kept a ticket stub or wristband as a souvenir of one night",
+      "ru": "Я никогда не хранил билет или браслет с концерта как память о том вечере"
+    }
+  },
+  {
+    "id": "nhi-019",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever typed 'I'm proud of you' to someone close and then chickened out of sending it",
+      "ru": "Я никогда не писал близкому «горжусь тобой» и стеснялся отправить"
+    }
+  },
+  {
+    "id": "nhi-020",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever rehearsed a big confession I never actually worked up the courage to say",
+      "ru": "Я никогда не репетировал важное признание, которое так и не решился сказать"
+    }
+  },
+  {
+    "id": "nhi-021",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever gone silent out of pride while secretly missing someone like crazy",
+      "ru": "Я никогда не молчал из гордости, хотя сильно скучал по человеку"
+    }
+  },
+  {
+    "id": "nhi-022",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever reread an old card or letter on a rough day just to feel something",
+      "ru": "Я никогда не перечитывал старую открытку или письмо, когда было грустно"
+    }
+  },
+  {
+    "id": "nhi-023",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever held onto a gift I never use simply because of who it's from",
+      "ru": "Я никогда не хранил подарок, которым не пользуюсь, просто потому что он дорог как память"
+    }
+  },
+  {
+    "id": "nhi-024",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever gone back to a place just for the memories tied to it",
+      "ru": "Я никогда не возвращался в место только ради воспоминаний, что с ним связаны"
+    }
+  },
+  {
+    "id": "nhi-025",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever thanked someone in my head whom I never actually said it to out loud",
+      "ru": "Я никогда не благодарил мысленно человека, которому так и не сказал спасибо вслух"
+    }
+  },
+  {
+    "id": "nhi-026",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever felt a flash of envy at a friend's good news and then felt awful about it",
+      "ru": "Я никогда не завидовал счастью друга и потом этого стыдился"
+    }
+  },
+  {
+    "id": "nhi-027",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever swallowed a grudge just so I wouldn't ruin the night for everyone",
+      "ru": "Я никогда не держал в себе обиду, лишь бы не портить общий вечер"
+    }
+  },
+  {
+    "id": "nhi-028",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever forgiven someone mostly because I was scared of losing them",
+      "ru": "Я никогда не прощал человека только потому, что боялся его потерять"
+    }
+  },
+  {
+    "id": "nhi-029",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever wished for the exact same thing year after year after year",
+      "ru": "Я никогда не загадывал одно и то же желание много лет подряд"
+    }
+  },
+  {
+    "id": "nhi-030",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever kept a voice message just to hear the sound of someone's voice",
+      "ru": "Я никогда не хранил голосовое сообщение только ради звука чьего-то голоса"
+    }
+  },
+  {
+    "id": "nhi-031",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever called someone by the wrong name and realized it way too late to fix",
+      "ru": "Я никогда не называл человека чужим именем и понимал это слишком поздно"
+    }
+  },
+  {
+    "id": "nhi-032",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever played along in a whole conversation after mistaking a stranger for someone I knew",
+      "ru": "Я никогда не поддерживал чужой разговор, перепутав человека с кем-то знакомым"
+    }
+  },
+  {
+    "id": "nhi-033",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever sworn 'it wasn't me' while looking someone dead in the eye",
+      "ru": "Я никогда не клялся, что это сделал не я, глядя прямо в глаза"
+    }
+  },
+  {
+    "id": "nhi-034",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever kept a 'secret stash' of random little treasures as a kid",
+      "ru": "Я никогда не собирал «секретную коллекцию» каких-то мелочей"
+    }
+  },
+  {
+    "id": "nhi-035",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever had an imaginary friend with a name and a whole backstory",
+      "ru": "Я никогда не придумывал себе воображаемого друга"
+    }
+  },
+  {
+    "id": "nhi-036",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever dreamed of a job that I'd absolutely laugh at now",
+      "ru": "Я никогда не мечтал о профессии, над которой сейчас бы посмеялся"
+    }
+  },
+  {
+    "id": "nhi-037",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever nursed a childhood crush that nobody else ever knew about",
+      "ru": "Я никогда не переживал детскую влюблённость, о которой никто не знал"
+    }
+  },
+  {
+    "id": "nhi-038",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever scrolled someone's profile all the way back to 2015 and froze in terror over the like button",
+      "ru": "Я никогда не доскролливал чужой профиль до 2015 года и в ужасе замирал над кнопкой лайка"
+    }
+  },
+  {
+    "id": "nhi-039",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever rehearsed a toast for a friend and then just raised my glass in silence because my throat closed up",
+      "ru": "Я никогда не репетировал тост за друга, а в нужный момент просто молча поднимал бокал, потому что комок в горле"
+    }
+  },
+  {
+    "id": "nhi-040",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever driven up to my old yard and sat in the car, not quite ready to get out",
+      "ru": "Я никогда не доезжал до старого двора и сидел в машине, не решаясь выйти"
+    }
+  },
+  {
+    "id": "nhi-041",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever saved myself in someone's phone under a silly name, hoping that's how they'd remember me",
+      "ru": "Я никогда не оставлял в чьём-то телефоне свой номер под смешным именем, надеясь, что меня так и запомнят"
+    }
+  },
+  {
+    "id": "nhi-042",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever belted out a song in the car that we used to scream together and gone quiet halfway through",
+      "ru": "Я никогда не пел в машине песню, которую мы орали вместе, и замолкал на середине"
+    }
+  },
+  {
+    "id": "nhi-043",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever rehearsed a 'spontaneous' voice note before nailing it on the third take",
+      "ru": "Я никогда не репетировал «спонтанное» голосовое, прежде чем записать его с третьей попытки"
+    }
+  },
+  {
+    "id": "nhi-044",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever zoomed way into someone's old photo just to figure out who was in the background",
+      "ru": "Я никогда не зумил чужое старое фото, чтобы разглядеть, кто там на заднем плане"
+    }
+  },
+  {
+    "id": "nhi-045",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever watched someone's stories from a finsta so they wouldn't see I'd looked",
+      "ru": "Я никогда не листал чьи-то сторис на фейковом аккаунте, лишь бы не светить, что смотрел"
+    }
+  },
+  {
+    "id": "nhi-046",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever built a whole theory about someone from a single like they left on a random photo",
+      "ru": "Я никогда не строил целую теорию о человеке по одному его лайку под чужим фото"
+    }
+  },
+  {
+    "id": "nhi-047",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a screenshot of the weather instead of just admitting I missed someone",
+      "ru": "Я никогда не отправлял скрин погоды вместо того, чтобы просто признаться, что соскучился"
+    }
+  },
+  {
+    "id": "nhi-048",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever liked someone's very first post just so they'd know how far back I scrolled",
+      "ru": "Я никогда не лайкал самое первое фото человека, чтобы он понял, как далеко я долистал"
+    }
+  },
+  {
+    "id": "nhi-049",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever switched my profile picture right before texting someone after a long silence",
+      "ru": "Я никогда не менял аватарку специально перед тем, как написать человеку после долгого молчания"
+    }
+  },
+  {
+    "id": "nhi-050",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever shoved my phone at a friend going 'how am I supposed to read THIS' over a single period at the end",
+      "ru": "Я никогда не показывал телефон другу со словами «ну вот как это понимать?» из-за одной точки в конце"
+    }
+  },
+  {
+    "id": "nhi-051",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever convinced younger kids I could move things with my mind",
+      "ru": "Я никогда не убеждал младших, что умею двигать вещи силой мысли"
+    }
+  },
+  {
+    "id": "nhi-052",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever blamed a broken vase on the cat who was asleep in another room",
+      "ru": "Я никогда не сваливал разбитую вазу на кота, который вообще спал в другой комнате"
+    }
+  },
+  {
+    "id": "nhi-053",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever swore to classmates I personally saw a UFO over the cottage",
+      "ru": "Я никогда не клялся одноклассникам, что лично видел НЛО над дачей"
+    }
+  },
+  {
+    "id": "nhi-054",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever forged my parents' signature in the school journal, proud of how close it looked",
+      "ru": "Я никогда не подделывал в дневнике подпись родителей, гордясь, как похоже вышло"
+    }
+  },
+  {
+    "id": "nhi-055",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever hugged a total stranger from behind, mistaking them for a friend",
+      "ru": "Я никогда не обнимал со спины совершенно чужого человека, перепутав его с другом"
+    }
+  },
+  {
+    "id": "nhi-056",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever played the long-lost friend to avoid admitting I forgot who someone was",
+      "ru": "Я никогда не выдавал себя за давнего знакомого, чтобы не признаваться, что забыл, кто это"
+    }
+  },
+  {
+    "id": "nhi-057",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever left someone's last message unread on purpose, just so our conversation technically wasn't over yet",
+      "ru": "Я никогда не оставлял непрочитанным последнее сообщение от человека, лишь бы у нас формально не заканчивался разговор"
+    }
+  },
+  {
+    "id": "nhi-058",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever stretched out a book someone gave me, because finishing it felt like really saying goodbye to them",
+      "ru": "Я никогда не дочитывал подаренную книгу до самого конца, потому что закрыть её значило окончательно с человеком попрощаться"
+    }
+  },
+  {
+    "id": "nhi-059",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever learned to cook one specific dish just to make my kitchen smell the way home did when I was little",
+      "ru": "Я никогда не учился готовить какое-то блюдо только ради того, чтобы дома снова запахло так, как в детстве"
+    }
+  },
+  {
+    "id": "nhi-060",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever carried a note in someone else's handwriting in my wallet long after I should have thrown it out",
+      "ru": "Я никогда не носил с собой в кошельке записку чужим почерком, которую давно пора выбросить"
+    }
+  },
+  {
+    "id": "nhi-061",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever held onto someone's sweater, telling myself I'd return it next time we met, and that next time keeps not coming",
+      "ru": "Я никогда не задерживал чужой свитер у себя, оправдываясь тем, что верну при следующей встрече, которой всё нет"
+    }
+  },
+  {
+    "id": "nhi-062",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever scribbled my grandmother's recipe on a napkin and then kept that napkin like it was an official document",
+      "ru": "Я никогда не записывал за бабушкой её рецепт на салфетку и хранил эту салфетку, как документ"
+    }
+  },
+  {
+    "id": "nhi-063",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever sat in the parked car an extra ten minutes after arriving, just to finish the song we used to love",
+      "ru": "Я никогда не сидел в машине лишних десять минут после того, как доехал, лишь бы дослушать песню, которую мы любили"
+    }
+  },
+  {
+    "id": "nhi-064",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever rehearsed kind words for a friend and then sent a dumb meme instead, because that felt easier",
+      "ru": "Я никогда не повторял про себя слова поддержки для друга и в итоге отправлял вместо них дурацкий мем, потому что так проще"
+    }
+  },
+  {
+    "id": "nhi-065",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever kept a book full of someone's margin notes and ended up reading the notes instead of the story",
+      "ru": "Я никогда не оставлял у себя книгу с чьими-то пометками на полях и читал не текст, а эти пометки"
+    }
+  },
+  {
+    "id": "nhi-066",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever rehearsed how casually I'd say 'oh, I was just passing by' after standing near the right doorway for half an hour",
+      "ru": "Я никогда не репетировал, как небрежно скажу «да я тут случайно проходил», стоя у нужного подъезда уже полчаса"
+    }
+  },
+  {
+    "id": "nhi-067",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever hid tears behind a fake 'something's in my eye' when a friend said a few words about me at a wedding",
+      "ru": "Я никогда не прятал слёзы за тем, что притворялся, будто что-то попало в глаз, когда друг сказал на свадьбе пару слов про меня"
+    }
+  },
+  {
+    "id": "nhi-068",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever kept an unfinished letter to someone I fell out with in my notes app, adding a line to it once a year",
+      "ru": "Я никогда не держал в заметках недописанное письмо человеку, с которым мы поссорились, и дописывал его по строчке годами"
+    }
+  },
+  {
+    "id": "nhi-069",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever started typing, seen the other person typing too, and panic-deleted everything just to read theirs first",
+      "ru": "Я никогда не печатал ответ, видел, что человек тоже печатает, и в панике всё стирал, чтобы прочитать первым"
+    }
+  },
+  {
+    "id": "nhi-070",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a voice message and then replayed it five times wondering if my voice sounds that weird",
+      "ru": "Я никогда не отправлял голосовое, а потом слушал его сам раз пять, гадая, нормальный ли у меня голос"
+    }
+  },
+  {
+    "id": "nhi-071",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever made a friend proofread a text to an ex before I dared to hit send",
+      "ru": "Я никогда не давал другу прочитать черновик сообщения бывшему, прежде чем рискнуть отправить"
+    }
+  },
+  {
+    "id": "nhi-072",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever spent a late night scrolling a vacation album I wasn't even invited on",
+      "ru": "Я никогда не залипал на ночь в чужой совместный альбом с отпуска, на который меня даже не звали"
+    }
+  },
+  {
+    "id": "nhi-073",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever backed out of someone's stories halfway, terrified I'd accidentally swipe into their DMs",
+      "ru": "Я никогда не выходил из чужих сторис на полпути, испугавшись, что случайно свайпну в личку"
+    }
+  },
+  {
+    "id": "nhi-074",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever checked if someone was online right before sending 'you randomly crossed my mind'",
+      "ru": "Я никогда не проверял, в сети ли человек, прямо перед тем, как написать «случайно вспомнил о тебе»"
+    }
+  },
+  {
+    "id": "nhi-075",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever liked a photo at 3 a.m. and spent the next day rehearsing an excuse in case anyone asked",
+      "ru": "Я никогда не оставлял лайк на фото в три часа ночи и весь следующий день репетировал объяснение, если спросят"
+    }
+  },
+  {
+    "id": "nhi-076",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever typed 'goodnight', deleted it, typed 'night', and then sent nothing at all",
+      "ru": "Я никогда не печатал «спокойной ночи», стирал, печатал «споки» и в итоге не отправлял ничего"
+    }
+  },
+  {
+    "id": "nhi-077",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever convinced my little sibling they were found in a cabbage patch and watched the panic set in",
+      "ru": "Я никогда не убеждал младшего брата, что его нашли в капусте, и наблюдал, как он переживает"
+    }
+  },
+  {
+    "id": "nhi-078",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever swallowed my gum and then spent a week scared a tree would sprout inside me",
+      "ru": "Я никогда не глотал жвачку и потом неделю боялся, что внутри меня вырастет дерево"
+    }
+  },
+  {
+    "id": "nhi-079",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever faked being asleep in the car so I'd get carried up to bed",
+      "ru": "Я никогда не прикидывался спящим в машине, чтобы меня донесли до кровати на руках"
+    }
+  },
+  {
+    "id": "nhi-080",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever climbed into a stranger's car thinking it was my taxi and buckled up like nothing happened",
+      "ru": "Я никогда не садился в чужую машину, перепутав её со своим такси, и пристёгивался как ни в чём не бывало"
+    }
+  },
+  {
+    "id": "nhi-081",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever called a stranger's mom 'mom' at the playground, too caught up in the game to look up",
+      "ru": "Я никогда не звал чужую маму «мам» на детской площадке, заигравшись и забыв поднять глаза"
+    }
+  },
+  {
+    "id": "nhi-082",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever kept someone saved in my phone under the exact name from day one, long after everything between us had changed",
+      "ru": "Я никогда не оставлял в телефоне имя человека ровно таким, каким записал его в самый первый день, хотя всё между нами давно стало другим"
+    }
+  },
+  {
+    "id": "nhi-083",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever memorized someone's usual order so I could one day pretend I just guessed it",
+      "ru": "Я никогда не выучивал наизусть чужой любимый заказ, чтобы однажды сделать вид, будто угадал случайно"
+    }
+  },
+  {
+    "id": "nhi-084",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever said 'no really, I'm fine' at the door while secretly hoping someone would stop me and ask me to stay",
+      "ru": "Я никогда не отвечал «да всё нормально», стоя у двери, хотя на самом деле очень хотел, чтобы меня остановили и попросили остаться"
+    }
+  },
+  {
+    "id": "nhi-085",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever pieced together someone's whole life from a mutual friend's likes because I'm too scared to follow them myself",
+      "ru": "Я никогда не вычислял по лайкам общего друга, чем сейчас живёт человек, на которого подписываться не решаюсь"
+    }
+  },
+  {
+    "id": "nhi-086",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever muted someone while staying subscribed so they'd never guess I stopped watching",
+      "ru": "Я никогда не отключал у человека звук, оставляя подписку, чтобы он не догадался, что я больше не смотрю"
+    }
+  },
+  {
+    "id": "nhi-087",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever googled someone before meeting them and then carefully acted surprised to hear it all for the first time",
+      "ru": "Я никогда не гуглил человека перед встречей, а потом старательно делал вид, что узнаю всё впервые"
+    }
+  },
+  {
+    "id": "nhi-088",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever assured the whole playground that my dad personally knew Spider-Man",
+      "ru": "Я никогда не уверял всю детскую площадку, что мой папа лично знаком с человеком-пауком"
+    }
+  },
+  {
+    "id": "nhi-089",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever thanked a waiter by calling them 'mom' after slipping out of home mode",
+      "ru": "Я никогда не благодарил официанта словом «мам», случайно переключившись с домашнего режима"
+    }
+  },
+  {
+    "id": "nhi-090",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever replayed one happy evening in my head at bedtime like a favorite film, just to fall asleep smiling",
+      "ru": "Я никогда не прокручивал в голове один счастливый вечер перед сном, как любимый фильм, лишь бы уснуть с улыбкой"
+    }
+  },
+  {
+    "id": "nhi-091",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever held a goodbye hug a couple of seconds too long because I didn't want them to leave",
+      "ru": "Я никогда не задерживал прощальное объятие на пару секунд дольше, чем нужно, потому что не хотел, чтобы человек уходил"
+    }
+  },
+  {
+    "id": "nhi-092",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever moved over to a friend's favorite spot while they were gone, just to sit the way they used to",
+      "ru": "Я никогда не пересаживался на любимое место друга в его отсутствие, чтобы хоть немного побыть так, как сидел он"
+    }
+  },
+  {
+    "id": "nhi-093",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever invented an excuse to drop by someone's place when really I just wanted to make sure they were okay",
+      "ru": "Я никогда не придумывал заранее повод заглянуть к человеку, хотя на самом деле просто хотел убедиться, что у него всё хорошо"
+    }
+  },
+  {
+    "id": "nhi-094",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever carried the same little trinket in my pocket for years because someone dear once pressed it into my palm",
+      "ru": "Я никогда не носил годами одну и ту же мелочь в кармане, потому что когда-то мне вложил её в ладонь дорогой человек"
+    }
+  },
+  {
+    "id": "nhi-095",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever promised myself on the way home that this time I'd finally say how much someone means to me, then walked in and went quiet again",
+      "ru": "Я никогда не загадывал по дороге домой, что вот сейчас зайду и наконец скажу, как сильно ценю человека, а заходил и снова молчал"
+    }
+  },
+  {
+    "id": "nhi-096",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever re-recorded a video selfie until my face landed on exactly the right casual smile",
+      "ru": "Я никогда не перезаписывал кружочек, пока на лице не получится нужная небрежная улыбка"
+    }
+  },
+  {
+    "id": "nhi-097",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a friend two profile pics asking 'which one makes me look less weird?'",
+      "ru": "Я никогда не скидывал другу два варианта аватарки с вопросом «на какой я нормальнее?»"
+    }
+  },
+  {
+    "id": "nhi-098",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever screenshotted someone's story just to calmly study who that person standing next to them is",
+      "ru": "Я никогда не делал скрин чужой сторис, чтобы спокойно разглядеть, что за человек стоит рядом с ним на фото"
+    }
+  },
+  {
+    "id": "nhi-099",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever saved a meme thinking 'gotta send this to them' and then never did, because we don't talk anymore",
+      "ru": "Я никогда не сохранял мем с подписью «это надо скинуть ему», а потом так и не скидывал, потому что мы уже не общаемся"
+    }
+  },
+  {
+    "id": "nhi-100",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever waited for someone to go offline before texting first, just so it wouldn't look like I'd been lurking",
+      "ru": "Я никогда не ждал, пока человек выйдет из сети, чтобы написать первым и не выглядеть так, будто караулил"
+    }
+  },
+  {
+    "id": "nhi-101",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever caught feelings for someone in this very room",
+      "ru": "Я никогда не влюблялся в кого-то прямо из этой компании"
+    }
+  },
+  {
+    "id": "nhi-102",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever climbed onto a table to dance while everyone egged me on",
+      "ru": "Я никогда не залезал на стол потанцевать под одобрительные крики компании"
+    }
+  },
+  {
+    "id": "nhi-103",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever grabbed the karaoke mic dead sure the whole room was about to hear a star",
+      "ru": "Я никогда не хватал микрофон в караоке с полной уверенностью, что сейчас все услышат звезду"
+    }
+  },
+  {
+    "id": "nhi-104",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever proposed a toast that was met with dead silence",
+      "ru": "Я никогда не предлагал тост, который встречали гробовым молчанием"
+    }
+  },
+  {
+    "id": "nhi-105",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever fired off 2 a.m. texts to an ex with courage borrowed from a glass",
+      "ru": "Я никогда не строчил сообщения бывшим в два часа ночи, набравшись храбрости из бокала"
+    }
+  },
+  {
+    "id": "nhi-106",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever rehearsed a pickup line in the mirror that came out completely wrong in the moment",
+      "ru": "Я никогда не репетировал перед зеркалом фразу для знакомства, которая в итоге прозвучала совсем не так"
+    }
+  },
+  {
+    "id": "nhi-107",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever rattled off a fake number just to politely escape someone who wouldn't take the hint",
+      "ru": "Я никогда не диктовал выдуманный номер, лишь бы вежливо уйти от слишком настойчивого знакомства"
+    }
+  },
+  {
+    "id": "nhi-108",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever slipped on a date and called them by my ex's name",
+      "ru": "Я никогда не оговаривался на свидании, назвав человека именем бывшей"
+    }
+  },
+  {
+    "id": "nhi-109",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever faked an urgent call to quietly bail on a hopeless date",
+      "ru": "Я никогда не изображал срочный звонок, чтобы по-тихому сбежать с безнадёжного свидания"
+    }
+  },
+  {
+    "id": "nhi-110",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a flirty text to the wrong person and immediately wanted to flee the country",
+      "ru": "Я никогда не отправлял флиртующее сообщение не тому человеку, после чего хотелось срочно уехать из страны"
+    }
+  },
+  {
+    "id": "nhi-111",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever rounded my age on a dating profile in a more flattering direction",
+      "ru": "Я никогда не округлял свой возраст в анкете на сайте знакомств в более выгодную сторону"
+    }
+  },
+  {
+    "id": "nhi-112",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever used a five-year-old photo on a dating app where I look suspiciously good",
+      "ru": "Я никогда не ставил в профиль знакомств фото пятилетней давности, где подозрительно хорош собой"
+    }
+  },
+  {
+    "id": "nhi-113",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever stumbled on someone I know in a dating app and slammed my phone shut in horror",
+      "ru": "Я никогда не натыкался в приложении для знакомств на хорошего знакомого и в ужасе захлопывал телефон"
+    }
+  },
+  {
+    "id": "nhi-114",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever played wingman, talking a friend up to a cute stranger",
+      "ru": "Я никогда не работал у друга «крылом», расхваливая его симпатичному незнакомцу"
+    }
+  },
+  {
+    "id": "nhi-115",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever kissed someone within five minutes of meeting them",
+      "ru": "Я никогда не целовался с человеком уже через пять минут после знакомства"
+    }
+  },
+  {
+    "id": "nhi-116",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever played spin the bottle that took the night way further than anyone planned",
+      "ru": "Я никогда не играл в «бутылочку», которая заводила вечер куда дальше задуманного"
+    }
+  },
+  {
+    "id": "nhi-117",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever asked someone out and caught a 'no' so fast I wanted the floor to swallow me",
+      "ru": "Я никогда не приглашал человека на свидание, нарвавшись на отказ такой быстрый, что хотелось провалиться сквозь землю"
+    }
+  },
+  {
+    "id": "nhi-118",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever passed a note that said 'do you like me, circle yes or no'",
+      "ru": "Я никогда не передавал записку «ты мне нравишься, обведи да или нет»"
+    }
+  },
+  {
+    "id": "nhi-119",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever asked someone to slow-dance at a school disco with ice-cold sweaty palms",
+      "ru": "Я никогда не приглашал на медляк на школьной дискотеке, обливаясь холодным потом"
+    }
+  },
+  {
+    "id": "nhi-120",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever practiced kissing on the back of my own hand",
+      "ru": "Я никогда не тренировался целоваться на собственной руке"
+    }
+  },
+  {
+    "id": "nhi-121",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever invented a girlfriend who conveniently lived in another city",
+      "ru": "Я никогда не сочинял, что у меня есть девушка, просто живёт в другом городе"
+    }
+  },
+  {
+    "id": "nhi-122",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever had my first kiss at summer camp and let the whole class buzz about it after",
+      "ru": "Я никогда не целовался впервые в жизни в лагере, чтобы потом об этом гудел весь класс"
+    }
+  },
+  {
+    "id": "nhi-123",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever walked straight into a glass door in front of a whole café",
+      "ru": "Я никогда не врезался в стеклянную дверь на глазах у целого кафе"
+    }
+  },
+  {
+    "id": "nhi-124",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever waved back at someone who was clearly waving at the person behind me",
+      "ru": "Я никогда не махал в ответ человеку, который махал вовсе не мне"
+    }
+  },
+  {
+    "id": "nhi-125",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever tripped over flat ground while trying to look cool walking past someone I liked",
+      "ru": "Я никогда не запинался на ровном месте, проходя мимо человека, которому хотел понравиться"
+    }
+  },
+  {
+    "id": "nhi-126",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever burst out laughing at the most solemn possible moment",
+      "ru": "Я никогда не прыскал со смеху в самый неподходящий торжественный момент"
+    }
+  },
+  {
+    "id": "nhi-127",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever primped in a shop window, forgetting the people inside could see me perfectly",
+      "ru": "Я никогда не прихорашивался у витрины, забыв, что изнутри на меня прекрасно видно"
+    }
+  },
+  {
+    "id": "nhi-128",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever told the waiter 'you too' after they wished me a good meal",
+      "ru": "Я никогда не отвечал официанту «и тебе приятного» на пожелание приятного аппетита"
+    }
+  },
+  {
+    "id": "nhi-129",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever confidently given a stranger directions and sent them the exact wrong way",
+      "ru": "Я никогда не объяснял незнакомцу дорогу с полной уверенностью, отправив его ровно в противоположную сторону"
+    }
+  },
+  {
+    "id": "nhi-130",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever nodded along pretending to adore a film I'd never actually seen",
+      "ru": "Я никогда не кивал с умным видом, делая вид, что обожаю незнакомый мне фильм"
+    }
+  },
+  {
+    "id": "nhi-131",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever rewritten the word 'hi' twenty times before sending it to someone I liked",
+      "ru": "Я никогда не переписывал слово «привет» раз двадцать, прежде чем отправить его симпатичному человеку"
+    }
+  },
+  {
+    "id": "nhi-132",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever studied my crush's ex's profile out of purely sporting curiosity",
+      "ru": "Я никогда не изучал профиль бывшей своего краша из чистого спортивного интереса"
+    }
+  },
+  {
+    "id": "nhi-133",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever replied to a crush's story with a single emoji and then agonized for half an hour over whether it was too bold",
+      "ru": "Я никогда не отвечал на сторис симпатичного человека одним смайликом, а потом полчаса гадал, не слишком ли это смело"
+    }
+  },
+  {
+    "id": "nhi-134",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever posted a story aimed at exactly one specific person seeing it",
+      "ru": "Я никогда не выкладывал сторис в расчёте на то, что её увидит один-единственный человек"
+    }
+  },
+  {
+    "id": "nhi-135",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever drunk-ordered something ridiculous online and barely recognized it in the package next morning",
+      "ru": "Я никогда не заказывал ночью под настроение нелепую вещь, которую наутро с трудом узнавал в посылке"
+    }
+  },
+  {
+    "id": "nhi-136",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever texted someone 'we should totally hang out sometime' with zero intention of ever arranging it",
+      "ru": "Я никогда не писал кому-то «надо бы как-нибудь встретиться» без малейшего намерения это организовать"
+    }
+  },
+  {
+    "id": "nhi-137",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever replayed a good flirty moment in my head and grinned like an idiot in the middle of the street",
+      "ru": "Я никогда не прокручивал в голове удачный флирт, расплываясь в глупой улыбке посреди улицы"
+    }
+  },
+  {
+    "id": "nhi-138",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever sworn I had zero feelings for someone while it was written all over my face",
+      "ru": "Я никогда не уверял всех, что человек мне абсолютно безразличен, хотя по мне было видно обратное"
+    }
+  },
+  {
+    "id": "nhi-139",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever blurted out a way-too-intense compliment on a first date and watched them short-circuit a little",
+      "ru": "Я никогда не выпаливал слишком пылкий комплимент на первом же свидании, наблюдая, как человек слегка зависает"
+    }
+  },
+  {
+    "id": "nhi-140",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever counted the minutes for a crush to reply, checking my phone every thirty seconds",
+      "ru": "Я никогда не считал минуты до ответа симпатичного человека, проверяя телефон каждые тридцать секунд"
+    }
+  },
+  {
+    "id": "nhi-141",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever declared as a kid that my heart was broken forever over one rejection",
+      "ru": "Я никогда не объявлял в детстве, что моё сердце разбито навсегда из-за чьего-то отказа"
+    }
+  },
+  {
+    "id": "nhi-142",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever frozen mid-sentence, blanking on the name of the person I was about to introduce",
+      "ru": "Я никогда не застывал посреди фразы, забыв имя человека, которого сам же собирался кому-то представить"
+    }
+  },
+  {
+    "id": "nhi-143",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever shown up to a party first and awkwardly hovered alone with the host for an hour before anyone else came",
+      "ru": "Я никогда не приходил на вечеринку первым, неловко зависая наедине с хозяином ещё час до остальных"
+    }
+  },
+  {
+    "id": "nhi-144",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever deleted a fresh post an hour later because it pulled fewer likes than I'd hoped",
+      "ru": "Я никогда не удалял свежий пост через час, потому что лайков набралось меньше, чем я надеялся"
+    }
+  },
+  {
+    "id": "nhi-145",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever unfollowed someone the second I realized they'd never followed me back",
+      "ru": "Я никогда не отписывался от человека, как только понимал, что в ответ он на меня так и не подписался"
+    }
+  },
+  {
+    "id": "nhi-146",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever slid into the DMs of someone I liked with a 'oh I just stumbled on your post' as cover",
+      "ru": "Я никогда не писал в личку первым тому, кто нравится, под предлогом «случайно наткнулся на твой пост»"
+    }
+  },
+  {
+    "id": "nhi-147",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever posted a photo under a filter that reshaped my face so much I'd be unrecognizable in person",
+      "ru": "Я никогда не выкладывал фото под фильтром, который менял мне лицо так, что в жизни меня бы не узнали"
+    }
+  },
+  {
+    "id": "nhi-148",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever faked a laggy connection just to bail out of a video call early",
+      "ru": "Я никогда не изображал, что у меня тормозит интернет, лишь бы по-быстрому слиться с видеозвонка"
+    }
+  },
+  {
+    "id": "nhi-149",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sat in a side group chat where we were dishing about someone from the main one",
+      "ru": "Я никогда не сидел в отдельной беседе, где мы обсуждали человека из основного чата"
+    }
+  },
+  {
+    "id": "nhi-150",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever typed my own name into a search engine just to see what the internet says about me",
+      "ru": "Я никогда не вбивал собственное имя в поиск, чтобы посмотреть, что выдаёт обо мне интернет"
+    }
+  },
+  {
+    "id": "nhi-151",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever met up in real life with someone I'd only ever known through the internet",
+      "ru": "Я никогда не встречался вживую с человеком, которого до этого знал только по переписке в сети"
+    }
+  },
+  {
+    "id": "nhi-152",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever shown up to a date only to find the person looked nothing like their photos",
+      "ru": "Я никогда не приходил на свидание к человеку, который вживую оказался совсем не таким, как на фото"
+    }
+  },
+  {
+    "id": "nhi-153",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever opened the list of who viewed my story hunting for one specific name",
+      "ru": "Я никогда не открывал список просмотревших мою сторис в поисках одного-единственного имени"
+    }
+  },
+  {
+    "id": "nhi-154",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever posted a 'look how much fun I'm having' story aimed squarely at the person who dumped me",
+      "ru": "Я никогда не выкладывал сторис, где мне типа очень весело, специально для того, кто меня бросил"
+    }
+  },
+  {
+    "id": "nhi-155",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever typed 'hahaha' at a joke that didn't get even a flicker of a smile out of me",
+      "ru": "Я никогда не отвечал «ахахах» на шутку, которая не вызвала у меня ни улыбки"
+    }
+  },
+  {
+    "id": "nhi-156",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever slapped a thumbs-up reaction on a message instead of replying, just to quietly show I was annoyed",
+      "ru": "Я никогда не ставил на сообщение лайк-реакцию вместо ответа, чтобы тонко показать, что я задет"
+    }
+  },
+  {
+    "id": "nhi-157",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever replied 'oh sorry, only just saw this' to a message I'd calmly read the day before",
+      "ru": "Я никогда не отвечал «ой, только увидел» на сообщение, которое преспокойно прочитал ещё вчера"
+    }
+  },
+  {
+    "id": "nhi-158",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever texted someone sitting in the very same room just to avoid saying it out loud",
+      "ru": "Я никогда не переписывался с человеком, который сидел в той же комнате, чтобы не говорить вслух"
+    }
+  },
+  {
+    "id": "nhi-159",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever scoped out a friend's new partner online before we'd even been introduced",
+      "ru": "Я никогда не изучал в сети нового парня или девушку друга ещё до того, как нас познакомили"
+    }
+  },
+  {
+    "id": "nhi-160",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever blamed my silence on my phone supposedly dying",
+      "ru": "Я никогда не сваливал своё молчание на то, что у меня якобы сел телефон"
+    }
+  },
+  {
+    "id": "nhi-161",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever fired a message into the group chat that was meant for one person's eyes only",
+      "ru": "Я никогда не отправлял в общий чат сообщение, которое предназначалось одному человеку"
+    }
+  },
+  {
+    "id": "nhi-162",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever switched off read receipts so I could read messages in peace and stall on replying",
+      "ru": "Я никогда не отключал галочки о прочтении, чтобы спокойно читать сообщения и тянуть с ответом"
+    }
+  },
+  {
+    "id": "nhi-163",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever buried a whole chat in the archive, pretending that person meant nothing to me anymore",
+      "ru": "Я никогда не прятал переписку в архив, делая вид, что человек больше для меня ничего не значит"
+    }
+  },
+  {
+    "id": "nhi-164",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever wished an ex a happy birthday secretly hoping it'd crack the door back open",
+      "ru": "Я никогда не поздравлял бывшего с днём рождения в тайной надежде, что разговор завяжется снова"
+    }
+  },
+  {
+    "id": "nhi-165",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever combed through someone's following list, sizing up who they might be into",
+      "ru": "Я никогда не пролистывал чужие подписки, прикидывая, кто человеку нравится"
+    }
+  },
+  {
+    "id": "nhi-166",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever untagged myself from a group photo where I came out looking rough",
+      "ru": "Я никогда не снимал с себя отметку на совместном фото, где вышел неудачно"
+    }
+  },
+  {
+    "id": "nhi-167",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever sent a late-night 'you awake?' knowing full well where I was steering it",
+      "ru": "Я никогда не писал поздно ночью «не спишь?» человеку, прекрасно понимая, к чему веду"
+    }
+  },
+  {
+    "id": "nhi-168",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever screenshotted a disappearing photo before it had the chance to vanish",
+      "ru": "Я никогда не делал скриншот исчезающего фото, пока оно не успело пропасть"
+    }
+  },
+  {
+    "id": "nhi-169",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever buried someone under ten voice notes in a row and then apologized for the 'whole podcast'",
+      "ru": "Я никогда не заваливал человека десятком голосовых подряд, а потом извинялся за «целый подкаст»"
+    }
+  },
+  {
+    "id": "nhi-170",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever posted a 'candid' coffee shot after quietly taking forty takes",
+      "ru": "Я никогда не выкладывал «случайный» снимок с кофе, сделав перед этим сорок дублей"
+    }
+  },
+  {
+    "id": "nhi-171",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever turned on post notifications for one person so I'd never miss a single thing they shared",
+      "ru": "Я никогда не включал уведомления на чьи-то посты, лишь бы не пропустить ни одного"
+    }
+  },
+  {
+    "id": "nhi-172",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever crafted a text with flawless punctuation just to seem more sober than I was",
+      "ru": "Я никогда не выписывал сообщение с идеальной пунктуацией, лишь бы казаться трезвее, чем был"
+    }
+  },
+  {
+    "id": "nhi-173",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever launched a story poll purely as an excuse to chat with one person in the replies",
+      "ru": "Я никогда не запускал опрос в сторис только ради того, чтобы списаться с одним человеком в ответах"
+    }
+  },
+  {
+    "id": "nhi-174",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever liked a comment in someone else's argument just to silently take a side",
+      "ru": "Я никогда не лайкал чей-то комментарий в чужом споре, молча принимая сторону"
+    }
+  },
+  {
+    "id": "nhi-175",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever muted a group chat and then played innocent that I'd seen nothing",
+      "ru": "Я никогда не отключал уведомления в беседе, а потом оправдывался, что ничего не видел"
+    }
+  },
+  {
+    "id": "nhi-176",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever 'happened' to wander into a café I'd worked out from someone's photos",
+      "ru": "Я никогда не заходил «случайно» в кафе, которое вычислил по чужим фото"
+    }
+  },
+  {
+    "id": "nhi-177",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever fired off messages to the group chat that I deeply regretted by morning",
+      "ru": "Я никогда не строчил в общий чат сообщения, о которых наутро горько жалел"
+    }
+  },
+  {
+    "id": "nhi-178",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever piled on a second and third text to someone who never answered the first",
+      "ru": "Я никогда не дописывал второе и третье сообщение человеку, который так и не ответил на первое"
+    }
+  },
+  {
+    "id": "nhi-179",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever let a chat sit with an unread badge for weeks, swearing I'd reply 'later'",
+      "ru": "Я никогда не держал на чате значок непрочитанного неделями, обещая себе ответить «попозже»"
+    }
+  },
+  {
+    "id": "nhi-180",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever posted a throwback on a dull day, fishing for 'you never change!' comments",
+      "ru": "Я никогда не выкладывал старое фото в скучный день в расчёте на комментарии в духе «ты совсем не меняешься»"
+    }
+  },
+  {
+    "id": "nhi-181",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever rattled off five follow-up texts after autocorrect butchered what I wrote",
+      "ru": "Я никогда не строчил пять уточняющих сообщений после того, как автозамена изуродовала мой текст"
+    }
+  },
+  {
+    "id": "nhi-182",
+    "theme": "digital",
+    "text": {
+      "en": "Never have I ever saved someone's number under a code name so nobody glancing at my phone would guess who it was",
+      "ru": "Я никогда не записывал чей-то номер под кодовым именем, чтобы никто, заглянув в телефон, не догадался, кто это"
+    }
+  },
+  {
+    "id": "nhi-183",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever caught a train going the opposite way and only noticed it three stops later",
+      "ru": "Я никогда не уезжал на поезде в обратную сторону и понимал это только через три остановки"
+    }
+  },
+  {
+    "id": "nhi-184",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever slept clean through my stop and ended up at the last station in a part of town I'd never seen",
+      "ru": "Я никогда не просыпал свою остановку так, что выходил уже на конечной в незнакомом районе"
+    }
+  },
+  {
+    "id": "nhi-185",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever remembered only at the airport that my passport was still lying at home on the nightstand",
+      "ru": "Я никогда не вспоминал уже в аэропорту, что паспорт остался лежать дома на тумбочке"
+    }
+  },
+  {
+    "id": "nhi-186",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever wandered a foreign city for a solid hour pretending I meant to go that way",
+      "ru": "Я никогда не плутал по чужому городу битый час, делая вид, что иду так специально"
+    }
+  },
+  {
+    "id": "nhi-187",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever jabbed at a menu in a language I couldn't read and got a plate I was scared to taste",
+      "ru": "Я никогда не тыкал в меню на чужом языке наугад и получал тарелку, которую боялся попробовать"
+    }
+  },
+  {
+    "id": "nhi-188",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever finished a whole café dinner the exact second I remembered my wallet was at home",
+      "ru": "Я никогда не доедал ужин в кафе ровно в тот момент, когда вспоминал про забытый дома кошелёк"
+    }
+  },
+  {
+    "id": "nhi-189",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever yanked a 'push' door toward me in front of a whole café",
+      "ru": "Я никогда не дёргал на себя дверь с табличкой «от себя» на глазах у целого кафе"
+    }
+  },
+  {
+    "id": "nhi-190",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever spent half a day in an inside-out shirt and heard about it from a complete stranger",
+      "ru": "Я никогда не разгуливал полдня в футболке наизнанку и узнавал об этом от незнакомого человека"
+    }
+  },
+  {
+    "id": "nhi-191",
+    "theme": "awkward",
+    "text": {
+      "en": "Never have I ever kissed someone at the very top of a Ferris wheel while the car hung frozen at the peak",
+      "ru": "Я никогда не целовался на верхушке колеса обозрения, пока кабинка застыла на самом верху"
+    }
+  },
+  {
+    "id": "nhi-192",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever hid a bad grade so far away that I then spent a week looking for it myself",
+      "ru": "Я никогда не прятал дневник с плохой оценкой так далеко, что сам потом неделю его искал"
+    }
+  },
+  {
+    "id": "nhi-193",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever crept to the kitchen at night for sweets, freezing at every creak of the floor",
+      "ru": "Я никогда не пробирался ночью на кухню за конфетами, замирая от каждого скрипа пола"
+    }
+  },
+  {
+    "id": "nhi-194",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever warmed the thermometer on the radiator to stay home from school",
+      "ru": "Я никогда не грел градусник о батарею, чтобы остаться дома вместо школы"
+    }
+  },
+  {
+    "id": "nhi-195",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever pinned my own mischief on a younger sibling and stuck to the story to the end",
+      "ru": "Я никогда не сваливал на младшего то, что натворил сам, и держался до последнего"
+    }
+  },
+  {
+    "id": "nhi-196",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever swallowed something dodgy on a dare in the yard just to earn the other kids' respect",
+      "ru": "Я никогда не глотал во дворе что-то подозрительное на спор ради уважения пацанов"
+    }
+  },
+  {
+    "id": "nhi-197",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever leapt across the couches dead serious that the floor was lava",
+      "ru": "Я никогда не скакал по диванам, на полном серьёзе веря, что пол — это лава"
+    }
+  },
+  {
+    "id": "nhi-198",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever mixed shampoo, toothpaste and dirt in a jar and proudly called it a magic potion",
+      "ru": "Я никогда не смешивал в банке шампунь, зубную пасту и землю, гордо называя это волшебным зельем"
+    }
+  },
+  {
+    "id": "nhi-199",
+    "theme": "childhood",
+    "text": {
+      "en": "Never have I ever dug a hole in the yard genuinely hoping to reach the other side of the Earth",
+      "ru": "Я никогда не копал во дворе яму, всерьёз надеясь дорыться до другого конца Земли"
+    }
+  },
+  {
+    "id": "nhi-200",
+    "theme": "feelings",
+    "text": {
+      "en": "Never have I ever ordered borscht abroad hoping it'd taste even a little like my grandmother's",
+      "ru": "Я никогда не заказывал борщ в чужой стране в надежде, что он хоть капельку похож на бабушкин"
+    }
+  }
+]
