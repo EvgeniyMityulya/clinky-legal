@@ -7,9 +7,15 @@
   'use strict';
 
   var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4gv-C4NlkexGgz-lbDvD7xm0RU5BxsCVe2eLvof-DYLDNN_ZGKafpijywAQQZEh6IYw/exec'; // Google Apps Script -> Sheet
-  var GEO = {};   // {country, city, code}, best-effort from a free IP lookup
+  var GEO = {};   // {code, tz} — country from Cloudflare's own trace endpoint, no third party involved
   var RU_LOCALES = { RU: 1, BY: 1, KZ: 1, KG: 1, UA: 1, MD: 1, AM: 1, AZ: 1, GE: 1, TJ: 1, TM: 1, UZ: 1 };
-  try { fetch('https://ipwho.is/').then(function (r) { return r.json(); }).then(function (d) { if (d && d.success !== false) { GEO.country = d.country || ''; GEO.city = d.city || ''; GEO.code = d.country_code || ''; applyGeoLang(); } }).catch(function () {}); } catch (e) {}
+  try { GEO.tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { GEO.tz = ''; }
+  try {
+    fetch('/cdn-cgi/trace').then(function (r) { return r.text(); }).then(function (t) {
+      var m = /(?:^|\n)loc=([A-Z]{2})/.exec(t);
+      if (m) { GEO.code = m[1]; applyGeoLang(); }
+    }).catch(function () {});
+  } catch (e) {}
   var SUPPORT_ENDPOINT = WAITLIST_ENDPOINT;   // same Apps Script web app; routed by type=support
   var CONTACT_EMAIL = 'support@clinkyapp.com';
   var C = '#FF4F62';
@@ -205,6 +211,14 @@
       return '<details><summary>' + esc(f.q) + '</summary>' +
         '<div class="faq-body">' + esc(f.a) + '</div></details>';
     }).join('') + '</div>';
+  }
+  function buzz(ms) {
+    try {
+      if (!navigator.vibrate) return;
+      var ua = navigator.userActivation;
+      if (ua && !ua.hasBeenActive) return;
+      navigator.vibrate(ms);
+    } catch (e) {}
   }
   function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
   function tdict() {
@@ -895,7 +909,7 @@
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
   function burstSparkles() {
     var fx = document.getElementById('fxLayer'); if (!fx) return;
-    try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+    buzz(8);
     var r = fx.getBoundingClientRect(), cx = r.width / 2, cy = r.height * 0.46;
 
     // "ping" shockwave ring popping out from the centre
@@ -933,7 +947,7 @@
     if (!card || !fx) return;
     var fr = fx.getBoundingClientRect(), cr = card.getBoundingClientRect();
     var x = cr.left + cr.width / 2 - fr.left, y = cr.top - fr.top;
-    try { if (navigator.vibrate) navigator.vibrate(8); } catch (e) {}
+    buzz(8);
     var s = document.createElement('span');
     s.textContent = '+1';
     s.style.cssText = 'position:absolute;left:' + x + 'px;top:' + y + 'px;transform:translate(-50%,-50%);font-family:Nunito,sans-serif;font-weight:900;font-size:' + (20 + Math.random() * 8) + 'px;color:#FF4F62;text-shadow:0 4px 12px rgba(255,79,98,.4);will-change:transform,opacity';
@@ -1199,8 +1213,9 @@
     var params = new URLSearchParams();
     params.set('email', email);
     params.set('hp', (form.hp && form.hp.value) || '');
-    params.set('country', GEO.country || '');
-    params.set('city', GEO.city || '');
+    params.set('country', GEO.code || '');
+    params.set('city', GEO.tz || '');
+    params.set('tz', GEO.tz || '');
     params.set('lang', state.lang || navigator.language || '');
     params.set('drink', state.sel || '');
     params.set('referrer', document.referrer || '');

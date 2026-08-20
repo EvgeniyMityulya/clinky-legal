@@ -209,7 +209,10 @@ function play() {
   if (reduceMotion()) return;
   spinning = true;
   const myToken = ++spinToken;
-  try { if (navigator.vibrate) navigator.vibrate(9); } catch (e) {}
+  try {
+    var ua = navigator.userActivation;
+    if (navigator.vibrate && (!ua || ua.hasBeenActive)) navigator.vibrate(9);
+  } catch (e) {}
   const coffee = drink === 'coffee', dur = 900, t0 = performance.now();
   const rx0 = D2R(c.rotation[0]), ry0 = D2R(c.rotation[1]), rz0 = D2R(c.rotation[2]);
   const baseY = groundedY;
