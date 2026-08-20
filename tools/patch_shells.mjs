@@ -142,7 +142,8 @@ function simplePrerender(s) {
     ? [['Главная', `${SITE}/`], ['Игры', '/games'], ['Приватность', '/privacy-ru'], ['Условия', '/terms-ru']]
     : [['Home', `${SITE}/`], ['Games', '/games'], ['About', '/about'], ['Support', '/support'], ['Privacy', '/privacy'], ['Terms', '/terms']];
   const heading = s.title.split(/ — |—/)[0];
-  const legalKind = /^privacy/.test(s.file) ? 'privacy' : (/^terms/.test(s.file) ? 'terms' : null);
+  const base = s.file.split('/').pop();
+  const legalKind = /^privacy/.test(base) ? 'privacy' : (/^terms/.test(base) ? 'terms' : null);
   const legalText = legalKind ? legalBody(legalKind, loc) : '';
   const faq = (s.faq && s.faq !== 'games')
     ? `<h2>${loc === 'ru' ? 'Частые вопросы' : 'Frequently asked questions'}</h2>\n${faqHtml(FAQ_SUPPORT[loc])}`
@@ -192,6 +193,7 @@ ${faqHtml(FAQ_GAMES[loc])}
 
 function jsonld(s) {
   const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
+  const canonicalForSchema = s.canonicalOverride ? `${SITE}${s.canonicalOverride}` : canonical;
   const website = {
     '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Clinky',
     inLanguage: 'en',
@@ -228,7 +230,9 @@ function jsonld(s) {
 }
 
 function seoBlock(s) {
-  const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
+  const canonical = s.canonicalOverride
+    ? `${SITE}${s.canonicalOverride}`
+    : (s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`);
   const rows = [
     '<!-- seo:start -->',
     `<meta name="robots" content="${s.robots}">`,
@@ -342,7 +346,7 @@ for (const s of SHELLS) {
   html = html.replace('three@0.160.0/build/three.module.js', 'three@0.160.0/build/three.module.min.js');
 
 
-  const LEGAL_PAGES = new Set(['privacy.html', 'terms.html', 'privacy-ru.html', 'terms-ru.html']);
+  const LEGAL_PAGES = new Set(['privacy.html', 'terms.html', 'privacy-ru.html', 'terms-ru.html', 'ru/privacy.html', 'ru/terms.html']);
   if (!LEGAL_PAGES.has(s.file)) {
     html = html.replace(/\n?<script src="assets\/legal-content\.js(\?v=[a-f0-9]+)?"><\/script>/, '');
   } else if (!/legal-content\.js/.test(html)) {

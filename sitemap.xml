@@ -1,11 +1,75 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://clinkyapp.com/</loc><priority>1.0</priority></url>
-  <url><loc>https://clinkyapp.com/games</loc><priority>0.9</priority></url>
-  <url><loc>https://clinkyapp.com/about</loc><priority>0.6</priority></url>
-  <url><loc>https://clinkyapp.com/support</loc><priority>0.5</priority></url>
-  <url><loc>https://clinkyapp.com/privacy</loc><priority>0.3</priority></url>
-  <url><loc>https://clinkyapp.com/terms</loc><priority>0.3</priority></url>
-  <url><loc>https://clinkyapp.com/privacy-ru</loc><priority>0.3</priority></url>
-  <url><loc>https://clinkyapp.com/terms-ru</loc><priority>0.3</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://clinkyapp.com/</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/games</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/games"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/games"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/about</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/about"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/support</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/support"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/support"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/privacy"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/privacy"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/terms</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/terms"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/terms"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/games</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/games"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/games"/>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/about</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/about"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/about"/>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/support</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/support"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/support"/>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/privacy</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/privacy"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/privacy"/>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/terms</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/terms"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/terms"/>
+    <priority>0.3</priority>
+  </url>
 </urlset>

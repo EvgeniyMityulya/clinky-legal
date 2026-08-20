@@ -1149,7 +1149,12 @@
   // ===== actions =====
   function setLang(lang) {
     try { localStorage.setItem('clinky_lang', lang); } catch (e) {}
-    document.documentElement.lang = lang; state.lang = lang; paint();
+    document.documentElement.lang = lang; state.lang = lang;
+    try {
+      var tgt = pathFor(state.page, lang);
+      if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
+    } catch (e) {}
+    paint();
   }
   // Country fallback: switch to RU for Russian-speaking countries — only if the visitor hasn't
   // chosen a language and the browser wasn't already Russian. Not persisted (re-checked each visit).
@@ -1164,18 +1169,30 @@
   }
   var PAGES = { home: 1, games: 1, about: 1, support: 1, privacy: 1, terms: 1 };
   // clean path routing (no hash): / , /about , /support , /privacy , /terms (+ -ru entry variants)
-  function pageFromPath() {
+  function pathSegment() {
     var seg = (location.pathname || '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
-    if (seg.slice(-3) === '-ru') seg = seg.slice(0, -3);   // privacy-ru -> privacy (locale set at mount)
+    if (seg === 'ru') return '';                            // /ru/ -> home
+    if (seg.indexOf('ru/') === 0) return seg.slice(3);      // /ru/games -> games
+    if (seg.slice(-3) === '-ru') return seg.slice(0, -3);   // legacy /privacy-ru -> privacy
+    return seg;
+  }
+  function isRuPath() {
+    var seg = (location.pathname || '/').replace(/^\/+|\/+$/g, '').replace(/\.html$/, '').toLowerCase();
+    return seg === 'ru' || seg.indexOf('ru/') === 0 || seg.slice(-3) === '-ru';
+  }
+  function pageFromPath() {
+    var seg = pathSegment();
     return PAGES[seg] ? seg : 'home';
+  }
+  function pathFor(page, lang) {
+    var tail = page === 'home' ? '' : page;
+    return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
   function setPage(page) {
     state.page = page;
     try {
-      var cur = (location.pathname || '/').replace(/\.html$/, '').replace(/^\/+|\/+$/g, '').toLowerCase();
-      if (cur.slice(-3) === '-ru') cur = cur.slice(0, -3);
-      var tgt = page === 'home' ? '' : page;
-      if (cur !== tgt) history.pushState(null, '', '/' + tgt);
+      var tgt = pathFor(page, state.lang);
+      if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
     } catch (e) {}
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
     state.scrolled = window.scrollY > 24; paint();
@@ -1310,7 +1327,7 @@
     try {   // deterministic locale entry for /privacy-ru and ?lang= (used by App Store Connect URLs)
       var qlang = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
       if (qlang === 'ru' || qlang === 'en') lang = qlang;
-      else if (/-ru(\.html)?\/?$/i.test(location.pathname)) lang = 'ru';
+      else if (isRuPath()) lang = 'ru';
     } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
     try { state.source = captureSource(); } catch (e) {}
