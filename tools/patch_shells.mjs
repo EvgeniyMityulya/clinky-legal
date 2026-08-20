@@ -100,7 +100,7 @@ function homePrerender(loc) {
 <p><a href="/"><strong>${esc(t.cta)}</strong></a></p>
 <h2>${esc(t.gamesTitle)}</h2>
 <p>${esc(t.gamesSub)}</p>
-${samples.map((s) => `<h3><a href="${s.href}">${esc(s.title)}</a></h3><ul>${s.qs.map((q) => `<li>${esc(q)}</li>`).join('')}</ul>`).join('\n')}
+${samples.map((s) => `<h3><a href="${s.href}">${esc(s.title)}</a></h3>`).join('\n')}
 <h2>${esc(t.problemTitle)}</h2>
 <p>${esc(t.problemBody)}</p>
 <h2>${esc(t.insideTitle)}</h2>
@@ -110,12 +110,40 @@ ${t.inside.map(([h, d]) => `<h3>${esc(h)}</h3><p>${esc(d)}</p>`).join('\n')}
 </div>`;
 }
 
+
+// Legal pages ship their full text in the prerendered fallback: the real policy is
+// ~1500 words injected by legal-content.js, and crawlers without JS were seeing 20.
+let LEGAL_CACHE = null;
+function legalDocs() {
+  if (LEGAL_CACHE) return LEGAL_CACHE;
+  const w = {};
+  new Function('window', readFileSync('assets/legal-content.js', 'utf8'))(w);
+  LEGAL_CACHE = { privacy: w.PRIVACY || {}, terms: w.TERMS || {} };
+  return LEGAL_CACHE;
+}
+
+function legalBody(which, loc) {
+  const doc = legalDocs()[which] || {};
+  const sections = doc[loc] || [];
+  return sections.map((sec) => {
+    let out = sec.h ? `<h2>${esc(sec.h)}</h2>` : '';
+    out += (sec.b || []).map((bl) => {
+      if (bl[0] === 'h3') return `<h3>${esc(bl[1])}</h3>`;
+      if (bl[0] === 'ul') return `<ul>${(bl[1] || []).map((li) => `<li>${esc(li)}</li>`).join('')}</ul>`;
+      return `<p>${esc(bl[1])}</p>`;
+    }).join('');
+    return out;
+  }).join('\n');
+}
+
 function simplePrerender(s) {
   const loc = s.loc;
   const nav = loc === 'ru'
     ? [['Главная', `${SITE}/`], ['Игры', '/games'], ['Приватность', '/privacy-ru'], ['Условия', '/terms-ru']]
     : [['Home', `${SITE}/`], ['Games', '/games'], ['About', '/about'], ['Support', '/support'], ['Privacy', '/privacy'], ['Terms', '/terms']];
   const heading = s.title.split(/ — |—/)[0];
+  const legalKind = /^privacy/.test(s.file) ? 'privacy' : (/^terms/.test(s.file) ? 'terms' : null);
+  const legalText = legalKind ? legalBody(legalKind, loc) : '';
   const faq = (s.faq && s.faq !== 'games')
     ? `<h2>${loc === 'ru' ? 'Частые вопросы' : 'Frequently asked questions'}</h2>\n${faqHtml(FAQ_SUPPORT[loc])}`
     : '';
@@ -123,6 +151,7 @@ function simplePrerender(s) {
 <nav>${nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(heading)}</h1>
 <p>${esc(s.description)}</p>
+${legalText}
 ${faq}
 <p><a href="/">Clinky</a></p>
 </div>`;
@@ -165,10 +194,15 @@ function jsonld(s) {
   const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
   const website = {
     '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Clinky',
-    inLanguage: s.loc,
+    inLanguage: 'en',
+    publisher: { '@id': `${SITE}/#org` },
     description: 'Clinky is an iOS app for hangouts with friends: question cards, a log of every meet-up and a 3D drink for each clink.'
   };
-  const graph = [website];
+  const organization = {
+    '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Clinky', url: `${SITE}/`,
+    logo: { '@type': 'ImageObject', url: `${SITE}/assets/clinky-icon.png`, width: 512, height: 512 }
+  };
+  const graph = [website, organization];
   if (s.home) {
     graph.push({
       '@type': 'MobileApplication', '@id': `${SITE}/#app`, name: 'Clinky',
@@ -176,7 +210,11 @@ function jsonld(s) {
       url: `${SITE}/`, image: `${SITE}/assets/og-image.jpg`,
       description: 'Track who you meet, play party-game question cards and collect a 3D drink for every clink. Offline-first, no accounts.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      publisher: { '@type': 'Organization', name: 'Clinky', url: `${SITE}/` }
+      publisher: { '@id': `${SITE}/#org` }
+    });
+    graph.push({
+      '@type': 'WebPage', '@id': canonical, url: canonical, name: s.title,
+      description: s.description, inLanguage: s.loc, isPartOf: { '@id': `${SITE}/#website` }
     });
   } else {
     graph.push({
