@@ -96,7 +96,7 @@
       gamesPageTitle: 'Игры для компании',
       gamesPageSub: 'Выбери игру и полистай настоящие карточки из приложения.',
       howTitle: 'Как играть', stepLabel: 'Шаг',
-      playTitle: 'Играть в «{game}» онлайн', playSub: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+      playTitle: 'Играть в {game} онлайн', playSub: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
       playNext: 'Дальше', playLeft: 'осталось карточек сегодня: {n}', playHint: 'Бесплатные карточки обновляются каждый день',
       playLoading: 'Тасуем колоду…',
       playDoneTitle: 'На сегодня колода закончилась',
@@ -439,7 +439,7 @@
     var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
       '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:1 1 0;min-width:0;justify-content:flex-start;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
+        '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
       '<nav class="nav-mid" style="display:flex;align-items:center;gap:4px;flex:0 1 auto;min-width:0;justify-content:center">' +
@@ -478,7 +478,7 @@
       '<div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
         '<div style="max-width:300px">' +
           '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">' +
-            '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
+            '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
             '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;color:#1c1326">Clinky</span>' +
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">' + esc(t.slogan) + '</p>' +
@@ -546,7 +546,7 @@
       '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
-            '<img src="assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+            '<img src="/assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
           '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
             '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
@@ -599,8 +599,8 @@
     '</section>';
 
     // ---- feature bento (Sheepy-style tilted compositions) ----
-    function bshot(n) { return 'assets/shots/en-' + n + '.jpg'; } // TODO swap to assets/bento/* finals
-    var capImg = 'assets/bento/drink.png';
+    function bshot(n) { return '/assets/shots/en-' + n + '.jpg'; } // TODO swap to assets/bento/* finals
+    var capImg = '/assets/bento/drink.png';
     function L2(ru, en) { return L === 'ru' ? ru : en; }
     var FC = {
       ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Рулетка», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. "Never Have I Ever", "Roulette", "Tell a Moment" and "Would You Rather", four games in all.') },
@@ -639,7 +639,7 @@
     }
     var ibThemes = ['nhi', 'rou', 'tam', 'wyr'];
     var ibDeckImgs = ibThemes.map(function (th) {
-      return '<img class="ibd-card" src="assets/bento/ib-' + th + '-' + L + '.png" loading="lazy" alt="" draggable="false" style="position:absolute;left:0;top:0;width:100%;transform-origin:center;user-select:none;-webkit-user-drag:none">';
+      return '<img class="ibd-card" src="/assets/bento/ib-' + th + '-' + L + '.png" loading="lazy" alt="" draggable="false" style="position:absolute;left:0;top:0;width:100%;transform-origin:center;user-select:none;-webkit-user-drag:none">';
     }).join('');
     var cellIce = '<div class="bento-card" style="grid-column:1/3;grid-row:1/3;position:relative;overflow:hidden;padding:26px">' +
         bHead(FC.ic, '84%') +
@@ -651,20 +651,20 @@
       '</div>';
     var cellStr = '<div class="bento-card" style="grid-column:3/4;grid-row:2/3;position:relative;overflow:hidden;padding:20px">' +
         bHead(FC.str, '100%') +
-        '<img src="assets/bento/streak-' + L + '.png?v=3" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
+        '<img src="/assets/bento/streak-' + L + '.png?v=3" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;bottom:14px;width:212px;transform:translateX(-50%);filter:drop-shadow(0 5px 6px rgba(28,19,38,.20)) drop-shadow(0 13px 16px rgba(28,19,38,.10));z-index:1">' +
       '</div>';
     var cellAch = '<div class="bento-card" style="grid-column:4/5;grid-row:2/3;position:relative;overflow:visible;padding:20px;z-index:2">' +
         bHead(FC.ach, '100%') +
-        '<img src="assets/bento/ach-' + L + '.png?v=5" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
+        '<img src="/assets/bento/ach-' + L + '.png?v=5" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-18px;bottom:44px;width:262px;transform:rotate(-4deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:1">' +
       '</div>';
     var cellAn = '<div class="bento-card" style="grid-column:1/3;grid-row:3/4;position:relative;overflow:visible;padding:26px;z-index:2">' +
         bHead(FC.an, '100%', '185px') +
-        '<img src="assets/bento/donut-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
-        '<img src="assets/bento/chart-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
+        '<img src="/assets/bento/donut-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;left:30px;bottom:-30px;width:226px;transform:rotate(-3deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.18)) drop-shadow(0 13px 16px rgba(28,19,38,.09));z-index:2">' +
+        '<img src="/assets/bento/chart-' + L + '.png" loading="lazy" alt="" class="bento-media" style="position:absolute;right:-12px;bottom:-14px;width:300px;transform:rotate(2deg);filter:drop-shadow(0 5px 6px rgba(28,19,38,.16)) drop-shadow(0 13px 16px rgba(28,19,38,.08));z-index:3">' +
       '</div>';
     var cellRem = '<div class="bento-card" style="grid-column:3/5;grid-row:3/4;position:relative;overflow:hidden;padding:24px">' +
         bHead(FC.rem, '100%') +
-        '<img src="assets/bento/notif-' + L + '.png" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
+        '<img src="/assets/bento/notif-' + L + '.png" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
       '</div>';
     var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
@@ -702,7 +702,7 @@
         sparkle({ s: 20, pos: 'top:40%;left:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
         sparkle({ s: 16, pos: 'top:46%;right:9%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.6s ease-in-out .5s infinite' }) +
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
-          '<img src="assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
+          '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
           '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
           '<div id="wl2">' + waitlistForm() + '</div>' +
@@ -817,8 +817,12 @@
   function deckCards() {
     var d = window.CLINKY_WEB_DECK;
     if (!d) return [];
-    var game = (PLAY_SLUGS[state.playSlug] || {}).id || 'never_have_i';
-    return (d.games[game] || {})[state.lang] || [];
+    var meta = PLAY_SLUGS[state.playSlug] || {};
+    var g = d.games[meta.id || 'never_have_i'] || {};
+    var list = g[state.lang] || [];
+    if (!g.names) return list;
+    var n = g.names[state.lang] || g.names.en || ['A', 'B'];
+    return list.map(function (q) { return q.replace(/\{A\}/g, n[0]).replace(/\{B\}/g, n[1]); });
   }
   var _deckLoading = false;
   function ensureDeck(cb) {
@@ -859,14 +863,20 @@
     '</div>';
   }
 
+  var GAME_TITLE_CASE = {
+    ru: { never_have_i: '«Я никогда не»', roulette: '«Рулетку»', tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»' },
+    en: { never_have_i: 'Never Have I Ever', roulette: 'Roulette', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
+  };
   function renderPlay() {
     var t = tdict(), meta = PLAY_SLUGS[state.playSlug] || {};
-    var gameTitle = GAMES[0].title[state.lang];
+    var gi = typeof meta.game === 'number' ? meta.game : 0;
+    if (state.gameIndex !== gi) state.gameIndex = gi;
+    var gameTitle = (GAME_TITLE_CASE[state.lang] || {})[meta.id] || GAMES[gi].title[state.lang];
     ensureDeck(function () { var m = document.getElementById('playMount'); if (m) m.innerHTML = renderPlayCard(); });
     return '<div class="page-in">' +
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div style="max-width:760px;margin:0 auto;text-align:center">' +
-          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(0, C, 26) + '</span>' +
+          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, C, 26) + '</span>' +
           h2sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
         '</div>' +
       '</section>' +
@@ -905,7 +915,7 @@
       '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(36px,5vh,56px);text-align:center;overflow:hidden">' +
         sparkle({ s: 20, pos: 'top:24%;left:16%', op: 0.45, c: '#FF4F62', glow: 'rgba(255,79,98,.3)' }) +
         sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
-        '<img src="assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
+        '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px;color:#1c1326">' + esc(t.aboutTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
@@ -955,7 +965,7 @@
     if (_legalLoading) return;
     _legalLoading = true;
     var sc = document.createElement('script');
-    sc.src = 'assets/legal-content.min.js';
+    sc.src = '/assets/legal-content.min.js';
     sc.onload = function () { _legalLoading = false; cb(); };
     sc.onerror = function () { _legalLoading = false; };
     document.head.appendChild(sc);
@@ -1268,8 +1278,14 @@
   }
   var PAGES = { home: 1, games: 1, play: 1, about: 1, support: 1, privacy: 1, terms: 1 };
   var PLAY_SLUGS = {
-    'never-have-i-ever': { id: 'never_have_i', lang: 'en' },
-    'ya-nikogda-ne': { id: 'never_have_i', lang: 'ru' }
+    'never-have-i-ever': { id: 'never_have_i', lang: 'en', game: 0 },
+    'ya-nikogda-ne': { id: 'never_have_i', lang: 'ru', game: 0 },
+    'roulette': { id: 'roulette', lang: 'en', game: 1 },
+    'ruletka': { id: 'roulette', lang: 'ru', game: 1 },
+    'questions-to-ask-friends': { id: 'tell_a_moment', lang: 'en', game: 2 },
+    'voprosy-druzyam': { id: 'tell_a_moment', lang: 'ru', game: 2 },
+    'would-you-rather': { id: 'would_you_rather', lang: 'en', game: 3 },
+    'chto-vyberesh': { id: 'would_you_rather', lang: 'ru', game: 3 }
   };
   // clean path routing (no hash): / , /about , /support , /privacy , /terms (+ -ru entry variants)
   function pathSegment() {

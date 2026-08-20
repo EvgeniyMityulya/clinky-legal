@@ -19,6 +19,42 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://clinkyapp.com/play/roulette</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/ruletka"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/roulette"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/play/ruletka</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/roulette"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/ruletka"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/play/questions-to-ask-friends</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/voprosy-druzyam"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/questions-to-ask-friends"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/play/voprosy-druzyam</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/questions-to-ask-friends"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/voprosy-druzyam"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/play/would-you-rather</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/chto-vyberesh"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/would-you-rather"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/play/chto-vyberesh</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/play/would-you-rather"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/play/chto-vyberesh"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://clinkyapp.com/ru/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/"/>

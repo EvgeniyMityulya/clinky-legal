@@ -118,6 +118,54 @@ export const SHELLS = [
     ogDescription: 'Тяни карточку, дальше всё сделает компания. Бесплатно, без регистрации.'
   },
   {
+    file: 'play/roulette.html', loc: 'en', path: '/play/roulette', altRu: '/ru/play/ruletka',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
+    title: 'Roulette Question Game Online — Free, No Sign-Up',
+    description: 'A question game about the people at your table: the card picks two friends and asks one about the other. Play free in your browser, no sign-up.',
+    ogTitle: 'Roulette — the question game about your own friends',
+    ogDescription: 'The card picks the pair. Play free in the browser.'
+  },
+  {
+    file: 'ru/play/ruletka.html', loc: 'ru', path: '/ru/play/ruletka', altEn: '/play/roulette',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
+    title: 'Игра «Рулетка» онлайн — вопросы про друзей, бесплатно',
+    description: 'Игра, где карточка сама выбирает двоих и спрашивает одного про другого. Играй бесплатно в браузере, без регистрации и установки.',
+    ogTitle: '«Рулетка» — вопросы про своих же друзей',
+    ogDescription: 'Карточка выбирает пару. Играй бесплатно в браузере.'
+  },
+  {
+    file: 'play/questions-to-ask-friends.html', loc: 'en', path: '/play/questions-to-ask-friends', altRu: '/ru/play/voprosy-druzyam',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
+    title: 'Questions to Ask Friends — Free Card Game Online',
+    description: 'Questions that ask for a story instead of a one-word answer. Tap for a new card, play free in your browser, no sign-up needed.',
+    ogTitle: 'Questions to ask friends — play online',
+    ogDescription: 'Ask for a moment, not an opinion. Free, no sign-up.'
+  },
+  {
+    file: 'ru/play/voprosy-druzyam.html', loc: 'ru', path: '/ru/play/voprosy-druzyam', altEn: '/play/questions-to-ask-friends',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
+    title: 'Вопросы друзьям онлайн — карточки для разговора, бесплатно',
+    description: 'Вопросы, на которые отвечают историей, а не одним словом. Жми и тяни новую карточку, бесплатно и без регистрации.',
+    ogTitle: 'Вопросы друзьям — играть онлайн',
+    ogDescription: 'Проси момент, а не мнение. Бесплатно, без регистрации.'
+  },
+  {
+    file: 'play/would-you-rather.html', loc: 'en', path: '/play/would-you-rather', altRu: '/ru/play/chto-vyberesh',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'would_you_rather',
+    title: 'Would You Rather Online — Free Cards, No Sign-Up',
+    description: 'Would You Rather with two options that both cost something, so the table actually argues. Play free in your browser, nothing to install.',
+    ogTitle: 'Would You Rather — play online, free',
+    ogDescription: 'Both options hurt a little. That is the point.'
+  },
+  {
+    file: 'ru/play/chto-vyberesh.html', loc: 'ru', path: '/ru/play/chto-vyberesh', altEn: '/play/would-you-rather',
+    robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'would_you_rather',
+    title: 'Играть в «Что выберешь» онлайн — карточки бесплатно',
+    description: 'Игра «Что выберешь», где у обоих вариантов есть цена, поэтому компания спорит всерьёз. Играй бесплатно в браузере, без установки.',
+    ogTitle: '«Что выберешь» — играть онлайн, бесплатно',
+    ogDescription: 'Оба варианта немного больно. В этом и смысл.'
+  },
+  {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,
     title: 'Page Not Found — Clinky',
     description: 'That page does not exist. Head back to the Clinky home page or browse the free question packs.',

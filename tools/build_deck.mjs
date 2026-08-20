@@ -6,6 +6,7 @@ import { WEB_DECK, DECK_LIMIT } from './web_deck.mjs';
 const payload = { limit: DECK_LIMIT, games: {} };
 for (const [id, g] of Object.entries(WEB_DECK)) {
   payload.games[id] = { slug: g.slug, en: g.en, ru: g.ru };
+  if (g.names) payload.games[id].names = g.names;
 }
 
 writeFileSync('assets/web-deck.js',
