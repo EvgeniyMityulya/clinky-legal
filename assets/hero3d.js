@@ -268,5 +268,14 @@ window.ClinkyHero = {
   isReady: function () { return !!renderer; }
 };
 
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
-else init();
+// The 3D hero is decorative: start it only after first paint so it never delays
+// LCP. three.js, the HDR env map and the models are ~2.8 MB combined.
+function boot() {
+  var start = function () {
+    if (window.requestIdleCallback) requestIdleCallback(init, { timeout: 1200 });
+    else setTimeout(init, 200);
+  };
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start, { once: true });
+}
+boot();

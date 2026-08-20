@@ -266,6 +266,26 @@ for (const s of SHELLS) {
     html = html.replace(new RegExp('(["\'])' + ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g'), `$1${ref}?v=${v}$1`);
   }
 
+
+  // external CSS must not block first paint: preload + swap media on load
+  const NONBLOCKING = [
+    'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap',
+    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css',
+    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css',
+    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css'
+  ];
+  for (const href of NONBLOCKING) {
+    const esc = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const blocking = new RegExp('<link href="' + esc + '" rel="stylesheet">|<link rel="stylesheet" href="' + esc + '">', 'g');
+    html = html.replace(blocking,
+      `<link rel="preload" as="style" href="${href}">` +
+      `<link rel="stylesheet" href="${href}" media="print" onload="this.media='all'">`);
+  }
+  if (!/unpkg\.com" crossorigin/.test(html)) {
+    html = html.replace('<link rel="preconnect" href="https://fonts.googleapis.com">',
+      '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://unpkg.com" crossorigin>');
+  }
+
   writeFileSync(s.file, html);
   console.log(`patched ${s.file.padEnd(16)} ${(html.length / 1024).toFixed(1)} KB`);
 }
