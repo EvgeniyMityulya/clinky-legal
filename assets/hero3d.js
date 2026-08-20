@@ -313,7 +313,7 @@ function dropPlaceholder() {
 function wantsLightHero() {
   if (window.innerWidth < 900) return true;
   const c = navigator.connection;
-  if (c && (c.saveData || /2g|slow-2g|3g/.test(c.effectiveType || ''))) return true;
+  if (c && (c.saveData || /^(slow-2g|2g)$/.test(c.effectiveType || ''))) return true;
   return (navigator.hardwareConcurrency || 8) <= 4;
 }
 

@@ -429,11 +429,11 @@
     var join = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;font-family:Nunito,sans-serif;white-space:nowrap;transition:transform .2s;background:#FF4F62;color:#fff;box-shadow:0 8px 18px -8px rgba(255,79,98,.7)';
     var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
-      '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:none;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
+      '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:1 1 0;min-width:0;justify-content:flex-start;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
         '<img src="assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
-      '<nav class="nav-mid" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px">' +
+      '<nav class="nav-mid" style="display:flex;align-items:center;gap:4px;flex:0 1 auto;min-width:0;justify-content:center">' +
         '<button data-act="home" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
         '<button data-act="games" style="' + navPill(p === 'games') + '">' + esc(t.navGames) + '</button>' +
         '<button data-act="about" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
@@ -442,7 +442,7 @@
         '<button data-act="privacy" class="nav-legal" style="' + navPill(p === 'privacy') + '">' + esc(t.navPrivacy) + '</button>' +
         '<button data-act="terms" class="nav-legal" style="' + navPill(p === 'terms') + '">' + esc(t.navTerms) + '</button>' +
       '</nav>' +
-      '<div style="display:flex;align-items:center;gap:10px;flex:none;margin-left:auto">' +
+      '<div style="display:flex;align-items:center;gap:10px;flex:1 1 0;min-width:0;justify-content:flex-end">' +
         '<button data-act="join" class="join-cta" style="' + join + '">' + esc(t.navJoin) + '</button>' +
         '<div style="' + seg + '">' +
           '<button data-act="en" style="' + langSeg(state.lang === 'en') + '">EN</button>' +
@@ -853,10 +853,23 @@
   }
 
   // ===== LEGAL =====
+  var _legalLoading = false;
+  function ensureLegalContent(cb) {
+    if (window.PRIVACY && window.TERMS) { cb(); return; }
+    if (_legalLoading) return;
+    _legalLoading = true;
+    var sc = document.createElement('script');
+    sc.src = 'assets/legal-content.js';
+    sc.onload = function () { _legalLoading = false; cb(); };
+    sc.onerror = function () { _legalLoading = false; };
+    document.head.appendChild(sc);
+  }
+
   function renderLegal(which) {
     var t = tdict();
     var title = which === 'privacy' ? t.privTitle : t.termsTitle;
     var src = (which === 'privacy' ? window.PRIVACY : window.TERMS) || {};
+    if (!src[state.lang]) { ensureLegalContent(function () { paint(); }); }
     var sections = src[state.lang] || [];
     var body = sections.map(function (sec) {
       var inner = '';

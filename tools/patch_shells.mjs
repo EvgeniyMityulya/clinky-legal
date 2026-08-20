@@ -289,6 +289,14 @@ for (const s of SHELLS) {
 
   html = html.replace('three@0.160.0/build/three.module.js', 'three@0.160.0/build/three.module.min.js');
 
+
+  const LEGAL_PAGES = new Set(['privacy.html', 'terms.html', 'privacy-ru.html', 'terms-ru.html']);
+  if (!LEGAL_PAGES.has(s.file)) {
+    html = html.replace(/\n?<script src="assets\/legal-content\.js(\?v=[a-f0-9]+)?"><\/script>/, '');
+  } else if (!/legal-content\.js/.test(html)) {
+    html = html.replace('<script src="assets/site.js', '<script src="assets/legal-content.js"></script>\n<script src="assets/site.js');
+  }
+
   writeFileSync(s.file, html);
   console.log(`patched ${s.file.padEnd(16)} ${(html.length / 1024).toFixed(1)} KB`);
 }
