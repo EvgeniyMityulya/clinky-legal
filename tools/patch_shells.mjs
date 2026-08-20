@@ -227,7 +227,7 @@ function seoBlock(s) {
   rows.push(`<script type="application/ld+json">${JSON.stringify(jsonld(s))}</script>`);
   rows.push(PRERENDER_CSS);
   rows.push("<script>document.documentElement.classList.add('motion-ready');setTimeout(function(){if(!window.clinkyInitReveals)document.documentElement.classList.remove('motion-ready')},1500)</script>");
-  rows.push(`<script defer src="/assets/motion.js?v=${assetVer('assets/motion.js')}"></script>`);
+  rows.push(`<script defer src="/assets/motion.min.js?v=${assetVer('assets/motion.min.js')}"></script>`);
   if (CF_BEACON) rows.push(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CF_BEACON}"}'></script>`);
   rows.push('<!-- seo:end -->');
   return rows.join('\n');
@@ -255,11 +255,25 @@ for (const s of SHELLS) {
   }
 
 
+
+  // shells load the minified twins (sources stay readable; run tools/minify.mjs after edits)
+  const MIN_MAP = [
+    ['assets/legal-content.js', 'assets/legal-content.min.js'],
+    ['assets/site.js', 'assets/site.min.js'],
+    ['assets/hero3d.js', 'assets/hero3d.min.js'],
+    ['assets/motion.js', 'assets/motion.min.js']
+  ];
+  for (const [plain, min] of MIN_MAP) {
+    const re = new RegExp(plain.replace('.', '\\.') + '(\\?v=[a-f0-9]+)?', 'g');
+    html = html.replace(re, min);
+  }
+
   const BUST = [
     ['assets/site.css', 'assets/site.css'],
-    ['assets/site.js', 'assets/site.js'],
-    ['assets/legal-content.js', 'assets/legal-content.js'],
-    ['assets/hero3d.js', 'assets/hero3d.js']
+    ['assets/site.min.js', 'assets/site.min.js'],
+    ['assets/legal-content.min.js', 'assets/legal-content.min.js'],
+    ['assets/hero3d.min.js', 'assets/hero3d.min.js'],
+    ['assets/motion.min.js', 'assets/motion.min.js']
   ];
   for (const [ref, file] of BUST) {
     const v = assetVer(file);

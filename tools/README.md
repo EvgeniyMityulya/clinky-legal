@@ -16,12 +16,17 @@ gets overwritten on the next build.
 ## Scripts
 
 ```bash
-node tools/build.mjs         # question hub + sitemap.xml + robots.txt
-node tools/patch_shells.mjs  # SPA shells: meta, canonical, JSON-LD, prerendered fallback
-node tools/patch_site_js.mjs # site.js: FAQ data, home FAQ section, links to the hub
+node tools/build.mjs         # sitemap.xml + robots.txt
+node tools/patch_site_js.mjs # site.js: FAQ data, games page wiring
+node tools/minify.mjs        # assets/*.js -> assets/*.min.js (shells load the minified twins)
+node tools/patch_shells.mjs  # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
 ```
 
-All three are idempotent, so running them twice changes nothing. Run all three after touching any source.
+Order matters: patch the sources first, minify, then patch the shells so the version hashes
+match the files that ship. All four scripts are idempotent.
+
+`assets/*.js` stay readable and are the files you edit. `assets/*.min.js` are generated
+and referenced by the shells, so a source edit without `minify.mjs` will not reach the site.
 
 ## Refreshing the questions
 

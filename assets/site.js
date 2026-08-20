@@ -453,8 +453,8 @@
         '</button>' +
       '</div>' +
       (state.menuOpen ? '<div class="nav-menu" style="position:absolute;top:calc(100% + 8px);right:clamp(14px,3.5vw,40px);left:clamp(14px,3.5vw,40px);background:#fff;border:1px solid #ece7ec;border-radius:18px;box-shadow:0 18px 40px -18px rgba(28,19,38,.3);padding:8px;display:flex;flex-direction:column;gap:2px;z-index:70;animation:popIn .2s ease both">' +
-        ['home', 'about', 'support', 'privacy', 'terms'].map(function (pg) {
-          var label = { home: t.navHome, about: t.navAbout, support: t.navSupport, privacy: t.navPrivacy, terms: t.navTerms }[pg];
+        ['home', 'games', 'about', 'support', 'privacy', 'terms'].map(function (pg) {
+          var label = { home: t.navHome, games: t.navGames, about: t.navAbout, support: t.navSupport, privacy: t.navPrivacy, terms: t.navTerms }[pg];
           var on = p === pg;
           return '<button data-act="' + pg + '" style="text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326') + '">' + esc(label) + '</button>';
         }).join('') +
@@ -859,7 +859,7 @@
     if (_legalLoading) return;
     _legalLoading = true;
     var sc = document.createElement('script');
-    sc.src = 'assets/legal-content.js';
+    sc.src = 'assets/legal-content.min.js';
     sc.onload = function () { _legalLoading = false; cb(); };
     sc.onerror = function () { _legalLoading = false; };
     document.head.appendChild(sc);
