@@ -838,26 +838,43 @@
 
   function renderPlayCard() {
     var t = tdict(), cards = deckCards(), st = deckState(), limit = deckLimit();
-    if (!cards.length) return '<p style="text-align:center;color:#a99ea6;font-size:14px">' + esc(t.playLoading) + '</p>';
+    var meta = PLAY_SLUGS[state.playSlug] || {};
+    var gi = typeof meta.game === 'number' ? meta.game : 0;
+    if (!cards.length) {
+      return '<div style="max-width:430px;margin:0 auto;text-align:center;padding:40px 0;color:#a99ea6;font-size:14px">' + esc(t.playLoading) + '</div>';
+    }
     if (st.used >= limit) {
-      return '<div class="soft-card" style="padding:32px 28px;text-align:center;border-radius:30px">' +
-        '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(20px,2.6vw,26px);color:#1c1326;margin-bottom:10px">' + esc(t.playDoneTitle) + '</div>' +
-        '<p style="font-size:15.5px;color:#6b6b76;margin:0 auto 22px;max-width:26em">' + esc(t.playDoneBody) + '</p>' +
-        coralBtn(t.heroCta, 'join') +
+      return '<div style="max-width:430px;margin:0 auto">' +
+        '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:38px 30px 32px;text-align:center">' +
+          '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:16px">' +
+            '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#E11D48', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
+          '</div>' +
+          '<p style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(19px,2.4vw,23px);line-height:1.25;letter-spacing:-.3px;margin:0 0 10px;color:#1c1326">' + esc(t.playDoneTitle) + '</p>' +
+          '<p style="font-size:15px;line-height:1.55;color:#6b6b76;margin:0 auto 22px;max-width:24em">' + esc(t.playDoneBody) + '</p>' +
+          coralBtn(t.heroCta, 'join') +
+        '</div>' +
       '</div>';
     }
     var idx = state.playIndex % cards.length;
-    return '<div class="qcard" style="max-width:430px;margin:0 auto">' +
-      '<div class="qbody" style="position:relative;min-height:132px;display:flex;align-items:center;justify-content:center;margin:6px 0 16px;padding:0 14px">' +
-        '<p id="playLine" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;color:#1c1326">' + esc(cards[idx]) + '</p>' +
-      '</div>' +
-      '<div class="qfoot" style="border-top:1px solid #e9e6ec;padding-top:16px">' +
-        '<p class="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin:0 0 5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</p>' +
-        '<div class="qnav" style="display:flex;align-items:center;justify-content:center;gap:20px;margin-top:10px">' +
-          '<button data-act="playnext" class="qbtn next" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
-            '<span class="circle" style="width:62px;height:62px;border-radius:50%;background:#FF4F62;color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 24, '#fff', 'ph-bold') + '</span>' +
-            '<span class="lbl" style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.playNext) + '</span>' +
-          '</button>' +
+    return '<div style="max-width:430px;margin:0 auto">' +
+      '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
+        '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
+          '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#E11D48', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
+        '</div>' +
+        '<div style="position:relative;min-height:132px;display:flex;align-items:center;justify-content:center;margin:8px 0 16px;padding:0 14px">' +
+          '<span style="position:absolute;top:-8px;left:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201C</span>' +
+          '<p id="playLine" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;color:#1c1326;text-wrap:pretty">' + esc(cards[idx]) + '</p>' +
+          '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201D</span>' +
+        '</div>' +
+        '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
+          '<div style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
+          '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
+          '<div style="display:flex;align-items:center;justify-content:center">' +
+            '<button data-act="playnext" aria-label="' + esc(t.playNext) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
+              '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 24, '#fff', 'ph-bold') + '</span>' +
+              '<span style="font-size:13px;font-weight:700;color:#FF4F62">' + esc(t.playNext) + '</span>' +
+            '</button>' +
+          '</div>' +
         '</div>' +
       '</div>' +
     '</div>';
@@ -882,7 +899,6 @@
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
         '<div id="playMount">' + renderPlayCard() + '</div>' +
-        '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.playHint) + '</p>' +
       '</section>' +
       '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
         '<div style="max-width:720px;margin:0 auto">' +
