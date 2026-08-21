@@ -1,7 +1,7 @@
 // Notifies Bing and Yandex about new or changed URLs. Reads the sitemap so the
 // list never drifts from what we actually publish.
 import { readFileSync } from 'node:fs';
-import { INDEXNOW_KEY } from './build.mjs';
+import { INDEXNOW_KEY } from './indexnow_key.mjs';
 
 const HOST = 'clinkyapp.com';
 const urls = [...readFileSync('sitemap.xml', 'utf8').matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);

@@ -1,0 +1,1 @@
+export const INDEXNOW_KEY = 'd92b1e700180336a96b7902c7da91d49';

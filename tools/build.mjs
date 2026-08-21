@@ -1,6 +1,5 @@
 import { writeFileSync } from 'node:fs';
 
-export const INDEXNOW_KEY = 'd92b1e700180336a96b7902c7da91d49';
 const SITE = 'https://clinkyapp.com';
 const PAGES = [
   { path: 'games', pri: '0.9' },
