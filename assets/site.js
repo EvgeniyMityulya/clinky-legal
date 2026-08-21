@@ -56,6 +56,7 @@
       playDoneTitle: 'That is today\u2019s deck',
       playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
+      aboutPillarsTitle: 'What the app does',
       aboutStoryTitle: 'Why does this exist?',
       aboutStory1: 'We see our friends a lot, at home and in bars, and there is almost always someone new at the table. The first twenty minutes go on traffic and weather while the evening quietly waits to start.',
       aboutStory2: 'Clinky came out of a trick we kept using. Someone would pull a random question, read it out loud, and the conversation started on its own. The app does that part now, and it also remembers who we have seen lately, so a rare meet-up does not turn into a year of silence.',
@@ -113,6 +114,7 @@
       playDoneTitle: 'На сегодня колода закончилась',
       playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
+      aboutPillarsTitle: 'Что умеет приложение',
       aboutStoryTitle: 'Зачем это всё?',
       aboutStory1: 'Мы часто собираемся с друзьями, дома и в барах, и почти всегда за столом оказывается кто-то новый. Первые двадцать минут уходят на пробки и погоду, хотя вечер задумывался совсем не про это.',
       aboutStory2: 'Clinky вырос из приёма, которым мы пользовались и так. Кто-то вытягивал случайный вопрос, читал его вслух, и разговор запускался сам. Теперь эту часть делает приложение, а заодно помнит, с кем мы виделись недавно, чтобы редкая встреча не превратилась в год тишины.',
@@ -1124,6 +1126,7 @@
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
       '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
+        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 auto clamp(18px,2.6vh,26px);max-width:980px;color:#1c1326">' + esc(t.aboutPillarsTitle) + '</h2>' +
         '<div style="max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
@@ -1173,7 +1176,7 @@
       var l = AUTHOR_LINKS[i];
       var mark = brandIcon(l.icon, 18, l.color || '#FF4F62') || ph(l.icon, 18, '#FF4F62', 'ph-fill');
       var text = (state.lang === 'en' && l.handleEn) ? l.handleEn : (l.handle || l.label);
-      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" aria-label="' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
+      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" aria-label="' + esc(text) + ', ' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
     }
     return out.join('');
   }
