@@ -1,0 +1,396 @@
+{
+  "/": {
+    "status": 200,
+    "title": "Clinky — Party Question Games for Friends",
+    "description": "Four question games that get any table talking, a log of every meet-up, and a 3D drink for each clink. Free iOS app, coming soon.",
+    "canonical": "https://clinkyapp.com/",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Turn hangouts into a game",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "MobileApplication",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 196
+  },
+  "/play/never-have-i-ever": {
+    "status": 200,
+    "title": "Never Have I Ever Online — Free Cards, No Sign-Up",
+    "description": "Play Never Have I Ever in your browser: tap for a fresh card, no sign-up, nothing to install. Rules, a no-drinking version and a new set of cards every day.",
+    "canonical": "https://clinkyapp.com/play/never-have-i-ever",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Play Never Have I Ever online",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 509
+  },
+  "/ru/play/ya-nikogda-ne": {
+    "status": 200,
+    "title": "Играть в «Я никогда не» онлайн — карточки бесплатно",
+    "description": "Играй в «Я никогда не» прямо в браузере: жми и тяни новую карточку, без регистрации и установки. Правила, версия без алкоголя и новые карточки каждый день.",
+    "canonical": "https://clinkyapp.com/ru/play/ya-nikogda-ne",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Играть в «Я никогда не» онлайн",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 399
+  },
+  "/play/roulette": {
+    "status": 200,
+    "title": "Roulette Question Game Online — Free, No Sign-Up",
+    "description": "A question game about the people at your table: the card picks two friends and asks one about the other. Play free in your browser, no sign-up.",
+    "canonical": "https://clinkyapp.com/play/roulette",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Play Roulette online",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 473
+  },
+  "/ru/play/ruletka": {
+    "status": 200,
+    "title": "Игра «Рулетка» онлайн — вопросы про друзей, бесплатно",
+    "description": "Игра, где карточка сама выбирает двоих и спрашивает одного про другого. Играй бесплатно в браузере, без регистрации и установки.",
+    "canonical": "https://clinkyapp.com/ru/play/ruletka",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Играть в «Рулетку» онлайн",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 390
+  },
+  "/play/questions-to-ask-friends": {
+    "status": 200,
+    "title": "Questions to Ask Friends — Free Card Game Online",
+    "description": "Questions that ask for a story instead of a one-word answer. Tap for a new card, play free in your browser, no sign-up needed.",
+    "canonical": "https://clinkyapp.com/play/questions-to-ask-friends",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Play Questions to Ask Friends online",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 474
+  },
+  "/ru/play/voprosy-druzyam": {
+    "status": 200,
+    "title": "Вопросы друзьям онлайн — карточки для разговора, бесплатно",
+    "description": "Вопросы, на которые отвечают историей, а не одним словом. Жми и тяни новую карточку, бесплатно и без регистрации.",
+    "canonical": "https://clinkyapp.com/ru/play/voprosy-druzyam",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Играть в «Расскажи момент» онлайн",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 371
+  },
+  "/play/would-you-rather": {
+    "status": 200,
+    "title": "Would You Rather Online — Free Cards, No Sign-Up",
+    "description": "Would You Rather with two options that both cost something, so the table actually argues. Play free in your browser, nothing to install.",
+    "canonical": "https://clinkyapp.com/play/would-you-rather",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Play Would You Rather online",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 460
+  },
+  "/ru/play/chto-vyberesh": {
+    "status": 200,
+    "title": "Играть в «Что выберешь» онлайн — карточки бесплатно",
+    "description": "Игра «Что выберешь», где у обоих вариантов есть цена, поэтому компания спорит всерьёз. Играй бесплатно в браузере, без установки.",
+    "canonical": "https://clinkyapp.com/ru/play/chto-vyberesh",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Играть в «Что выберешь» онлайн",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 364
+  },
+  "/ru/": {
+    "status": 200,
+    "title": "Clinky — игры с вопросами для компании друзей",
+    "description": "Четыре игры с вопросами, которые разговорят любую компанию, счётчик встреч и 3D-напиток за каждый «чок». Бесплатное приложение для iPhone, скоро в App Store.",
+    "canonical": "https://clinkyapp.com/ru/",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Преврати встречи в игру",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "MobileApplication",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 144
+  },
+  "/games": {
+    "status": 200,
+    "title": "Party Question Games for Friends — Clinky",
+    "description": "Four question games you can start at any table. Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather, each with its own rules, cards and no sign-up.",
+    "canonical": "https://clinkyapp.com/games",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Games for any table",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 297
+  },
+  "/about": {
+    "status": 200,
+    "title": "About Clinky — An App for Friendships Worth Keeping",
+    "description": "Why we built Clinky: an offline-first iOS app that helps you see your friends more often and gives every get-together a game worth playing.",
+    "canonical": "https://clinkyapp.com/about",
+    "robots": "index,follow",
+    "h1": "About Clinky",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 33
+  },
+  "/support": {
+    "status": 200,
+    "title": "Clinky Support — Report a Bug or Send an Idea",
+    "description": "Found a bug in Clinky or have an idea for a question pack? Write to the team. We read everything and usually reply within a day.",
+    "canonical": "https://clinkyapp.com/support",
+    "robots": "index,follow",
+    "h1": "Clinky Support",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 170
+  },
+  "/privacy": {
+    "status": 200,
+    "title": "Privacy Policy — Clinky",
+    "description": "How Clinky handles your data. The app is offline-first with no accounts, so your meet-ups and friends stay on your device.",
+    "canonical": "https://clinkyapp.com/privacy",
+    "robots": "index,follow",
+    "h1": "Privacy Policy",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 1840
+  },
+  "/terms": {
+    "status": 200,
+    "title": "Terms of Use — Clinky",
+    "description": "The terms that apply when you use Clinky, the iOS app for tracking meet-ups with friends and playing question cards together.",
+    "canonical": "https://clinkyapp.com/terms",
+    "robots": "index,follow",
+    "h1": "Terms of Use",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 1575
+  },
+  "/ru/games": {
+    "status": 200,
+    "title": "Игры для компании: вопросы для вечера с друзьями — Clinky",
+    "description": "Четыре игры с вопросами для компании: «Я никогда не», «Рулетка», «Расскажи момент», «Что выберешь». Правила, примеры карточек и как играть без алкоголя.",
+    "canonical": "https://clinkyapp.com/ru/games",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Игры для компании",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 237
+  },
+  "/ru/about": {
+    "status": 200,
+    "title": "О Clinky — приложение, чтобы не терять друзей",
+    "description": "Зачем мы сделали Clinky: приложение для iPhone, которое помогает видеться с друзьями чаще и превращает встречи в игру. Работает офлайн, без аккаунтов.",
+    "canonical": "https://clinkyapp.com/ru/about",
+    "robots": "index,follow",
+    "h1": "О Clinky",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 29
+  },
+  "/ru/support": {
+    "status": 200,
+    "title": "Поддержка Clinky — вопросы и связь с командой",
+    "description": "Нашёл баг или есть идея для новой игры? Напиши нам. Здесь же ответы на частые вопросы: лимиты, офлайн-режим, что с данными.",
+    "canonical": "https://clinkyapp.com/ru/support",
+    "robots": "index,follow",
+    "h1": "Поддержка Clinky",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 138
+  },
+  "/ru/privacy": {
+    "status": 200,
+    "title": "Политика конфиденциальности — Clinky",
+    "description": "Как Clinky обращается с твоими данными. Приложение работает офлайн и без аккаунтов, поэтому встречи и друзья остаются на устройстве.",
+    "canonical": "https://clinkyapp.com/ru/privacy",
+    "robots": "index,follow",
+    "h1": "Политика конфиденциальности",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 1703
+  },
+  "/ru/terms": {
+    "status": 200,
+    "title": "Условия использования — Clinky",
+    "description": "Условия, которые действуют при использовании Clinky, приложения для встреч с друзьями и карточек с вопросами.",
+    "canonical": "https://clinkyapp.com/ru/terms",
+    "robots": "index,follow",
+    "h1": "Условия использования",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 1420
+  }
+}

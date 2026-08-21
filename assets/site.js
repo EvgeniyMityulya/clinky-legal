@@ -287,7 +287,7 @@
     return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + body + '</p>';
   }
   function coralBtn(label, act, extra) {
-    return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
+    return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#E11D48;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
   }
   function renderQcount() {
     var len = GAMES[state.gameIndex].q.length;
@@ -298,7 +298,7 @@
   // segmented / pill styles
   function navPill(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:8px 15px;font-weight:700;font-size:14px;white-space:nowrap;transition:all .22s;font-family:DM Sans,sans-serif;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 16px -6px rgba(255,79,98,.6);' : b + 'background:transparent;color:#6b6b76;';
+    return active ? b + 'background:#E11D48;color:#fff;box-shadow:0 6px 16px -6px rgba(255,79,98,.6);' : b + 'background:transparent;color:#6b6b76;';
   }
   function navCls(active) { return 'navpill' + (active ? ' is-on' : ''); }
   function gamesDropdown() {
@@ -318,15 +318,15 @@
   }
   function pill(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14.5px;transition:all .22s;display:inline-flex;align-items:center;gap:7px;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #e9e6ec;';
+    return active ? b + 'background:#E11D48;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #e9e6ec;';
   }
   function langSeg(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:6px 13px;font-weight:800;font-size:13px;transition:all .25s;';
-    return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 14px -6px rgba(255,79,98,.7);' : b + 'background:transparent;color:#6b6b76;';
+    return active ? b + 'background:#E11D48;color:#fff;box-shadow:0 6px 14px -6px rgba(255,79,98,.7);' : b + 'background:transparent;color:#6b6b76;';
   }
   function langSegDark(active) {
     var b = 'border:1px solid #e9e6ec;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
-    return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:#8a8190;';
+    return active ? b + 'background:#E11D48;color:#fff;border-color:#E11D48;' : b + 'background:transparent;color:#8a8190;';
   }
   function drinkToggle() {
     var t = tdict();
@@ -460,7 +460,7 @@
   function renderHeader() {
     var t = tdict(), p = state.page;
     var seg = 'display:flex;padding:4px;border-radius:999px;flex:none;background:rgba(28,19,38,.05);border:1px solid rgba(28,19,38,.08)';
-    var join = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;font-family:Nunito,sans-serif;white-space:nowrap;transition:transform .2s;background:#FF4F62;color:#fff;box-shadow:0 8px 18px -8px rgba(255,79,98,.7)';
+    var join = 'border:0;cursor:pointer;border-radius:999px;padding:9px 18px;font-weight:800;font-size:14px;font-family:Nunito,sans-serif;white-space:nowrap;transition:transform .2s;background:#E11D48;color:#fff;box-shadow:0 8px 18px -8px rgba(255,79,98,.7)';
     var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
       '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:1 1 0;min-width:0;justify-content:flex-start;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
@@ -554,7 +554,7 @@
     }
     var btn = onColor
       ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
-      : 'color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
+      : 'color:#fff;background:#E11D48;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
     return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:' + (left ? '0' : '0 auto') + ';flex-wrap:wrap">' +
         '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
         '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">' +
@@ -791,7 +791,7 @@
       steps.map(function (line, i) {
         return '<div class="soft-card" style="padding:18px 20px 20px;text-align:left">' +
           '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">' +
-            '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
+            '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#E11D48;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
             '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#E11D48">' + esc(t.stepLabel) + '</span>' +
           '</div>' +
           '<p style="margin:0;min-height:2.9em;font-size:15.5px;line-height:1.45;color:#6b6b76;text-wrap:balance">' + esc(line) + '</p>' +
@@ -1113,7 +1113,7 @@
           '<input name="contactName" required placeholder="' + esc(t.supName) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
-          '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
+          '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#E11D48;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
           '<p style="font-size:12.5px;color:#a99ea6;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
     var faqHtml = faqAccordion(FAQ[state.lang]);

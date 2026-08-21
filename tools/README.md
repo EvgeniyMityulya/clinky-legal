@@ -24,7 +24,13 @@ node tools/patch_site_js.mjs      # site.js: FAQ data, doc titles, games page wi
 node tools/minify.mjs             # assets/*.js -> assets/*.min.js (shells load the minified twins)
 node tools/patch_shells.mjs       # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
 node tools/indexnow.mjs           # tells Bing and Yandex what changed (run after the deploy is live)
+node tools/seo_baseline.mjs       # diffs the live pages against snapshots/seo-baseline.json
 ```
+
+`seo_baseline.mjs` walks every URL in the sitemap and compares title, description,
+canonical, robots, h1, hreflang, schema types and prerender length. It exits 1 when a
+high-severity field moved, so it fits a pre-deploy check. Re-run with `--save` after an
+intentional change, `--local` to check the preview server instead of the live site.
 
 `indexnow.mjs` reads sitemap.xml, so it stays in sync with what we publish. Pass a
 substring to submit only part of it, e.g. `node tools/indexnow.mjs /play/`. The key file
