@@ -3,6 +3,7 @@ import { createHash } from 'node:crypto';
 import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { SHELLS } from './shell_meta.mjs';
+import { ICON_PATHS } from './icons_data.mjs';
 
 const FILE = 'assets/site.js';
 let js = readFileSync(FILE, 'utf8');
@@ -61,6 +62,8 @@ if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
 
 const titles = Object.fromEntries(SHELLS.map((s) => [s.path, s.title]));
 js = js.replace(/  var DOC_TITLES = \{[^}]*\};/, '  var DOC_TITLES = ' + JSON.stringify(titles) + ';');
+
+js = js.replace(/  var ICON_PATHS = \{[^;]*\};/, '  var ICON_PATHS = ' + JSON.stringify(ICON_PATHS) + ';');
 
 // lazily loaded payloads need their own cache-busting, they are not in the shells
 const lazyVer = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8);

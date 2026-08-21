@@ -250,6 +250,12 @@ ${faqHtml(c.faq[loc])}
 </div>`;
 }
 
+function stripPhosphor(html) {
+  return html
+    .replace(/[ \t]*<link[^>]*phosphor-icons[^>]*>\s*\n?/g, '')
+    .replace(/[ \t]*<noscript>\s*<link[^>]*phosphor-icons[^>]*>\s*<\/noscript>\s*\n?/g, '');
+}
+
 function jsonld(s) {
   const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
   const canonicalForSchema = s.canonicalOverride ? `${SITE}${s.canonicalOverride}` : canonical;
@@ -383,12 +389,12 @@ for (const s of SHELLS) {
   }
 
 
+  // the icon fonts are gone, inline SVG replaced them
+  html = stripPhosphor(html);
+
   // external CSS must not block first paint: preload + swap media on load
   const NONBLOCKING = [
     'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap',
-    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css',
-    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/bold/style.css',
-    'https://unpkg.com/@phosphor-icons/web@2.1.1/src/fill/style.css'
   ];
   for (const href of NONBLOCKING) {
     const esc = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
