@@ -23,7 +23,12 @@ node tools/build_game_content.mjs # game_content.mjs -> assets/game-content.js
 node tools/patch_site_js.mjs      # site.js: FAQ data, doc titles, games page wiring
 node tools/minify.mjs             # assets/*.js -> assets/*.min.js (shells load the minified twins)
 node tools/patch_shells.mjs       # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
+node tools/indexnow.mjs           # tells Bing and Yandex what changed (run after the deploy is live)
 ```
+
+`indexnow.mjs` reads sitemap.xml, so it stays in sync with what we publish. Pass a
+substring to submit only part of it, e.g. `node tools/indexnow.mjs /play/`. The key file
+at the repo root must stay reachable at https://clinkyapp.com/<key>.txt.
 
 Order matters: build the data bundles and patch the sources first, minify, then patch the shells
 so the version hashes match the files that ship. Every script is idempotent.
