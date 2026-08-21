@@ -276,6 +276,7 @@
       esc(label) + '</span>';
   }
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
+  function h1sec(s) { return '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h1>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
   function subsec(s) { return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + esc(s) + '</p>'; }
   function coralBtn(label, act, extra) {
@@ -789,26 +790,11 @@
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(24px,4vh,34px)">' +
         '<div style="max-width:760px;margin:0 auto;text-align:center">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + icons().game + '</span>' +
-          h2sec(t.gamesPageTitle) + subsec(t.gamesPageSub) +
+          h1sec(t.gamesPageTitle) + subsec(t.gamesPageSub) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px)">' +
         '<div id="howWrap">' + renderHowStrip() + '</div>' +
-      '</section>' +
-      '<section style="padding:0 clamp(20px,5vw,72px) clamp(6px,1vh,14px)">' +
-        '<div style="max-width:960px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
-          GAMES.map(function (g, i) {
-            var href = playHrefFor(i, state.lang);
-            if (!href) return '';
-            return '<a href="' + href + '" class="soft-card" style="display:flex;align-items:center;gap:12px;padding:16px 18px;text-decoration:none">' +
-              '<span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + gameIcon(i, '#E11D48', 18) + '</span>' +
-              '<span style="display:block">' +
-                '<span style="display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#1c1326">' + esc(g.title[state.lang]) + '</span>' +
-                '<span style="display:block;font-size:13px;color:#E11D48;font-weight:600">' + esc(t.playCta) + ' →</span>' +
-              '</span>' +
-            '</a>';
-          }).join('') +
-        '</div>' +
       '</section>' +
       renderQuestionSection({ hideHeading: true }) +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
@@ -913,10 +899,16 @@
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div style="max-width:760px;margin:0 auto;text-align:center">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, C, 26) + '</span>' +
-          h2sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
+          h1sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
+        '<div style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 22px;max-width:760px">' +
+          GAMES.map(function (g, i) {
+            var active = i === gi;
+            return '<button data-act="p' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[state.lang]) + '</button>';
+          }).join('') +
+        '</div>' +
         '<div id="playMount">' + renderPlayCard() + '</div>' +
       '</section>' +
       '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
@@ -931,25 +923,8 @@
           faqAccordion(FAQ_GAMES[state.lang]) +
         '</div>' +
       '</section>' +
-      '<section style="padding:clamp(6px,1vh,14px) clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
-        '<div style="max-width:960px;margin:0 auto">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(t.playOther) + '</h2>' +
-          '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
-            GAMES.map(function (g, i) {
-              if (i === gi) return '';
-              var href = playHrefFor(i, state.lang);
-              if (!href) return '';
-              return '<a href="' + href + '" class="soft-card" style="display:flex;align-items:center;gap:12px;padding:16px 18px;text-decoration:none">' +
-                '<span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + gameIcon(i, '#E11D48', 18) + '</span>' +
-                '<span style="display:block">' +
-                  '<span style="display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#1c1326">' + esc(g.title[state.lang]) + '</span>' +
-                  '<span style="display:block;font-size:13px;color:#E11D48;font-weight:600">' + esc(t.playCta) + ' →</span>' +
-                '</span>' +
-              '</a>';
-            }).join('') +
-          '</div>' +
-          '<p style="margin:18px 0 0"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.playRules) + ' →</button></p>' +
-        '</div>' +
+      '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
+        '<p style="max-width:720px;margin:0 auto;text-align:center"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.playRules) + ' →</button></p>' +
       '</section>' +
       renderFinalCta() +
     '</div>';
@@ -1384,6 +1359,12 @@
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
+  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Party Question Games for Friends — Clinky","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры для компании: вопросы для вечера с друзьями — Clinky","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Online — Free Cards, No Sign-Up","/ru/play/ya-nikogda-ne":"Играть в «Я никогда не» онлайн — карточки бесплатно","/play/roulette":"Roulette Question Game Online — Free, No Sign-Up","/ru/play/ruletka":"Игра «Рулетка» онлайн — вопросы про друзей, бесплатно","/play/questions-to-ask-friends":"Questions to Ask Friends — Free Card Game Online","/ru/play/voprosy-druzyam":"Вопросы друзьям онлайн — карточки для разговора, бесплатно","/play/would-you-rather":"Would You Rather Online — Free Cards, No Sign-Up","/ru/play/chto-vyberesh":"Играть в «Что выберешь» онлайн — карточки бесплатно","/404":"Page Not Found — Clinky"};
+  function syncDocTitle() {
+    var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
+    var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];
+    if (v) document.title = v;
+  }
   function setPage(page) {
     state.page = page;
     try {
@@ -1391,7 +1372,7 @@
       if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
     } catch (e) {}
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
-    state.scrolled = window.scrollY > 24; paint();
+    state.scrolled = window.scrollY > 24; paint(); syncDocTitle();
   }
   function joinCta() { if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
   function scrollWaitlist() {
@@ -1502,6 +1483,12 @@
       case 'coffee': setDrink('coffee'); break;
       case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); bumpClink(); resetAnim(); break;
       case 'plusone': plusOne(); break;
+      case 'p0': case 'p1': case 'p2': case 'p3': {
+        var pgi = parseInt(a.slice(1), 10);
+        var pslug = playSlugFor(GAME_IDS[pgi], state.lang);
+        if (pslug) { state.playSlug = pslug; state.gameIndex = pgi; state.playIndex = 0; setPage('play'); }
+        break;
+      }
       case 'playnext': {
         var st = deckState(), lim = deckLimit();
         if (st.used < lim) {

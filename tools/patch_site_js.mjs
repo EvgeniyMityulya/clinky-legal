@@ -1,6 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
+import { SHELLS } from './shell_meta.mjs';
 
 const FILE = 'assets/site.js';
 let js = readFileSync(FILE, 'utf8');
@@ -56,6 +57,9 @@ if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
   js = js.replace(hintLine, hintLine + "\n        '<p style=\"text-align:center;margin:14px 0 0\"><a href=\"' + questionsHref() + '\" style=\"font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none\">' + esc(t.gamesAll) + ' →</a></p>' +");
 }
 
+
+const titles = Object.fromEntries(SHELLS.map((s) => [s.path, s.title]));
+js = js.replace(/  var DOC_TITLES = \{[^}]*\};/, '  var DOC_TITLES = ' + JSON.stringify(titles) + ';');
 
 writeFileSync(FILE, js);
 console.log(`site.js: ${before} -> ${js.length} bytes`);
