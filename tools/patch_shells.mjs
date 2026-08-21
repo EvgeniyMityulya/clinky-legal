@@ -10,6 +10,11 @@ import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
 
+const RU_ACC = {
+  never_have_i: '«Я никогда не»', roulette: '«Рулетку»',
+  tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»'
+};
+
 
 const CF_BEACON = process.env.CF_BEACON_TOKEN || '';
 const GSC = process.env.GSC_VERIFY || '';
@@ -207,7 +212,7 @@ function playPrerender(s) {
   const game = GAMES_META.find((g) => g.id === s.play) || GAMES_META[0];
   const cards = ((deck.games[s.play] || {})[loc] || []).slice(0, 5);
   const t = loc === 'ru'
-    ? { h1: `Играть в «${game.title.ru}» онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+    ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
     : { h1: `Play ${game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
