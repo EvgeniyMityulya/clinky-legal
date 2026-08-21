@@ -9,7 +9,12 @@ import { SITE, SHELLS } from './shell_meta.mjs';
 import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
+import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
 
+const EN_TITLE = {
+  never_have_i: 'Never Have I Ever', roulette: 'Roulette',
+  tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather'
+};
 const RU_ACC = {
   never_have_i: '«Я никогда не»', roulette: '«Рулетку»',
   tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»'
@@ -173,17 +178,14 @@ function gamesPrerender(loc) {
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games',
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
 
+  const L = CONTENT_LABELS[loc];
   const blocks = GAMES_META.map((g) => {
-    let cards = [];
-    try {
-      const items = JSON.parse(readFileSync(`data/${g.id}.json`, 'utf8'));
-      const names = { en: { A: 'Alex', B: 'Sam' }, ru: { A: 'Аня', B: 'Макс' } }[loc];
-      cards = items.slice(0, 3).map((q) => q.text[loc]
-        .replace(/\{A\}/g, names.A).replace(/\{B\}/g, names.B).replace(/\*/g, ''));
-    } catch (e) {}
-    return `<h3>${esc(g.title[loc])}</h3>
-<p><strong>${esc(t.how)}:</strong> ${g.how[loc].map((x) => esc(x)).join(' · ')}</p>
-${cards.length ? `<ul>${cards.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>` : ''}`;
+    const c = GAME_CONTENT[g.id];
+    const slug = (webDeck().games[g.id] || {}).slug || {};
+    const href = slug[loc] ? `/${slug[loc]}` : (loc === 'ru' ? '/ru/games' : '/games');
+    return `<h3><a href="${href}">${esc(g.title[loc])}</a></h3>
+<p>${esc(c.tagline[loc])}</p>
+<p>${esc(L.fitPlayers)}. ${esc(c.players[loc])}. ${esc(L.fitBest)}. ${esc(c.best[loc])}</p>`;
   }).join('\n');
 
   return `<div id="prerender">
@@ -210,26 +212,40 @@ function playPrerender(s) {
   const loc = s.loc;
   const deck = webDeck();
   const game = GAMES_META.find((g) => g.id === s.play) || GAMES_META[0];
-  const cards = ((deck.games[s.play] || {})[loc] || []).slice(0, 5);
+  const entry = deck.games[s.play] || {};
+  const nm = (entry.names || {})[loc] || ['Alex', 'Sam'];
+  const cards = (entry[loc] || []).slice(0, 6)
+    .map((x) => String(x).replace(/\{A\}/g, nm[0]).replace(/\{B\}/g, nm[1]).replace(/\*/g, ''));
   const t = loc === 'ru'
     ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
-    : { h1: `Play ${game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
+    : { h1: `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games', limit: `${deck.limit} free cards a day, refreshed daily.`,
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
+
+  const c = GAME_CONTENT[s.play];
+  const L = CONTENT_LABELS[loc];
 
   return `<div id="prerender">
 <nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 <p>${esc(t.limit)}</p>
-<h2>${esc(t.how)}</h2>
-<p>${game.how[loc].map((x) => esc(x)).join(' · ')}</p>
-<h2>${esc(t.cards)}</h2>
-<ul>${cards.map((c) => `<li>${esc(c)}</li>`).join('')}</ul>
-<h2>${esc(t.faq)}</h2>
-${faqHtml(FAQ_GAMES[loc])}
+<h2>${esc(L.about)}</h2>
+<p>${esc(L.fitPlayers)}. ${esc(c.players[loc])}</p>
+<p>${esc(L.fitBest)}. ${esc(c.best[loc])}</p>
+${c.intro[loc].map((para) => `<p>${esc(para)}</p>`).join('\n')}
+<h2>${esc(L.rules)}</h2>
+<ol>${c.rules[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
+<h2>${esc(L.examples)}</h2>
+<ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+<h2>${esc(L.variants)}</h2>
+${c.variants[loc].map((v) => `<h3>${esc(v.t)}</h3>\n<p>${esc(v.d)}</p>`).join('\n')}
+<h2>${esc(L.tips)}</h2>
+<ul>${c.tips[loc].map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+<h2>${esc(L.faq)}</h2>
+${faqHtml(c.faq[loc])}
 </div>`;
 }
 
@@ -265,7 +281,8 @@ function jsonld(s) {
       '@type': 'WebPage', '@id': canonical, url: canonical, name: s.title,
       description: s.description, inLanguage: s.loc, isPartOf: { '@id': `${SITE}/#website` }
     });
-    if (s.faq === 'games') graph.push(faqSchema(FAQ_GAMES[s.loc]));
+    if (s.play && GAME_CONTENT[s.play]) graph.push(faqSchema(GAME_CONTENT[s.play].faq[s.loc]));
+    else if (s.faq === 'games') graph.push(faqSchema(FAQ_GAMES[s.loc]));
     else if (s.faq) graph.push(faqSchema(FAQ_SUPPORT[s.loc]));
   }
   return { '@context': 'https://schema.org', '@graph': graph };
@@ -348,8 +365,8 @@ for (const s of SHELLS) {
     ['assets/motion.js', 'assets/motion.min.js']
   ];
   for (const [plain, min] of MIN_MAP) {
-    const re = new RegExp(plain.replace('.', '\\.') + '(\\?v=[a-f0-9]+)?', 'g');
-    html = html.replace(re, min);
+    const re = new RegExp('(["\'])/?' + plain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g');
+    html = html.replace(re, `$1/${min}$1`);
   }
 
   const BUST = [
@@ -361,7 +378,7 @@ for (const s of SHELLS) {
   ];
   for (const [ref, file] of BUST) {
     const v = assetVer(file);
-    html = html.replace(new RegExp('(["\'])' + ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g'), `$1${ref}?v=${v}$1`);
+    html = html.replace(new RegExp('(["\'])/?' + ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g'), `$1/${ref}?v=${v}$1`);
   }
 
 

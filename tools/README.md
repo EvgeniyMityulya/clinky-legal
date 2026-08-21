@@ -8,7 +8,8 @@ gets overwritten on the next build.
 
 | File | What lives there |
 |---|---|
-| `pages.mjs` | Copy for the question hub and the three question packs, EN + RU (titles, descriptions, ledes, intros, rules, per-page FAQ) |
+| `game_content.mjs` | Per-game editorial copy, EN + RU (tagline, who it fits, intro, rules, ways to play, tips, per-game FAQ). Feeds the play pages, the games hub cards, the FAQPage JSON-LD and the prerender |
+| `web_deck.mjs` | The website-only card decks and the daily limit. Kept separate from the app set on purpose |
 | `faq_home.mjs` | The home-page FAQ, EN + RU. Single source: it feeds the visible FAQ section in `site.js`, the FAQPage JSON-LD and the prerendered fallback |
 | `shell_meta.mjs` | Per-page title, description, canonical, hreflang pairs and Open Graph copy for the SPA shells |
 | `../data/*.json` | The question sets, copied from the iOS app (`Clinky/Resources/IceBreakers/`) |
@@ -16,14 +17,19 @@ gets overwritten on the next build.
 ## Scripts
 
 ```bash
-node tools/build.mjs         # sitemap.xml + robots.txt
-node tools/patch_site_js.mjs # site.js: FAQ data, games page wiring
-node tools/minify.mjs        # assets/*.js -> assets/*.min.js (shells load the minified twins)
-node tools/patch_shells.mjs  # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
+node tools/build.mjs              # sitemap.xml + robots.txt
+node tools/build_deck.mjs         # web_deck.mjs -> assets/web-deck.js
+node tools/build_game_content.mjs # game_content.mjs -> assets/game-content.js
+node tools/patch_site_js.mjs      # site.js: FAQ data, doc titles, games page wiring
+node tools/minify.mjs             # assets/*.js -> assets/*.min.js (shells load the minified twins)
+node tools/patch_shells.mjs       # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
 ```
 
-Order matters: patch the sources first, minify, then patch the shells so the version hashes
-match the files that ship. All four scripts are idempotent.
+Order matters: build the data bundles and patch the sources first, minify, then patch the shells
+so the version hashes match the files that ship. Every script is idempotent.
+
+`assets/game-content.js` and `assets/web-deck.js` load on demand from the games and play pages,
+so they stay out of the main bundle.
 
 `assets/*.js` stay readable and are the files you edit. `assets/*.min.js` are generated
 and referenced by the shells, so a source edit without `minify.mjs` will not reach the site.

@@ -1,4 +1,5 @@
 import { readFileSync, writeFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { SHELLS } from './shell_meta.mjs';
@@ -60,6 +61,13 @@ if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
 
 const titles = Object.fromEntries(SHELLS.map((s) => [s.path, s.title]));
 js = js.replace(/  var DOC_TITLES = \{[^}]*\};/, '  var DOC_TITLES = ' + JSON.stringify(titles) + ';');
+
+// lazily loaded payloads need their own cache-busting, they are not in the shells
+const lazyVer = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8);
+for (const name of ['game-content.js', 'web-deck.js']) {
+  const re = new RegExp("'/assets/" + name.replace('.', '\\.') + "(\\?v=[a-f0-9]+)?'", 'g');
+  js = js.replace(re, `'/assets/${name}?v=${lazyVer('assets/' + name)}'`);
+}
 
 writeFileSync(FILE, js);
 console.log(`site.js: ${before} -> ${js.length} bytes`);

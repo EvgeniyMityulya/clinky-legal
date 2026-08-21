@@ -41,7 +41,7 @@
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through',
-      gamesAll: 'See how to play', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
+      gamesAll: 'See how to play', navPickGame: 'Pick a game', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
       problemKicker: 'Sound familiar?', problemTitle: 'Getting everyone together can be a real quest!',
       problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
       problemTurn: 'Clinky helps you meet up more often and have the kind of time you want to repeat!',
@@ -87,7 +87,7 @@
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
-      gamesAll: 'Как в это играть', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
+      gamesAll: 'Как в это играть', navPickGame: 'Выбери игру', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
       problemKicker: 'Знакомо?', problemTitle: 'Собраться компанией бывает та ещё задачка!',
       problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт куда веселее!',
       problemTurn: 'Clinky помогает видеться чаще и проводить время так, что хочется повторить!',
@@ -293,6 +293,22 @@
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:8px 15px;font-weight:700;font-size:14px;white-space:nowrap;transition:all .22s;font-family:DM Sans,sans-serif;';
     return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 16px -6px rgba(255,79,98,.6);' : b + 'background:transparent;color:#6b6b76;';
   }
+  function navCls(active) { return 'navpill' + (active ? ' is-on' : ''); }
+  function gamesDropdown() {
+    var t = tdict(), onGames = state.page === 'games' || state.page === 'play';
+    return '<span class="nav-drop">' +
+      '<button data-act="games" class="' + navCls(onGames) + '" aria-haspopup="true" style="' + navPill(onGames) + '">' + esc(t.navGames) + '</button>' +
+      '<span class="nav-drop-panel">' +
+        '<span class="nav-drop-title">' + esc(t.navPickGame) + '</span>' +
+        GAMES.map(function (g, i) {
+          var href = playHrefFor(i, state.lang), on = state.page === 'play' && state.gameIndex === i;
+          if (!href) return '';
+          return '<a href="' + href + '" class="nav-drop-item' + (on ? ' is-on' : '') + '">' +
+            '<span class="nav-drop-ico">' + gameIcon(i, on ? '#fff' : '#E11D48', 16) + '</span>' + esc(g.title[state.lang]) + '</a>';
+        }).join('') +
+      '</span>' +
+    '</span>';
+  }
   function pill(active) {
     var b = 'border:0;cursor:pointer;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14.5px;transition:all .22s;display:inline-flex;align-items:center;gap:7px;';
     return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 8px 20px -8px rgba(255,79,98,.7);' : b + 'background:#fff;color:#6b6b76;border:1px solid #e9e6ec;';
@@ -445,13 +461,13 @@
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
       '<nav class="nav-mid" style="display:flex;align-items:center;gap:4px;flex:0 1 auto;min-width:0;justify-content:center">' +
-        '<button data-act="home" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
-        '<button data-act="games" style="' + navPill(p === 'games') + '">' + esc(t.navGames) + '</button>' +
-        '<button data-act="about" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
-        '<button data-act="support" style="' + navPill(p === 'support') + '">' + esc(t.navSupport) + '</button>' +
+        '<button data-act="home" class="' + navCls(p === 'home') + '" style="' + navPill(p === 'home') + '">' + esc(t.navHome) + '</button>' +
+        gamesDropdown() +
+        '<button data-act="about" class="' + navCls(p === 'about') + '" style="' + navPill(p === 'about') + '">' + esc(t.navAbout) + '</button>' +
+        '<button data-act="support" class="' + navCls(p === 'support') + '" style="' + navPill(p === 'support') + '">' + esc(t.navSupport) + '</button>' +
         '<span class="nav-legal" style="' + navDiv + '"></span>' +
-        '<button data-act="privacy" class="nav-legal" style="' + navPill(p === 'privacy') + '">' + esc(t.navPrivacy) + '</button>' +
-        '<button data-act="terms" class="nav-legal" style="' + navPill(p === 'terms') + '">' + esc(t.navTerms) + '</button>' +
+        '<button data-act="privacy" class="nav-legal ' + navCls(p === 'privacy') + '" style="' + navPill(p === 'privacy') + '">' + esc(t.navPrivacy) + '</button>' +
+        '<button data-act="terms" class="nav-legal ' + navCls(p === 'terms') + '" style="' + navPill(p === 'terms') + '">' + esc(t.navTerms) + '</button>' +
       '</nav>' +
       '<div style="display:flex;align-items:center;gap:10px;flex:1 1 0;min-width:0;justify-content:flex-end">' +
         '<button data-act="join" class="join-cta" style="' + join + '">' + esc(t.navJoin) + '</button>' +
@@ -467,7 +483,14 @@
         ['home', 'games', 'about', 'support', 'privacy', 'terms'].map(function (pg) {
           var label = { home: t.navHome, games: t.navGames, about: t.navAbout, support: t.navSupport, privacy: t.navPrivacy, terms: t.navTerms }[pg];
           var on = p === pg;
-          return '<button data-act="' + pg + '" style="text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326') + '">' + esc(label) + '</button>';
+          var row = '<button data-act="' + pg + '" style="text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326') + '">' + esc(label) + '</button>';
+          if (pg !== 'games') return row;
+          return row + '<span class="nav-sub">' + GAMES.map(function (g, i) {
+            var href = playHrefFor(i, state.lang), sel = state.page === 'play' && state.gameIndex === i;
+            if (!href) return '';
+            return '<a href="' + href + '" class="nav-drop-item' + (sel ? ' is-on' : '') + '" style="font-size:14.5px">' +
+              '<span class="nav-drop-ico">' + gameIcon(i, sel ? '#fff' : '#E11D48', 15) + '</span>' + esc(g.title[state.lang]) + '</a>';
+          }).join('') + '</span>';
         }).join('') +
       '</div>' : '');
   }
@@ -784,6 +807,28 @@
     return qStr.split('*').map(function (seg, i) { return '<span style="color:' + (i % 2 ? '#FF4F62' : '#1c1326') + '">' + esc(seg) + '</span>'; }).join('');
   }
 
+  function gamesHub() {
+    var t = tdict(), L = contentLabels();
+    if (!L) ensureGameContent(function () { paint(); });
+    return '<section style="padding:0 clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
+      '<div style="max-width:980px;margin:0 auto;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">' +
+        GAMES.map(function (g, i) {
+          var href = playHrefFor(i, state.lang);
+          if (!href) return '';
+          var c = gameContent(GAME_IDS[i]);
+          return '<a href="' + href + '" class="soft-card hub-card" style="display:flex;flex-direction:column;gap:10px;padding:22px 24px;text-decoration:none">' +
+            '<span style="display:flex;align-items:center;gap:12px">' +
+              '<span style="flex:none;width:40px;height:40px;border-radius:13px;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + gameIcon(i, '#E11D48', 20) + '</span>' +
+              '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:18.5px;letter-spacing:-.4px;color:#1c1326">' + esc(g.title[state.lang]) + '</span>' +
+            '</span>' +
+            (c ? '<span style="font-size:14.5px;line-height:1.55;color:#6b6b76">' + esc(c.tagline[state.lang]) + '</span>' : '') +
+            (c && L ? '<span style="font-size:13px;color:#a99ea6">' + esc(L.fitPlayers) + ' · ' + esc(c.players[state.lang]) + '</span>' : '') +
+            '<span style="margin-top:2px;font-size:14.5px;font-weight:700;color:#E11D48">' + esc(t.playCta) + ' →</span>' +
+          '</a>';
+        }).join('') +
+      '</div>' +
+    '</section>';
+  }
   function renderGames() {
     var t = tdict();
     return '<div class="page-in">' +
@@ -793,10 +838,7 @@
           h1sec(t.gamesPageTitle) + subsec(t.gamesPageSub) +
         '</div>' +
       '</section>' +
-      '<section style="padding:0 clamp(20px,5vw,72px)">' +
-        '<div id="howWrap">' + renderHowStrip() + '</div>' +
-      '</section>' +
-      renderQuestionSection({ hideHeading: true }) +
+      gamesHub() +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
         '<div style="max-width:720px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
@@ -835,12 +877,96 @@
     if (_deckLoading) return;
     _deckLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/web-deck.js';
+    sc.src = '/assets/web-deck.js?v=9ae58268';
     sc.onload = function () { _deckLoading = false; cb(); };
     sc.onerror = function () { _deckLoading = false; };
     document.head.appendChild(sc);
   }
 
+  var _gcLoading = false;
+  function ensureGameContent(cb) {
+    if (window.CLINKY_GAME_CONTENT) return;
+    if (_gcLoading) return;
+    _gcLoading = true;
+    var sc = document.createElement('script');
+    sc.src = '/assets/game-content.js?v=c9ba007c';
+    sc.onload = function () { _gcLoading = false; cb(); };
+    sc.onerror = function () { _gcLoading = false; };
+    document.head.appendChild(sc);
+  }
+  function gameContent(id) {
+    var g = window.CLINKY_GAME_CONTENT;
+    return g && g.content[id] ? g.content[id] : null;
+  }
+  function contentLabels() {
+    var g = window.CLINKY_GAME_CONTENT;
+    return g ? g.labels[state.lang] : null;
+  }
+  function sectionWrap(title, inner, tight) {
+    return '<section style="padding:' + (tight ? '0' : 'clamp(8px,1.6vh,18px)') + ' clamp(20px,5vw,72px) clamp(22px,3.6vh,40px)">' +
+      '<div style="max-width:760px;margin:0 auto">' +
+        (title ? '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(title) + '</h2>' : '') +
+        inner +
+      '</div>' +
+    '</section>';
+  }
+  function numberedList(items) {
+    return '<ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;counter-reset:r">' +
+      items.map(function (line, i) {
+        return '<li class="soft-card" style="display:flex;gap:14px;align-items:flex-start;padding:15px 18px">' +
+          '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FFE2E6;color:#E11D48;font-family:Nunito,sans-serif;font-weight:900;font-size:13.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
+          '<span style="font-size:15px;line-height:1.55;color:#3a323f">' + esc(line) + '</span>' +
+        '</li>';
+      }).join('') +
+    '</ol>';
+  }
+  function variantCards(items) {
+    return '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">' +
+      items.map(function (v) {
+        return '<div class="soft-card" style="padding:18px 20px">' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#1c1326;margin-bottom:7px">' + esc(v.t) + '</div>' +
+          '<div style="font-size:14.5px;line-height:1.6;color:#6b6b76">' + esc(v.d) + '</div>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+  function bulletList(items) {
+    return '<ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:11px">' +
+      items.map(function (line) {
+        return '<li style="display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.6;color:#3a323f">' +
+          '<span style="flex:none;width:7px;height:7px;border-radius:50%;background:#FF4F62;margin-top:8px"></span>' + esc(line) +
+        '</li>';
+      }).join('') +
+    '</ul>';
+  }
+  function fitStrip(c) {
+    var L = contentLabels();
+    return '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));margin:0 0 24px">' +
+      [[L.fitPlayers, c.players[state.lang]], [L.fitBest, c.best[state.lang]]].map(function (pair) {
+        return '<div class="soft-card" style="padding:15px 18px">' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:#a99ea6;margin-bottom:6px">' + esc(pair[0]) + '</div>' +
+          '<div style="font-size:14.5px;line-height:1.5;color:#1c1326;font-weight:600">' + esc(pair[1]) + '</div>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+  function exampleList(gi) {
+    var deck = window.CLINKY_WEB_DECK, out = [];
+    if (deck && deck.games) {
+      var entry = deck.games[GAME_IDS[gi]], pack = entry && entry[state.lang];
+      if (pack && pack.length) out = pack.slice(0, 6).map(function (line) { return plainCard(line, entry); });
+    }
+    if (!out.length) out = (GAMES[gi].q || []).slice(0, 5).map(function (q) { return plainCard(q[state.lang]); });
+    return '<div style="display:flex;flex-direction:column;gap:10px">' +
+      out.map(function (line) {
+        return '<div class="soft-card" style="padding:16px 20px;font-family:Nunito,sans-serif;font-weight:700;font-size:15.5px;line-height:1.5;color:#1c1326">' + esc(line) + '</div>';
+      }).join('') +
+    '</div>';
+  }
+  function plainCard(line, entry) {
+    var names = (entry && entry.names && entry.names[state.lang]) || ['Alex', 'Sam'];
+    return String(line).replace(/\{A\}/g, names[0]).replace(/\{B\}/g, names[1]).replace(/\*/g, '');
+  }
   function renderPlayCard() {
     var t = tdict(), cards = deckCards(), st = deckState(), limit = deckLimit();
     var meta = PLAY_SLUGS[state.playSlug] || {};
@@ -911,23 +1037,34 @@
         '</div>' +
         '<div id="playMount">' + renderPlayCard() + '</div>' +
       '</section>' +
-      '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
-        '<div style="max-width:720px;margin:0 auto">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 14px;color:#1c1326">' + esc(t.howTitle) + '</h2>' +
-          '<div id="howWrap">' + renderHowStrip() + '</div>' +
-        '</div>' +
-      '</section>' +
-      '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(30px,5vh,50px)">' +
-        '<div style="max-width:720px;margin:0 auto">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
-          faqAccordion(FAQ_GAMES[state.lang]) +
-        '</div>' +
-      '</section>' +
+      playEditorial(gi, meta.id) +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
         '<p style="max-width:720px;margin:0 auto;text-align:center"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.playRules) + ' →</button></p>' +
       '</section>' +
       renderFinalCta() +
     '</div>';
+  }
+  function playEditorial(gi, id) {
+    var t = tdict(), c = gameContent(id), L = contentLabels();
+    if (!c || !L) {
+      ensureGameContent(function () { paint(); });
+      return '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
+        '<div style="max-width:720px;margin:0 auto">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 14px;color:#1c1326">' + esc(t.howTitle) + '</h2>' +
+          '<div id="howWrap">' + renderHowStrip() + '</div>' +
+        '</div>' +
+      '</section>';
+    }
+    var lang = state.lang;
+    var intro = c.intro[lang].map(function (para) {
+      return '<p style="font-size:16px;line-height:1.72;color:#3a323f;margin:0 0 14px">' + esc(para) + '</p>';
+    }).join('');
+    return sectionWrap(L.about, fitStrip(c) + intro) +
+      sectionWrap(L.rules, numberedList(c.rules[lang])) +
+      sectionWrap(L.examples, exampleList(gi)) +
+      sectionWrap(L.variants, variantCards(c.variants[lang])) +
+      sectionWrap(L.tips, bulletList(c.tips[lang])) +
+      sectionWrap(L.faq, faqAccordion(c.faq[lang]));
   }
 
   // ===== ABOUT =====
