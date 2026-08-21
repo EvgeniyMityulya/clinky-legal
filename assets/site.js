@@ -145,6 +145,7 @@
 
   var GAME_IDS = ['never_have_i', 'roulette', 'tell_a_moment', 'would_you_rather'];
   var AUTHOR_LINKS = [{"label":"LinkedIn","href":"https://www.linkedin.com/in/evgeniy-mityulya/","icon":"briefcase"},{"label":"Telegram","href":"https://t.me/evgeniymityulya","icon":"paper-plane-tilt"}];
+  var AUTHOR_PHOTO = '/assets/author.jpg?v=d82bd078';
   var GAMES = [
     { title: { en: 'Never have I ever', ru: 'Я никогда не' }, how: {
       en: ['Read the card out loud, exactly as written', 'Whoever has done it owns up to the table', 'And tells the story behind that card'],

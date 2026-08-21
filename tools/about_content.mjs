@@ -44,4 +44,4 @@ export const AUTHOR_LINKS = [
 
 // Set once a portrait lands in assets/. Both the page and the Person schema
 // switch from the placeholder icon to the real image when this is filled in.
-export const AUTHOR_PHOTO = '';
+export const AUTHOR_PHOTO = '/assets/author.jpg';

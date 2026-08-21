@@ -10,7 +10,7 @@ const zone = (env.match(/CF_ZONE_ID=([A-Za-z0-9]+)/) || [])[1];
 if (!zone) { console.log('no zone id'); process.exit(1); }
 
 const hash = (f) => execSync(`md5 -q ${f}`).toString().trim().slice(0, 8);
-const files = ['site.css', 'site.min.js', 'hero3d.min.js', 'motion.min.js', 'legal-content.min.js', 'web-deck.js', 'game-content.js'];
+const files = ['site.css', 'site.min.js', 'hero3d.min.js', 'motion.min.js', 'legal-content.min.js', 'web-deck.js', 'game-content.js', 'author.jpg'];
 const urls = [];
 for (const f of files) {
   urls.push(`https://clinkyapp.com/assets/${f}`);
