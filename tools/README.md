@@ -25,7 +25,13 @@ node tools/minify.mjs             # assets/*.js -> assets/*.min.js (shells load 
 node tools/patch_shells.mjs       # shells: meta, canonical, JSON-LD, prerender, cache-busting hashes
 node tools/indexnow.mjs           # tells Bing and Yandex what changed (run after the deploy is live)
 node tools/seo_baseline.mjs       # diffs the live pages against snapshots/seo-baseline.json
+node tools/cf_purge.mjs           # drops the CDN copies of the built assets (run after every deploy)
 ```
+
+Run `cf_purge.mjs` once the deploy is live. The Cloudflare cache rule keeps
+`/assets/*` for a year, so a request that arrives while GitHub Pages is still
+serving the previous file pins that stale copy for the whole year. Purging costs
+nothing and the year-long cache still applies to everything that follows.
 
 `seo_baseline.mjs` walks every URL in the sitemap and compares title, description,
 canonical, robots, h1, hreflang, schema types and prerender length. It exits 1 when a
