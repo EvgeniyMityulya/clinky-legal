@@ -7,6 +7,7 @@ arrow-right|bold
 arrows-left-right|bold
 beer-bottle|fill
 bell|fill
+briefcase|fill
 chart-bar|fill
 chat-circle|bold
 chat-teardrop-dots|fill
@@ -22,6 +23,7 @@ game-controller|fill
 heart|fill
 list|bold
 lock-simple|fill
+paper-plane-tilt|fill
 shield-check|fill
 target|bold
 trophy|fill

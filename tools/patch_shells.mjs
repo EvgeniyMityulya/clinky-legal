@@ -10,7 +10,7 @@ import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
 import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
-import { ABOUT, AUTHOR_LINKS } from './about_content.mjs';
+import { ABOUT, AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
 
 const EN_TITLE = {
   never_have_i: 'Never Have I Ever', roulette: 'Roulette',
@@ -283,7 +283,8 @@ function jsonld(s) {
   const author = {
     '@type': 'Person', '@id': `${SITE}/#author`,
     name: ABOUT[s.loc].name, jobTitle: ABOUT[s.loc].role,
-    ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => l.href) } : {})
+    ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => l.href) } : {}),
+    ...(AUTHOR_PHOTO ? { image: `${SITE}${AUTHOR_PHOTO}` } : {})
   };
   const graph = [website, organization];
   if (s.home) graph.push(author);

@@ -14,6 +14,7 @@
     "schemaTypes": [
       "MobileApplication",
       "Organization",
+      "Person",
       "WebPage",
       "WebSite"
     ],
@@ -194,6 +195,7 @@
     "schemaTypes": [
       "MobileApplication",
       "Organization",
+      "Person",
       "WebPage",
       "WebSite"
     ],
@@ -233,10 +235,11 @@
     ],
     "schemaTypes": [
       "Organization",
+      "Person",
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 33
+    "prerenderWords": 234
   },
   "/support": {
     "status": 200,
@@ -330,10 +333,11 @@
     ],
     "schemaTypes": [
       "Organization",
+      "Person",
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 29
+    "prerenderWords": 196
   },
   "/ru/support": {
     "status": 200,

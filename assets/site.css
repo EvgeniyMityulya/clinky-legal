@@ -163,7 +163,7 @@ model-viewer::part(default-progress-bar){display:none}
 .nav-drop-item{display:flex;align-items:center;gap:10px;text-align:left;border:0;background:transparent;cursor:pointer;border-radius:13px;padding:10px 12px;font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;text-decoration:none;transition:background .16s ease}
 .nav-drop-item:hover,.nav-drop-item:focus-visible{background:#FFF1F3}
 .nav-drop-item .nav-drop-ico{flex:none;width:30px;height:30px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center}
-.nav-drop-item.is-on{background:#E11D48;color:#fff}
+.nav-drop-item.is-on{background:#FF4F62;color:#fff}
 .nav-drop-item.is-on .nav-drop-ico{background:rgba(255,255,255,.22)}
 .nav-sub{padding:2px 0 6px 12px;display:flex;flex-direction:column;gap:2px}
 .hub-card{transition:transform .2s ease,box-shadow .25s ease}
@@ -180,7 +180,7 @@ model-viewer::part(default-progress-bar){display:none}
 .hub-line{font-size:14.5px;line-height:1.55;color:#6b6b76;min-height:3.1em}
 .hub-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
 .hub-meta{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:600;color:#6b6b76}
-.hub-cta{flex:none;padding:12px 34px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#E11D48;color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:15px;box-shadow:0 12px 24px -12px rgba(255,79,98,.8);transition:transform .18s ease}
+.hub-cta{flex:none;padding:12px 34px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:15px;box-shadow:0 12px 24px -12px rgba(255,79,98,.8);transition:transform .18s ease}
 .hub-card:hover .hub-cta{transform:translateY(-1px)}
 
 .fit-grid{display:grid;gap:12px;grid-template-columns:1fr;margin:0 0 22px;align-items:stretch}
