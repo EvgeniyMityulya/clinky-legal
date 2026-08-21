@@ -9,9 +9,9 @@ export const ABOUT = {
     ],
     whoTitle: 'Who makes it?',
     name: 'Evgeniy Mityulya',
-    role: 'iOS engineer, founder of @clinky',
+    role: 'iOS Engineer, Founder of @Clinky',
     who: [
-      'I built the app for my own table, so an evening with friends starts fun instead of spending twenty minutes warming up. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame \u{1F642}',
+      'I built the app for my own table, so an evening starts right away instead of the first awkward twenty minutes. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame \u{1F642}',
       'Write to me directly. If you have an idea, or just a question worth asking, send it over and we will talk.'
     ],
     dataTitle: 'What happens to your data?',
@@ -25,9 +25,9 @@ export const ABOUT = {
     ],
     whoTitle: 'Кто делает?',
     name: 'Евгений Митюля',
-    role: 'iOS-инженер, основатель @clinky',
+    role: 'iOS Инженер, Основатель @Clinky',
     who: [
-      'Приложение я сделал для своей компании, чтобы вечер с друзьями начинался весело, а не с двадцати минут раскачки. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться \u{1F642}',
+      'Приложение я сделал для своей компании, чтобы вечер начинался сразу, без неловких первых двадцати минут. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться \u{1F642}',
       'Пишите мне напрямую. Если есть идея или просто интересный вопрос, тоже пишите, пообщаемся.'
     ],
     dataTitle: 'Что с вашими данными?',
@@ -38,8 +38,9 @@ export const ABOUT = {
 // Profiles that prove the author is a real person. Empty until the URLs are known;
 // both the page and the Person schema pick them up automatically.
 export const AUTHOR_LINKS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/evgeniy-mityulya/', icon: 'briefcase' },
-  { label: 'Telegram', href: 'https://t.me/evgeniymityulya', icon: 'paper-plane-tilt' }
+  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/evgeniy-mityulya/', icon: 'linkedin' },
+  { label: 'Telegram', href: 'https://t.me/evgeniymityulya', icon: 'telegram' },
+  { label: 'X', href: 'https://x.com/Evgeniy_iOS', icon: 'x' }
 ];
 
 // Set once a portrait lands in assets/. Both the page and the Person schema

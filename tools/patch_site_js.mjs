@@ -4,11 +4,19 @@ import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { SHELLS } from './shell_meta.mjs';
 import { ICON_PATHS } from './icons_data.mjs';
+import { BRAND_ICONS } from './brand_icons_data.mjs';
 import { AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
 
 const FILE = 'assets/site.js';
 let js = readFileSync(FILE, 'utf8');
 const before = js.length;
+
+// a missing declaration used to ship a ReferenceError to production, so fail loudly
+const inject = (name, re, value) => {
+  if (!re.test(js)) throw new Error(`${name} must be declared in site.js for the patcher to fill it`);
+  js = js.replace(re, `  var ${name} = ${value};`);
+};
+
 
 const faqLiteral = 'var FAQ = {\n' + ['en', 'ru'].map((l) =>
   `    ${l}: [\n` + FAQ_SUPPORT[l].map((f) =>
@@ -64,9 +72,10 @@ if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
 const titles = Object.fromEntries(SHELLS.map((s) => [s.path, s.title]));
 js = js.replace(/  var DOC_TITLES = \{[^}]*\};/, '  var DOC_TITLES = ' + JSON.stringify(titles) + ';');
 
-js = js.replace(/  var AUTHOR_PHOTO = '[^']*';/, "  var AUTHOR_PHOTO = '" + AUTHOR_PHOTO + "';");
-js = js.replace(/  var AUTHOR_LINKS = \[[^;]*\];/, '  var AUTHOR_LINKS = ' + JSON.stringify(AUTHOR_LINKS) + ';');
-js = js.replace(/  var ICON_PATHS = \{[^;]*\};/, '  var ICON_PATHS = ' + JSON.stringify(ICON_PATHS) + ';');
+inject('AUTHOR_PHOTO', /  var AUTHOR_PHOTO = '[^']*';/, `'${AUTHOR_PHOTO}'`);
+inject('AUTHOR_LINKS', /  var AUTHOR_LINKS = \[[^;]*\];/, JSON.stringify(AUTHOR_LINKS));
+inject('BRAND_ICONS', /  var BRAND_ICONS = \{[^;]*\};/, JSON.stringify(BRAND_ICONS));
+inject('ICON_PATHS', /  var ICON_PATHS = \{[^;]*\};/, JSON.stringify(ICON_PATHS));
 
 // lazily loaded payloads need their own cache-busting, they are not in the shells
 const lazyVer = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8);

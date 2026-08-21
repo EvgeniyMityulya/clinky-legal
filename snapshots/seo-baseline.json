@@ -38,7 +38,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 509
+    "prerenderWords": 510
   },
   "/ru/play/ya-nikogda-ne": {
     "status": 200,
@@ -78,7 +78,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 473
+    "prerenderWords": 474
   },
   "/ru/play/ruletka": {
     "status": 200,
@@ -118,7 +118,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 474
+    "prerenderWords": 475
   },
   "/ru/play/voprosy-druzyam": {
     "status": 200,
@@ -158,7 +158,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 460
+    "prerenderWords": 461
   },
   "/ru/play/chto-vyberesh": {
     "status": 200,
@@ -239,7 +239,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 236
+    "prerenderWords": 255
   },
   "/support": {
     "status": 200,
@@ -337,7 +337,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 198
+    "prerenderWords": 206
   },
   "/ru/support": {
     "status": 200,
