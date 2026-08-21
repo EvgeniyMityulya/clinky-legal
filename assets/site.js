@@ -326,7 +326,7 @@
   }
   function langSegDark(active) {
     var b = 'border:1px solid #e9e6ec;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
-    return active ? b + 'background:#E11D48;color:#fff;border-color:#E11D48;' : b + 'background:transparent;color:#8a8190;';
+    return active ? b + 'background:#E11D48;color:#fff;border-color:#E11D48;' : b + 'background:transparent;color:#7a7280;';
   }
   function drinkToggle() {
     var t = tdict();
@@ -505,7 +505,7 @@
   function renderFooter() {
     var t = tdict(), I = icons();
     var lnk = 'background:transparent;border:0;cursor:pointer;font-size:14.5px;color:#6b6b76;padding:0;font-family:DM Sans,sans-serif';
-    var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#a99ea6;margin-bottom:2px';
+    var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#7a7280;margin-bottom:2px';
     return '' +
       '<div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
         '<div style="max-width:300px">' +
@@ -514,7 +514,7 @@
             '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;color:#1c1326">Clinky</span>' +
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">' + esc(t.slogan) + '</p>' +
-          '<p style="font-size:13.5px;color:#8a8190;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
+          '<p style="font-size:13.5px;color:#7a7280;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
           '<div style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;font-weight:700;color:#3a323f">' + esc(t.footComingSoon) + I.apple + '</div>' +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
@@ -532,7 +532,7 @@
         '</div>' +
       '</div>' +
       '<div style="max-width:1080px;margin:32px auto 0;padding-top:20px;border-top:1px solid #e9e6ec;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
-        '<span style="font-size:12.5px;color:#a99ea6">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
+        '<span style="font-size:12.5px;color:#7a7280">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
         '<div style="display:flex;gap:6px">' +
           '<button data-act="en" style="' + langSegDark(state.lang === 'en') + '">EN</button>' +
           '<button data-act="ru" style="' + langSegDark(state.lang === 'ru') + '">RU</button>' +
@@ -612,7 +612,7 @@
           '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div></div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div></div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#a99ea6;text-align:center;margin:10px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p style="font-size:13.5px;color:#7a7280;text-align:center;margin:10px 0 0">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
       '</div>' +
       '</div>' +
@@ -738,7 +738,7 @@
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
           '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
           '<div id="wl2">' + waitlistForm() + '</div>' +
-          (state.waitlistDone ? '' : '<p style="font-size:13px;color:#a99ea6;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
+          (state.waitlistDone ? '' : '<p style="font-size:13px;color:#7a7280;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
         '</div>' +
       '</div>' +
     '</section>';
@@ -762,11 +762,11 @@
           '</div>' +
           '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
             '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
-            '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
+            '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
               '<button data-act="prevq" aria-label="' + esc(t.dislike) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + ph('arrow-left', 22, '#b9b0b6', 'ph-bold') + '</span>' +
-                '<span style="font-size:12.5px;font-weight:600;color:#a99ea6">' + esc(t.dislike) + '</span>' +
+                '<span style="font-size:12.5px;font-weight:600;color:#7a7280">' + esc(t.dislike) + '</span>' +
               '</button>' +
               '<button data-act="nextq" aria-label="' + esc(t.like) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 26, '#fff', 'ph-bold') + '</span>' +
@@ -775,7 +775,7 @@
             '</div>' +
           '</div>' +
         '</div>' +
-        '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
+        '<p style="text-align:center;font-size:13px;color:#7a7280;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
         ((opts && opts.hideHeading) ? '' : '') +
         '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
           '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
@@ -980,7 +980,7 @@
     var meta = PLAY_SLUGS[state.playSlug] || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
     if (!cards.length) {
-      return '<div style="max-width:430px;margin:0 auto;text-align:center;padding:40px 0;color:#a99ea6;font-size:14px">' + esc(t.playLoading) + '</div>';
+      return '<div style="max-width:430px;margin:0 auto;text-align:center;padding:40px 0;color:#7a7280;font-size:14px">' + esc(t.playLoading) + '</div>';
     }
     if (st.used >= limit) {
       return '<div style="max-width:430px;margin:0 auto">' +
@@ -1007,7 +1007,7 @@
         '</div>' +
         '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
           '<div style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
-          '<div style="text-align:center;font-size:12.5px;color:#a99ea6;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
+          '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
           '<div style="display:flex;align-items:center;justify-content:center">' +
             '<button data-act="playnext" aria-label="' + esc(t.playNext) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
               '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 24, '#fff', 'ph-bold') + '</span>' +
@@ -1114,7 +1114,7 @@
           '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
           '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#E11D48;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
-          '<p style="font-size:12.5px;color:#a99ea6;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
+          '<p style="font-size:12.5px;color:#7a7280;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
     var faqHtml = faqAccordion(FAQ[state.lang]);
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
@@ -1163,7 +1163,7 @@
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:680px;margin:0 auto">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
-        '<p style="font-size:13.5px;color:#a99ea6;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
+        '<p style="font-size:13.5px;color:#7a7280;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
         '<div style="margin-top:30px;text-align:center">' + coralBtn(t.docContactCta, 'support') + '</div>' +
       '</div></section></div>';
   }
