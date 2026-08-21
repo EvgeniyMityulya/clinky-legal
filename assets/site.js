@@ -278,7 +278,10 @@
   function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
   function h1sec(s) { return '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h1>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
-  function subsec(s) { return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + esc(s) + '</p>'; }
+  function subsec(s) {
+    var body = esc(s).replace(/\.\s+(?=\S)/g, '.<br class="lede-br">');
+    return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + body + '</p>';
+  }
   function coralBtn(label, act, extra) {
     return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
   }
