@@ -9,7 +9,7 @@ export const GAME_CONTENT = {
       en: 'Confessions that drag a story out behind them',
       ru: 'Признания, за которыми идёт история'
     },
-    players: { en: 'Three and up, five is livelier', ru: 'От трёх, от пяти живее' },
+    players: { en: 'Three players and up', ru: 'От трёх игроков и больше' },
     best: {
       en: 'A warmed-up table, once people stopped being polite',
       ru: 'Разогретой компании, когда все перестали стесняться'
@@ -36,16 +36,16 @@ export const GAME_CONTENT = {
     },
     variants: {
       en: [
-        'Without drinking, count points instead of sips, and by the end it is clear who has lived the most',
-        'For two, read in turns and both answer, which turns the game into a long honest conversation',
-        'From eight people, split the table in half so nobody waits ten minutes for their turn',
-        'On a video call one person reads the cards, everyone else answers in gallery order'
+        { t: 'Without drinking', d: 'count points instead of sips, and by the end it is clear who has lived the most' },
+        { t: 'For two', d: 'read in turns and both answer, which turns the game into a long honest conversation' },
+        { t: 'From eight people', d: 'split the table in half so nobody waits ten minutes for their turn' },
+        { t: 'On a video call', d: 'one person reads the cards and everyone else answers in gallery order' }
       ],
       ru: [
-        'Без алкоголя считайте очки вместо глотков, и к концу вечера видно, кто жил насыщеннее всех',
-        'Вдвоём читайте по очереди и отвечайте оба, тогда игра превращается в честный разговор',
-        'От восьми человек делите стол на половины, чтобы никто не ждал своей очереди по десять минут',
-        'По видеосвязи карточки читает один, остальные отвечают по порядку в галерее'
+        { t: 'Без алкоголя', d: 'считайте очки вместо глотков, и к концу вечера видно, кто жил насыщеннее всех' },
+        { t: 'Вдвоём', d: 'читайте по очереди и отвечайте оба, тогда игра превращается в честный разговор' },
+        { t: 'От восьми человек', d: 'делите стол на половины, чтобы никто не ждал очереди по десять минут' },
+        { t: 'По видеосвязи', d: 'карточки читает один, а остальные отвечают по порядку в галерее' }
       ]
     },
     advice: {
@@ -68,10 +68,10 @@ export const GAME_CONTENT = {
         { q: 'Can I play in the browser?', a: 'Yes, right on this page. Eight cards a day are free here, and the app holds a far bigger set that remembers what you have already asked.' }
       ],
       ru: [
-        { q: 'Сколько человек нужно', a: 'Трёх достаточно, от пяти веселее. Чем больше людей, тем чаще кто-то признаётся, а признание и запускает истории.' },
-        { q: 'Нужен ли алкоголь', a: 'Нет. Набор одинаково работает и на чае. Считайте очки за признания или не считайте вовсе, а просто рассказывайте.' },
-        { q: 'Подойдёт ли для малознакомой компании', a: 'Начните с безобидных карточек, а к личным переходите, когда люди перестанут коситься друг на друга. Веб-набор поэтому и открывается мягкими вопросами.' },
-        { q: 'Можно играть в браузере', a: 'Да, прямо на этой странице. Восемь карточек в день бесплатно, а в приложении набор гораздо больше и помнит, что вы уже спрашивали.' }
+        { q: 'Сколько человек нужно?', a: 'Трёх достаточно, от пяти веселее. Чем больше людей, тем чаще кто-то признаётся, а признание и запускает истории.' },
+        { q: 'Нужен ли алкоголь?', a: 'Нет. Набор одинаково работает и на чае. Считайте очки за признания или не считайте вовсе, а просто рассказывайте.' },
+        { q: 'Подойдёт ли для малознакомой компании?', a: 'Начните с безобидных карточек, а к личным переходите, когда люди перестанут коситься друг на друга. Веб-набор поэтому и открывается мягкими вопросами.' },
+        { q: 'Можно играть в браузере?', a: 'Да, прямо на этой странице. Восемь карточек в день бесплатно, а в приложении набор гораздо больше и помнит, что вы уже спрашивали.' }
       ]
     }
   },
@@ -82,7 +82,7 @@ export const GAME_CONTENT = {
       en: 'The card picks two of you and asks about one',
       ru: 'Карточка выбирает двоих и спрашивает про одного'
     },
-    players: { en: 'Three and up, four is the sweet spot', ru: 'От трёх, идеально от четырёх' },
+    players: { en: 'Three players and up', ru: 'От трёх игроков и больше' },
     best: {
       en: 'Friends with shared history, any point of the evening',
       ru: 'Компании с общей историей, в любой момент вечера'
@@ -109,16 +109,16 @@ export const GAME_CONTENT = {
     },
     variants: {
       en: [
-        'Without drinking nothing changes, the game runs on stories rather than on forfeits',
-        'For two, every card is about the two of you, so the evening turns into comparing memories',
-        'From eight people put a minute on the clock, otherwise one story eats half the evening',
-        'With a new group stay on the first-impression cards, they are safe and land quickly'
+        { t: 'Without drinking', d: 'nothing changes, the game runs on stories rather than on forfeits' },
+        { t: 'For two', d: 'every card is about the two of you, so the evening turns into comparing memories' },
+        { t: 'From eight people', d: 'put a minute on the clock, otherwise one story eats half the evening' },
+        { t: 'With a new group', d: 'stay on the first-impression cards, they are safe and they land quickly' }
       ],
       ru: [
-        'Без алкоголя ничего не меняется, игра держится на историях, а не на штрафах',
-        'Вдвоём каждая карточка про вас двоих, и вечер уходит на сравнение воспоминаний',
-        'От восьми человек ставьте минуту на ответ, иначе одна история съест полвечера',
-        'В новой компании держитесь вопросов про первое впечатление, они безопасные'
+        { t: 'Без алкоголя', d: 'ничего не меняется, игра держится на историях, а не на штрафах' },
+        { t: 'Вдвоём', d: 'каждая карточка про вас двоих, и вечер уходит на сравнение воспоминаний' },
+        { t: 'От восьми человек', d: 'ставьте минуту на ответ, иначе одна история съест полвечера' },
+        { t: 'В новой компании', d: 'держитесь вопросов про первое впечатление, они безопасные и быстрые' }
       ]
     },
     advice: {
@@ -141,10 +141,10 @@ export const GAME_CONTENT = {
         { q: 'Can I play in the browser?', a: 'Yes. This page uses two stand-in names so you can see how the cards read, and the app pulls real names from your own friend list.' }
       ],
       ru: [
-        { q: 'А если люди плохо знакомы', a: 'Тогда оставайтесь на вопросах про первое впечатление. Для вопросов про общее прошлое нужно само общее прошлое, так что их лучше отложить.' },
-        { q: 'Кто выбирает пару', a: 'Карточка, и в этом весь фокус. Никто не может направить вопрос в конкретного человека, поэтому за столом ничего не выглядит наездом.' },
-        { q: 'Работает ли вдвоём', a: 'Да, только иначе. Каждая карточка становится вопросом про вас двоих, и игра превращается в долгий разговор.' },
-        { q: 'Можно играть в браузере', a: 'Да. На этой странице стоят два условных имени, чтобы было видно, как читаются карточки, а в приложении подставляются имена из твоего списка друзей.' }
+        { q: 'А если люди плохо знакомы?', a: 'Тогда оставайтесь на вопросах про первое впечатление. Для вопросов про общее прошлое нужно само общее прошлое, так что их лучше отложить.' },
+        { q: 'Кто выбирает пару?', a: 'Карточка, и в этом весь фокус. Никто не может направить вопрос в конкретного человека, поэтому за столом ничего не выглядит наездом.' },
+        { q: 'Работает ли вдвоём?', a: 'Да, только иначе. Каждая карточка становится вопросом про вас двоих, и игра превращается в долгий разговор.' },
+        { q: 'Можно играть в браузере?', a: 'Да. На этой странице стоят два условных имени, чтобы было видно, как читаются карточки, а в приложении подставляются имена из твоего списка друзей.' }
       ]
     }
   },
@@ -155,7 +155,7 @@ export const GAME_CONTENT = {
       en: 'Questions answered with a story, not a word',
       ru: 'Вопросы, на которые отвечают историей'
     },
-    players: { en: 'Two and up, great for a pair', ru: 'От двух, хорошо и для пары' },
+    players: { en: 'Two players and up', ru: 'От двух игроков и больше' },
     best: {
       en: 'A slow evening when you actually want to talk',
       ru: 'Тихому вечеру, когда хочется поговорить'
@@ -182,16 +182,16 @@ export const GAME_CONTENT = {
     },
     variants: {
       en: [
-        'Without drinking nothing changes, this is the set for a long evening and a clear head',
-        'For two it works best of all, one question and two answers fill an hour easily',
-        'From six people answer in pairs, so it stays a conversation instead of a queue',
-        'On a walk the cards read fine out loud, one question per block works well'
+        { t: 'Without drinking', d: 'nothing changes, this is the set for a long evening and a clear head' },
+        { t: 'For two', d: 'it works best of all, one question and two answers fill an hour easily' },
+        { t: 'From six people', d: 'answer in pairs, so it stays a conversation instead of a queue' },
+        { t: 'On a walk', d: 'the cards read fine out loud, one question per block works well' }
       ],
       ru: [
-        'Без алкоголя ничего не меняется, это набор для долгого вечера и свежей головы',
-        'Вдвоём работает лучше всего, один вопрос и два ответа легко занимают час',
-        'От шести человек отвечайте парами, тогда это остаётся разговором, а не очередью',
-        'На прогулке карточки нормально читаются вслух, один вопрос на квартал'
+        { t: 'Без алкоголя', d: 'ничего не меняется, это набор для долгого вечера и свежей головы' },
+        { t: 'Вдвоём', d: 'работает лучше всего, один вопрос и два ответа легко занимают час' },
+        { t: 'От шести человек', d: 'отвечайте парами, тогда это остаётся разговором, а не очередью' },
+        { t: 'На прогулке', d: 'карточки нормально читаются вслух, один вопрос на квартал' }
       ]
     },
     advice: {
@@ -214,10 +214,10 @@ export const GAME_CONTENT = {
         { q: 'Can I play in the browser?', a: 'Yes, eight cards a day on this page. The app keeps the full set and does not repeat what it has already asked you.' }
       ],
       ru: [
-        { q: 'Подходит ли для двоих', a: 'Из четырёх игр эта лучшая для двоих. Карточки просят истории, а двое могут идти за историей, не ожидая очереди.' },
-        { q: 'Что делать, если ответили одним словом', a: 'Спроси про одну деталь ответа. Обычно этого хватает, поэтому уточняющий вопрос и вписан в правила.' },
-        { q: 'Вопросы личные', a: 'Они просят момент, а не секрет. Ничто в наборе не заставляет признаваться, поэтому игра идёт и с родителями, и с коллегами.' },
-        { q: 'Можно играть в браузере', a: 'Да, восемь карточек в день на этой странице. В приложении полный набор, и оно не повторяет то, что уже спрашивало.' }
+        { q: 'Подходит ли для двоих?', a: 'Из четырёх игр эта лучшая для двоих. Карточки просят истории, а двое могут идти за историей, не ожидая очереди.' },
+        { q: 'Что делать, если ответили одним словом?', a: 'Спроси про одну деталь ответа. Обычно этого хватает, поэтому уточняющий вопрос и вписан в правила.' },
+        { q: 'Вопросы личные?', a: 'Они просят момент, а не секрет. Ничто в наборе не заставляет признаваться, поэтому игра идёт и с родителями, и с коллегами.' },
+        { q: 'Можно играть в браузере?', a: 'Да, восемь карточек в день на этой странице. В приложении полный набор, и оно не повторяет то, что уже спрашивало.' }
       ]
     }
   },
@@ -228,7 +228,7 @@ export const GAME_CONTENT = {
       en: 'Two options, and both of them cost you',
       ru: 'Два варианта, и оба чем-то неудобны'
     },
-    players: { en: 'Two and up, four is louder', ru: 'От двух, от четырёх громче' },
+    players: { en: 'Two players and up', ru: 'От двух игроков и больше' },
     best: {
       en: 'The first ten minutes, to wake a quiet table up',
       ru: 'Первым десяти минутам, чтобы расшевелить стол'
@@ -255,16 +255,16 @@ export const GAME_CONTENT = {
     },
     variants: {
       en: [
-        'Without drinking count who switched sides most often, that person is worth watching',
-        'For two take opposite sides on purpose, even the one you do not believe in',
-        'From ten people split the room physically, left option and right option',
-        'With kids at the table the set still works, they choose faster and argue harder'
+        { t: 'Without drinking', d: 'count who switched sides most often, that person is worth watching' },
+        { t: 'For two', d: 'take opposite sides on purpose, even the one you do not believe in' },
+        { t: 'From ten people', d: 'split the room physically, left option on one side and right on the other' },
+        { t: 'With kids at the table', d: 'the set still works, they choose faster and argue harder' }
       ],
       ru: [
-        'Без алкоголя считайте, кто чаще менял сторону, за ним и стоит следить',
-        'Вдвоём занимайте противоположные стороны специально, даже нелюбимую',
-        'От десяти человек делите комнату физически, один вариант влево, другой вправо',
-        'С детьми за столом набор тоже идёт, они выбирают быстрее и спорят злее'
+        { t: 'Без алкоголя', d: 'считайте, кто чаще менял сторону, именно за ним и стоит следить' },
+        { t: 'Вдвоём', d: 'занимайте противоположные стороны специально, даже нелюбимую' },
+        { t: 'От десяти человек', d: 'делите комнату физически, один вариант влево, другой вправо' },
+        { t: 'С детьми за столом', d: 'набор тоже идёт, они выбирают быстрее и спорят злее' }
       ]
     },
     advice: {
@@ -287,10 +287,10 @@ export const GAME_CONTENT = {
         { q: 'Can I play in the browser?', a: 'Yes, eight cards a day here. The app has the full set plus the other three games in the same place.' }
       ],
       ru: [
-        { q: 'Почему не сделать один вариант явно лучше', a: 'Потому что тогда спорить не о чем. Каждая пара в наборе написана так, что обе стороны чем-то стоят.' },
-        { q: 'Сколько идёт круг', a: 'Минута или две на карточку. Это самая быстрая из четырёх игр, поэтому ей удобно открывать вечер.' },
-        { q: 'Подходит ли для смешанной компании', a: 'Да. Вопросы про выбор, а не про признания, поэтому никому не нужно раскрывать что-то о себе.' },
-        { q: 'Можно играть в браузере', a: 'Да, восемь карточек в день здесь. В приложении полный набор и остальные три игры рядом.' }
+        { q: 'Почему не сделать один вариант явно лучше?', a: 'Потому что тогда спорить не о чем. Каждая пара в наборе написана так, что обе стороны чем-то стоят.' },
+        { q: 'Сколько идёт круг?', a: 'Минута или две на карточку. Это самая быстрая из четырёх игр, поэтому ей удобно открывать вечер.' },
+        { q: 'Подходит ли для смешанной компании?', a: 'Да. Вопросы про выбор, а не про признания, поэтому никому не нужно раскрывать что-то о себе.' },
+        { q: 'Можно играть в браузере?', a: 'Да, восемь карточек в день здесь. В приложении полный набор и остальные три игры рядом.' }
       ]
     }
   }
@@ -300,13 +300,13 @@ export const CONTENT_LABELS = {
   en: {
     about: 'What is this game?', rules: 'Rules', variants: 'Other ways to play',
     advice: 'Advice for the host', examples: 'Cards from the set',
-    fitPlayers: 'Players', fitBest: 'Best moment', faq: 'Questions about this game',
+    fitPlayers: 'How many players?', fitBest: 'When does it land?', faq: 'Questions about this game',
     playCta: 'Play'
   },
   ru: {
     about: 'Что за игра?', rules: 'Правила', variants: 'Как ещё играть',
     advice: 'Рекомендации по игре', examples: 'Карточки из набора',
-    fitPlayers: 'Игроков', fitBest: 'Когда заходит', faq: 'Вопросы про эту игру',
+    fitPlayers: 'Сколько игроков?', fitBest: 'Когда заходит?', faq: 'Вопросы про эту игру',
     playCta: 'Играть'
   }
 };

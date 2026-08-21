@@ -185,7 +185,7 @@ function gamesPrerender(loc) {
     const href = slug[loc] ? `/${slug[loc]}` : (loc === 'ru' ? '/ru/games' : '/games');
     return `<h3><a href="${href}">${esc(g.title[loc])}</a></h3>
 <p>${esc(c.tagline[loc])}</p>
-<p>${esc(L.fitPlayers)}. ${c.min}+. ${esc(c.best[loc])}</p>`;
+<p>${esc(c.players[loc])}. ${esc(c.best[loc])}</p>`;
   }).join('\n');
 
   return `<div id="prerender">
@@ -233,15 +233,15 @@ function playPrerender(s) {
 <p>${esc(t.lede)}</p>
 <p>${esc(t.limit)}</p>
 <h2>${esc(L.about)}</h2>
-<p>${esc(L.fitPlayers)}. ${c.min}+. ${esc(c.players[loc])}</p>
-<p>${esc(L.fitBest)}. ${esc(c.best[loc])}</p>
+<p>${esc(L.fitPlayers)} ${esc(c.players[loc])}</p>
+<p>${esc(L.fitBest)} ${esc(c.best[loc])}</p>
 <p>${esc(c.intro[loc])}</p>
 <h2>${esc(L.rules)}</h2>
 <ol>${c.rules[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
 <h2>${esc(L.examples)}</h2>
 <ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
 <h2>${esc(L.variants)}</h2>
-<ol>${c.variants[loc].map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
+<ol>${c.variants[loc].map((v) => `<li><strong>${esc(v.t)}</strong> ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.advice)}</h2>
 <ol>${c.advice[loc].map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
 <h2>${esc(L.faq)}</h2>

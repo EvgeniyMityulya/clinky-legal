@@ -304,7 +304,7 @@
           var href = playHrefFor(i, state.lang), on = state.page === 'play' && state.gameIndex === i;
           if (!href) return '';
           return '<a href="' + href + '" class="nav-drop-item' + (on ? ' is-on' : '') + '">' +
-            '<span class="nav-drop-ico">' + gameIcon(i, on ? '#fff' : '#E11D48', 16) + '</span>' + esc(g.title[state.lang]) + '</a>';
+            '<span class="nav-drop-ico">' + gameIcon(i, on ? '#fff' : '#FF4F62', 16) + '</span>' + esc(g.title[state.lang]) + '</a>';
         }).join('') +
       '</span>' +
     '</span>';
@@ -489,7 +489,7 @@
             var href = playHrefFor(i, state.lang), sel = state.page === 'play' && state.gameIndex === i;
             if (!href) return '';
             return '<a href="' + href + '" class="nav-drop-item' + (sel ? ' is-on' : '') + '" style="font-size:14.5px">' +
-              '<span class="nav-drop-ico">' + gameIcon(i, sel ? '#fff' : '#E11D48', 15) + '</span>' + esc(g.title[state.lang]) + '</a>';
+              '<span class="nav-drop-ico">' + gameIcon(i, sel ? '#fff' : '#FF4F62', 15) + '</span>' + esc(g.title[state.lang]) + '</a>';
           }).join('') + '</span>';
         }).join('') +
       '</div>' : '');
@@ -818,12 +818,14 @@
           var c = gameContent(GAME_IDS[i]);
           return '<a href="' + href + '" class="soft-card hub-card">' +
             '<span class="hub-head">' +
-              '<span class="hub-ico">' + gameIcon(i, '#E11D48', 20) + '</span>' +
+              '<span class="hub-ico">' + gameIcon(i, '#FF4F62', 20) + '</span>' +
               '<span class="hub-title">' + esc(g.title[state.lang]) + '</span>' +
             '</span>' +
             (c ? '<span class="hub-line">' + esc(c.tagline[state.lang]) + '</span>' : '') +
-            (c ? '<span class="hub-meta">' + ph('users-three', 17, '#E11D48', 'ph-fill') + '<span>' + c.min + '+</span></span>' : '') +
-            '<span class="hub-cta">' + esc((L && L.playCta) || 'Play') + '</span>' +
+            '<span class="hub-foot">' +
+              '<span class="hub-cta">' + esc((L && L.playCta) || 'Play') + '</span>' +
+              (c ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(c.players[state.lang]) + '</span></span>' : '') +
+            '</span>' +
           '</a>';
         }).join('') +
       '</div>' +
@@ -869,7 +871,7 @@
     var list = g[state.lang] || [];
     if (!g.names) return list;
     var n = g.names[state.lang] || g.names.en || ['A', 'B'];
-    return list.map(function (q) { return q.replace(/\{A\}/g, n[0]).replace(/\{B\}/g, n[1]); });
+    return list.map(function (q) { return q.replace(/\{A\}/g, '*' + n[0] + '*').replace(/\{B\}/g, '*' + n[1] + '*'); });
   }
   var _deckLoading = false;
   function ensureDeck(cb) {
@@ -877,7 +879,7 @@
     if (_deckLoading) return;
     _deckLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/web-deck.js?v=429e92a7';
+    sc.src = '/assets/web-deck.js?v=16fe4469';
     sc.onload = function () { _deckLoading = false; cb(); };
     sc.onerror = function () { _deckLoading = false; };
     document.head.appendChild(sc);
@@ -889,7 +891,7 @@
     if (_gcLoading) return;
     _gcLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=b8af0e36';
+    sc.src = '/assets/game-content.js?v=ae7ab260';
     sc.onload = function () { _gcLoading = false; cb(); };
     sc.onerror = function () { _gcLoading = false; };
     document.head.appendChild(sc);
@@ -912,10 +914,13 @@
   }
   function numberedList(items) {
     return '<ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;counter-reset:r">' +
-      items.map(function (line, i) {
+      items.map(function (item, i) {
+        var body = typeof item === 'string'
+          ? esc(item)
+          : '<strong style="font-weight:800;color:#1c1326">' + esc(item.t) + '</strong> ' + esc(item.d);
         return '<li class="soft-card" style="display:flex;gap:14px;align-items:flex-start;padding:15px 18px">' +
           '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FFE2E6;color:#E11D48;font-family:Nunito,sans-serif;font-weight:900;font-size:13.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
-          '<span style="font-size:15px;line-height:1.55;color:#3a323f">' + esc(line) + '</span>' +
+          '<span style="font-size:15px;line-height:1.55;color:#3a323f">' + body + '</span>' +
         '</li>';
       }).join('') +
     '</ol>';
@@ -923,8 +928,8 @@
   function fitStrip(c) {
     var L = contentLabels();
     var rows = [
-      [ph('users-three', 19, '#E11D48', 'ph-fill'), L.fitPlayers, c.min + '+ · ' + c.players[state.lang]],
-      [ph('clock', 19, '#E11D48', 'ph-fill'), L.fitBest, c.best[state.lang]]
+      [ph('users-three', 19, '#FF4F62', 'ph-fill'), L.fitPlayers, c.players[state.lang]],
+      [ph('clock', 19, '#FF4F62', 'ph-fill'), L.fitBest, c.best[state.lang]]
     ];
     return '<div class="fit-grid">' +
       rows.map(function (r) {
@@ -932,7 +937,7 @@
           '<span class="fit-ico">' + r[0] + '</span>' +
           '<span>' +
             '<span class="fit-label">' + esc(r[1]) + '</span>' +
-            '<span class="fit-value">' + esc(r[2]) + '</span>' +
+            '<span class="fit-value">' + esc(r[2]).replace(/,\s/, ',<br>') + '</span>' +
           '</span>' +
         '</div>';
       }).join('') +
@@ -947,13 +952,18 @@
     if (!out.length) out = (GAMES[gi].q || []).slice(0, 5).map(function (q) { return plainCard(q[state.lang]); });
     return '<div style="display:flex;flex-direction:column;gap:10px">' +
       out.map(function (line) {
-        return '<div class="soft-card ex-card" style="padding:16px 20px;font-family:Nunito,sans-serif;font-weight:700;font-size:15.5px;line-height:1.5;color:#1c1326">' + esc(line) + '</div>';
+        return '<div class="soft-card ex-card" style="padding:16px 20px;font-family:Nunito,sans-serif;font-weight:700;font-size:15.5px;line-height:1.5;color:#1c1326">' + accented(line) + '</div>';
       }).join('') +
     '</div>';
   }
   function plainCard(line, entry) {
     var names = (entry && entry.names && entry.names[state.lang]) || ['Alex', 'Sam'];
-    return String(line).replace(/\{A\}/g, names[0]).replace(/\{B\}/g, names[1]).replace(/\*/g, '');
+    return String(line).replace(/\{A\}/g, '*' + names[0] + '*').replace(/\{B\}/g, '*' + names[1] + '*');
+  }
+  function accented(line) {
+    return String(line).split(/\*/).map(function (part, i) {
+      return i % 2 ? '<span style="color:#E11D48">' + esc(part) + '</span>' : esc(part);
+    }).join('');
   }
   function renderPlayCard() {
     var t = tdict(), cards = deckCards(), st = deckState(), limit = deckLimit();
@@ -982,7 +992,7 @@
         '</div>' +
         '<div style="position:relative;min-height:132px;display:flex;align-items:center;justify-content:center;margin:8px 0 16px;padding:0 14px">' +
           '<span style="position:absolute;top:-8px;left:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201C</span>' +
-          '<p id="playLine" class="play-line" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;color:#1c1326">' + esc(cards[idx]) + '</p>' +
+          '<p id="playLine" class="play-line" style="text-align:center;font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.3px;margin:0;color:#1c1326">' + accented(cards[idx]) + '</p>' +
           '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201D</span>' +
         '</div>' +
         '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
@@ -1012,7 +1022,7 @@
     return '<div class="page-in">' +
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div style="max-width:760px;margin:0 auto;text-align:center">' +
-          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, C, 26) + '</span>' +
+          '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, '#FF4F62', 26) + '</span>' +
           h1sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
         '</div>' +
       '</section>' +
