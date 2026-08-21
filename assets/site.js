@@ -144,7 +144,7 @@
   };
 
   var GAME_IDS = ['never_have_i', 'roulette', 'tell_a_moment', 'would_you_rather'];
-  var AUTHOR_LINKS = [{"label":"LinkedIn","href":"https://www.linkedin.com/in/evgeniy-mityulya/","icon":"linkedin"},{"label":"Telegram","href":"https://t.me/evgeniymityulya","icon":"telegram"},{"label":"X","href":"https://x.com/Evgeniy_iOS","icon":"x"}];
+  var AUTHOR_LINKS = [{"label":"LinkedIn","handle":"Евгений Митюля","handleEn":"Evgeniy Mityulya","href":"https://www.linkedin.com/in/evgeniy-mityulya/","icon":"linkedin","color":"#0A66C2"},{"label":"Telegram","handle":"@evgeniymityulya","href":"https://t.me/evgeniymityulya","icon":"telegram","color":"#26A5E4"},{"label":"X","handle":"@Evgeniy_iOS","href":"https://x.com/Evgeniy_iOS","icon":"x","color":"#111111"}];
   var AUTHOR_PHOTO = '/assets/author.jpg?v=d82bd078';
   var GAMES = [
     { title: { en: 'Never have I ever', ru: 'Я никогда не' }, how: {
@@ -1171,8 +1171,9 @@
     var out = [];
     for (var i = 0; i < AUTHOR_LINKS.length; i++) {
       var l = AUTHOR_LINKS[i];
-      var mark = brandIcon(l.icon, 17, '#FF4F62') || ph(l.icon, 17, '#FF4F62', 'ph-fill');
-      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + mark + esc(l.label) + '</a>');
+      var mark = brandIcon(l.icon, 18, l.color || '#FF4F62') || ph(l.icon, 18, '#FF4F62', 'ph-fill');
+      var text = (state.lang === 'en' && l.handleEn) ? l.handleEn : (l.handle || l.label);
+      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" aria-label="' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
     }
     return out.join('');
   }

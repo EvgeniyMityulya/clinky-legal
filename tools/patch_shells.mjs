@@ -166,7 +166,7 @@ ${a.story.map((x) => `<p>${esc(x)}</p>`).join('\n')}
 <h2>${esc(a.whoTitle)}</h2>
 <p><strong>${esc(a.name)}</strong>, ${esc(a.role)}</p>
 ${a.who.map((x) => `<p>${esc(x)}</p>`).join('\n')}
-${AUTHOR_LINKS.length ? `<p>${AUTHOR_LINKS.map((l) => `<a href="${l.href}" rel="me">${esc(l.label)}</a>`).join(' ')}</p>` : ''}
+${AUTHOR_LINKS.length ? `<p>${AUTHOR_LINKS.map((l) => `<a href="${l.href}" rel="me">${esc(l.label)} ${esc((loc === 'en' && l.handleEn) ? l.handleEn : (l.handle || ''))}</a>`).join(' ')}</p>` : ''}
 <h2>${esc(a.dataTitle)}</h2>
 <p>${esc(a.data)}</p>` : '';
   return `<div id="prerender">

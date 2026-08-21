@@ -38,9 +38,9 @@ export const ABOUT = {
 // Profiles that prove the author is a real person. Empty until the URLs are known;
 // both the page and the Person schema pick them up automatically.
 export const AUTHOR_LINKS = [
-  { label: 'LinkedIn', href: 'https://www.linkedin.com/in/evgeniy-mityulya/', icon: 'linkedin' },
-  { label: 'Telegram', href: 'https://t.me/evgeniymityulya', icon: 'telegram' },
-  { label: 'X', href: 'https://x.com/Evgeniy_iOS', icon: 'x' }
+  { label: 'LinkedIn', handle: 'Евгений Митюля', handleEn: 'Evgeniy Mityulya', href: 'https://www.linkedin.com/in/evgeniy-mityulya/', icon: 'linkedin', color: '#0A66C2' },
+  { label: 'Telegram', handle: '@evgeniymityulya', href: 'https://t.me/evgeniymityulya', icon: 'telegram', color: '#26A5E4' },
+  { label: 'X', handle: '@Evgeniy_iOS', href: 'https://x.com/Evgeniy_iOS', icon: 'x', color: '#111111' }
 ];
 
 // Set once a portrait lands in assets/. Both the page and the Person schema
