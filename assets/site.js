@@ -1027,9 +1027,9 @@
     ensureDeck(function () { var m = document.getElementById('playMount'); if (m) m.innerHTML = renderPlayCard(); });
     return '<div class="page-in">' +
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
-        '<div style="max-width:760px;margin:0 auto;text-align:center">' +
+        '<div class="play-head" style="margin:0 auto;text-align:center">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, '#FF4F62', 26) + '</span>' +
-          h1sec(t.playTitle.replace('{game}', gameTitle)) + subsec(t.playSub) +
+          '<h1 class="play-h1">' + esc(t.playTitle.replace('{game}', gameTitle)) + '</h1>' + subsec(t.playSub) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
