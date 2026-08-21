@@ -12,9 +12,9 @@ export const SHELLS = [
   {
     file: 'games.html', loc: 'en', path: '/games', altRu: '/ru/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
     title: 'Party Question Games for Friends — Clinky',
-    description: 'Four question games you can start at any table: Never Have I Ever, Roulette, Tell a Moment and Would You Rather. Rules, real cards and no sign-up.',
+    description: 'Four question games you can start at any table. Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather, each with its own rules, cards and no sign-up.',
     ogTitle: 'Clinky — four question games for any table',
-    ogDescription: 'Pick a game, read how it runs and flick through real cards from the app.'
+    ogDescription: 'Pick a game, read how it runs and play a few cards in the browser.'
   },
   {
     file: 'about.html', loc: 'en', path: '/about', altRu: '/ru/about', robots: 'index,follow',

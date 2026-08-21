@@ -1,115 +1,107 @@
-// Per-game editorial content. Hand-written source, rendered into both the
-// prerendered shells and the client-side play pages.
+// Per-game editorial copy. Hand-written source of truth for the play pages,
+// the games hub cards, the FAQPage JSON-LD and the prerendered fallback.
+// Keep the lists the same length and the lines the same rough width so the
+// cards line up without CSS tricks.
 export const GAME_CONTENT = {
   never_have_i: {
+    min: 3,
     tagline: {
-      en: 'Confessions that always drag a story out behind them',
-      ru: 'Признания, за которыми всегда идёт история'
+      en: 'Confessions that drag a story out behind them',
+      ru: 'Признания, за которыми идёт история'
     },
-    players: { en: 'Three people or more, best from five', ru: 'От трёх человек, живее всего от пяти' },
+    players: { en: 'Three and up, five is livelier', ru: 'От трёх, от пяти живее' },
     best: {
-      en: 'For a table that has already warmed up and is ready to admit things',
-      ru: 'Для компании, которая уже разогрелась и готова признаваться'
+      en: 'A warmed-up table, once people stopped being polite',
+      ru: 'Разогретой компании, когда все перестали стесняться'
     },
     intro: {
-      en: [
-        'Someone reads a card out loud and everyone who has done it owns up. That part takes five seconds. The good part comes next, because every confession has a story behind it and the table always asks for it.',
-        'We wrote the cards so that the answer leaves a hole you want to poke. That is why you will not find "never have I ever been abroad" in the set. Small, recognisable, slightly embarrassing things work far better than big ones.'
-      ],
-      ru: [
-        'Кто-то читает карточку вслух, и все, кто это делал, признаются. На это уходит пять секунд. Интересное начинается сразу после, потому что за каждым признанием есть история, и её всегда просят рассказать.',
-        'Мы писали карточки так, чтобы после ответа хотелось спросить «а как это вообще получилось». Поэтому в наборе нет «я никогда не был за границей». Мелкие и очень узнаваемые вещи работают куда лучше громких.'
-      ]
+      en: 'Someone reads a card out loud and everyone who has done it owns up. That takes five seconds, and then the good part starts, because every confession has a story behind it and the table always asks for it. The cards are written for exactly that, which is why the set has no "never have I ever been abroad" in it.',
+      ru: 'Кто-то читает карточку вслух, и все, кто это делал, признаются. На это уходит пять секунд, а дальше начинается главное, потому что за каждым признанием есть история, и её всегда просят рассказать. Карточки написаны ровно под это, поэтому в наборе нет «я никогда не был за границей».'
     },
     rules: {
       en: [
-        'Read the card out loud, exactly as written, without softening it',
+        'Read the card out loud, exactly as written',
         'Everyone who has done it owns up, a raised hand counts',
         'Whoever admitted it first tells the table how it happened',
-        'The next person clockwise reads the next card',
-        'Anyone can pass once, and nobody gets talked into anything'
+        'The next person clockwise takes the following card',
+        'Anyone can pass once and nobody gets talked into it'
       ],
       ru: [
-        'Читаешь карточку вслух, ровно как написано, ничего не смягчая',
-        'Все, кто это делал, признаются, поднятой руки достаточно',
-        'Кто признался первым, рассказывает столу, как это вышло',
-        'Следующую карточку читает сосед по кругу',
-        'Пропустить можно один раз, и никого не уговаривают'
+        'Читаешь карточку вслух, ровно как написано',
+        'Все, кто это делал, признаются, поднятой руки хватит',
+        'Кто признался первым, рассказывает, как это вышло',
+        'Следующую карточку берёт сосед по кругу',
+        'Пропустить можно один раз и никого не уговаривают'
       ]
     },
     variants: {
       en: [
-        { t: 'Without drinking', d: 'Count points instead of sips. One confession, one point. By the end of the night the person with the most points has clearly lived the most, and that is funny on its own.' },
-        { t: 'For two', d: 'Read the cards in turn and both answer every one. With two people it stops being a game and turns into a proper conversation, which is usually better.' },
-        { t: 'For a big group', d: 'From eight people, split the table in half and read each card for both halves at once. Nobody sits waiting ten minutes for a turn.' },
-        { t: 'Over a video call', d: 'One person keeps the cards and reads them, everyone else answers in gallery order. Otherwise four people talk at the same time and you hear none of them.' }
+        'Without drinking, count points instead of sips, and by the end it is clear who has lived the most',
+        'For two, read in turns and both answer, which turns the game into a long honest conversation',
+        'From eight people, split the table in half so nobody waits ten minutes for their turn',
+        'On a video call one person reads the cards, everyone else answers in gallery order'
       ],
       ru: [
-        { t: 'Без алкоголя', d: 'Считайте очки вместо глотков. Признался, забрал очко. К концу вечера у кого-то их будет больше всех, и это смешно само по себе.' },
-        { t: 'Вдвоём', d: 'Читайте карточки по очереди и отвечайте оба на каждую. Вдвоём это перестаёт быть игрой и становится разговором, а так обычно интереснее.' },
-        { t: 'Большой компанией', d: 'От восьми человек делите стол на две половины и читайте карточку сразу для обеих. Никто не ждёт своей очереди десять минут.' },
-        { t: 'По видеосвязи', d: 'Один человек держит карточки и читает, остальные отвечают по порядку в галерее. Иначе говорят разом четверо, и не слышно никого.' }
+        'Без алкоголя считайте очки вместо глотков, и к концу вечера видно, кто жил насыщеннее всех',
+        'Вдвоём читайте по очереди и отвечайте оба, тогда игра превращается в честный разговор',
+        'От восьми человек делите стол на половины, чтобы никто не ждал своей очереди по десять минут',
+        'По видеосвязи карточки читает один, остальные отвечают по порядку в галерее'
       ]
     },
-    tips: {
+    advice: {
       en: [
-        'Do not explain the card before reading it. Half the laugh is in how differently everyone reads the same line',
-        'If the whole table owns up, ask who had it worst instead of who did it',
-        'Leave the quiet one alone. Two cards later they usually start talking on their own'
+        'Do not explain the card first, half the laugh is in how differently people read it',
+        'If the whole table owns up, ask who had it worse rather than who did it',
+        'Leave the quiet one alone, two cards later they usually start talking'
       ],
       ru: [
-        'Не объясняй карточку заранее. Половина смеха в том, что все поняли одну строчку по-разному',
-        'Если признались все, спрашивай не «кто», а «у кого было хуже»',
-        'Не давите на того, кто молчит. Через пару карточек он заговорит сам'
+        'Не объясняй карточку заранее, половина смеха в том, что её поняли по-разному',
+        'Если признались все, спрашивай не кто это делал, а у кого вышло хуже',
+        'Молчуна не трогай, через пару карточек он заговорит сам'
       ]
     },
     faq: {
       en: [
-        { q: 'How many people do you need?', a: 'Three is enough, five or more is better. The more people at the table, the more often someone owns up, and the confession is what starts the stories.' },
-        { q: 'Does it need drinking?', a: 'No. The set is written so it works over tea. Count points for confessions, or skip scoring and just tell the stories.' },
+        { q: 'How many people do you need?', a: 'Three is enough and five or more is better. The more people at the table, the more often someone owns up, and the confession is what starts the stories.' },
+        { q: 'Does it need drinking?', a: 'No. The set works over tea just as well. Count points for confessions, or skip the scoring and simply tell the stories.' },
         { q: 'Will it work with people who barely know each other?', a: 'Start with the harmless cards and move to personal ones once people stop glancing at each other. The web deck opens with the softer questions for that reason.' },
-        { q: 'Can I play in the browser?', a: 'Yes, right on this page. Eight cards a day are free here. The app holds a far bigger set and remembers what you have already asked.' }
+        { q: 'Can I play in the browser?', a: 'Yes, right on this page. Eight cards a day are free here, and the app holds a far bigger set that remembers what you have already asked.' }
       ],
       ru: [
         { q: 'Сколько человек нужно', a: 'Трёх достаточно, от пяти веселее. Чем больше людей, тем чаще кто-то признаётся, а признание и запускает истории.' },
-        { q: 'Нужен ли алкоголь', a: 'Нет. Набор написан так, чтобы работал и на чае. Считайте очки за признания или вообще не считайте, а просто рассказывайте.' },
+        { q: 'Нужен ли алкоголь', a: 'Нет. Набор одинаково работает и на чае. Считайте очки за признания или не считайте вовсе, а просто рассказывайте.' },
         { q: 'Подойдёт ли для малознакомой компании', a: 'Начните с безобидных карточек, а к личным переходите, когда люди перестанут коситься друг на друга. Веб-набор поэтому и открывается мягкими вопросами.' },
-        { q: 'Можно играть в браузере', a: 'Да, прямо на этой странице. Восемь карточек в день бесплатно. В приложении набор гораздо больше, и оно помнит, что вы уже спрашивали.' }
+        { q: 'Можно играть в браузере', a: 'Да, прямо на этой странице. Восемь карточек в день бесплатно, а в приложении набор гораздо больше и помнит, что вы уже спрашивали.' }
       ]
     }
   },
 
   roulette: {
+    min: 3,
     tagline: {
-      en: 'The card picks two of you and asks one about the other',
-      ru: 'Карточка сама выбирает двоих и спрашивает одного про другого'
+      en: 'The card picks two of you and asks about one',
+      ru: 'Карточка выбирает двоих и спрашивает про одного'
     },
-    players: { en: 'Three people or more, four is the sweet spot', ru: 'От трёх человек, идеально от четырёх' },
+    players: { en: 'Three and up, four is the sweet spot', ru: 'От трёх, идеально от четырёх' },
     best: {
-      en: 'For friends who already have history together',
-      ru: 'Для компании, у которой уже есть общая история'
+      en: 'Friends with shared history, any point of the evening',
+      ru: 'Компании с общей историей, в любой момент вечера'
     },
     intro: {
-      en: [
-        'Most question games ask about you. This one asks about the person sitting next to you. The card names two players and the first one answers a question about the second.',
-        'It gets good when the two versions do not match. One remembers the evening as an adventure, the other as a disaster, and the table listens to both and decides who to believe.'
-      ],
-      ru: [
-        'Обычные игры с вопросами спрашивают про тебя. Эта спрашивает про того, кто сидит рядом. Карточка называет двоих, и первый отвечает на вопрос про второго.',
-        'Смешно становится, когда версии расходятся. Один помнит вечер как приключение, второй как провал, а стол слушает обе версии и решает, кому верить.'
-      ]
+      en: 'Most question games ask about you. This one asks about the person next to you, because the card names two players and the first answers a question about the second. It gets good when the versions do not match, since one remembers the evening as an adventure and the other as a disaster.',
+      ru: 'Обычные игры с вопросами спрашивают про тебя. Эта спрашивает про того, кто сидит рядом, потому что карточка называет двоих, и первый отвечает на вопрос про второго. Смешно становится, когда версии расходятся, ведь один помнит вечер как приключение, а второй как провал.'
     },
     rules: {
       en: [
-        'Enter everyone who is playing and let the card pick the pair',
-        'The first person answers the question about the second, out loud and without dodging',
-        'The second adds their own version of the same story',
+        'Enter everyone playing and let the card pick the pair',
+        'The first answers about the second, out loud and without dodging',
+        'The second then adds their own version of the same story',
         'The table gets one follow-up question, not five',
-        'Then the card picks a new pair and it starts again'
+        'After that the card picks a new pair and it starts again'
       ],
       ru: [
-        'Впиши всех, кто играет, и карточка сама выберет пару',
-        'Первый отвечает на вопрос про второго, вслух и без отговорок',
+        'Впиши всех, кто играет, и карточка выберет пару',
+        'Первый отвечает про второго, вслух и без отговорок',
         'Второй добавляет свою версию той же истории',
         'Стол задаёт один уточняющий вопрос, а не пять',
         'Дальше карточка выбирает новую пару и всё повторяется'
@@ -117,113 +109,108 @@ export const GAME_CONTENT = {
     },
     variants: {
       en: [
-        { t: 'Without drinking', d: 'Nothing to replace here. The game runs on stories, so the only cost of a bad answer is the table refusing to accept it.' },
-        { t: 'For two', d: 'With two people every card is about the two of you. Take turns reading and both answer, and you end up with an evening of comparing memories.' },
-        { t: 'For a big group', d: 'From eight people put a minute on the clock for each answer. Without it, one story eats half the evening.' },
-        { t: 'For a new group', d: 'If people met recently, start with the first-impression questions. They are safe, and they give everyone something to laugh about straight away.' }
+        'Without drinking nothing changes, the game runs on stories rather than on forfeits',
+        'For two, every card is about the two of you, so the evening turns into comparing memories',
+        'From eight people put a minute on the clock, otherwise one story eats half the evening',
+        'With a new group stay on the first-impression cards, they are safe and land quickly'
       ],
       ru: [
-        { t: 'Без алкоголя', d: 'Тут и заменять нечего. Игра держится на историях, и единственная расплата за слабый ответ в том, что стол его не примет.' },
-        { t: 'Вдвоём', d: 'Вдвоём каждая карточка про вас двоих. Читайте по очереди и отвечайте оба, и вечер уйдёт на сравнение воспоминаний.' },
-        { t: 'Большой компанией', d: 'От восьми человек ставьте минуту на ответ. Без таймера одна история съест полвечера.' },
-        { t: 'Для новой компании', d: 'Если люди познакомились недавно, начните с вопросов про первое впечатление. Они безопасные и сразу дают повод посмеяться.' }
+        'Без алкоголя ничего не меняется, игра держится на историях, а не на штрафах',
+        'Вдвоём каждая карточка про вас двоих, и вечер уходит на сравнение воспоминаний',
+        'От восьми человек ставьте минуту на ответ, иначе одна история съест полвечера',
+        'В новой компании держитесь вопросов про первое впечатление, они безопасные'
       ]
     },
-    tips: {
+    advice: {
       en: [
-        'Read the names the way the card wrote them. Swapping who answers whom kills the point',
-        'The second version matters more than the first. Ask for it even when everyone is already laughing',
-        'If a pair comes up twice in a row, keep it. The second question about the same two people is usually the sharper one'
+        'Read the names as the card wrote them, swapping who answers kills the point',
+        'The second version matters more than the first, ask for it every time',
+        'If the same pair comes up twice, keep it, the second question is sharper'
       ],
       ru: [
-        'Читай имена так, как их выдала карточка. Если поменять, кто про кого отвечает, весь смысл теряется',
-        'Вторая версия важнее первой. Проси её, даже когда все уже смеются',
-        'Если пара выпала два раза подряд, не меняй. Второй вопрос про тех же двоих обычно острее'
+        'Читай имена так, как выдала карточка, иначе весь смысл теряется',
+        'Вторая версия важнее первой, проси её каждый раз',
+        'Если пара выпала дважды, не меняй, второй вопрос будет острее'
       ]
     },
     faq: {
       en: [
         { q: 'What if people do not know each other well?', a: 'Then stay on the first-impression cards. Questions about a shared past need a shared past, so save those for the group that has one.' },
-        { q: 'Who picks the pair?', a: 'The card does. That is the whole trick. Nobody can aim a question at a specific person, so nothing feels targeted.' },
+        { q: 'Who picks the pair?', a: 'The card does, and that is the whole trick. Nobody can aim a question at a particular person, so nothing at the table feels targeted.' },
         { q: 'Does it work for two?', a: 'Yes, and differently. Every card becomes a question about the two of you, which turns the game into a long conversation rather than a round.' },
-        { q: 'Can I play in the browser?', a: 'Yes. This page uses two stand-in names so you can see how the cards read. The app pulls real names from your own friend list.' }
+        { q: 'Can I play in the browser?', a: 'Yes. This page uses two stand-in names so you can see how the cards read, and the app pulls real names from your own friend list.' }
       ],
       ru: [
         { q: 'А если люди плохо знакомы', a: 'Тогда оставайтесь на вопросах про первое впечатление. Для вопросов про общее прошлое нужно само общее прошлое, так что их лучше отложить.' },
-        { q: 'Кто выбирает пару', a: 'Карточка. В этом весь фокус. Никто не может направить вопрос в конкретного человека, поэтому ничего не выглядит наездом.' },
+        { q: 'Кто выбирает пару', a: 'Карточка, и в этом весь фокус. Никто не может направить вопрос в конкретного человека, поэтому за столом ничего не выглядит наездом.' },
         { q: 'Работает ли вдвоём', a: 'Да, только иначе. Каждая карточка становится вопросом про вас двоих, и игра превращается в долгий разговор.' },
-        { q: 'Можно играть в браузере', a: 'Да. На этой странице стоят два условных имени, чтобы было видно, как читаются карточки. В приложении подставляются имена из твоего списка друзей.' }
+        { q: 'Можно играть в браузере', a: 'Да. На этой странице стоят два условных имени, чтобы было видно, как читаются карточки, а в приложении подставляются имена из твоего списка друзей.' }
       ]
     }
   },
 
   tell_a_moment: {
+    min: 2,
     tagline: {
-      en: 'Questions people answer with a story instead of one word',
-      ru: 'Вопросы, на которые отвечают историей, а не одним словом'
+      en: 'Questions answered with a story, not a word',
+      ru: 'Вопросы, на которые отвечают историей'
     },
-    players: { en: 'Two people or more', ru: 'От двух человек' },
+    players: { en: 'Two and up, great for a pair', ru: 'От двух, хорошо и для пары' },
     best: {
-      en: 'For a slow evening when you actually want to talk',
-      ru: 'Для тихого вечера, когда хочется поговорить'
+      en: 'A slow evening when you actually want to talk',
+      ru: 'Тихому вечеру, когда хочется поговорить'
     },
     intro: {
-      en: [
-        'This one is not a race. A single question can hold the table for twenty minutes, and that is the point rather than a problem.',
-        'Every card asks for a moment. Not an opinion, not a favourite, a moment with a time and a place in it. That small difference is why the answers stop sounding like small talk.'
-      ],
-      ru: [
-        'Это игра не на скорость. Один вопрос может занять двадцать минут, и это не сбой, а смысл.',
-        'Каждая карточка просит момент. Не мнение и не любимое что-то, а случай, у которого есть время и место. Из-за этой мелочи ответы перестают быть светской болтовнёй.'
-      ]
+      en: 'This one is not a race. A single question can hold the table for twenty minutes, and that is the point rather than a problem. Every card asks for a moment with a time and a place in it instead of an opinion or a favourite, and that small difference is why the answers stop sounding like small talk.',
+      ru: 'Это игра не на скорость. Один вопрос может занять двадцать минут, и это не сбой, а смысл. Каждая карточка просит момент, у которого есть время и место, а не мнение или любимое что-то, и из-за этой мелочи ответы перестают быть светской болтовнёй.'
     },
     rules: {
       en: [
         'Ask one person rather than throwing the card at the table',
-        'Let the silence sit for a few seconds, the first answer is rarely the real one',
-        'Follow up on one detail from what they said',
+        'Let the silence sit, the first answer is rarely the real one',
+        'Follow up on one detail from what they just said',
         'When the story ends, pass the cards to whoever answered',
-        'Nobody has to answer, and nobody has to explain why not'
+        'Nobody has to answer and nobody explains why not'
       ],
       ru: [
-        'Спрашивай одного человека, а не бросай карточку на весь стол',
-        'Дай тишине повисеть пару секунд, первый ответ редко настоящий',
+        'Спрашивай одного человека, а не весь стол сразу',
+        'Дай тишине повисеть, первый ответ редко настоящий',
         'Уточни одну деталь из того, что он рассказал',
-        'Когда история закончилась, отдай карточки тому, кто отвечал',
-        'Отвечать не обязательно, и объяснять отказ тоже не нужно'
+        'Когда история кончилась, отдай карточки рассказчику',
+        'Отвечать не обязан никто и объяснять отказ не нужно'
       ]
     },
     variants: {
       en: [
-        { t: 'Without drinking', d: 'Nothing changes. This is the game we hand to people who want a long evening and a clear head.' },
-        { t: 'For two', d: 'The set works best with two. One question, two answers, and an hour disappears somewhere between them.' },
-        { t: 'For a big group', d: 'From six people, answer in pairs. Two people take the same card, everyone else listens, and it stays a conversation instead of a queue.' },
-        { t: 'On a walk', d: 'Cards read fine out loud with no table. One question per block works surprisingly well.' }
+        'Without drinking nothing changes, this is the set for a long evening and a clear head',
+        'For two it works best of all, one question and two answers fill an hour easily',
+        'From six people answer in pairs, so it stays a conversation instead of a queue',
+        'On a walk the cards read fine out loud, one question per block works well'
       ],
       ru: [
-        { t: 'Без алкоголя', d: 'Ничего не меняется. Эту игру мы и даём тем, кто хочет долгий вечер и свежую голову.' },
-        { t: 'Вдвоём', d: 'Набор лучше всего работает на двоих. Один вопрос, два ответа, и час куда-то уходит между ними.' },
-        { t: 'Большой компанией', d: 'От шести человек отвечайте парами. Двое берут одну карточку, остальные слушают, и это остаётся разговором, а не очередью.' },
-        { t: 'На прогулке', d: 'Карточки нормально читаются вслух и без стола. Один вопрос на квартал заходит на удивление хорошо.' }
+        'Без алкоголя ничего не меняется, это набор для долгого вечера и свежей головы',
+        'Вдвоём работает лучше всего, один вопрос и два ответа легко занимают час',
+        'От шести человек отвечайте парами, тогда это остаётся разговором, а не очередью',
+        'На прогулке карточки нормально читаются вслух, один вопрос на квартал'
       ]
     },
-    tips: {
+    advice: {
       en: [
-        'Ask the follow-up. One question about a detail turns a short answer into the actual story',
-        'Do not answer your own card first. People copy the length of the first answer',
+        'Ask the follow-up, one question about a detail unlocks the actual story',
+        'Do not answer your own card first, people copy the length of the first answer',
         'If a question lands flat, drop it and move on without discussing why'
       ],
       ru: [
-        'Задавай уточняющий вопрос. Один вопрос про деталь превращает короткий ответ в настоящую историю',
-        'Не отвечай на свою карточку первым. Люди повторяют длину первого ответа',
-        'Если вопрос не зашёл, брось его и иди дальше, не обсуждая почему'
+        'Задавай уточняющий вопрос, он и открывает настоящую историю',
+        'Не отвечай на свою карточку первым, люди копируют длину ответа',
+        'Если вопрос не зашёл, брось его и иди дальше без обсуждений'
       ]
     },
     faq: {
       en: [
         { q: 'Is this good for two people?', a: 'It is the best of the four for two. The cards ask for stories, and two people can follow a story without waiting for a turn.' },
-        { q: 'What if someone gives a one-word answer?', a: 'Ask about one detail of it. That is usually all it takes, and it is why the follow-up is written into the rules.' },
-        { q: 'Are the questions personal?', a: 'They ask for moments, not secrets. Nothing in the set forces anyone to confess anything, so it works with parents and colleagues too.' },
+        { q: 'What if someone gives a one-word answer?', a: 'Ask about one detail of it. That is usually all it takes, which is why the follow-up is written into the rules.' },
+        { q: 'Are the questions personal?', a: 'They ask for moments rather than secrets. Nothing in the set forces a confession, so it works with parents and colleagues too.' },
         { q: 'Can I play in the browser?', a: 'Yes, eight cards a day on this page. The app keeps the full set and does not repeat what it has already asked you.' }
       ],
       ru: [
@@ -236,71 +223,66 @@ export const GAME_CONTENT = {
   },
 
   would_you_rather: {
+    min: 2,
     tagline: {
-      en: 'Two options, and both of them cost you something',
+      en: 'Two options, and both of them cost you',
       ru: 'Два варианта, и оба чем-то неудобны'
     },
-    players: { en: 'Two people or more, four and up is livelier', ru: 'От двух человек, от четырёх живее' },
+    players: { en: 'Two and up, four is louder', ru: 'От двух, от четырёх громче' },
     best: {
-      en: 'When the table needs waking up in under a minute',
-      ru: 'Когда стол надо расшевелить за минуту'
+      en: 'The first ten minutes, to wake a quiet table up',
+      ru: 'Первым десяти минутам, чтобы расшевелить стол'
     },
     intro: {
-      en: [
-        'An argument without a subject. Both options are bad in their own way, so whichever you pick you end up defending it.',
-        'The trick is in the writing. If one option is obviously better the card is dead, so every pair in the set takes something away from you either way.'
-      ],
-      ru: [
-        'Спор без темы. Оба варианта плохи по-своему, поэтому какой ни выбери, придётся его защищать.',
-        'Весь фокус в формулировке. Если один вариант очевидно лучше, карточка мертва, поэтому в каждой паре у тебя что-то отбирают в обоих случаях.'
-      ]
+      en: 'An argument without a subject. Both options are bad in their own way, so whichever you pick you end up defending it. The trick is in the writing, because a card with one obviously better option is dead on arrival, and every pair in the set takes something away from you either way.',
+      ru: 'Спор без темы. Оба варианта плохи по-своему, поэтому какой ни выбери, придётся его защищать. Весь фокус в формулировке, ведь карточка с очевидно лучшим вариантом мертва, а в каждой паре набора у тебя что-то отбирают в обоих случаях.'
     },
     rules: {
       en: [
-        'Read both options out loud without hinting which one you like',
+        'Read both options out loud without hinting at your own',
         'Everyone picks a side before anyone explains anything',
         'Then each side says why, one sentence at a time',
-        'The bigger side has to convince one person to switch',
-        'Nobody wins, and that is fine, the next card is already waiting'
+        'The bigger side has to talk one person into switching',
+        'Nobody wins and the next card is already waiting'
       ],
       ru: [
-        'Читай оба варианта вслух и не намекай, какой нравится тебе',
-        'Все выбирают сторону до того, как кто-то начнёт объяснять',
-        'Потом каждая сторона говорит почему, по одному предложению',
-        'Большая сторона должна перетянуть к себе хотя бы одного',
-        'Победителя нет, и это нормально, следующая карточка уже ждёт'
+        'Читай оба варианта вслух и не намекай на свой',
+        'Все выбирают сторону до того, как кто-то объяснит',
+        'Потом каждая сторона говорит почему, по одной фразе',
+        'Большая сторона должна перетянуть хотя бы одного',
+        'Победителя нет, и следующая карточка уже ждёт'
       ]
     },
     variants: {
       en: [
-        { t: 'Without drinking', d: 'The game never needed it. Count who switched sides most often instead, that person is the one to watch.' },
-        { t: 'For two', d: 'Take opposite sides on purpose, even the one you do not believe in. Defending a position you dislike is the funniest part of the game.' },
-        { t: 'For a big group', d: 'Split the room physically, one option to the left, the other to the right. From ten people this reads faster than going around the table.' },
-        { t: 'With kids at the table', d: 'The set has no adult content, so the questions work at a family dinner. Younger players usually pick faster and argue harder.' }
+        'Without drinking count who switched sides most often, that person is worth watching',
+        'For two take opposite sides on purpose, even the one you do not believe in',
+        'From ten people split the room physically, left option and right option',
+        'With kids at the table the set still works, they choose faster and argue harder'
       ],
       ru: [
-        { t: 'Без алкоголя', d: 'Он тут и не нужен был. Считайте, кто чаще менял сторону, за этим человеком и стоит следить.' },
-        { t: 'Вдвоём', d: 'Занимайте противоположные стороны специально, даже ту, в которую не верите. Защищать позицию, которая тебе не нравится, самое смешное в игре.' },
-        { t: 'Большой компанией', d: 'Разделите комнату физически, один вариант налево, второй направо. От десяти человек так быстрее, чем обходить стол.' },
-        { t: 'Когда за столом дети', d: 'В наборе нет взрослого содержания, так что вопросы годятся и для семейного ужина. Младшие обычно выбирают быстрее и спорят злее.' }
+        'Без алкоголя считайте, кто чаще менял сторону, за ним и стоит следить',
+        'Вдвоём занимайте противоположные стороны специально, даже нелюбимую',
+        'От десяти человек делите комнату физически, один вариант влево, другой вправо',
+        'С детьми за столом набор тоже идёт, они выбирают быстрее и спорят злее'
       ]
     },
-    tips: {
+    advice: {
       en: [
-        'Make everyone choose before the talking starts. Once one person explains, the rest drift to that side',
-        'Ban "both" and "neither". The card only works if you have to give something up',
-        'Keep the pace up. Two minutes per card is plenty, and this is the game you use to warm the table before a longer one'
+        'Make everyone choose before the talking starts, otherwise they drift',
+        'Ban both and neither, the card works only if you give something up',
+        'Keep the pace up, two minutes a card is plenty for this one'
       ],
       ru: [
-        'Пусть все выберут до начала разговора. Как только кто-то объяснит, остальные сползут на его сторону',
-        'Запрети «оба» и «ни то, ни другое». Карточка работает только если чем-то приходится жертвовать',
-        'Держи темп. Двух минут на карточку хватает, и именно этой игрой удобно разогревать стол перед долгой'
+        'Пусть все выберут до начала разговора, иначе сползут к первому',
+        'Запрети «оба» и «ни то, ни другое», иначе жертвовать нечем',
+        'Держи темп, двух минут на карточку этой игре хватает'
       ]
     },
     faq: {
       en: [
-        { q: 'Why not make one option clearly better?', a: 'Because then there is nothing to argue about. Every pair in the set is written so both sides cost you something.' },
-        { q: 'How long does a round take?', a: 'About a minute or two per card. It is the fastest of the four games, which makes it the one to open the evening with.' },
+        { q: 'Why not make one option clearly better?', a: 'Because then there is nothing to argue about. Every pair in the set is written so that both sides cost you something.' },
+        { q: 'How long does a round take?', a: 'A minute or two per card. It is the fastest of the four games, which makes it the one to open the evening with.' },
         { q: 'Is it safe for a mixed table?', a: 'Yes. The questions are about choices rather than confessions, so nobody has to reveal anything about themselves.' },
         { q: 'Can I play in the browser?', a: 'Yes, eight cards a day here. The app has the full set plus the other three games in the same place.' }
       ],
@@ -316,13 +298,15 @@ export const GAME_CONTENT = {
 
 export const CONTENT_LABELS = {
   en: {
-    about: 'What the game is', rules: 'Rules', variants: 'Ways to play',
-    tips: 'How to run it well', examples: 'Cards from the set',
-    fitPlayers: 'Players', fitBest: 'Works best', faq: 'Questions about this game'
+    about: 'What is this game?', rules: 'Rules', variants: 'Other ways to play',
+    advice: 'Advice for the host', examples: 'Cards from the set',
+    fitPlayers: 'Players', fitBest: 'Best moment', faq: 'Questions about this game',
+    playCta: 'Play'
   },
   ru: {
-    about: 'Что за игра', rules: 'Правила', variants: 'Как ещё играть',
-    tips: 'Как вести, чтобы не заглохло', examples: 'Карточки из набора',
-    fitPlayers: 'Сколько человек', fitBest: 'Лучше всего', faq: 'Вопросы про эту игру'
+    about: 'Что за игра?', rules: 'Правила', variants: 'Как ещё играть',
+    advice: 'Рекомендации по игре', examples: 'Карточки из набора',
+    fitPlayers: 'Игроков', fitBest: 'Когда заходит', faq: 'Вопросы про эту игру',
+    playCta: 'Играть'
   }
 };
