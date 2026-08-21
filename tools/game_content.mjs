@@ -6,10 +6,9 @@ export const GAME_CONTENT = {
   never_have_i: {
     min: 3,
     tagline: {
-      en: 'Confessions that drag a story out behind them',
-      ru: 'Признания, за которыми идёт история'
+      en: 'Confessions that the table immediately asks you to explain',
+      ru: 'Признания, за которыми стол тут же просит рассказать историю'
     },
-    players: { en: 'Three players and up', ru: 'От трёх игроков и больше' },
     best: {
       en: 'A warmed-up table, once people stopped being polite',
       ru: 'Разогретой компании, когда все перестали стесняться'
@@ -50,14 +49,14 @@ export const GAME_CONTENT = {
     },
     advice: {
       en: [
-        'Do not explain the card first, half the laugh is in how differently people read it',
-        'If the whole table owns up, ask who had it worse rather than who did it',
-        'Leave the quiet one alone, two cards later they usually start talking'
+        { t: 'Do not explain the card', d: 'half the laugh is in how differently people read the same line' },
+        { t: 'If everyone owns up', d: 'ask who had it worse rather than who did it at all' },
+        { t: 'Leave the quiet one alone', d: 'two cards later they usually start talking on their own' }
       ],
       ru: [
-        'Не объясняй карточку заранее, половина смеха в том, что её поняли по-разному',
-        'Если признались все, спрашивай не кто это делал, а у кого вышло хуже',
-        'Молчуна не трогай, через пару карточек он заговорит сам'
+        { t: 'Не объясняй карточку', d: 'половина смеха в том, что одну строчку поняли по-разному' },
+        { t: 'Если признались все', d: 'спрашивай не кто это делал, а у кого вышло хуже' },
+        { t: 'Молчуна не трогай', d: 'через пару карточек он заговорит сам, без уговоров' }
       ]
     },
     faq: {
@@ -79,10 +78,9 @@ export const GAME_CONTENT = {
   roulette: {
     min: 3,
     tagline: {
-      en: 'The card picks two of you and asks about one',
-      ru: 'Карточка выбирает двоих и спрашивает про одного'
+      en: 'The card picks two of you and asks one about the other',
+      ru: 'Карточка сама выбирает двоих и спрашивает одного про другого'
     },
-    players: { en: 'Three players and up', ru: 'От трёх игроков и больше' },
     best: {
       en: 'Friends with shared history, any point of the evening',
       ru: 'Компании с общей историей, в любой момент вечера'
@@ -123,14 +121,14 @@ export const GAME_CONTENT = {
     },
     advice: {
       en: [
-        'Read the names as the card wrote them, swapping who answers kills the point',
-        'The second version matters more than the first, ask for it every time',
-        'If the same pair comes up twice, keep it, the second question is sharper'
+        { t: 'Read the names as written', d: 'swapping who answers whom kills the point of the card' },
+        { t: 'The second version matters', d: 'ask for it every time, even when everyone is already laughing' },
+        { t: 'If a pair repeats', d: 'keep it, the second question about the same two is sharper' }
       ],
       ru: [
-        'Читай имена так, как выдала карточка, иначе весь смысл теряется',
-        'Вторая версия важнее первой, проси её каждый раз',
-        'Если пара выпала дважды, не меняй, второй вопрос будет острее'
+        { t: 'Читай имена как выдала карточка', d: 'если поменять, кто про кого отвечает, смысл теряется' },
+        { t: 'Вторая версия важнее', d: 'проси её каждый раз, даже когда все уже смеются' },
+        { t: 'Если пара выпала дважды', d: 'не меняй её, второй вопрос про тех же двоих острее' }
       ]
     },
     faq: {
@@ -152,10 +150,9 @@ export const GAME_CONTENT = {
   tell_a_moment: {
     min: 2,
     tagline: {
-      en: 'Questions answered with a story, not a word',
-      ru: 'Вопросы, на которые отвечают историей'
+      en: 'Questions that get answered with a story instead of one word',
+      ru: 'Вопросы, на которые отвечают историей, а не одним словом'
     },
-    players: { en: 'Two players and up', ru: 'От двух игроков и больше' },
     best: {
       en: 'A slow evening when you actually want to talk',
       ru: 'Тихому вечеру, когда хочется поговорить'
@@ -196,14 +193,14 @@ export const GAME_CONTENT = {
     },
     advice: {
       en: [
-        'Ask the follow-up, one question about a detail unlocks the actual story',
-        'Do not answer your own card first, people copy the length of the first answer',
-        'If a question lands flat, drop it and move on without discussing why'
+        { t: 'Ask the follow-up', d: 'one question about a detail unlocks the actual story' },
+        { t: 'Do not answer first', d: 'people copy the length of whoever answered before them' },
+        { t: 'If a question lands flat', d: 'drop it and move on without discussing why it did' }
       ],
       ru: [
-        'Задавай уточняющий вопрос, он и открывает настоящую историю',
-        'Не отвечай на свою карточку первым, люди копируют длину ответа',
-        'Если вопрос не зашёл, брось его и иди дальше без обсуждений'
+        { t: 'Задавай уточняющий вопрос', d: 'именно он и открывает настоящую историю' },
+        { t: 'Не отвечай первым', d: 'люди копируют длину ответа того, кто говорил до них' },
+        { t: 'Если вопрос не зашёл', d: 'брось его и иди дальше, не обсуждая почему' }
       ]
     },
     faq: {
@@ -225,10 +222,9 @@ export const GAME_CONTENT = {
   would_you_rather: {
     min: 2,
     tagline: {
-      en: 'Two options, and both of them cost you',
-      ru: 'Два варианта, и оба чем-то неудобны'
+      en: 'Two options that both cost you something, so the table argues',
+      ru: 'Два варианта, и оба чем-то неудобны, поэтому спор неизбежен'
     },
-    players: { en: 'Two players and up', ru: 'От двух игроков и больше' },
     best: {
       en: 'The first ten minutes, to wake a quiet table up',
       ru: 'Первым десяти минутам, чтобы расшевелить стол'
@@ -269,14 +265,14 @@ export const GAME_CONTENT = {
     },
     advice: {
       en: [
-        'Make everyone choose before the talking starts, otherwise they drift',
-        'Ban both and neither, the card works only if you give something up',
-        'Keep the pace up, two minutes a card is plenty for this one'
+        { t: 'Everyone chooses first', d: 'once one person explains, the rest drift to that side' },
+        { t: 'Ban both and neither', d: 'the card works only if you have to give something up' },
+        { t: 'Keep the pace up', d: 'two minutes a card is plenty for this one, then move on' }
       ],
       ru: [
-        'Пусть все выберут до начала разговора, иначе сползут к первому',
-        'Запрети «оба» и «ни то, ни другое», иначе жертвовать нечем',
-        'Держи темп, двух минут на карточку этой игре хватает'
+        { t: 'Пусть все выберут сразу', d: 'иначе сползут на сторону того, кто объяснил первым' },
+        { t: 'Запрети «оба»', d: 'без жертвы карточка не работает и спорить не о чем' },
+        { t: 'Держи темп', d: 'двух минут на карточку этой игре более чем хватает' }
       ]
     },
     faq: {

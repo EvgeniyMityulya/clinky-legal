@@ -15,6 +15,7 @@ const EN_TITLE = {
   never_have_i: 'Never Have I Ever', roulette: 'Roulette',
   tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather'
 };
+const playersLine = (min, loc) => (loc === 'ru' ? `От ${min}+ игроков` : `${min}+ players`);
 const RU_ACC = {
   never_have_i: '«Я никогда не»', roulette: '«Рулетку»',
   tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»'
@@ -185,7 +186,7 @@ function gamesPrerender(loc) {
     const href = slug[loc] ? `/${slug[loc]}` : (loc === 'ru' ? '/ru/games' : '/games');
     return `<h3><a href="${href}">${esc(g.title[loc])}</a></h3>
 <p>${esc(c.tagline[loc])}</p>
-<p>${esc(c.players[loc])}. ${esc(c.best[loc])}</p>`;
+<p>${esc(playersLine(c.min, loc))}. ${esc(c.best[loc])}</p>`;
   }).join('\n');
 
   return `<div id="prerender">
@@ -233,7 +234,7 @@ function playPrerender(s) {
 <p>${esc(t.lede)}</p>
 <p>${esc(t.limit)}</p>
 <h2>${esc(L.about)}</h2>
-<p>${esc(L.fitPlayers)} ${esc(c.players[loc])}</p>
+<p>${esc(L.fitPlayers)} ${esc(playersLine(c.min, loc))}</p>
 <p>${esc(L.fitBest)} ${esc(c.best[loc])}</p>
 <p>${esc(c.intro[loc])}</p>
 <h2>${esc(L.rules)}</h2>
@@ -241,9 +242,9 @@ function playPrerender(s) {
 <h2>${esc(L.examples)}</h2>
 <ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
 <h2>${esc(L.variants)}</h2>
-<ol>${c.variants[loc].map((v) => `<li><strong>${esc(v.t)}</strong> ${esc(v.d)}</li>`).join('')}</ol>
+<ol>${c.variants[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.advice)}</h2>
-<ol>${c.advice[loc].map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
+<ol>${c.advice[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.faq)}</h2>
 ${faqHtml(c.faq[loc])}
 </div>`;

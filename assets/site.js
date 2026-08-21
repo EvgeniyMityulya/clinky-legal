@@ -824,7 +824,7 @@
             (c ? '<span class="hub-line">' + esc(c.tagline[state.lang]) + '</span>' : '') +
             '<span class="hub-foot">' +
               '<span class="hub-cta">' + esc((L && L.playCta) || 'Play') + '</span>' +
-              (c ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(c.players[state.lang]) + '</span></span>' : '') +
+              (c ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(playersLine(c.min)) + '</span></span>' : '') +
             '</span>' +
           '</a>';
         }).join('') +
@@ -891,7 +891,7 @@
     if (_gcLoading) return;
     _gcLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=ae7ab260';
+    sc.src = '/assets/game-content.js?v=84a72543';
     sc.onload = function () { _gcLoading = false; cb(); };
     sc.onerror = function () { _gcLoading = false; };
     document.head.appendChild(sc);
@@ -917,7 +917,7 @@
       items.map(function (item, i) {
         var body = typeof item === 'string'
           ? esc(item)
-          : '<strong style="font-weight:800;color:#1c1326">' + esc(item.t) + '</strong> ' + esc(item.d);
+          : '<strong style="font-weight:800;color:#1c1326">' + esc(item.t) + '</strong>, ' + esc(item.d);
         return '<li class="soft-card" style="display:flex;gap:14px;align-items:flex-start;padding:15px 18px">' +
           '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FFE2E6;color:#E11D48;font-family:Nunito,sans-serif;font-weight:900;font-size:13.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
           '<span style="font-size:15px;line-height:1.55;color:#3a323f">' + body + '</span>' +
@@ -925,10 +925,13 @@
       }).join('') +
     '</ol>';
   }
+  function playersLine(min) {
+    return state.lang === 'ru' ? 'От ' + min + '+ игроков' : min + '+ players';
+  }
   function fitStrip(c) {
     var L = contentLabels();
     var rows = [
-      [ph('users-three', 19, '#FF4F62', 'ph-fill'), L.fitPlayers, c.players[state.lang]],
+      [ph('users-three', 19, '#FF4F62', 'ph-fill'), L.fitPlayers, playersLine(c.min)],
       [ph('clock', 19, '#FF4F62', 'ph-fill'), L.fitBest, c.best[state.lang]]
     ];
     return '<div class="fit-grid">' +
@@ -1498,14 +1501,35 @@
     var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];
     if (v) document.title = v;
   }
+  var _pageKey = '';
+  function pageKey(page) { return page === 'play' ? 'play:' + state.playSlug : page; }
   function setPage(page) {
+    var leaving = document.querySelector('#app .page-in');
+    if (leaving && pageKey(page) !== _pageKey && !prefersReducedMotion()) {
+      leaving.classList.add('page-out');
+      setTimeout(function () { commitPage(page); }, 120);
+      return;
+    }
+    commitPage(page);
+  }
+  function prefersReducedMotion() {
+    try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
+  }
+  function commitPage(page) {
     state.page = page;
+    _pageKey = pageKey(page);
     try {
       var tgt = pathFor(page, state.lang);
       if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
     } catch (e) {}
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
     state.scrolled = window.scrollY > 24; paint(); syncDocTitle();
+  }
+  function closeMenu(instant) {
+    var el = document.querySelector('.nav-menu');
+    if (!el || instant) { state.menuOpen = false; paintHeader(); return; }
+    el.classList.add('is-closing');
+    setTimeout(function () { state.menuOpen = false; paintHeader(); }, 180);
   }
   function joinCta() { if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
   function scrollWaitlist() {
@@ -1607,8 +1631,12 @@
     var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
-      case 'home': case 'games': case 'about': case 'support': case 'privacy': case 'terms': state.menuOpen = false; setPage(a); break;
-      case 'menu': state.menuOpen = !state.menuOpen; paintHeader(); break;
+      case 'home': case 'games': case 'about': case 'support': case 'privacy': case 'terms': if (state.menuOpen) closeMenu(true); setPage(a); break;
+      case 'menu': {
+        if (state.menuOpen) closeMenu();
+        else { state.menuOpen = true; paintHeader(); }
+        break;
+      }
       case 'en': setLang('en'); break;
       case 'ru': setLang('ru'); break;
       case 'join': joinCta(); break;
