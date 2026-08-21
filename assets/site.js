@@ -56,6 +56,17 @@
       playDoneTitle: 'That is today\u2019s deck',
       playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
+      aboutStoryTitle: 'Why this exists',
+      aboutStory1: 'We see our friends a lot, at home and in bars, and there is almost always someone new at the table. The first twenty minutes go on traffic and weather while the evening quietly waits to start.',
+      aboutStory2: 'Clinky came out of a trick we kept using. Someone would pull a random question, read it out loud, and the conversation started on its own. The app does that part now, and it also remembers who we have seen lately, so a rare meet-up does not turn into a year of silence.',
+      aboutWhoTitle: 'Who makes it',
+      aboutWhoName: 'Evgeniy Mityulya',
+      aboutWhoRole: 'iOS developer, building Clinky solo',
+      aboutWho1: 'I have been writing mobile apps for over three years, in Swift and SwiftUI. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame.',
+      aboutWho2: 'Write to me directly, I read everything and usually answer the same day.',
+      aboutDataTitle: 'What happens to your data',
+      aboutData1: 'There are no accounts and there is no server. Your meet-ups, your friends and your collection stay on your phone, which means I cannot see whom you meet or what you answer. Nothing to leak, because nothing leaves the device.',
+      aboutDataLink: 'Read the privacy policy',
       slogan: "Bring your friends, we'll bring the fun!",
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
@@ -102,6 +113,17 @@
       playDoneTitle: 'На сегодня колода закончилась',
       playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
+      aboutStoryTitle: 'Зачем это всё',
+      aboutStory1: 'Мы часто собираемся с друзьями, дома и в барах, и почти всегда за столом оказывается кто-то новый. Первые двадцать минут уходят на пробки и погоду, хотя вечер задумывался совсем не про это.',
+      aboutStory2: 'Clinky вырос из приёма, которым мы пользовались и так. Кто-то вытягивал случайный вопрос, читал его вслух, и разговор запускался сам. Теперь эту часть делает приложение, а заодно помнит, с кем мы виделись недавно, чтобы редкая встреча не превратилась в год тишины.',
+      aboutWhoTitle: 'Кто делает',
+      aboutWhoName: 'Евгений Митюля',
+      aboutWhoRole: 'iOS-разработчик, делаю Clinky один',
+      aboutWho1: 'Пишу мобильные приложения больше трёх лет, на Swift и SwiftUI. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться.',
+      aboutWho2: 'Пишите мне напрямую, я читаю всё и обычно отвечаю в тот же день.',
+      aboutDataTitle: 'Что с вашими данными',
+      aboutData1: 'Аккаунтов нет, сервера тоже нет. Встречи, друзья и коллекция лежат на вашем телефоне, поэтому я не вижу, с кем вы встречаетесь и что отвечаете на карточки. Утечь нечему, потому что ничего не уходит с устройства.',
+      aboutDataLink: 'Читать политику приватности',
       slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
@@ -122,6 +144,7 @@
   };
 
   var GAME_IDS = ['never_have_i', 'roulette', 'tell_a_moment', 'would_you_rather'];
+  var AUTHOR_LINKS = [];
   var GAMES = [
     { title: { en: 'Never have I ever', ru: 'Я никогда не' }, how: {
       en: ['Read the card out loud, exactly as written', 'Whoever has done it owns up to the table', 'And tells the story behind that card'],
@@ -1096,11 +1119,51 @@
         '<div style="max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
-        '<div style="max-width:680px;margin:48px auto 0;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
+      '</section>' +
+      aboutStory() +
+      '<section style="padding:0 clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
+        '<div style="max-width:680px;margin:0 auto;text-align:center">' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
+  }
+  function aboutStory() {
+    var t = tdict();
+    var para = function (text) {
+      return '<p style="font-size:16px;line-height:1.72;color:#3a323f;margin:0 0 14px">' + esc(text) + '</p>';
+    };
+    var head = function (text) {
+      return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(text) + '</h2>';
+    };
+    return '<section style="padding:0 clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
+      '<div style="max-width:760px;margin:0 auto">' +
+        head(t.aboutStoryTitle) + para(t.aboutStory1) + para(t.aboutStory2) +
+        '<div style="height:clamp(20px,3vh,34px)"></div>' +
+        head(t.aboutWhoTitle) +
+        '<div class="soft-card" style="padding:22px 24px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">' +
+          '<span style="flex:none;width:52px;height:52px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + ph('user-circle', 30, '#E11D48', 'ph-fill') + '</span>' +
+          '<span style="flex:1 1 260px;min-width:0">' +
+            '<span style="display:block;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;color:#1c1326">' + esc(t.aboutWhoName) + '</span>' +
+            '<span style="display:block;font-size:14px;color:#7a7280;margin-bottom:12px">' + esc(t.aboutWhoRole) + '</span>' +
+            '<span style="display:block;font-size:15px;line-height:1.65;color:#3a323f;margin-bottom:10px">' + esc(t.aboutWho1) + '</span>' +
+            '<span style="display:block;font-size:15px;line-height:1.65;color:#3a323f">' + esc(t.aboutWho2) + '</span>' +
+            '<span style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">' + authorLinks() + '</span>' +
+          '</span>' +
+        '</div>' +
+        '<div style="height:clamp(20px,3vh,34px)"></div>' +
+        head(t.aboutDataTitle) + para(t.aboutData1) +
+        '<p style="margin:0"><button data-act="privacy" style="background:transparent;border:0;cursor:pointer;padding:0;font-family:DM Sans,sans-serif;font-size:15px;font-weight:700;color:#E11D48">' + esc(t.aboutDataLink) + ' →</button></p>' +
+      '</div>' +
+    '</section>';
+  }
+  function authorLinks() {
+    var out = [];
+    for (var i = 0; i < AUTHOR_LINKS.length; i++) {
+      var l = AUTHOR_LINKS[i];
+      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none">' + ph(l.icon, 17, '#E11D48', 'ph-fill') + esc(l.label) + '</a>');
+    }
+    return out.join('');
   }
 
   // ===== SUPPORT =====

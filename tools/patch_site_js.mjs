@@ -4,6 +4,7 @@ import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { SHELLS } from './shell_meta.mjs';
 import { ICON_PATHS } from './icons_data.mjs';
+import { AUTHOR_LINKS } from './about_content.mjs';
 
 const FILE = 'assets/site.js';
 let js = readFileSync(FILE, 'utf8');
@@ -63,6 +64,7 @@ if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
 const titles = Object.fromEntries(SHELLS.map((s) => [s.path, s.title]));
 js = js.replace(/  var DOC_TITLES = \{[^}]*\};/, '  var DOC_TITLES = ' + JSON.stringify(titles) + ';');
 
+js = js.replace(/  var AUTHOR_LINKS = \[[^;]*\];/, '  var AUTHOR_LINKS = ' + JSON.stringify(AUTHOR_LINKS) + ';');
 js = js.replace(/  var ICON_PATHS = \{[^;]*\};/, '  var ICON_PATHS = ' + JSON.stringify(ICON_PATHS) + ';');
 
 // lazily loaded payloads need their own cache-busting, they are not in the shells

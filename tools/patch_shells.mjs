@@ -10,6 +10,7 @@ import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
 import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
+import { ABOUT, AUTHOR_LINKS } from './about_content.mjs';
 
 const EN_TITLE = {
   never_have_i: 'Never Have I Ever', roulette: 'Roulette',
@@ -159,10 +160,20 @@ function simplePrerender(s) {
   const faq = (s.faq && s.faq !== 'games')
     ? `<h2>${loc === 'ru' ? 'Частые вопросы' : 'Frequently asked questions'}</h2>\n${faqHtml(FAQ_SUPPORT[loc])}`
     : '';
+  const a = ABOUT[loc];
+  const aboutText = /^about/.test(base) ? `<h2>${esc(a.storyTitle)}</h2>
+${a.story.map((x) => `<p>${esc(x)}</p>`).join('\n')}
+<h2>${esc(a.whoTitle)}</h2>
+<p><strong>${esc(a.name)}</strong>, ${esc(a.role)}</p>
+${a.who.map((x) => `<p>${esc(x)}</p>`).join('\n')}
+${AUTHOR_LINKS.length ? `<p>${AUTHOR_LINKS.map((l) => `<a href="${l.href}" rel="me">${esc(l.label)}</a>`).join(' ')}</p>` : ''}
+<h2>${esc(a.dataTitle)}</h2>
+<p>${esc(a.data)}</p>` : '';
   return `<div id="prerender">
 <nav>${nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(heading)}</h1>
 <p>${esc(s.description)}</p>
+${aboutText}
 ${legalText}
 ${faq}
 <p><a href="/">Clinky</a></p>
@@ -269,7 +280,13 @@ function jsonld(s) {
     '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Clinky', url: `${SITE}/`,
     logo: { '@type': 'ImageObject', url: `${SITE}/assets/clinky-icon.png`, width: 512, height: 512 }
   };
+  const author = {
+    '@type': 'Person', '@id': `${SITE}/#author`,
+    name: ABOUT[s.loc].name, jobTitle: ABOUT[s.loc].role,
+    ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => l.href) } : {})
+  };
   const graph = [website, organization];
+  if (s.home) graph.push(author);
   if (s.home) {
     graph.push({
       '@type': 'MobileApplication', '@id': `${SITE}/#app`, name: 'Clinky',
@@ -277,7 +294,8 @@ function jsonld(s) {
       url: `${SITE}/`, image: `${SITE}/assets/og-image.jpg`,
       description: 'Track who you meet, play party-game question cards and collect a 3D drink for every clink. Offline-first, no accounts.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-      publisher: { '@id': `${SITE}/#org` }
+      publisher: { '@id': `${SITE}/#org` },
+      author: { '@id': `${SITE}/#author` }
     });
     graph.push({
       '@type': 'WebPage', '@id': canonical, url: canonical, name: s.title,
@@ -288,6 +306,9 @@ function jsonld(s) {
       '@type': 'WebPage', '@id': canonical, url: canonical, name: s.title,
       description: s.description, inLanguage: s.loc, isPartOf: { '@id': `${SITE}/#website` }
     });
+    if (/^about/.test(s.file.split('/').pop())) {
+      graph.push({ ...author, knowsAbout: ['iOS development', 'Swift', 'SwiftUI', 'party games'] });
+    }
     if (s.play && GAME_CONTENT[s.play]) graph.push(faqSchema(GAME_CONTENT[s.play].faq[s.loc]));
     else if (s.faq === 'games') graph.push(faqSchema(FAQ_GAMES[s.loc]));
     else if (s.faq) graph.push(faqSchema(FAQ_SUPPORT[s.loc]));
