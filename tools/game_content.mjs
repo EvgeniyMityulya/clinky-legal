@@ -294,13 +294,13 @@ export const GAME_CONTENT = {
 
 export const CONTENT_LABELS = {
   en: {
-    about: 'What is this game?', rules: 'Rules', variants: 'Other ways to play',
+    about: 'What is this game?', rules: 'Rules', variants: 'How else can you play?',
     advice: 'Advice for the host', examples: 'Cards from the set',
     fitPlayers: 'How many players?', fitBest: 'When does it land?', faq: 'Questions about this game',
     playCta: 'Play'
   },
   ru: {
-    about: 'Что за игра?', rules: 'Правила', variants: 'Как ещё играть',
+    about: 'Что за игра?', rules: 'Правила', variants: 'Как ещё играть?',
     advice: 'Рекомендации по игре', examples: 'Карточки из набора',
     fitPlayers: 'Сколько игроков?', fitBest: 'Когда заходит?', faq: 'Вопросы про эту игру',
     playCta: 'Играть'

@@ -43,7 +43,7 @@ model-viewer::part(default-progress-bar){display:none}
 .flow{position:relative;max-width:600px;margin:0 auto;display:flex;flex-direction:column}
 .flow-step{position:relative;display:flex;gap:20px;padding-bottom:30px}
 .flow-step:last-child{padding-bottom:0}
-.flow-num{flex:none;width:48px;height:48px;border-radius:16px;background:linear-gradient(165deg,#FF8A97,#E11D48);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;box-shadow:0 12px 24px -10px rgba(225,29,72,.6);position:relative;z-index:1}
+.flow-num{flex:none;width:48px;height:48px;border-radius:16px;background:linear-gradient(165deg,#FF8A97,#FF4F62);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;box-shadow:0 12px 24px -10px rgba(225,29,72,.6);position:relative;z-index:1}
 .flow-step:not(:last-child)::before{content:"";position:absolute;left:23px;top:54px;bottom:6px;width:2px;background:linear-gradient(#ffd2d9,rgba(255,210,217,.2))}
 .cta-btn{position:relative;overflow:hidden}
 .cta-btn::after{content:"";position:absolute;top:0;left:0;width:60%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:translateX(-180%) skewX(-18deg)}

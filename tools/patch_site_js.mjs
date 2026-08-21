@@ -57,7 +57,7 @@ if (supportOld.test(js)) js = js.replace(supportOld, '    var faqHtml = faqAccor
 
 const hintLine = "'<p style=\"text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0\">' + esc(t.cardHint) + '</p>' +";
 if (js.includes(hintLine) && !js.includes('esc(t.gamesAll)')) {
-  js = js.replace(hintLine, hintLine + "\n        '<p style=\"text-align:center;margin:14px 0 0\"><a href=\"' + questionsHref() + '\" style=\"font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none\">' + esc(t.gamesAll) + ' →</a></p>' +");
+  js = js.replace(hintLine, hintLine + "\n        '<p style=\"text-align:center;margin:14px 0 0\"><a href=\"' + questionsHref() + '\" style=\"font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none\">' + esc(t.gamesAll) + ' →</a></p>' +");
 }
 
 

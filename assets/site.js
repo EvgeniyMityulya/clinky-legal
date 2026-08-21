@@ -56,15 +56,15 @@
       playDoneTitle: 'That is today\u2019s deck',
       playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
-      aboutStoryTitle: 'Why this exists',
+      aboutStoryTitle: 'Why does this exist?',
       aboutStory1: 'We see our friends a lot, at home and in bars, and there is almost always someone new at the table. The first twenty minutes go on traffic and weather while the evening quietly waits to start.',
       aboutStory2: 'Clinky came out of a trick we kept using. Someone would pull a random question, read it out loud, and the conversation started on its own. The app does that part now, and it also remembers who we have seen lately, so a rare meet-up does not turn into a year of silence.',
-      aboutWhoTitle: 'Who makes it',
+      aboutWhoTitle: 'Who makes it?',
       aboutWhoName: 'Evgeniy Mityulya',
-      aboutWhoRole: 'iOS developer, building Clinky solo',
-      aboutWho1: 'I have been writing mobile apps for over three years, in Swift and SwiftUI. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame.',
-      aboutWho2: 'Write to me directly, I read everything and usually answer the same day.',
-      aboutDataTitle: 'What happens to your data',
+      aboutWhoRole: 'iOS engineer, founder of @clinky',
+      aboutWho1: 'I built the app for my own table, so an evening with friends starts fun instead of spending twenty minutes warming up. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame \uD83D\uDE42',
+      aboutWho2: 'Write to me directly. If you have an idea, or just a question worth asking, send it over and we will talk.',
+      aboutDataTitle: 'What happens to your data?',
       aboutData1: 'There are no accounts and there is no server. Your meet-ups, your friends and your collection stay on your phone, which means I cannot see whom you meet or what you answer. Nothing to leak, because nothing leaves the device.',
       aboutDataLink: 'Read the privacy policy',
       slogan: "Bring your friends, we'll bring the fun!",
@@ -113,15 +113,15 @@
       playDoneTitle: 'На сегодня колода закончилась',
       playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
-      aboutStoryTitle: 'Зачем это всё',
+      aboutStoryTitle: 'Зачем это всё?',
       aboutStory1: 'Мы часто собираемся с друзьями, дома и в барах, и почти всегда за столом оказывается кто-то новый. Первые двадцать минут уходят на пробки и погоду, хотя вечер задумывался совсем не про это.',
       aboutStory2: 'Clinky вырос из приёма, которым мы пользовались и так. Кто-то вытягивал случайный вопрос, читал его вслух, и разговор запускался сам. Теперь эту часть делает приложение, а заодно помнит, с кем мы виделись недавно, чтобы редкая встреча не превратилась в год тишины.',
-      aboutWhoTitle: 'Кто делает',
+      aboutWhoTitle: 'Кто делает?',
       aboutWhoName: 'Евгений Митюля',
-      aboutWhoRole: 'iOS-разработчик, делаю Clinky один',
-      aboutWho1: 'Пишу мобильные приложения больше трёх лет, на Swift и SwiftUI. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться.',
-      aboutWho2: 'Пишите мне напрямую, я читаю всё и обычно отвечаю в тот же день.',
-      aboutDataTitle: 'Что с вашими данными',
+      aboutWhoRole: 'iOS-инженер, основатель @clinky',
+      aboutWho1: 'Приложение я сделал для своей компании, чтобы вечер с друзьями начинался весело, а не с двадцати минут раскачки. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться \uD83D\uDE42',
+      aboutWho2: 'Пишите мне напрямую. Если есть идея или просто интересный вопрос, тоже пишите, пообщаемся.',
+      aboutDataTitle: 'Что с вашими данными?',
       aboutData1: 'Аккаунтов нет, сервера тоже нет. Встречи, друзья и коллекция лежат на вашем телефоне, поэтому я не вижу, с кем вы встречаетесь и что отвечаете на карточки. Утечь нечему, потому что ничего не уходит с устройства.',
       aboutDataLink: 'Читать политику приватности',
       slogan: 'Друзья — с тебя, веселье — с нас!',
@@ -577,7 +577,7 @@
         '<span style="display:inline-flex;flex:none">' + icons().checkPink + '</span><span style="font-weight:600;font-size:15px;line-height:1.45;color:#1c1326">' + esc(state.waitlistDup ? t.heroDup : t.heroDone) + '</span></div>';
     }
     var btn = onColor
-      ? 'color:#E11D48;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
+      ? 'color:#FF4F62;background:#fff;box-shadow:0 16px 30px -12px rgba(0,0,0,.35)'
       : 'color:#fff;background:#FF4F62;box-shadow:0 14px 30px -10px rgba(255,79,98,.75)';
     return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:' + (left ? '0' : '0 auto') + ';flex-wrap:wrap">' +
         '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
@@ -605,7 +605,7 @@
             '<img src="/assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
           '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
-            '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#E11D48);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
+            '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#FF4F62);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
               '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
                 '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
                 '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
@@ -777,7 +777,7 @@
       '<div style="max-width:430px;margin:0 auto">' +
         '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
-            '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
+            '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
           '</div>' +
           '<div style="position:relative;min-height:120px;display:flex;align-items:center;justify-content:center;margin:8px 0 16px;padding:0 14px">' +
             '<span style="position:absolute;top:-8px;left:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">“</span>' +
@@ -785,7 +785,7 @@
             '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">”</span>' +
           '</div>' +
           '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
-            '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
+            '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
             '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
               '<button data-act="prevq" aria-label="' + esc(t.dislike) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
@@ -802,7 +802,7 @@
         '<p style="text-align:center;font-size:13px;color:#7a7280;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
         ((opts && opts.hideHeading) ? '' : '') +
         '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
-          '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
+          '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
           ((opts && opts.hideHeading) ? '' : '<button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.gamesAll) + '</button>') +
         '</p>' +
       '</div>' +
@@ -816,7 +816,7 @@
         return '<div class="soft-card" style="padding:18px 20px 20px;text-align:left">' +
           '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">' +
             '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
-            '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#E11D48">' + esc(t.stepLabel) + '</span>' +
+            '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#FF4F62">' + esc(t.stepLabel) + '</span>' +
           '</div>' +
           '<p style="margin:0;min-height:2.9em;font-size:15.5px;line-height:1.45;color:#6b6b76;text-wrap:balance">' + esc(line) + '</p>' +
         '</div>';
@@ -831,7 +831,7 @@
       return '<button data-act="g' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[L]) + '</button>';
     }).join('');
   }
-  function renderQcat() { return gameIcon(state.gameIndex, '#E11D48', 17) + esc(GAMES[state.gameIndex].title[state.lang]); }
+  function renderQcat() { return gameIcon(state.gameIndex, '#FF4F62', 17) + esc(GAMES[state.gameIndex].title[state.lang]); }
   function renderQline() {
     var L = state.lang, cg = GAMES[state.gameIndex];
     var qStr = cg.q[state.qIndex % cg.q.length][L];
@@ -922,7 +922,7 @@
     if (_gcLoading) return;
     _gcLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=84a72543';
+    sc.src = '/assets/game-content.js?v=59c4872d';
     sc.onload = function () { _gcLoading = false; cb(); };
     sc.onerror = function () { _gcLoading = false; };
     document.head.appendChild(sc);
@@ -950,7 +950,7 @@
           ? esc(item)
           : '<strong style="font-weight:800;color:#1c1326">' + esc(item.t) + '</strong>, ' + esc(item.d);
         return '<li class="soft-card" style="display:flex;gap:14px;align-items:flex-start;padding:15px 18px">' +
-          '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FFE2E6;color:#E11D48;font-family:Nunito,sans-serif;font-weight:900;font-size:13.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
+          '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FFE2E6;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:900;font-size:13.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
           '<span style="font-size:15px;line-height:1.55;color:#3a323f">' + body + '</span>' +
         '</li>';
       }).join('') +
@@ -996,7 +996,7 @@
   }
   function accented(line) {
     return String(line).split(/\*/).map(function (part, i) {
-      return i % 2 ? '<span style="color:#E11D48">' + esc(part) + '</span>' : esc(part);
+      return i % 2 ? '<span style="color:#FF4F62">' + esc(part) + '</span>' : esc(part);
     }).join('');
   }
   function renderPlayCard() {
@@ -1010,7 +1010,7 @@
       return '<div style="max-width:430px;margin:0 auto">' +
         '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:38px 30px 32px;text-align:center">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:16px">' +
-            '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#E11D48', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
+            '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#FF4F62', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(19px,2.4vw,23px);line-height:1.25;letter-spacing:-.3px;margin:0 0 10px;color:#1c1326">' + esc(t.playDoneTitle) + '</p>' +
           '<p style="font-size:15px;line-height:1.55;color:#6b6b76;margin:0 auto 22px;max-width:24em">' + esc(t.playDoneBody) + '</p>' +
@@ -1022,7 +1022,7 @@
     return '<div style="max-width:430px;margin:0 auto">' +
       '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
         '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
-          '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#E11D48;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#E11D48', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
+          '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#FF4F62', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
         '</div>' +
         '<div style="position:relative;min-height:132px;display:flex;align-items:center;justify-content:center;margin:8px 0 16px;padding:0 14px">' +
           '<span style="position:absolute;top:-8px;left:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201C</span>' +
@@ -1030,7 +1030,7 @@
           '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201D</span>' +
         '</div>' +
         '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
-          '<div style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#E11D48;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
+          '<div style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
           '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
           '<div style="display:flex;align-items:center;justify-content:center">' +
             '<button data-act="playnext" aria-label="' + esc(t.playNext) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
@@ -1124,7 +1124,7 @@
       aboutStory() +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
         '<div style="max-width:680px;margin:0 auto;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#E11D48;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
+          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
           coralBtn(t.heroCta, 'join') +
         '</div>' +
       '</section></div>';
@@ -1145,7 +1145,7 @@
         '<div class="soft-card" style="padding:22px 24px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">' +
           (AUTHOR_PHOTO
             ? '<img src="' + AUTHOR_PHOTO + '" alt="' + esc(t.aboutWhoName) + '" width="72" height="72" loading="lazy" decoding="async" style="flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 10px 22px -12px rgba(28,19,38,.45)">'
-            : '<span style="flex:none;width:52px;height:52px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + ph('user-circle', 30, '#E11D48', 'ph-fill') + '</span>') +
+            : '<span style="flex:none;width:52px;height:52px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + ph('user-circle', 30, '#FF4F62', 'ph-fill') + '</span>') +
           '<span style="flex:1 1 260px;min-width:0">' +
             '<span style="display:block;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;color:#1c1326">' + esc(t.aboutWhoName) + '</span>' +
             '<span style="display:block;font-size:14px;color:#7a7280;margin-bottom:12px">' + esc(t.aboutWhoRole) + '</span>' +
@@ -1156,7 +1156,7 @@
         '</div>' +
         '<div style="height:clamp(20px,3vh,34px)"></div>' +
         head(t.aboutDataTitle) + para(t.aboutData1) +
-        '<p style="margin:0"><button data-act="privacy" style="background:transparent;border:0;cursor:pointer;padding:0;font-family:DM Sans,sans-serif;font-size:15px;font-weight:700;color:#E11D48">' + esc(t.aboutDataLink) + ' →</button></p>' +
+        '<p style="margin:0"><button data-act="privacy" style="background:transparent;border:0;cursor:pointer;padding:0;font-family:DM Sans,sans-serif;font-size:15px;font-weight:700;color:#FF4F62">' + esc(t.aboutDataLink) + ' →</button></p>' +
       '</div>' +
     '</section>';
   }
@@ -1164,7 +1164,7 @@
     var out = [];
     for (var i = 0; i < AUTHOR_LINKS.length; i++) {
       var l = AUTHOR_LINKS[i];
-      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none">' + ph(l.icon, 17, '#E11D48', 'ph-fill') + esc(l.label) + '</a>');
+      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + ph(l.icon, 17, '#FF4F62', 'ph-fill') + esc(l.label) + '</a>');
     }
     return out.join('');
   }

@@ -44,10 +44,10 @@ const PRERENDER_CSS = `<style>
 #prerender h2{font-family:Nunito,sans-serif;font-size:24px;margin:36px 0 10px}
 #prerender h3{font-size:18px;margin:22px 0 6px}
 #prerender p{margin:0 0 14px}
-#prerender a{color:#E11D48}
+#prerender a{color:#FF4F62}
 #prerender nav{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:26px;font-weight:600}
 #prerender ul{padding-left:20px}
-#prerender .eyebrow{color:#E11D48;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+#prerender .eyebrow{color:#FF4F62;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
 </style>`;
 
 function faqHtml(faq) {

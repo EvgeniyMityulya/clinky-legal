@@ -239,7 +239,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 234
+    "prerenderWords": 236
   },
   "/support": {
     "status": 200,
@@ -337,7 +337,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 196
+    "prerenderWords": 198
   },
   "/ru/support": {
     "status": 200,
