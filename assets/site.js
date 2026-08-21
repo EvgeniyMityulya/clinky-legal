@@ -52,7 +52,7 @@
       howTitle: 'How to play', stepLabel: 'Step',
       playTitle: 'Play {game} online', playSub: 'Tap for a new card. No sign-up, nothing to install.',
       playNext: 'Next card', playLeft: '{n} cards left today', playHint: 'Free cards reset every day',
-      playLoading: 'Shuffling the deck…',
+      playLoading: 'Shuffling the deck…', playCta: 'Play online', playOther: 'Other games to play', playRules: 'Rules for all four games',
       playDoneTitle: 'That is today\u2019s deck',
       playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
@@ -98,7 +98,7 @@
       howTitle: 'Как играть', stepLabel: 'Шаг',
       playTitle: 'Играть в {game} онлайн', playSub: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
       playNext: 'Дальше', playLeft: 'осталось карточек сегодня: {n}', playHint: 'Бесплатные карточки обновляются каждый день',
-      playLoading: 'Тасуем колоду…',
+      playLoading: 'Тасуем колоду…', playCta: 'Играть онлайн', playOther: 'Другие игры', playRules: 'Правила всех четырёх игр',
       playDoneTitle: 'На сегодня колода закончилась',
       playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
@@ -121,6 +121,7 @@
     }
   };
 
+  var GAME_IDS = ['never_have_i', 'roulette', 'tell_a_moment', 'would_you_rather'];
   var GAMES = [
     { title: { en: 'Never have I ever', ru: 'Я никогда не' }, how: {
       en: ['Read the card out loud, exactly as written', 'Whoever has done it owns up to the table', 'And tells the story behind that card'],
@@ -745,7 +746,10 @@
         '</div>' +
         '<p style="text-align:center;font-size:13px;color:#a99ea6;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
         ((opts && opts.hideHeading) ? '' : '') +
-        ((opts && opts.hideHeading) ? '' : '<p style="text-align:center;margin:14px 0 0"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#E11D48">' + esc(t.gamesAll) + ' →</button></p>') +
+        '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
+          '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#E11D48;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
+          ((opts && opts.hideHeading) ? '' : '<button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.gamesAll) + '</button>') +
+        '</p>' +
       '</div>' +
     '</section>';
   }
@@ -790,6 +794,21 @@
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px)">' +
         '<div id="howWrap">' + renderHowStrip() + '</div>' +
+      '</section>' +
+      '<section style="padding:0 clamp(20px,5vw,72px) clamp(6px,1vh,14px)">' +
+        '<div style="max-width:960px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
+          GAMES.map(function (g, i) {
+            var href = playHrefFor(i, state.lang);
+            if (!href) return '';
+            return '<a href="' + href + '" class="soft-card" style="display:flex;align-items:center;gap:12px;padding:16px 18px;text-decoration:none">' +
+              '<span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + gameIcon(i, '#E11D48', 18) + '</span>' +
+              '<span style="display:block">' +
+                '<span style="display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#1c1326">' + esc(g.title[state.lang]) + '</span>' +
+                '<span style="display:block;font-size:13px;color:#E11D48;font-weight:600">' + esc(t.playCta) + ' →</span>' +
+              '</span>' +
+            '</a>';
+          }).join('') +
+        '</div>' +
       '</section>' +
       renderQuestionSection({ hideHeading: true }) +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
@@ -910,6 +929,26 @@
         '<div style="max-width:720px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
           faqAccordion(FAQ_GAMES[state.lang]) +
+        '</div>' +
+      '</section>' +
+      '<section style="padding:clamp(6px,1vh,14px) clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
+        '<div style="max-width:960px;margin:0 auto">' +
+          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(t.playOther) + '</h2>' +
+          '<div style="display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">' +
+            GAMES.map(function (g, i) {
+              if (i === gi) return '';
+              var href = playHrefFor(i, state.lang);
+              if (!href) return '';
+              return '<a href="' + href + '" class="soft-card" style="display:flex;align-items:center;gap:12px;padding:16px 18px;text-decoration:none">' +
+                '<span style="flex:none;width:34px;height:34px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + gameIcon(i, '#E11D48', 18) + '</span>' +
+                '<span style="display:block">' +
+                  '<span style="display:block;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#1c1326">' + esc(g.title[state.lang]) + '</span>' +
+                  '<span style="display:block;font-size:13px;color:#E11D48;font-weight:600">' + esc(t.playCta) + ' →</span>' +
+                '</span>' +
+              '</a>';
+            }).join('') +
+          '</div>' +
+          '<p style="margin:18px 0 0"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.playRules) + ' →</button></p>' +
         '</div>' +
       '</section>' +
       renderFinalCta() +
@@ -1232,6 +1271,8 @@
     var c = document.getElementById('qcat'); if (c) c.innerHTML = renderQcat();
     var l = document.getElementById('qline'); if (l) l.innerHTML = renderQline();
     var hw = document.getElementById('howWrap'); if (hw) hw.innerHTML = renderHowStrip();
+    var pl = document.getElementById('playLink');
+    if (pl) pl.setAttribute('href', playHrefFor(state.gameIndex, state.lang) || '/games');
     var n = document.getElementById('qcount'); if (n) n.innerHTML = esc(renderQcount());
     animQ();
   }
@@ -1322,6 +1363,11 @@
       if (PLAY_SLUGS[slug]) { state.playSlug = slug; return 'play'; }
     }
     return PAGES[seg] ? seg : 'home';
+  }
+  function playHrefFor(gameIndex, lang) {
+    var slug = playSlugFor(GAME_IDS[gameIndex], lang);
+    if (!slug) return null;
+    return (lang === 'ru' ? '/ru/play/' : '/play/') + slug;
   }
   function playSlugFor(gameId, lang) {
     for (var k in PLAY_SLUGS) {
