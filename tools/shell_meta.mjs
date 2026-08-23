@@ -12,7 +12,7 @@ export const SHELLS = [
   {
     file: 'games.html', loc: 'en', path: '/games', altRu: '/ru/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
     title: 'Question Games for Friends — Play Free Online',
-    description: 'Four sets of questions for any table. Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather, with rules and real cards.',
+    description: 'Four sets of questions for any table. Never Have I Ever, Who Knows Better, Questions to Ask Friends and Would You Rather, with rules and real cards.',
     ogTitle: 'Clinky — four question games for any table',
     ogDescription: 'Pick a game, read how it runs and play a few cards in the browser.'
   },
@@ -69,7 +69,7 @@ export const SHELLS = [
   {
     file: 'ru/games.html', loc: 'ru', path: '/ru/games', altEn: '/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
     title: 'Игры с вопросами для компании — играть онлайн',
-    description: 'Четыре набора вопросов для любой компании. «Я никогда не», «Рулетка», вопросы друзьям и «Что выберешь», с правилами и живыми карточками.',
+    description: 'Четыре набора вопросов для любой компании. «Я никогда не», «Кто из нас», вопросы друзьям и «Что выберешь», с правилами и живыми карточками.',
     ogTitle: 'Clinky — четыре игры с вопросами для компании',
     ogDescription: 'Выбери игру, прочитай правила и полистай настоящие карточки из приложения.'
   },
@@ -120,17 +120,17 @@ export const SHELLS = [
   {
     file: 'play/roulette.html', loc: 'en', path: '/play/roulette', altRu: '/ru/play/ruletka',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
-    title: 'Questions About Your Friends — Roulette Game Online',
+    title: 'How Well Do You Know Your Friends — Free Game',
     description: 'Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.',
-    ogTitle: 'Roulette — the question game about your own friends',
+    ogTitle: 'Who Knows Better — the question game about your own friends',
     ogDescription: 'The card picks the pair. Play free in the browser.'
   },
   {
     file: 'ru/play/ruletka.html', loc: 'ru', path: '/ru/play/ruletka', altEn: '/play/roulette',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
-    title: 'Вопросы про друзей — игра «Рулетка» онлайн',
-    description: 'Вопросы про своих же друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.',
-    ogTitle: '«Рулетка» — вопросы про своих же друзей',
+    title: 'Кто из нас — вопросы для компании друзей',
+    description: 'Игра «Кто из нас» для компании друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.',
+    ogTitle: '«Кто из нас» — вопросы про своих же друзей',
     ogDescription: 'Карточка выбирает пару. Играй бесплатно в браузере.'
   },
   {

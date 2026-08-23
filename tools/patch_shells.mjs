@@ -13,12 +13,14 @@ import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
 import { ABOUT, AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
 
 const EN_TITLE = {
-  never_have_i: 'Never Have I Ever', roulette: 'Roulette',
+  never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better',
   tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather'
 };
+// У этой игры целевая фраза длиннее названия, поэтому h1 задан отдельно.
+const EN_H1 = { roulette: 'How well do you know your friends' };
 const playersLine = (min, loc) => (loc === 'ru' ? `От ${min}+ игроков` : `${min}+ players`);
 const RU_ACC = {
-  never_have_i: '«Я никогда не»', roulette: '«Рулетку»',
+  never_have_i: '«Я никогда не»', roulette: '«Кто из нас»',
   tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»'
 };
 
@@ -232,7 +234,7 @@ function playPrerender(s) {
     ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
-    : { h1: `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
+    : { h1: EN_H1[s.play] || `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games', limit: `${deck.limit} free cards a day, refreshed daily.`,
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
 

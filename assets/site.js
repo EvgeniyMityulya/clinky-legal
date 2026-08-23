@@ -198,7 +198,7 @@
       { q: "Does it work with no internet?", a: "Fully. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing." },
       { q: "Are the questions we played saved?", a: "Every card you draw is saved to that meet-up, so you can look back at what you talked about. The ones you liked are collected as favourites." },
       { q: "Do the same cards come round again?", a: "Not inside one evening. And a card you did not like can be hidden so it stops appearing." },
-      { q: "How many people do you need?", a: "Three games work from two people. Roulette needs three, because its cards ask one person about another." }
+      { q: "How many people do you need?", a: "Three games work from two people. Who Knows Better needs three, because its cards ask one person about another." }
     ],
     ru: [
       { q: "Есть лимит на количество карточек?", a: "На бесплатном тарифе три новых карточки в день на все четыре игры вместе. Pro снимает лимит, а уже вытянутые карточки остаются доступными в любом случае." },
@@ -206,7 +206,7 @@
       { q: "Работает без интернета?", a: "Полностью. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет." },
       { q: "Сохраняются ли вопросы, которые мы прошли?", a: "Каждая вытянутая карточка сохраняется к этой встрече, так что можно вернуться и посмотреть, о чём говорили. Понравившиеся собираются в избранных." },
       { q: "Карточки повторяются?", a: "Внутри одного вечера нет. А карточку, которая не понравилась, можно скрыть, и она перестанет попадаться." },
-      { q: "Сколько нужно человек?", a: "Три игры работают от двух человек. «Рулетке» нужны трое, потому что её карточки спрашивают одного про другого." }
+      { q: "Сколько нужно человек?", a: "Три игры работают от двух человек. Игре «Кто из нас» нужны трое, потому что её карточки спрашивают одного про другого." }
     ]
   };
 
@@ -668,7 +668,7 @@
     var capImg = '/assets/bento/drink.png';
     function L2(ru, en) { return L === 'ru' ? ru : en; }
     var FC = {
-      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Рулетка», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. "Never Have I Ever", "Roulette", "Tell a Moment" and "Would You Rather", four games in all.') },
+      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Кто из нас», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. "Never Have I Ever", "Who Knows Better", "Tell a Moment" and "Would You Rather", four games in all.') },
       col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» добавляет в коллекцию 3D-напиток своего вида. Чем больше встреч, тем полнее коллекция!', 'Each clink adds a 3D drink, unique to its kind. The more you meet, the fuller it gets!') },
       str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Держи серию встреч с близкими', 'Keep your streak going with the people close to you') },
       ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и новые знакомства. Есть и секретные!', 'Badges for meet-ups, streaks and new friends. Some are secret!') },
@@ -1580,7 +1580,7 @@
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
-  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/roulette":"Questions About Your Friends — Roulette Game Online","/ru/play/ruletka":"Вопросы про друзей — игра «Рулетка» онлайн","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/404":"Page Not Found — Clinky"};
+  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/roulette":"How Well Do You Know Your Friends — Free Game","/ru/play/ruletka":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];

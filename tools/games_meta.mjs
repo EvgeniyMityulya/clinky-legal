@@ -9,7 +9,7 @@ export const GAMES_META = [
   },
   {
     id: "roulette",
-    title: { en: "Roulette", ru: "Рулетка" },
+    title: { en: "Who Knows Better", ru: "Кто из нас" },
     how: {
       en: ["The card picks two people from the table", "The first answers the question about the second", "Then the second adds their side of it"],
       ru: ["Карточка сама выбирает двоих из компании", "Первый отвечает на вопрос про второго", "Второй добавляет свою версию той истории"]
