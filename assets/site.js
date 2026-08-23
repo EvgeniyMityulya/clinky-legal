@@ -159,7 +159,7 @@
       { en: "Never have I ever screenshotted a chat to dissect it with a friend", ru: 'Я никогда не делал скриншот переписки, чтобы разобрать её с другом' },
       { en: "Never have I ever googled someone before meeting them and then acted surprised to hear it all", ru: 'Я никогда не гуглил человека перед встречей и делал вид, что узнаю всё впервые' }
     ]},
-    { title: { en: 'Roulette', ru: 'Рулетка' }, how: {
+    { title: { en: 'Who Knows Better', ru: 'Кто из нас' }, how: {
       en: ['The card picks two people from the table', 'The first answers the question about the second', 'Then the second adds their side of it'],
       ru: ['Карточка сама выбирает двоих из компании', 'Первый отвечает на вопрос про второго', 'Второй добавляет свою версию той истории']
     }, q: [
@@ -1053,9 +1053,10 @@
   }
 
   var GAME_TITLE_CASE = {
-    ru: { never_have_i: '«Я никогда не»', roulette: '«Рулетку»', tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»' },
-    en: { never_have_i: 'Never Have I Ever', roulette: 'Roulette', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
+    ru: { never_have_i: '«Я никогда не»', roulette: '«Кто из нас»', tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»' },
+    en: { never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
   };
+  var PLAY_H1 = { en: { roulette: 'How well do you know your friends' } };
   function renderPlay() {
     var t = tdict(), meta = PLAY_SLUGS[state.playSlug] || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
@@ -1066,7 +1067,7 @@
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div class="play-head" style="margin:0 auto;text-align:center">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, '#FF4F62', 26) + '</span>' +
-          '<h1 class="play-h1">' + esc(t.playTitle.replace('{game}', gameTitle)) + '</h1>' + subsec(t.playSub) +
+          '<h1 class="play-h1">' + esc((PLAY_H1[state.lang] || {})[meta.id] || t.playTitle.replace('{game}', gameTitle)) + '</h1>' + subsec(t.playSub) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
