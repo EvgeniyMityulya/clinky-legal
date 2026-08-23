@@ -11,8 +11,8 @@ export const SHELLS = [
   },
   {
     file: 'games.html', loc: 'en', path: '/games', altRu: '/ru/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
-    title: 'Party Question Games for Friends — Clinky',
-    description: 'Four question games for any table: Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather. Rules, real cards, no sign-up.',
+    title: 'Question Games for Friends — Play Free Online',
+    description: 'Four sets of questions for any table. Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather, with rules and real cards.',
     ogTitle: 'Clinky — four question games for any table',
     ogDescription: 'Pick a game, read how it runs and play a few cards in the browser.'
   },
@@ -68,8 +68,8 @@ export const SHELLS = [
   },
   {
     file: 'ru/games.html', loc: 'ru', path: '/ru/games', altEn: '/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
-    title: 'Игры для компании: вопросы для вечера с друзьями — Clinky',
-    description: 'Четыре игры с вопросами для компании: «Я никогда не», «Рулетка», «Расскажи момент», «Что выберешь». Правила, примеры карточек и как играть без алкоголя.',
+    title: 'Игры с вопросами для компании — играть онлайн',
+    description: 'Четыре набора вопросов для любой компании. «Я никогда не», «Рулетка», вопросы друзьям и «Что выберешь», с правилами и живыми карточками.',
     ogTitle: 'Clinky — четыре игры с вопросами для компании',
     ogDescription: 'Выбери игру, прочитай правила и полистай настоящие карточки из приложения.'
   },
@@ -104,64 +104,64 @@ export const SHELLS = [
   {
     file: 'play/never-have-i-ever.html', loc: 'en', path: '/play/never-have-i-ever', altRu: '/ru/play/ya-nikogda-ne',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
-    title: 'Never Have I Ever Online — Free Cards, No Sign-Up',
-    description: 'Play Never Have I Ever in your browser: tap for a fresh card, no sign-up, nothing to install. Rules, a no-drinking version and a new set of cards every day.',
+    title: 'Never Have I Ever Questions — Play Free Online',
+    description: 'Never Have I Ever questions you can read straight off the screen. Tap for a fresh card, no sign-up, nothing to install, plus rules and a no-drinking version.',
     ogTitle: 'Never Have I Ever — play online, free',
     ogDescription: 'Tap for a card and let the table do the rest. Free, no sign-up.'
   },
   {
     file: 'ru/play/ya-nikogda-ne.html', loc: 'ru', path: '/ru/play/ya-nikogda-ne', altEn: '/play/never-have-i-ever',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
-    title: 'Играть в «Я никогда не» онлайн — карточки бесплатно',
-    description: 'Играй в «Я никогда не» прямо в браузере: жми и тяни новую карточку, без регистрации и установки. Правила, версия без алкоголя и новые карточки каждый день.',
+    title: 'Вопросы «Я никогда не» — играть онлайн бесплатно',
+    description: 'Вопросы «Я никогда не», которые можно читать прямо с экрана. Жми и тяни новую карточку, без регистрации и установки. Правила и версия без алкоголя.',
     ogTitle: '«Я никогда не» — играть онлайн, бесплатно',
     ogDescription: 'Тяни карточку, дальше всё сделает компания. Бесплатно, без регистрации.'
   },
   {
     file: 'play/roulette.html', loc: 'en', path: '/play/roulette', altRu: '/ru/play/ruletka',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
-    title: 'Roulette Question Game Online — Free, No Sign-Up',
-    description: 'A question game about the people at your table: the card picks two friends and asks one about the other. Play free in your browser, no sign-up.',
+    title: 'Questions About Your Friends — Roulette Game Online',
+    description: 'Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.',
     ogTitle: 'Roulette — the question game about your own friends',
     ogDescription: 'The card picks the pair. Play free in the browser.'
   },
   {
     file: 'ru/play/ruletka.html', loc: 'ru', path: '/ru/play/ruletka', altEn: '/play/roulette',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
-    title: 'Игра «Рулетка» онлайн — вопросы про друзей, бесплатно',
-    description: 'Игра, где карточка сама выбирает двоих и спрашивает одного про другого. Играй бесплатно в браузере, без регистрации и установки.',
+    title: 'Вопросы про друзей — игра «Рулетка» онлайн',
+    description: 'Вопросы про своих же друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.',
     ogTitle: '«Рулетка» — вопросы про своих же друзей',
     ogDescription: 'Карточка выбирает пару. Играй бесплатно в браузере.'
   },
   {
     file: 'play/questions-to-ask-friends.html', loc: 'en', path: '/play/questions-to-ask-friends', altRu: '/ru/play/voprosy-druzyam',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
-    title: 'Questions to Ask Friends — Free Card Game Online',
-    description: 'Questions that ask for a story instead of a one-word answer. Tap for a new card, play free in your browser, no sign-up needed.',
+    title: 'Questions to Ask Friends — 24 Free Cards to Play',
+    description: 'Questions to ask friends when the talk runs dry, 24 of them free. Each one asks for a story instead of a one-word answer. No sign-up needed.',
     ogTitle: 'Questions to ask friends — play online',
     ogDescription: 'Ask for a moment, not an opinion. Free, no sign-up.'
   },
   {
     file: 'ru/play/voprosy-druzyam.html', loc: 'ru', path: '/ru/play/voprosy-druzyam', altEn: '/play/questions-to-ask-friends',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
-    title: 'Вопросы друзьям онлайн — карточки для разговора, бесплатно',
-    description: 'Вопросы, на которые отвечают историей, а не одним словом. Жми и тяни новую карточку, бесплатно и без регистрации.',
+    title: 'Вопросы друзьям — 24 карточки для разговора',
+    description: 'Вопросы друзьям, когда разговор заглох, 24 штуки бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.',
     ogTitle: 'Вопросы друзьям — играть онлайн',
     ogDescription: 'Проси момент, а не мнение. Бесплатно, без регистрации.'
   },
   {
     file: 'play/would-you-rather.html', loc: 'en', path: '/play/would-you-rather', altRu: '/ru/play/chto-vyberesh',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'would_you_rather',
-    title: 'Would You Rather Online — Free Cards, No Sign-Up',
-    description: 'Would You Rather with two options that both cost something, so the table actually argues. Play free in your browser, nothing to install.',
+    title: 'Would You Rather Questions — Play Free Online',
+    description: 'Would You Rather questions where both options cost you something, so the table actually argues. Play free in the browser, nothing to install.',
     ogTitle: 'Would You Rather — play online, free',
     ogDescription: 'Both options hurt a little. That is the point.'
   },
   {
     file: 'ru/play/chto-vyberesh.html', loc: 'ru', path: '/ru/play/chto-vyberesh', altEn: '/play/would-you-rather',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'would_you_rather',
-    title: 'Играть в «Что выберешь» онлайн — карточки бесплатно',
-    description: 'Игра «Что выберешь», где у обоих вариантов есть цена, поэтому компания спорит всерьёз. Играй бесплатно в браузере, без установки.',
+    title: 'Вопросы «Что выберешь» — играть онлайн бесплатно',
+    description: 'Вопросы «Что выберешь», где у обоих вариантов есть цена, поэтому компания спорит всерьёз. Бесплатно в браузере, без установки.',
     ogTitle: '«Что выберешь» — играть онлайн, бесплатно',
     ogDescription: 'Оба варианта немного больно. В этом и смысл.'
   },
