@@ -1156,7 +1156,7 @@
     if (document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
-    sc.src = '/assets/scenarios.js?v=6a82ea14';
+    sc.src = '/assets/scenarios.js?v=f40cc5be';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
   }
