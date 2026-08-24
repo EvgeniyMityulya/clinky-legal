@@ -3,6 +3,7 @@
 // намеренно: одинаковые страницы поиск склеивает.
 export const SCENARIOS = {
   couples: {
+    icon: { name: 'heart', weight: 'fill' },
     slug: { en: 'questions/for-couples', ru: 'ru/voprosy/dlya-pary' },
     players: { en: "For two", ru: "Для двоих" },
     h1: { en: "Questions for couples", ru: "Вопросы для пары" },
@@ -101,6 +102,7 @@ export const SCENARIOS = {
   },
 
   party: {
+    icon: { name: 'users-three', weight: 'fill' },
     slug: { en: 'questions/party', ru: 'ru/voprosy/za-stolom' },
     players: { en: "From four people", ru: "От четырёх человек" },
     h1: { en: "Party game questions", ru: "Вопросы за столом" },
@@ -199,6 +201,7 @@ export const SCENARIOS = {
   },
 
   'first-date': {
+    icon: { name: 'hand-heart', weight: 'fill' },
     slug: { en: 'questions/first-date', ru: 'ru/voprosy/pervoe-svidanie' },
     players: { en: "For two", ru: "Для двоих" },
     h1: { en: "First date questions", ru: "Вопросы на первом свидании" },

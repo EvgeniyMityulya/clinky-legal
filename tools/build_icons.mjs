@@ -20,6 +20,7 @@ envelope|regular
 eye-slash|bold
 flame|fill
 game-controller|fill
+hand-heart|fill
 heart|fill
 list|bold
 lock-simple|fill
