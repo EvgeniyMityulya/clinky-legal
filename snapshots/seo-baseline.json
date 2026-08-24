@@ -34,6 +34,7 @@
     ],
     "schemaTypes": [
       "FAQPage",
+      "FAQPage",
       "Organization",
       "WebPage",
       "WebSite"
@@ -53,6 +54,7 @@
       "x-default"
     ],
     "schemaTypes": [
+      "FAQPage",
       "FAQPage",
       "Organization",
       "WebPage",
@@ -74,6 +76,7 @@
     ],
     "schemaTypes": [
       "FAQPage",
+      "FAQPage",
       "Organization",
       "WebPage",
       "WebSite"
@@ -93,6 +96,7 @@
       "x-default"
     ],
     "schemaTypes": [
+      "FAQPage",
       "FAQPage",
       "Organization",
       "WebPage",
@@ -114,6 +118,7 @@
     ],
     "schemaTypes": [
       "FAQPage",
+      "FAQPage",
       "Organization",
       "WebPage",
       "WebSite"
@@ -133,6 +138,7 @@
       "x-default"
     ],
     "schemaTypes": [
+      "FAQPage",
       "FAQPage",
       "Organization",
       "WebPage",
@@ -154,6 +160,7 @@
     ],
     "schemaTypes": [
       "FAQPage",
+      "FAQPage",
       "Organization",
       "WebPage",
       "WebSite"
@@ -174,11 +181,132 @@
     ],
     "schemaTypes": [
       "FAQPage",
+      "FAQPage",
       "Organization",
       "WebPage",
       "WebSite"
     ],
     "prerenderWords": 364
+  },
+  "/questions/for-couples": {
+    "status": 200,
+    "title": "Questions for Couples — Free Card Game",
+    "description": "Twenty questions for the two of you, built to start stories rather than one-word answers. Free in the browser, nothing to install.",
+    "canonical": "https://clinkyapp.com/questions/for-couples",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Questions for couples",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 528
+  },
+  "/ru/voprosy/dlya-pary": {
+    "status": 200,
+    "title": "Вопросы для пары — 20 карточек онлайн",
+    "description": "Двадцать вопросов на двоих, после которых начинается разговор, а не короткий ответ. Бесплатно в браузере, без установки.",
+    "canonical": "https://clinkyapp.com/ru/voprosy/dlya-pary",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Вопросы для пары",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 406
+  },
+  "/questions/party": {
+    "status": 200,
+    "title": "Party Game Questions for Friends — Free",
+    "description": "Twenty questions for a table that has run out of news. They ask about your own group, so the answers come with names in them. Free, no sign-up.",
+    "canonical": "https://clinkyapp.com/questions/party",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Party game questions",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 528
+  },
+  "/ru/voprosy/za-stolom": {
+    "status": 200,
+    "title": "Вопросы за столом для весёлой компании",
+    "description": "Двадцать вопросов для стола, у которого новости кончились. Спрашивают про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.",
+    "canonical": "https://clinkyapp.com/ru/voprosy/za-stolom",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Вопросы за столом",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 419
+  },
+  "/questions/first-date": {
+    "status": 200,
+    "title": "First Date Questions — Free Card Game",
+    "description": "Twenty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.",
+    "canonical": "https://clinkyapp.com/questions/first-date",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "First date questions",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 492
+  },
+  "/ru/voprosy/pervoe-svidanie": {
+    "status": 200,
+    "title": "Вопросы на первом свидании — 20 карточек",
+    "description": "Двадцать вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.",
+    "canonical": "https://clinkyapp.com/ru/voprosy/pervoe-svidanie",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Вопросы на первом свидании",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 409
   },
   "/ru/": {
     "status": 200,
@@ -219,7 +347,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 301
+    "prerenderWords": 350
   },
   "/about": {
     "status": 200,
@@ -317,7 +445,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 242
+    "prerenderWords": 282
   },
   "/ru/about": {
     "status": 200,

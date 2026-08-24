@@ -323,7 +323,7 @@
     return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
   }
   function renderQcount() {
-    var len = GAMES[state.gameIndex].q.length;
+    var len = qSource().cards.length || 1;
     var n = (state.qIndex % len) + 1;
     return state.lang === 'ru' ? ('вопрос ' + n + ' из ' + len) : ('question ' + n + ' of ' + len);
   }
@@ -777,14 +777,9 @@
     '</section>';
   }
 
-  function renderQuestionSection(opts) {
+  function questionCard() {
     var t = tdict();
-    var tight = opts && opts.hideHeading;
-    return '<section style="padding:' + (tight ? 'clamp(18px,3vh,30px)' : 'clamp(50px,8vh,96px)') + ' clamp(16px,4vw,72px) clamp(50px,8vh,96px)">' +
-      ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>') +
-      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 10px;max-width:760px">' + renderGameTabs() + '</div>' +
-      '<div style="max-width:430px;margin:0 auto">' +
-        '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
+    return '<div id="qcard" style="position:relative;cursor:grab;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden;touch-action:pan-y;will-change:transform;user-select:none">' +
           '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
             '<div id="qcat" style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13.5px">' + renderQcat() + '</div>' +
           '</div>' +
@@ -808,8 +803,17 @@
             '</div>' +
           '</div>' +
         '</div>' +
-        '<p style="text-align:center;font-size:13px;color:#7a7280;margin:16px 0 0">' + esc(t.cardHint) + '</p>' +
-        ((opts && opts.hideHeading) ? '' : '') +
+        '<p style="text-align:center;font-size:13px;color:#7a7280;margin:16px 0 0">' + esc(t.cardHint) + '</p>';
+  }
+
+  function renderQuestionSection(opts) {
+    var t = tdict();
+    var tight = opts && opts.hideHeading;
+    return '<section style="padding:' + (tight ? 'clamp(18px,3vh,30px)' : 'clamp(50px,8vh,96px)') + ' clamp(16px,4vw,72px) clamp(50px,8vh,96px)">' +
+      ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>') +
+      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 10px;max-width:760px">' + renderGameTabs() + '</div>' +
+      '<div style="max-width:430px;margin:0 auto">' +
+        questionCard() +
         '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
           '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
           ((opts && opts.hideHeading) ? '' : '<button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.gamesAll) + '</button>') +
@@ -840,10 +844,24 @@
       return '<button data-act="g' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[L]) + '</button>';
     }).join('');
   }
-  function renderQcat() { return gameIcon(state.gameIndex, '#FF4F62', 17) + esc(GAMES[state.gameIndex].title[state.lang]); }
+  // Карточка с вопросом одна на весь сайт, меняется только источник колоды.
+  function qSource() {
+    if (state.page === 'scenario') {
+      var meta = SCENARIO_SLUGS[state.scenarioSlug] || {}, sc = scenarioData(meta.id);
+      if (sc) return { kind: 'scenario', label: sc.h1[state.lang], cards: sc.cards[state.lang] || [] };
+    }
+    var g = GAMES[state.gameIndex];
+    return { kind: 'game', label: g.title[state.lang], cards: (g.q || []).map(function (q) { return q[state.lang]; }) };
+  }
+  function renderQcat() {
+    var src = qSource();
+    var icon = src.kind === 'scenario' ? ph('chats-circle', 17, '#FF4F62', 'ph-bold') : gameIcon(state.gameIndex, '#FF4F62', 17);
+    return icon + esc(src.label);
+  }
   function renderQline() {
-    var L = state.lang, cg = GAMES[state.gameIndex];
-    var qStr = cg.q[state.qIndex % cg.q.length][L];
+    var cards = qSource().cards;
+    if (!cards.length) return '';
+    var qStr = cards[state.qIndex % cards.length] || '';
     return qStr.split('*').map(function (seg, i) { return '<span style="color:' + (i % 2 ? '#FF4F62' : '#1c1326') + '">' + esc(seg) + '</span>'; }).join('');
   }
 
@@ -1148,37 +1166,29 @@
     var d = window.CLINKY_SCENARIOS;
     return d && d.labels ? d.labels[state.lang] : null;
   }
-  function scenarioCard(sc) {
-    var cards = sc.cards[state.lang] || [];
-    if (!cards.length) return '';
-    var idx = (state.scenarioIndex || 0) % cards.length;
-    return '<div style="max-width:430px;margin:0 auto">' +
-      '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
-        '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
-          '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + esc(sc.h1[state.lang]) + '</span>' +
-        '</div>' +
-        '<p id="scLine" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(18px,2.3vw,22px);line-height:1.3;letter-spacing:-.3px;text-align:center;margin:0 0 22px;color:#1c1326">' + esc(cards[idx]) + '</p>' +
-        '<div style="display:flex;justify-content:center">' +
-          '<button data-act="snext" aria-label="' + esc(state.lang === 'ru' ? 'Следующая карточка' : 'Next card') + '" style="width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;background:#FF4F62;color:#fff;font-size:22px;box-shadow:0 14px 26px -12px rgba(225,29,72,.7)">&rarr;</button>' +
-        '</div>' +
-        '<p style="text-align:center;font-size:12.5px;color:#9a94a2;margin:16px 0 0">' + esc((idx + 1) + ' / ' + cards.length) + '</p>' +
-      '</div>' +
-    '</div>';
-  }
   function scenarioMore(currentId) {
     var d = window.CLINKY_SCENARIOS;
     if (!d) return '';
-    var out = [];
+    var lang = state.lang, tiles = [];
+    var tile = function (href, title, sub, icon) {
+      return '<a href="' + href + '" class="soft-card" style="display:block;padding:18px;text-decoration:none;text-align:left">' +
+        '<span style="display:flex;width:40px;height:40px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + icon + '</span>' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:16px;margin:0 0 5px;color:#1c1326">' + esc(title) + '</h3>' +
+        '<p style="font-size:13.5px;line-height:1.45;color:#6b6b76;margin:0">' + esc(sub) + '</p></a>';
+    };
     for (var id in d.scenarios) {
       if (id === currentId) continue;
-      var href = scenarioHrefFor(id, state.lang);
-      if (href) out.push('<li style="margin:0 0 8px"><a href="' + href + '" style="color:#FF4F62;font-weight:700;text-decoration:none">' + esc(d.scenarios[id].h1[state.lang]) + '</a></li>');
+      var sc = d.scenarios[id], href = scenarioHrefFor(id, lang);
+      if (href) tiles.push(tile(href, sc.h1[lang], sc.players[lang], ph('chats-circle', 19, '#FF4F62', 'ph-bold')));
     }
+    var haveContent = !!gameContent(GAME_IDS[0]);
+    if (!haveContent) ensureGameContent(function () { paint(); });
     for (var i = 0; i < GAMES.length; i++) {
-      var ph = playHrefFor(i, state.lang);
-      if (ph) out.push('<li style="margin:0 0 8px"><a href="' + ph + '" style="color:#FF4F62;font-weight:700;text-decoration:none">' + esc(GAMES[i].title[state.lang]) + '</a></li>');
+      var ph2 = playHrefFor(i, lang), c = gameContent(GAME_IDS[i]);
+      if (ph2) tiles.push(tile(ph2, GAMES[i].title[lang], c ? c.tagline[lang] : GAMES[i].how[lang][0], gameIcon(i, '#FF4F62', 19)));
     }
-    return '<ul style="list-style:none;padding:0;margin:0">' + out.join('') + '</ul>';
+    if (!tiles.length) return '';
+    return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">' + tiles.join('') + '</div>';
   }
   function renderScenario() {
     var meta = SCENARIO_SLUGS[state.scenarioSlug] || {};
@@ -1198,7 +1208,7 @@
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
-        '<div id="scMount">' + scenarioCard(sc) + '</div>' +
+        '<div style="max-width:430px;margin:0 auto">' + questionCard() + '</div>' +
       '</section>' +
       sectionWrap(null, '<p class="lead-p">' + esc(sc.players[lang]) + '. ' + esc(sc.intro[lang]) + '</p>') +
       sectionWrap(L.how, numberedList(sc.how[lang])) +
@@ -1573,7 +1583,7 @@
     var l = document.getElementById('qline'); if (l) l.innerHTML = renderQline();
     var hw = document.getElementById('howWrap'); if (hw) hw.innerHTML = renderHowStrip();
     var pl = document.getElementById('playLink');
-    if (pl) pl.setAttribute('href', playHrefFor(state.gameIndex, state.lang) || '/games');
+    if (pl && state.page !== 'scenario') pl.setAttribute('href', playHrefFor(state.gameIndex, state.lang) || '/games');
     var n = document.getElementById('qcount'); if (n) n.innerHTML = esc(renderQcount());
     animQ();
   }
@@ -1731,6 +1741,7 @@
     try { return window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; }
   }
   function commitPage(page) {
+    if (page !== state.page || (page === 'scenario' && pageKey(page) !== _pageKey)) state.qIndex = 0;
     state.page = page;
     _pageKey = pageKey(page);
     try {
@@ -1765,8 +1776,8 @@
     if (hero()) hero().setDrink(d);     // swap model + per-drink scene config in the three.js hero
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
-  function nextQuestion() { state.qIndex = (state.qIndex + 1) % GAMES[state.gameIndex].q.length; refreshCard(); }
-  function prevQuestion() { var len = GAMES[state.gameIndex].q.length; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
+  function nextQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; refreshCard(); }
+  function prevQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
 
   // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
   function captureSource() {
@@ -1875,19 +1886,6 @@
             m.innerHTML = renderPlayCard();
             var line = document.getElementById('playLine');
             if (line) { line.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)'; }
-          }
-        }
-        break;
-      }
-      case 'snext': {
-        var smeta = SCENARIO_SLUGS[state.scenarioSlug] || {}, sdata = scenarioData(smeta.id);
-        if (sdata) {
-          state.scenarioIndex = (state.scenarioIndex || 0) + 1;
-          var sm = document.getElementById('scMount');
-          if (sm) {
-            sm.innerHTML = scenarioCard(sdata);
-            var sl = document.getElementById('scLine');
-            if (sl) sl.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)';
           }
         }
         break;
