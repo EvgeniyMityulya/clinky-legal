@@ -20,6 +20,12 @@ const URLS = [
   { path: '/ru/play/voprosy-druzyam', pri: '0.8', alt: '/play/questions-to-ask-friends' },
   { path: '/play/would-you-rather', pri: '0.8', alt: '/ru/play/chto-vyberesh' },
   { path: '/ru/play/chto-vyberesh', pri: '0.8', alt: '/play/would-you-rather' },
+  { path: '/questions/for-couples', pri: '0.8', alt: '/ru/voprosy/dlya-pary' },
+  { path: '/ru/voprosy/dlya-pary', pri: '0.8', alt: '/questions/for-couples' },
+  { path: '/questions/party', pri: '0.8', alt: '/ru/voprosy/za-stolom' },
+  { path: '/ru/voprosy/za-stolom', pri: '0.8', alt: '/questions/party' },
+  { path: '/questions/first-date', pri: '0.8', alt: '/ru/voprosy/pervoe-svidanie' },
+  { path: '/ru/voprosy/pervoe-svidanie', pri: '0.8', alt: '/questions/first-date' },
   { path: '/ru/', pri: '1.0', alt: '/' },
   ...PAGES.map((p) => ({ path: `/${p.path}`, pri: p.pri, alt: `/ru/${p.path}` })),
   ...PAGES.map((p) => ({ path: `/ru/${p.path}`, pri: p.pri, alt: `/${p.path}` }))

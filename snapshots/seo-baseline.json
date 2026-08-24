@@ -18,7 +18,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 196
+    "prerenderWords": 200
   },
   "/play/never-have-i-ever": {
     "status": 200,
@@ -62,11 +62,11 @@
   },
   "/play/roulette": {
     "status": 200,
-    "title": "Questions About Your Friends — Roulette Game Online",
+    "title": "How Well Do You Know Your Friends — Free Game",
     "description": "Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.",
     "canonical": "https://clinkyapp.com/play/roulette",
     "robots": "index,follow,max-image-preview:large",
-    "h1": "Play Roulette online",
+    "h1": "How well do you know your friends",
     "hreflang": [
       "en",
       "ru",
@@ -78,15 +78,15 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 474
+    "prerenderWords": 478
   },
   "/ru/play/ruletka": {
     "status": 200,
-    "title": "Вопросы про друзей — игра «Рулетка» онлайн",
-    "description": "Вопросы про своих же друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.",
+    "title": "Кто из нас — вопросы для компании друзей",
+    "description": "Игра «Кто из нас» для компании друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.",
     "canonical": "https://clinkyapp.com/ru/play/ruletka",
     "robots": "index,follow,max-image-preview:large",
-    "h1": "Играть в «Рулетку» онлайн",
+    "h1": "Играть в «Кто из нас» онлайн",
     "hreflang": [
       "en",
       "ru",
@@ -98,7 +98,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 390
+    "prerenderWords": 392
   },
   "/play/questions-to-ask-friends": {
     "status": 200,
@@ -199,12 +199,12 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 144
+    "prerenderWords": 148
   },
   "/games": {
     "status": 200,
     "title": "Question Games for Friends — Play Free Online",
-    "description": "Four sets of questions for any table. Never Have I Ever, Roulette, Questions to Ask Friends and Would You Rather, with rules and real cards.",
+    "description": "Four sets of questions for any table. Never Have I Ever, Who Knows Better, Questions to Ask Friends and Would You Rather, with rules and real cards.",
     "canonical": "https://clinkyapp.com/games",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Games for any table",
@@ -219,7 +219,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 297
+    "prerenderWords": 301
   },
   "/about": {
     "status": 200,
@@ -302,7 +302,7 @@
   "/ru/games": {
     "status": 200,
     "title": "Игры с вопросами для компании — играть онлайн",
-    "description": "Четыре набора вопросов для любой компании. «Я никогда не», «Рулетка», вопросы друзьям и «Что выберешь», с правилами и живыми карточками.",
+    "description": "Четыре набора вопросов для любой компании. «Я никогда не», «Кто из нас», вопросы друзьям и «Что выберешь», с правилами и живыми карточками.",
     "canonical": "https://clinkyapp.com/ru/games",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Игры для компании",
@@ -317,7 +317,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 237
+    "prerenderWords": 242
   },
   "/ru/about": {
     "status": 200,

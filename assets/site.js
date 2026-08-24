@@ -881,6 +881,7 @@
         '</div>' +
       '</section>' +
       gamesHub() +
+      scenarioStrip() +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
         '<div style="max-width:720px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
@@ -1107,6 +1108,108 @@
       sectionWrap(L.faq, faqAccordion(c.faq[lang]));
   }
 
+  function scenarioStrip() {
+    var d = window.CLINKY_SCENARIOS;
+    if (!d) { ensureScenarios(function () { paint(); }); return ''; }
+    var lang = state.lang, items = [];
+    for (var id in d.scenarios) {
+      var sc = d.scenarios[id], href = scenarioHrefFor(id, lang);
+      if (!href) continue;
+      items.push('<a href="' + href + '" class="soft-card" style="display:block;padding:20px;text-decoration:none;text-align:left">' +
+        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:17px;margin:0 0 6px;color:#1c1326">' + esc(sc.h1[lang]) + '</h3>' +
+        '<p style="font-size:14px;line-height:1.5;color:#6b6b76;margin:0">' + esc(sc.tagline[lang]) + '</p></a>');
+    }
+    if (!items.length) return '';
+    return '<section style="padding:clamp(6px,1.4vh,18px) clamp(20px,5vw,72px) clamp(20px,3vh,32px)">' +
+      '<div style="max-width:980px;margin:0 auto">' +
+        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;text-align:center;color:#1c1326">' + esc(lang === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation') + '</h2>' +
+        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">' + items.join('') + '</div>' +
+      '</div>' +
+    '</section>';
+  }
+
+  // ===== SCENARIO PAGES =====
+  // Ситуационные наборы: своя колода, свой текст. Данные лежат отдельным файлом,
+  // потому что в бандл им незачем.
+  function ensureScenarios(cb) {
+    if (window.CLINKY_SCENARIOS) { cb && cb(); return; }
+    if (document.getElementById('scData')) return;
+    var sc = document.createElement('script');
+    sc.id = 'scData';
+    sc.src = '/assets/scenarios.js?v=97c04e21';
+    sc.onload = function () { cb && cb(); };
+    document.head.appendChild(sc);
+  }
+  function scenarioData(id) {
+    var d = window.CLINKY_SCENARIOS;
+    return d && d.scenarios ? d.scenarios[id] : null;
+  }
+  function scenarioLabels() {
+    var d = window.CLINKY_SCENARIOS;
+    return d && d.labels ? d.labels[state.lang] : null;
+  }
+  function scenarioCard(sc) {
+    var cards = sc.cards[state.lang] || [];
+    if (!cards.length) return '';
+    var idx = (state.scenarioIndex || 0) % cards.length;
+    return '<div style="max-width:430px;margin:0 auto">' +
+      '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
+        '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
+          '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + esc(sc.h1[state.lang]) + '</span>' +
+        '</div>' +
+        '<p id="scLine" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(18px,2.3vw,22px);line-height:1.3;letter-spacing:-.3px;text-align:center;margin:0 0 22px;color:#1c1326">' + esc(cards[idx]) + '</p>' +
+        '<div style="display:flex;justify-content:center">' +
+          '<button data-act="snext" aria-label="' + esc(state.lang === 'ru' ? 'Следующая карточка' : 'Next card') + '" style="width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;background:#FF4F62;color:#fff;font-size:22px;box-shadow:0 14px 26px -12px rgba(225,29,72,.7)">&rarr;</button>' +
+        '</div>' +
+        '<p style="text-align:center;font-size:12.5px;color:#9a94a2;margin:16px 0 0">' + esc((idx + 1) + ' / ' + cards.length) + '</p>' +
+      '</div>' +
+    '</div>';
+  }
+  function scenarioMore(currentId) {
+    var d = window.CLINKY_SCENARIOS;
+    if (!d) return '';
+    var out = [];
+    for (var id in d.scenarios) {
+      if (id === currentId) continue;
+      var href = scenarioHrefFor(id, state.lang);
+      if (href) out.push('<li style="margin:0 0 8px"><a href="' + href + '" style="color:#FF4F62;font-weight:700;text-decoration:none">' + esc(d.scenarios[id].h1[state.lang]) + '</a></li>');
+    }
+    for (var i = 0; i < GAMES.length; i++) {
+      var ph = playHrefFor(i, state.lang);
+      if (ph) out.push('<li style="margin:0 0 8px"><a href="' + ph + '" style="color:#FF4F62;font-weight:700;text-decoration:none">' + esc(GAMES[i].title[state.lang]) + '</a></li>');
+    }
+    return '<ul style="list-style:none;padding:0;margin:0">' + out.join('') + '</ul>';
+  }
+  function renderScenario() {
+    var meta = SCENARIO_SLUGS[state.scenarioSlug] || {};
+    var sc = scenarioData(meta.id), L = scenarioLabels();
+    if (!sc || !L) {
+      ensureScenarios(function () { paint(); });
+      return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) 40px;text-align:center">' +
+        '<p style="color:#7a7280;font-size:14px">' + esc(state.lang === 'ru' ? 'Загружаем карточки' : 'Loading cards') + '</p></section></div>';
+    }
+    var lang = state.lang;
+    var cardsList = (sc.cards[lang] || []).map(function (q) { return { t: q, d: '' }; });
+    return '<div class="page-in">' +
+      '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
+        '<div class="play-head" style="margin:0 auto;text-align:center">' +
+          '<h1 class="play-h1">' + esc(sc.h1[lang]) + '</h1>' +
+          subsec(sc.tagline[lang]) +
+        '</div>' +
+      '</section>' +
+      '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
+        '<div id="scMount">' + scenarioCard(sc) + '</div>' +
+      '</section>' +
+      sectionWrap(null, '<p class="lead-p">' + esc(sc.players[lang]) + '. ' + esc(sc.intro[lang]) + '</p>') +
+      sectionWrap(L.how, numberedList(sc.how[lang])) +
+      sectionWrap(L.cards, numberedList(cardsList)) +
+      sectionWrap(L.advice, numberedList(sc.advice[lang])) +
+      sectionWrap(L.faq, faqAccordion(sc.faq[lang])) +
+      sectionWrap(L.more, scenarioMore(meta.id)) +
+      renderFinalCta() +
+    '</div>';
+  }
+
   // ===== ABOUT =====
   function renderAbout() {
     var t = tdict(), I = icons();
@@ -1250,6 +1353,7 @@
   function renderMain() {
     switch (state.page) {
       case 'play': return renderPlay();
+      case 'scenario': return renderScenario();
       case 'games': return renderGames();
       case 'about': return renderAbout();
       case 'support': return renderSupport();
@@ -1517,7 +1621,7 @@
       var tgt = pathFor(state.page, lang);
       if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
     } catch (e) {}
-    paint();
+    paint(); syncDocTitle();
   }
   // Country fallback: switch to RU for Russian-speaking countries — only if the visitor hasn't
   // chosen a language and the browser wasn't already Russian. Not persisted (re-checked each visit).
@@ -1530,7 +1634,23 @@
       state.lang = 'ru'; document.documentElement.lang = 'ru'; paint();
     } catch (e) {}
   }
-  var PAGES = { home: 1, games: 1, play: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  var PAGES = { home: 1, games: 1, play: 1, scenario: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  var SCENARIO_SLUGS = {
+    'for-couples': { id: 'couples', lang: 'en' },
+    'dlya-pary': { id: 'couples', lang: 'ru' },
+    'party': { id: 'party', lang: 'en' },
+    'za-stolom': { id: 'party', lang: 'ru' },
+    'first-date': { id: 'first-date', lang: 'en' },
+    'pervoe-svidanie': { id: 'first-date', lang: 'ru' }
+  };
+  function scenarioSlugFor(id, lang) {
+    for (var k in SCENARIO_SLUGS) if (SCENARIO_SLUGS[k].id === id && SCENARIO_SLUGS[k].lang === lang) return k;
+    return null;
+  }
+  function scenarioHrefFor(id, lang) {
+    var slug = scenarioSlugFor(id, lang);
+    return slug ? (lang === 'ru' ? '/ru/voprosy/' : '/questions/') + slug : null;
+  }
   var PLAY_SLUGS = {
     'never-have-i-ever': { id: 'never_have_i', lang: 'en', game: 0 },
     'ya-nikogda-ne': { id: 'never_have_i', lang: 'ru', game: 0 },
@@ -1559,6 +1679,11 @@
       var slug = seg.slice(5);
       if (PLAY_SLUGS[slug]) { state.playSlug = slug; return 'play'; }
     }
+    var qPrefix = seg.indexOf('questions/') === 0 ? 10 : (seg.indexOf('voprosy/') === 0 ? 8 : 0);
+    if (qPrefix) {
+      var sslug = seg.slice(qPrefix);
+      if (SCENARIO_SLUGS[sslug]) { state.scenarioSlug = sslug; return 'scenario'; }
+    }
     return PAGES[seg] ? seg : 'home';
   }
   function playHrefFor(gameIndex, lang) {
@@ -1573,6 +1698,10 @@
     return null;
   }
   function pathFor(page, lang) {
+    if (page === 'scenario') {
+      var cs = SCENARIO_SLUGS[state.scenarioSlug] || { id: 'couples' };
+      return scenarioHrefFor(cs.id, lang) || scenarioHrefFor(cs.id, 'en');
+    }
     if (page === 'play') {
       var cur = PLAY_SLUGS[state.playSlug] || { id: 'never_have_i' };
       var slug = playSlugFor(cur.id, lang) || state.playSlug;
@@ -1581,14 +1710,14 @@
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
-  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/roulette":"How Well Do You Know Your Friends — Free Game","/ru/play/ruletka":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/404":"Page Not Found — Clinky"};
+  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/roulette":"How Well Do You Know Your Friends — Free Game","/ru/play/ruletka":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары — 20 карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы за столом для весёлой компании","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании — 20 карточек","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];
     if (v) document.title = v;
   }
   var _pageKey = '';
-  function pageKey(page) { return page === 'play' ? 'play:' + state.playSlug : page; }
+  function pageKey(page) { return page === 'play' ? 'play:' + state.playSlug : page === 'scenario' ? 'scenario:' + state.scenarioSlug : page; }
   function setPage(page) {
     var leaving = document.querySelector('#app .page-in');
     if (leaving && pageKey(page) !== _pageKey && !prefersReducedMotion()) {
@@ -1746,6 +1875,19 @@
             m.innerHTML = renderPlayCard();
             var line = document.getElementById('playLine');
             if (line) { line.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)'; }
+          }
+        }
+        break;
+      }
+      case 'snext': {
+        var smeta = SCENARIO_SLUGS[state.scenarioSlug] || {}, sdata = scenarioData(smeta.id);
+        if (sdata) {
+          state.scenarioIndex = (state.scenarioIndex || 0) + 1;
+          var sm = document.getElementById('scMount');
+          if (sm) {
+            sm.innerHTML = scenarioCard(sdata);
+            var sl = document.getElementById('scLine');
+            if (sl) sl.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)';
           }
         }
         break;

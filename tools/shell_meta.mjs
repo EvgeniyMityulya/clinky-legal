@@ -166,6 +166,54 @@ export const SHELLS = [
     ogDescription: 'Оба варианта немного больно. В этом и смысл.'
   },
   {
+    file: 'questions/for-couples.html', loc: 'en', path: '/questions/for-couples', altRu: '/ru/voprosy/dlya-pary',
+    robots: 'index,follow,max-image-preview:large', scenario: 'couples',
+    title: 'Questions for Couples — Free Card Game',
+    description: 'Twenty questions for the two of you, built to start stories rather than one-word answers. Free in the browser, nothing to install.',
+    ogTitle: 'Questions for couples that are not about favourite colours',
+    ogDescription: 'Twenty cards for two. Play free in the browser.'
+  },
+  {
+    file: 'ru/voprosy/dlya-pary.html', loc: 'ru', path: '/ru/voprosy/dlya-pary', altEn: '/questions/for-couples',
+    robots: 'index,follow,max-image-preview:large', scenario: 'couples',
+    title: 'Вопросы для пары — 20 карточек онлайн',
+    description: 'Двадцать вопросов на двоих, после которых начинается разговор, а не короткий ответ. Бесплатно в браузере, без установки.',
+    ogTitle: 'Вопросы для пары, которые не про любимый цвет',
+    ogDescription: 'Двадцать карточек на двоих. Играй бесплатно в браузере.'
+  },
+  {
+    file: 'questions/party.html', loc: 'en', path: '/questions/party', altRu: '/ru/voprosy/za-stolom',
+    robots: 'index,follow,max-image-preview:large', scenario: 'party',
+    title: 'Party Game Questions for Friends — Free',
+    description: 'Twenty questions for a table that has run out of news. They ask about your own group, so the answers come with names in them. Free, no sign-up.',
+    ogTitle: 'Party questions about your own group',
+    ogDescription: 'Twenty cards for four people and up. Free in the browser.'
+  },
+  {
+    file: 'ru/voprosy/za-stolom.html', loc: 'ru', path: '/ru/voprosy/za-stolom', altEn: '/questions/party',
+    robots: 'index,follow,max-image-preview:large', scenario: 'party',
+    title: 'Вопросы за столом для весёлой компании',
+    description: 'Двадцать вопросов для стола, у которого новости кончились. Спрашивают про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.',
+    ogTitle: 'Вопросы за столом про свою же компанию',
+    ogDescription: 'Двадцать карточек от четырёх человек. Бесплатно в браузере.'
+  },
+  {
+    file: 'questions/first-date.html', loc: 'en', path: '/questions/first-date', altRu: '/ru/voprosy/pervoe-svidanie',
+    robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
+    title: 'First Date Questions — Free Card Game',
+    description: 'Twenty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.',
+    ogTitle: 'First date questions that skip the interview',
+    ogDescription: 'Twenty cards for two. Free, no sign-up.'
+  },
+  {
+    file: 'ru/voprosy/pervoe-svidanie.html', loc: 'ru', path: '/ru/voprosy/pervoe-svidanie', altEn: '/questions/first-date',
+    robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
+    title: 'Вопросы на первом свидании — 20 карточек',
+    description: 'Двадцать вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.',
+    ogTitle: 'Вопросы на свидании вместо собеседования',
+    ogDescription: 'Двадцать карточек на двоих. Бесплатно, без регистрации.'
+  },
+  {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,
     title: 'Page Not Found — Clinky',
     description: 'That page does not exist. Head back to the Clinky home page or browse the free question packs.',

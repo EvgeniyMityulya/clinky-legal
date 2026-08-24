@@ -11,6 +11,7 @@ import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
 import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
 import { ABOUT, AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
+import { SCENARIOS, SCENARIO_LABELS } from './scenario_content.mjs';
 
 const EN_TITLE = {
   never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better',
@@ -18,6 +19,14 @@ const EN_TITLE = {
 };
 // У этой игры целевая фраза длиннее названия, поэтому h1 задан отдельно.
 const EN_H1 = { roulette: 'How well do you know your friends' };
+const PLAY_EN = {
+  never_have_i: '/play/never-have-i-ever', roulette: '/play/roulette',
+  tell_a_moment: '/play/questions-to-ask-friends', would_you_rather: '/play/would-you-rather'
+};
+const PLAY_RU = {
+  never_have_i: '/ru/play/ya-nikogda-ne', roulette: '/ru/play/ruletka',
+  tell_a_moment: '/ru/play/voprosy-druzyam', would_you_rather: '/ru/play/chto-vyberesh'
+};
 const playersLine = (min, loc) => (loc === 'ru' ? `От ${min}+ игроков` : `${min}+ players`);
 const RU_ACC = {
   never_have_i: '«Я никогда не»', roulette: '«Кто из нас»',
@@ -202,11 +211,16 @@ function gamesPrerender(loc) {
 <p>${esc(playersLine(c.min, loc))}. ${esc(c.best[loc])}</p>`;
   }).join('\n');
 
+  const sets = Object.values(SCENARIOS).map((sc) =>
+    `<h3><a href="/${sc.slug[loc]}">${esc(sc.h1[loc])}</a></h3>\n<p>${esc(sc.tagline[loc])}</p>`).join('\n');
+
   return `<div id="prerender">
 <nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 ${blocks}
+<h2>${esc(loc === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation')}</h2>
+${sets}
 <h2>${esc(t.faq)}</h2>
 ${faqHtml(FAQ_GAMES[loc])}
 </div>`;
@@ -263,6 +277,39 @@ ${faqHtml(c.faq[loc])}
 </div>`;
 }
 
+function scenarioPrerender(s) {
+  const loc = s.loc;
+  const sc = SCENARIOS[s.scenario];
+  const L = SCENARIO_LABELS[loc];
+  const nav = loc === 'ru'
+    ? [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']]
+    : [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']];
+  const others = Object.entries(SCENARIOS)
+    .filter(([id]) => id !== s.scenario)
+    .map(([, v]) => [v.h1[loc], '/' + v.slug[loc]]);
+  const games = GAMES_META.map((g) => {
+    const slug = loc === 'ru' ? PLAY_RU[g.id] : PLAY_EN[g.id];
+    return [loc === 'ru' ? g.title.ru : (EN_TITLE[g.id] || g.title.en), slug];
+  });
+  return `<div id="prerender">
+<nav>${nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<h1>${esc(sc.h1[loc])}</h1>
+<p>${esc(sc.tagline[loc])}</p>
+<p>${esc(sc.players[loc])}</p>
+<p>${esc(sc.intro[loc])}</p>
+<h2>${esc(L.how)}</h2>
+<ol>${sc.how[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
+<h2>${esc(L.cards)}</h2>
+<ol>${sc.cards[loc].map((q) => `<li>${esc(q)}</li>`).join('')}</ol>
+<h2>${esc(L.advice)}</h2>
+<ol>${sc.advice[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
+<h2>${esc(L.faq)}</h2>
+${faqHtml(sc.faq[loc])}
+<h2>${esc(L.more)}</h2>
+<ul>${[...others, ...games].map(([n, h]) => `<li><a href="${h}">${esc(n)}</a></li>`).join('')}</ul>
+</div>`;
+}
+
 function stripPhosphor(html) {
   return html
     .replace(/[ \t]*<link[^>]*phosphor-icons[^>]*>\s*\n?/g, '')
@@ -313,6 +360,7 @@ function jsonld(s) {
       graph.push({ ...author, knowsAbout: ['iOS development', 'Swift', 'SwiftUI', 'party games'] });
     }
     if (s.play && GAME_CONTENT[s.play]) graph.push(faqSchema(GAME_CONTENT[s.play].faq[s.loc]));
+    if (s.scenario && SCENARIOS[s.scenario]) graph.push(faqSchema(SCENARIOS[s.scenario].faq[s.loc]));
     else if (s.faq === 'games') graph.push(faqSchema(FAQ_GAMES[s.loc]));
     else if (s.faq) graph.push(faqSchema(FAQ_SUPPORT[s.loc]));
   }
@@ -378,7 +426,7 @@ for (const s of SHELLS) {
 
   html = html.replace(/<noscript[\s\S]*?<\/noscript>\n?/, '');
 
-  const body = s.home ? homePrerender(s.loc) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s)));
+  const body = s.home ? homePrerender(s.loc) : (s.scenario ? scenarioPrerender(s) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s))));
   const appBlock = `<div id="app"><!-- prerender:start -->\n${body}\n<!-- prerender:end --></div>`;
   if (/<!-- prerender:start -->/.test(html)) {
     html = html.replace(/<div id="app"><!-- prerender:start -->[\s\S]*?<!-- prerender:end --><\/div>/, appBlock);

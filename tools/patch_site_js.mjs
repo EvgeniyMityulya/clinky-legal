@@ -79,7 +79,7 @@ inject('ICON_PATHS', /  var ICON_PATHS = \{[^;]*\};/, JSON.stringify(ICON_PATHS)
 
 // lazily loaded payloads need their own cache-busting, they are not in the shells
 const lazyVer = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8);
-for (const name of ['game-content.js', 'web-deck.js', 'author.jpg']) {
+for (const name of ['game-content.js', 'web-deck.js', 'scenarios.js', 'author.jpg']) {
   const re = new RegExp("'/assets/" + name.replace('.', '\\.') + "(\\?v=[a-f0-9]+)?'", 'g');
   js = js.replace(re, `'/assets/${name}?v=${lazyVer('assets/' + name)}'`);
 }
