@@ -253,7 +253,7 @@ export const SCENARIOS = {
     },
     cards: {
       en: [
-        "What were you doing an hour before you left the house?",
+        "What is the best thing that happened to you this week?",
         "Which place in this city never gets old for you?",
         "What are you good at and never mention?",
         "Which of your habits gives you away before you speak?",
@@ -275,7 +275,7 @@ export const SCENARIOS = {
         "What would a good second meeting look like?"
       ],
       ru: [
-        "Чем ты занимался за час до того, как вышел из дома?",
+        "Что хорошее случилось с тобой на этой неделе?",
         "Какое место в городе тебе никогда не надоедает?",
         "Что ты умеешь хорошо и никогда об этом не говоришь?",
         "Какая твоя привычка выдаёт тебя раньше слов?",
