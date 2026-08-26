@@ -20,11 +20,11 @@ const EN_TITLE = {
 // У этой игры целевая фраза длиннее названия, поэтому h1 задан отдельно.
 const EN_H1 = { roulette: 'How well do you know your friends' };
 const PLAY_EN = {
-  never_have_i: '/play/never-have-i-ever', roulette: '/play/roulette',
+  never_have_i: '/play/never-have-i-ever', roulette: '/play/who-knows-better',
   tell_a_moment: '/play/questions-to-ask-friends', would_you_rather: '/play/would-you-rather'
 };
 const PLAY_RU = {
-  never_have_i: '/ru/play/ya-nikogda-ne', roulette: '/ru/play/ruletka',
+  never_have_i: '/ru/play/ya-nikogda-ne', roulette: '/ru/play/kto-iz-nas',
   tell_a_moment: '/ru/play/voprosy-druzyam', would_you_rather: '/ru/play/chto-vyberesh'
 };
 const playersLine = (min, loc) => (loc === 'ru' ? `От ${min}+ игроков` : `${min}+ players`);

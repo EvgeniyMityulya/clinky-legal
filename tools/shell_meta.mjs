@@ -118,7 +118,7 @@ export const SHELLS = [
     ogDescription: 'Тяни карточку, дальше всё сделает компания. Бесплатно, без регистрации.'
   },
   {
-    file: 'play/roulette.html', loc: 'en', path: '/play/roulette', altRu: '/ru/play/ruletka',
+    file: 'play/who-knows-better.html', loc: 'en', path: '/play/who-knows-better', altRu: '/ru/play/kto-iz-nas',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
     title: 'How Well Do You Know Your Friends — Free Game',
     description: 'Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.',
@@ -126,8 +126,26 @@ export const SHELLS = [
     ogDescription: 'The card picks the pair. Play free in the browser.'
   },
   {
-    file: 'ru/play/ruletka.html', loc: 'ru', path: '/ru/play/ruletka', altEn: '/play/roulette',
+    file: 'ru/play/kto-iz-nas.html', loc: 'ru', path: '/ru/play/kto-iz-nas', altEn: '/play/who-knows-better',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
+    title: 'Кто из нас — вопросы для компании друзей',
+    description: 'Игра «Кто из нас» для компании друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.',
+    ogTitle: '«Кто из нас» — вопросы про своих же друзей',
+    ogDescription: 'Карточка выбирает пару. Играй бесплатно в браузере.'
+  },
+  // Прежние адреса игры остаются рабочими, но каноническими считаются новые,
+  // иначе переезд отдал бы 404 всем, у кого старая ссылка. Удалить после включения 301.
+  {
+    file: 'play/roulette.html', loc: 'en', path: '/play/roulette', canonicalOverride: '/play/who-knows-better',
+    robots: 'index,follow', faq: 'games', play: 'roulette',
+    title: 'How Well Do You Know Your Friends — Free Game',
+    description: 'Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.',
+    ogTitle: 'Who Knows Better — the question game about your own friends',
+    ogDescription: 'The card picks the pair. Play free in the browser.'
+  },
+  {
+    file: 'ru/play/ruletka.html', loc: 'ru', path: '/ru/play/ruletka', canonicalOverride: '/ru/play/kto-iz-nas',
+    robots: 'index,follow', faq: 'games', play: 'roulette',
     title: 'Кто из нас — вопросы для компании друзей',
     description: 'Игра «Кто из нас» для компании друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.',
     ogTitle: '«Кто из нас» — вопросы про своих же друзей',

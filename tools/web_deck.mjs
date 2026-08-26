@@ -57,7 +57,7 @@ export const WEB_DECK = {
     ]
   },
   roulette: {
-    slug: { en: 'play/roulette', ru: 'ru/play/ruletka' },
+    slug: { en: 'play/who-knows-better', ru: 'ru/play/kto-iz-nas' },
     names: { en: ['Alex', 'Sam'], ru: ['Аня', 'Макс'] },
     en: [
       '{A}, what did you think of {B} the first five minutes you met?',

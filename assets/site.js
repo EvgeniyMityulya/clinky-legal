@@ -940,7 +940,7 @@
     if (_deckLoading) return;
     _deckLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/web-deck.js?v=16fe4469';
+    sc.src = '/assets/web-deck.js?v=6ac0c73d';
     sc.onload = function () { _deckLoading = false; cb(); };
     sc.onerror = function () { _deckLoading = false; };
     document.head.appendChild(sc);
@@ -1666,8 +1666,10 @@
   var PLAY_SLUGS = {
     'never-have-i-ever': { id: 'never_have_i', lang: 'en', game: 0 },
     'ya-nikogda-ne': { id: 'never_have_i', lang: 'ru', game: 0 },
-    'roulette': { id: 'roulette', lang: 'en', game: 1 },
-    'ruletka': { id: 'roulette', lang: 'ru', game: 1 },
+    'who-knows-better': { id: 'roulette', lang: 'en', game: 1 },
+    'kto-iz-nas': { id: 'roulette', lang: 'ru', game: 1 },
+    'roulette': { id: 'roulette', lang: 'en', game: 1, legacy: true },
+    'ruletka': { id: 'roulette', lang: 'ru', game: 1, legacy: true },
     'questions-to-ask-friends': { id: 'tell_a_moment', lang: 'en', game: 2 },
     'voprosy-druzyam': { id: 'tell_a_moment', lang: 'ru', game: 2 },
     'would-you-rather': { id: 'would_you_rather', lang: 'en', game: 3 },
@@ -1705,7 +1707,7 @@
   }
   function playSlugFor(gameId, lang) {
     for (var k in PLAY_SLUGS) {
-      if (PLAY_SLUGS[k].id === gameId && PLAY_SLUGS[k].lang === lang) return k;
+      if (PLAY_SLUGS[k].id === gameId && PLAY_SLUGS[k].lang === lang && !PLAY_SLUGS[k].legacy) return k;
     }
     return null;
   }
@@ -1722,7 +1724,7 @@
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
-  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/roulette":"How Well Do You Know Your Friends — Free Game","/ru/play/ruletka":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары — 20 карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы за столом для весёлой компании","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании — 20 карточек","/404":"Page Not Found — Clinky"};
+  var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"How Well Do You Know Your Friends — Free Game","/ru/play/kto-iz-nas":"Кто из нас — вопросы для компании друзей","/play/roulette":"How Well Do You Know Your Friends — Free Game","/ru/play/ruletka":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары — 20 карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы за столом для весёлой компании","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании — 20 карточек","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];
