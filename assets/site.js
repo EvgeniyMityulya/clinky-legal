@@ -848,7 +848,7 @@
   function qSource() {
     if (state.page === 'scenario') {
       var meta = SCENARIO_SLUGS[state.scenarioSlug] || {}, sc = scenarioData(meta.id);
-      if (sc) return { kind: 'scenario', label: sc.h1[state.lang], cards: sc.cards[state.lang] || [], icon: sc.icon };
+      if (sc) return { kind: 'scenario', label: sc.h1[state.lang], cards: scenarioCards(sc, state.lang), icon: sc.icon };
     }
     var g = GAMES[state.gameIndex];
     return { kind: 'game', label: g.title[state.lang], cards: (g.q || []).map(function (q) { return q[state.lang]; }) };
@@ -1156,9 +1156,14 @@
     if (document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
-    sc.src = '/assets/scenarios.js?v=b6984de3';
+    sc.src = '/assets/scenarios.js?v=e4ca2e50';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
+  }
+  function scenarioCards(sc, lang) {
+    if (!sc) return [];
+    if (sc.groups) return sc.groups.reduce(function (all, g) { return all.concat(g[lang] || []); }, []);
+    return (sc.cards && sc.cards[lang]) || [];
   }
   function scenarioData(id) {
     var d = window.CLINKY_SCENARIOS;
@@ -1201,7 +1206,16 @@
         '<p style="color:#7a7280;font-size:14px">' + esc(state.lang === 'ru' ? 'Загружаем карточки' : 'Loading cards') + '</p></section></div>';
     }
     var lang = state.lang;
-    var cardsList = (sc.cards[lang] || []).map(function (q) { return { t: q, d: '' }; });
+    var cardsBlock;
+    if (sc.groups) {
+      cardsBlock = sc.groups.map(function (g) {
+        return '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:17px;margin:26px 0 4px;color:#1c1326">' + esc(g.title[lang]) + '</h3>' +
+          '<p style="font-size:14px;color:#6b6b76;margin:0 0 12px">' + esc(g.note[lang]) + '</p>' +
+          numberedList((g[lang] || []).map(function (q) { return { t: q, d: '' }; }));
+      }).join('');
+    } else {
+      cardsBlock = numberedList(scenarioCards(sc, lang).map(function (q) { return { t: q, d: '' }; }));
+    }
     return '<div class="page-in">' +
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div class="play-head" style="margin:0 auto;text-align:center">' +
@@ -1214,7 +1228,7 @@
       '</section>' +
       sectionWrap(null, '<p class="lead-p">' + esc(sc.players[lang]) + '. ' + esc(sc.intro[lang]) + '</p>') +
       sectionWrap(L.how, numberedList(sc.how[lang])) +
-      sectionWrap(L.cards, numberedList(cardsList)) +
+      sectionWrap(L.cards, cardsBlock) +
       sectionWrap(L.advice, numberedList(sc.advice[lang])) +
       sectionWrap(L.faq, faqAccordion(sc.faq[lang])) +
       sectionWrap(L.more, scenarioMore(meta.id)) +

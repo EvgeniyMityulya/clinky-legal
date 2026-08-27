@@ -185,17 +185,17 @@ export const SHELLS = [
     file: 'questions/party.html', loc: 'en', path: '/questions/party', altRu: '/ru/voprosy/za-stolom',
     robots: 'index,follow,max-image-preview:large', scenario: 'party',
     title: 'Party Game Questions for Friends — Free',
-    description: 'Twenty questions for a table that has run out of news. They ask about your own group, so the answers come with names in them. Free, no sign-up.',
+    description: 'Sixty questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.',
     ogTitle: 'Party questions about your own group',
-    ogDescription: 'Twenty cards for four people and up. Free in the browser.'
+    ogDescription: 'Sixty cards for four people and up. Free in the browser.'
   },
   {
     file: 'ru/voprosy/za-stolom.html', loc: 'ru', path: '/ru/voprosy/za-stolom', altEn: '/questions/party',
     robots: 'index,follow,max-image-preview:large', scenario: 'party',
     title: 'Вопросы за столом для весёлой компании',
-    description: 'Двадцать вопросов для стола, у которого новости кончились. Спрашивают про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.',
+    description: 'Шестьдесят вопросов для стола, у которого новости кончились. Разогрев, поглубже и смешные, спрашивают про саму компанию, поэтому в ответах появляются имена.',
     ogTitle: 'Вопросы за столом про свою же компанию',
-    ogDescription: 'Двадцать карточек от четырёх человек. Бесплатно в браузере.'
+    ogDescription: 'Шестьдесят карточек от четырёх человек. Бесплатно в браузере.'
   },
   {
     file: 'questions/first-date.html', loc: 'en', path: '/questions/first-date', altRu: '/ru/voprosy/pervoe-svidanie',

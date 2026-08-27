@@ -300,7 +300,9 @@ function scenarioPrerender(s) {
 <h2>${esc(L.how)}</h2>
 <ol>${sc.how[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
 <h2>${esc(L.cards)}</h2>
-<ol>${sc.cards[loc].map((q) => `<li>${esc(q)}</li>`).join('')}</ol>
+${sc.groups
+  ? sc.groups.map((g) => `<h3>${esc(g.title[loc])}</h3>\n<p>${esc(g.note[loc])}</p>\n<ol>${(g[loc] || []).map((q) => `<li>${esc(q)}</li>`).join('')}</ol>`).join('\n')
+  : `<ol>${(sc.cards[loc] || []).map((q) => `<li>${esc(q)}</li>`).join('')}</ol>`}
 <h2>${esc(L.advice)}</h2>
 <ol>${sc.advice[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.faq)}</h2>
