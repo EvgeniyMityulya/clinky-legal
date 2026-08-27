@@ -169,17 +169,17 @@ export const SHELLS = [
     file: 'questions/for-couples.html', loc: 'en', path: '/questions/for-couples', altRu: '/ru/voprosy/dlya-pary',
     robots: 'index,follow,max-image-preview:large', scenario: 'couples',
     title: 'Questions for Couples — Free Card Game',
-    description: 'Twenty questions for the two of you, built to start stories rather than one-word answers. Free in the browser, nothing to install.',
+    description: 'Sixty questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.',
     ogTitle: 'Questions for couples that are not about favourite colours',
-    ogDescription: 'Twenty cards for two. Play free in the browser.'
+    ogDescription: 'Sixty cards for two. Play free in the browser.'
   },
   {
     file: 'ru/voprosy/dlya-pary.html', loc: 'ru', path: '/ru/voprosy/dlya-pary', altEn: '/questions/for-couples',
     robots: 'index,follow,max-image-preview:large', scenario: 'couples',
-    title: 'Вопросы для пары — 20 карточек онлайн',
-    description: 'Двадцать вопросов на двоих, после которых начинается разговор, а не короткий ответ. Бесплатно в браузере, без установки.',
+    title: 'Вопросы для пары — 60 карточек онлайн',
+    description: 'Шестьдесят вопросов на двоих, разбиты на разогрев, поглубже и смешные. После них начинается разговор, а не короткий ответ. Бесплатно, без установки.',
     ogTitle: 'Вопросы для пары, которые не про любимый цвет',
-    ogDescription: 'Двадцать карточек на двоих. Играй бесплатно в браузере.'
+    ogDescription: 'Шестьдесят карточек на двоих. Играй бесплатно в браузере.'
   },
   {
     file: 'questions/party.html', loc: 'en', path: '/questions/party', altRu: '/ru/voprosy/za-stolom',
@@ -201,17 +201,33 @@ export const SHELLS = [
     file: 'questions/first-date.html', loc: 'en', path: '/questions/first-date', altRu: '/ru/voprosy/pervoe-svidanie',
     robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
     title: 'First Date Questions — Free Card Game',
-    description: 'Twenty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.',
+    description: 'Sixty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.',
     ogTitle: 'First date questions that skip the interview',
-    ogDescription: 'Twenty cards for two. Free, no sign-up.'
+    ogDescription: 'Sixty cards for two. Free, no sign-up.'
   },
   {
     file: 'ru/voprosy/pervoe-svidanie.html', loc: 'ru', path: '/ru/voprosy/pervoe-svidanie', altEn: '/questions/first-date',
     robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
-    title: 'Вопросы на первом свидании — 20 карточек',
-    description: 'Двадцать вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.',
+    title: 'Вопросы на первом свидании — 60 карточек',
+    description: 'Шестьдесят вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.',
     ogTitle: 'Вопросы на свидании вместо собеседования',
-    ogDescription: 'Двадцать карточек на двоих. Бесплатно, без регистрации.'
+    ogDescription: 'Шестьдесят карточек на двоих. Бесплатно, без регистрации.'
+  },
+  {
+    file: 'questions/drinks.html', loc: 'en', path: '/questions/drinks', altRu: '/ru/voprosy/za-bokalom',
+    robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
+    title: 'Questions to Ask Over Drinks — 60 Cards',
+    description: 'Sixty questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.',
+    ogTitle: 'Questions for an evening that is in no hurry',
+    ogDescription: 'Sixty cards for two people and up. Free in the browser.'
+  },
+  {
+    file: 'ru/voprosy/za-bokalom.html', loc: 'ru', path: '/ru/voprosy/za-bokalom', altEn: '/questions/drinks',
+    robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
+    title: 'Вопросы за бокалом — 60 карточек для вечера',
+    description: 'Шестьдесят вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.',
+    ogTitle: 'Вопросы для вечера, который никуда не спешит',
+    ogDescription: 'Шестьдесят карточек от двух человек. Бесплатно в браузере.'
   },
   {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,

@@ -24,6 +24,8 @@ const URLS = [
   { path: '/ru/voprosy/dlya-pary', pri: '0.8', alt: '/questions/for-couples' },
   { path: '/questions/party', pri: '0.8', alt: '/ru/voprosy/za-stolom' },
   { path: '/ru/voprosy/za-stolom', pri: '0.8', alt: '/questions/party' },
+  { path: '/questions/drinks', pri: '0.8', alt: '/ru/voprosy/za-bokalom' },
+  { path: '/ru/voprosy/za-bokalom', pri: '0.8', alt: '/questions/drinks' },
   { path: '/questions/first-date', pri: '0.8', alt: '/ru/voprosy/pervoe-svidanie' },
   { path: '/ru/voprosy/pervoe-svidanie', pri: '0.8', alt: '/questions/first-date' },
   { path: '/ru/', pri: '1.0', alt: '/' },

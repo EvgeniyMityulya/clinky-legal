@@ -79,6 +79,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://clinkyapp.com/questions/drinks</loc>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/voprosy/za-bokalom"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/questions/drinks"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://clinkyapp.com/ru/voprosy/za-bokalom</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/questions/drinks"/>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/voprosy/za-bokalom"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://clinkyapp.com/questions/first-date</loc>
     <xhtml:link rel="alternate" hreflang="ru" href="https://clinkyapp.com/ru/voprosy/pervoe-svidanie"/>
     <xhtml:link rel="alternate" hreflang="en" href="https://clinkyapp.com/questions/first-date"/>
