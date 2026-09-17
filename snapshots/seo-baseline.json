@@ -62,11 +62,11 @@
     ],
     "prerenderWords": 399
   },
-  "/play/roulette": {
+  "/play/who-knows-better": {
     "status": 200,
     "title": "How Well Do You Know Your Friends — Free Game",
     "description": "Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.",
-    "canonical": "https://clinkyapp.com/play/roulette",
+    "canonical": "https://clinkyapp.com/play/who-knows-better",
     "robots": "index,follow,max-image-preview:large",
     "h1": "How well do you know your friends",
     "hreflang": [
@@ -83,11 +83,11 @@
     ],
     "prerenderWords": 478
   },
-  "/ru/play/ruletka": {
+  "/ru/play/kto-iz-nas": {
     "status": 200,
     "title": "Кто из нас — вопросы для компании друзей",
     "description": "Игра «Кто из нас» для компании друзей. Карточка выбирает двоих и спрашивает одного про другого, а ответы превращаются в истории. Бесплатно, без регистрации.",
-    "canonical": "https://clinkyapp.com/ru/play/ruletka",
+    "canonical": "https://clinkyapp.com/ru/play/kto-iz-nas",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Играть в «Кто из нас» онлайн",
     "hreflang": [
@@ -191,7 +191,7 @@
   "/questions/for-couples": {
     "status": 200,
     "title": "Questions for Couples — Free Card Game",
-    "description": "Twenty questions for the two of you, built to start stories rather than one-word answers. Free in the browser, nothing to install.",
+    "description": "Sixty questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.",
     "canonical": "https://clinkyapp.com/questions/for-couples",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Questions for couples",
@@ -206,12 +206,12 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 528
+    "prerenderWords": 995
   },
   "/ru/voprosy/dlya-pary": {
     "status": 200,
-    "title": "Вопросы для пары — 20 карточек онлайн",
-    "description": "Двадцать вопросов на двоих, после которых начинается разговор, а не короткий ответ. Бесплатно в браузере, без установки.",
+    "title": "Вопросы для пары — 60 карточек онлайн",
+    "description": "Шестьдесят вопросов на двоих, разбиты на разогрев, поглубже и смешные. После них начинается разговор, а не короткий ответ. Бесплатно, без установки.",
     "canonical": "https://clinkyapp.com/ru/voprosy/dlya-pary",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы для пары",
@@ -226,12 +226,12 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 406
+    "prerenderWords": 809
   },
   "/questions/party": {
     "status": 200,
     "title": "Party Game Questions for Friends — Free",
-    "description": "Twenty questions for a table that has run out of news. They ask about your own group, so the answers come with names in them. Free, no sign-up.",
+    "description": "Sixty questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.",
     "canonical": "https://clinkyapp.com/questions/party",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Party game questions",
@@ -246,12 +246,12 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 528
+    "prerenderWords": 1000
   },
   "/ru/voprosy/za-stolom": {
     "status": 200,
     "title": "Вопросы за столом для весёлой компании",
-    "description": "Двадцать вопросов для стола, у которого новости кончились. Спрашивают про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.",
+    "description": "Шестьдесят вопросов для стола, у которого новости кончились. Разогрев, поглубже и смешные, спрашивают про саму компанию, поэтому в ответах появляются имена.",
     "canonical": "https://clinkyapp.com/ru/voprosy/za-stolom",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы за столом",
@@ -266,12 +266,52 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 419
+    "prerenderWords": 811
+  },
+  "/questions/drinks": {
+    "status": 200,
+    "title": "Questions to Ask Over Drinks — 60 Cards",
+    "description": "Sixty questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.",
+    "canonical": "https://clinkyapp.com/questions/drinks",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Questions to ask over drinks",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 892
+  },
+  "/ru/voprosy/za-bokalom": {
+    "status": 200,
+    "title": "Вопросы за бокалом — 60 карточек для вечера",
+    "description": "Шестьдесят вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.",
+    "canonical": "https://clinkyapp.com/ru/voprosy/za-bokalom",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Вопросы за бокалом",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 742
   },
   "/questions/first-date": {
     "status": 200,
     "title": "First Date Questions — Free Card Game",
-    "description": "Twenty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.",
+    "description": "Sixty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.",
     "canonical": "https://clinkyapp.com/questions/first-date",
     "robots": "index,follow,max-image-preview:large",
     "h1": "First date questions",
@@ -286,12 +326,12 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 492
+    "prerenderWords": 876
   },
   "/ru/voprosy/pervoe-svidanie": {
     "status": 200,
-    "title": "Вопросы на первом свидании — 20 карточек",
-    "description": "Двадцать вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.",
+    "title": "Вопросы на первом свидании — 60 карточек",
+    "description": "Шестьдесят вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.",
     "canonical": "https://clinkyapp.com/ru/voprosy/pervoe-svidanie",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы на первом свидании",
@@ -306,7 +346,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 409
+    "prerenderWords": 722
   },
   "/ru/": {
     "status": 200,
@@ -347,7 +387,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 350
+    "prerenderWords": 368
   },
   "/about": {
     "status": 200,
@@ -445,7 +485,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 282
+    "prerenderWords": 296
   },
   "/ru/about": {
     "status": 200,

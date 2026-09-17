@@ -316,7 +316,7 @@
   function h1sec(s) { return '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h1>'; }
   function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
   function subsec(s) {
-    var body = esc(s).replace(/\.\s+(?=\S)/g, '.<br class="lede-br">');
+    var body = esc(s).replace(/\.\s+(?=\S)/g, '. <br class="lede-br">');
     return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + body + '</p>';
   }
   function coralBtn(label, act, extra) {
@@ -952,7 +952,7 @@
     if (_gcLoading) return;
     _gcLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=59c4872d';
+    sc.src = '/assets/game-content.js?v=94ecd7aa';
     sc.onload = function () { _gcLoading = false; cb(); };
     sc.onerror = function () { _gcLoading = false; };
     document.head.appendChild(sc);
@@ -1078,6 +1078,7 @@
     en: { never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
   };
   var PLAY_H1 = { en: { roulette: 'How well do you know your friends' } };
+  var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
   function renderPlay() {
     var t = tdict(), meta = PLAY_SLUGS[state.playSlug] || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
@@ -1088,7 +1089,7 @@
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div class="play-head" style="margin:0 auto;text-align:center">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + gameIcon(gi, '#FF4F62', 26) + '</span>' +
-          '<h1 class="play-h1">' + esc((PLAY_H1[state.lang] || {})[meta.id] || t.playTitle.replace('{game}', gameTitle)) + '</h1>' + subsec(t.playSub) +
+          '<h1 class="play-h1">' + esc((PLAY_H1[state.lang] || {})[meta.id] || t.playTitle.replace('{game}', gameTitle)) + '</h1>' + subsec((PLAY_SUB[state.lang] || {})[meta.id] || t.playSub) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +

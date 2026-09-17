@@ -245,10 +245,10 @@ function playPrerender(s) {
   const cards = (entry[loc] || []).slice(0, 6)
     .map((x) => String(x).replace(/\{A\}/g, nm[0]).replace(/\{B\}/g, nm[1]).replace(/\*/g, ''));
   const t = loc === 'ru'
-    ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+    ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: GAME_CONTENT[s.play]?.answer?.ru || 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
-    : { h1: EN_H1[s.play] || `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: 'Tap for a new card. No sign-up, nothing to install.',
+    : { h1: EN_H1[s.play] || `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: GAME_CONTENT[s.play]?.answer?.en || 'Tap for a new card. No sign-up, nothing to install.',
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games', limit: `${deck.limit} free cards a day, refreshed daily.`,
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
 

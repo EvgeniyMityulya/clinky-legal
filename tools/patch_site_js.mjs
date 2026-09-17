@@ -6,6 +6,7 @@ import { SHELLS } from './shell_meta.mjs';
 import { ICON_PATHS } from './icons_data.mjs';
 import { BRAND_ICONS } from './brand_icons_data.mjs';
 import { AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
+import { GAME_CONTENT } from './game_content.mjs';
 
 const FILE = 'assets/site.js';
 let js = readFileSync(FILE, 'utf8');
@@ -17,6 +18,10 @@ const inject = (name, re, value) => {
   js = js.replace(re, `  var ${name} = ${value};`);
 };
 
+
+const playSub = { en: {}, ru: {} };
+for (const [id, g] of Object.entries(GAME_CONTENT)) for (const l of ['en', 'ru']) if (g.answer?.[l]) playSub[l][id] = g.answer[l];
+inject('PLAY_SUB', /  var PLAY_SUB = [^\n]*;/, JSON.stringify(playSub));
 
 const faqLiteral = 'var FAQ = {\n' + ['en', 'ru'].map((l) =>
   `    ${l}: [\n` + FAQ_SUPPORT[l].map((f) =>

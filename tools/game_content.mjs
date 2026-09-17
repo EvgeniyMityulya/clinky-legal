@@ -1,10 +1,15 @@
 // Per-game editorial copy. Hand-written source of truth for the play pages,
 // the games hub cards, the FAQPage JSON-LD and the prerendered fallback.
 // Keep the lists the same length and the lines the same rough width so the
-// cards line up without CSS tricks.
+// cards line up without CSS tricks. `answer` is the lede under the H1, written
+// as a direct answer so search engines and AI assistants can quote it whole.
 export const GAME_CONTENT = {
   never_have_i: {
     min: 3,
+    answer: {
+      en: "Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.",
+      ru: "В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки."
+    },
     tagline: {
       en: 'Confessions that the table immediately asks you to explain',
       ru: 'Признания, за которыми стол тут же просит рассказать историю'
@@ -77,6 +82,10 @@ export const GAME_CONTENT = {
 
   roulette: {
     min: 3,
+    answer: {
+      en: "Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.",
+      ru: "В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки."
+    },
     tagline: {
       en: 'The card picks two of you and asks one about the other',
       ru: 'Карточка сама выбирает двоих и спрашивает одного про другого'
@@ -149,6 +158,10 @@ export const GAME_CONTENT = {
 
   tell_a_moment: {
     min: 2,
+    answer: {
+      en: "Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.",
+      ru: "В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки."
+    },
     tagline: {
       en: 'Questions that get answered with a story instead of one word',
       ru: 'Вопросы, на которые отвечают историей, а не одним словом'
@@ -221,6 +234,10 @@ export const GAME_CONTENT = {
 
   would_you_rather: {
     min: 2,
+    answer: {
+      en: "Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything.",
+      ru: "В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."
+    },
     tagline: {
       en: 'Two options that both cost you something, so the table argues',
       ru: 'Два варианта, и оба чем-то неудобны, поэтому спор неизбежен'
