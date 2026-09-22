@@ -1,0 +1,12 @@
+# secrets never belong in a repo that GitHub Pages publishes as-is
+.env
+.env.*
+*.env
+*.pem
+*.key
+*token*.txt
+.claude/settings.local.json
+
+# local tooling and OS noise
+node_modules/
+.DS_Store

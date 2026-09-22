@@ -256,7 +256,7 @@
       navigator.vibrate(ms);
     } catch (e) {}
   }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
   function tdict() {
     var raw = DICT[state.lang], t = {};
     for (var k in raw) t[k] = typeof raw[k] === 'string' ? raw[k].replace(/\.+$/, '') : raw[k];
@@ -440,10 +440,13 @@
     }, { threshold: 0.4 });
     clinkObs.observe(el);
   }
-  function clinkDebugValue() {   // ?clink=123456 → test the odometer at any width (not sent to server)
+  function clinkDebugValue() {   // ?clink=123456 → test the odometer at any width (not sent to server), local preview only
+    if (!isLocalPreview()) return null;
     try { var q = new URLSearchParams(location.search).get('clink'); if (q != null && /^\d+$/.test(q)) return parseInt(q, 10); } catch (e) {}
     return null;
   }
+  // Debug query switches must not let a shared link fake the live counter or a success banner.
+  function isLocalPreview() { return location.hostname === 'localhost' || location.hostname === '127.0.0.1'; }
   function loadClinkCount() {
     clinkBuild(2);   // placeholder width at "00" (top), rolled in on reveal
     bindClinkReveal();
@@ -847,7 +850,7 @@
   // Карточка с вопросом одна на весь сайт, меняется только источник колоды.
   function qSource() {
     if (state.page === 'scenario') {
-      var meta = SCENARIO_SLUGS[state.scenarioSlug] || {}, sc = scenarioData(meta.id);
+      var meta = own(SCENARIO_SLUGS, state.scenarioSlug) || {}, sc = scenarioData(meta.id);
       if (sc) return { kind: 'scenario', label: sc.h1[state.lang], cards: scenarioCards(sc, state.lang), icon: sc.icon };
     }
     var g = GAMES[state.gameIndex];
@@ -927,7 +930,7 @@
   function deckCards() {
     var d = window.CLINKY_WEB_DECK;
     if (!d) return [];
-    var meta = PLAY_SLUGS[state.playSlug] || {};
+    var meta = own(PLAY_SLUGS, state.playSlug) || {};
     var g = d.games[meta.id || 'never_have_i'] || {};
     var list = g[state.lang] || [];
     if (!g.names) return list;
@@ -946,20 +949,20 @@
     document.head.appendChild(sc);
   }
 
-  var _gcLoading = false;
+  var _gcRequested = false;
   function ensureGameContent(cb) {
     if (window.CLINKY_GAME_CONTENT) return;
-    if (_gcLoading) return;
-    _gcLoading = true;
+    if (_gcRequested) return;
+    _gcRequested = true;
     var sc = document.createElement('script');
     sc.src = '/assets/game-content.js?v=94ecd7aa';
-    sc.onload = function () { _gcLoading = false; cb(); };
-    sc.onerror = function () { _gcLoading = false; };
+    sc.onload = function () { cb(); };   // stays set: a file without the global must not be refetched on every paint
+    sc.onerror = function () { _gcRequested = false; };
     document.head.appendChild(sc);
   }
   function gameContent(id) {
     var g = window.CLINKY_GAME_CONTENT;
-    return g && g.content[id] ? g.content[id] : null;
+    return (g && g.content && own(g.content, id)) || null;
   }
   function contentLabels() {
     var g = window.CLINKY_GAME_CONTENT;
@@ -1031,7 +1034,7 @@
   }
   function renderPlayCard() {
     var t = tdict(), cards = deckCards(), st = deckState(), limit = deckLimit();
-    var meta = PLAY_SLUGS[state.playSlug] || {};
+    var meta = own(PLAY_SLUGS, state.playSlug) || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
     if (!cards.length) {
       return '<div style="max-width:430px;margin:0 auto;text-align:center;padding:40px 0;color:#7a7280;font-size:14px">' + esc(t.playLoading) + '</div>';
@@ -1080,7 +1083,7 @@
   var PLAY_H1 = { en: { roulette: 'How well do you know your friends' } };
   var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
   function renderPlay() {
-    var t = tdict(), meta = PLAY_SLUGS[state.playSlug] || {};
+    var t = tdict(), meta = own(PLAY_SLUGS, state.playSlug) || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
     if (state.gameIndex !== gi) state.gameIndex = gi;
     var gameTitle = (GAME_TITLE_CASE[state.lang] || {})[meta.id] || GAMES[gi].title[state.lang];
@@ -1152,9 +1155,10 @@
   // ===== SCENARIO PAGES =====
   // Ситуационные наборы: своя колода, свой текст. Данные лежат отдельным файлом,
   // потому что в бандл им незачем.
+  // Calls back only after its own load, never synchronously: callers repaint from the callback,
+  // so data that arrives without the requested set must not send paint() straight back here.
   function ensureScenarios(cb) {
-    if (window.CLINKY_SCENARIOS) { cb && cb(); return; }
-    if (document.getElementById('scData')) return;
+    if (window.CLINKY_SCENARIOS || document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
     sc.src = '/assets/scenarios.js?v=28564864';
@@ -1168,7 +1172,7 @@
   }
   function scenarioData(id) {
     var d = window.CLINKY_SCENARIOS;
-    return d && d.scenarios ? d.scenarios[id] : null;
+    return (d && d.scenarios && own(d.scenarios, id)) || null;
   }
   function scenarioLabels() {
     var d = window.CLINKY_SCENARIOS;
@@ -1199,7 +1203,7 @@
     return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">' + tiles.join('') + '</div>';
   }
   function renderScenario() {
-    var meta = SCENARIO_SLUGS[state.scenarioSlug] || {};
+    var meta = own(SCENARIO_SLUGS, state.scenarioSlug) || {};
     var sc = scenarioData(meta.id), L = scenarioLabels();
     if (!sc || !L) {
       ensureScenarios(function () { paint(); });
@@ -1285,7 +1289,7 @@
         head(t.aboutWhoTitle) +
         '<div class="soft-card" style="padding:22px 24px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">' +
           (AUTHOR_PHOTO
-            ? '<img src="' + AUTHOR_PHOTO + '" alt="' + esc(t.aboutWhoName) + '" width="72" height="72" loading="lazy" decoding="async" style="flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 10px 22px -12px rgba(28,19,38,.45)">'
+            ? '<img src="' + esc(AUTHOR_PHOTO) + '" alt="' + esc(t.aboutWhoName) + '" width="72" height="72" loading="lazy" decoding="async" style="flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 10px 22px -12px rgba(28,19,38,.45)">'
             : '<span style="flex:none;width:52px;height:52px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + ph('user-circle', 30, '#FF4F62', 'ph-fill') + '</span>') +
           '<span style="flex:1 1 260px;min-width:0">' +
             '<span style="display:block;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;color:#1c1326">' + esc(t.aboutWhoName) + '</span>' +
@@ -1307,7 +1311,7 @@
       var l = AUTHOR_LINKS[i];
       var mark = brandIcon(l.icon, 18, l.color || '#FF4F62') || ph(l.icon, 18, '#FF4F62', 'ph-fill');
       var text = (state.lang === 'en' && l.handleEn) ? l.handleEn : (l.handle || l.label);
-      out.push('<a href="' + l.href + '" rel="me noopener" target="_blank" aria-label="' + esc(text) + ', ' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
+      out.push('<a href="' + esc(l.href) + '" rel="me noopener" target="_blank" aria-label="' + esc(text) + ', ' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
     }
     return out.join('');
   }
@@ -1341,15 +1345,16 @@
   }
 
   // ===== LEGAL =====
-  var _legalLoading = false;
+  // One request per visit and no synchronous callback: texts that arrive without the current
+  // language must not bounce paint() back here, and a file without the globals is not refetched.
+  var _legalRequested = false;
   function ensureLegalContent(cb) {
-    if (window.PRIVACY && window.TERMS) { cb(); return; }
-    if (_legalLoading) return;
-    _legalLoading = true;
+    if ((window.PRIVACY && window.TERMS) || _legalRequested) return;
+    _legalRequested = true;
     var sc = document.createElement('script');
     sc.src = '/assets/legal-content.min.js';
-    sc.onload = function () { _legalLoading = false; cb(); };
-    sc.onerror = function () { _legalLoading = false; };
+    sc.onload = function () { cb(); };
+    sc.onerror = function () { _legalRequested = false; };
     document.head.appendChild(sc);
   }
 
@@ -1401,7 +1406,13 @@
     if (logo) { var show = state.scrolled || state.page !== 'home'; logo.style.opacity = show ? '1' : '0'; logo.style.pointerEvents = show ? 'auto' : 'none'; }
   }
   function paintHeader() { $hdr.innerHTML = renderHeader(); updateHeaderBg(); }
+  // Once the data is in, a set it does not contain is an unknown path like any other, so it shows home.
+  function scenarioMissing() {
+    if (state.page !== 'scenario' || !window.CLINKY_SCENARIOS) return false;
+    return !scenarioData((own(SCENARIO_SLUGS, state.scenarioSlug) || {}).id) || !scenarioLabels();
+  }
   function paint() {
+    if (scenarioMissing()) state.page = 'home';
     $hdr.innerHTML = renderHeader();
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
@@ -1650,18 +1661,26 @@
     } catch (e) {}
     paint(); syncDocTitle();
   }
+  // Anything but the two known values is ignored: the language keys DICT, FAQ and the legal texts.
+  function storedLang() {
+    try { var v = localStorage.getItem('clinky_lang'); return v === 'en' || v === 'ru' ? v : ''; } catch (e) { return ''; }
+  }
   // Country fallback: switch to RU for Russian-speaking countries — only if the visitor hasn't
   // chosen a language and the browser wasn't already Russian. Not persisted (re-checked each visit).
   function applyGeoLang() {
     try {
-      if (localStorage.getItem('clinky_lang')) return;
+      if (storedLang()) return;
       if (!state || state.lang === 'ru') return;
       if (!RU_LOCALES[(GEO.code || '').toUpperCase()]) return;
       if (!document.getElementById('main')) return;   // app not mounted yet
       state.lang = 'ru'; document.documentElement.lang = 'ru'; paint();
     } catch (e) {}
   }
-  var PAGES = { home: 1, games: 1, play: 1, scenario: 1, about: 1, support: 1, privacy: 1, terms: 1 };
+  // Route tables are plain objects, so a bare lookup would match /questions/constructor or /play/__proto__
+  // through Object.prototype. Only own keys count as routes.
+  function own(table, key) { return Object.prototype.hasOwnProperty.call(table, key) ? table[key] : undefined; }
+  // 'play' and 'scenario' are reached through their slugs only, never as a bare /play or /scenario
+  var PAGES = { home: 1, games: 1, about: 1, support: 1, privacy: 1, terms: 1 };
   var SCENARIO_SLUGS = {
     'for-couples': { id: 'couples', lang: 'en' },
     'dlya-pary': { id: 'couples', lang: 'ru' },
@@ -1709,14 +1728,14 @@
     var seg = pathSegment();
     if (seg.indexOf('play/') === 0) {
       var slug = seg.slice(5);
-      if (PLAY_SLUGS[slug]) { state.playSlug = slug; return 'play'; }
+      if (own(PLAY_SLUGS, slug)) { state.playSlug = slug; return 'play'; }
     }
     var qPrefix = seg.indexOf('questions/') === 0 ? 10 : (seg.indexOf('voprosy/') === 0 ? 8 : 0);
     if (qPrefix) {
       var sslug = seg.slice(qPrefix);
-      if (SCENARIO_SLUGS[sslug]) { state.scenarioSlug = sslug; return 'scenario'; }
+      if (own(SCENARIO_SLUGS, sslug)) { state.scenarioSlug = sslug; return 'scenario'; }
     }
-    return PAGES[seg] ? seg : 'home';
+    return own(PAGES, seg) ? seg : 'home';
   }
   function playHrefFor(gameIndex, lang) {
     var slug = playSlugFor(GAME_IDS[gameIndex], lang);
@@ -1731,11 +1750,11 @@
   }
   function pathFor(page, lang) {
     if (page === 'scenario') {
-      var cs = SCENARIO_SLUGS[state.scenarioSlug] || { id: 'couples' };
+      var cs = own(SCENARIO_SLUGS, state.scenarioSlug) || { id: 'couples' };
       return scenarioHrefFor(cs.id, lang) || scenarioHrefFor(cs.id, 'en');
     }
     if (page === 'play') {
-      var cur = PLAY_SLUGS[state.playSlug] || { id: 'never_have_i' };
+      var cur = own(PLAY_SLUGS, state.playSlug) || { id: 'never_have_i' };
       var slug = playSlugFor(cur.id, lang) || state.playSlug;
       return (lang === 'ru' ? '/ru/play/' : '/play/') + slug;
     }
@@ -1745,7 +1764,7 @@
   var DOC_TITLES = {"/":"Clinky — Party Question Games for Friends","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky — игры с вопросами для компании друзей","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"How Well Do You Know Your Friends — Free Game","/ru/play/kto-iz-nas":"Кто из нас — вопросы для компании друзей","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям — 24 карточки для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары — 60 карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы за столом для весёлой компании","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании — 60 карточек","/questions/drinks":"Questions to Ask Over Drinks — 60 Cards","/ru/voprosy/za-bokalom":"Вопросы за бокалом — 60 карточек для вечера","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
-    var v = DOC_TITLES[k] || DOC_TITLES[k + '/'];
+    var v = own(DOC_TITLES, k) || own(DOC_TITLES, k + '/');
     if (v) document.title = v;
   }
   var _pageKey = '';
@@ -1802,12 +1821,13 @@
   function prevQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
 
   // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
+  function cleanSource(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 40); }
   function captureSource() {
     var src = '';
-    try { src = (new URLSearchParams(location.search).get('utm_source') || '').toLowerCase().trim().slice(0, 40); } catch (e) {}
+    try { src = cleanSource(new URLSearchParams(location.search).get('utm_source')); } catch (e) {}
     try {
       if (src) sessionStorage.setItem('clinky_src', src);
-      else src = sessionStorage.getItem('clinky_src') || '';
+      else src = cleanSource(sessionStorage.getItem('clinky_src'));
     } catch (e) {}
     try {
       if (src && !sessionStorage.getItem('clinky_src_hit')) {
@@ -1928,8 +1948,7 @@
     app.innerHTML = '<header id="hdr"></header><main id="main"></main><footer id="ftr" style="background:#fff;border-top:1px solid #e9e6ec;padding:clamp(44px,6vh,64px) clamp(20px,5vw,72px) 40px"></footer>';
     $hdr = document.getElementById('hdr'); $main = document.getElementById('main'); $ftr = document.getElementById('ftr');
 
-    var lang = 'en';
-    try { lang = localStorage.getItem('clinky_lang') || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en'); } catch (e) {}
+    var lang = storedLang() || ((navigator.language || 'en').toLowerCase().indexOf('ru') === 0 ? 'ru' : 'en');
     try {   // deterministic locale entry for /privacy-ru and ?lang= (used by App Store Connect URLs)
       var qlang = (new URLSearchParams(location.search).get('lang') || '').toLowerCase();
       if (qlang === 'ru' || qlang === 'en') lang = qlang;
@@ -1938,8 +1957,8 @@
     state.lang = lang; document.documentElement.lang = lang;
     try { state.source = captureSource(); } catch (e) {}
     state.page = pageFromPath();
-    try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting
-      var demo = new URLSearchParams(location.search).get('demo');
+    try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting, local preview only
+      var demo = isLocalPreview() ? new URLSearchParams(location.search).get('demo') : null;
       if (demo === 'support') { state.page = 'support'; state.supportDone = true; }
       else if (demo === 'waitlist') { state.waitlistDone = true; }
     } catch (e) {}

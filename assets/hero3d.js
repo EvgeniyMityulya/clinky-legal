@@ -319,7 +319,8 @@ function wantsLightHero() {
 
 let bootRequested = false;
 function bootHero() {
-  if (bootRequested) return;
+  // three.js loads only where the hero is on the page; support, legal and game pages never fetch it
+  if (bootRequested || !document.getElementById('heroMount')) return;
   bootRequested = true;
   dropPlaceholder();
   init();
@@ -350,8 +351,21 @@ function scheduleHero() {
   else window.addEventListener('load', start, { once: true });
 }
 
-if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scheduleHero);
-else scheduleHero();
+// site.js mounts the app after this module runs, and the SPA can render the home page later
+// (say /support, then Home), so scheduling waits for the mount itself, not for page load.
+function whenHeroMounted(fn) {
+  if (document.getElementById('heroMount')) { fn(); return; }
+  if (typeof MutationObserver !== 'function') return;
+  const obs = new MutationObserver(function () {
+    if (!document.getElementById('heroMount')) return;
+    obs.disconnect();
+    fn();
+  });
+  obs.observe(document.getElementById('app') || document.body, { childList: true, subtree: true });
+}
+
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { whenHeroMounted(scheduleHero); });
+else whenHeroMounted(scheduleHero);
 
 // site.js can ask for the hero explicitly (drink switch, spin button)
 window.ClinkyHeroBoot = bootHero;

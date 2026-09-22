@@ -12,6 +12,7 @@ import { GAMES_META } from './games_meta.mjs';
 import { GAME_CONTENT, CONTENT_LABELS } from './game_content.mjs';
 import { ABOUT, AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
 import { SCENARIOS, SCENARIO_LABELS } from './scenario_content.mjs';
+import { assertSafeUrl } from './guards.mjs';
 
 const EN_TITLE = {
   never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better',
@@ -36,7 +37,31 @@ const RU_ACC = {
 
 const CF_BEACON = process.env.CF_BEACON_TOKEN || '';
 const GSC = process.env.GSC_VERIFY || '';
+// Both land verbatim inside attributes of every page, so anything unexpected stops the build.
+if (CF_BEACON && !/^[a-f0-9]{32}$/.test(CF_BEACON)) throw new Error('CF_BEACON_TOKEN must be 32 lowercase hex characters');
+if (GSC && !/^[A-Za-z0-9_-]{10,100}$/.test(GSC)) throw new Error('GSC_VERIFY must be 10-100 characters of [A-Za-z0-9_-]');
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+// content files feed these links, so each one is checked before it is escaped into an attribute
+const safeHref = (u) => esc(assertSafeUrl(u));
+
+// three.js is self-hosted from the npm tarball (assets/vendor/); hero3d.js imports it through this map.
+const THREE_BASE = '/assets/vendor/three@0.160.0';
+const IMPORT_MAP = `<script type="importmap">
+{ "imports": {
+  "three": "${THREE_BASE}/build/three.module.min.js",
+  "three/addons/": "${THREE_BASE}/examples/jsm/"
+}}
+</script>`;
+const IMPORT_MAP_RE = /<script type="importmap">[\s\S]*?<\/script>/;
+
+// Fonts are self-hosted too (tools/build_fonts.mjs), so no page asks Google for anything.
+// Body copy is DM Sans latin: that one file is worth a preload.
+const BODY_FONT = (readFileSync('assets/fonts/fonts.css', 'utf8')
+  .match(/\/\* latin \*\/\n@font-face \{\n  font-family: 'DM Sans';[^}]*?src: url\(([\w.-]+\.woff2)\)/) || [])[1];
+if (!BODY_FONT) throw new Error('assets/fonts/fonts.css has no DM Sans latin face, run node tools/build_fonts.mjs');
+const FONT_PRELOAD = `<link rel="preload" as="font" type="font/woff2" href="/assets/fonts/${BODY_FONT}" crossorigin>`;
+const FONT_CSS = '<link rel="stylesheet" href="/assets/fonts/fonts.css">';
+const FONT_OR_CDN_LINK = /^\s*<link\b[^\n]*(?:fonts\.googleapis\.com|fonts\.gstatic\.com|unpkg\.com|"\/assets\/fonts\/)/;
 
 const DROP = [
   /^\s*<meta name="robots"/i,
@@ -81,7 +106,7 @@ function sampleQuestions(loc, n) {
     try {
       const items = JSON.parse(readFileSync(`data/${g.id}.json`, 'utf8'));
       qs = items.slice(0, n).map((q) => q.text[loc]
-        .replace(/\{A\}/g, names.A).replace(/\{B\}/g, names.B).replace(/\*/g, ''));
+        .replace(/\{A\}/g, () => names.A).replace(/\{B\}/g, () => names.B).replace(/\*/g, ''));
     } catch (e) {}
     return { title: g.title[loc], href: '/games', qs };
   });
@@ -116,14 +141,14 @@ function homePrerender(loc) {
 
   const samples = sampleQuestions(loc, 3);
   return `<div id="prerender">
-<nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<nav>${t.nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <p class="eyebrow">${esc(t.eyebrow)}</p>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 <p><a href="/"><strong>${esc(t.cta)}</strong></a></p>
 <h2>${esc(t.gamesTitle)}</h2>
 <p>${esc(t.gamesSub)}</p>
-${samples.map((s) => `<h3><a href="${s.href}">${esc(s.title)}</a></h3>`).join('\n')}
+${samples.map((s) => `<h3><a href="${safeHref(s.href)}">${esc(s.title)}</a></h3>`).join('\n')}
 <h2>${esc(t.problemTitle)}</h2>
 <p>${esc(t.problemBody)}</p>
 <h2>${esc(t.insideTitle)}</h2>
@@ -177,11 +202,11 @@ ${a.story.map((x) => `<p>${esc(x)}</p>`).join('\n')}
 <h2>${esc(a.whoTitle)}</h2>
 <p><strong>${esc(a.name)}</strong>, ${esc(a.role)}</p>
 ${a.who.map((x) => `<p>${esc(x)}</p>`).join('\n')}
-${AUTHOR_LINKS.length ? `<p>${AUTHOR_LINKS.map((l) => `<a href="${l.href}" rel="me">${esc(l.label)} ${esc((loc === 'en' && l.handleEn) ? l.handleEn : (l.handle || ''))}</a>`).join(' ')}</p>` : ''}
+${AUTHOR_LINKS.length ? `<p>${AUTHOR_LINKS.map((l) => `<a href="${safeHref(l.href)}" rel="me">${esc(l.label)} ${esc((loc === 'en' && l.handleEn) ? l.handleEn : (l.handle || ''))}</a>`).join(' ')}</p>` : ''}
 <h2>${esc(a.dataTitle)}</h2>
 <p>${esc(a.data)}</p>` : '';
   return `<div id="prerender">
-<nav>${nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<nav>${nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(heading)}</h1>
 <p>${esc(s.description)}</p>
 ${aboutText}
@@ -206,16 +231,16 @@ function gamesPrerender(loc) {
     const c = GAME_CONTENT[g.id];
     const slug = (webDeck().games[g.id] || {}).slug || {};
     const href = slug[loc] ? `/${slug[loc]}` : (loc === 'ru' ? '/ru/games' : '/games');
-    return `<h3><a href="${href}">${esc(g.title[loc])}</a></h3>
+    return `<h3><a href="${safeHref(href)}">${esc(g.title[loc])}</a></h3>
 <p>${esc(c.tagline[loc])}</p>
 <p>${esc(playersLine(c.min, loc))}. ${esc(c.best[loc])}</p>`;
   }).join('\n');
 
   const sets = Object.values(SCENARIOS).map((sc) =>
-    `<h3><a href="/${sc.slug[loc]}">${esc(sc.h1[loc])}</a></h3>\n<p>${esc(sc.tagline[loc])}</p>`).join('\n');
+    `<h3><a href="${safeHref('/' + sc.slug[loc])}">${esc(sc.h1[loc])}</a></h3>\n<p>${esc(sc.tagline[loc])}</p>`).join('\n');
 
   return `<div id="prerender">
-<nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<nav>${t.nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 ${blocks}
@@ -243,7 +268,7 @@ function playPrerender(s) {
   const entry = deck.games[s.play] || {};
   const nm = (entry.names || {})[loc] || ['Alex', 'Sam'];
   const cards = (entry[loc] || []).slice(0, 6)
-    .map((x) => String(x).replace(/\{A\}/g, nm[0]).replace(/\{B\}/g, nm[1]).replace(/\*/g, ''));
+    .map((x) => String(x).replace(/\{A\}/g, () => nm[0]).replace(/\{B\}/g, () => nm[1]).replace(/\*/g, ''));
   const t = loc === 'ru'
     ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: GAME_CONTENT[s.play]?.answer?.ru || 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
@@ -256,7 +281,7 @@ function playPrerender(s) {
   const L = CONTENT_LABELS[loc];
 
   return `<div id="prerender">
-<nav>${t.nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<nav>${t.nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 <p>${esc(t.limit)}</p>
@@ -292,7 +317,7 @@ function scenarioPrerender(s) {
     return [loc === 'ru' ? g.title.ru : (EN_TITLE[g.id] || g.title.en), slug];
   });
   return `<div id="prerender">
-<nav>${nav.map(([n, h]) => `<a href="${h}">${esc(n)}</a>`).join('')}</nav>
+<nav>${nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(sc.h1[loc])}</h1>
 <p>${esc(sc.tagline[loc])}</p>
 <p>${esc(sc.players[loc])}</p>
@@ -308,7 +333,7 @@ ${sc.groups
 <h2>${esc(L.faq)}</h2>
 ${faqHtml(sc.faq[loc])}
 <h2>${esc(L.more)}</h2>
-<ul>${[...others, ...games].map(([n, h]) => `<li><a href="${h}">${esc(n)}</a></li>`).join('')}</ul>
+<ul>${[...others, ...games].map(([n, h]) => `<li><a href="${safeHref(h)}">${esc(n)}</a></li>`).join('')}</ul>
 </div>`;
 }
 
@@ -334,8 +359,8 @@ function jsonld(s) {
   const author = {
     '@type': 'Person', '@id': `${SITE}/#author`,
     name: ABOUT[s.loc].name, jobTitle: ABOUT[s.loc].role,
-    ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => l.href) } : {}),
-    ...(AUTHOR_PHOTO ? { image: `${SITE}${AUTHOR_PHOTO}` } : {})
+    ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => assertSafeUrl(l.href)) } : {}),
+    ...(AUTHOR_PHOTO ? { image: assertSafeUrl(`${SITE}${AUTHOR_PHOTO}`) } : {})
   };
   const graph = [website, organization];
   if (s.home) graph.push(author);
@@ -379,16 +404,16 @@ function seoBlock(s) {
     `<title>${esc(s.title)}</title>`,
     `<meta name="description" content="${esc(s.description)}">`
   ];
-  if (!s.noCanonical) rows.push(`<link rel="canonical" href="${canonical}">`);
+  if (!s.noCanonical) rows.push(`<link rel="canonical" href="${safeHref(canonical)}">`);
   if (s.altRu) {
-    rows.push(`<link rel="alternate" hreflang="en" href="${canonical}">`);
-    rows.push(`<link rel="alternate" hreflang="ru" href="${SITE}${s.altRu}">`);
-    rows.push(`<link rel="alternate" hreflang="x-default" href="${canonical}">`);
+    rows.push(`<link rel="alternate" hreflang="en" href="${safeHref(canonical)}">`);
+    rows.push(`<link rel="alternate" hreflang="ru" href="${safeHref(SITE + s.altRu)}">`);
+    rows.push(`<link rel="alternate" hreflang="x-default" href="${safeHref(canonical)}">`);
   }
   if (s.altEn) {
-    rows.push(`<link rel="alternate" hreflang="en" href="${SITE}${s.altEn}">`);
-    rows.push(`<link rel="alternate" hreflang="ru" href="${canonical}">`);
-    rows.push(`<link rel="alternate" hreflang="x-default" href="${SITE}${s.altEn}">`);
+    rows.push(`<link rel="alternate" hreflang="en" href="${safeHref(SITE + s.altEn)}">`);
+    rows.push(`<link rel="alternate" hreflang="ru" href="${safeHref(canonical)}">`);
+    rows.push(`<link rel="alternate" hreflang="x-default" href="${safeHref(SITE + s.altEn)}">`);
   }
   rows.push(
     '<meta property="og:site_name" content="Clinky">',
@@ -396,7 +421,7 @@ function seoBlock(s) {
     `<meta property="og:locale" content="${s.loc === 'ru' ? 'ru_RU' : 'en_US'}">`,
     `<meta property="og:title" content="${esc(s.ogTitle)}">`,
     `<meta property="og:description" content="${esc(s.ogDescription)}">`,
-    `<meta property="og:url" content="${canonical}">`,
+    `<meta property="og:url" content="${safeHref(canonical)}">`,
     `<meta property="og:image" content="${SITE}/assets/og-image.jpg">`,
     '<meta property="og:image:width" content="1024">',
     '<meta property="og:image:height" content="1024">',
@@ -406,7 +431,8 @@ function seoBlock(s) {
     `<meta name="twitter:image" content="${SITE}/assets/og-image.jpg">`
   );
   if (GSC) rows.push(`<meta name="google-site-verification" content="${GSC}">`);
-  rows.push(`<script type="application/ld+json">${JSON.stringify(jsonld(s))}</script>`);
+  // '<' as \u003c keeps content such as "</script>" or "<!--" from ending the block early
+  rows.push(`<script type="application/ld+json">${JSON.stringify(jsonld(s)).replace(/</g, '\\u003c')}</script>`);
   rows.push(PRERENDER_CSS);
   rows.push("<script>document.documentElement.classList.add('motion-ready');setTimeout(function(){if(!window.clinkyInitReveals)document.documentElement.classList.remove('motion-ready')},1500)</script>");
   rows.push(`<script defer src="/assets/motion.min.js?v=${assetVer('assets/motion.min.js')}"></script>`);
@@ -419,7 +445,7 @@ for (const s of SHELLS) {
   let html = readFileSync(s.file, 'utf8');
 
   html = html.replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->\n?/, '');
-  html = html.replace(/<html lang="[^"]*">/, `<html lang="${s.loc}">`);
+  html = html.replace(/<html lang="[^"]*">/, () => `<html lang="${s.loc}">`);
 
   const lines = html.split('\n').filter((l) => !DROP.some((re) => re.test(l)));
   const vi = lines.findIndex((l) => /<meta name="viewport"/.test(l));
@@ -431,9 +457,9 @@ for (const s of SHELLS) {
   const body = s.home ? homePrerender(s.loc) : (s.scenario ? scenarioPrerender(s) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s))));
   const appBlock = `<div id="app"><!-- prerender:start -->\n${body}\n<!-- prerender:end --></div>`;
   if (/<!-- prerender:start -->/.test(html)) {
-    html = html.replace(/<div id="app"><!-- prerender:start -->[\s\S]*?<!-- prerender:end --><\/div>/, appBlock);
+    html = html.replace(/<div id="app"><!-- prerender:start -->[\s\S]*?<!-- prerender:end --><\/div>/, () => appBlock);
   } else {
-    html = html.replace(/<div id="app"><\/div>/, appBlock);
+    html = html.replace(/<div id="app"><\/div>/, () => appBlock);
   }
 
 
@@ -447,11 +473,21 @@ for (const s of SHELLS) {
   ];
   for (const [plain, min] of MIN_MAP) {
     const re = new RegExp('(["\'])/?' + plain.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g');
-    html = html.replace(re, `$1/${min}$1`);
+    html = html.replace(re, (m, q) => `${q}/${min}${q}`);
   }
+
+  if (!IMPORT_MAP_RE.test(html)) throw new Error(`${s.file} has no import map, hero3d.js could not resolve three`);
+  html = html.replace(IMPORT_MAP_RE, () => IMPORT_MAP);
+
+  // Drop every Google Fonts / unpkg hint and link (and our own font tags, so reruns stay idempotent),
+  // then put the local ones back in front of the import map.
+  const hadPreload = /<link rel="preload" as="(?:style" href="https:\/\/fonts\.googleapis\.com|font")/.test(html);
+  html = html.split('\n').filter((l) => !FONT_OR_CDN_LINK.test(l)).join('\n');
+  html = html.replace('<script type="importmap">', () => (hadPreload ? FONT_PRELOAD + '\n' : '') + FONT_CSS + '\n<script type="importmap">');
 
   const BUST = [
     ['assets/site.css', 'assets/site.css'],
+    ['assets/fonts/fonts.css', 'assets/fonts/fonts.css'],
     ['assets/site.min.js', 'assets/site.min.js'],
     ['assets/legal-content.min.js', 'assets/legal-content.min.js'],
     ['assets/hero3d.min.js', 'assets/hero3d.min.js'],
@@ -459,32 +495,12 @@ for (const s of SHELLS) {
   ];
   for (const [ref, file] of BUST) {
     const v = assetVer(file);
-    html = html.replace(new RegExp('(["\'])/?' + ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g'), `$1/${ref}?v=${v}$1`);
+    html = html.replace(new RegExp('(["\'])/?' + ref.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(\\?v=[a-f0-9]+)?\\1', 'g'), (m, q) => `${q}/${ref}?v=${v}${q}`);
   }
 
 
   // the icon fonts are gone, inline SVG replaced them
   html = stripPhosphor(html);
-
-  // external CSS must not block first paint: preload + swap media on load
-  const NONBLOCKING = [
-    'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Nunito:wght@700;800;900&display=swap',
-  ];
-  for (const href of NONBLOCKING) {
-    const esc = href.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    const blocking = new RegExp('<link href="' + esc + '" rel="stylesheet">|<link rel="stylesheet" href="' + esc + '">', 'g');
-    html = html.replace(blocking,
-      `<link rel="preload" as="style" href="${href}">` +
-      `<link rel="stylesheet" href="${href}" media="print" onload="this.media='all'">`);
-  }
-  if (!/unpkg\.com" crossorigin/.test(html)) {
-    html = html.replace('<link rel="preconnect" href="https://fonts.googleapis.com">',
-      '<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://unpkg.com" crossorigin>');
-  }
-
-
-  html = html.replace('three@0.160.0/build/three.module.js', 'three@0.160.0/build/three.module.min.js');
-
 
   const LEGAL_PAGES = new Set(['privacy.html', 'terms.html', 'privacy-ru.html', 'terms-ru.html', 'ru/privacy.html', 'ru/terms.html']);
   if (!LEGAL_PAGES.has(s.file)) {
@@ -495,6 +511,14 @@ for (const s of SHELLS) {
 
   writeFileSync(s.file, html);
   console.log(`patched ${s.file.padEnd(16)} ${(html.length / 1024).toFixed(1)} KB`);
+}
+
+// The 3D studio is a debug page rather than a shell, but it resolves three through the same map.
+for (const file of ['studio.html']) {
+  const html = readFileSync(file, 'utf8');
+  if (!IMPORT_MAP_RE.test(html)) throw new Error(`${file} has no import map, its three imports would not resolve`);
+  writeFileSync(file, html.replace(IMPORT_MAP_RE, () => IMPORT_MAP));
+  console.log(`import map ${file}`);
 }
 console.log(CF_BEACON ? 'CF beacon: embedded' : 'CF beacon: skipped (set CF_BEACON_TOKEN)');
 console.log(GSC ? 'GSC meta: embedded' : 'GSC meta: skipped (set GSC_VERIFY)');
