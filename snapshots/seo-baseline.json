@@ -39,7 +39,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 510
+    "prerenderWords": 544
   },
   "/ru/play/ya-nikogda-ne": {
     "status": 200,
@@ -60,7 +60,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 399
+    "prerenderWords": 417
   },
   "/play/who-knows-better": {
     "status": 200,
@@ -81,7 +81,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 478
+    "prerenderWords": 507
   },
   "/ru/play/kto-iz-nas": {
     "status": 200,
@@ -102,7 +102,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 392
+    "prerenderWords": 408
   },
   "/play/questions-to-ask-friends": {
     "status": 200,
@@ -123,7 +123,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 475
+    "prerenderWords": 511
   },
   "/ru/play/voprosy-druzyam": {
     "status": 200,
@@ -144,7 +144,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 371
+    "prerenderWords": 390
   },
   "/play/would-you-rather": {
     "status": 200,
@@ -165,7 +165,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 461
+    "prerenderWords": 493
   },
   "/ru/play/chto-vyberesh": {
     "status": 200,
@@ -186,7 +186,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 364
+    "prerenderWords": 382
   },
   "/questions/for-couples": {
     "status": 200,
