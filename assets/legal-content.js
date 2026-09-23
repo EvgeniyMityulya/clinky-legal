@@ -9,13 +9,13 @@
   window.PRIVACY = {
     en: [
       { h: '1. Who we are', b: [
-        P('Clinky ("the app", "we", "us") is an iOS application developed by an individual developer based in Belarus. Clinky is a social meeting and drink tracker: it helps you remember the people you meet, the moments you share, and gives you icebreaker cards for in-person get-togethers.'),
+        P('Clinky ("the app", "we", "us") is an iOS application developed by an individual developer based in Belarus. Clinky helps friends see each other more often and have a good time together. It remembers who you met and when, offers question games for get-togethers, and adds a coffee or tea cup to your collection for every meeting.'),
         P('If you have any question about this policy or your data, contact us at support@clinkyapp.com.')
       ]},
       { h: '2. The short version', b: [
         UL([
           'Clinky has no user accounts and no login. You don’t create a profile with us.',
-          'Clinky has no first-party server. Your friends, meetings, drinks, streaks, achievements, plans and answered icebreaker cards are stored only on your device (in a local database), not on any server we control.',
+          'Clinky has no first-party server. Your friends, meetings, collected cups, streaks, achievements, plans and answered icebreaker cards are stored only on your device (in a local database), not on any server we control.',
           'Three third-party services receive limited data off your device: Adapty (subscriptions), TelemetryDeck (anonymous product analytics) and Sentry (crash reports). What each receives is described below.',
           'We do not track you across other apps or websites, we use no advertising identifier (IDFA), and we do not sell or share your personal information for advertising.'
         ])
@@ -24,7 +24,7 @@
         P('The core content you create in Clinky never leaves your device through us. It is stored in a local database inside the app’s private container on your iPhone. This includes:'),
         UL([
           'Your friends ("Clinkers"), including names and, for friends you import from Contacts, the contact’s stable identifier (see Section 6).',
-          'Your meetings, drinks logged, the place name (a text label you type, never a GPS coordinate) you optionally attach to a meeting, streaks, achievements, planned meetings, and which icebreaker cards you’ve answered.'
+          'Your meetings, the cups you collect (coffee or tea), the place name (a text label you type, never a GPS coordinate) you optionally attach to a meeting, streaks, achievements, planned meetings, and which icebreaker cards you’ve answered.'
         ]),
         P('We have no copy of this data, no ability to read it remotely, and no way to recover it for you. If you delete the app, this data is removed from your device.')
       ]},
@@ -67,7 +67,7 @@
         ])
       ]},
       { h: '7. Children', b: [
-        P('Clinky is rated 17+ in the App Store because it contains references to alcohol — this is a content rating, not a data-processing age. Separately, we do not knowingly process personal data of anyone below the applicable digital-consent age in their country (which is 13 to 16 depending on the jurisdiction, 16 by GDPR default). The app is not directed to children. If you believe a child has used the app, contact us at support@clinkyapp.com and we will help with deletion where applicable. Note that most of the app’s data is on-device only and under your control.')
+        P('Clinky is rated 12+ in the App Store. This is a content rating, not a data-processing age. Separately, we do not knowingly process personal data of anyone below the applicable digital-consent age in their country (which is 13 to 16 depending on the jurisdiction, 16 by GDPR default). The app is not directed to children. If you believe a child has used the app, contact us at support@clinkyapp.com and we will help with deletion where applicable. Note that most of the app’s data is on-device only and under your control.')
       ]},
       { h: '8. Legal bases for processing (GDPR)', b: [
         P('If you are in the European Economic Area or UK, we rely on:'),
@@ -109,13 +109,13 @@
     ],
     ru: [
       { h: '1. Кто мы', b: [
-        P('Clinky («приложение», «мы») — это приложение для iOS, разработанное частным разработчиком, находящимся в Беларуси. Clinky — это социальный трекер встреч и напитков: он помогает помнить людей, с которыми вы встречаетесь, и моменты, которые вы разделили, а также даёт карточки-игры для живого общения.'),
+        P('Clinky («приложение», «мы») — это приложение для iOS, разработанное частным разработчиком, находящимся в Беларуси. Clinky помогает друзьям чаще видеться и хорошо проводить время вместе. Приложение помнит, с кем и когда вы встречались, предлагает игры-вопросы для живых встреч и добавляет в вашу коллекцию чашку кофе или чая за каждую встречу.'),
         P('По любым вопросам об этой политике или ваших данных пишите на support@clinkyapp.com.')
       ]},
       { h: '2. Кратко', b: [
         UL([
           'В Clinky нет аккаунтов и нет входа в систему. Вы не создаёте у нас профиль.',
-          'У Clinky нет собственного сервера. Ваши друзья, встречи, напитки, серии, достижения, планы и отвеченные карточки-игры хранятся только на вашем устройстве (в локальной базе данных), а не на наших серверах.',
+          'У Clinky нет собственного сервера. Ваши друзья, встречи, собранные чашки, серии, достижения, планы и отвеченные карточки-игры хранятся только на вашем устройстве (в локальной базе данных), а не на наших серверах.',
           'Три сторонних сервиса получают ограниченные данные за пределами устройства: Adapty (подписки), TelemetryDeck (анонимная продуктовая аналитика) и Sentry (отчёты о сбоях). Что именно получает каждый — описано ниже.',
           'Мы не отслеживаем вас в других приложениях или на сайтах, не используем рекламный идентификатор (IDFA) и не продаём и не передаём ваши персональные данные для рекламы.'
         ])
@@ -124,7 +124,7 @@
         P('Основной контент, который вы создаёте в Clinky, никогда не покидает ваше устройство через нас. Он хранится в локальной базе данных в приватном контейнере приложения на вашем iPhone. Сюда входит:'),
         UL([
           'Ваши друзья («Clinkers»), включая имена и — для друзей, импортированных из Контактов — стабильный идентификатор контакта (см. раздел 6).',
-          'Ваши встречи, записанные напитки, название места (текстовая метка, которую вы вводите, а не GPS-координата), которое вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные карточки-игры.'
+          'Ваши встречи, собранные чашки (кофе или чай), название места (текстовая метка, которую вы вводите, а не GPS-координата), которое вы по желанию прикрепляете к встрече, серии, достижения, запланированные встречи и отвеченные карточки-игры.'
         ]),
         P('У нас нет копии этих данных, нет возможности читать их удалённо и нет способа восстановить их для вас. При удалении приложения эти данные удаляются с устройства.')
       ]},
@@ -167,7 +167,7 @@
         ])
       ]},
       { h: '7. Дети', b: [
-        P('Clinky имеет возрастной рейтинг 17+ в App Store, поскольку содержит упоминания алкоголя, — это рейтинг контента, а не возраст обработки данных. Отдельно: мы сознательно не обрабатываем персональные данные лиц младше применимого в их стране возраста цифрового согласия (который составляет от 13 до 16 лет в зависимости от юрисдикции, 16 по умолчанию GDPR). Приложение не предназначено для детей. Если вы считаете, что приложением воспользовался ребёнок, напишите нам на support@clinkyapp.com, и мы поможем с удалением там, где это применимо. Обратите внимание, что большая часть данных приложения хранится только на устройстве и находится под вашим контролем.')
+        P('Clinky имеет возрастной рейтинг 12+ в App Store. Это рейтинг контента, а не возраст обработки данных. Отдельно: мы сознательно не обрабатываем персональные данные лиц младше применимого в их стране возраста цифрового согласия (который составляет от 13 до 16 лет в зависимости от юрисдикции, 16 по умолчанию GDPR). Приложение не предназначено для детей. Если вы считаете, что приложением воспользовался ребёнок, напишите нам на support@clinkyapp.com, и мы поможем с удалением там, где это применимо. Обратите внимание, что большая часть данных приложения хранится только на устройстве и находится под вашим контролем.')
       ]},
       { h: '8. Правовые основания обработки (GDPR)', b: [
         P('Если вы находитесь в Европейской экономической зоне или Великобритании, мы опираемся на:'),
@@ -244,10 +244,10 @@
           'Use the App to harass, harm, or deceive others;',
           'Misuse any feature of the App in a way that could damage, disable, or impair it.'
         ]),
-        P('Clinky helps you track meetings and drinks with friends. You are solely responsible for your own choices, including any decisions related to alcohol consumption. Clinky does not encourage excessive or irresponsible drinking. If you choose to drink, please drink responsibly.')
+        P('Clinky helps you keep track of meetings with friends and play question games together. You are responsible for your own choices during meetings and games, including what you decide to share with others.')
       ]},
       { h: '5. Your Content and Data', b: [
-        P('Clinky is offline-first and stores your content — including your friends ("Clinkers"), meetings, drinks, plans, collectibles, and icebreaker answers — locally on your device. This data belongs to you. We do not host it on our own servers and, except for the limited third-party services described in our Privacy Policy, it does not leave your device.'),
+        P('Clinky is offline-first and stores your content — including your friends ("Clinkers"), meetings, plans, collected cups, and icebreaker answers — locally on your device. This data belongs to you. We do not host it on our own servers and, except for the limited third-party services described in our Privacy Policy, it does not leave your device.'),
         P('You are responsible for your content and for maintaining your own backups. Because your data is stored locally, deleting the App or your device data may permanently remove your content, and we cannot recover it for you.'),
         P('Your use of the App is also subject to our Privacy Policy, available at: https://clinkyapp.com/privacy.html')
       ]},
@@ -266,7 +266,7 @@
         P('These limitations do not apply to liability that cannot be excluded or limited under applicable law (including liability for death or personal injury caused by negligence, fraud, or gross negligence), and they do not affect any mandatory consumer rights you have under the law of your country of residence.')
       ]},
       { h: '9. Age Requirement (17+)', b: [
-        P('Clinky is rated 17+ because it contains references to alcohol. By using the App, you confirm that you are at least 17 years old (or the age of majority in your jurisdiction, if higher). The App is not directed to children. If you are under the applicable age, please do not use the App.')
+        P('Clinky is rated 12+ in the App Store. The App is not directed to children. If you are under the age of digital consent in your country, use the App only with permission from a parent or guardian.')
       ]},
       { h: '10. Termination', b: [
         P('These Terms remain in effect until terminated. Your license terminates automatically if you fail to comply with any of these Terms. You may terminate at any time by deleting the App from your device. Upon termination, you must stop using the App; sections that by their nature should survive (including Sections 5–8, 11, and 12) will survive.')
@@ -322,10 +322,10 @@
           'использовать Приложение для преследования, причинения вреда или обмана других лиц;',
           'злоупотреблять любой функцией Приложения способом, который может повредить его, отключить или нарушить его работу.'
         ]),
-        P('Clinky помогает вам отслеживать встречи и напитки с друзьями. Вы несёте полную ответственность за собственный выбор, включая любые решения, связанные с употреблением алкоголя. Clinky не поощряет чрезмерное или безответственное употребление алкоголя. Если вы решите употреблять алкоголь, пожалуйста, делайте это ответственно.')
+        P('Clinky помогает отмечать встречи с друзьями и играть вместе в игры-вопросы. Вы сами отвечаете за свой выбор во время встреч и игр, в том числе за то, чем решаете делиться с другими.')
       ]},
       { h: '5. Ваш контент и данные', b: [
-        P('Clinky работает по принципу offline-first и хранит ваш контент — включая ваших друзей («Clinkers»), встречи, напитки, планы, коллекционные предметы и ответы на вопросы из карточек-игр — локально на вашем устройстве. Эти данные принадлежат вам. Мы не размещаем их на собственных серверах, и, за исключением ограниченных сторонних сервисов, описанных в нашей Политике конфиденциальности, они не покидают ваше устройство.'),
+        P('Clinky работает по принципу offline-first и хранит ваш контент — включая ваших друзей («Clinkers»), встречи, планы, собранные чашки и ответы на вопросы из карточек-игр — локально на вашем устройстве. Эти данные принадлежат вам. Мы не размещаем их на собственных серверах, и, за исключением ограниченных сторонних сервисов, описанных в нашей Политике конфиденциальности, они не покидают ваше устройство.'),
         P('Вы несёте ответственность за свой контент и за создание собственных резервных копий. Поскольку ваши данные хранятся локально, удаление Приложения или данных устройства может безвозвратно удалить ваш контент, и мы не сможем его восстановить.'),
         P('Использование вами Приложения также регулируется нашей Политикой конфиденциальности, доступной по адресу: https://clinkyapp.com/privacy-ru.html')
       ]},
@@ -344,7 +344,7 @@
         P('Данные ограничения не применяются к ответственности, которая не может быть исключена или ограничена в соответствии с применимым законодательством (включая ответственность за смерть или причинение вреда здоровью вследствие халатности, за мошенничество или грубую неосторожность), и не затрагивают любые обязательные права потребителей, предоставленные вам законодательством страны вашего проживания.')
       ]},
       { h: '9. Возрастное ограничение (17+)', b: [
-        P('Clinky имеет рейтинг 17+, поскольку содержит упоминания алкоголя. Используя Приложение, вы подтверждаете, что вам не менее 17 лет (или вы достигли возраста совершеннолетия в вашей юрисдикции, если он выше). Приложение не предназначено для детей. Если вы не достигли применимого возраста, пожалуйста, не используйте Приложение.')
+        P('Clinky имеет рейтинг 12+ в App Store. Приложение не предназначено для детей. Если вы не достигли возраста цифрового согласия в вашей стране, пользуйтесь Приложением только с разрешения родителя или опекуна.')
       ]},
       { h: '10. Прекращение действия', b: [
         P('Настоящие Условия действуют до их прекращения. Ваша лицензия прекращается автоматически в случае несоблюдения вами любого из настоящих Условий. Вы можете прекратить действие в любое время, удалив Приложение со своего устройства. После прекращения действия вы обязаны прекратить использование Приложения; положения, которые по своей природе должны сохранять силу (включая Разделы 5–8, 11 и 12), остаются в силе.')
