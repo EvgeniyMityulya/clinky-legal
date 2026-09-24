@@ -1872,7 +1872,7 @@
   // no email or IP. Each card event says which card was on screen and for how long, which is how
   // the report tells the questions people linger on from the ones they skip.
   var EVENT_ENDPOINT = '/api/event';
-  var _sid = null, _card = null, _cardSince = 0, _activeMs = 0, _visibleSince = Date.now();
+  var _sid = null, _card = null, _cardSince = 0, _visibleSince = Date.now();
   function sessionId() {
     if (_sid) return _sid;
     try { _sid = sessionStorage.getItem('clinky_sid'); } catch (e) {}
@@ -1926,8 +1926,10 @@
     if (_leaveSent) return;
     _leaveSent = true;
     flushCard('hide');
-    _activeMs += Date.now() - _visibleSince;
-    track('leave', { v: Math.round(_activeMs / 1000) });
+    // the total survives full page loads within the visit, so it lives in the tab's sessionStorage
+    var total = Date.now() - _visibleSince;
+    try { total += Number(sessionStorage.getItem('clinky_active_ms')) || 0; sessionStorage.setItem('clinky_active_ms', String(total)); } catch (e) {}
+    track('leave', { v: Math.round(total / 1000) });
   }
   function onVisibility() {
     if (document.hidden) { sendLeave(); return; }
