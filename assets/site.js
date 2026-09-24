@@ -6,7 +6,10 @@
 (function () {
   'use strict';
 
-  var WAITLIST_ENDPOINT = 'https://script.google.com/macros/s/AKfycby4gv-C4NlkexGgz-lbDvD7xm0RU5BxsCVe2eLvof-DYLDNN_ZGKafpijywAQQZEh6IYw/exec'; // Google Apps Script -> Sheet
+  // Forms go to a same-origin Worker (clinkyapp.com/api/*). It adds the visitor's city and browser
+  // and hands the request to the Apps Script behind it, which checks Turnstile before storing anything.
+  var WAITLIST_ENDPOINT = '/api/waitlist';
+  var TURNSTILE_SITEKEY = '0x4AAAAAAFCCDLJY3hyta5eu';
   var GEO = {};   // {code, tz} — country from Cloudflare's own trace endpoint, no third party involved
   var RU_LOCALES = { RU: 1, BY: 1, KZ: 1, KG: 1, UA: 1, MD: 1, AM: 1, AZ: 1, GE: 1, TJ: 1, TM: 1, UZ: 1 };
   try { GEO.tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { GEO.tz = ''; }
@@ -16,7 +19,8 @@
       if (m) { GEO.code = m[1]; applyGeoLang(); }
     }).catch(function () {});
   } catch (e) {}
-  var SUPPORT_ENDPOINT = WAITLIST_ENDPOINT;   // same Apps Script web app; routed by type=support
+  var SUPPORT_ENDPOINT = '/api/support';
+  var VISIT_ENDPOINT = '/api/visit';
   var CONTACT_EMAIL = 'support@clinkyapp.com';
   var C = '#FF4F62';
 
@@ -38,6 +42,7 @@
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       heroDup: "This email is already on the list! We'll be in touch on launch day.",
       heroSending: 'One sec, adding you…',
+      formSending: 'Sending…', formError: "Couldn't send it. Please try again in a minute.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
       gamesSub: 'These are real cards from the app. Pick a game and swipe through',
@@ -96,6 +101,7 @@
       heroDone: 'Ты в очереди! Пришлём ссылку на App Store, как только Clinky выйдет.',
       heroDup: 'Эта почта уже в списке! Напишем в день релиза.',
       heroSending: 'Секундочку, добавляем…',
+      formSending: 'Отправляем…', formError: 'Не получилось отправить. Попробуй ещё раз через минуту.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
       gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
@@ -1785,6 +1791,7 @@
     if (page !== state.page || (page === 'scenario' && pageKey(page) !== _pageKey)) state.qIndex = 0;
     state.page = page;
     _pageKey = pageKey(page);
+    trackVisit('pages');
     try {
       var tgt = pathFor(page, state.lang);
       if (location.pathname.replace(/\.html$/, '') !== tgt) history.pushState(null, '', tgt);
@@ -1817,7 +1824,7 @@
     if (hero()) hero().setDrink(d);     // swap model + per-drink scene config in the three.js hero
   }
   function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
-  function nextQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; refreshCard(); }
+  function nextQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); }
   function prevQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
 
   // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
@@ -1832,41 +1839,124 @@
     try {
       if (src && !sessionStorage.getItem('clinky_src_hit')) {
         sessionStorage.setItem('clinky_src_hit', '1');
-        var vp = new URLSearchParams(); vp.set('type', 'visit'); vp.set('source', src);
-        fetch(WAITLIST_ENDPOINT, { method: 'POST', body: vp, keepalive: true }).catch(function () {});
+        var vp = new URLSearchParams(); vp.set('source', src); vp.set('referrer', document.referrer || '');
+        fetch(VISIT_ENDPOINT, { method: 'POST', body: vp, keepalive: true }).catch(function () {});
       }
     } catch (e) {}
     return src;
   }
+  // What the visitor did before writing to us. Kept for this tab only (sessionStorage, no cookies)
+  // and sent solely together with a form, so the sheet shows the landing page and the time spent.
+  function visitState() {
+    try { var v = JSON.parse(sessionStorage.getItem('clinky_visit') || 'null'); if (v && v.start) return v; } catch (e) {}
+    return null;
+  }
+  function trackVisit(field) {
+    try {
+      var v = visitState() || { landing: location.pathname.slice(0, 200), start: Date.now(), pages: 0, cards: 0 };
+      v[field] = (v[field] || 0) + 1;
+      sessionStorage.setItem('clinky_visit', JSON.stringify(v));
+    } catch (e) {}
+  }
+  function visitParams(params) {
+    var v = visitState(); if (!v) return;
+    params.set('landing', v.landing || '');
+    params.set('pages', String(v.pages || 1));
+    params.set('secs', String(Math.max(0, Math.round((Date.now() - v.start) / 1000))));
+    params.set('cards', String(v.cards || 0));
+  }
+
+  // Cloudflare Turnstile proves a person sent the form. Most visitors never see it; the script
+  // loads on the first submit only, so pages without a form stay free of third-party code.
+  var _tsLoad = null, _tsSeq = 0;
+  function loadTurnstile() {
+    if (window.turnstile) return Promise.resolve(window.turnstile);
+    if (_tsLoad) return _tsLoad;
+    _tsLoad = new Promise(function (resolve, reject) {
+      var sc = document.createElement('script');
+      sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      sc.async = true;
+      sc.onload = function () { if (window.turnstile) resolve(window.turnstile); else { _tsLoad = null; reject(new Error('turnstile')); } };
+      sc.onerror = function () { _tsLoad = null; reject(new Error('turnstile')); };
+      document.head.appendChild(sc);
+    });
+    return _tsLoad;
+  }
+  function humanToken(form) {
+    return loadTurnstile().then(function (ts) {
+      return new Promise(function (resolve, reject) {
+        var slot = form.querySelector('.ts-slot');
+        if (slot && slot.getAttribute('data-widget')) { try { ts.remove(slot.getAttribute('data-widget')); } catch (e) {} }
+        if (!slot) {
+          slot = document.createElement('div');
+          slot.className = 'ts-slot';
+          slot.style.cssText = 'flex-basis:100%;display:flex;justify-content:center';
+          form.appendChild(slot);
+        }
+        slot.id = 'ts' + (++_tsSeq);
+        var timer = setTimeout(function () { reject(new Error('timeout')); }, 90000);
+        var id = ts.render('#' + slot.id, {
+          sitekey: TURNSTILE_SITEKEY, appearance: 'interaction-only', execution: 'execute',
+          language: state.lang === 'ru' ? 'ru' : 'en',
+          callback: function (token) { clearTimeout(timer); resolve(token); },
+          'error-callback': function () { clearTimeout(timer); reject(new Error('turnstile')); },
+          'timeout-callback': function () { clearTimeout(timer); reject(new Error('timeout')); }
+        });
+        slot.setAttribute('data-widget', id);
+        ts.execute('#' + slot.id);
+      });
+    });
+  }
+  function postForm(url, params) {
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, 20000);
+    return fetch(url, { method: 'POST', body: params, signal: ctl ? ctl.signal : undefined })
+      .then(function (r) {
+        clearTimeout(timer);
+        return r.json().catch(function () { return {}; }).then(function (d) {
+          if (!r.ok || !d || d.ok !== true) throw new Error('send');
+          return d;
+        });
+      }, function (e) { clearTimeout(timer); throw e; });
+  }
+  // The form stays on screen while it sends (the Turnstile widget lives inside it); only a
+  // confirmed answer from the server turns it into the success message.
+  function formBusy(form, label) {
+    form.setAttribute('data-busy', '1');
+    var err = form.querySelector('.form-error'); if (err) err.parentNode.removeChild(err);
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.setAttribute('data-label', btn.textContent); btn.textContent = label; btn.disabled = true; btn.style.opacity = '.75'; }
+  }
+  function formFailed(form, msg) {
+    form.removeAttribute('data-busy');
+    var btn = form.querySelector('button[type="submit"]');
+    if (btn) { btn.textContent = btn.getAttribute('data-label') || btn.textContent; btn.disabled = false; btn.style.opacity = ''; }
+    var p = document.createElement('p');
+    p.className = 'form-error'; p.setAttribute('role', 'alert');
+    p.style.cssText = 'flex-basis:100%;margin:6px 0 0;font-size:13.5px;line-height:1.4;color:#D92D48;text-align:center';
+    p.textContent = msg;
+    form.appendChild(p);
+  }
   function submitWaitlist(form) {
     var email = (form.email.value || '').trim();
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return;
-    var params = new URLSearchParams();
-    params.set('email', email);
-    params.set('hp', (form.hp && form.hp.value) || '');
-    params.set('country', GEO.code || '');
-    params.set('city', GEO.tz || '');
-    params.set('tz', GEO.tz || '');
-    params.set('lang', state.lang || navigator.language || '');
-    params.set('drink', state.sel || '');
-    params.set('referrer', document.referrer || '');
-    params.set('source', state.source || '');
-    // Show a loading state first; reveal the final result only once the server answers (no flicker).
-    state.waitlistLoading = true; state.waitlistDone = false; state.waitlistDup = false;
-    paintWaitlistDone();
-    var settled = false;
-    function finish(dup) {
-      if (settled) return; settled = true;
-      state.waitlistLoading = false; state.waitlistDone = true; state.waitlistDup = !!dup;
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || form.getAttribute('data-busy')) return;
+    var t = tdict();
+    formBusy(form, t.formSending);
+    humanToken(form).then(function (token) {
+      var params = new URLSearchParams();
+      params.set('email', email);
+      params.set('hp', (form.hp && form.hp.value) || '');
+      params.set('lang', state.lang || navigator.language || '');
+      params.set('drink', state.sel || '');
+      params.set('referrer', document.referrer || '');
+      params.set('source', state.source || '');
+      params.set('cf-turnstile-response', token);
+      visitParams(params);
+      return postForm(WAITLIST_ENDPOINT, params);
+    }).then(function () {
+      state.waitlistDone = true; state.waitlistDup = false;
       paintWaitlistDone();
-    }
-    try {
-      fetch(WAITLIST_ENDPOINT, { method: 'POST', body: params })
-        .then(function (r) { return r.json(); })
-        .then(function (d) { finish(d && d.dup); })
-        .catch(function () { finish(false); });
-    } catch (e) { finish(false); }
-    setTimeout(function () { finish(false); }, 6000);   // safety: never hang on the spinner
+    }, function () { formFailed(form, t.formError); });
   }
   function paintWaitlistDone() {
     var done = waitlistForm();
@@ -1876,19 +1966,21 @@
   }
   function submitSupport(form) {
     var name = (form.contactName.value || '').trim(), email = (form.email.value || '').trim(), msg = (form.message.value || '').trim();
-    if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !msg) return;
-    try {
+    if (!name || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || !msg || form.getAttribute('data-busy')) return;
+    var t = tdict();
+    formBusy(form, t.formSending);
+    humanToken(form).then(function (token) {
       var params = new URLSearchParams();
-      params.set('type', 'support');
       params.set('name', name);
       params.set('email', email);
       params.set('message', msg);
       params.set('hp', (form.hp && form.hp.value) || '');
       params.set('lang', state.lang || navigator.language || '');
       params.set('referrer', document.referrer || '');
-      fetch(SUPPORT_ENDPOINT, { method: 'POST', mode: 'no-cors', body: params });
-    } catch (e) {}
-    state.supportDone = true; paint();
+      params.set('cf-turnstile-response', token);
+      visitParams(params);
+      return postForm(SUPPORT_ENDPOINT, params);
+    }).then(function () { state.supportDone = true; paint(); }, function () { formFailed(form, t.formError); });
   }
 
   function onScroll() {
@@ -1921,7 +2013,7 @@
       case 'playnext': {
         var st = deckState(), lim = deckLimit();
         if (st.used < lim) {
-          st.used += 1; saveDeck(st);
+          st.used += 1; saveDeck(st); trackVisit('cards');
           state.playIndex = (state.playIndex + 1) % Math.max(1, deckCards().length);
           var m = document.getElementById('playMount');
           if (m) {
@@ -1956,6 +2048,7 @@
     } catch (e) {}
     state.lang = lang; document.documentElement.lang = lang;
     try { state.source = captureSource(); } catch (e) {}
+    trackVisit('pages');
     state.page = pageFromPath();
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting, local preview only
       var demo = isLocalPreview() ? new URLSearchParams(location.search).get('demo') : null;
