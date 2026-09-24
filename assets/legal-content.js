@@ -53,7 +53,10 @@
           'Sentry privacy policy: https://sentry.io/privacy/'
         ]),
         H3('4.4 Apple'),
-        P('Purchases are handled by Apple via the App Store / StoreKit, and are governed by Apple’s privacy policy. Planned meetings you choose to save go into your own Apple Calendar (see Section 6).')
+        P('Purchases are handled by Apple via the App Store / StoreKit, and are governed by Apple’s privacy policy. Planned meetings you choose to save go into your own Apple Calendar (see Section 6).'),
+        H3('4.5 The website (clinkyapp.com)'),
+        P('If you join the waitlist or write to us on clinkyapp.com, we keep the email you enter (for support messages, also your name and message), the country and city your request comes from, your browser and type of device, the site that sent you to us, and a short summary of the visit: the first page, how many pages and cards you looked at and the time spent on the site. We use this only to write to you about Clinky and to see, in total, where visitors come from. It is stored in a private Google Sheet, emails are sent through Resend, and Cloudflare Turnstile checks the forms against spam.'),
+        P('The website also counts anonymous usage: which pages and question cards are opened and how long they stay on screen. These counts carry no email, name or IP address, use no cookies and are kept by Cloudflare. The clink counter on the home page runs on the Abacus service. To have your data deleted, write to support@clinkyapp.com.')
       ]},
       { h: '5. Tracking and advertising', b: [
         P('Clinky does not track you in the App Store sense: there is no IDFA / advertising identifier, no AppTrackingTransparency prompt, no ad networks, and no data brokers. Adapty processes the IDFV (vendor identifier) as disclosed in Section 4.1 — this is a per-vendor device identifier, not an advertising identifier and not a cross-app tracking signal. None of the services above are configured to track you across other apps or websites. We do not sell or share your personal information.')
@@ -153,7 +156,10 @@
           'Политика конфиденциальности Sentry: https://sentry.io/privacy/'
         ]),
         H3('4.4 Apple'),
-        P('Покупки обрабатываются Apple через App Store / StoreKit и регулируются политикой конфиденциальности Apple. Запланированные встречи, которые вы решаете сохранить, попадают в ваш собственный Apple Calendar (см. раздел 6).')
+        P('Покупки обрабатываются Apple через App Store / StoreKit и регулируются политикой конфиденциальности Apple. Запланированные встречи, которые вы решаете сохранить, попадают в ваш собственный Apple Calendar (см. раздел 6).'),
+        H3('4.5 Сайт (clinkyapp.com)'),
+        P('Если вы встаёте в очередь или пишете нам через clinkyapp.com, мы сохраняем указанную почту (для обращений в поддержку ещё имя и текст сообщения), страну и город, откуда пришёл запрос, браузер и тип устройства, сайт, с которого вы перешли, и короткую сводку визита: первую страницу, сколько страниц и карточек вы посмотрели и время на сайте. Это нужно только чтобы написать вам о Clinky и видеть общую картину, откуда приходят люди. Данные хранятся в закрытой Google-таблице, письма отправляет сервис Resend, а формы от спама защищает Cloudflare Turnstile.'),
+        P('Кроме того, сайт ведёт обезличенную статистику: какие страницы и карточки с вопросами открывают и сколько времени на них проводят. В ней нет почты, имени и IP-адреса, она не использует cookies и хранится в Cloudflare. Счётчик «чоков» на главной работает на сервисе Abacus. Чтобы удалить свои данные, напишите на support@clinkyapp.com.')
       ]},
       { h: '5. Отслеживание и реклама', b: [
         P('Clinky не отслеживает вас в понимании App Store: нет IDFA / рекламного идентификатора, нет запроса AppTrackingTransparency, нет рекламных сетей и нет брокеров данных. Adapty обрабатывает IDFV (идентификатор поставщика), как раскрыто в разделе 4.1, — это идентификатор устройства уровня поставщика, а не рекламный идентификатор и не сигнал межприложенческого отслеживания. Ни один из перечисленных сервисов не настроен на отслеживание вас в других приложениях или на сайтах. Мы не продаём и не передаём ваши персональные данные.')
