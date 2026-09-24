@@ -1973,7 +1973,7 @@
         slot.id = 'ts' + (++_tsSeq);
         var timer = setTimeout(function () { reject(new Error('timeout')); }, 90000);
         var id = ts.render('#' + slot.id, {
-          sitekey: TURNSTILE_SITEKEY, appearance: 'interaction-only', execution: 'execute',
+          sitekey: TURNSTILE_SITEKEY, appearance: 'interaction-only', execution: 'execute', theme: 'light',
           language: state.lang === 'ru' ? 'ru' : 'en',
           callback: function (token) { clearTimeout(timer); resolve(token); },
           'error-callback': function () { clearTimeout(timer); reject(new Error('turnstile')); },
