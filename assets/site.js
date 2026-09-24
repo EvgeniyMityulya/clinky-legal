@@ -1789,6 +1789,7 @@
   }
   function commitPage(page) {
     if (page !== state.page || (page === 'scenario' && pageKey(page) !== _pageKey)) state.qIndex = 0;
+    flushCard('page');
     state.page = page;
     _pageKey = pageKey(page);
     trackVisit('pages');
@@ -1798,6 +1799,7 @@
     } catch (e) {}
     try { window.scrollTo({ top: 0, behavior: 'auto' }); } catch (e2) { window.scrollTo(0, 0); }
     state.scrolled = window.scrollY > 24; paint(); syncDocTitle();
+    track('page'); markCard();
   }
   function closeMenu(instant) {
     var el = document.querySelector('.nav-menu');
@@ -1823,9 +1825,9 @@
     if (c) { c.style.color = d === 'coffee' ? '#fff' : '#6b6b76'; var ci = c.querySelector('i'); if (ci) ci.style.color = d === 'coffee' ? '#fff' : '#b9b0b6'; }
     if (hero()) hero().setDrink(d);     // swap model + per-drink scene config in the three.js hero
   }
-  function setGame(i) { state.gameIndex = i; state.qIndex = 0; refreshCard(); }
-  function nextQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); }
-  function prevQuestion() { var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); }
+  function setGame(i) { flushCard('switch'); state.gameIndex = i; state.qIndex = 0; refreshCard(); markCard(); }
+  function nextQuestion() { flushCard('next'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); markCard(); }
+  function prevQuestion() { flushCard('back'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); markCard(); }
 
   // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
   function cleanSource(s) { return String(s || '').toLowerCase().replace(/[^a-z0-9._-]/g, '').slice(0, 40); }
@@ -1864,6 +1866,79 @@
     params.set('pages', String(v.pages || 1));
     params.set('secs', String(Math.max(0, Math.round((Date.now() - v.start) / 1000))));
     params.set('cards', String(v.cards || 0));
+  }
+
+  // Anonymous usage events for our own statistics: a random id per tab (sessionStorage), no cookies,
+  // no email or IP. Each card event says which card was on screen and for how long, which is how
+  // the report tells the questions people linger on from the ones they skip.
+  var EVENT_ENDPOINT = '/api/event';
+  var _sid = null, _card = null, _cardSince = 0, _activeMs = 0, _visibleSince = Date.now();
+  function sessionId() {
+    if (_sid) return _sid;
+    try { _sid = sessionStorage.getItem('clinky_sid'); } catch (e) {}
+    if (!_sid || !/^[a-z0-9]{6,16}$/.test(_sid)) {
+      _sid = (Math.random().toString(36) + Math.random().toString(36)).replace(/[^a-z0-9]/g, '').slice(0, 12);
+      try { sessionStorage.setItem('clinky_sid', _sid); } catch (e) {}
+    }
+    return _sid;
+  }
+  function track(type, data) {
+    try {
+      var ev = { t: type, sid: sessionId(), p: location.pathname, l: state.lang };
+      for (var k in data) if (Object.prototype.hasOwnProperty.call(data, k)) ev[k] = data[k];
+      var body = JSON.stringify(ev);
+      if (navigator.sendBeacon && navigator.sendBeacon(EVENT_ENDPOINT, new Blob([body], { type: 'text/plain' }))) return;
+      fetch(EVENT_ENDPOINT, { method: 'POST', body: body, keepalive: true }).catch(function () {});
+    } catch (e) {}
+  }
+  function currentCard() {
+    if (state.page === 'play') {
+      if (!document.getElementById('playLine')) return null;
+      var pm = own(PLAY_SLUGS, state.playSlug) || {}, pc = deckCards()[state.playIndex];
+      return pc ? { g: pm.id || '', i: state.playIndex, q: pc } : null;
+    }
+    if (!document.getElementById('qcard')) return null;
+    var src = qSource(), qc = src.cards[state.qIndex % (src.cards.length || 1)];
+    if (!qc) return null;
+    var g = src.kind === 'scenario' ? 'scenario:' + ((own(SCENARIO_SLUGS, state.scenarioSlug) || {}).id || '') : (GAME_IDS[state.gameIndex] || '');
+    return { g: g, i: state.qIndex, q: qc };
+  }
+  // Scenario and play decks load after the first paint, so an empty first look gets one retry.
+  function markCard() {
+    _card = currentCard(); _cardSince = Date.now();
+    if (!_card) setTimeout(function () { if (!_card) { _card = currentCard(); _cardSince = Date.now(); } }, 1500);
+  }
+  function flushCard(reason) {
+    if (!_card) return;
+    var ms = Date.now() - _cardSince;
+    if (ms > 400) track('card', { g: _card.g, i: _card.i, q: String(_card.q).replace(/\*/g, '').slice(0, 160), v: ms, r: reason });
+    _card = null;
+  }
+  function sendVisitOnce() {
+    try { if (sessionStorage.getItem('clinky_visit_sent')) return; sessionStorage.setItem('clinky_visit_sent', '1'); } catch (e) {}
+    var v = visitState() || {};
+    track('visit', { lp: v.landing || location.pathname, s: state.source || '', ref: document.referrer || '' });
+  }
+  // Time on site counts only while the tab is in front; every time it goes to the background the
+  // running total is sent again, and the report keeps the largest one per visit.
+  var _leaveSent = false;
+  function sendLeave() {
+    if (_leaveSent) return;
+    _leaveSent = true;
+    flushCard('hide');
+    _activeMs += Date.now() - _visibleSince;
+    track('leave', { v: Math.round(_activeMs / 1000) });
+  }
+  function onVisibility() {
+    if (document.hidden) { sendLeave(); return; }
+    _leaveSent = false;
+    _visibleSince = Date.now();
+    markCard();
+  }
+  function onTrackClick(e) {
+    if (e.target.closest('a[href*="apps.apple.com"]')) track('cta', { c: 'appstore' });
+    else if (e.target.closest('[data-act="join"]')) track('cta', { c: 'join' });
+    else if (e.target.closest('#playLink')) track('cta', { c: 'play' });
   }
 
   // Cloudflare Turnstile proves a person sent the form. Most visitors never see it; the script
@@ -1954,6 +2029,7 @@
       visitParams(params);
       return postForm(WAITLIST_ENDPOINT, params);
     }).then(function () {
+      track('signup');
       state.waitlistDone = true; state.waitlistDup = false;
       paintWaitlistDone();
     }, function () { formFailed(form, t.formError); });
@@ -1980,7 +2056,7 @@
       params.set('cf-turnstile-response', token);
       visitParams(params);
       return postForm(SUPPORT_ENDPOINT, params);
-    }).then(function () { state.supportDone = true; paint(); }, function () { formFailed(form, t.formError); });
+    }).then(function () { track('support'); state.supportDone = true; paint(); }, function () { formFailed(form, t.formError); });
   }
 
   function onScroll() {
@@ -2013,6 +2089,7 @@
       case 'playnext': {
         var st = deckState(), lim = deckLimit();
         if (st.used < lim) {
+          flushCard('next');
           st.used += 1; saveDeck(st); trackVisit('cards');
           state.playIndex = (state.playIndex + 1) % Math.max(1, deckCards().length);
           var m = document.getElementById('playMount');
@@ -2021,6 +2098,8 @@
             var line = document.getElementById('playLine');
             if (line) { line.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)'; }
           }
+          if (st.used >= lim) track('limit', { g: (own(PLAY_SLUGS, state.playSlug) || {}).id || '' });
+          markCard();
         }
         break;
       }
@@ -2066,9 +2145,14 @@
     window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('visibilitychange', function () { if (state.page === 'home' && !document.hidden) scheduleAnim(); });
 
+    document.addEventListener('visibilitychange', onVisibility);
+    window.addEventListener('pagehide', sendLeave);
+    document.addEventListener('click', onTrackClick, true);
+
     paint();
     onScroll();
     applyGeoLang();   // in case geo already resolved before mount
+    sendVisitOnce(); track('page'); markCard();
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', mount);
