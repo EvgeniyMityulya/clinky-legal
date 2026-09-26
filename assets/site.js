@@ -1276,7 +1276,11 @@
   var AUTHOR_EMAIL = 'evgeniymityulya@gmail.com';
   // [phrase] in the row copy is set in white, the rest stays muted
   function aboutMarked(text) {
-    return esc(text).replace(/\[([^\]]+)\]/g, '<b>$1</b>');
+    return keepHyphenated(esc(text)).replace(/\[([^\]]+)\]/g, '<b>$1</b>');
+  }
+  // words like meet-up or 3D-сувенир stay on one line
+  function keepHyphenated(html) {
+    return html.replace(/([0-9A-Za-zА-Яа-яЁё]+(?:-[0-9A-Za-zА-Яа-яЁё]+)+)/g, '<span class="nobr">$1</span>');
   }
   function aboutTag(text) { return '<span class="ab-tag">' + esc(text) + '</span>'; }
   function aboutArt(key) {
@@ -1289,7 +1293,7 @@
     var rows = (t.aboutRows || []).map(function (r, i) {
       return '<div class="soft-card ab-row' + (i % 2 ? ' ab-flip' : '') + '">' +
         '<div class="ab-copy">' + aboutTag(r.tag) +
-          '<h3 class="ab-title">' + esc(r.title) + '</h3>' +
+          '<h3 class="ab-title">' + keepHyphenated(esc(r.title)) + '</h3>' +
           '<p class="ab-text">' + aboutMarked(r.text) + '</p>' +
         '</div>' +
         '<div class="ab-visual">' + aboutArt(r.art) + '</div>' +
