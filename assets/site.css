@@ -242,9 +242,9 @@ h1,h2,h3,.hub-title{text-wrap:balance}
 .ab-name{margin-top:16px;font-family:Nunito,sans-serif;font-weight:900;font-size:20px;letter-spacing:-.3px;color:#1c1326}
 .ab-role{margin-top:4px;font-size:13.5px;line-height:1.45;color:#7a7280}
 .ab-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.ab-author .author-link{background:#fff;border:1.5px solid #FFC9D0;color:#FF4F62;padding:5px 15px 5px 5px}
+.ab-author .author-link{background:#fff;border:1.5px solid #FFC9D0;color:#1c1326;padding:5px 15px 5px 5px}
 .ab-author .author-link:hover{border-color:#FF4F62;background:#FFF7F8;box-shadow:0 8px 18px -12px rgba(255,79,98,.6)}
-.brand-chip{flex:none;width:26px;height:26px;border-radius:50%;background:#FFF1F3;display:inline-flex;align-items:center;justify-content:center}
+.brand-chip{flex:none;width:26px;height:26px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(28,19,38,.16)}
 .brand-chip svg{width:15px;height:15px}
 .ab-mail{margin:6px 0 0;text-align:center;font-size:15px;color:#6b6b76}
 .ab-mail a{color:#1c1326;font-weight:700;text-underline-offset:3px}
