@@ -244,11 +244,11 @@ h1,h2,h3,.hub-title{text-wrap:balance}
 .ab-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
 .ab-author .author-link{background:#fff;border:1.5px solid #FFC9D0;color:#1c1326;padding:5px 15px 5px 5px}
 .ab-author .author-link:hover{border-color:#FF4F62;background:#FFF7F8;box-shadow:0 8px 18px -12px rgba(255,79,98,.6)}
-.brand-chip{flex:none;width:26px;height:26px;border-radius:50%;background:#fff;display:inline-flex;align-items:center;justify-content:center;box-shadow:0 1px 5px rgba(28,19,38,.16)}
+.brand-chip{flex:none;width:26px;height:26px;display:inline-flex;align-items:center;justify-content:center}
 .brand-chip svg{width:15px;height:15px}
 .ab-mail{margin:6px 0 0;text-align:center;font-size:15px;color:#6b6b76}
-.ab-mail a{color:#1c1326;font-weight:700;text-underline-offset:3px}
-.ab-mail a:hover{color:#FF4F62}
+.ab-mail a{color:#FF4F62;font-weight:800;text-underline-offset:3px}
+.ab-mail a:hover{color:#E11D48}
 @media (max-width:760px){
   .ab-row{grid-template-columns:1fr;gap:18px;height:auto;padding:26px 24px}
   .ab-row .ab-copy,.ab-row.ab-flip .ab-copy{order:2}
@@ -263,3 +263,4 @@ h1,h2,h3,.hub-title{text-wrap:balance}
 .ab-row.soft-card:hover,.ab-author.soft-card:hover{transform:none;box-shadow:0 10px 30px -24px rgba(255,79,98,.3)}
 .nobr{white-space:nowrap}
 @media (max-width:760px){.ab-row .ab-visual{height:auto}.ab-art-ib-nhi,.ab-art-cap{max-height:170px}.ab-art-streak{max-height:140px}}
+.ab-slogan{text-align:center;font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);letter-spacing:-.6px;line-height:1.2;color:#FF4F62;text-wrap:balance;padding:clamp(18px,3vh,34px) clamp(20px,5vw,72px) clamp(4px,1vh,10px)}

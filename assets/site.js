@@ -1312,6 +1312,7 @@
         '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' + rows + '</div>' +
       '</section>' +
       aboutStory() +
+      '<div class="ab-slogan">' + sloganHTML(tdict().slogan) + '</div>' +
       renderFinalCta() +
     '</div>';
   }
