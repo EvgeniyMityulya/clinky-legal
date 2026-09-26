@@ -73,8 +73,8 @@
       aboutDataTitle: 'What happens to your data?',
       aboutData1: 'There are no accounts and there is no server. Your meet-ups, your friends and your collection stay on your phone, which means I cannot see whom you meet or what you answer. Nothing to leak, because nothing leaves the device.',
       aboutDataLink: 'Read the privacy policy',
-      aboutDataMore: 'Read more', aboutStoryTag: 'Why', aboutAuthorTag: 'From the author', aboutDataTag: 'Your data',
-      aboutMail: 'Write to me directly',
+      aboutAuthorTag: 'From the author',
+      aboutMailLead: 'Want to talk to me directly or share an idea?', aboutMail: 'Write to me',
       aboutRows: [
         { tag: 'Games', title: 'Cards that get the table talking', text: 'Four games and sets for dates, parties and long evenings. Every question is written to [start a story], never a plain yes or no.', art: 'ib-nhi' },
         { tag: 'Friends', title: 'Remember who you have not seen', text: 'Clinky keeps every meet-up and nudges you when a friend goes quiet. [A streak] shows how often your people actually meet.', art: 'streak' },
@@ -139,8 +139,8 @@
       aboutDataTitle: 'Что с вашими данными?',
       aboutData1: 'Аккаунтов нет, сервера тоже нет. Встречи, друзья и коллекция лежат на вашем телефоне, поэтому я не вижу, с кем вы встречаетесь и что отвечаете на карточки. Утечь нечему, потому что ничего не уходит с устройства.',
       aboutDataLink: 'Читать политику приватности',
-      aboutDataMore: 'Подробнее', aboutStoryTag: 'Зачем', aboutAuthorTag: 'От автора', aboutDataTag: 'Данные',
-      aboutMail: 'Написать мне напрямую',
+      aboutAuthorTag: 'От автора',
+      aboutMailLead: 'Хочешь поговорить напрямую или предложить идею?', aboutMail: 'Напиши мне на почту',
       aboutRows: [
         { tag: 'Игры', title: 'Карточки, которые разговорят стол', text: 'Четыре игры и наборы для свиданий, компании и долгих вечеров. Каждый вопрос написан так, чтобы [начать историю], а не получить да или нет.', art: 'ib-nhi' },
         { tag: 'Друзья', title: 'Помни, с кем давно не виделись', text: 'Clinky хранит каждую встречу и напомнит, если друг пропал. [Серия встреч] показывает, как часто вы на самом деле видитесь.', art: 'streak' },
@@ -1287,7 +1287,7 @@
   function renderAbout() {
     var t = tdict();
     var rows = (t.aboutRows || []).map(function (r, i) {
-      return '<div class="ab-row' + (i % 2 ? ' ab-flip' : '') + '">' +
+      return '<div class="soft-card ab-row' + (i % 2 ? ' ab-flip' : '') + '">' +
         '<div class="ab-copy">' + aboutTag(r.tag) +
           '<h3 class="ab-title">' + esc(r.title) + '</h3>' +
           '<p class="ab-text">' + aboutMarked(r.text) + '</p>' +
@@ -1316,17 +1316,12 @@
   }
   function aboutStory() {
     var t = tdict();
-    var para = function (text) { return '<p class="ab-para">' + esc(text) + '</p>'; };
     var photo = AUTHOR_PHOTO
       ? '<img src="' + esc(AUTHOR_PHOTO) + '" alt="' + esc(t.aboutWhoName) + '" width="132" height="132" loading="lazy" decoding="async" class="ab-photo">'
-      : '<span class="ab-photo" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)">' + ph('user-circle', 64, '#FF8A97', 'ph-fill') + '</span>';
-    var mail = '<a href="mailto:' + AUTHOR_EMAIL + '" class="author-link">' + ph('paper-plane-tilt', 18, '#FF4F62', 'ph-fill') + esc(t.aboutMail) + '</a>';
+      : '<span class="ab-photo" style="display:flex;align-items:center;justify-content:center;background:#FFE2E6">' + ph('user-circle', 64, '#FF4F62', 'ph-fill') + '</span>';
     return '<section style="padding:clamp(14px,2vh,18px) clamp(20px,5vw,72px) clamp(40px,6vh,64px)">' +
       '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' +
-        '<div class="soft-card ab-light">' + aboutTag(t.aboutStoryTag) +
-          '<h3 class="ab-title">' + esc(t.aboutStoryTitle) + '</h3>' + para(t.aboutStory1) + para(t.aboutStory2) +
-        '</div>' +
-        '<div class="ab-author">' +
+        '<div class="soft-card ab-author">' +
           '<div class="ab-side">' + photo +
             '<span class="ab-name">' + esc(t.aboutWhoName) + '</span>' +
             '<span class="ab-role">' + esc(t.aboutWhoRole) + '</span>' +
@@ -1334,15 +1329,10 @@
           '<div>' + aboutTag(t.aboutAuthorTag) +
             '<p class="ab-text">' + esc(t.aboutWho1) + '</p>' +
             '<p class="ab-text">' + esc(t.aboutWho2) + '</p>' +
-            '<div class="ab-links">' + authorLinks() + mail + '</div>' +
+            '<div class="ab-links">' + authorLinks() + '</div>' +
           '</div>' +
         '</div>' +
-        '<div class="soft-card ab-light">' +
-          '<div class="ab-head">' + aboutTag(t.aboutDataTag) +
-            '<button data-act="privacy" class="ab-more">' + esc(t.aboutDataMore) + ph('arrow-right', 15, 'currentColor', 'ph-bold') + '</button>' +
-          '</div>' +
-          '<h3 class="ab-title">' + esc(t.aboutDataTitle) + '</h3>' + para(t.aboutData1) +
-        '</div>' +
+        '<p class="ab-mail">' + esc(t.aboutMailLead) + ' <a href="mailto:' + AUTHOR_EMAIL + '">' + esc(t.aboutMail) + '</a></p>' +
       '</div>' +
     '</section>';
   }
@@ -1352,7 +1342,7 @@
       var l = AUTHOR_LINKS[i];
       var mark = brandIcon(l.icon, 18, l.color || '#FF4F62') || ph(l.icon, 18, '#FF4F62', 'ph-fill');
       var text = (state.lang === 'en' && l.handleEn) ? l.handleEn : (l.handle || l.label);
-      out.push('<a href="' + esc(l.href) + '" rel="me noopener" target="_blank" aria-label="' + esc(text) + ', ' + esc(l.label) + '" class="author-link">' + mark + esc(text) + '</a>');
+      out.push('<a href="' + esc(l.href) + '" rel="me noopener" target="_blank" aria-label="' + esc(text) + ', ' + esc(l.label) + '" class="author-link"><span class="brand-chip">' + mark + '</span>' + esc(text) + '</a>');
     }
     return out.join('');
   }
