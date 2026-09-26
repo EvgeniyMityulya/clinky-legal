@@ -226,9 +226,13 @@ h1,h2,h3,.hub-title{text-wrap:balance}
 .ab-text b{color:#FF4F62;font-weight:700;white-space:nowrap}
 .ab-visual{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;min-height:0}
 /* one soft glow and one floor shadow behind every picture, like the cap on the home page */
-.ab-visual::before{content:'';position:absolute;left:50%;top:50%;width:300px;height:220px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse at center,rgba(255,79,98,.18),rgba(255,138,151,.08) 45%,rgba(255,138,151,0) 70%);pointer-events:none}
-.ab-floor{position:relative;z-index:0;flex:none;width:72%;max-width:250px;height:24px;margin-top:6px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(225,29,72,.22),rgba(225,29,72,0) 70%);filter:blur(3px);pointer-events:none}
-.ab-art{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;filter:drop-shadow(0 16px 20px rgba(225,29,72,.16))}
+.ab-capwrap{position:relative;display:inline-block;margin-bottom:26px}
+.ab-capwrap::before{content:'';position:absolute;left:50%;top:48%;width:128%;height:120%;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.34),rgba(255,138,151,.13) 46%,transparent 72%);pointer-events:none}
+/* cast shadow drawn from the cap's own silhouette, down and to the right like the 3D one on Home */
+.ab-cast{position:absolute;inset:0;background:rgba(200,30,55,.26);-webkit-mask:url(/assets/bento/drink.png) center/contain no-repeat;mask:url(/assets/bento/drink.png) center/contain no-repeat;transform:translate(16px,10px) scale(.9,.5) skewX(-14deg);transform-origin:50% 100%;filter:blur(9px);pointer-events:none}
+.ab-floor{position:relative;z-index:0;flex:none;width:64%;max-width:230px;height:20px;margin-top:16px;border-radius:50%;background:radial-gradient(ellipse at center,rgba(225,29,72,.3),rgba(225,29,72,0) 70%);filter:blur(3px);pointer-events:none}
+.ab-art{position:relative;z-index:1;display:block;width:auto;height:auto;max-width:100%;filter:drop-shadow(0 6px 10px rgba(225,29,72,.1))}
+.ab-art-cap{filter:none}
 .ab-art-ib-nhi{max-height:220px;border-radius:22px;transform:rotate(-3deg)}
 .ab-art-streak{max-height:180px;border-radius:22px;transform:rotate(2deg)}
 .ab-art-cap{max-height:200px;transform:rotate(-6deg)}

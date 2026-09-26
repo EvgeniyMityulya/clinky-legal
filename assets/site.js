@@ -1286,7 +1286,7 @@
   function aboutArt(key) {
     var lang = state.lang === 'ru' ? 'ru' : 'en';
     var floor = '<span class="ab-floor"></span>';
-    if (key === 'drink') return '<img src="/assets/bento/drink.png" alt="" loading="lazy" decoding="async" class="ab-art ab-art-cap">' + floor;
+    if (key === 'drink') return '<span class="ab-capwrap"><span class="ab-cast"></span><img src="/assets/bento/drink.png" alt="" loading="lazy" decoding="async" class="ab-art ab-art-cap"></span>';
     return '<img src="/assets/bento/' + key + '-' + lang + '.png" alt="" loading="lazy" decoding="async" class="ab-art ab-art-' + key + '">' + floor;
   }
   function renderAbout() {
