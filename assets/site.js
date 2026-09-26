@@ -549,7 +549,7 @@
     var lnk = 'background:transparent;border:0;cursor:pointer;font-size:14.5px;color:#6b6b76;padding:0;font-family:DM Sans,sans-serif';
     var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#7a7280;margin-bottom:2px';
     return '' +
-      '<div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
         '<div style="max-width:300px">' +
           '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">' +
             '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
@@ -573,7 +573,7 @@
           '<a href="mailto:' + CONTACT_EMAIL + '" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:#6b6b76">' + I.mail + esc(t.footEmail) + '</a>' +
         '</div>' +
       '</div>' +
-      '<div style="max-width:1080px;margin:32px auto 0;padding-top:20px;border-top:1px solid #e9e6ec;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:32px auto 0;padding-top:20px;border-top:1px solid #e9e6ec;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
         '<span style="font-size:12.5px;color:#7a7280">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
         '<div style="display:flex;gap:6px">' +
           '<button data-act="en" style="' + langSegDark(state.lang === 'en') + '">EN</button>' +
@@ -617,7 +617,7 @@
       sparkle({ s: 27, pos: 'bottom:12%;right:7%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.6s ease-in-out .2s infinite' }) +
       sparkle({ s: 14, pos: 'top:40%;right:46%', op: 0.42, c: '#FF8A97', glow: 'rgba(255,138,151,.28)', anim: 'twinkle 3.2s ease-in-out .7s infinite', cls: 'spark-mid' }) +
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite', cls: 'spark-mid' }) +
-      '<div class="hero-grid" style="position:relative;max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
+      '<div class="hero-grid" style="position:relative;max-width:' + PAGE_W + 'px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
             '<img src="/assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
@@ -740,7 +740,7 @@
         bHead(FC.rem, '100%') +
         '<img src="/assets/bento/notif-' + L + '.png" alt="" loading="lazy" class="bento-media" style="position:absolute;left:50%;top:108px;width:510px;transform:translateX(-50%);filter:drop-shadow(0 0 7px rgba(28,19,38,.18)) drop-shadow(0 7px 16px rgba(28,19,38,.11));z-index:1">' +
       '</div>';
-    var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:1080px;margin:0 auto">' +
+    var discover = '<section style="padding:clamp(50px,8vh,96px) clamp(20px,5vw,72px)"><div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
       '<div style="text-align:center;margin-bottom:clamp(30px,5vh,46px)">' + kicker(t.discoverKicker) + h2sec(t.discoverTitle) + subsec(t.discoverSub) + '</div>' +
       '<div class="bento">' + cellIce + cellCol + cellStr + cellAch + cellAn + cellRem + '</div>' +
     '</div></section>';
@@ -766,7 +766,7 @@
   function renderFinalCta() {
     var t = tdict();
     return '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:920px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
+      '<div style="position:relative;max-width:' + PAGE_W + 'px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
         sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
         sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
@@ -833,7 +833,7 @@
   function renderHowStrip() {
     var t = tdict(), L = state.lang, steps = (GAMES[state.gameIndex].how || {})[L] || [];
     if (!steps.length) return '';
-    return '<div id="howStrip" style="max-width:960px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">' +
+    return '<div id="howStrip" style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">' +
       steps.map(function (line, i) {
         return '<div class="soft-card" style="padding:18px 20px 20px;text-align:left">' +
           '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">' +
@@ -912,7 +912,7 @@
       gamesHub() +
       scenarioStrip() +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
-        '<div style="max-width:720px;margin:0 auto">' +
+        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
           faqAccordion(FAQ_GAMES[state.lang]) +
         '</div>' +
@@ -976,7 +976,7 @@
   }
   function sectionWrap(title, inner, tight) {
     return '<section style="padding:' + (tight ? '0' : 'clamp(8px,1.6vh,18px)') + ' clamp(20px,5vw,72px) clamp(22px,3.6vh,40px)">' +
-      '<div style="max-width:760px;margin:0 auto">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         (title ? '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(title) + '</h2>' : '') +
         inner +
       '</div>' +
@@ -1122,7 +1122,7 @@
     if (!c || !L) {
       ensureGameContent(function () { paint(); });
       return '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
-        '<div style="max-width:720px;margin:0 auto">' +
+        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 14px;color:#1c1326">' + esc(t.howTitle) + '</h2>' +
           '<div id="howWrap">' + renderHowStrip() + '</div>' +
         '</div>' +
@@ -1151,7 +1151,7 @@
     }
     if (!items.length) return '';
     return '<section style="padding:clamp(6px,1.4vh,18px) clamp(20px,5vw,72px) clamp(20px,3vh,32px)">' +
-      '<div style="max-width:980px;margin:0 auto">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;text-align:center;color:#1c1326">' + esc(lang === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation') + '</h2>' +
         '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">' + items.join('') + '</div>' +
       '</div>' +
@@ -1267,8 +1267,8 @@
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
       '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
-        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 auto clamp(18px,2.6vh,26px);max-width:980px;color:#1c1326">' + esc(t.aboutPillarsTitle) + '</h2>' +
-        '<div style="max-width:980px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
+        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 auto clamp(18px,2.6vh,26px);max-width:' + PAGE_W + 'px;color:#1c1326">' + esc(t.aboutPillarsTitle) + '</h2>' +
+        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
           pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
         '</div>' +
       '</section>' +
@@ -1289,7 +1289,7 @@
       return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(text) + '</h2>';
     };
     return '<section style="padding:0 clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
-      '<div style="max-width:760px;margin:0 auto">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         head(t.aboutStoryTitle) + para(t.aboutStory1) + para(t.aboutStory2) +
         '<div style="height:clamp(20px,3vh,34px)"></div>' +
         head(t.aboutWhoTitle) +
@@ -1337,12 +1337,12 @@
         '</form>';
     var faqHtml = faqAccordion(FAQ[state.lang]);
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
-      '<div style="max-width:560px;margin:0 auto">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         '<div style="text-align:center;margin-bottom:30px">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + I.chat + '</span>' +
           '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 10px;color:#1c1326">' + esc(t.supTitle) + '</h1>' +
           '<p style="font-size:16px;color:#6b6b76;margin:0">' + esc(t.supSub) + '</p>' +
-        '</div>' + body +
+        '</div>' + '<div style="max-width:560px;margin:0 auto">' + body + '</div>' +
         '<div style="margin-top:46px">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 16px;text-align:center;color:#1c1326">FAQ</h2>' +
           '<div style="display:flex;flex-direction:column;gap:10px">' + faqHtml + '</div>' +
@@ -1381,7 +1381,7 @@
       return '<div style="margin-bottom:22px">' + inner + '</div>';
     }).join('');
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
-      '<div style="max-width:680px;margin:0 auto">' +
+      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
         '<p style="font-size:13.5px;color:#7a7280;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
         '<div style="margin-top:30px;text-align:center">' + coralBtn(t.docContactCta, 'support') + '</div>' +
@@ -1403,8 +1403,10 @@
 
   // ===== paint =====
   var $hdr, $main, $ftr;
+  // One content column for every page: the header, the sections and the footer share these edges.
+  var PAGE_W = 1080;
   function updateHeaderBg() {
-    var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px clamp(14px,3.5vw,40px);transition:background .35s ease,box-shadow .35s ease;';
+    var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px max(clamp(20px,5vw,40px), calc((100% - ' + PAGE_W + 'px) / 2));transition:background .35s ease,box-shadow .35s ease;';
     var bg = state.scrolled ? 'background:rgba(255,255,255,.9);box-shadow:0 6px 24px -10px rgba(28,19,38,.16);backdrop-filter:blur(12px);' : 'background:transparent;';
     if ($hdr) $hdr.setAttribute('style', base + bg);
     // header logo hidden at the top of Home (the hero already shows the big icon); fades in on scroll

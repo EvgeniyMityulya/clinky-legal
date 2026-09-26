@@ -86,6 +86,9 @@ const PRERENDER_CSS = `<style>
 #prerender .eyebrow{color:#FF4F62;font-weight:800;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
 </style>`;
 
+// 1200x630 share card in the page's language
+const ogImage = (s) => `${SITE}/assets/og-image${s.loc === 'ru' ? '-ru' : ''}.jpg`;
+
 function faqHtml(faq) {
   return faq.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('\n');
 }
@@ -368,7 +371,7 @@ function jsonld(s) {
     graph.push({
       '@type': 'MobileApplication', '@id': `${SITE}/#app`, name: 'Clinky',
       applicationCategory: 'LifestyleApplication', operatingSystem: 'iOS 17.0 or later',
-      url: `${SITE}/`, image: `${SITE}/assets/og-image.jpg`,
+      url: `${SITE}/`, image: ogImage(s),
       description: 'Track who you meet, play party-game question cards and collect a 3D drink for every clink. Offline-first, no accounts.',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       publisher: { '@id': `${SITE}/#org` },
@@ -422,13 +425,13 @@ function seoBlock(s) {
     `<meta property="og:title" content="${esc(s.ogTitle)}">`,
     `<meta property="og:description" content="${esc(s.ogDescription)}">`,
     `<meta property="og:url" content="${safeHref(canonical)}">`,
-    `<meta property="og:image" content="${SITE}/assets/og-image.jpg">`,
-    '<meta property="og:image:width" content="1024">',
-    '<meta property="og:image:height" content="1024">',
-    '<meta name="twitter:card" content="summary">',
+    `<meta property="og:image" content="${ogImage(s)}">`,
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
+    '<meta name="twitter:card" content="summary_large_image">',
     `<meta name="twitter:title" content="${esc(s.ogTitle)}">`,
     `<meta name="twitter:description" content="${esc(s.ogDescription)}">`,
-    `<meta name="twitter:image" content="${SITE}/assets/og-image.jpg">`
+    `<meta name="twitter:image" content="${ogImage(s)}">`
   );
   if (GSC) rows.push(`<meta name="google-site-verification" content="${GSC}">`);
   // '<' as \u003c keeps content such as "</script>" or "<!--" from ending the block early
