@@ -1312,12 +1312,8 @@
         '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' + rows + '</div>' +
       '</section>' +
       aboutStory() +
-      '<section style="padding:0 clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
-        '<div style="max-width:680px;margin:0 auto;text-align:center">' +
-          '<div style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(24px,3.4vw,38px);color:#FF4F62;letter-spacing:-.6px;margin-bottom:24px">' + sloganHTML(t.slogan) + '</div>' +
-          coralBtn(t.heroCta, 'join') +
-        '</div>' +
-      '</section></div>';
+      renderFinalCta() +
+    '</div>';
   }
   function aboutStory() {
     var t = tdict();
