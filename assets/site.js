@@ -73,6 +73,13 @@
       aboutDataTitle: 'What happens to your data?',
       aboutData1: 'There are no accounts and there is no server. Your meet-ups, your friends and your collection stay on your phone, which means I cannot see whom you meet or what you answer. Nothing to leak, because nothing leaves the device.',
       aboutDataLink: 'Read the privacy policy',
+      aboutDataMore: 'Read more', aboutStoryTag: 'Why', aboutAuthorTag: 'From the author', aboutDataTag: 'Your data',
+      aboutMail: 'Write to me directly',
+      aboutRows: [
+        { tag: 'Games', title: 'Cards that get the table talking', text: 'Four games and sets for dates, parties and long evenings. Every question is written to [start a story], never a plain yes or no.', art: 'ib-nhi' },
+        { tag: 'Friends', title: 'Remember who you have not seen', text: 'Clinky keeps every meet-up and nudges you when a friend goes quiet. [A streak] shows how often your people actually meet.', art: 'streak' },
+        { tag: 'Collection', title: 'A 3D memento for every clink', text: 'Coffee, tea or anything you like. Each meet-up puts [a new piece on your shelf], and achievements open along the way.', art: 'drink' }
+      ],
       slogan: "Bring your friends, we'll bring the fun!",
       aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
@@ -132,6 +139,13 @@
       aboutDataTitle: 'Что с вашими данными?',
       aboutData1: 'Аккаунтов нет, сервера тоже нет. Встречи, друзья и коллекция лежат на вашем телефоне, поэтому я не вижу, с кем вы встречаетесь и что отвечаете на карточки. Утечь нечему, потому что ничего не уходит с устройства.',
       aboutDataLink: 'Читать политику приватности',
+      aboutDataMore: 'Подробнее', aboutStoryTag: 'Зачем', aboutAuthorTag: 'От автора', aboutDataTag: 'Данные',
+      aboutMail: 'Написать мне напрямую',
+      aboutRows: [
+        { tag: 'Игры', title: 'Карточки, которые разговорят стол', text: 'Четыре игры и наборы для свиданий, компании и долгих вечеров. Каждый вопрос написан так, чтобы [начать историю], а не получить да или нет.', art: 'ib-nhi' },
+        { tag: 'Друзья', title: 'Помни, с кем давно не виделись', text: 'Clinky хранит каждую встречу и напомнит, если друг пропал. [Серия встреч] показывает, как часто вы на самом деле видитесь.', art: 'streak' },
+        { tag: 'Коллекция', title: '3D-сувенир за каждую встречу', text: 'Кофе, чай или что угодно. Каждая встреча ставит [новую вещицу на полку], а по пути открываются достижения.', art: 'drink' }
+      ],
       slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
@@ -1142,18 +1156,28 @@
     var d = window.CLINKY_SCENARIOS;
     if (!d) { ensureScenarios(function () { paint(); }); return ''; }
     var lang = state.lang, items = [];
+    var L = contentLabels();
     for (var id in d.scenarios) {
       var sc = d.scenarios[id], href = scenarioHrefFor(id, lang);
       if (!href) continue;
-      items.push('<a href="' + href + '" class="soft-card" style="display:block;padding:20px;text-decoration:none;text-align:left">' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:17px;margin:0 0 6px;color:#1c1326">' + esc(sc.h1[lang]) + '</h3>' +
-        '<p style="font-size:14px;line-height:1.5;color:#6b6b76;margin:0">' + esc(sc.tagline[lang]) + '</p></a>');
+      var ic = sc.icon || {};
+      items.push('<a href="' + href + '" class="soft-card hub-card">' +
+        '<span class="hub-head">' +
+          '<span class="hub-ico">' + ph(ic.name || 'heart', 20, '#FF4F62', 'ph-' + (ic.weight || 'fill')) + '</span>' +
+          '<span class="hub-title">' + esc(sc.h1[lang]) + '</span>' +
+        '</span>' +
+        '<span class="hub-line">' + esc(sc.tagline[lang]) + '</span>' +
+        '<span class="hub-foot">' +
+          '<span class="hub-cta">' + esc((L && L.playCta) || (lang === 'ru' ? 'Играть' : 'Play')) + '</span>' +
+          (sc.players ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(sc.players[lang]) + '</span></span>' : '') +
+        '</span>' +
+      '</a>');
     }
     if (!items.length) return '';
     return '<section style="padding:clamp(6px,1.4vh,18px) clamp(20px,5vw,72px) clamp(20px,3vh,32px)">' +
       '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;text-align:center;color:#1c1326">' + esc(lang === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation') + '</h2>' +
-        '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px">' + items.join('') + '</div>' +
+        '<div class="hub-grid">' + items.join('') + '</div>' +
       '</div>' +
     '</section>';
   }
@@ -1167,7 +1191,7 @@
     if (window.CLINKY_SCENARIOS || document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
-    sc.src = '/assets/scenarios.js?v=28564864';
+    sc.src = '/assets/scenarios.js?v=1c3df1f2';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
   }
@@ -1248,29 +1272,39 @@
   }
 
   // ===== ABOUT =====
+  // The author's own inbox, separate from support: people who want to talk, not report a bug.
+  var AUTHOR_EMAIL = 'evgeniymityulya@gmail.com';
+  // [phrase] in the row copy is set in white, the rest stays muted
+  function aboutMarked(text) {
+    return esc(text).replace(/\[([^\]]+)\]/g, '<b>$1</b>');
+  }
+  function aboutTag(text) { return '<span class="ab-tag">' + esc(text) + '</span>'; }
+  function aboutArt(key) {
+    var lang = state.lang === 'ru' ? 'ru' : 'en';
+    if (key === 'drink') return '<img src="/assets/bento/drink.png" alt="" loading="lazy" decoding="async" class="ab-art ab-art-cap">';
+    return '<img src="/assets/bento/' + key + '-' + lang + '.png" alt="" loading="lazy" decoding="async" class="ab-art ab-art-' + key + '">';
+  }
   function renderAbout() {
-    var t = tdict(), I = icons();
-    var pillar = function (ic, ti, de) {
-      return '<div class="soft-card" style="padding:26px;text-align:left">' +
-        '<div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">' +
-          '<span style="display:flex;width:48px;height:48px;border-radius:14px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ic + '</span>' +
-          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(ti) + '</h3>' +
+    var t = tdict();
+    var rows = (t.aboutRows || []).map(function (r, i) {
+      return '<div class="ab-row' + (i % 2 ? ' ab-flip' : '') + '">' +
+        '<div class="ab-copy">' + aboutTag(r.tag) +
+          '<h3 class="ab-title">' + esc(r.title) + '</h3>' +
+          '<p class="ab-text">' + aboutMarked(r.text) + '</p>' +
         '</div>' +
-        '<p style="font-size:14.5px;line-height:1.55;color:#6b6b76;margin:0">' + esc(de) + '</p></div>';
-    };
+        '<div class="ab-visual">' + aboutArt(r.art) + '</div>' +
+      '</div>';
+    }).join('');
     return '<div class="page-in">' +
-      '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(36px,5vh,56px);text-align:center;overflow:hidden">' +
+      '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(30px,4vh,46px);text-align:center;overflow:hidden">' +
         sparkle({ s: 20, pos: 'top:24%;left:16%', op: 0.45, c: '#FF4F62', glow: 'rgba(255,79,98,.3)' }) +
         sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
         '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px;color:#1c1326">' + esc(t.aboutTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
-      '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
-        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 auto clamp(18px,2.6vh,26px);max-width:' + PAGE_W + 'px;color:#1c1326">' + esc(t.aboutPillarsTitle) + '</h2>' +
-        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px" class="pillars">' +
-          pillar(I.people, t.p1t, t.p1d) + pillar(I.cupBig, t.p2t, t.p2d) + pillar(I.game, t.p3t, t.p3d) +
-        '</div>' +
+      '<section style="padding:0 clamp(20px,5vw,72px)">' +
+        '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' + rows + '</div>' +
       '</section>' +
       aboutStory() +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(56px,8vh,90px)">' +
@@ -1282,32 +1316,33 @@
   }
   function aboutStory() {
     var t = tdict();
-    var para = function (text) {
-      return '<p style="font-size:16px;line-height:1.72;color:#3a323f;margin:0 0 14px">' + esc(text) + '</p>';
-    };
-    var head = function (text) {
-      return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(text) + '</h2>';
-    };
-    return '<section style="padding:0 clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
-      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-        head(t.aboutStoryTitle) + para(t.aboutStory1) + para(t.aboutStory2) +
-        '<div style="height:clamp(20px,3vh,34px)"></div>' +
-        head(t.aboutWhoTitle) +
-        '<div class="soft-card" style="padding:22px 24px;display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">' +
-          (AUTHOR_PHOTO
-            ? '<img src="' + esc(AUTHOR_PHOTO) + '" alt="' + esc(t.aboutWhoName) + '" width="72" height="72" loading="lazy" decoding="async" style="flex:none;width:72px;height:72px;border-radius:50%;object-fit:cover;box-shadow:0 10px 22px -12px rgba(28,19,38,.45)">'
-            : '<span style="flex:none;width:52px;height:52px;border-radius:50%;background:#FFE2E6;display:flex;align-items:center;justify-content:center">' + ph('user-circle', 30, '#FF4F62', 'ph-fill') + '</span>') +
-          '<span style="flex:1 1 260px;min-width:0">' +
-            '<span style="display:block;font-family:Nunito,sans-serif;font-weight:900;font-size:18px;color:#1c1326">' + esc(t.aboutWhoName) + '</span>' +
-            '<span style="display:block;font-size:14px;color:#7a7280;margin-bottom:12px">' + esc(t.aboutWhoRole) + '</span>' +
-            '<span style="display:block;font-size:15px;line-height:1.65;color:#3a323f;margin-bottom:10px">' + esc(t.aboutWho1) + '</span>' +
-            '<span style="display:block;font-size:15px;line-height:1.65;color:#3a323f">' + esc(t.aboutWho2) + '</span>' +
-            '<span style="display:flex;gap:12px;flex-wrap:wrap;margin-top:14px">' + authorLinks() + '</span>' +
-          '</span>' +
+    var para = function (text) { return '<p class="ab-para">' + esc(text) + '</p>'; };
+    var photo = AUTHOR_PHOTO
+      ? '<img src="' + esc(AUTHOR_PHOTO) + '" alt="' + esc(t.aboutWhoName) + '" width="132" height="132" loading="lazy" decoding="async" class="ab-photo">'
+      : '<span class="ab-photo" style="display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)">' + ph('user-circle', 64, '#FF8A97', 'ph-fill') + '</span>';
+    var mail = '<a href="mailto:' + AUTHOR_EMAIL + '" class="author-link">' + ph('paper-plane-tilt', 18, '#FF4F62', 'ph-fill') + esc(t.aboutMail) + '</a>';
+    return '<section style="padding:clamp(14px,2vh,18px) clamp(20px,5vw,72px) clamp(40px,6vh,64px)">' +
+      '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' +
+        '<div class="soft-card ab-light">' + aboutTag(t.aboutStoryTag) +
+          '<h3 class="ab-title">' + esc(t.aboutStoryTitle) + '</h3>' + para(t.aboutStory1) + para(t.aboutStory2) +
         '</div>' +
-        '<div style="height:clamp(20px,3vh,34px)"></div>' +
-        head(t.aboutDataTitle) + para(t.aboutData1) +
-        '<p style="margin:0"><button data-act="privacy" style="background:transparent;border:0;cursor:pointer;padding:0;font-family:DM Sans,sans-serif;font-size:15px;font-weight:700;color:#FF4F62">' + esc(t.aboutDataLink) + ' →</button></p>' +
+        '<div class="ab-author">' +
+          '<div class="ab-side">' + photo +
+            '<span class="ab-name">' + esc(t.aboutWhoName) + '</span>' +
+            '<span class="ab-role">' + esc(t.aboutWhoRole) + '</span>' +
+          '</div>' +
+          '<div>' + aboutTag(t.aboutAuthorTag) +
+            '<p class="ab-text">' + esc(t.aboutWho1) + '</p>' +
+            '<p class="ab-text">' + esc(t.aboutWho2) + '</p>' +
+            '<div class="ab-links">' + authorLinks() + mail + '</div>' +
+          '</div>' +
+        '</div>' +
+        '<div class="soft-card ab-light">' +
+          '<div class="ab-head">' + aboutTag(t.aboutDataTag) +
+            '<button data-act="privacy" class="ab-more">' + esc(t.aboutDataMore) + ph('arrow-right', 15, 'currentColor', 'ph-bold') + '</button>' +
+          '</div>' +
+          '<h3 class="ab-title">' + esc(t.aboutDataTitle) + '</h3>' + para(t.aboutData1) +
+        '</div>' +
       '</div>' +
     '</section>';
   }

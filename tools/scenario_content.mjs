@@ -8,8 +8,8 @@ export const SCENARIOS = {
     players: { en: "For two", ru: "Для двоих" },
     h1: { en: "Questions for couples", ru: "Вопросы для пары" },
     tagline: {
-      en: "Sixty cards for the two of you, and none of them ask about your favourite colour",
-      ru: "Шестьдесят карточек на двоих, и ни одна не спрашивает про любимый цвет"
+      en: "For the two of you, and not one card asks about your favourite colour",
+      ru: "Для вас двоих, и ни одна карточка не спросит про любимый цвет"
     },
     intro: {
       en: "Couples run out of questions faster than they run out of evenings. Not because there is nothing left to say, but because the easy questions are used up and the real ones feel too heavy to start with. These cards sit in between. Each one asks about something that already happened to you, so the answer arrives as a story rather than a word.",
@@ -210,8 +210,8 @@ export const SCENARIOS = {
     players: { en: "From four people", ru: "От четырёх человек" },
     h1: { en: "Party game questions", ru: "Вопросы за столом" },
     tagline: {
-      en: "Sixty cards for a table that has already run out of news, split by mood",
-      ru: "Шестьдесят карточек для стола, у которого новости уже кончились, разбиты по настроению"
+      en: "For a table that has run out of news, sorted by mood",
+      ru: "Для стола, где новости уже кончились. Вопросы разложены по настроению"
     },
     intro: {
       en: "Every group has the same twenty minutes: everyone has shared their news, nobody wants to start a topic, and half the table is checking their phone. These cards are for that gap. They ask about the group rather than about the world, so the answers come with names in them and the table argues about who remembers it correctly.",
@@ -414,8 +414,8 @@ export const SCENARIOS = {
     players: { en: 'From two people', ru: 'От двух человек' },
     h1: { en: 'Questions to ask over drinks', ru: 'Вопросы за бокалом' },
     tagline: {
-      en: 'Sixty cards for a long table and a slow evening',
-      ru: 'Шестьдесят карточек для долгого стола и неспешного вечера'
+      en: 'For a long table and a slow evening',
+      ru: 'Для долгого стола и неспешного вечера'
     },
     intro: {
       en: 'An evening with drinks has its own pace. Nobody is going anywhere, the phones are face down, and conversation stops being an exchange of news. These cards fit that pace: none of them can be answered in a word, and none of them ask anyone to drink for a wrong answer. There are no forfeits here, only questions that hold a table for an hour.',
@@ -616,8 +616,8 @@ export const SCENARIOS = {
     players: { en: "For two", ru: "Для двоих" },
     h1: { en: "First date questions", ru: "Вопросы на первом свидании" },
     tagline: {
-      en: "Sixty cards that get past the interview stage",
-      ru: "Шестьдесят карточек, чтобы уйти от собеседования"
+      en: "Questions that get a first date past the interview stage",
+      ru: "Чтобы первое свидание не превратилось в собеседование"
     },
     intro: {
       en: "First dates fail at the same place: work, city, weekend plans, and then a pause nobody knows how to fill. The fix is not being bolder, it is asking about something specific enough to answer. These cards do that. None of them require a confession, and all of them are hard to answer in one word.",
