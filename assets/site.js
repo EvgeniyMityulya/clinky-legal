@@ -26,7 +26,7 @@
 
   var state = {
     lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false, playSlug: 'never-have-i-ever', playIndex: 0,
-    gameIndex: 0, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
+    gameIndex: 0, homeCouples: false, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
 
@@ -838,7 +838,7 @@
       '<div style="max-width:430px;margin:0 auto">' +
         questionCard() +
         '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
-          '<a id="playLink" href="' + (playHrefFor(state.gameIndex, state.lang) || '/games') + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
+          '<a id="playLink" href="' + homeDeckHref() + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
           ((opts && opts.hideHeading) ? '' : '<button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.gamesAll) + '</button>') +
         '</p>' +
       '</div>' +
@@ -862,16 +862,27 @@
 
   function renderGameTabs() {
     var L = state.lang;
-    return GAMES.map(function (g, i) {
-      var active = i === state.gameIndex;
+    var onHome = state.page === 'home';
+    var tabs = GAMES.map(function (g, i) {
+      var active = i === state.gameIndex && !(onHome && state.homeCouples);
       return '<button data-act="g' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[L]) + '</button>';
-    }).join('');
+    });
+    if (onHome) {
+      var on = state.homeCouples;
+      tabs.push('<button data-act="gc" style="' + pill(on) + '">' + ph('heart', 18, on ? '#fff' : '#6b6b76', 'ph-fill') + esc(L === 'ru' ? 'Для пары' : 'For couples') + '</button>');
+    }
+    return tabs.join('');
   }
   // Карточка с вопросом одна на весь сайт, меняется только источник колоды.
   function qSource() {
     if (state.page === 'scenario') {
       var meta = own(SCENARIO_SLUGS, state.scenarioSlug) || {}, sc = scenarioData(meta.id);
-      if (sc) return { kind: 'scenario', label: sc.h1[state.lang], cards: scenarioCards(sc, state.lang), icon: sc.icon };
+      if (sc) return { kind: 'scenario', id: meta.id, label: sc.h1[state.lang], cards: scenarioCards(sc, state.lang), icon: sc.icon };
+    }
+    if (state.page === 'home' && state.homeCouples) {
+      var cp = scenarioData('couples');
+      if (cp) return { kind: 'scenario', id: 'couples', label: cp.h1[state.lang], cards: scenarioCards(cp, state.lang), icon: cp.icon };
+      ensureScenarios(function () { refreshCard(); markCard(); });
     }
     var g = GAMES[state.gameIndex];
     return { kind: 'game', label: g.title[state.lang], cards: (g.q || []).map(function (q) { return q[state.lang]; }) };
@@ -1646,7 +1657,7 @@
     var l = document.getElementById('qline'); if (l) l.innerHTML = renderQline();
     var hw = document.getElementById('howWrap'); if (hw) hw.innerHTML = renderHowStrip();
     var pl = document.getElementById('playLink');
-    if (pl && state.page !== 'scenario') pl.setAttribute('href', playHrefFor(state.gameIndex, state.lang) || '/games');
+    if (pl && state.page !== 'scenario') pl.setAttribute('href', homeDeckHref());
     var n = document.getElementById('qcount'); if (n) n.innerHTML = esc(renderQcount());
     animQ();
   }
@@ -1854,7 +1865,24 @@
     if (c) { c.style.color = d === 'coffee' ? '#fff' : '#6b6b76'; var ci = c.querySelector('i'); if (ci) ci.style.color = d === 'coffee' ? '#fff' : '#b9b0b6'; }
     if (hero()) hero().setDrink(d);     // swap model + per-drink scene config in the three.js hero
   }
-  function setGame(i) { flushCard('switch'); state.gameIndex = i; state.qIndex = 0; refreshCard(); markCard(); }
+  function setGame(i) { flushCard('switch'); state.gameIndex = i; state.homeCouples = false; state.qIndex = 0; refreshCard(); markCard(); }
+  function setHomeCouples() { flushCard('switch'); state.homeCouples = true; state.qIndex = 0; refreshCard(); markCard(); }
+  function homeDeckHref() {
+    if (state.page === 'home' && state.homeCouples) return scenarioHrefFor('couples', state.lang) || '/games';
+    return playHrefFor(state.gameIndex, state.lang) || '/games';
+  }
+  // A/B test of the home card's starting deck: half the visitors open on Never Have I Ever,
+  // half on the couples set. The pick sticks per browser and rides on the visit event (field c).
+  var HOME_AB_KEY = 'clinky_ab_home';
+  function homeVariant() {
+    var v = null;
+    try { v = localStorage.getItem(HOME_AB_KEY); } catch (e) {}
+    if (v !== 'nhi' && v !== 'couples') {
+      v = Math.random() < 0.5 ? 'nhi' : 'couples';
+      try { localStorage.setItem(HOME_AB_KEY, v); } catch (e) {}
+    }
+    return v;
+  }
   function nextQuestion() { flushCard('next'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); markCard(); }
   function prevQuestion() { flushCard('back'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); markCard(); }
 
@@ -1929,7 +1957,7 @@
     if (!document.getElementById('qcard')) return null;
     var src = qSource(), qc = src.cards[state.qIndex % (src.cards.length || 1)];
     if (!qc) return null;
-    var g = src.kind === 'scenario' ? 'scenario:' + ((own(SCENARIO_SLUGS, state.scenarioSlug) || {}).id || '') : (GAME_IDS[state.gameIndex] || '');
+    var g = src.kind === 'scenario' ? 'scenario:' + (src.id || '') : (GAME_IDS[state.gameIndex] || '');
     return { g: g, i: state.qIndex, q: qc };
   }
   // Scenario and play decks load after the first paint, so an empty first look gets one retry.
@@ -1946,7 +1974,7 @@
   function sendVisitOnce() {
     try { if (sessionStorage.getItem('clinky_visit_sent')) return; sessionStorage.setItem('clinky_visit_sent', '1'); } catch (e) {}
     var v = visitState() || {};
-    track('visit', { lp: v.landing || location.pathname, s: state.source || '', ref: document.referrer || '' });
+    track('visit', { lp: v.landing || location.pathname, s: state.source || '', ref: document.referrer || '', c: 'ab:' + homeVariant() });
   }
   // Time on site counts only while the tab is in front; every time it goes to the background the
   // running total is sent again, and the report keeps the largest one per visit.
@@ -2136,7 +2164,7 @@
       }
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
-      default: if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
+      default: if (a === 'gc') setHomeCouples(); else if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
     }
   }
   function onSubmit(e) {
@@ -2160,6 +2188,7 @@
     try { state.source = captureSource(); } catch (e) {}
     trackVisit('pages');
     state.page = pageFromPath();
+    state.homeCouples = homeVariant() === 'couples';
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting, local preview only
       var demo = isLocalPreview() ? new URLSearchParams(location.search).get('demo') : null;
       if (demo === 'support') { state.page = 'support'; state.supportDone = true; }
