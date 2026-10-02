@@ -3,10 +3,10 @@ export const SITE = 'https://clinkyapp.com';
 export const SHELLS = [
   {
     file: 'index.html', loc: 'en', path: '/', altRu: '/ru/', robots: 'index,follow,max-image-preview:large',
-    title: 'Clinky — Party Question Games for Friends',
-    description: 'Four question games that get any table talking, a log of every meet-up, and a 3D drink for each clink. Free iOS app, coming soon.',
-    ogTitle: "Clinky — Bring your friends, we'll bring the fun!",
-    ogDescription: 'Turn hangouts into a game. Question cards that get any table talking, a record of every meet-up, and a 3D drink for each clink.',
+    title: 'Clinky: Party Question Games for Friends & Couples',
+    description: 'Never Have I Ever, Who Knows Better and question sets for couples, parties and first dates. Play free in the browser, the iPhone app is coming soon.',
+    ogTitle: 'Clinky: Party Question Games for Friends & Couples',
+    ogDescription: "Bring your friends, we'll bring the fun! Never Have I Ever, Who Knows Better and question sets for couples and parties, free in the browser.",
     home: true
   },
   {
@@ -60,10 +60,10 @@ export const SHELLS = [
   },
   {
     file: 'ru/index.html', loc: 'ru', path: '/ru/', altEn: '/', robots: 'index,follow,max-image-preview:large',
-    title: 'Clinky — игры с вопросами для компании друзей',
-    description: 'Четыре игры с вопросами, которые разговорят любую компанию, счётчик встреч и 3D-напиток за каждый «чок». Бесплатное приложение для iPhone, скоро в App Store.',
-    ogTitle: 'Clinky — друзья с тебя, веселье с нас!',
-    ogDescription: 'Преврати встречи в игру. Карточки с вопросами для любого стола, счётчик встреч и 3D-напиток за каждый «чок».',
+    title: 'Clinky: игры с вопросами для компании и пары',
+    description: '«Я никогда не», «Кто из нас» и наборы вопросов для пары, компании и первого свидания. Играй бесплатно в браузере, приложение для iPhone скоро в App Store.',
+    ogTitle: 'Clinky: игры с вопросами для компании и пары',
+    ogDescription: 'Друзья с тебя, веселье с нас! «Я никогда не», «Кто из нас» и наборы вопросов для пары и компании, бесплатно в браузере.',
     home: true
   },
   {
