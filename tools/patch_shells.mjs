@@ -87,7 +87,10 @@ const PRERENDER_CSS = `<style>
 </style>`;
 
 // 1200x630 share card in the page's language
-const ogImage = (s) => `${SITE}/assets/og-image${s.loc === 'ru' ? '-ru' : ''}.jpg`;
+// the ?v= hash changes with the picture, so LinkedIn and Telegram fetch it again instead of
+// showing a copy cached under the same address
+const ogFile = (s) => `assets/og-image${s.loc === 'ru' ? '-ru' : ''}.jpg`;
+const ogImage = (s) => `${SITE}/${ogFile(s)}?v=${createHash('md5').update(readFileSync(ogFile(s))).digest('hex').slice(0, 8)}`;
 
 function faqHtml(faq) {
   return faq.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('\n');
