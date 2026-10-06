@@ -345,7 +345,8 @@
   function renderQcount() {
     var len = qSource().cards.length || 1;
     var n = (state.qIndex % len) + 1;
-    return state.lang === 'ru' ? ('вопрос ' + n + ' из ' + len) : ('question ' + n + ' of ' + len);
+    // the running number only: the deck size is not shown, the daily limit already caps play
+    return state.lang === 'ru' ? ('вопрос ' + n) : ('question ' + n);
   }
 
   // segmented / pill styles

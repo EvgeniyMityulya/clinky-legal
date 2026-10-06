@@ -127,8 +127,8 @@
   },
   "/ru/play/voprosy-druzyam": {
     "status": 200,
-    "title": "Вопросы друзьям — 24 карточки для разговора",
-    "description": "Вопросы друзьям, когда разговор заглох, 24 штуки бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.",
+    "title": "Вопросы друзьям, много карточек для разговора",
+    "description": "Вопросы друзьям, когда разговор заглох, много карточек бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.",
     "canonical": "https://clinkyapp.com/ru/play/voprosy-druzyam",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Играть в «Расскажи момент» онлайн",
@@ -147,25 +147,15 @@
     "prerenderWords": 390
   },
   "/play/would-you-rather": {
-    "status": 200,
-    "title": "Would You Rather Questions — Play Free Online",
-    "description": "Would You Rather questions where both options cost you something, so the table actually argues. Play free in the browser, nothing to install.",
-    "canonical": "https://clinkyapp.com/play/would-you-rather",
-    "robots": "index,follow,max-image-preview:large",
-    "h1": "Play Would You Rather online",
-    "hreflang": [
-      "en",
-      "ru",
-      "x-default"
-    ],
-    "schemaTypes": [
-      "FAQPage",
-      "FAQPage",
-      "Organization",
-      "WebPage",
-      "WebSite"
-    ],
-    "prerenderWords": 493
+    "status": 503,
+    "title": "Unicorn! &middot; GitHub",
+    "description": "",
+    "canonical": "",
+    "robots": "",
+    "h1": "",
+    "hreflang": [],
+    "schemaTypes": [],
+    "prerenderWords": 0
   },
   "/ru/play/chto-vyberesh": {
     "status": 200,
@@ -191,7 +181,7 @@
   "/questions/for-couples": {
     "status": 200,
     "title": "Questions for Couples — Free Card Game",
-    "description": "Sixty questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.",
+    "description": "Lots of questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.",
     "canonical": "https://clinkyapp.com/questions/for-couples",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Questions for couples",
@@ -210,8 +200,8 @@
   },
   "/ru/voprosy/dlya-pary": {
     "status": 200,
-    "title": "Вопросы для пары — 60 карточек онлайн",
-    "description": "Игра для пар на сближение, 60 карточек с вопросами онлайн. Разогрев, поглубже и смешные, после них начинается разговор, а не короткий ответ. Бесплатно, без установки.",
+    "title": "Вопросы для пары, много карточек онлайн",
+    "description": "Игра для пар на сближение, много карточек с вопросами онлайн. Разогрев, поглубже и смешные, после них начинается разговор, а не короткий ответ. Бесплатно, без установки.",
     "canonical": "https://clinkyapp.com/ru/voprosy/dlya-pary",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы для пары",
@@ -231,7 +221,7 @@
   "/questions/party": {
     "status": 200,
     "title": "Party Game Questions for Friends — Free",
-    "description": "Sixty questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.",
+    "description": "Lots of questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.",
     "canonical": "https://clinkyapp.com/questions/party",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Party game questions",
@@ -246,11 +236,11 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 997
+    "prerenderWords": 998
   },
   "/ru/voprosy/za-stolom": {
     "status": 200,
-    "title": "Вопросы для компании друзей, 60 карточек онлайн",
+    "title": "Вопросы для компании друзей, много карточек онлайн",
     "description": "Вопросы для компании друзей, когда новости уже кончились. Разогрев, поглубже и смешные, все про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.",
     "canonical": "https://clinkyapp.com/ru/voprosy/za-stolom",
     "robots": "index,follow,max-image-preview:large",
@@ -270,8 +260,8 @@
   },
   "/questions/drinks": {
     "status": 200,
-    "title": "Questions to Ask Over Drinks — 60 Cards",
-    "description": "Sixty questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.",
+    "title": "Questions to Ask Over Drinks — Free Card Game",
+    "description": "Lots of questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.",
     "canonical": "https://clinkyapp.com/questions/drinks",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Questions to ask over drinks",
@@ -290,8 +280,8 @@
   },
   "/ru/voprosy/za-bokalom": {
     "status": 200,
-    "title": "Вопросы за бокалом — 60 карточек для вечера",
-    "description": "Шестьдесят вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.",
+    "title": "Вопросы за бокалом, много карточек для вечера",
+    "description": "Много вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.",
     "canonical": "https://clinkyapp.com/ru/voprosy/za-bokalom",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы за бокалом",
@@ -311,7 +301,7 @@
   "/questions/first-date": {
     "status": 200,
     "title": "First Date Questions — Free Card Game",
-    "description": "Sixty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.",
+    "description": "Lots of questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.",
     "canonical": "https://clinkyapp.com/questions/first-date",
     "robots": "index,follow,max-image-preview:large",
     "h1": "First date questions",
@@ -330,8 +320,8 @@
   },
   "/ru/voprosy/pervoe-svidanie": {
     "status": 200,
-    "title": "Вопросы на первом свидании — 60 карточек",
-    "description": "Шестьдесят вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.",
+    "title": "Вопросы на первом свидании, много карточек онлайн",
+    "description": "Много вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.",
     "canonical": "https://clinkyapp.com/ru/voprosy/pervoe-svidanie",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Вопросы на первом свидании",
