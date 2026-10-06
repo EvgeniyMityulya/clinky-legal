@@ -249,13 +249,13 @@ export const SCENARIOS = {
       en: [
         { q: "How many people does this need?", a: "It works from four. With three it turns into a conversation rather than a game, and above ten you need the timer." },
         { q: "Does it work with people who just met?", a: "Partly. Cards about shared history need a group with some history, so mixed tables should start with the ones about habits and opinions." },
-        { q: "Is there anything to set up?", a: "No. Open the page, read cards, that is the whole thing. All sixty are here for free, and the app holds a much larger deck with new ones each day." }
+        { q: "Is there anything to set up?", a: "No. Open the page, read cards, that is the whole thing. The whole set is here for free, and the app holds a much larger deck with new ones each day." }
       ],
       ru: [
         { q: "Сколько нужно человек?", a: "Работает от четырёх. На троих это уже разговор, а не игра, а больше десяти нужен таймер." },
         { q: "Подойдёт для тех, кто только познакомился?", a: "Частично. Карточки про общее прошлое требуют этого прошлого, поэтому смешанному столу лучше начать с вопросов про привычки и взгляды." },
         { q: "Какие вопросы задать компании друзей?", a: "Те, что про саму компанию, а не про новости. Кто первым предложил ту поездку, чья идея обернулась провалом, кого из вас проще всего уговорить. На такие вопросы отвечают историями с именами, и стол сам подхватывает разговор." },
-        { q: "Нужно что-то настраивать?", a: "Нет. Открыл страницу, читаешь карточки, всё. Все шестьдесят доступны бесплатно, а в приложении набор гораздо больше и обновляется каждый день." }
+        { q: "Нужно что-то настраивать?", a: "Нет. Открыл страницу, читаешь карточки, всё. Весь набор доступен бесплатно, а в приложении набор гораздо больше и обновляется каждый день." }
       ]
     },
     // Три группы вместо одного списка: по запросам-спискам выигрывает тот,

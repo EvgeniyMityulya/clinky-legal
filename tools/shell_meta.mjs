@@ -144,8 +144,8 @@ export const SHELLS = [
   {
     file: 'ru/play/voprosy-druzyam.html', loc: 'ru', path: '/ru/play/voprosy-druzyam', altEn: '/play/questions-to-ask-friends',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
-    title: 'Вопросы друзьям — 24 карточки для разговора',
-    description: 'Вопросы друзьям, когда разговор заглох, 24 штуки бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.',
+    title: 'Вопросы друзьям, много карточек для разговора',
+    description: 'Вопросы друзьям, когда разговор заглох, много карточек бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.',
     ogTitle: 'Вопросы друзьям — играть онлайн',
     ogDescription: 'Проси момент, а не мнение. Бесплатно, без регистрации.'
   },
@@ -169,65 +169,65 @@ export const SHELLS = [
     file: 'questions/for-couples.html', loc: 'en', path: '/questions/for-couples', altRu: '/ru/voprosy/dlya-pary',
     robots: 'index,follow,max-image-preview:large', scenario: 'couples',
     title: 'Questions for Couples — Free Card Game',
-    description: 'Sixty questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.',
+    description: 'Lots of questions for the two of you, split into warm-up, deeper and funny. Built to start stories rather than one-word answers. Free, nothing to install.',
     ogTitle: 'Questions for couples that are not about favourite colours',
-    ogDescription: 'Sixty cards for two. Play free in the browser.'
+    ogDescription: 'Lots of question cards for two. Play free in the browser.'
   },
   {
     file: 'ru/voprosy/dlya-pary.html', loc: 'ru', path: '/ru/voprosy/dlya-pary', altEn: '/questions/for-couples',
     robots: 'index,follow,max-image-preview:large', scenario: 'couples',
-    title: 'Вопросы для пары — 60 карточек онлайн',
-    description: 'Игра для пар на сближение, 60 карточек с вопросами онлайн. Разогрев, поглубже и смешные, после них начинается разговор, а не короткий ответ. Бесплатно, без установки.',
+    title: 'Вопросы для пары, много карточек онлайн',
+    description: 'Игра для пар на сближение, много карточек с вопросами онлайн. Разогрев, поглубже и смешные, после них начинается разговор, а не короткий ответ. Бесплатно, без установки.',
     ogTitle: 'Вопросы для пары, которые не про любимый цвет',
-    ogDescription: 'Шестьдесят карточек на двоих. Играй бесплатно в браузере.'
+    ogDescription: 'Много карточек с вопросами на двоих. Играй бесплатно в браузере.'
   },
   {
     file: 'questions/party.html', loc: 'en', path: '/questions/party', altRu: '/ru/voprosy/za-stolom',
     robots: 'index,follow,max-image-preview:large', scenario: 'party',
     title: 'Party Game Questions for Friends — Free',
-    description: 'Sixty questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.',
+    description: 'Lots of questions for a table that has run out of news, split into warm-up, deeper and funny. They ask about your own group, so answers come with names in them.',
     ogTitle: 'Party questions about your own group',
-    ogDescription: 'Sixty cards for four people and up. Free in the browser.'
+    ogDescription: 'Lots of question cards for four people and up. Free in the browser.'
   },
   {
     file: 'ru/voprosy/za-stolom.html', loc: 'ru', path: '/ru/voprosy/za-stolom', altEn: '/questions/party',
     robots: 'index,follow,max-image-preview:large', scenario: 'party',
-    title: 'Вопросы для компании друзей, 60 карточек онлайн',
+    title: 'Вопросы для компании друзей, много карточек онлайн',
     description: 'Вопросы для компании друзей, когда новости уже кончились. Разогрев, поглубже и смешные, все про саму компанию, поэтому в ответах появляются имена. Бесплатно, без регистрации.',
     ogTitle: 'Вопросы для компании про своих же друзей',
-    ogDescription: 'Шестьдесят карточек от четырёх человек. Бесплатно в браузере.'
+    ogDescription: 'Много карточек с вопросами от четырёх человек. Бесплатно в браузере.'
   },
   {
     file: 'questions/first-date.html', loc: 'en', path: '/questions/first-date', altRu: '/ru/voprosy/pervoe-svidanie',
     robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
     title: 'First Date Questions — Free Card Game',
-    description: 'Sixty questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.',
+    description: 'Lots of questions that get a first date past work, city and weekend plans. No exes, no money, nothing that needs a confession. Free in the browser.',
     ogTitle: 'First date questions that skip the interview',
-    ogDescription: 'Sixty cards for two. Free, no sign-up.'
+    ogDescription: 'Lots of question cards for two. Free, no sign-up.'
   },
   {
     file: 'ru/voprosy/pervoe-svidanie.html', loc: 'ru', path: '/ru/voprosy/pervoe-svidanie', altEn: '/questions/first-date',
     robots: 'index,follow,max-image-preview:large', scenario: 'first-date',
-    title: 'Вопросы на первом свидании — 60 карточек',
-    description: 'Шестьдесят вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.',
+    title: 'Вопросы на первом свидании, много карточек онлайн',
+    description: 'Много вопросов, чтобы уйти от работы, города и планов на выходные. Без бывших, без денег и без признаний. Бесплатно в браузере.',
     ogTitle: 'Вопросы на свидании вместо собеседования',
-    ogDescription: 'Шестьдесят карточек на двоих. Бесплатно, без регистрации.'
+    ogDescription: 'Много карточек с вопросами на двоих. Бесплатно, без регистрации.'
   },
   {
     file: 'questions/drinks.html', loc: 'en', path: '/questions/drinks', altRu: '/ru/voprosy/za-bokalom',
     robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
-    title: 'Questions to Ask Over Drinks — 60 Cards',
-    description: 'Sixty questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.',
+    title: 'Questions to Ask Over Drinks — Free Card Game',
+    description: 'Lots of questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.',
     ogTitle: 'Questions for an evening that is in no hurry',
-    ogDescription: 'Sixty cards for two people and up. Free in the browser.'
+    ogDescription: 'Lots of question cards for two people and up. Free in the browser.'
   },
   {
     file: 'ru/voprosy/za-bokalom.html', loc: 'ru', path: '/ru/voprosy/za-bokalom', altEn: '/questions/drinks',
     robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
-    title: 'Вопросы за бокалом — 60 карточек для вечера',
-    description: 'Шестьдесят вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.',
+    title: 'Вопросы за бокалом, много карточек для вечера',
+    description: 'Много вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.',
     ogTitle: 'Вопросы для вечера, который никуда не спешит',
-    ogDescription: 'Шестьдесят карточек от двух человек. Бесплатно в браузере.'
+    ogDescription: 'Много карточек с вопросами от двух человек. Бесплатно в браузере.'
   },
   {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,
