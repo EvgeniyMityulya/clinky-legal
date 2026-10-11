@@ -36,7 +36,7 @@
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
-      promptTitle: 'Enjoying the questions?', promptSub: "Clinky is coming to the App Store with every game and set in full. Leave your email and we'll write on launch day.", promptCta: 'Sign me up', promptClose: 'Close',
+      promptTitle: 'Enjoying the questions?', promptSub: "Leave your email and we'll write on launch day", promptCta: 'Sign me up', promptClose: 'Close',
       heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
@@ -103,7 +103,7 @@
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
-      promptTitle: 'Понравились вопросы?', promptSub: 'Скоро Clinky выйдет в App Store, а там все игры и наборы целиком. Оставь почту, и мы напишем в день запуска.', promptCta: 'Записаться', promptClose: 'Закрыть',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Оставь почту, и мы напишем в день релиза', promptCta: 'Записаться', promptClose: 'Закрыть',
       heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
@@ -2126,11 +2126,16 @@
     var t = tdict();
     var box = document.createElement('div');
     box.id = 'wlPrompt'; box.className = 'wl-prompt'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-labelledby', 'wlPromptTitle');
+    var C = '#FF4F62';
     box.innerHTML =
-      '<button type="button" data-act="promptclose" class="wl-prompt-x" aria-label="' + esc(t.promptClose) + '">' + ph('x', 18, 'currentColor', 'ph-bold') + '</button>' +
-      '<div class="wl-prompt-head"><img src="/assets/clinky-icon.png" alt="" width="44" height="44">' +
-        '<div><p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p><p class="wl-prompt-sub">' + esc(t.promptSub) + '</p></div></div>' +
-      '<div id="wl3">' + waitlistForm(false, true, t.promptCta) + '</div>' +
+      sparkle({ s: 16, pos: 'top:18%;left:9%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
+      sparkle({ s: 11, pos: 'top:34%;right:12%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
+      sparkle({ s: 13, pos: 'bottom:22%;left:7%', op: 0.4, c: C, glow: 'rgba(255,79,98,.25)', anim: 'twinkle 4.6s ease-in-out .8s infinite' }) +
+      '<button type="button" data-act="promptclose" class="wl-prompt-x" aria-label="' + esc(t.promptClose) + '">' + ph('x', 16, 'currentColor', 'ph-bold') + '</button>' +
+      '<img class="wl-prompt-icon" src="/assets/clinky-icon.png" alt="" width="52" height="52">' +
+      '<p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p>' +
+      '<p class="wl-prompt-sub">' + esc(t.promptSub) + '</p>' +
+      '<div id="wl3">' + waitlistForm(false, false, t.promptCta) + '</div>' +
       '<p class="wl-prompt-note">' + esc(t.heroMicro) + '</p>';
     document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
