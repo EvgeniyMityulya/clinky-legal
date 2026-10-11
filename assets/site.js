@@ -2109,8 +2109,13 @@
   // Once per visit, never again after a signup, and quiet for a few days after a close.
   var PROMPT_AFTER_CARDS = 3, PROMPT_QUIET_DAYS = 3;
   var PROMPT_JOINED_KEY = 'clinky_waitlisted', PROMPT_CLOSED_KEY = 'clinky_prompt_closed';
+  // ?wltest in the address shows the prompt after the first card every time, for checking the design;
+  // it skips the limits and sends no events
+  var PROMPT_TEST = /[?&]wltest\b/.test(location.search);
   function maybeWaitlistPrompt() {
-    if (state.waitlistDone || document.getElementById('wlPrompt')) return;
+    if (document.getElementById('wlPrompt')) return;
+    if (PROMPT_TEST) { showWaitlistPrompt(); return; }
+    if (state.waitlistDone) return;
     try {
       if (localStorage.getItem(PROMPT_JOINED_KEY) || sessionStorage.getItem('clinky_prompt_seen')) return;
       var closed = Number(localStorage.getItem(PROMPT_CLOSED_KEY)) || 0;
@@ -2140,13 +2145,13 @@
     document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
     document.addEventListener('keydown', promptEsc);
-    track('cta', { c: 'prompt_show' });
+    if (!PROMPT_TEST) track('cta', { c: 'prompt_show' });
   }
   function promptEsc(e) { if (e.key === 'Escape') closeWaitlistPrompt(true); }
   function closeWaitlistPrompt(byUser) {
     var box = document.getElementById('wlPrompt'); if (!box) return;
     document.removeEventListener('keydown', promptEsc);
-    if (byUser) { try { localStorage.setItem(PROMPT_CLOSED_KEY, String(Date.now())); } catch (e) {} track('cta', { c: 'prompt_close' }); }
+    if (byUser && !PROMPT_TEST) { try { localStorage.setItem(PROMPT_CLOSED_KEY, String(Date.now())); } catch (e) {} track('cta', { c: 'prompt_close' }); }
     box.classList.remove('is-in');
     setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 300);
   }
