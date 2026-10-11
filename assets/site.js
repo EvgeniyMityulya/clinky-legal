@@ -36,6 +36,7 @@
       heroEyebrow: 'Coming soon to the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
+      promptTitle: 'Enjoying the questions?', promptSub: "Clinky is coming to the App Store with every game and set in full. Leave your email and we'll write on launch day.", promptCta: 'Sign me up', promptClose: 'Close',
       heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
@@ -102,6 +103,7 @@
       heroEyebrow: 'Скоро в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Скоро Clinky выйдет в App Store, а там все игры и наборы целиком. Оставь почту, и мы напишем в день запуска.', promptCta: 'Записаться', promptClose: 'Закрыть',
       heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
@@ -598,7 +600,7 @@
   }
 
   // ===== waitlist form =====
-  function waitlistForm(onColor, left) {
+  function waitlistForm(onColor, left, ctaLabel) {
     var t = tdict();
     if (state.waitlistLoading) {
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .4s ease both">' +
@@ -615,7 +617,7 @@
     return '<form data-form="waitlist" style="display:flex;gap:11px;max-width:32em;margin:' + (left ? '0' : '0 auto') + ';flex-wrap:wrap">' +
         '<input name="email" type="email" required placeholder="' + esc(t.emailPh) + '" style="flex:1;min-width:220px;border:1px solid ' + (onColor ? 'transparent' : '#efe1e4') + ';border-radius:16px;padding:18px 22px;font-size:16.5px;background:#fff;color:#1c1326;outline:none;box-shadow:0 10px 28px -16px rgba(28,19,38,.32)">' +
         '<input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none">' +
-        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap;' + btn + '">' + esc(t.heroCta) + '</button>' +
+        '<button type="submit" class="cta-btn" style="border:0;cursor:pointer;border-radius:16px;padding:18px 32px;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:transform .2s,box-shadow .2s;white-space:nowrap;' + btn + '">' + esc(ctaLabel || t.heroCta) + '</button>' +
       '</form>';
   }
 
@@ -1884,7 +1886,7 @@
     }
     return v;
   }
-  function nextQuestion() { flushCard('next'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); markCard(); }
+  function nextQuestion() { flushCard('next'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); markCard(); maybeWaitlistPrompt(); }
   function prevQuestion() { flushCard('back'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); markCard(); }
 
   // read ?utm_source, remember it for the whole session, and fire a one-time visit beacon per channel
@@ -2089,8 +2091,9 @@
       visitParams(params);
       return postForm(WAITLIST_ENDPOINT, params);
     }).then(function () {
-      track('signup');
+      track('signup', { c: form.closest('#wl3') ? 'prompt' : 'page' });
       state.waitlistDone = true; state.waitlistDup = false;
+      try { localStorage.setItem(PROMPT_JOINED_KEY, '1'); } catch (e) {}
       paintWaitlistDone();
     }, function () { formFailed(form, t.formError); });
   }
@@ -2098,7 +2101,49 @@
     var done = waitlistForm();
     var w1 = document.getElementById('wl1'); if (w1) w1.innerHTML = done;
     var w2 = document.getElementById('wl2'); if (w2) w2.innerHTML = done;
+    var w3 = document.getElementById('wl3');
+    if (w3) { w3.innerHTML = done; setTimeout(function () { closeWaitlistPrompt(false); }, 3500); }
     document.querySelectorAll('.hero-trust').forEach(function (n) { n.style.display = 'none'; });
+  }
+  // Waitlist nudge: after a few cards a small card slides up with the same waitlist form.
+  // Once per visit, never again after a signup, and quiet for a few days after a close.
+  var PROMPT_AFTER_CARDS = 3, PROMPT_QUIET_DAYS = 3;
+  var PROMPT_JOINED_KEY = 'clinky_waitlisted', PROMPT_CLOSED_KEY = 'clinky_prompt_closed';
+  function maybeWaitlistPrompt() {
+    if (state.waitlistDone || document.getElementById('wlPrompt')) return;
+    try {
+      if (localStorage.getItem(PROMPT_JOINED_KEY) || sessionStorage.getItem('clinky_prompt_seen')) return;
+      var closed = Number(localStorage.getItem(PROMPT_CLOSED_KEY)) || 0;
+      if (closed && Date.now() - closed < PROMPT_QUIET_DAYS * 86400000) return;
+      var n = (Number(sessionStorage.getItem('clinky_cards_seen')) || 0) + 1;
+      sessionStorage.setItem('clinky_cards_seen', String(n));
+      if (n < PROMPT_AFTER_CARDS) return;
+      sessionStorage.setItem('clinky_prompt_seen', '1');
+    } catch (e) { return; }
+    showWaitlistPrompt();
+  }
+  function showWaitlistPrompt() {
+    var t = tdict();
+    var box = document.createElement('div');
+    box.id = 'wlPrompt'; box.className = 'wl-prompt'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-labelledby', 'wlPromptTitle');
+    box.innerHTML =
+      '<button type="button" data-act="promptclose" class="wl-prompt-x" aria-label="' + esc(t.promptClose) + '">' + ph('x', 18, 'currentColor', 'ph-bold') + '</button>' +
+      '<div class="wl-prompt-head"><img src="/assets/clinky-icon.png" alt="" width="44" height="44">' +
+        '<div><p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p><p class="wl-prompt-sub">' + esc(t.promptSub) + '</p></div></div>' +
+      '<div id="wl3">' + waitlistForm(false, true, t.promptCta) + '</div>' +
+      '<p class="wl-prompt-note">' + esc(t.heroMicro) + '</p>';
+    document.body.appendChild(box);
+    requestAnimationFrame(function () { box.classList.add('is-in'); });
+    document.addEventListener('keydown', promptEsc);
+    track('cta', { c: 'prompt_show' });
+  }
+  function promptEsc(e) { if (e.key === 'Escape') closeWaitlistPrompt(true); }
+  function closeWaitlistPrompt(byUser) {
+    var box = document.getElementById('wlPrompt'); if (!box) return;
+    document.removeEventListener('keydown', promptEsc);
+    if (byUser) { try { localStorage.setItem(PROMPT_CLOSED_KEY, String(Date.now())); } catch (e) {} track('cta', { c: 'prompt_close' }); }
+    box.classList.remove('is-in');
+    setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 300);
   }
   function submitSupport(form) {
     var name = (form.contactName.value || '').trim(), email = (form.email.value || '').trim(), msg = (form.message.value || '').trim();
@@ -2127,6 +2172,7 @@
     var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
+      case 'promptclose': closeWaitlistPrompt(true); return;
       case 'home': case 'games': case 'about': case 'support': case 'privacy': case 'terms': if (state.menuOpen) closeMenu(true); setPage(a); break;
       case 'menu': {
         if (state.menuOpen) closeMenu();
@@ -2150,7 +2196,7 @@
         var st = deckState(), lim = deckLimit();
         if (st.used < lim) {
           flushCard('next');
-          st.used += 1; saveDeck(st); trackVisit('cards');
+          st.used += 1; saveDeck(st); trackVisit('cards'); maybeWaitlistPrompt();
           state.playIndex = (state.playIndex + 1) % Math.max(1, deckCards().length);
           var m = document.getElementById('playMount');
           if (m) {
