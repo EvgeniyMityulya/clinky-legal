@@ -2106,25 +2106,15 @@
     document.querySelectorAll('.hero-trust').forEach(function (n) { n.style.display = 'none'; });
   }
   // Waitlist nudge: after a few cards a small card slides up with the same waitlist form.
-  // Once per visit, never again after a signup, and quiet for a few days after a close.
-  var PROMPT_AFTER_CARDS = 3, PROMPT_QUIET_DAYS = 3;
-  var PROMPT_JOINED_KEY = 'clinky_waitlisted', PROMPT_CLOSED_KEY = 'clinky_prompt_closed';
-  // ?wltest in the address shows the prompt after the first card every time, for checking the design;
-  // it skips the limits and sends no events
-  var PROMPT_TEST = /[?&]wltest\b/.test(location.search);
+  // It returns on every page load until the visitor joins; after a signup it never shows again.
+  var PROMPT_AFTER_CARDS = 3, PROMPT_JOINED_KEY = 'clinky_waitlisted';
+  var _promptCards = 0, _promptShown = false;
   function maybeWaitlistPrompt() {
-    if (document.getElementById('wlPrompt')) return;
-    if (PROMPT_TEST) { showWaitlistPrompt(); return; }
-    if (state.waitlistDone) return;
-    try {
-      if (localStorage.getItem(PROMPT_JOINED_KEY) || sessionStorage.getItem('clinky_prompt_seen')) return;
-      var closed = Number(localStorage.getItem(PROMPT_CLOSED_KEY)) || 0;
-      if (closed && Date.now() - closed < PROMPT_QUIET_DAYS * 86400000) return;
-      var n = (Number(sessionStorage.getItem('clinky_cards_seen')) || 0) + 1;
-      sessionStorage.setItem('clinky_cards_seen', String(n));
-      if (n < PROMPT_AFTER_CARDS) return;
-      sessionStorage.setItem('clinky_prompt_seen', '1');
-    } catch (e) { return; }
+    if (_promptShown || state.waitlistDone) return;
+    try { if (localStorage.getItem(PROMPT_JOINED_KEY)) return; } catch (e) {}
+    _promptCards += 1;
+    if (_promptCards < PROMPT_AFTER_CARDS) return;
+    _promptShown = true;
     showWaitlistPrompt();
   }
   function showWaitlistPrompt() {
@@ -2145,13 +2135,16 @@
     document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
     document.addEventListener('keydown', promptEsc);
-    if (!PROMPT_TEST) track('cta', { c: 'prompt_show' });
+    track('cta', { c: 'prompt_show' });
+    // the first tap into the email field counts as engaging with the prompt
+    var input = box.querySelector('input[name=email]');
+    if (input) input.addEventListener('focus', function () { track('cta', { c: 'prompt_focus' }); }, { once: true });
   }
   function promptEsc(e) { if (e.key === 'Escape') closeWaitlistPrompt(true); }
   function closeWaitlistPrompt(byUser) {
     var box = document.getElementById('wlPrompt'); if (!box) return;
     document.removeEventListener('keydown', promptEsc);
-    if (byUser && !PROMPT_TEST) { try { localStorage.setItem(PROMPT_CLOSED_KEY, String(Date.now())); } catch (e) {} track('cta', { c: 'prompt_close' }); }
+    if (byUser) track('cta', { c: 'prompt_close' });
     box.classList.remove('is-in');
     setTimeout(function () { if (box.parentNode) box.parentNode.removeChild(box); }, 300);
   }
