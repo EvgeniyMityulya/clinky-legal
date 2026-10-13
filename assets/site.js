@@ -2142,7 +2142,7 @@
   }
   function promptEsc(e) { if (e.key === 'Escape') closeWaitlistPrompt(true); }
   function closeWaitlistPrompt(byUser) {
-    var box = document.getElementById('wlPrompt'); if (!box) return;
+    var box = document.getElementById('wlPrompt'); if (!box || !box.classList.contains('is-in')) return;
     document.removeEventListener('keydown', promptEsc);
     if (byUser) track('cta', { c: 'prompt_close' });
     box.classList.remove('is-in');
