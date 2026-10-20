@@ -121,9 +121,9 @@ function sampleQuestions(loc, n) {
 function homePrerender(loc) {
   const t = loc === 'ru'
     ? {
-        eyebrow: 'Скоро в App Store', h1: 'Преврати встречи в игру',
+        eyebrow: 'Доступно в App Store', h1: 'Преврати встречи в игру',
         lede: 'Лёгкий повод видеться чаще. Карточки-игры для любой компании и 3D-напиток за каждый «чок».',
-        cta: 'Встать в очередь', gamesTitle: 'Эти вопросы раскроют любого',
+        cta: 'Скачать в App Store', gamesTitle: 'Эти вопросы раскроют любого',
         gamesSub: 'Это реальные карточки из приложения. Полные наборы можно листать прямо на сайте.',
         problemTitle: 'Собраться компанией бывает та ещё задачка',
         problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт живее. Clinky помогает видеться чаще и проводить время так, что хочется повторить.',
@@ -133,9 +133,9 @@ function homePrerender(loc) {
         nav: [['Главная', '/'], ['Игры', '/games'], ['О нас', '/about'], ['Поддержка', '/support']]
       }
     : {
-        eyebrow: 'Coming soon to the App Store', h1: 'Turn hangouts into a game',
+        eyebrow: 'Available on the App Store', h1: 'Turn hangouts into a game',
         lede: 'An easy reason to meet more often. Party-game cards for any table and a 3D drink for every clink.',
-        cta: 'Join the waitlist', gamesTitle: 'Questions that open anyone up',
+        cta: 'Download on the App Store', gamesTitle: 'Questions that open anyone up',
         gamesSub: 'These are real cards from the app. You can read the full sets right here on the site.',
         problemTitle: 'Getting everyone together can be a real quest',
         problemBody: 'Either everyone is busy and the meet-up drifts to someday, or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun. Clinky helps you meet up more often and have the kind of time you want to repeat.',
@@ -151,7 +151,7 @@ function homePrerender(loc) {
 <p class="eyebrow">${esc(t.eyebrow)}</p>
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
-<p><a href="/"><strong>${esc(t.cta)}</strong></a></p>
+<p><a href="https://apps.apple.com/app/apple-store/id6777998850?pt=128999575&amp;mt=8&amp;ct=site-prerender"><strong>${esc(t.cta)}</strong></a></p>
 <h2>${esc(t.gamesTitle)}</h2>
 <p>${esc(t.gamesSub)}</p>
 ${samples.map((s) => `<h3><a href="${safeHref(s.href)}">${esc(s.title)}</a></h3>`).join('\n')}
@@ -373,9 +373,10 @@ function jsonld(s) {
   if (s.home) {
     graph.push({
       '@type': 'MobileApplication', '@id': `${SITE}/#app`, name: 'Clinky',
-      applicationCategory: 'LifestyleApplication', operatingSystem: 'iOS 17.0 or later',
+      applicationCategory: 'EntertainmentApplication', operatingSystem: 'iOS 17.0 or later',
       url: `${SITE}/`, image: ogImage(s),
       description: 'Track who you meet, play party-game question cards and collect a 3D drink for every clink. Offline-first, no accounts.',
+      downloadUrl: 'https://apps.apple.com/app/id6777998850', installUrl: 'https://apps.apple.com/app/id6777998850',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       publisher: { '@id': `${SITE}/#org` },
       author: { '@id': `${SITE}/#author` }

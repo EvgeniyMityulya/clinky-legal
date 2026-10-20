@@ -1,9 +1,9 @@
 export const FAQ_SUPPORT = {
   en: [
-    { q: 'When does Clinky launch?',
-      a: "Soon. Join the waitlist and we'll email you the App Store link the day it's live." },
+    { q: 'Where can I get Clinky?',
+      a: 'Clinky is on the App Store for iPhone with iOS 17 or later.' },
     { q: 'Is it free?',
-      a: 'Yes, Clinky is free to start. An optional Clinky Pro will unlock a few extras.' },
+      a: 'Yes, Clinky is free to start. An optional Clinky Pro unlocks a few extras.' },
     { q: 'Does the app work without drinking?',
       a: 'Completely. A clink can be coffee, tea or water, and every question game plays the same way. Nothing in the app requires alcohol.' },
     { q: 'Does Clinky work offline?',
@@ -14,10 +14,10 @@ export const FAQ_SUPPORT = {
       a: 'iPhone on iOS 17 and later.' }
   ],
   ru: [
-    { q: 'Когда выйдет Clinky?',
-      a: 'Скоро. Встань в очередь, пришлём ссылку на App Store в день релиза.' },
+    { q: 'Где скачать Clinky?',
+      a: 'Clinky есть в App Store, для iPhone с iOS 17 и новее.' },
     { q: 'Это бесплатно?',
-      a: 'Да, Clinky бесплатен на старте. Опциональный Clinky Pro откроет пару дополнений.' },
+      a: 'Да, Clinky бесплатен на старте. Опциональный Clinky Pro открывает пару дополнений.' },
     { q: 'А без алкоголя приложение работает?',
       a: 'Полностью. Чокнуться можно кофе, чаем или водой, и все игры с вопросами идут точно так же. Ничто в приложении не требует алкоголя.' },
     { q: 'Clinky работает офлайн?',

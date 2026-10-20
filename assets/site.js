@@ -26,18 +26,18 @@
 
   var state = {
     lang: 'en', page: 'home', scrolled: false, sel: 'beer', menuOpen: false, playSlug: 'never-have-i-ever', playIndex: 0,
-    gameIndex: 0, homeCouples: false, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
+    gameIndex: 0, homeAudience: null, qIndex: 0, waitlistDone: false, waitlistDup: false, waitlistLoading: false, supportDone: false
   };
   var animTimer = null, animBack = null, animKickoff = null, qdrag = null;
 
   var DICT = {
     en: {
-      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navGames: 'Games', navJoin: 'Try it first!',
-      heroEyebrow: 'Coming soon to the App Store',
+      navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navGames: 'Games', navJoin: 'Download',
+      heroEyebrow: 'Available on the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
-      promptTitle: 'Enjoying the questions?', promptSub: "Leave your email and we'll write on launch day", promptCta: 'Sign me up', promptClose: 'Close',
-      heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
+      promptTitle: 'Enjoying the questions?', promptSub: 'Many more questions are waiting in the app', promptCta: 'Sign me up', promptClose: 'Close',
+      heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
@@ -46,13 +46,13 @@
       formSending: 'Sending…', formError: "Couldn't send it. Please try again in a minute.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
       gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
-      gamesSub: 'These are real cards from the app. Pick a game and swipe through',
+      gamesSub: 'These are real cards from the app. Pick a game and who you play with',
       gamesAll: 'See how to play', navPickGame: 'Pick a game', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
       problemKicker: 'Sound familiar?', problemTitle: 'Getting everyone together can be a real quest!',
       problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
       problemTurn: 'Clinky helps you meet up more often and have the kind of time you want to repeat!',
       discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just your people and your moments.',
-      finalTitle: 'Round up your friends and clink first!', finalSub: "Drop your email and we'll let you know on launch day!",
+      finalTitle: 'Round up your friends and clink!', finalSub: 'Clinky is on the App Store. Grab it before your next hangout',
       gamesPageTitle: 'Games for any table',
       gamesPageSub: 'Pick a game, then read the rules and play a few cards right here.',
       howTitle: 'How to play', stepLabel: 'Step',
@@ -60,7 +60,7 @@
       playNext: 'Next card', playLeft: '{n} cards left today', playHint: 'Free cards reset every day',
       playLoading: 'Shuffling the deck…', playCta: 'Play online', playOther: 'Other games to play', playRules: 'Rules for all four games',
       playDoneTitle: 'That is today\u2019s deck',
-      playDoneBody: 'Come back tomorrow for more, or get the full deck in the app when it lands on the App Store.', gamesFaqTitle: 'Questions about the games',
+      playDoneBody: 'Come back tomorrow for more, or get the full deck in the app.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
       aboutPillarsTitle: 'What the app does',
       aboutStoryTitle: 'Why does this exist?',
@@ -95,16 +95,16 @@
       docContact: 'Questions about this document? Email us at support@clinkyapp.com and we will help.',
       docContactCta: 'Contact support',
       footNote: 'Track meet-ups, play party-game cards and collect 3D mementos.',
-      footComingSoon: 'Coming to the App Store', footProduct: 'Product', footLegalReach: 'Legal & contact', footEmail: 'Email us',
+      footComingSoon: 'Download on the App Store', footProduct: 'Product', footLegalReach: 'Legal & contact', footEmail: 'Email us',
       footRights: 'For people who value real meet-ups.'
     },
     ru: {
-      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navGames: 'Игры', navJoin: 'Хочу первым!',
-      heroEyebrow: 'Скоро в App Store',
+      navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navGames: 'Игры', navJoin: 'Скачать',
+      heroEyebrow: 'Доступно в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
-      promptTitle: 'Понравились вопросы?', promptSub: 'Оставь почту, и мы напишем в день релиза', promptCta: 'Записаться', promptClose: 'Закрыть',
-      heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Ещё больше вопросов ждут в приложении', promptCta: 'Записаться', promptClose: 'Закрыть',
+      heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
       heroDone: 'Ты в очереди! Пришлём ссылку на App Store, как только Clinky выйдет.',
@@ -113,13 +113,13 @@
       formSending: 'Отправляем…', formError: 'Не получилось отправить. Попробуй ещё раз через минуту.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
       gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
-      gamesSub: 'Это реальные карточки из приложения. Выбери игру и листай',
+      gamesSub: 'Это реальные карточки из приложения. Выбери игру и с кем играешь',
       gamesAll: 'Как в это играть', navPickGame: 'Выбери игру', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
       problemKicker: 'Знакомо?', problemTitle: 'Собраться компанией бывает та ещё задачка!',
       problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт куда веселее!',
       problemTurn: 'Clinky помогает видеться чаще и проводить время так, что хочется повторить!',
       discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только твои люди и моменты.',
-      finalTitle: 'Собери друзей и чокнись первым!', finalSub: 'Оставь почту, и мы напишем тебе в день релиза!',
+      finalTitle: 'Собери друзей и чокнись!', finalSub: 'Clinky уже в App Store. Скачай до следующей встречи',
       gamesPageTitle: 'Игры для компании',
       gamesPageSub: 'Выбери игру, а внутри правила и карточки, в которые можно сыграть прямо тут.',
       howTitle: 'Как играть', stepLabel: 'Шаг',
@@ -127,7 +127,7 @@
       playNext: 'Дальше', playLeft: 'осталось карточек сегодня: {n}', playHint: 'Бесплатные карточки обновляются каждый день',
       playLoading: 'Тасуем колоду…', playCta: 'Играть онлайн', playOther: 'Другие игры', playRules: 'Правила всех четырёх игр',
       playDoneTitle: 'На сегодня колода закончилась',
-      playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении, когда оно выйдет в App Store.', gamesFaqTitle: 'Вопросы про игры',
+      playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
       aboutPillarsTitle: 'Что умеет приложение',
       aboutStoryTitle: 'Зачем это всё?',
@@ -162,7 +162,7 @@
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
       docContactCta: 'Написать в поддержку',
       footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
-      footComingSoon: 'Скоро в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
+      footComingSoon: 'Скачать в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
       footRights: 'Для тех, кто ценит живые встречи.'
     }
   };
@@ -234,16 +234,16 @@
 
   var FAQ = {
     en: [
-      { q: "When does Clinky launch?", a: "Soon. Join the waitlist and we'll email you the App Store link the day it's live." },
-      { q: "Is it free?", a: "Yes, Clinky is free to start. An optional Clinky Pro will unlock a few extras." },
+      { q: "Where can I get Clinky?", a: "Clinky is on the App Store for iPhone with iOS 17 or later." },
+      { q: "Is it free?", a: "Yes, Clinky is free to start. An optional Clinky Pro unlocks a few extras." },
       { q: "Does the app work without drinking?", a: "Completely. A clink can be coffee, tea or water, and every question game plays the same way. Nothing in the app requires alcohol." },
       { q: "Does Clinky work offline?", a: "Yes, the whole app does. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing and there is no server to be down." },
       { q: "What about my data?", a: "Clinky is offline-first with no accounts. Your data stays on your device and we never see it." },
       { q: "Which devices are supported?", a: "iPhone on iOS 17 and later." }
     ],
     ru: [
-      { q: "Когда выйдет Clinky?", a: "Скоро. Встань в очередь, пришлём ссылку на App Store в день релиза." },
-      { q: "Это бесплатно?", a: "Да, Clinky бесплатен на старте. Опциональный Clinky Pro откроет пару дополнений." },
+      { q: "Где скачать Clinky?", a: "Clinky есть в App Store, для iPhone с iOS 17 и новее." },
+      { q: "Это бесплатно?", a: "Да, Clinky бесплатен на старте. Опциональный Clinky Pro открывает пару дополнений." },
       { q: "А без алкоголя приложение работает?", a: "Полностью. Чокнуться можно кофе, чаем или водой, и все игры с вопросами идут точно так же. Ничто в приложении не требует алкоголя." },
       { q: "Clinky работает офлайн?", a: "Да, целиком. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет, и падать нечему." },
       { q: "А что с моими данными?", a: "Clinky работает офлайн и без аккаунтов. Данные остаются на твоём устройстве, мы их не видим." },
@@ -574,7 +574,7 @@
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">' + esc(t.slogan) + '</p>' +
           '<p style="font-size:13.5px;color:#7a7280;margin:0 0 18px;line-height:1.55">' + esc(t.footNote) + '</p>' +
-          '<div style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;font-weight:700;color:#3a323f">' + esc(t.footComingSoon) + I.apple + '</div>' +
+          (APP_LIVE ? storeBadge(true, 'footer') : '<div style="display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:12px;background:#fff;border:1px solid #e9e6ec;font-size:13.5px;font-weight:700;color:#3a323f">' + esc(t.footComingSoon) + I.apple + '</div>') +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footProduct) + '</div>' +
@@ -599,8 +599,24 @@
       '</div>';
   }
 
+  // ===== App Store badge (replaces the waitlist form since launch) =====
+  var APP_LIVE = true, STORE_URL = 'https://apps.apple.com/app/apple-store/id6777998850?pt=128999575&mt=8&ct=';
+  // Apple's badge artwork stays untouched; the branding lives in the card around it.
+  function storeLink(ct, cls, w) {
+    return '<a class="' + cls + '" href="' + STORE_URL + 'site-' + ct + '" target="_blank" rel="noopener" aria-label="Download on the App Store">' +
+      '<img src="/assets/appstore-badge.svg" alt="Download on the App Store" width="' + w + '" height="' + Math.round(w / 3) + '"></a>';
+  }
+  function storeBadge(left, ct) {
+    var t = tdict();
+    if (ct === 'footer') return storeLink('footer', 'store-badge', 150);
+    return '<div style="display:flex;justify-content:' + (left ? 'flex-start' : 'center') + '">' +
+      '<a class="cta-btn store-cta" href="' + STORE_URL + 'site-' + (ct || state.page) + '" target="_blank" rel="noopener">' +
+        appStoreMark(26, '#fff') + '<span>' + esc(t.storeCta) + '</span></a></div>';
+  }
+
   // ===== waitlist form =====
-  function waitlistForm(onColor, left, ctaLabel) {
+  function waitlistForm(onColor, left, ctaLabel, ct) {
+    if (APP_LIVE) return storeBadge(left, ct);
     var t = tdict();
     if (state.waitlistLoading) {
       return '<div style="display:inline-flex;align-items:center;gap:13px;padding:17px 22px;border-radius:18px;background:' + (onColor ? 'rgba(255,255,255,.92)' : '#ffffff') + ';border:1.5px solid ' + (onColor ? 'transparent' : '#ffc9d0') + ';box-shadow:0 10px 26px -16px rgba(255,79,98,.28);max-width:32em;text-align:left;animation:popIn .4s ease both">' +
@@ -648,11 +664,12 @@
           '</div>' +
           '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-1.4px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
           '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.5;color:#6b6b76;max-width:30em;margin:0 0 20px">' + esc(t.heroLede) + '</p>' +
-          '<div id="wl1">' + waitlistForm(false, true) + '</div>' +
+          '<div class="hero-cta"><div id="wl1">' + waitlistForm(false, true, null, 'hero') + '</div>' +
           (state.waitlistDone ? '' :
             '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:16px 0 0">' +
               heroChip('user-circle', t.trust1) + heroChip('shield-check', t.trust2) + heroChip('apple-logo', t.trust3) +
             '</div>') +
+          '</div>' +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
         '<div data-act="play" class="hero-stage" style="position:relative;aspect-ratio:1/0.62;perspective:1000px;cursor:pointer">' +
@@ -796,8 +813,8 @@
           '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
           '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
-          '<div id="wl2">' + waitlistForm() + '</div>' +
-          (state.waitlistDone ? '' : '<p style="font-size:13px;color:#7a7280;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
+          '<div id="wl2">' + waitlistForm(false, false, null, 'final') + '</div>' +
+          (state.waitlistDone || APP_LIVE ? '' : '<p style="font-size:13px;color:#7a7280;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
         '</div>' +
       '</div>' +
     '</section>';
@@ -837,7 +854,7 @@
     var tight = opts && opts.hideHeading;
     return '<section style="padding:' + (tight ? 'clamp(18px,3vh,30px)' : 'clamp(50px,8vh,96px)') + ' clamp(16px,4vw,72px) clamp(50px,8vh,96px)">' +
       ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>') +
-      '<div id="gameTabs" style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:28px auto 10px;max-width:760px">' + renderGameTabs() + '</div>' +
+      '<div id="gameTabs" class="game-tabs">' + renderGameTabs() + '</div>' +
       '<div style="max-width:430px;margin:0 auto">' +
         questionCard() +
         '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
@@ -863,18 +880,26 @@
     '</div>';
   }
 
+  // Who the questions are for; optional filter on top of the selected game (decks in audience.js).
+  var AUDIENCES = [
+    { id: 'friends', icon: 'users-three', label: { en: 'With friends', ru: 'С друзьями' } },
+    { id: 'family', icon: 'hand-heart', label: { en: 'Family', ru: 'Семейные' } },
+    { id: 'couples', icon: 'heart', label: { en: 'For couples', ru: 'Для пары' } },
+    { id: 'meet', icon: 'chat-teardrop-dots', label: { en: 'Getting to know', ru: 'Знакомство' } }
+  ];
   function renderGameTabs() {
     var L = state.lang;
     var onHome = state.page === 'home';
-    var tabs = GAMES.map(function (g, i) {
-      var active = i === state.gameIndex && !(onHome && state.homeCouples);
+    var games = GAMES.map(function (g, i) {
+      var active = i === state.gameIndex;
       return '<button data-act="g' + i + '" style="' + pill(active) + '">' + gameIcon(i, active ? '#fff' : '#6b6b76', 18) + esc(g.title[L]) + '</button>';
-    });
-    if (onHome) {
-      var on = state.homeCouples;
-      tabs.push('<button data-act="gc" style="' + pill(on) + '">' + ph('heart', 18, on ? '#fff' : '#6b6b76', 'ph-fill') + esc(L === 'ru' ? 'Для пары' : 'For couples') + '</button>');
-    }
-    return tabs.join('');
+    }).join('');
+    if (!onHome) return '<div class="tab-row">' + games + '</div>';
+    var auds = AUDIENCES.map(function (a) {
+      var on = state.homeAudience === a.id;
+      return '<button data-act="ga:' + a.id + '" aria-pressed="' + on + '" style="' + pill(on) + '">' + ph(a.icon, 18, on ? '#fff' : '#6b6b76', 'ph-fill') + esc(a.label[L]) + '</button>';
+    }).join('');
+    return '<div class="tab-row">' + games + '</div><div class="tab-row">' + auds + '</div>';
   }
   // Карточка с вопросом одна на весь сайт, меняется только источник колоды.
   function qSource() {
@@ -882,12 +907,12 @@
       var meta = own(SCENARIO_SLUGS, state.scenarioSlug) || {}, sc = scenarioData(meta.id);
       if (sc) return { kind: 'scenario', id: meta.id, label: sc.h1[state.lang], cards: scenarioCards(sc, state.lang), icon: sc.icon };
     }
-    if (state.page === 'home' && state.homeCouples) {
-      var cp = scenarioData('couples');
-      if (cp) return { kind: 'scenario', id: 'couples', label: cp.h1[state.lang], cards: scenarioCards(cp, state.lang), icon: cp.icon };
-      ensureScenarios(function () { refreshCard(); markCard(); });
-    }
     var g = GAMES[state.gameIndex];
+    if (state.page === 'home' && state.homeAudience) {
+      var deck = window.CLINKY_AUDIENCE && (window.CLINKY_AUDIENCE[GAME_IDS[state.gameIndex]] || {})[state.homeAudience];
+      if (deck && deck.length) return { kind: 'game', label: g.title[state.lang], cards: deck.map(function (q) { return q[state.lang]; }) };
+      ensureAudience(function () { refreshCard(); markCard(); });
+    }
     return { kind: 'game', label: g.title[state.lang], cards: (g.q || []).map(function (q) { return q[state.lang]; }) };
   }
   function renderQcat() {
@@ -1081,7 +1106,7 @@
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(19px,2.4vw,23px);line-height:1.25;letter-spacing:-.3px;margin:0 0 10px;color:#1c1326">' + esc(t.playDoneTitle) + '</p>' +
           '<p style="font-size:15px;line-height:1.55;color:#6b6b76;margin:0 auto 22px;max-width:24em">' + esc(t.playDoneBody) + '</p>' +
-          coralBtn(t.heroCta, 'join') +
+          coralBtn(APP_LIVE ? t.navJoin : t.heroCta, APP_LIVE ? 'joinlimit' : 'join') +
         '</div>' +
       '</div>';
     }
@@ -1201,6 +1226,14 @@
   // потому что в бандл им незачем.
   // Calls back only after its own load, never synchronously: callers repaint from the callback,
   // so data that arrives without the requested set must not send paint() straight back here.
+  function ensureAudience(cb) {
+    if (window.CLINKY_AUDIENCE || document.getElementById('audData')) return;
+    var sc = document.createElement('script');
+    sc.id = 'audData';
+    sc.src = '/assets/audience.js?v=e8cc3976';
+    sc.onload = function () { cb && cb(); };
+    document.head.appendChild(sc);
+  }
   function ensureScenarios(cb) {
     if (window.CLINKY_SCENARIOS || document.getElementById('scData')) return;
     var sc = document.createElement('script');
@@ -1850,7 +1883,7 @@
     el.classList.add('is-closing');
     setTimeout(function () { state.menuOpen = false; paintHeader(); }, 180);
   }
-  function joinCta() { if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
+  function joinCta(ct) { if (APP_LIVE) { window.open(STORE_URL + 'site-' + (ct || 'nav'), '_blank', 'noopener'); return; } if (state.page !== 'home') { setPage('home'); setTimeout(scrollWaitlist, 80); } else scrollWaitlist(); }
   function scrollWaitlist() {
     var f = document.querySelector('input[type="email"]'); if (!f) return;
     var y = f.getBoundingClientRect().top + window.scrollY - 120;
@@ -1868,23 +1901,10 @@
     if (c) { c.style.color = d === 'coffee' ? '#fff' : '#6b6b76'; var ci = c.querySelector('i'); if (ci) ci.style.color = d === 'coffee' ? '#fff' : '#b9b0b6'; }
     if (hero()) hero().setDrink(d);     // swap model + per-drink scene config in the three.js hero
   }
-  function setGame(i) { flushCard('switch'); state.gameIndex = i; state.homeCouples = false; state.qIndex = 0; refreshCard(); markCard(); }
-  function setHomeCouples() { flushCard('switch'); state.homeCouples = true; state.qIndex = 0; refreshCard(); markCard(); }
+  function setGame(i) { flushCard('switch'); state.gameIndex = i; state.qIndex = 0; refreshCard(); markCard(); }
+  function setHomeAudience(id) { flushCard('switch'); state.homeAudience = state.homeAudience === id ? null : id; state.qIndex = 0; refreshCard(); markCard(); }
   function homeDeckHref() {
-    if (state.page === 'home' && state.homeCouples) return scenarioHrefFor('couples', state.lang) || '/games';
     return playHrefFor(state.gameIndex, state.lang) || '/games';
-  }
-  // A/B test of the home card's starting deck: half the visitors open on Never Have I Ever,
-  // half on the couples set. The pick sticks per browser and rides on the visit event (field c).
-  var HOME_AB_KEY = 'clinky_ab_home';
-  function homeVariant() {
-    var v = null;
-    try { v = localStorage.getItem(HOME_AB_KEY); } catch (e) {}
-    if (v !== 'nhi' && v !== 'couples') {
-      v = Math.random() < 0.5 ? 'nhi' : 'couples';
-      try { localStorage.setItem(HOME_AB_KEY, v); } catch (e) {}
-    }
-    return v;
   }
   function nextQuestion() { flushCard('next'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex + 1) % len; trackVisit('cards'); refreshCard(); markCard(); maybeWaitlistPrompt(); }
   function prevQuestion() { flushCard('back'); var len = qSource().cards.length || 1; state.qIndex = (state.qIndex - 1 + len) % len; refreshCard(); markCard(); }
@@ -1977,7 +1997,7 @@
   function sendVisitOnce() {
     try { if (sessionStorage.getItem('clinky_visit_sent')) return; sessionStorage.setItem('clinky_visit_sent', '1'); } catch (e) {}
     var v = visitState() || {};
-    track('visit', { lp: v.landing || location.pathname, s: state.source || '', ref: document.referrer || '', c: 'ab:' + homeVariant() });
+    track('visit', { lp: v.landing || location.pathname, s: state.source || '', ref: document.referrer || '' });
   }
   // Time on site counts only while the tab is in front; every time it goes to the background the
   // running total is sent again, and the report keeps the largest one per visit.
@@ -1998,8 +2018,11 @@
     markCard();
   }
   function onTrackClick(e) {
-    if (e.target.closest('a[href*="apps.apple.com"]')) track('cta', { c: 'appstore' });
-    else if (e.target.closest('[data-act="join"]')) track('cta', { c: 'join' });
+    // App Store taps are tagged by placement (ct=site-<place> in the link): hero, final, prompt, footer, nav, limit.
+    var store = e.target.closest('a[href*="apps.apple.com"]');
+    if (store) track('cta', { c: 'store:' + (((store.getAttribute('href') || '').match(/ct=site-([a-z-]+)/) || [])[1] || 'other') });
+    else if (e.target.closest('[data-act="join"]')) track('cta', { c: APP_LIVE ? 'store:nav' : 'join' });
+    else if (e.target.closest('[data-act="joinlimit"]')) track('cta', { c: 'store:limit' });
     else if (e.target.closest('#playLink')) track('cta', { c: 'play' });
   }
 
@@ -2130,7 +2153,7 @@
       '<img class="wl-prompt-icon" src="/assets/clinky-icon.png" alt="" width="52" height="52">' +
       '<p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p>' +
       '<p class="wl-prompt-sub">' + esc(t.promptSub) + '</p>' +
-      '<div id="wl3">' + waitlistForm(false, false, t.promptCta) + '</div>' +
+      '<div id="wl3">' + waitlistForm(false, false, t.promptCta, 'prompt') + '</div>' +
       '<p class="wl-prompt-note">' + esc(t.heroMicro) + '</p>';
     document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
@@ -2184,7 +2207,8 @@
       }
       case 'en': setLang('en'); break;
       case 'ru': setLang('ru'); break;
-      case 'join': joinCta(); break;
+      case 'join': joinCta('nav'); break;
+      case 'joinlimit': joinCta('limit'); break;
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
       case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); bumpClink(); resetAnim(); break;
@@ -2214,7 +2238,7 @@
       }
       case 'nextq': qFlyout(1); break;
       case 'prevq': qFlyout(-1); break;
-      default: if (a === 'gc') setHomeCouples(); else if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
+      default: if (a.indexOf('ga:') === 0) setHomeAudience(a.slice(3)); else if (a.charAt(0) === 'g') setGame(parseInt(a.slice(1), 10));
     }
   }
   function onSubmit(e) {
@@ -2238,7 +2262,6 @@
     try { state.source = captureSource(); } catch (e) {}
     trackVisit('pages');
     state.page = pageFromPath();
-    state.homeCouples = homeVariant() === 'couples';
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting, local preview only
       var demo = isLocalPreview() ? new URLSearchParams(location.search).get('demo') : null;
       if (demo === 'support') { state.page = 'support'; state.supportDone = true; }

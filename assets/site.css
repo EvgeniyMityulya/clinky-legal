@@ -283,3 +283,36 @@ h1,h2,h3,.hub-title{text-wrap:balance}
 .wl-prompt-note{position:relative;margin:10px 0 0;font-size:12.5px;color:#7a7280}
 @media (max-width:520px){.wl-prompt{bottom:12px;padding:24px 18px 14px}.wl-prompt form{flex-wrap:wrap !important}.wl-prompt form button{width:100%}}
 @media (prefers-reduced-motion:reduce){.wl-prompt{transition:opacity .2s ease}.wl-prompt .cta-btn::after{animation:none}}
+
+/* App Store CTA: big coral button with a recurring shine; footer keeps Apple's official badge */
+.store-badge { display: inline-block; line-height: 0; border-radius: 12px; transition: opacity .2s ease; }
+.store-badge img { display: block; width: 100%; height: auto; }
+footer .store-badge { width: 150px; }
+.store-badge:hover { opacity: .86; }
+.store-cta {
+  display: inline-flex; align-items: center; gap: 12px; padding: 18px 34px 18px 28px; border-radius: 18px;
+  background: linear-gradient(135deg, #FF6373, #FF4F62 55%, #F23A55); color: #fff; text-decoration: none;
+  font-family: Nunito, sans-serif; font-weight: 900; font-size: 18px; letter-spacing: -.1px; white-space: nowrap;
+  box-shadow: 0 16px 34px -12px rgba(255,79,98,.75), inset 0 1px 0 rgba(255,255,255,.35);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.store-cta:hover { transform: translateY(-2px); box-shadow: 0 22px 40px -14px rgba(255,79,98,.85), inset 0 1px 0 rgba(255,255,255,.35); }
+.store-cta:active { transform: translateY(0) scale(.98); }
+.store-cta::after { animation: wlShineGap 3.2s ease-in-out 1s infinite; }
+@media (prefers-reduced-motion: reduce) { .store-cta::after { animation: none; } }
+@media (max-width: 960px) { .hero-left .store-cta { margin: 0 auto; } #wl1 > div { justify-content: center !important; } }
+
+/* Home picker: four games in one row, the audience row under it, same pill shape */
+.game-tabs { margin: 22px auto 14px; max-width: 900px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.tab-row { display: flex; gap: 9px; justify-content: center; flex-wrap: nowrap; max-width: 100%; padding: 6px 4px 14px; }
+.tab-row > * { flex: none; }
+@media (max-width: 860px) {
+  .tab-row { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 6px 16px 18px; max-width: calc(100% + 32px); }
+  .tab-row::-webkit-scrollbar { display: none; }
+}
+
+/* Hero: the App Store button spans the trust chips row under it */
+.hero-cta { display: inline-flex; flex-direction: column; max-width: 100%; }
+.hero-cta #wl1 > div { display: block !important; }
+.hero-cta .store-cta { display: flex; width: 100%; justify-content: center; box-sizing: border-box; }
+@media (max-width: 960px) { .hero-cta { display: flex; align-items: center; } .hero-cta #wl1 { width: 100%; max-width: 440px; } }
