@@ -16,7 +16,7 @@
         UL([
           'Clinky has no user accounts and no login. You don’t create a profile with us.',
           'Clinky has no first-party server. Your friends, meetings, collected cups, streaks, achievements, plans and answered icebreaker cards are stored only on your device (in a local database), not on any server we control.',
-          'Three third-party services receive limited data off your device: Adapty (subscriptions), TelemetryDeck (anonymous product analytics) and Sentry (crash reports). What each receives is described below.',
+          'Three third-party services receive limited data off your device: Adapty (subscriptions), Amplitude (product analytics and masked session replays) and Sentry (crash reports). What each receives is described below.',
           'We do not track you across other apps or websites, we use no advertising identifier (IDFA), and we do not sell or share your personal information for advertising.'
         ])
       ]},
@@ -38,12 +38,13 @@
           'Purpose: check your Pro entitlement, show and A/B-test the paywall, process purchases and restores.',
           'Adapty privacy policy: https://adapty.io/privacy/'
         ]),
-        H3('4.2 TelemetryDeck — privacy-first product analytics'),
-        P('TelemetryDeck receives aggregate, anonymous usage events (for example: app opened, meeting created, paywall shown), with parameters limited to bucketed counts, types and flags. The app does not send your typed text, friend names, contact identifiers, or any raw IDs in these events. The TelemetryDeck SDK additionally generates its own anonymized, salted-and-hashed identifier (not reversible, not shared across apps) plus device/OS/app-version metadata. TelemetryDeck does not store IP addresses. By the vendor’s own assessment, the data it handles falls outside GDPR/CCPA scope; we nonetheless disclose it here for transparency.'),
+        H3('4.2 Amplitude — product analytics and session replay'),
+        P('Amplitude receives usage events from the app (for example: app opened, a game started, a meeting created, the paywall shown), with parameters limited to counts, types and flags. The app does not send your typed text, friend names, contact identifiers or any identifiers of ours in these events. The Amplitude SDK also creates a random identifier for this installation and adds the device model, OS version, app version and language. We have switched off the collection of your IP address, city, region, mobile carrier and IDFV, so the only location Amplitude sees is the country set on your device.'),
+        P('Amplitude also records session replays: the layout of each screen, taps and scrolling, so we can see where the app gets in the way. Replays use the strictest masking the SDK offers: all text and images are blanked out on your device before anything is sent, and the screens that show friends’ names are masked a second time. A replay shows where you tapped, never what was written there.'),
         UL([
-          'Purpose: understand feature usage so we can improve the app.',
-          'Where: TelemetryDeck servers (EU).',
-          'TelemetryDeck privacy policy: https://telemetrydeck.com/privacy/'
+          'Purpose: understand how the app is used and find where it gets in the way, so we can improve it.',
+          'Where: Amplitude servers (EU).',
+          'Amplitude privacy policy: https://amplitude.com/privacy'
         ]),
         H3('4.3 Sentry — crash reporting'),
         P('Sentry receives crash and error reports: stack traces, breadcrumbs (such as navigation and lifecycle events), and device / OS / app-version metadata, plus a per-install random identifier. We have configured Sentry to not send personal information by default (sendDefaultPii = false) and to strip user data from events. We do not attach your identity to crash reports.'),
@@ -59,7 +60,7 @@
         P('The website also counts anonymous usage: which pages and question cards are opened and how long they stay on screen. These counts carry no email, name or IP address, use no cookies and are kept by Cloudflare. The clink counter on the home page runs on the Abacus service. To have your data deleted, write to support@clinkyapp.com.')
       ]},
       { h: '5. Tracking and advertising', b: [
-        P('Clinky does not track you in the App Store sense: there is no IDFA / advertising identifier, no AppTrackingTransparency prompt, no ad networks, and no data brokers. Adapty processes the IDFV (vendor identifier) as disclosed in Section 4.1 — this is a per-vendor device identifier, not an advertising identifier and not a cross-app tracking signal. None of the services above are configured to track you across other apps or websites. We do not sell or share your personal information.')
+        P('Clinky does not track you in the App Store sense: there is no IDFA / advertising identifier, no AppTrackingTransparency prompt, no ad networks, and no data brokers. Adapty processes the IDFV (vendor identifier) as disclosed in Section 4.1, and Amplitude uses a random identifier for this installation as disclosed in Section 4.2. Neither is an advertising identifier or a cross-app tracking signal. None of the services above are configured to track you across other apps or websites. We do not sell or share your personal information.')
       ]},
       { h: '6. Permissions the app may request', b: [
         P('Each permission is optional and is used only for the purpose described. iOS will ask before any permission is granted, and you can change or revoke each one at any time in iOS Settings → Clinky.'),
@@ -77,23 +78,23 @@
         UL([
           'Performance of a contract (Art. 6(1)(b)) — to process and restore your Clinky Pro subscription (Adapty / Apple).',
           'Legitimate interests (Art. 6(1)(f)) — to diagnose crashes and keep the app stable (Sentry), balanced against your privacy.',
-          'Consent (Art. 6(1)(a)) — for non-essential product analytics (TelemetryDeck). Where the app presents an analytics consent choice, we process analytics only on that basis, and you can withdraw consent at any time (see Section 11). Where you have not consented, non-essential analytics are not collected.'
+          'Legitimate interests (Art. 6(1)(f)) — to understand how the app is used and improve it (Amplitude), within the limits described in Section 4.2: no IP address, no names or typed text, and masked replays. You can object at any time (see Section 11).'
         ])
       ]},
       { h: '9. Your rights', b: [
         P('If you are in the EEA / UK (GDPR): you have the right to access, rectify, erase, restrict, port, and object to processing, to withdraw consent, and to lodge a complaint with your local data protection authority.'),
         P('If you are in California (CCPA/CPRA): you have the right to know what we collect, to delete and correct it, to opt out of "sale" or "sharing" (we do neither), to limit use of sensitive personal information, and to not be discriminated against for exercising these rights.'),
-        P('Important limitation (GDPR Art. 11). Because Clinky has no accounts and your core data is stored only on your device, and because the data shared with our processors is anonymized or pseudonymized (anonymous Adapty profile, hashed TelemetryDeck ID, scrubbed Sentry events), we generally cannot identify a specific individual’s records within that processor data. Where we cannot identify you from the data we hold, we may be unable to act on an access, correction or deletion request for that processor data, and we may ask you for additional information to enable identification, or decline where identification remains impossible. The primary and most effective way to delete your data is on-device: delete a friend, a meeting, or the entire app at any time. For matters within our control, contact us at support@clinkyapp.com. We do not sell or share your personal information.')
+        P('Important limitation (GDPR Art. 11). Because Clinky has no accounts and your core data is stored only on your device, and because the data shared with our processors is anonymized or pseudonymized (anonymous Adapty profile, random Amplitude installation ID, scrubbed Sentry events), we generally cannot identify a specific individual’s records within that processor data. Where we cannot identify you from the data we hold, we may be unable to act on an access, correction or deletion request for that processor data, and we may ask you for additional information to enable identification, or decline where identification remains impossible. The primary and most effective way to delete your data is on-device: delete a friend, a meeting, or the entire app at any time. For matters within our control, contact us at support@clinkyapp.com. We do not sell or share your personal information.')
       ]},
       { h: '10. Data retention', b: [
         UL([
           'On-device data is kept until you delete it or uninstall the app. We never receive it.',
-          'Analytics and crash data are retained only as long as needed for the stated purposes, according to each processor’s default retention settings.',
+          'Analytics, session replays and crash data are retained only as long as needed for the stated purposes, according to each processor’s default retention settings.',
           'Subscription data is retained by Adapty/Apple for as long as needed to manage your entitlement and as required by their own policies and applicable law.'
         ])
       ]},
-      { h: '11. Withdrawing consent / opting out', b: [
-        P('You can stop most off-device data sharing by revoking permissions in iOS Settings, by turning off analytics consent in the app (where offered), or by uninstalling the app. To make a request regarding data held by our processors, email support@clinkyapp.com, noting the identification limitation described in Section 9.')
+      { h: '11. Opting out', b: [
+        P('Uninstalling the app stops all off-device data sharing. In iOS Settings → Clinky you can revoke access to Contacts, Calendar and Notifications at any time. To object to analytics, or to make a request regarding data held by our processors, email support@clinkyapp.com, noting the identification limitation described in Section 9.')
       ]},
       { h: '12. International data transfers and EU representation', b: [
         P('The developer (the data controller) is based in Belarus, which is outside the EEA and is not covered by an EU adequacy decision. This means that personal data of EEA users is processed by a controller located in a third country without adequacy. We address this through the data-minimization described in this policy (no accounts, on-device-only core data, anonymized/pseudonymized processor data) and, where required, appropriate safeguards.'),
@@ -119,7 +120,7 @@
         UL([
           'В Clinky нет аккаунтов и нет входа в систему. Вы не создаёте у нас профиль.',
           'У Clinky нет собственного сервера. Ваши друзья, встречи, собранные чашки, серии, достижения, планы и отвеченные карточки-игры хранятся только на вашем устройстве (в локальной базе данных), а не на наших серверах.',
-          'Три сторонних сервиса получают ограниченные данные за пределами устройства: Adapty (подписки), TelemetryDeck (анонимная продуктовая аналитика) и Sentry (отчёты о сбоях). Что именно получает каждый — описано ниже.',
+          'Три сторонних сервиса получают ограниченные данные за пределами устройства: Adapty (подписки), Amplitude (продуктовая аналитика и записи сессий со скрытым содержимым) и Sentry (отчёты о сбоях). Что именно получает каждый — описано ниже.',
           'Мы не отслеживаем вас в других приложениях или на сайтах, не используем рекламный идентификатор (IDFA) и не продаём и не передаём ваши персональные данные для рекламы.'
         ])
       ]},
@@ -141,12 +142,13 @@
           'Цель: проверка прав на Pro, показ и A/B-тестирование paywall, обработка покупок и восстановлений.',
           'Политика конфиденциальности Adapty: https://adapty.io/privacy/'
         ]),
-        H3('4.2 TelemetryDeck — продуктовая аналитика с приоритетом приватности'),
-        P('TelemetryDeck получает агрегированные анонимные события использования (например: приложение открыто, встреча создана, показан paywall), с параметрами, ограниченными сгруппированными счётчиками, типами и флагами. Приложение не отправляет в этих событиях ваш введённый текст, имена друзей, идентификаторы контактов или какие-либо «сырые» ID. SDK TelemetryDeck дополнительно генерирует собственный анонимизированный идентификатор с солью и хешированием (необратимый, не разделяемый между приложениями) плюс метаданные устройства/ОС/версии приложения. TelemetryDeck не хранит IP-адреса. По оценке самого вендора, обрабатываемые им данные выходят за рамки GDPR/CCPA; тем не менее мы раскрываем это здесь для прозрачности.'),
+        H3('4.2 Amplitude — продуктовая аналитика и записи сессий'),
+        P('Amplitude получает события использования приложения (например: приложение открыто, начата игра, создана встреча, показан paywall) с параметрами, ограниченными счётчиками, типами и флагами. Приложение не отправляет в этих событиях ваш введённый текст, имена друзей, идентификаторы контактов или какие-либо наши идентификаторы. SDK Amplitude также создаёт случайный идентификатор этой установки и добавляет модель устройства, версию ОС, версию приложения и язык. Мы отключили сбор вашего IP-адреса, города, региона, оператора связи и IDFV, поэтому из сведений о местоположении Amplitude видит только страну, выбранную в настройках устройства.'),
+        P('Amplitude также записывает сессии: раскладку каждого экрана, нажатия и прокрутку, чтобы мы видели, где приложение мешает. Для записей включено самое строгое скрытие, какое есть в SDK: весь текст и все изображения закрываются прямо на устройстве, до отправки, а экраны с именами друзей скрываются ещё раз. В записи видно, куда вы нажали, но не видно, что там было написано.'),
         UL([
-          'Цель: понимать использование функций, чтобы улучшать приложение.',
-          'Где: серверы TelemetryDeck (ЕС).',
-          'Политика конфиденциальности TelemetryDeck: https://telemetrydeck.com/privacy/'
+          'Цель: понять, как используется приложение, и найти места, где оно мешает, чтобы его улучшить.',
+          'Где: серверы Amplitude (ЕС).',
+          'Политика конфиденциальности Amplitude: https://amplitude.com/privacy'
         ]),
         H3('4.3 Sentry — отчёты о сбоях'),
         P('Sentry получает отчёты о сбоях и ошибках: трассировки стека, breadcrumbs (например, навигационные события и события жизненного цикла) и метаданные устройства / ОС / версии приложения, а также случайный идентификатор для каждой установки. Мы настроили Sentry так, чтобы по умолчанию не отправлять персональные данные (sendDefaultPii = false) и удалять пользовательские данные из событий. Мы не привязываем вашу личность к отчётам о сбоях.'),
@@ -162,7 +164,7 @@
         P('Кроме того, сайт ведёт обезличенную статистику: какие страницы и карточки с вопросами открывают и сколько времени на них проводят. В ней нет почты, имени и IP-адреса, она не использует cookies и хранится в Cloudflare. Счётчик «чоков» на главной работает на сервисе Abacus. Чтобы удалить свои данные, напишите на support@clinkyapp.com.')
       ]},
       { h: '5. Отслеживание и реклама', b: [
-        P('Clinky не отслеживает вас в понимании App Store: нет IDFA / рекламного идентификатора, нет запроса AppTrackingTransparency, нет рекламных сетей и нет брокеров данных. Adapty обрабатывает IDFV (идентификатор поставщика), как раскрыто в разделе 4.1, — это идентификатор устройства уровня поставщика, а не рекламный идентификатор и не сигнал межприложенческого отслеживания. Ни один из перечисленных сервисов не настроен на отслеживание вас в других приложениях или на сайтах. Мы не продаём и не передаём ваши персональные данные.')
+        P('Clinky не отслеживает вас в понимании App Store: нет IDFA / рекламного идентификатора, нет запроса AppTrackingTransparency, нет рекламных сетей и нет брокеров данных. Adapty обрабатывает IDFV (идентификатор поставщика), как раскрыто в разделе 4.1, а Amplitude использует случайный идентификатор этой установки, как раскрыто в разделе 4.2. Ни один из них не является рекламным идентификатором или сигналом отслеживания между приложениями. Ни один из перечисленных сервисов не настроен на отслеживание вас в других приложениях или на сайтах. Мы не продаём и не передаём ваши персональные данные.')
       ]},
       { h: '6. Разрешения, которые может запросить приложение', b: [
         P('Каждое разрешение необязательно и используется только для описанной цели. iOS спросит вас перед предоставлением любого разрешения, и вы можете изменить или отозвать каждое в любой момент в Настройках iOS → Clinky.'),
@@ -180,23 +182,23 @@
         UL([
           'Исполнение договора (ст. 6(1)(b)) — для обработки и восстановления вашей подписки Clinky Pro (Adapty / Apple).',
           'Законные интересы (ст. 6(1)(f)) — для диагностики сбоев и поддержания стабильности приложения (Sentry), с учётом баланса с вашей приватностью.',
-          'Согласие (ст. 6(1)(a)) — для необязательной продуктовой аналитики (TelemetryDeck). Там, где приложение предлагает выбор согласия на аналитику, мы обрабатываем аналитику только на этом основании, и вы можете отозвать согласие в любой момент (см. раздел 11). Если вы не дали согласия, необязательная аналитика не собирается.'
+          'Законные интересы (ст. 6(1)(f)) — чтобы понимать, как используется приложение, и улучшать его (Amplitude), в пределах, описанных в разделе 4.2: без IP-адреса, без имён и введённого текста, со скрытым содержимым записей. Вы можете возразить в любой момент (см. раздел 11).'
         ])
       ]},
       { h: '9. Ваши права', b: [
         P('Если вы в ЕЭЗ / Великобритании (GDPR): вы имеете право на доступ, исправление, удаление, ограничение, перенос и возражение против обработки, на отзыв согласия, а также на подачу жалобы в местный орган по защите данных.'),
         P('Если вы в Калифорнии (CCPA/CPRA): вы имеете право знать, что мы собираем, удалять и исправлять эти данные, отказаться от «продажи» или «передачи» (мы не делаем ни того, ни другого), ограничивать использование чувствительных персональных данных и не подвергаться дискриминации за реализацию этих прав.'),
-        P('Важное ограничение (ст. 11 GDPR). Поскольку в Clinky нет аккаунтов и ваши основные данные хранятся только на устройстве, а данные, передаваемые нашим обработчикам, анонимизированы или псевдонимизированы (анонимный профиль Adapty, хешированный ID TelemetryDeck, очищенные события Sentry), мы, как правило, не можем идентифицировать записи конкретного лица в этих данных обработчиков. Если мы не можем идентифицировать вас по имеющимся у нас данным, мы можем быть не в состоянии выполнить запрос на доступ, исправление или удаление этих данных обработчика, можем запросить у вас дополнительную информацию для идентификации или отказать, если идентификация остаётся невозможной. Основной и наиболее эффективный способ удаления ваших данных — на устройстве: удалите друга, встречу или всё приложение в любой момент. По вопросам в пределах нашего контроля пишите на support@clinkyapp.com. Мы не продаём и не передаём ваши персональные данные.')
+        P('Важное ограничение (ст. 11 GDPR). Поскольку в Clinky нет аккаунтов и ваши основные данные хранятся только на устройстве, а данные, передаваемые нашим обработчикам, анонимизированы или псевдонимизированы (анонимный профиль Adapty, случайный ID установки в Amplitude, очищенные события Sentry), мы, как правило, не можем идентифицировать записи конкретного лица в этих данных обработчиков. Если мы не можем идентифицировать вас по имеющимся у нас данным, мы можем быть не в состоянии выполнить запрос на доступ, исправление или удаление этих данных обработчика, можем запросить у вас дополнительную информацию для идентификации или отказать, если идентификация остаётся невозможной. Основной и наиболее эффективный способ удаления ваших данных — на устройстве: удалите друга, встречу или всё приложение в любой момент. По вопросам в пределах нашего контроля пишите на support@clinkyapp.com. Мы не продаём и не передаём ваши персональные данные.')
       ]},
       { h: '10. Хранение данных', b: [
         UL([
           'Данные на устройстве хранятся до тех пор, пока вы их не удалите или не удалите приложение. Мы их никогда не получаем.',
-          'Аналитика и данные о сбоях хранятся только столько, сколько необходимо для заявленных целей, в соответствии с настройками хранения по умолчанию каждого обработчика.',
+          'Аналитика, записи сессий и данные о сбоях хранятся только столько, сколько необходимо для заявленных целей, в соответствии с настройками хранения по умолчанию каждого обработчика.',
           'Данные о подписке хранятся Adapty/Apple столько, сколько необходимо для управления вашими правами, а также в соответствии с их политиками и применимым законодательством.'
         ])
       ]},
-      { h: '11. Отзыв согласия / отказ', b: [
-        P('Вы можете прекратить большую часть передачи данных за пределы устройства, отозвав разрешения в Настройках iOS, отключив согласие на аналитику в приложении (где предлагается) или удалив приложение. Чтобы подать запрос в отношении данных, находящихся у наших обработчиков, напишите на support@clinkyapp.com, учитывая ограничение идентификации, описанное в разделе 9.')
+      { h: '11. Отказ от обработки', b: [
+        P('Удаление приложения прекращает любую передачу данных за пределы устройства. В Настройках iOS → Clinky можно в любой момент отозвать доступ к Контактам, Календарю и Уведомлениям. Чтобы возразить против аналитики или подать запрос в отношении данных, находящихся у наших обработчиков, напишите на support@clinkyapp.com, учитывая ограничение идентификации, описанное в разделе 9.')
       ]},
       { h: '12. Международная передача данных и представительство в ЕС', b: [
         P('Разработчик (оператор данных) находится в Беларуси, которая расположена за пределами ЕЭЗ и не охвачена решением ЕС об адекватности. Это означает, что персональные данные пользователей ЕЭЗ обрабатываются оператором, находящимся в третьей стране без статуса адекватности. Мы решаем это через минимизацию данных, описанную в этой политике (нет аккаунтов, основные данные только на устройстве, анонимизированные/псевдонимизированные данные обработчиков), и, где требуется, надлежащие гарантии.'),

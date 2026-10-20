@@ -91,7 +91,7 @@
       supName: 'Name', supEmailPh: 'Email', supMsgPh: 'Description',
       supSend: 'Send message', supNote: 'We usually reply within a day.',
       supDone: 'Thanks! We got your message and will reply soon.',
-      privTitle: 'Privacy Policy', termsTitle: 'Terms of Use', docUpdated: 'Last updated: June 30, 2026',
+      privTitle: 'Privacy Policy', termsTitle: 'Terms of Use', docUpdated: 'Last updated: June 30, 2026', privUpdated: 'Last updated: October 20, 2026',
       docContact: 'Questions about this document? Email us at support@clinkyapp.com and we will help.',
       docContactCta: 'Contact support',
       footNote: 'Track meet-ups, play party-game cards and collect 3D mementos.',
@@ -158,7 +158,7 @@
       supName: 'Имя', supEmailPh: 'Почта', supMsgPh: 'Описание',
       supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
       supDone: 'Спасибо! Мы получили твоё сообщение и скоро ответим.',
-      privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 30 июня 2026 г.',
+      privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 30 июня 2026 г.', privUpdated: 'Последнее обновление: 20 октября 2026 г.',
       docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
       docContactCta: 'Написать в поддержку',
       footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
@@ -1424,7 +1424,7 @@
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
         '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
-        '<p style="font-size:13.5px;color:#7a7280;margin:0 0 30px">' + esc(t.docUpdated) + '</p>' + body +
+        '<p style="font-size:13.5px;color:#7a7280;margin:0 0 30px">' + esc(which === 'privacy' ? t.privUpdated : t.docUpdated) + '</p>' + body +
         '<div style="margin-top:30px;text-align:center">' + coralBtn(t.docContactCta, 'support') + '</div>' +
       '</div></section></div>';
   }
