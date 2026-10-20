@@ -307,8 +307,9 @@ footer .store-badge { width: 150px; }
 .tab-row { display: flex; gap: 9px; justify-content: center; flex-wrap: nowrap; max-width: 100%; padding: 6px 4px 14px; }
 .tab-row > * { flex: none; }
 @media (max-width: 860px) {
-  .tab-row { justify-content: flex-start; overflow-x: auto; scrollbar-width: none; margin: 0 -16px; padding: 6px 16px 18px; max-width: calc(100% + 32px); }
-  .tab-row::-webkit-scrollbar { display: none; }
+  .game-tabs { width: 100%; max-width: 460px; }
+  .tab-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; width: 100%; padding: 4px 0 10px; }
+  .tab-row > button { justify-content: center; padding-left: 10px !important; padding-right: 10px !important; font-size: 14px !important; white-space: nowrap; }
 }
 
 /* Hero: the App Store button spans the trust chips row under it */
@@ -343,3 +344,5 @@ footer .store-badge { width: 150px; }
 .faq-acc details[open] .faq-body { animation: faqIn .32s ease both; }
 @keyframes faqIn { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
 @media (prefers-reduced-motion: reduce) { .faq-acc details[open] .faq-body { animation: none; } }
+
+@media (max-width: 960px) { .hero-cta .hero-trust { justify-content: center; } }
