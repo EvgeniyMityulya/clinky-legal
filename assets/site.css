@@ -166,6 +166,11 @@ model-viewer::part(default-progress-bar){display:none}
 .nav-drop-item.is-on{background:#FF4F62;color:#fff}
 .nav-drop-item.is-on .nav-drop-ico{background:rgba(255,255,255,.22)}
 .nav-sub{padding:2px 0 6px 12px;display:flex;flex-direction:column;gap:2px}
+.nav-games-row+.nav-sub{display:grid;grid-template-rows:0fr;padding-top:0;padding-bottom:0;transition:grid-template-rows .28s cubic-bezier(.2,.7,.2,1),padding .28s}
+.nav-sub-in{display:flex;flex-direction:column;gap:2px;min-height:0;overflow:hidden}
+.nav-games-row[aria-expanded=true]+.nav-sub{grid-template-rows:1fr;padding:2px 0 6px 12px}
+.nav-chev{display:inline-flex;transition:transform .28s}
+.nav-games-row[aria-expanded=true] .nav-chev{transform:rotate(180deg)}
 .hub-card{transition:transform .2s ease,box-shadow .25s ease}
 .hub-card:hover{transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(255,79,98,.45)}
 
@@ -254,6 +259,7 @@ h1,h2,h3,.hub-title{text-wrap:balance}
   .ab-row .ab-copy,.ab-row.ab-flip .ab-copy{order:2}
   .ab-row .ab-visual{order:1;height:200px}
   .ab-author{grid-template-columns:1fr;gap:18px}
+  .ab-links{justify-content:center}
   .ab-photo{width:104px;height:104px}
 }
 
@@ -346,3 +352,13 @@ footer .store-badge { width: 150px; }
 @media (prefers-reduced-motion: reduce) { .faq-acc details[open] .faq-body { animation: none; } }
 
 @media (max-width: 960px) { .hero-cta .hero-trust { justify-content: center; } }
+
+/* Phones: the three trust chips stay on one line, a size down */
+@media (max-width: 480px) {
+  .hero-trust { flex-wrap: nowrap !important; gap: 6px !important; justify-content: center; }
+  .hero-trust > span { padding: 5px 11px 5px 5px !important; gap: 6px !important; font-size: 12px !important; }
+  .hero-trust .chip-ic { width: 22px !important; height: 22px !important; }
+  .hero-trust .chip-ic svg { width: 12px; height: 12px; }
+}
+/* Phones: bento tiles lose their pictures, so the copy gets a size up */
+@media (max-width: 960px) { .bento-desc { font-size: 15.5px !important; } }

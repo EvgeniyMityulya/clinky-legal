@@ -568,14 +568,16 @@
         ['home', 'games', 'about', 'support', 'privacy', 'terms'].map(function (pg) {
           var label = { home: t.navHome, games: t.navGames, about: t.navAbout, support: t.navSupport, privacy: t.navPrivacy, terms: t.navTerms }[pg];
           var on = p === pg;
-          var row = '<button data-act="' + pg + '" style="text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326') + '">' + esc(label) + '</button>';
-          if (pg !== 'games') return row;
-          return row + '<span class="nav-sub">' + GAMES.map(function (g, i) {
+          var rowStyle = 'text-align:left;border:0;cursor:pointer;border-radius:12px;padding:13px 16px;font-family:Nunito,sans-serif;font-weight:800;font-size:16px;background:' + (on ? '#FF4F62' : 'transparent') + ';color:' + (on ? '#fff' : '#1c1326');
+          if (pg !== 'games') return '<button data-act="' + pg + '" style="' + rowStyle + '">' + esc(label) + '</button>';
+          var row = '<button data-act="menugames" aria-expanded="false" class="nav-games-row" style="' + rowStyle + ';display:flex;align-items:center;justify-content:space-between">' + esc(label) +
+            '<span class="nav-chev">' + '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="' + (on ? '#fff' : '#1c1326') + '" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>' + '</span></button>';
+          return row + '<span class="nav-sub"><span class="nav-sub-in">' + GAMES.map(function (g, i) {
             var href = playHrefFor(i, state.lang), sel = state.page === 'play' && state.gameIndex === i;
             if (!href) return '';
             return '<a href="' + href + '" class="nav-drop-item' + (sel ? ' is-on' : '') + '" style="font-size:14.5px">' +
               '<span class="nav-drop-ico">' + gameIcon(i, sel ? '#fff' : '#FF4F62', 15) + '</span>' + esc(g.title[state.lang]) + '</a>';
-          }).join('') + '</span>';
+          }).join('') + '</span></span>';
         }).join('') +
       '</div>' : '');
   }
@@ -730,12 +732,12 @@
     var capImg = '/assets/bento/drink.png';
     function L2(ru, en) { return L === 'ru' ? ru : en; }
     var FC = {
-      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Реальные карточки, что разговорят любой стол за секунды. «Я никогда не», «Кто из нас», «Расскажи момент» и «Что бы ты выбрал», всего четыре игры.', 'Real cards that get any table talking in seconds. "Never Have I Ever", "Who Knows Better", "Tell a Moment" and "Would You Rather", four games in all.') },
-      col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» добавляет в коллекцию 3D-напиток своего вида. Чем больше встреч, тем полнее коллекция!', 'Each clink adds a 3D drink, unique to its kind. The more you meet, the fuller it gets!') },
-      str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Держи серию встреч с близкими', 'Keep your streak going with the people close to you') },
-      ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и новые знакомства. Есть и секретные!', 'Badges for meet-ups, streaks and new friends. Some are secret!') },
-      an:  { ic: 'chart-bar', t: L2('Аналитика', 'Analytics'), d: L2('Графики и факты о твоих друзьях, напитках и встречах', 'Clear charts of your friends, drinks and meet-ups') },
-      rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко подскажем, чтобы ты никого не забыл', 'A gentle nudge so you never forget a friend') }
+      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Четыре игры с живыми вопросами, которые разговорят любой стол', 'Four games with real questions that get any table talking in seconds') },
+      col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» приносит в коллекцию новый 3D-напиток', 'Every clink adds a new 3D drink to your collection') },
+      str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Регулярные встречи с близкими складываются в серию без пропусков', 'Regular meet-ups with your people turn into a streak you won’t want to break') },
+      ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и знакомства. Есть и секретные', 'Badges for meet-ups, streaks and new friends. Some of them are secret') },
+      an:  { ic: 'chart-bar', t: L2('Аналитика', 'Analytics'), d: L2('Понятные графики и факты о друзьях, встречах и напитках за любой период', 'Clear charts and facts about your friends, meet-ups and drinks over time') },
+      rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко напомним написать другу, с которым вы давно не виделись', 'A gentle nudge to text a friend you haven’t seen in a while') }
     };
     // Unified bento header: icon BESIDE title (one row), description below.
     // descMw optionally narrows ONLY the description so it wraps earlier (keeps title row full).
@@ -2218,6 +2220,12 @@
     var a = el.getAttribute('data-act');
     switch (a) {
       case 'promptclose': closeWaitlistPrompt(true); return;
+      case 'menugames': {
+        // First tap unfolds the game list, a second tap goes to the Games page.
+        var gr = document.querySelector('.nav-games-row');
+        if (gr && gr.getAttribute('aria-expanded') !== 'true') { gr.setAttribute('aria-expanded', 'true'); break; }
+        if (state.menuOpen) closeMenu(true); setPage('games'); break;
+      }
       case 'home': case 'games': case 'about': case 'support': case 'privacy': case 'terms': if (state.menuOpen) closeMenu(true); setPage(a); break;
       case 'menu': {
         if (state.menuOpen) closeMenu();
