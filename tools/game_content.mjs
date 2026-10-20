@@ -11,8 +11,8 @@ export const GAME_CONTENT = {
       ru: "В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки."
     },
     tagline: {
-      en: 'Confessions that the table immediately asks you to explain',
-      ru: 'Признания, за которыми стол тут же просит рассказать историю'
+      en: 'Own up and tell the story behind each card',
+      ru: 'Признайся и расскажи историю за каждой карточкой'
     },
     best: {
       en: 'A warmed-up table, once people stopped being polite',
@@ -87,8 +87,8 @@ export const GAME_CONTENT = {
       ru: "В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки."
     },
     tagline: {
-      en: 'The card picks two of you and asks one about the other',
-      ru: 'Карточка сама выбирает двоих и спрашивает одного про другого'
+      en: 'One player answers questions about another',
+      ru: 'Один игрок отвечает на вопросы о другом'
     },
     best: {
       en: 'Friends with shared history, any point of the evening',
@@ -164,8 +164,8 @@ export const GAME_CONTENT = {
       ru: "В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки."
     },
     tagline: {
-      en: 'Questions that get answered with a story instead of one word',
-      ru: 'Вопросы, на которые отвечают историей, а не одним словом'
+      en: 'Share a short story from your life on each card',
+      ru: 'На каждую карточку рассказываешь случай из жизни'
     },
     best: {
       en: 'A slow evening when you actually want to talk',
@@ -240,8 +240,8 @@ export const GAME_CONTENT = {
       ru: "В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."
     },
     tagline: {
-      en: 'Two options that both cost you something, so the table argues',
-      ru: 'Два варианта, и оба чем-то неудобны, поэтому спор неизбежен'
+      en: 'Pick one of two tricky options and explain why',
+      ru: 'Выбери один из двух трудных вариантов и объясни почему'
     },
     best: {
       en: 'The first ten minutes, to wake a quiet table up',

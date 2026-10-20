@@ -270,6 +270,25 @@
         '<div class="faq-body">' + esc(f.a) + '</div></details>';
     }).join('') + '</div>';
   }
+  // FAQ items animate both ways; a native <details> only snaps shut, so the height is driven here.
+  document.addEventListener('click', function (e) {
+    var sum = e.target.closest && e.target.closest('.faq-acc summary');
+    if (!sum) return;
+    var d = sum.parentNode;
+    if (!d.animate || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    e.preventDefault();
+    if (d._faqAnim) { var prev = d._faqAnim; d._faqAnim = null; prev.cancel(); }
+    var from = d.offsetHeight, closing = d.open;
+    if (!closing) d.open = true;
+    var to = closing ? sum.offsetHeight : d.offsetHeight;
+    d.style.overflow = 'hidden';
+    var anim = d._faqAnim = d.animate([{ height: from + 'px' }, { height: to + 'px' }],
+      { duration: closing ? 260 : 320, easing: closing ? 'cubic-bezier(.4,0,.2,1)' : 'cubic-bezier(.2,.7,.2,1)' });
+    // Settle on a timer too: animations stall in background tabs and onfinish may never come.
+    var done = function () { if (d._faqAnim !== anim) return; anim.cancel(); if (closing) d.open = false; d._faqAnim = null; d.style.overflow = ''; };
+    anim.onfinish = done;
+    setTimeout(done, (closing ? 260 : 320) + 60);
+  });
   function buzz(ms) {
     try {
       if (!navigator.vibrate) return;
@@ -946,7 +965,7 @@
             (c ? '<span class="hub-line">' + esc(c.tagline[state.lang]) + '</span>' : '') +
             '<span class="hub-foot">' +
               '<span class="hub-cta">' + esc((L && L.playCta) || 'Play') + '</span>' +
-              (c ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(playersLine(c.min)) + '</span></span>' : '') +
+              (c ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(c.min + '+') + '</span></span>' : '') +
             '</span>' +
           '</a>';
         }).join('') +
@@ -965,7 +984,7 @@
       gamesHub() +
       scenarioStrip() +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
-        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
+        '<div style="max-width:880px;margin:0 auto">' +
           '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
           faqAccordion(FAQ_GAMES[state.lang]) +
         '</div>' +
@@ -1014,7 +1033,7 @@
     if (_gcRequested) return;
     _gcRequested = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=c8c19946';
+    sc.src = '/assets/game-content.js?v=4b2d9d76';
     sc.onload = function () { cb(); };   // stays set: a file without the global must not be refetched on every paint
     sc.onerror = function () { _gcRequested = false; };
     document.head.appendChild(sc);
@@ -1208,7 +1227,7 @@
         '<span class="hub-line">' + esc(sc.tagline[lang]) + '</span>' +
         '<span class="hub-foot">' +
           '<span class="hub-cta">' + esc((L && L.playCta) || (lang === 'ru' ? 'Играть' : 'Play')) + '</span>' +
-          (sc.players ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(sc.players[lang]) + '</span></span>' : '') +
+          (sc.min ? '<span class="hub-meta">' + ph('users-three', 18, '#FF4F62', 'ph-fill') + '<span>' + esc(sc.min + '+') + '</span></span>' : '') +
         '</span>' +
       '</a>');
     }
@@ -1238,7 +1257,7 @@
     if (window.CLINKY_SCENARIOS || document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
-    sc.src = '/assets/scenarios.js?v=1dcd30a2';
+    sc.src = '/assets/scenarios.js?v=189eb207';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
   }

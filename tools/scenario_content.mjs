@@ -5,11 +5,11 @@ export const SCENARIOS = {
   couples: {
     icon: { name: 'heart', weight: 'fill' },
     slug: { en: 'questions/for-couples', ru: 'ru/voprosy/dlya-pary' },
-    players: { en: "For two", ru: "Для двоих" },
+    players: { en: "For two", ru: "Для двоих" }, min: 2,
     h1: { en: "Questions for couples", ru: "Вопросы для пары" },
     tagline: {
-      en: "For the two of you, and not one card asks about your favourite colour",
-      ru: "Для вас двоих, и ни одна карточка не спросит про любимый цвет"
+      en: "Questions that bring the two of you closer",
+      ru: "Сближающие вопросы для вас двоих"
     },
     intro: {
       en: "Couples run out of questions faster than they run out of evenings. Not because there is nothing left to say, but because the easy questions are used up and the real ones feel too heavy to start with. These cards sit in between. Each one asks about something that already happened to you, so the answer arrives as a story rather than a word.",
@@ -209,11 +209,11 @@ export const SCENARIOS = {
   party: {
     icon: { name: 'users-three', weight: 'fill' },
     slug: { en: 'questions/party', ru: 'ru/voprosy/za-stolom' },
-    players: { en: "From four people", ru: "От четырёх человек" },
+    players: { en: "From four people", ru: "От четырёх человек" }, min: 4,
     h1: { en: "Party game questions", ru: "Вопросы для компании" },
     tagline: {
-      en: "For a table that has run out of news, sorted by mood",
-      ru: "Для стола, где новости уже кончились. Вопросы разложены по настроению"
+      en: "Fresh topics for a group around one table",
+      ru: "Новые темы для компании за общим столом"
     },
     intro: {
       en: "Every group has the same twenty minutes: everyone has shared their news, nobody wants to start a topic, and half the table is checking their phone. These cards are for that gap. They ask about the group rather than about the world, so the answers come with names in them and the table argues about who remembers it correctly.",
@@ -414,11 +414,11 @@ export const SCENARIOS = {
   drinks: {
     icon: { name: 'coffee', weight: 'fill' },
     slug: { en: 'questions/drinks', ru: 'ru/voprosy/za-bokalom' },
-    players: { en: 'From two people', ru: 'От двух человек' },
+    players: { en: 'From two people', ru: 'От двух человек' }, min: 2,
     h1: { en: 'Questions to ask over drinks', ru: 'Вопросы за бокалом' },
     tagline: {
-      en: 'For a long table and a slow evening',
-      ru: 'Для долгого стола и неспешного вечера'
+      en: 'Easy talk for a long slow evening',
+      ru: 'Лёгкие разговоры на долгий спокойный вечер'
     },
     intro: {
       en: 'An evening with drinks has its own pace. Nobody is going anywhere, the phones are face down, and conversation stops being an exchange of news. These cards fit that pace: none of them can be answered in a word, and none of them ask anyone to drink for a wrong answer. There are no forfeits here, only questions that hold a table for an hour.',
@@ -616,11 +616,11 @@ export const SCENARIOS = {
   'first-date': {
     icon: { name: 'hand-heart', weight: 'fill' },
     slug: { en: 'questions/first-date', ru: 'ru/voprosy/pervoe-svidanie' },
-    players: { en: "For two", ru: "Для двоих" },
+    players: { en: "For two", ru: "Для двоих" }, min: 2,
     h1: { en: "First date questions", ru: "Вопросы на первом свидании" },
     tagline: {
-      en: "Questions that get a first date past the interview stage",
-      ru: "Чтобы первое свидание не превратилось в собеседование"
+      en: "Keep a first date from feeling like an interview",
+      ru: "Чтобы первое свидание не стало собеседованием"
     },
     intro: {
       en: "First dates fail at the same place: work, city, weekend plans, and then a pause nobody knows how to fill. The fix is not being bolder, it is asking about something specific enough to answer. These cards do that. None of them require a confession, and all of them are hard to answer in one word.",

@@ -2,7 +2,7 @@
   "/": {
     "status": 200,
     "title": "Clinky: Party Question Games for Friends &amp; Couples",
-    "description": "Never Have I Ever, Who Knows Better and question sets for couples, parties and first dates. Play free in the browser, the iPhone app is coming soon.",
+    "description": "Never Have I Ever, Who Knows Better and question sets for couples, parties and first dates. Play free in the browser or get the iPhone app on the App Store.",
     "canonical": "https://clinkyapp.com/",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Turn hangouts into a game",
@@ -18,7 +18,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 200
+    "prerenderWords": 201
   },
   "/play/never-have-i-ever": {
     "status": 200,
@@ -147,15 +147,25 @@
     "prerenderWords": 390
   },
   "/play/would-you-rather": {
-    "status": 503,
-    "title": "Unicorn! &middot; GitHub",
-    "description": "",
-    "canonical": "",
-    "robots": "",
-    "h1": "",
-    "hreflang": [],
-    "schemaTypes": [],
-    "prerenderWords": 0
+    "status": 200,
+    "title": "Would You Rather Questions — Play Free Online",
+    "description": "Would You Rather questions where both options cost you something, so the table actually argues. Play free in the browser, nothing to install.",
+    "canonical": "https://clinkyapp.com/play/would-you-rather",
+    "robots": "index,follow,max-image-preview:large",
+    "h1": "Play Would You Rather online",
+    "hreflang": [
+      "en",
+      "ru",
+      "x-default"
+    ],
+    "schemaTypes": [
+      "FAQPage",
+      "FAQPage",
+      "Organization",
+      "WebPage",
+      "WebSite"
+    ],
+    "prerenderWords": 493
   },
   "/ru/play/chto-vyberesh": {
     "status": 200,
@@ -341,7 +351,7 @@
   "/ru/": {
     "status": 200,
     "title": "Clinky: игры с вопросами для компании и пары",
-    "description": "«Я никогда не», «Кто из нас» и наборы вопросов для пары, компании и первого свидания. Играй бесплатно в браузере, приложение для iPhone скоро в App Store.",
+    "description": "«Я никогда не», «Кто из нас» и наборы вопросов для пары, компании и первого свидания. Играй бесплатно в браузере или скачай приложение для iPhone в App Store.",
     "canonical": "https://clinkyapp.com/ru/",
     "robots": "index,follow,max-image-preview:large",
     "h1": "Преврати встречи в игру",
@@ -357,7 +367,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 148
+    "prerenderWords": 149
   },
   "/games": {
     "status": 200,
@@ -417,7 +427,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 170
+    "prerenderWords": 167
   },
   "/privacy": {
     "status": 200,
@@ -436,7 +446,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 2023
+    "prerenderWords": 2126
   },
   "/terms": {
     "status": 200,
@@ -534,7 +544,7 @@
       "WebPage",
       "WebSite"
     ],
-    "prerenderWords": 1847
+    "prerenderWords": 1927
   },
   "/ru/terms": {
     "status": 200,
