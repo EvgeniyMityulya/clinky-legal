@@ -1133,7 +1133,7 @@
     }
     var idx = state.playIndex % cards.length;
     return '<div style="max-width:430px;margin:0 auto">' +
-      '<div style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
+      '<div class="play-host" style="position:relative;border-radius:30px;background:#fff;box-shadow:0 26px 56px -26px rgba(225,29,72,.4);border:1px solid #e9e6ec;padding:26px 26px 24px;overflow:hidden">' +
         '<div style="display:flex;align-items:center;justify-content:center;margin-bottom:14px">' +
           '<span style="display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;background:#FFEDEF;color:#FF4F62;font-family:Nunito,sans-serif;font-weight:800;font-size:13px">' + gameIcon(gi, '#FF4F62', 17) + esc(GAMES[gi].title[state.lang]) + '</span>' +
         '</div>' +
@@ -2177,7 +2177,13 @@
       '<p class="wl-prompt-sub">' + esc(t.promptSub) + '</p>' +
       '<div id="wl3">' + waitlistForm(false, false, t.promptCta, 'prompt') + '</div>' +
       '<p class="wl-prompt-note">' + esc(APP_LIVE ? t.promptNote : t.heroMicro) + '</p>';
-    document.body.appendChild(box);
+    // Since launch the invite takes over the question card itself; the cross brings the questions back.
+    var host = APP_LIVE && (document.getElementById('qcard') || document.querySelector('.play-host'));
+    if (host) {
+      box.classList.add('in-card');
+      ['pointerdown', 'mousedown', 'touchstart'].forEach(function (ev) { box.addEventListener(ev, function (e) { e.stopPropagation(); }, { passive: true }); });
+      host.appendChild(box);
+    } else document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
     document.addEventListener('keydown', promptEsc);
     track('cta', { c: 'prompt_show' });
@@ -2251,7 +2257,7 @@
         var st = deckState(), lim = deckLimit();
         if (st.used < lim) {
           flushCard('next');
-          st.used += 1; saveDeck(st); trackVisit('cards'); maybeWaitlistPrompt();
+          st.used += 1; saveDeck(st); trackVisit('cards');
           state.playIndex = (state.playIndex + 1) % Math.max(1, deckCards().length);
           var m = document.getElementById('playMount');
           if (m) {
@@ -2259,6 +2265,7 @@
             var line = document.getElementById('playLine');
             if (line) { line.style.animation = 'qSwap .34s cubic-bezier(0.16,1,0.3,1)'; }
           }
+          maybeWaitlistPrompt();   // after the repaint, so the in-card invite lands on the new card
           if (st.used >= lim) track('limit', { g: (own(PLAY_SLUGS, state.playSlug) || {}).id || '' });
           markCard();
         }
