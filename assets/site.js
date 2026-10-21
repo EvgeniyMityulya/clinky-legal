@@ -36,7 +36,7 @@
       heroEyebrow: 'Available on the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
-      promptTitle: 'Enjoying the questions?', promptSub: 'Many more questions are waiting in the app', promptCta: 'Sign me up', promptClose: 'Close',
+      promptTitle: 'Enjoying the questions?', promptSub: 'Every game and deck is in the app. Play right on your phone, even offline', promptNote: 'Free · iPhone · iOS 17+', promptCta: 'Sign me up', promptClose: 'Close',
       heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
@@ -103,7 +103,7 @@
       heroEyebrow: 'Доступно в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
-      promptTitle: 'Понравились вопросы?', promptSub: 'Ещё больше вопросов ждут в приложении', promptCta: 'Записаться', promptClose: 'Закрыть',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении. Играйте прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
       heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
@@ -2041,6 +2041,7 @@
   function onTrackClick(e) {
     // App Store taps are tagged by placement (ct=site-<place> in the link): hero, final, prompt, footer, nav, limit.
     var store = e.target.closest('a[href*="apps.apple.com"]');
+    if (store || e.target.closest('[data-act="join"],[data-act="joinlimit"]')) { try { localStorage.setItem(PROMPT_STORE_KEY, '1'); } catch (er) {} }
     if (store) track('cta', { c: 'store:' + (((store.getAttribute('href') || '').match(/ct=site-([a-z-]+)/) || [])[1] || 'other') });
     else if (e.target.closest('[data-act="join"]')) track('cta', { c: APP_LIVE ? 'store:nav' : 'join' });
     else if (e.target.closest('[data-act="joinlimit"]')) track('cta', { c: 'store:limit' });
@@ -2151,11 +2152,11 @@
   }
   // Waitlist nudge: after a few cards a small card slides up with the same waitlist form.
   // It returns on every page load until the visitor joins; after a signup it never shows again.
-  var PROMPT_AFTER_CARDS = 3, PROMPT_JOINED_KEY = 'clinky_waitlisted';
+  var PROMPT_AFTER_CARDS = 3, PROMPT_JOINED_KEY = 'clinky_waitlisted', PROMPT_STORE_KEY = 'clinky_store_tapped';
   var _promptCards = 0, _promptShown = false;
   function maybeWaitlistPrompt() {
     if (_promptShown || state.waitlistDone) return;
-    try { if (localStorage.getItem(PROMPT_JOINED_KEY)) return; } catch (e) {}
+    try { if (localStorage.getItem(APP_LIVE ? PROMPT_STORE_KEY : PROMPT_JOINED_KEY)) return; } catch (e) {}
     _promptCards += 1;
     if (_promptCards < PROMPT_AFTER_CARDS) return;
     _promptShown = true;
@@ -2175,7 +2176,7 @@
       '<p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p>' +
       '<p class="wl-prompt-sub">' + esc(t.promptSub) + '</p>' +
       '<div id="wl3">' + waitlistForm(false, false, t.promptCta, 'prompt') + '</div>' +
-      '<p class="wl-prompt-note">' + esc(t.heroMicro) + '</p>';
+      '<p class="wl-prompt-note">' + esc(APP_LIVE ? t.promptNote : t.heroMicro) + '</p>';
     document.body.appendChild(box);
     requestAnimationFrame(function () { box.classList.add('is-in'); });
     document.addEventListener('keydown', promptEsc);
