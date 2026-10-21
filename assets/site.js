@@ -36,7 +36,7 @@
       heroEyebrow: 'Available on the App Store',
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
-      promptTitle: 'Enjoying the questions?', promptSub: 'Every game and deck is in the app. Play right on your phone, even offline', promptNote: 'Free · iPhone · iOS 17+', promptCta: 'Sign me up', promptClose: 'Close',
+      promptTitle: 'Enjoying the questions?', promptSub: 'Every game and deck is in the app.\nPlay right on your phone, even offline', promptNote: 'Free · iPhone · iOS 17+', promptCta: 'Sign me up', promptClose: 'Close',
       heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
       heroModel: 'Tap the drink to spin it',
       counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
@@ -103,7 +103,7 @@
       heroEyebrow: 'Доступно в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
-      promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении. Играйте прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении.\nИграйте прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
       heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
       heroModel: 'Нажми на напиток, чтобы покрутить',
       counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
@@ -2174,9 +2174,9 @@
       '<button type="button" data-act="promptclose" class="wl-prompt-x" aria-label="' + esc(t.promptClose) + '">' + ph('x', 16, 'currentColor', 'ph-bold') + '</button>' +
       '<img class="wl-prompt-icon" src="/assets/clinky-icon.png" alt="" width="52" height="52">' +
       '<p id="wlPromptTitle" class="wl-prompt-title">' + esc(t.promptTitle) + '</p>' +
-      '<p class="wl-prompt-sub">' + esc(t.promptSub) + '</p>' +
+      '<p class="wl-prompt-sub">' + t.promptSub.split('\n').map(function (l) { return '<span class="wl-ln">' + esc(l) + '</span>'; }).join('') + '</p>' +
       '<div id="wl3">' + waitlistForm(false, false, t.promptCta, 'prompt') + '</div>' +
-      '<p class="wl-prompt-note">' + esc(APP_LIVE ? t.promptNote : t.heroMicro) + '</p>';
+      (APP_LIVE ? '' : '<p class="wl-prompt-note">' + esc(t.heroMicro) + '</p>');
     // Since launch the invite takes over the question card itself; the cross brings the questions back.
     var host = APP_LIVE && (document.getElementById('qcard') || document.querySelector('.play-host'));
     if (host) {

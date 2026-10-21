@@ -371,3 +371,6 @@ footer .store-badge { width: 150px; }
 .wl-prompt.in-card .wl-prompt-x { top: 14px; right: 14px; width: 34px; height: 34px; }
 .wl-prompt.in-card #wl3 { width: 100%; }
 .wl-prompt.in-card .store-cta { padding: 16px 26px 16px 22px; font-size: 17px; }
+
+.wl-ln { display: block; text-wrap: balance; }
+.wl-prompt.in-card .wl-prompt-sub { margin-bottom: 20px; }
