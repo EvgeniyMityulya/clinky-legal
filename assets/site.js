@@ -2042,7 +2042,7 @@
     // App Store taps are tagged by placement (ct=site-<place> in the link): hero, final, prompt, footer, nav, limit.
     var store = e.target.closest('a[href*="apps.apple.com"]');
     if (store || e.target.closest('[data-act="join"],[data-act="joinlimit"]')) { try { localStorage.setItem(PROMPT_STORE_KEY, '1'); } catch (er) {} }
-    if (store) track('cta', { c: 'store:' + (((store.getAttribute('href') || '').match(/ct=site-([a-z-]+)/) || [])[1] || 'other') });
+    if (store) track('cta', { c: 'store:' + (store.getAttribute('data-ct') || ((store.getAttribute('href') || '').match(/ct=site-([a-z-]+)/) || [])[1] || 'other') });
     else if (e.target.closest('[data-act="join"]')) track('cta', { c: APP_LIVE ? 'store:nav' : 'join' });
     else if (e.target.closest('[data-act="joinlimit"]')) track('cta', { c: 'store:limit' });
     else if (e.target.closest('#playLink')) track('cta', { c: 'play' });
@@ -2162,8 +2162,105 @@
     _promptShown = true;
     showWaitlistPrompt();
   }
+  // Since launch the card prompt is a two-step special offer: first the yearly discount, and if the
+  // visitor closes it, a 7-day free week with a countdown to the real end of both codes (5 Nov).
+  var OFFER_END = new Date(2026, 10, 5, 23, 59, 59);
+  var OFFER_LINK = 'https://apps.apple.com/redeem?ctx=offercodes&id=6777998850&code=';
+  var OFFER_TEXT = {
+    ru: {
+      year: { badge: 'Спецпредложение', top: 'Скидка на годовую Pro', big: 'от&nbsp;40%', cta: 'Скачать со скидкой' },
+      week: { badge: 'Последний шанс', top: 'Держи 7&nbsp;дней Pro', big: 'бесплатно', cta: 'Скачать бесплатно' },
+      ends: 'Предложение сгорит через', units: ['час', 'мин', 'сек']
+    },
+    en: {
+      year: { badge: 'Special offer', top: 'Yearly Pro', big: '40%&nbsp;off', cta: 'Download with the discount' },
+      week: { badge: 'Last chance', top: 'Take 7&nbsp;days of Pro', big: 'for&nbsp;free', cta: 'Download for free' },
+      ends: 'The offer burns out in', units: ['hrs', 'min', 'sec']
+    }
+  };
+  // One honest hour per browser: the countdown starts on the first show, and once it runs out
+  // this browser is not offered the deal on the site again (the codes themselves last until 5 Nov).
+  var OFFER_KEY = 'clinky_offer_until', OFFER_WINDOW = (59 * 60 + 59) * 1000;
+  function offerDeadline() {
+    var until = 0;
+    try { until = +localStorage.getItem(OFFER_KEY) || 0; } catch (e) {}
+    if (!until) { until = Date.now() + OFFER_WINDOW; try { localStorage.setItem(OFFER_KEY, String(until)); } catch (e) {} }
+    return Math.min(until, +OFFER_END);
+  }
+  function offerOpen() {
+    var until = 0;
+    try { until = +localStorage.getItem(OFFER_KEY) || 0; } catch (e) {}
+    return Date.now() < +OFFER_END && (!until || Date.now() < until);
+  }
+  var offerTimer = null;
+  function offerDigits() {
+    var sec = Math.max(0, Math.floor((offerDeadline() - Date.now()) / 1000));
+    var two = function (n) { return (n < 10 ? '0' : '') + n; };
+    return two(Math.floor(sec / 3600)) + two(Math.floor(sec % 3600 / 60)) + two(sec % 60);
+  }
+  function timerHtml(units) {
+    var d = offerDigits(), html = '';
+    for (var g = 0; g < 3; g++) {
+      html += (g ? '<span class="ot-sep">:</span>' : '') + '<span class="ot-cell"><span class="ot-num">' +
+        [0, 1].map(function (k) { return '<span class="ot-col"><span class="ot-strip"><span>' + d[g * 2 + k] + '</span></span></span>'; }).join('') +
+        '</span><i>' + units[g] + '</i></span>';
+    }
+    return html;
+  }
+  function tickTimer(box) {
+    var d = offerDigits(), strips = box.querySelectorAll('.ot-strip');
+    strips.forEach(function (strip, k) {
+      var cur = strip.lastChild.textContent;
+      if (cur === d[k]) return;
+      // stack [new, old], start showing old, slide down so the new digit falls in from above
+      strip.innerHTML = '<span>' + d[k] + '</span><span>' + cur + '</span>';
+      strip.style.transition = 'none'; strip.style.transform = 'translateY(-50%)';
+      void strip.offsetWidth;
+      strip.style.transition = 'transform .45s cubic-bezier(.42,.06,.22,1)'; strip.style.transform = 'translateY(0)';
+      setTimeout(function () { if (strip.firstChild && strip.childNodes.length > 1) { strip.removeChild(strip.lastChild); strip.style.transition = 'none'; strip.style.transform = 'none'; } }, 480);
+    });
+    return d;
+  }
+  function renderOfferStep(box, step) {
+    var L = OFFER_TEXT[state.lang === 'ru' ? 'ru' : 'en'], o = L[step], code = step === 'year' ? 'CLINKYFRIENDS' : 'CLINKY7DAYS', C = '#FF4F62';
+    var spark = function (sz, pos, op, c, d) { return sparkle({ s: sz, pos: pos, op: op, c: c, glow: 'rgba(255,79,98,.3)', anim: 'twinkle ' + (3.4 + d) + 's ease-in-out ' + d + 's infinite' }); };
+    box.setAttribute('data-step', step);
+    box.innerHTML =
+      spark(18, 'top:9%;left:7%', .6, C, 0) + spark(10, 'top:22%;left:20%', .45, '#FF8A97', .5) + spark(13, 'top:12%;right:22%', .5, C, .9) +
+      spark(9, 'top:34%;right:7%', .45, '#FF8A97', .3) + spark(15, 'top:48%;left:5%', .5, C, 1.2) + spark(11, 'bottom:30%;right:9%', .5, C, .7) +
+      spark(17, 'bottom:12%;left:10%', .55, C, .4) + spark(10, 'bottom:9%;right:24%', .45, '#FF8A97', 1) +
+      '<button type="button" data-act="promptclose" class="wl-prompt-x" aria-label="' + esc(tdict().promptClose) + '">' + ph('x', 16, 'currentColor', 'ph-bold') + '</button>' +
+      '<div class="offer-body">' +
+        '<span class="offer-badge">' + esc(o.badge) + '</span>' +
+        '<p id="wlPromptTitle" class="offer-title">' + o.top + '<span class="offer-big">' + o.big + '</span></p>' +
+        '<p class="offer-ends">' + esc(L.ends) + '</p>' +
+        '<div class="offer-timer" role="timer">' + timerHtml(L.units) + '</div>' +
+        '<a class="cta-btn store-cta offer-cta" data-ct="prompt-' + step + '" href="' + OFFER_LINK + code + '" target="_blank" rel="noopener"><span>' + esc(o.cta) + '</span></a>' +
+      '</div>';
+    clearInterval(offerTimer);
+    offerTimer = setInterval(function () {
+      if (!document.body.contains(box)) { clearInterval(offerTimer); return; }
+      // time is up: the offer quietly folds away and the questions carry on
+      if (tickTimer(box) === '000000') { clearInterval(offerTimer); track('cta', { c: 'offer_expired' }); setTimeout(function () { closeWaitlistPrompt(false); }, 600); }
+    }, 1000);
+    track('cta', { c: 'offer_' + step });
+  }
   function showWaitlistPrompt() {
     var t = tdict();
+    if (APP_LIVE && offerOpen()) {
+      var host0 = document.getElementById('qcard') || document.querySelector('.play-host');
+      if (host0) {
+        var ob = document.createElement('div');
+        ob.id = 'wlPrompt'; ob.className = 'wl-prompt in-card offer'; ob.setAttribute('role', 'dialog'); ob.setAttribute('aria-labelledby', 'wlPromptTitle');
+        ['pointerdown', 'mousedown', 'touchstart'].forEach(function (ev) { ob.addEventListener(ev, function (e) { e.stopPropagation(); }, { passive: true }); });
+        renderOfferStep(ob, 'year');
+        host0.appendChild(ob);
+        requestAnimationFrame(function () { ob.classList.add('is-in'); });
+        document.addEventListener('keydown', promptEsc);
+        track('cta', { c: 'prompt_show' });
+        return;
+      }
+    }
     var box = document.createElement('div');
     box.id = 'wlPrompt'; box.className = 'wl-prompt'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-labelledby', 'wlPromptTitle');
     var C = '#FF4F62';
@@ -2226,7 +2323,19 @@
     var el = e.target.closest('[data-act]'); if (!el) return;
     var a = el.getAttribute('data-act');
     switch (a) {
-      case 'promptclose': closeWaitlistPrompt(true); return;
+      case 'promptclose': {
+        var pb = document.getElementById('wlPrompt');
+        if (pb && pb.getAttribute('data-step') === 'year') {
+          // the card stays put; only its content fades out and the free week fades in
+          track('cta', { c: 'offer_year_close' });
+          var bodyEl = pb.querySelector('.offer-body');
+          if (bodyEl) bodyEl.classList.add('is-out');
+          setTimeout(function () { renderOfferStep(pb, 'week'); }, 220);
+          return;
+        }
+        if (pb && pb.getAttribute('data-step') === 'week') track('cta', { c: 'offer_week_close' });
+        closeWaitlistPrompt(true); return;
+      }
       case 'menugames': {
         // First tap unfolds the game list, a second tap goes to the Games page.
         var gr = document.querySelector('.nav-games-row');
