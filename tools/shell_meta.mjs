@@ -120,7 +120,7 @@ export const SHELLS = [
   {
     file: 'play/who-knows-better.html', loc: 'en', path: '/play/who-knows-better', altRu: '/ru/play/kto-iz-nas',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'roulette',
-    title: 'How Well Do You Know Your Friends — Free Game',
+    title: 'Questions About Your Friends — Who Knows Better Game',
     description: 'Questions about the people at your table. The card picks two friends and asks one about the other, so the answers turn into stories. Free, no sign-up.',
     ogTitle: 'Who Knows Better — the question game about your own friends',
     ogDescription: 'The card picks the pair. Play free in the browser.'
@@ -136,7 +136,7 @@ export const SHELLS = [
   {
     file: 'play/questions-to-ask-friends.html', loc: 'en', path: '/play/questions-to-ask-friends', altRu: '/ru/play/voprosy-druzyam',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
-    title: 'Questions to Ask Friends — 24 Free Cards to Play',
+    title: 'Questions to Ask Friends — 20 Free Cards to Read and Play',
     description: 'Questions to ask friends when the talk runs dry, 24 of them free. Each one asks for a story instead of a one-word answer. No sign-up needed.',
     ogTitle: 'Questions to ask friends — play online',
     ogDescription: 'Ask for a moment, not an opinion. Free, no sign-up.'

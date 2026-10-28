@@ -215,7 +215,7 @@
 
   var FAQ_GAMES = {
     en: [
-      { q: "Is there a limit on how many cards I can draw?", a: "On the free plan you get three new cards a day across all four games together. Pro removes the limit, and cards you already drew stay readable either way." },
+      { q: "Is there a limit on how many cards I can draw?", a: "On this site you can draw 8 cards a day for free. In the app the free plan gives three new cards per game every week, and Pro removes the limit. Cards you already drew stay readable either way." },
       { q: "Can I switch games in the middle of an evening?", a: "Any time. Switching does not reset anything, and the cards you already played stay marked as played." },
       { q: "Does it work with no internet?", a: "Fully. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing." },
       { q: "Are the questions we played saved?", a: "Every card you draw is saved to that meet-up, so you can look back at what you talked about. The ones you liked are collected as favourites." },
@@ -223,7 +223,7 @@
       { q: "How many people do you need?", a: "Three games work from two people. Who Knows Better needs three, because its cards ask one person about another." }
     ],
     ru: [
-      { q: "Есть лимит на количество карточек?", a: "На бесплатном тарифе три новых карточки в день на все четыре игры вместе. Pro снимает лимит, а уже вытянутые карточки остаются доступными в любом случае." },
+      { q: "Есть лимит на количество карточек?", a: "На сайте бесплатно 8 карточек в день. В приложении на бесплатном тарифе три новых карточки в каждой игре за неделю, а Pro снимает лимит. Уже вытянутые карточки остаются доступными в любом случае." },
       { q: "Можно менять игру посреди вечера?", a: "В любой момент. Переключение ничего не сбрасывает, а карточки, в которые уже играли, остаются отмеченными." },
       { q: "Работает без интернета?", a: "Полностью. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет." },
       { q: "Сохраняются ли вопросы, которые мы прошли?", a: "Каждая вытянутая карточка сохраняется к этой встрече, так что можно вернуться и посмотреть, о чём говорили. Понравившиеся собираются в избранных." },
@@ -1160,7 +1160,7 @@
     ru: { never_have_i: '«Я никогда не»', roulette: '«Кто из нас»', tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»' },
     en: { never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
   };
-  var PLAY_H1 = { en: { roulette: 'How well do you know your friends' } };
+  var PLAY_H1 = { en: { roulette: 'Questions about your friends' }, ru: { tell_a_moment: 'Вопросы друзьям, чтобы разговорить компанию' } };
   var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
   function renderPlay() {
     var t = tdict(), meta = own(PLAY_SLUGS, state.playSlug) || {};
@@ -1492,8 +1492,25 @@
       case 'support': return renderSupport();
       case 'privacy': return renderLegal('privacy');
       case 'terms': return renderLegal('terms');
+      case 'notfound': return renderNotFound();
       default: return renderHome();
     }
+  }
+
+  // Friendly 404: says what happened and offers the games right away instead of a dead end.
+  function renderNotFound() {
+    var ru = state.lang === 'ru';
+    return '<div class="page-in">' +
+      '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
+        '<div style="max-width:640px;margin:0 auto;text-align:center">' +
+          '<div class="nf-code">404</div>' +
+          h1sec(ru ? 'Такой страницы нет' : 'This page does not exist') +
+          subsec(ru ? 'Возможно, ссылка устарела. Зато вопросы на месте, выбирай игру и начинай' : 'The link may be old. The questions are all here though, pick a game and start') +
+          '<div style="margin-top:22px">' + coralBtn(ru ? 'На главную' : 'Go to the home page', 'home') + '</div>' +
+        '</div>' +
+      '</section>' +
+      gamesHub() + scenarioStrip() +
+    '</div>';
   }
 
   // ===== paint =====
@@ -1838,7 +1855,8 @@
       var sslug = seg.slice(qPrefix);
       if (own(SCENARIO_SLUGS, sslug)) { state.scenarioSlug = sslug; return 'scenario'; }
     }
-    return own(PAGES, seg) ? seg : 'home';
+    if (own(PAGES, seg)) return seg;
+    return seg ? 'notfound' : 'home';   // a real address that we do not have gets its own page, not a silent home
   }
   function playHrefFor(gameIndex, lang) {
     var slug = playSlugFor(GAME_IDS[gameIndex], lang);
@@ -1861,13 +1879,15 @@
       var slug = playSlugFor(cur.id, lang) || state.playSlug;
       return (lang === 'ru' ? '/ru/play/' : '/play/') + slug;
     }
+    if (page === 'notfound') return location.pathname;
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
-  var DOC_TITLES = {"/":"Clinky: Party Question Games for Friends & Couples","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky: игры с вопросами для компании и пары","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"How Well Do You Know Your Friends — Free Game","/ru/play/kto-iz-nas":"Игра «Кто из нас», вопросы онлайн бесплатно","/play/questions-to-ask-friends":"Questions to Ask Friends — 24 Free Cards to Play","/ru/play/voprosy-druzyam":"Вопросы друзьям, много карточек для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары, много карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы для компании друзей, много карточек онлайн","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании, много карточек онлайн","/questions/drinks":"Questions to Ask Over Drinks — Free Card Game","/ru/voprosy/za-bokalom":"Вопросы за бокалом, много карточек для вечера","/404":"Page Not Found — Clinky"};
+  var DOC_TITLES = {"/":"Clinky: Party Question Games for Friends & Couples","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky: игры с вопросами для компании и пары","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"Questions About Your Friends — Who Knows Better Game","/ru/play/kto-iz-nas":"Игра «Кто из нас», вопросы онлайн бесплатно","/play/questions-to-ask-friends":"Questions to Ask Friends — 20 Free Cards to Read and Play","/ru/play/voprosy-druzyam":"Вопросы друзьям, много карточек для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары, много карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы для компании друзей, много карточек онлайн","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании, много карточек онлайн","/questions/drinks":"Questions to Ask Over Drinks — Free Card Game","/ru/voprosy/za-bokalom":"Вопросы за бокалом, много карточек для вечера","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     var v = own(DOC_TITLES, k) || own(DOC_TITLES, k + '/');
+    if (state.page === 'notfound') v = state.lang === 'ru' ? 'Страница не найдена — Clinky' : DOC_TITLES['/404'];
     if (v) document.title = v;
   }
   var _pageKey = '';
@@ -2406,6 +2426,12 @@
     try { state.source = captureSource(); } catch (e) {}
     trackVisit('pages');
     state.page = pageFromPath();
+    try {
+      var rawPath = location.pathname;
+      if (state.page !== 'notfound' && rawPath !== '/' && rawPath !== '/ru/' && /(\/|\.html)$/.test(rawPath)) history.replaceState(null, '', pathFor(state.page, state.lang) + location.search + location.hash);
+      // 404.html carries its own <title>; a cleaned address or a Russian 404 needs the right one
+      if (state.page === 'notfound' || rawPath !== location.pathname) syncDocTitle();
+    } catch (e) {}
     try {   // ?demo=support / ?demo=waitlist — preview the success banner without submitting, local preview only
       var demo = isLocalPreview() ? new URLSearchParams(location.search).get('demo') : null;
       if (demo === 'support') { state.page = 'support'; state.supportDone = true; }

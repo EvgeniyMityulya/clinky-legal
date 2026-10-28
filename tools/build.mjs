@@ -47,6 +47,11 @@ ${URLS.map((u) => `  <url>
 writeFileSync('robots.txt', `User-agent: *
 Allow: /
 
+# Yandex: these parameters only tag a visit or a campaign, the page is the same without them
+User-agent: Yandex
+Allow: /
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&ct&ref&source&lang&x&clink
+
 Sitemap: ${SITE}/sitemap.xml
 `);
 

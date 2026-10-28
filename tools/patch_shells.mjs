@@ -19,7 +19,8 @@ const EN_TITLE = {
   tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather'
 };
 // У этой игры целевая фраза длиннее названия, поэтому h1 задан отдельно.
-const EN_H1 = { roulette: 'How well do you know your friends' };
+const EN_H1 = { roulette: 'Questions about your friends' };
+const RU_H1 = { tell_a_moment: 'Вопросы друзьям, чтобы разговорить компанию' };
 const PLAY_EN = {
   never_have_i: '/play/never-have-i-ever', roulette: '/play/who-knows-better',
   tell_a_moment: '/play/questions-to-ask-friends', would_you_rather: '/play/would-you-rather'
@@ -193,7 +194,7 @@ function legalBody(which, loc) {
 function simplePrerender(s) {
   const loc = s.loc;
   const nav = loc === 'ru'
-    ? [['Главная', `${SITE}/`], ['Игры', '/games'], ['Приватность', '/privacy-ru'], ['Условия', '/terms-ru']]
+    ? [['Главная', '/ru/'], ['Игры', '/ru/games'], ['Приватность', '/ru/privacy'], ['Условия', '/ru/terms']]
     : [['Home', `${SITE}/`], ['Games', '/games'], ['About', '/about'], ['Support', '/support'], ['Privacy', '/privacy'], ['Terms', '/terms']];
   const heading = s.title.split(/ — |—/)[0];
   const base = s.file.split('/').pop();
@@ -267,16 +268,25 @@ function webDeck() {
   return WEB_DECK_CACHE;
 }
 
+// Questions shown as plain text on each game page: enough to match list-style results, the full deck stays in the app.
+const PRERENDER_CARDS = 20;
+function playCards(s) {
+  const entry = webDeck().games[s.play] || {};
+  const nm = (entry.names || {})[s.loc] || ['Alex', 'Sam'];
+  return (entry[s.loc] || []).slice(0, PRERENDER_CARDS)
+    .map((x) => String(x).replace(/\{A\}/g, () => nm[0]).replace(/\{B\}/g, () => nm[1]).replace(/\*/g, ''));
+}
+
 function playPrerender(s) {
   const loc = s.loc;
   const deck = webDeck();
   const game = GAMES_META.find((g) => g.id === s.play) || GAMES_META[0];
   const entry = deck.games[s.play] || {};
   const nm = (entry.names || {})[loc] || ['Alex', 'Sam'];
-  const cards = (entry[loc] || []).slice(0, 6)
+  const cards = (entry[loc] || []).slice(0, PRERENDER_CARDS)
     .map((x) => String(x).replace(/\{A\}/g, () => nm[0]).replace(/\{B\}/g, () => nm[1]).replace(/\*/g, ''));
   const t = loc === 'ru'
-    ? { h1: `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: GAME_CONTENT[s.play]?.answer?.ru || 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
+    ? { h1: RU_H1[s.play] || `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: GAME_CONTENT[s.play]?.answer?.ru || 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры', limit: `Бесплатно ${deck.limit} карточек в день, обновляются каждый день.`,
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
     : { h1: EN_H1[s.play] || `Play ${EN_TITLE[s.play] || game.title.en} online`, lede: GAME_CONTENT[s.play]?.answer?.en || 'Tap for a new card. No sign-up, nothing to install.',
@@ -299,6 +309,7 @@ function playPrerender(s) {
 <ol>${c.rules[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
 <h2>${esc(L.examples)}</h2>
 <ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+<p><a href="https://apps.apple.com/app/id6777998850">${loc === 'ru' ? 'Все вопросы этой игры в приложении Clinky для iPhone' : 'Every question of this game is in the Clinky app for iPhone'}</a></p>
 <h2>${esc(L.variants)}</h2>
 <ol>${c.variants[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.advice)}</h2>
@@ -349,6 +360,27 @@ function stripPhosphor(html) {
     .replace(/[ \t]*<noscript>\s*<link[^>]*phosphor-icons[^>]*>\s*<\/noscript>\s*\n?/g, '');
 }
 
+// Home > Games > page, so results show where a page sits instead of a bare URL.
+function breadcrumbs(s) {
+  if (s.home) return null;
+  const ru = s.loc === 'ru';
+  const home = [ru ? 'Главная' : 'Home', `${SITE}${ru ? '/ru/' : '/'}`];
+  const games = [ru ? 'Игры' : 'Games', `${SITE}${ru ? '/ru/games' : '/games'}`];
+  const self = [s.title.split(/ — |—/)[0].trim(), `${SITE}${s.canonicalOverride || s.path}`];
+  const isGames = /(^|\/)games\.html$/.test(s.file);
+  const trail = isGames ? [home, games] : (s.play || s.scenario) ? [home, games, self] : [home, self];
+  return {
+    '@type': 'BreadcrumbList',
+    itemListElement: trail.map(([name, item], i) => ({ '@type': 'ListItem', position: i + 1, name, item }))
+  };
+}
+
+function scenarioCardsFor(s) {
+  const sc = SCENARIOS[s.scenario];
+  const all = sc.groups ? sc.groups.flatMap((g) => g[s.loc] || []) : (sc.cards[s.loc] || []);
+  return all.slice(0, 30);
+}
+
 function jsonld(s) {
   const canonical = s.path === '/' ? `${SITE}/` : `${SITE}${s.path}`;
   const canonicalForSchema = s.canonicalOverride ? `${SITE}${s.canonicalOverride}` : canonical;
@@ -375,7 +407,10 @@ function jsonld(s) {
       '@type': 'MobileApplication', '@id': `${SITE}/#app`, name: 'Clinky',
       applicationCategory: 'EntertainmentApplication', operatingSystem: 'iOS 17.0 or later',
       url: `${SITE}/`, image: ogImage(s),
-      description: 'Track who you meet, play party-game question cards and collect a 3D drink for every clink. Offline-first, no accounts.',
+      description: s.loc === 'ru'
+        ? 'Карточки-игры с вопросами для компании и пары, планировщик встреч, достижения и 3D-напиток за каждый «чок». Работает без интернета и без аккаунта.'
+        : 'Party-game question cards for friends and couples, a meet-up planner, achievements and a 3D drink for every clink. Works offline, no account.',
+      inLanguage: s.loc,
       downloadUrl: 'https://apps.apple.com/app/id6777998850', installUrl: 'https://apps.apple.com/app/id6777998850',
       offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
       publisher: { '@id': `${SITE}/#org` },
@@ -394,9 +429,16 @@ function jsonld(s) {
       graph.push({ ...author, knowsAbout: ['iOS development', 'Swift', 'SwiftUI', 'party games'] });
     }
     if (s.play && GAME_CONTENT[s.play]) graph.push(faqSchema(GAME_CONTENT[s.play].faq[s.loc]));
-    if (s.scenario && SCENARIOS[s.scenario]) graph.push(faqSchema(SCENARIOS[s.scenario].faq[s.loc]));
+    else if (s.scenario && SCENARIOS[s.scenario]) graph.push(faqSchema(SCENARIOS[s.scenario].faq[s.loc]));
     else if (s.faq === 'games') graph.push(faqSchema(FAQ_GAMES[s.loc]));
     else if (s.faq) graph.push(faqSchema(FAQ_SUPPORT[s.loc]));
+    const crumbs = breadcrumbs(s);
+    if (crumbs) graph.push(crumbs);
+    const list = s.play ? playCards(s) : (s.scenario && SCENARIOS[s.scenario] ? scenarioCardsFor(s) : null);
+    if (list && list.length) graph.push({
+      '@type': 'ItemList', name: s.title.split(/ — |—|,/)[0].trim(), numberOfItems: list.length,
+      itemListElement: list.map((q, i) => ({ '@type': 'ListItem', position: i + 1, name: q }))
+    });
   }
   return { '@context': 'https://schema.org', '@graph': graph };
 }
