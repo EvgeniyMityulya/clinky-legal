@@ -485,6 +485,7 @@ function seoBlock(s) {
   rows.push(PRERENDER_CSS);
   rows.push("<script>document.documentElement.classList.add('motion-ready');setTimeout(function(){if(!window.clinkyInitReveals)document.documentElement.classList.remove('motion-ready')},1500)</script>");
   rows.push(`<script defer src="/assets/motion.min.js?v=${assetVer('assets/motion.min.js')}"></script>`);
+  rows.push(`<script defer src="/assets/clarity.js?v=${assetVer('assets/clarity.js')}"></script>`);
   if (CF_BEACON) rows.push(`<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"${CF_BEACON}"}'></script>`);
   rows.push('<!-- seo:end -->');
   return rows.join('\n');
