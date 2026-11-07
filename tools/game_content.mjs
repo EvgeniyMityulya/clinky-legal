@@ -315,12 +315,17 @@ export const CONTENT_LABELS = {
     about: 'What is this game?', rules: 'Rules', variants: 'How else can you play?',
     advice: 'Advice for the host', examples: 'Cards from the set',
     fitPlayers: 'How many players?', fitBest: 'When does it land?', faq: 'Questions about this game',
-    playCta: 'Play'
+    playCta: 'Play',
+    // headings that name the game match how people search for it
+    aboutFor: { never_have_i: 'What is Never Have I Ever?', roulette: 'What is Who Knows Better?', tell_a_moment: 'How do these questions work?', would_you_rather: 'What is Would You Rather?' },
+    rulesFor: { never_have_i: 'How to play Never Have I Ever', roulette: 'How to play Who Knows Better', tell_a_moment: 'How to play with these questions', would_you_rather: 'How to play Would You Rather' }
   },
   ru: {
     about: 'Что за игра?', rules: 'Правила', variants: 'Как ещё играть?',
     advice: 'Рекомендации по игре', examples: 'Карточки из набора',
     fitPlayers: 'Сколько игроков?', fitBest: 'Когда заходит?', faq: 'Вопросы про эту игру',
-    playCta: 'Играть'
+    playCta: 'Играть',
+    aboutFor: { never_have_i: 'Что за игра «Я никогда не»?', roulette: 'Что за игра «Кто из нас»?', tell_a_moment: 'Как устроены эти вопросы?', would_you_rather: 'Что за игра «Что выберешь»?' },
+    rulesFor: { never_have_i: 'Как играть в «Я никогда не»', roulette: 'Как играть в «Кто из нас»', tell_a_moment: 'Как играть с этими вопросами', would_you_rather: 'Как играть в «Что выберешь»' }
   }
 };

@@ -1,4 +1,4 @@
-import { readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 const assetVer = (file) => {
   try { return createHash('md5').update(readFileSync(file)).digest('hex').slice(0, 8); }
@@ -115,7 +115,7 @@ function sampleQuestions(loc, n) {
       qs = items.slice(0, n).map((q) => q.text[loc]
         .replace(/\{A\}/g, () => names.A).replace(/\{B\}/g, () => names.B).replace(/\*/g, ''));
     } catch (e) {}
-    return { title: g.title[loc], href: '/games', qs };
+    return { title: g.title[loc], href: playHref(g.id, loc), qs };
   });
 }
 
@@ -131,7 +131,7 @@ function homePrerender(loc) {
         insideTitle: 'Всё для встреч в одном месте',
         inside: [['Не теряй друзей', 'Помни, кого и когда видел и с кем давно не пересекался.'], ['Чокнись чем угодно', 'Кофе, чай, бокал вина или пиво. Главное, что вы вместе.'], ['Игры для компании', 'Карточки-игры, которые разговорят любой стол за секунды.']],
         hubTitle: 'Бесплатные наборы вопросов',
-        nav: [['Главная', '/'], ['Игры', '/games'], ['О нас', '/about'], ['Поддержка', '/support']]
+        nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']]
       }
     : {
         eyebrow: 'Available on the App Store', h1: 'Turn hangouts into a game',
@@ -161,7 +161,7 @@ ${samples.map((s) => `<h3><a href="${safeHref(s.href)}">${esc(s.title)}</a></h3>
 <h2>${esc(t.insideTitle)}</h2>
 ${t.inside.map(([h, d]) => `<h3>${esc(h)}</h3><p>${esc(d)}</p>`).join('\n')}
 <h2>${esc(t.hubTitle)}</h2>
-<ul>${GAMES_META.map((g) => `<li><a href="/games">${esc(g.title[loc])}</a></li>`).join('')}</ul>
+<ul>${GAMES_META.map((g) => `<li><a href="${safeHref(playHref(g.id, loc))}">${esc(g.title[loc])}</a></li>`).join('')}${Object.values(SCENARIOS).map((sc) => `<li><a href="${safeHref('/' + sc.slug[loc])}">${esc(sc.h1[loc])}</a></li>`).join('')}</ul>
 </div>`;
 }
 
@@ -228,7 +228,7 @@ function gamesPrerender(loc) {
   const t = loc === 'ru'
     ? { h1: 'Игры для компании', lede: 'Выбери игру, посмотри, как она идёт, и полистай настоящие карточки из приложения.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры',
-        nav: [['Главная', '/'], ['Игры', '/games'], ['О нас', '/about'], ['Поддержка', '/support']] }
+        nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
     : { h1: 'Games for any table', lede: 'Pick a game, see how it runs and flick through real cards from the app.',
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games',
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
@@ -270,6 +270,11 @@ function webDeck() {
 
 // Questions shown as plain text on each game page: enough to match list-style results, the full deck stays in the app.
 const PRERENDER_CARDS = 20;
+// a game's own page in the reader's language, the games hub when the deck has no slug for it
+function playHref(id, loc) {
+  const slug = (webDeck().games[id] || {}).slug || {};
+  return slug[loc] ? `/${slug[loc]}` : (loc === 'ru' ? '/ru/games' : '/games');
+}
 function playCards(s) {
   const entry = webDeck().games[s.play] || {};
   const nm = (entry.names || {})[s.loc] || ['Alex', 'Sam'];
@@ -301,11 +306,11 @@ function playPrerender(s) {
 <h1>${esc(t.h1)}</h1>
 <p>${esc(t.lede)}</p>
 <p>${esc(t.limit)}</p>
-<h2>${esc(L.about)}</h2>
+<h2>${esc((L.aboutFor || {})[s.play] || L.about)}</h2>
 <p>${esc(L.fitPlayers)} ${esc(playersLine(c.min, loc))}</p>
 <p>${esc(L.fitBest)} ${esc(c.best[loc])}</p>
 <p>${esc(c.intro[loc])}</p>
-<h2>${esc(L.rules)}</h2>
+<h2>${esc((L.rulesFor || {})[s.play] || L.rules)}</h2>
 <ol>${c.rules[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
 <h2>${esc(L.examples)}</h2>
 <ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
@@ -386,17 +391,19 @@ function jsonld(s) {
   const canonicalForSchema = s.canonicalOverride ? `${SITE}${s.canonicalOverride}` : canonical;
   const website = {
     '@type': 'WebSite', '@id': `${SITE}/#website`, url: `${SITE}/`, name: 'Clinky',
-    inLanguage: 'en',
+    inLanguage: ['en', 'ru'],
     publisher: { '@id': `${SITE}/#org` },
     description: 'Clinky is an iOS app for hangouts with friends: question cards, a log of every meet-up and a 3D drink for each clink.'
   };
   const organization = {
     '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Clinky', url: `${SITE}/`,
-    logo: { '@type': 'ImageObject', url: `${SITE}/assets/clinky-icon.png`, width: 512, height: 512 }
+    logo: { '@type': 'ImageObject', url: `${SITE}/assets/clinky-icon.png`, width: 512, height: 512 },
+    sameAs: ['https://apps.apple.com/app/id6777998850'],
+    contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: 'support@clinkyapp.com', availableLanguage: ['en', 'ru'] }
   };
   const author = {
     '@type': 'Person', '@id': `${SITE}/#author`,
-    name: ABOUT[s.loc].name, jobTitle: ABOUT[s.loc].role,
+    name: ABOUT[s.loc].name, jobTitle: ABOUT[s.loc].role.replace(/@/g, ''),
     ...(AUTHOR_LINKS.length ? { sameAs: AUTHOR_LINKS.map((l) => assertSafeUrl(l.href)) } : {}),
     ...(AUTHOR_PHOTO ? { image: assertSafeUrl(`${SITE}${AUTHOR_PHOTO}`) } : {})
   };
@@ -423,8 +430,27 @@ function jsonld(s) {
   } else {
     graph.push({
       '@type': 'WebPage', '@id': canonical, url: canonical, name: s.title,
-      description: s.description, inLanguage: s.loc, isPartOf: { '@id': `${SITE}/#website` }
+      description: s.description, inLanguage: s.loc, isPartOf: { '@id': `${SITE}/#website` },
+      ...(s.dateModified ? { dateModified: s.dateModified } : {})
     });
+    // question sets are written pieces: Article carries who wrote them and when they last changed
+    if (s.scenario && SCENARIOS[s.scenario]) {
+      graph.push(author);
+      graph.push({
+        '@type': 'Article', '@id': `${canonical}#article`, headline: s.title.split(/ — |—/)[0].trim(),
+        description: s.description, inLanguage: s.loc, url: canonical, image: ogImage(s),
+        mainEntityOfPage: { '@id': canonical }, author: { '@id': `${SITE}/#author` }, publisher: { '@id': `${SITE}/#org` },
+        ...(s.datePublished ? { datePublished: s.datePublished } : {}),
+        ...(s.dateModified ? { dateModified: s.dateModified } : {})
+      });
+    }
+    if (s.faq === 'games' && !s.play) {
+      const games = SHELLS.filter((x) => x.play && x.loc === s.loc);
+      graph.push({
+        '@type': 'ItemList', name: s.title.split(/ — |—/)[0].trim(), numberOfItems: games.length,
+        itemListElement: games.map((g, i) => ({ '@type': 'ListItem', position: i + 1, url: `${SITE}${g.path}`, name: g.title.split(/ — |—/)[0].trim() }))
+      });
+    }
     if (/^about/.test(s.file.split('/').pop())) {
       graph.push({ ...author, knowsAbout: ['iOS development', 'Swift', 'SwiftUI', 'party games'] });
     }
@@ -451,7 +477,9 @@ function seoBlock(s) {
     '<!-- seo:start -->',
     `<meta name="robots" content="${s.robots}">`,
     `<title>${esc(s.title)}</title>`,
-    `<meta name="description" content="${esc(s.description)}">`
+    `<meta name="description" content="${esc(s.description)}">`,
+    // Safari on iPhone shows its own "Open in App Store" strip; ct tags the installs in App Analytics
+    '<meta name="apple-itunes-app" content="app-id=6777998850, affiliate-data=pt=128999575&amp;ct=site-smartbanner">'
   ];
   if (!s.noCanonical) rows.push(`<link rel="canonical" href="${safeHref(canonical)}">`);
   if (s.altRu) {
@@ -491,8 +519,22 @@ function seoBlock(s) {
   return rows.join('\n');
 }
 
+// lastmod moves only when what a reader sees changes (title, description, prerendered text),
+// not when an asset hash bump rewrites every shell; build.mjs puts the same dates in the sitemap
+const LASTMOD_FILE = 'tools/lastmod.json';
+const lastmod = existsSync(LASTMOD_FILE) ? JSON.parse(readFileSync(LASTMOD_FILE, 'utf8')) : {};
+const today = new Date().toISOString().slice(0, 10);
+
 for (const s of SHELLS) {
   let html = readFileSync(s.file, 'utf8');
+  const body = s.home ? homePrerender(s.loc) : (s.scenario ? scenarioPrerender(s) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s))));
+  if (!s.canonicalOverride && s.path !== '/404') {
+    const hash = createHash('sha1').update([s.title, s.description, body].join('\n')).digest('hex').slice(0, 12);
+    const prev = lastmod[s.path];
+    if (!prev || prev.hash !== hash) lastmod[s.path] = { hash, date: today, published: (prev && prev.published) || today };
+    s.dateModified = lastmod[s.path].date;
+    s.datePublished = lastmod[s.path].published;
+  }
 
   html = html.replace(/<!-- seo:start -->[\s\S]*?<!-- seo:end -->\n?/, '');
   html = html.replace(/<html lang="[^"]*">/, () => `<html lang="${s.loc}">`);
@@ -504,8 +546,9 @@ for (const s of SHELLS) {
 
   html = html.replace(/<noscript[\s\S]*?<\/noscript>\n?/, '');
 
-  const body = s.home ? homePrerender(s.loc) : (s.scenario ? scenarioPrerender(s) : (s.play ? playPrerender(s) : (s.faq === 'games' ? gamesPrerender(s.loc) : simplePrerender(s))));
-  const appBlock = `<div id="app"><!-- prerender:start -->\n${body}\n<!-- prerender:end --></div>`;
+  // email_off: Cloudflare's email obfuscation would turn the plain addresses in the legal text
+  // into /cdn-cgi/l/email-protection links, which crawlers see as 404s
+  const appBlock = `<div id="app"><!-- prerender:start -->\n<!--email_off-->\n${body}\n<!--/email_off-->\n<!-- prerender:end --></div>`;
   if (/<!-- prerender:start -->/.test(html)) {
     html = html.replace(/<div id="app"><!-- prerender:start -->[\s\S]*?<!-- prerender:end --><\/div>/, () => appBlock);
   } else {
@@ -549,6 +592,17 @@ for (const s of SHELLS) {
   }
 
 
+  // Data the first paint needs ships before site.js: loading it on demand painted a short
+  // placeholder first, and the footer jumped twice (CLS 0.73 on the scenario pages).
+  html = html.replace(/\n?<script src="\/assets\/(?:scenarios|game-content)\.js\?v=[a-f0-9]+"><\/script>/g, '');
+  const DATA = [];
+  if (s.scenario) DATA.push('assets/scenarios.js');
+  if (s.home || s.scenario || s.play || s.faq === 'games') DATA.push('assets/game-content.js');
+  if (DATA.length) {
+    const tags = DATA.map((f) => `<script src="/${f}?v=${assetVer(f)}"></script>`).join('\n');
+    html = html.replace(/<script src="\/assets\/site\.min\.js/, (m) => tags + '\n' + m);
+  }
+
   // the icon fonts are gone, inline SVG replaced them
   html = stripPhosphor(html);
 
@@ -562,6 +616,7 @@ for (const s of SHELLS) {
   writeFileSync(s.file, html);
   console.log(`patched ${s.file.padEnd(16)} ${(html.length / 1024).toFixed(1)} KB`);
 }
+writeFileSync(LASTMOD_FILE, JSON.stringify(lastmod, null, 2) + '\n');
 
 // The 3D studio is a debug page rather than a shell, but it resolves three through the same map.
 for (const file of ['studio.html']) {

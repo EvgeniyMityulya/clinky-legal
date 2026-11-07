@@ -585,6 +585,8 @@
   function renderFooter() {
     var t = tdict(), I = icons();
     var lnk = 'background:transparent;border:0;cursor:pointer;font-size:14.5px;color:#6b6b76;padding:0;font-family:DM Sans,sans-serif';
+    // real <a href> so crawlers that read the rendered page still find every section; onClick keeps it in-app
+    var fl = function (pg, label) { return '<a data-nav data-act="' + pg + '" href="' + pathFor(pg, state.lang) + '" style="' + lnk + ';text-decoration:none">' + esc(label) + '</a>'; };
     var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#7a7280;margin-bottom:2px';
     return '' +
       '<div style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
@@ -599,15 +601,15 @@
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footProduct) + '</div>' +
-          '<button data-act="home" style="' + lnk + '">' + esc(t.navHome) + '</button>' +
-          '<button data-act="games" style="' + lnk + '">' + esc(t.navGames) + '</button>' +
-          '<button data-act="about" style="' + lnk + '">' + esc(t.navAbout) + '</button>' +
-          '<button data-act="support" style="' + lnk + '">' + esc(t.navSupport) + '</button>' +
+          fl('home', t.navHome) +
+          fl('games', t.navGames) +
+          fl('about', t.navAbout) +
+          fl('support', t.navSupport) +
         '</div>' +
         '<div style="display:flex;flex-direction:column;gap:12px;align-items:flex-start">' +
           '<div style="' + head + '">' + esc(t.footLegalReach) + '</div>' +
-          '<button data-act="privacy" style="' + lnk + '">' + esc(t.navPrivacy) + '</button>' +
-          '<button data-act="terms" style="' + lnk + '">' + esc(t.navTerms) + '</button>' +
+          fl('privacy', t.navPrivacy) +
+          fl('terms', t.navTerms) +
           '<a href="mailto:' + CONTACT_EMAIL + '" style="display:inline-flex;align-items:center;gap:7px;font-size:14.5px;color:#6b6b76">' + I.mail + esc(t.footEmail) + '</a>' +
         '</div>' +
       '</div>' +
@@ -1035,7 +1037,7 @@
     if (_gcRequested) return;
     _gcRequested = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=4b2d9d76';
+    sc.src = '/assets/game-content.js?v=38db32e3';
     sc.onload = function () { cb(); };   // stays set: a file without the global must not be refetched on every paint
     sc.onerror = function () { _gcRequested = false; };
     document.head.appendChild(sc);
@@ -1204,8 +1206,8 @@
     }
     var lang = state.lang;
     var intro = '<p class="lead-p">' + esc(c.intro[lang]) + '</p>';
-    return sectionWrap(L.about, fitStrip(c) + intro) +
-      sectionWrap(L.rules, numberedList(c.rules[lang])) +
+    return sectionWrap((L.aboutFor && L.aboutFor[id]) || L.about, fitStrip(c) + intro) +
+      sectionWrap((L.rulesFor && L.rulesFor[id]) || L.rules, numberedList(c.rules[lang])) +
       sectionWrap(L.examples, exampleList(gi)) +
       sectionWrap(L.variants, numberedList(c.variants[lang])) +
       sectionWrap(L.advice, numberedList(c.advice[lang])) +
@@ -2341,6 +2343,7 @@
   }
   function onClick(e) {
     var el = e.target.closest('[data-act]'); if (!el) return;
+    if (el.hasAttribute('data-nav')) { if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button) return; e.preventDefault(); }
     var a = el.getAttribute('data-act');
     switch (a) {
       case 'promptclose': {

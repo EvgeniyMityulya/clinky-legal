@@ -1,4 +1,4 @@
-import { writeFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 
 const SITE = 'https://clinkyapp.com';
 const PAGES = [
@@ -33,10 +33,15 @@ const URLS = [
   ...PAGES.map((p) => ({ path: `/ru/${p.path}`, pri: p.pri, alt: `/${p.path}` }))
 ];
 
+// dates come from patch_shells.mjs, which hashes what a reader sees on each page
+const LASTMOD_FILE = 'tools/lastmod.json';
+const lastmod = existsSync(LASTMOD_FILE) ? JSON.parse(readFileSync(LASTMOD_FILE, 'utf8')) : {};
+for (const u of URLS) u.lastmod = lastmod[u.path] && lastmod[u.path].date;
+
 writeFileSync('sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${URLS.map((u) => `  <url>
-    <loc>${SITE}${u.path}</loc>
+    <loc>${SITE}${u.path}</loc>${u.lastmod ? `\n    <lastmod>${u.lastmod}</lastmod>` : ''}
     <xhtml:link rel="alternate" hreflang="${u.path.startsWith('/ru') ? 'en' : 'ru'}" href="${SITE}${u.alt}"/>
     <xhtml:link rel="alternate" hreflang="${u.path.startsWith('/ru') ? 'ru' : 'en'}" href="${SITE}${u.path}"/>
     <priority>${u.pri}</priority>
