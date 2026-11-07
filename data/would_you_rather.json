@@ -108,7 +108,7 @@
     "id": "wyr-016",
     "text": {
       "en": "Would you rather remember every book you've read word for word or every conversation you've ever had?",
-      "ru": "Что выберешь: помнить каждую книгу, что прочитал, или каждый разговор, что вёл?"
+      "ru": "Что выберешь: помнить каждую книгу, что прочитал(-а), или каждый разговор, что вёл(-а)?"
     }
   },
   {
@@ -248,7 +248,7 @@
     "id": "wyr-036",
     "text": {
       "en": "Would you rather be the one who always leaves first or the one who stays till the end?",
-      "ru": "Что выберешь: быть тем, кто всегда уходит первым, или кто остаётся до конца?"
+      "ru": "Что выберешь: всегда уходить раньше всех или оставаться до конца?"
     }
   },
   {
@@ -276,7 +276,7 @@
     "id": "wyr-040",
     "text": {
       "en": "Would you rather say everything you never got to say or hear everything that was never said to you?",
-      "ru": "Что выберешь: сказать всё, что не успел, или услышать всё, что не сказали тебе?"
+      "ru": "Что выберешь: сказать всё, что не успел(-а), или услышать всё, что не сказали тебе?"
     }
   },
   {
@@ -332,14 +332,14 @@
     "id": "wyr-048",
     "text": {
       "en": "Would you rather your childhood 'what I'll be' came true literally or your current self got to pick all over again?",
-      "ru": "Что выберешь: чтобы твоё детское «кем стану» сбылось буквально или чтобы нынешний ты выбрал заново?"
+      "ru": "Что выберешь: чтобы твоё детское «кем стану» сбылось буквально или чтобы ты выбрал(-а) заново уже сейчас?"
     }
   },
   {
     "id": "wyr-049",
     "text": {
       "en": "Would you rather perfectly remember every song you fell in love to or every place you were truly happy in?",
-      "ru": "Что выберешь: помнить идеально каждую песню, под которую влюблялся, или каждое место, где было по-настоящему хорошо?"
+      "ru": "Что выберешь: помнить идеально каждую песню, под которую влюблялся(-ась), или каждое место, где было по-настоящему хорошо?"
     }
   },
   {
@@ -353,7 +353,7 @@
     "id": "wyr-051",
     "text": {
       "en": "Would you rather remember every phone number you knew in the 2000s or every password you forgot this year?",
-      "ru": "Что выберешь: помнить наизусть все номера, которые знал в нулевых, или все пароли, которые забыл в этом году?"
+      "ru": "Что выберешь: помнить наизусть все номера, которые знал(-а) в нулевых, или все пароли, которые забыл(-а) в этом году?"
     }
   },
   {
@@ -367,7 +367,7 @@
     "id": "wyr-053",
     "text": {
       "en": "Would you rather remember exactly what your first idol was like or exactly what you were like when you obsessed over them?",
-      "ru": "Что выберешь: помнить точь-в-точь, каким был твой первый кумир, или каким был ты сам, когда им бредил?"
+      "ru": "Что выберешь: помнить точь-в-точь своего первого кумира или себя в те годы, когда ты им бредил(-а)?"
     }
   },
   {
@@ -423,21 +423,21 @@
     "id": "wyr-061",
     "text": {
       "en": "Would you rather your best friend reminds you of your most embarrassing moment you'd forgotten, or you remind them of theirs?",
-      "ru": "Что выберешь: чтобы лучший друг рассказал тебе твой самый стыдный момент, о котором ты забыл, или твой — ему?"
+      "ru": "Что выберешь: чтобы лучший друг рассказал тебе твой самый стыдный момент, о котором ты забыл(-а), или твой — ему?"
     }
   },
   {
     "id": "wyr-062",
     "text": {
       "en": "Would you rather perfectly remember the voice of someone you haven't heard in years or their smell?",
-      "ru": "Что выберешь: помнить наизусть голос человека, которого давно не слышал, или его запах?"
+      "ru": "Что выберешь: помнить наизусть голос человека, которого давно не слышал(-а), или его запах?"
     }
   },
   {
     "id": "wyr-063",
     "text": {
       "en": "Would you rather perfectly remember the taste of your favourite childhood dish or the taste of what someone you loved used to cook?",
-      "ru": "Что выберешь: помнить вкус любимого блюда из детства точь-в-точь или вкус того, что готовил человек, которого ты любил?"
+      "ru": "Что выберешь: помнить вкус любимого блюда из детства точь-в-точь или вкус того, что готовил человек, которого ты любил(-а)?"
     }
   },
   {
@@ -465,7 +465,7 @@
     "id": "wyr-067",
     "text": {
       "en": "Would you rather get back the wide-eyed faith you had at 18 or keep every hard lesson you've collected since?",
-      "ru": "Что выберешь: вернуть себе наивность, с которой ты во всё верил в 18, или оставить весь опыт, что набил с тех пор?"
+      "ru": "Что выберешь: вернуть себе наивность, с которой ты во всё верил(-а) в 18, или оставить весь опыт, что набил(-а) с тех пор?"
     }
   },
   {
@@ -486,7 +486,7 @@
     "id": "wyr-070",
     "text": {
       "en": "Would you rather have every embarrassing teenage photo of you vanish forever or get back every photo you accidentally deleted?",
-      "ru": "Что выберешь: чтобы все твои самые стыдные подростковые фотки исчезли навсегда или чтобы вернулись все, что ты случайно удалил?"
+      "ru": "Что выберешь: чтобы все твои самые стыдные подростковые фотки исчезли навсегда или чтобы вернулись все, что ты случайно удалил(-а)?"
     }
   },
   {
@@ -500,7 +500,7 @@
     "id": "wyr-072",
     "text": {
       "en": "Would you rather remember exactly how your hometown looked when you were a kid or exactly who you were back then?",
-      "ru": "Что выберешь: помнить, каким был твой город в детстве, или каким был ты в этом городе?"
+      "ru": "Что выберешь: помнить свой город в детстве или себя в том городе?"
     }
   },
   {
@@ -514,14 +514,14 @@
     "id": "wyr-074",
     "text": {
       "en": "Would you rather get back one friendship that just quietly faded or one you ended yourself?",
-      "ru": "Что выберешь: вернуть себе одну дружбу, которая просто заглохла сама, или одну, которую ты сам прервал?"
+      "ru": "Что выберешь: вернуть себе одну дружбу, которая просто заглохла сама, или одну, которую ты сам(-а) прервал(-а)?"
     }
   },
   {
     "id": "wyr-075",
     "text": {
       "en": "Would you rather keep just one song out of everything you listened to in school or just one photo from back then?",
-      "ru": "Что выберешь: чтобы у тебя осталась всего одна песня из всех, что ты слушал в школе, или всего одна фотка из того времени?"
+      "ru": "Что выберешь: чтобы у тебя осталась всего одна песня из всех, что ты слушал(-а) в школе, или всего одна фотка из того времени?"
     }
   },
   {
@@ -549,14 +549,14 @@
     "id": "wyr-079",
     "text": {
       "en": "Would you rather always be the one who texts friends first or always wait for them to text you?",
-      "ru": "Что выберешь: всегда первым писать друзьям сам или всегда ждать, пока напишут тебе?"
+      "ru": "Что выберешь: всегда первым(-ой) писать друзьям или всегда ждать, пока напишут тебе?"
     }
   },
   {
     "id": "wyr-080",
     "text": {
       "en": "Would you rather your partner always know when you're lying or you always know when they are?",
-      "ru": "Что выберешь: чтобы партнёр всегда знал, когда ты соврал, или ты всегда знал, когда соврал он?"
+      "ru": "Что выберешь: чтобы партнёр всегда знал, когда ты соврал(-а), или чтобы ты всегда знал(-а), когда соврали тебе?"
     }
   },
   {
@@ -570,7 +570,7 @@
     "id": "wyr-082",
     "text": {
       "en": "Would you rather a friend honestly tell you you're wrong mid-argument or back you up even knowing you're wrong?",
-      "ru": "Что выберешь: чтобы друг честно сказал, что ты не прав, посреди ссоры, или поддержал тебя, даже зная, что ты не прав?"
+      "ru": "Что выберешь: чтобы друг честно сказал, что ты не прав(-а), посреди ссоры, или поддержал тебя, даже зная, что ты не прав(-а)?"
     }
   },
   {
@@ -584,21 +584,21 @@
     "id": "wyr-084",
     "text": {
       "en": "Would you rather your partner read you like an open book or stay a bit of a mystery to them forever?",
-      "ru": "Что выберешь: чтобы партнёр читал тебя как открытую книгу или чтобы ты до конца оставался для него загадкой?"
+      "ru": "Что выберешь: чтобы партнёр читал тебя как открытую книгу или чтобы ты до конца оставался(-ась) для него загадкой?"
     }
   },
   {
     "id": "wyr-085",
     "text": {
       "en": "Would you rather make up first even when you're not at fault or be right but sit in the cold silence?",
-      "ru": "Что выберешь: помириться первым, даже когда не виноват, или быть правым, но в холодной тишине?"
+      "ru": "Что выберешь: помириться первым(-ой), даже когда не виноват(-а), или быть правым(-ой), но в холодной тишине?"
     }
   },
   {
     "id": "wyr-086",
     "text": {
       "en": "Would you rather know someone secretly has feelings for you or keep the person you like from ever finding out about yours?",
-      "ru": "Что выберешь: знать, что кто-то тайно в тебя влюблён, или чтобы человек, в которого влюблён ты, об этом так и не узнал?"
+      "ru": "Что выберешь: знать, что кто-то тайно в тебя влюблён, или чтобы человек, в которого влюблён(-а) ты, об этом так и не узнал?"
     }
   },
   {
@@ -612,14 +612,14 @@
     "id": "wyr-088",
     "text": {
       "en": "Would you rather find a suitcase of cash and keep it not knowing whose it was, or return it and wonder forever how that money would've changed you?",
-      "ru": "Что выберешь: найти на улице чемодан денег и оставить себе, не зная чей, или вернуть владельцу и навсегда гадать, как бы ты с ними жил?"
+      "ru": "Что выберешь: найти на улице чемодан денег и оставить себе, не зная чей, или вернуть владельцу и навсегда гадать, как бы ты с ними жил(-а)?"
     }
   },
   {
     "id": "wyr-089",
     "text": {
       "en": "Would you rather always have money but forget every trip you took, or live tight but remember each journey in full detail?",
-      "ru": "Что выберешь: чтобы тебе всегда хватало денег, но ты не запоминал ни одной поездки, или жить впритык, но помнить каждое путешествие в деталях?"
+      "ru": "Что выберешь: чтобы тебе всегда хватало денег, но ты не запоминал(-а) ни одной поездки, или жить впритык, но помнить каждое путешествие в деталях?"
     }
   },
   {
@@ -633,7 +633,7 @@
     "id": "wyr-091",
     "text": {
       "en": "Would you rather get back every ruble you spent for nothing, or every favour people never returned to you?",
-      "ru": "Что выберешь: чтобы тебе вернули каждый рубль, который ты отдал зря, или каждую услугу, которую тебе так и не вернули?"
+      "ru": "Что выберешь: чтобы тебе вернули каждый рубль, который ты отдал(-а) зря, или каждую услугу, которую тебе так и не вернули?"
     }
   },
   {
@@ -654,35 +654,35 @@
     "id": "wyr-094",
     "text": {
       "en": "Would you rather remember word for word every argument you were wrong in, or completely forget every one where you got humiliated?",
-      "ru": "Что выберешь: помнить наизусть каждый разговор, в котором был не прав, или начисто забыть каждый, где тебя унизили?"
+      "ru": "Что выберешь: помнить наизусть каждый разговор, в котором был(-а) не прав(-а), или начисто забыть каждый, где тебя унизили?"
     }
   },
   {
     "id": "wyr-095",
     "text": {
       "en": "Would you rather have future-you send you one warning right now, or one compliment twenty years from now?",
-      "ru": "Что выберешь: чтобы будущий ты прислал тебе одно предупреждение прямо сейчас или один комплимент через двадцать лет?"
+      "ru": "Что выберешь: получить от себя из будущего одно предупреждение прямо сейчас или один комплимент через двадцать лет?"
     }
   },
   {
     "id": "wyr-096",
     "text": {
       "en": "Would you rather remember yourself only as you were in your bravest year, or exactly as you are right now?",
-      "ru": "Что выберешь: помнить себя только таким, каким ты был в самый смелый свой год, или таким, какой ты прямо сейчас?"
+      "ru": "Что выберешь: помнить себя только из самого смелого своего года или только из сегодняшнего дня?"
     }
   },
   {
     "id": "wyr-097",
     "text": {
       "en": "Would you rather remember only the people from your whole life but none of the events, or all the events but none of the faces?",
-      "ru": "Что выберешь: чтобы из всей жизни ты помнил только людей, но не события, или только события, но не лица?"
+      "ru": "Что выберешь: чтобы из всей жизни ты помнил(-а) только людей, но не события, или только события, но не лица?"
     }
   },
   {
     "id": "wyr-098",
     "text": {
       "en": "Would you rather rewrite one line from the most important day of your life, or add one you were too scared to say back then?",
-      "ru": "Что выберешь: переписать одну фразу из своего самого важного дня или дописать одну, которую ты тогда побоялся сказать?"
+      "ru": "Что выберешь: переписать одну фразу из своего самого важного дня или дописать одну, которую ты тогда побоялся(-ась) сказать?"
     }
   },
   {
@@ -696,7 +696,7 @@
     "id": "wyr-100",
     "text": {
       "en": "Would you rather catch every time a friend praised you without meaning it or every time you yourself agreed with someone you didn't?",
-      "ru": "Что выберешь: знать каждый раз, когда друг хвалит тебя не искренне, или каждый раз, когда сам кому-то поддакнул не от души?"
+      "ru": "Что выберешь: знать каждый раз, когда друг хвалит тебя не искренне, или каждый раз, когда сам(-а) кому-то поддакнул(-а) не от души?"
     }
   },
   {
@@ -707,31 +707,24 @@
     }
   },
   {
-    "id": "wyr-102",
-    "text": {
-      "en": "Would you rather be the sober driver who hears all the gossip or party fully and miss every story?",
-      "ru": "Что выберешь: быть трезвым за рулём, но слышать все сплетни компании, или гулять на полную, но пропустить все истории?"
-    }
-  },
-  {
     "id": "wyr-103",
     "text": {
       "en": "Would you rather inherit a house you must live in forever or money you must spend within a year?",
-      "ru": "Что выберешь: получить в наследство дом, в котором обязан жить всегда, или деньги, которые обязан потратить за год?"
+      "ru": "Что выберешь: получить в наследство дом, в котором обязан(-а) жить всегда, или деньги, которые обязан(-а) потратить за год?"
     }
   },
   {
     "id": "wyr-104",
     "text": {
       "en": "Would you rather have the whole table guess your type or be the one guessing everyone else's?",
-      "ru": "Что выберешь: чтобы вся компания за столом угадывала, кто в твоём вкусе, или чтобы ты угадывал, кто во вкусе у каждого из них?"
+      "ru": "Что выберешь: чтобы вся компания за столом угадывала, кто в твоём вкусе, или чтобы ты угадывал(-а), кто во вкусе у каждого из них?"
     }
   },
   {
     "id": "wyr-105",
     "text": {
       "en": "Would you rather find out who at this table once had a crush on you or have everyone learn who you had a crush on?",
-      "ru": "Что выберешь: узнать, кто за этим столом когда-то был в тебя влюблён, или чтобы все узнали, в кого был влюблён ты?"
+      "ru": "Что выберешь: узнать, кто за этим столом когда-то был в тебя влюблён, или чтобы все узнали, в кого влюблялся(-ась) ты?"
     }
   },
   {
@@ -821,8 +814,8 @@
   {
     "id": "wyr-118",
     "text": {
-      "en": "Would you rather never get a hangover or never get sunburned?",
-      "ru": "Что выберешь: никогда не страдать от похмелья или никогда не обгорать на солнце?"
+      "en": "Would you rather never wake up groggy or never get sunburned?",
+      "ru": "Что выберешь: никогда не просыпаться разбитым(-ой) или никогда не обгорать на солнце?"
     }
   },
   {
@@ -836,7 +829,7 @@
     "id": "wyr-120",
     "text": {
       "en": "Would you rather always have the perfect comeback or always remember everyone's name?",
-      "ru": "Что выберешь: всегда находить идеальный ответ в споре или всегда помнить имя каждого, кого встретил?"
+      "ru": "Что выберешь: всегда находить идеальный ответ в споре или всегда помнить имя каждого, кого встретил(-а)?"
     }
   },
   {
@@ -910,13 +903,6 @@
     }
   },
   {
-    "id": "wyr-131",
-    "text": {
-      "en": "Would you rather be able to instantly sober up at will or fall asleep instantly whenever you want?",
-      "ru": "Что выберешь: уметь мгновенно трезветь по желанию или мгновенно засыпать в любой момент?"
-    }
-  },
-  {
     "id": "wyr-132",
     "text": {
       "en": "Would you rather get one extra hour in the day that only you have, or never feel groggy in the morning again?",
@@ -934,7 +920,7 @@
     "id": "wyr-134",
     "text": {
       "en": "Would you rather have every meal turn out perfect but you didn't cook it, or cook masterpieces yourself but spend half a day on each?",
-      "ru": "Что выберешь: чтобы любое блюдо выходило идеальным, но готовил не ты, или готовить шедевры самому, но тратить на каждое полдня?"
+      "ru": "Что выберешь: чтобы любое блюдо выходило идеальным, но готовил(-а) не ты, или готовить шедевры самому(-ой), но тратить на каждое полдня?"
     }
   },
   {
@@ -976,7 +962,7 @@
     "id": "wyr-140",
     "text": {
       "en": "Would you rather spend your whole life where you were born, or travel the entire world but never come back home?",
-      "ru": "Что выберешь: всю жизнь прожить там, где родился, или объехать весь мир, но никогда не вернуться домой?"
+      "ru": "Что выберешь: всю жизнь прожить там, где родился(-ась), или объехать весь мир, но никогда не вернуться домой?"
     }
   },
   {
@@ -1067,21 +1053,21 @@
     "id": "wyr-153",
     "text": {
       "en": "Would you rather get everything easily and for free, or earn it all yourself through a hard fight?",
-      "ru": "Что выберешь: получить всё легко и даром или добиться всего сам, но через борьбу?"
+      "ru": "Что выберешь: получить всё легко и даром или добиться всего сам(-а), но через борьбу?"
     }
   },
   {
     "id": "wyr-154",
     "text": {
       "en": "Would you rather become the person everyone wants to be, or the person you actually want to be?",
-      "ru": "Что выберешь: стать тем, кем все хотят быть, или тем, кем хочешь быть ты сам?"
+      "ru": "Что выберешь: стать тем, кем все хотят быть, или тем, кем хочешь быть ты сам(-а)?"
     }
   },
   {
     "id": "wyr-155",
     "text": {
       "en": "Would you rather be the one who got away in someone's story, or the one they happily stayed with?",
-      "ru": "Что выберешь: быть в чьей-то истории тем, кто ушёл и кого до сих пор вспоминают, или тем, с кем человек счастливо остался?"
+      "ru": "Что выберешь: быть в чьей-то истории тем, кто ушёл(-шла) и кого до сих пор вспоминают, или тем, с кем человек счастливо остался?"
     }
   },
   {
@@ -1158,7 +1144,7 @@
     "id": "wyr-166",
     "text": {
       "en": "Would you rather always be the first to say 'I love you' or always be the first to hear it?",
-      "ru": "Что выберешь: всегда первым говорить «люблю» или всегда первым это слышать?"
+      "ru": "Что выберешь: всегда первым(-ой) говорить «люблю» или всегда первым(-ой) это слышать?"
     }
   },
   {
@@ -1172,7 +1158,7 @@
     "id": "wyr-168",
     "text": {
       "en": "Would you rather your partner be honest about whether an outfit suits you or always say you look amazing?",
-      "ru": "Что выберешь: чтобы партнёр честно говорил, идёт ли тебе наряд, или всегда говорил, что ты прекрасен?"
+      "ru": "Что выберешь: чтобы партнёр честно говорил, идёт ли тебе наряд, или всегда говорил, что ты прекрасен(-на)?"
     }
   },
   {
@@ -1319,7 +1305,7 @@
     "id": "wyr-189",
     "text": {
       "en": "Would you rather have your housing paid forever but someone else picks the city, or pay yourself and live wherever you want?",
-      "ru": "Что выберешь: чтобы кто-то вечно оплачивал твоё жильё, но выбирал город за тебя, или платить самому, зато жить где захочешь?"
+      "ru": "Что выберешь: чтобы кто-то вечно оплачивал твоё жильё, но выбирал город за тебя, или платить самому(-ой), зато жить где захочешь?"
     }
   },
   {

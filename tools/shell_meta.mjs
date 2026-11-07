@@ -21,21 +21,21 @@ export const SHELLS = [
     title: 'About Clinky — An App for Friendships Worth Keeping',
     description: 'Why we built Clinky: an offline-first iOS app that helps you see your friends more often and gives every get-together a game worth playing.',
     ogTitle: 'About Clinky',
-    ogDescription: 'An iOS app for the friendships you never want to drift.'
+    ogDescription: 'An iPhone app for the friendships you never want to let drift.'
   },
   {
     file: 'support.html', loc: 'en', path: '/support', altRu: '/ru/support', robots: 'index,follow', faq: true,
     title: 'Clinky Support — Report a Bug or Send an Idea',
     description: 'Found a bug in Clinky or have an idea for a question pack? Write to the team. We read everything and usually reply within a day.',
     ogTitle: 'Clinky Support',
-    ogDescription: 'Found a bug or have an idea? Write to us, we read everything.'
+    ogDescription: 'Found a bug or have an idea? Write to us, we read every message.'
   },
   {
     file: 'privacy.html', loc: 'en', path: '/privacy', altRu: '/ru/privacy', robots: 'index,follow',
     title: 'Privacy Policy — Clinky',
     description: 'How Clinky handles your data. The app is offline-first with no accounts, so your meet-ups and friends stay on your device.',
     ogTitle: 'Privacy Policy — Clinky',
-    ogDescription: 'Offline-first, no accounts. Your data stays on your device.'
+    ogDescription: 'Offline-first, no accounts. Your meet-ups and friends stay on your device.'
   },
   {
     file: 'terms.html', loc: 'en', path: '/terms', altRu: '/ru/terms', robots: 'index,follow',
@@ -49,7 +49,7 @@ export const SHELLS = [
     title: 'Политика конфиденциальности — Clinky',
     description: 'Как Clinky обращается с твоими данными. Приложение работает офлайн и без аккаунтов, поэтому встречи и друзья остаются на устройстве.',
     ogTitle: 'Политика конфиденциальности — Clinky',
-    ogDescription: 'Офлайн и без аккаунтов. Данные остаются на твоём устройстве.'
+    ogDescription: 'Офлайн и без аккаунтов. Встречи и друзья остаются на твоём устройстве.'
   },
   {
     file: 'terms-ru.html', loc: 'ru', path: '/terms-ru', canonicalOverride: '/ru/terms', robots: 'index,follow',
@@ -83,16 +83,16 @@ export const SHELLS = [
   {
     file: 'ru/support.html', loc: 'ru', path: '/ru/support', altEn: '/support', robots: 'index,follow', faq: true,
     title: 'Поддержка Clinky — вопросы и связь с командой',
-    description: 'Нашёл баг или есть идея для новой игры? Напиши нам. Здесь же ответы на частые вопросы: лимиты, офлайн-режим, что с данными.',
+    description: 'Заметил(-а) баг или есть идея для нового набора вопросов? Напиши нам. Здесь же ответы на частые вопросы: лимиты, офлайн-режим, что с данными.',
     ogTitle: 'Поддержка Clinky',
-    ogDescription: 'Нашёл баг или есть идея? Напиши нам, мы читаем всё.'
+    ogDescription: 'Заметил(-а) баг или есть идея? Напиши нам, мы читаем каждое письмо.'
   },
   {
     file: 'ru/privacy.html', loc: 'ru', path: '/ru/privacy', altEn: '/privacy', robots: 'index,follow',
     title: 'Политика конфиденциальности — Clinky',
     description: 'Как Clinky обращается с твоими данными. Приложение работает офлайн и без аккаунтов, поэтому встречи и друзья остаются на устройстве.',
     ogTitle: 'Политика конфиденциальности — Clinky',
-    ogDescription: 'Офлайн и без аккаунтов. Данные остаются на твоём устройстве.'
+    ogDescription: 'Офлайн и без аккаунтов. Встречи и друзья остаются на твоём устройстве.'
   },
   {
     file: 'ru/terms.html', loc: 'ru', path: '/ru/terms', altEn: '/terms', robots: 'index,follow',
@@ -105,7 +105,7 @@ export const SHELLS = [
     file: 'play/never-have-i-ever.html', loc: 'en', path: '/play/never-have-i-ever', altRu: '/ru/play/ya-nikogda-ne',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
     title: 'Never Have I Ever Questions — Play Free Online',
-    description: 'Never Have I Ever questions you can read straight off the screen. Tap for a fresh card, no sign-up, nothing to install, plus rules and a no-drinking version.',
+    description: 'Never Have I Ever questions you can read straight off the screen. Tap for a fresh card, no sign-up, nothing to install, plus rules and ideas for any table.',
     ogTitle: 'Never Have I Ever — play online, free',
     ogDescription: 'Tap for a card and let the table do the rest. Free, no sign-up.'
   },
@@ -113,7 +113,7 @@ export const SHELLS = [
     file: 'ru/play/ya-nikogda-ne.html', loc: 'ru', path: '/ru/play/ya-nikogda-ne', altEn: '/play/never-have-i-ever',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
     title: 'Вопросы «Я никогда не» — играть онлайн бесплатно',
-    description: 'Вопросы «Я никогда не», которые можно читать прямо с экрана. Жми и тяни новую карточку, без регистрации и установки. Правила и версия без алкоголя.',
+    description: 'Вопросы «Я никогда не», которые можно читать прямо с экрана. Жми и тяни новую карточку, без регистрации и установки. Правила и идеи для любой компании.',
     ogTitle: '«Я никогда не» — играть онлайн, бесплатно',
     ogDescription: 'Тяни карточку, дальше всё сделает компания. Бесплатно, без регистрации.'
   },
@@ -137,17 +137,17 @@ export const SHELLS = [
     file: 'play/questions-to-ask-friends.html', loc: 'en', path: '/play/questions-to-ask-friends', altRu: '/ru/play/voprosy-druzyam',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
     title: 'Questions to Ask Friends — 20 Free Cards to Read and Play',
-    description: 'Questions to ask friends when the talk runs dry, 24 of them free. Each one asks for a story instead of a one-word answer. No sign-up needed.',
+    description: 'Questions to ask friends when the talk runs dry, 20 of them free to read. Each one asks for a story instead of a one-word answer. No sign-up needed.',
     ogTitle: 'Questions to ask friends — play online',
-    ogDescription: 'Ask for a moment, not an opinion. Free, no sign-up.'
+    ogDescription: 'Questions that bring out stories. Free, no sign-up.'
   },
   {
     file: 'ru/play/voprosy-druzyam.html', loc: 'ru', path: '/ru/play/voprosy-druzyam', altEn: '/play/questions-to-ask-friends',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
     title: 'Вопросы друзьям, много карточек для разговора',
-    description: 'Вопросы друзьям, когда разговор заглох, много карточек бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.',
+    description: 'Вопросы друзьям на случай, когда разговор заглох. Карточки бесплатно. На каждый отвечают историей, а не одним словом. Без регистрации.',
     ogTitle: 'Вопросы друзьям — играть онлайн',
-    ogDescription: 'Проси момент, а не мнение. Бесплатно, без регистрации.'
+    ogDescription: 'Вопросы, на которые отвечают историей. Бесплатно, без регистрации.'
   },
   {
     file: 'play/would-you-rather.html', loc: 'en', path: '/play/would-you-rather', altRu: '/ru/play/chto-vyberesh',
@@ -163,7 +163,7 @@ export const SHELLS = [
     title: 'Вопросы «Что выберешь» — играть онлайн бесплатно',
     description: 'Вопросы «Что выберешь», где у обоих вариантов есть цена, поэтому компания спорит всерьёз. Бесплатно в браузере, без установки.',
     ogTitle: '«Что выберешь» — играть онлайн, бесплатно',
-    ogDescription: 'Оба варианта немного больно. В этом и смысл.'
+    ogDescription: 'Оба варианта немного жалко терять. В этом и смысл.'
   },
   {
     file: 'questions/for-couples.html', loc: 'en', path: '/questions/for-couples', altRu: '/ru/voprosy/dlya-pary',
@@ -195,7 +195,7 @@ export const SHELLS = [
     title: 'Вопросы для компании друзей, много карточек онлайн',
     description: 'Вопросы для компании друзей, когда новости кончились. Разогрев, поглубже и смешные, все про саму компанию, и в ответах звучат имена. Бесплатно.',
     ogTitle: 'Вопросы для компании про своих же друзей',
-    ogDescription: 'Много карточек с вопросами от четырёх человек. Бесплатно в браузере.'
+    ogDescription: 'Много карточек с вопросами для компании от четырёх человек. Бесплатно в браузере.'
   },
   {
     file: 'questions/first-date.html', loc: 'en', path: '/questions/first-date', altRu: '/ru/voprosy/pervoe-svidanie',
@@ -217,7 +217,7 @@ export const SHELLS = [
     file: 'questions/drinks.html', loc: 'en', path: '/questions/drinks', altRu: '/ru/voprosy/za-bokalom',
     robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
     title: 'Questions to Ask Over Drinks — Free Card Game',
-    description: 'Lots of questions for a long evening at the table, split into first glass, later on and loud ones. No forfeits and nobody drinks for a wrong answer.',
+    description: 'Lots of questions for a long evening at the table, split into warm-up, later on and loud ones. No forfeits, no penalties, just good talk.',
     ogTitle: 'Questions for an evening that is in no hurry',
     ogDescription: 'Lots of question cards for two people and up. Free in the browser.'
   },
@@ -225,9 +225,9 @@ export const SHELLS = [
     file: 'ru/voprosy/za-bokalom.html', loc: 'ru', path: '/ru/voprosy/za-bokalom', altEn: '/questions/drinks',
     robots: 'index,follow,max-image-preview:large', scenario: 'drinks',
     title: 'Вопросы за бокалом, много карточек для вечера',
-    description: 'Много вопросов для долгого вечера за столом. Первый бокал, ближе к ночи и шумные, без штрафов и без правил пить за неправильный ответ.',
+    description: 'Много вопросов для долгого вечера за столом. Для начала, ближе к ночи и шумные, без штрафов и фантов, просто хороший разговор.',
     ogTitle: 'Вопросы для вечера, который никуда не спешит',
-    ogDescription: 'Много карточек с вопросами от двух человек. Бесплатно в браузере.'
+    ogDescription: 'Много карточек с вопросами для компании от двух человек. Бесплатно в браузере.'
   },
   {
     file: '404.html', loc: 'en', path: '/404', robots: 'noindex,follow', noCanonical: true,

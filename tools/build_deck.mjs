@@ -7,6 +7,7 @@ const payload = { limit: DECK_LIMIT, games: {} };
 for (const [id, g] of Object.entries(WEB_DECK)) {
   payload.games[id] = { slug: g.slug, en: g.en, ru: g.ru };
   if (g.names) payload.games[id].names = g.names;
+  if (g.levels) payload.games[id].levels = g.levels;
 }
 
 writeFileSync('assets/web-deck.js',

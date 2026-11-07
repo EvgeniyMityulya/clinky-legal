@@ -27,7 +27,7 @@
     "id": "rou-004",
     "text": {
       "en": "{A}, in what kind of mess would you trust {B} to have your back?",
-      "ru": "{A}, в какой ситуации ты бы доверил {B} прикрыть тебя?"
+      "ru": "{A}, в какой ситуации ты бы доверил(-а) {B} прикрыть тебя?"
     },
     "minClinkers": 2
   },
@@ -43,7 +43,7 @@
     "id": "rou-006",
     "text": {
       "en": "{A}, what would you trust {B} with, and what would you absolutely never hand them?",
-      "ru": "{A}, что бы ты доверил {B}, а что — ни за что?"
+      "ru": "{A}, что бы ты доверил(-а) {B}, а что — ни за что?"
     },
     "minClinkers": 2
   },
@@ -51,7 +51,7 @@
     "id": "rou-007",
     "text": {
       "en": "{A}, when did {B} catch you off guard in the best way?",
-      "ru": "{A}, в какой момент {B} тебя приятно удивил?"
+      "ru": "{A}, в какой момент {B} тебя приятно удивил(-а)?"
     },
     "minClinkers": 2
   },
@@ -67,7 +67,7 @@
     "id": "rou-009",
     "text": {
       "en": "{A}, which habit of {B}'s would you steal, and which one could you never live with?",
-      "ru": "{A}, какую привычку {B} ты бы перенял, а какую — нет?"
+      "ru": "{A}, какую привычку {B} ты бы перенял(-а), а какую — нет?"
     },
     "minClinkers": 2
   },
@@ -75,7 +75,7 @@
     "id": "rou-010",
     "text": {
       "en": "{A}, if {B} had to answer one question with total honesty, what would you ask?",
-      "ru": "{A}, что бы ты спросил у {B}, если бы он обязан был ответить честно?"
+      "ru": "{A}, что бы ты спросил(-а) у {B}, будь {B} обязан(-а) ответить честно?"
     },
     "minClinkers": 2
   },
@@ -91,7 +91,7 @@
     "id": "rou-012",
     "text": {
       "en": "{A}, for what kind of chaos would you pick {B} as your partner in crime?",
-      "ru": "{A}, в каком деле ты бы выбрал {B} напарником?"
+      "ru": "{A}, в каком деле ты бы выбрал(-а) {B} напарником?"
     },
     "minClinkers": 2
   },
@@ -107,7 +107,7 @@
     "id": "rou-014",
     "text": {
       "en": "{A}, if you could swipe one thing from {B} — their looks, their personality, or their skills — what's it gonna be?",
-      "ru": "{A}, что бы ты забрал себе у {B}: внешность, характер или навыки?"
+      "ru": "{A}, что бы ты забрал(-а) себе у {B}: внешность, характер или навыки?"
     },
     "minClinkers": 2
   },
@@ -123,7 +123,7 @@
     "id": "rou-016",
     "text": {
       "en": "{A}, if tonight were the last time you ever saw {B}, what would you say to them?",
-      "ru": "{A}, что бы ты сказал {B}, если бы вы виделись сегодня в последний раз?"
+      "ru": "{A}, что бы ты сказал(-а) {B}, если бы вы виделись сегодня в последний раз?"
     },
     "minClinkers": 2
   },
@@ -139,7 +139,7 @@
     "id": "rou-018",
     "text": {
       "en": "{A}, what song would you put on to sum up {B}?",
-      "ru": "{A}, какую песню ты бы поставил, чтобы описать {B}?"
+      "ru": "{A}, какую песню ты бы поставил(-а), чтобы описать {B}?"
     },
     "minClinkers": 2
   },
@@ -147,7 +147,7 @@
     "id": "rou-019",
     "text": {
       "en": "{A}, what could {B} teach you in a single evening?",
-      "ru": "{A}, чему {B} мог бы научить тебя за один вечер?"
+      "ru": "{A}, чему {B} мог(-ла) бы научить тебя за один вечер?"
     },
     "minClinkers": 2
   },
@@ -155,7 +155,7 @@
     "id": "rou-020",
     "text": {
       "en": "{A}, when did it hit you that {B} was the real deal as a friend?",
-      "ru": "{A}, в какой момент ты понял, что {B} тебе настоящий друг?"
+      "ru": "{A}, в какой момент ты понял(-а), что {B} тебе настоящий друг?"
     },
     "minClinkers": 2
   },
@@ -163,7 +163,7 @@
     "id": "rou-021",
     "text": {
       "en": "{A}, what would you rewrite about your first impression of {B}?",
-      "ru": "{A}, что бы ты изменил в первом впечатлении о {B}?"
+      "ru": "{A}, что бы ты изменил(-а) в первом впечатлении о {B}?"
     },
     "minClinkers": 2
   },
@@ -186,8 +186,8 @@
   {
     "id": "rou-024",
     "text": {
-      "en": "{A}, what does {B} order at a bar they've never set foot in before?",
-      "ru": "{A}, что {B} закажет в баре, куда зашёл впервые?"
+      "en": "{A}, what does {B} order at a place they've never set foot in before?",
+      "ru": "{A}, что {B} закажет в новом месте, куда зашёл(-шла) впервые?"
     },
     "minClinkers": 2
   },
@@ -195,7 +195,7 @@
     "id": "rou-025",
     "text": {
       "en": "{A}, what was the very first thought that crossed your mind when you met {B}?",
-      "ru": "{A}, что ты подумал в первую секунду, когда увидел {B}?"
+      "ru": "{A}, что ты подумал(-а) в первую секунду, когда увидел(-а) {B}?"
     },
     "minClinkers": 2
   },
@@ -235,7 +235,7 @@
     "id": "rou-030",
     "text": {
       "en": "{A}, what would {B} do for serious money that they'd normally never touch?",
-      "ru": "{A}, на что {B} пошёл бы за огромные деньги, хотя обычно ни за что?"
+      "ru": "{A}, на что {B} пошёл(-шла) бы за огромные деньги, хотя обычно ни за что?"
     },
     "minClinkers": 2
   },
@@ -251,7 +251,7 @@
     "id": "rou-032",
     "text": {
       "en": "{A}, what kind of advice would send you straight to {B} and nobody else?",
-      "ru": "{A}, за каким советом ты бы пошёл именно к {B}?"
+      "ru": "{A}, за каким советом ты бы пошёл(-шла) именно к {B}?"
     },
     "minClinkers": 2
   },
@@ -259,7 +259,7 @@
     "id": "rou-033",
     "text": {
       "en": "{A}, if the house were on fire, what's the first thing {B} grabs?",
-      "ru": "{A}, что бы {B} спас первым делом из горящего дома?"
+      "ru": "{A}, что бы {B} спас(-ла) первым делом из горящего дома?"
     },
     "minClinkers": 2
   },
@@ -267,7 +267,7 @@
     "id": "rou-034",
     "text": {
       "en": "{A}, in which era would {B} feel completely at home?",
-      "ru": "{A}, в какой эпохе {B} чувствовал бы себя как дома?"
+      "ru": "{A}, в какой эпохе {B} чувствовал(-а) бы себя как дома?"
     },
     "minClinkers": 2
   },
@@ -291,7 +291,7 @@
     "id": "rou-037",
     "text": {
       "en": "{A}, where has {B} grown the most as a person?",
-      "ru": "{A}, в чём {B} повзрослел сильнее всего?"
+      "ru": "{A}, в чём {B} повзрослел(-а) сильнее всего?"
     },
     "minClinkers": 2
   },
@@ -323,7 +323,7 @@
     "id": "rou-041",
     "text": {
       "en": "{A}, what would {B} refuse to throw out, even though it's long overdue?",
-      "ru": "{A}, что бы {B} ни за что не выбросил, даже если давно пора?"
+      "ru": "{A}, что бы {B} ни за что не выбросил(-а), даже если давно пора?"
     },
     "minClinkers": 2
   },
@@ -347,7 +347,7 @@
     "id": "rou-044",
     "text": {
       "en": "{A}, what advice did {B} give you once that turned out to be dead right?",
-      "ru": "{A}, какой совет {B} однажды дал тебе — и оказался прав?"
+      "ru": "{A}, какой совет {B} однажды дал(-а) тебе — и оказался(-ась) прав(-а)?"
     },
     "minClinkers": 2
   },
@@ -363,7 +363,7 @@
     "id": "rou-046",
     "text": {
       "en": "{A}, after which stunt did {B} pull did you realize life with them would never be boring?",
-      "ru": "{A}, после какой выходки {B} ты понял, что с этим человеком точно не соскучишься?"
+      "ru": "{A}, после какой выходки {B} ты понял(-а), что с этим человеком точно не соскучишься?"
     },
     "minClinkers": 2
   },
@@ -387,7 +387,7 @@
     "id": "rou-049",
     "text": {
       "en": "{A}, which item from {B}'s closet would you swipe and never give back?",
-      "ru": "{A}, какую вещь из гардероба {B} ты бы спёр и не вернул?"
+      "ru": "{A}, какую вещь из гардероба {B} ты бы спёр(-ла) и не вернул(-а)?"
     },
     "minClinkers": 2
   },
@@ -403,7 +403,7 @@
     "id": "rou-051",
     "text": {
       "en": "{A}, what talent of {B}'s did you write off as nonsense until it suddenly saved the day?",
-      "ru": "{A}, какой талант {B} ты считал ерундой, пока однажды он не пригодился по-крупному?"
+      "ru": "{A}, какой талант {B} ты считал(-а) ерундой, пока однажды он не пригодился по-крупному?"
     },
     "minClinkers": 2
   },
@@ -411,7 +411,7 @@
     "id": "rou-052",
     "text": {
       "en": "{A}, what move or trick of {B}'s did you steal and now pull yourself?",
-      "ru": "{A}, какой жест или фишку {B} ты подсмотрел и теперь делаешь сам?"
+      "ru": "{A}, какой жест или фишку {B} ты подсмотрел(-а) и теперь делаешь сам(-а)?"
     },
     "minClinkers": 2
   },
@@ -419,7 +419,7 @@
     "id": "rou-053",
     "text": {
       "en": "{A}, which habit of {B}'s did you secretly judge before quietly adopting it yourself?",
-      "ru": "{A}, какую привычку {B} ты тайно осуждал, а потом сам перенял?"
+      "ru": "{A}, какую привычку {B} ты тайно осуждал(-а), а потом сам(-а) перенял(-а)?"
     },
     "minClinkers": 2
   },
@@ -427,7 +427,7 @@
     "id": "rou-054",
     "text": {
       "en": "{A}, what does {B} pull off around the house or in the kitchen that quietly beats you?",
-      "ru": "{A}, какую штуку {B} делает по дому или в готовке так, что ты тихо проиграл?"
+      "ru": "{A}, какую штуку {B} делает по дому или в готовке так, что ты тихо проиграл(-а)?"
     },
     "minClinkers": 2
   },
@@ -435,7 +435,7 @@
     "id": "rou-055",
     "text": {
       "en": "{A}, what call of {B}'s would you never repeat, but secretly admire that they went for it?",
-      "ru": "{A}, какое решение {B} ты бы ни за что не повторил, но втайне восхищаешься, что он рискнул?"
+      "ru": "{A}, какое решение {B} ты бы ни за что не повторил(-а), но втайне восхищаешься, что {B} рискнул(-а)?"
     },
     "minClinkers": 2
   },
@@ -491,7 +491,7 @@
     "id": "rou-062",
     "text": {
       "en": "{A}, what did {B} once do for you that you hadn't even asked them to?",
-      "ru": "{A}, что {B} однажды сделал ради тебя, хотя ты его даже не просил?"
+      "ru": "{A}, что {B} однажды сделал(-а) ради тебя, хотя ты {B} даже не просил(-а)?"
     },
     "minClinkers": 2
   },
@@ -507,7 +507,7 @@
     "id": "rou-064",
     "text": {
       "en": "{A}, when did you realize {B} remembered something about you that you'd forgotten yourself?",
-      "ru": "{A}, в какой момент ты понял, что {B} запомнил о тебе то, что ты сам давно забыл?"
+      "ru": "{A}, в какой момент ты понял(-а), что {B} запомнил(-а) о тебе то, что ты сам(-а) давно забыл(-а)?"
     },
     "minClinkers": 2
   },
@@ -555,7 +555,7 @@
     "id": "rou-070",
     "text": {
       "en": "{A}, what would {B} bring up about you that you're embarrassed by but secretly proud of?",
-      "ru": "{A}, что бы {B} вспомнил о тебе таким, чего ты сам стесняешься, но в глубине души гордишься?"
+      "ru": "{A}, что бы {B} вспомнил(-а) о тебе такого, чего ты сам(-а) стесняешься, но в глубине души гордишься?"
     },
     "minClinkers": 2
   },
@@ -563,7 +563,7 @@
     "id": "rou-071",
     "text": {
       "en": "{A}, which photo of you and {B} would you never post, but can't bring yourself to delete either?",
-      "ru": "{A}, какую вашу с {B} фотографию ты бы ни за что не выложил, но и удалить рука не поднимается?"
+      "ru": "{A}, какую вашу с {B} фотографию ты бы ни за что не выложил(-а), но и удалить рука не поднимается?"
     },
     "minClinkers": 2
   },
@@ -571,7 +571,7 @@
     "id": "rou-072",
     "text": {
       "en": "{A}, what secret of {B}'s did you figure out ages ago but pretend you don't know?",
-      "ru": "{A}, какой секрет {B} ты давно раскусил, но делаешь вид, что не в курсе?"
+      "ru": "{A}, какой секрет {B} ты давно раскусил(-а), но делаешь вид, что не в курсе?"
     },
     "minClinkers": 2
   },
@@ -603,7 +603,7 @@
     "id": "rou-076",
     "text": {
       "en": "{A}, what message did {B} reread ten times before hitting send?",
-      "ru": "{A}, какое сообщение {B} перечитывал десять раз, прежде чем нажать «отправить»?"
+      "ru": "{A}, какое сообщение {B} перечитывал(-а) десять раз, прежде чем нажать «отправить»?"
     },
     "minClinkers": 2
   },
@@ -611,7 +611,7 @@
     "id": "rou-077",
     "text": {
       "en": "{A}, which habit did {B} pick up from their parents after swearing they never would?",
-      "ru": "{A}, какую привычку {B} перенял у родителей, хотя клялся, что никогда?"
+      "ru": "{A}, какую привычку {B} перенял(-а) у родителей, хотя клялся(-ась), что никогда?"
     },
     "minClinkers": 2
   },
@@ -656,18 +656,10 @@
     "minClinkers": 2
   },
   {
-    "id": "rou-083",
-    "text": {
-      "en": "{A}, which thing that happened with {B} can you still not explain to sober people without them thinking you made it up?",
-      "ru": "{A}, какой случай с {B} ты до сих пор не можешь объяснить трезвым людям так, чтобы они поверили?"
-    },
-    "minClinkers": 2
-  },
-  {
     "id": "rou-084",
     "text": {
       "en": "{A}, what would you steal from {B}: their guilt-free way of saying no, sleeping without an alarm, or not caring what anyone thinks?",
-      "ru": "{A}, что бы ты украл у {B}: его умение говорить «нет» без чувства вины, его сон без будильника или его пофигизм на чужое мнение?"
+      "ru": "{A}, что бы ты украл(-а) у {B}: умение говорить «нет» без чувства вины, сон без будильника или пофигизм на чужое мнение?"
     },
     "minClinkers": 2
   },
@@ -675,7 +667,7 @@
     "id": "rou-085",
     "text": {
       "en": "{A}, what would you hand {B} with zero questions: your unlocked phone, your apartment keys, or your car for the weekend?",
-      "ru": "{A}, какую вещь {B} ты бы доверил без вопросов — телефон без блокировки, ключи от квартиры или машину на выходные?"
+      "ru": "{A}, какую вещь {B} ты бы доверил(-а) без вопросов — телефон без блокировки, ключи от квартиры или машину на выходные?"
     },
     "minClinkers": 2
   },
@@ -683,7 +675,7 @@
     "id": "rou-086",
     "text": {
       "en": "{A}, in what cringe situation do you wish you had {B}'s charm to talk your way out?",
-      "ru": "{A}, в какой неловкой ситуации ты бы хотел иметь обаяние {B}, чтобы выкрутиться?"
+      "ru": "{A}, в какой неловкой ситуации ты бы хотел(-а) иметь обаяние {B}, чтобы выкрутиться?"
     },
     "minClinkers": 2
   },
@@ -691,7 +683,7 @@
     "id": "rou-087",
     "text": {
       "en": "{A}, which of {B}'s looks would you graft onto yourself: their smile, their voice, or the way they pull off literally any rag?",
-      "ru": "{A}, чью внешнюю фишку {B} ты бы пересадил себе — улыбку, голос или то, как он носит любую тряпку?"
+      "ru": "{A}, чью внешнюю фишку {B} ты бы пересадил(-а) себе — улыбку, голос или то, как {B} носит любую тряпку?"
     },
     "minClinkers": 2
   },
@@ -699,7 +691,7 @@
     "id": "rou-088",
     "text": {
       "en": "{A}, in what jam would you call {B} first, and in what jam would they be the last person you'd dial?",
-      "ru": "{A}, в какой передряге ты бы вызвал именно {B}, а в какой — ни в коем случае не его?"
+      "ru": "{A}, в какой передряге ты бы вызвал(-а) именно {B}, а в какой — ни в коем случае не {B}?"
     },
     "minClinkers": 2
   },
@@ -707,7 +699,7 @@
     "id": "rou-089",
     "text": {
       "en": "{A}, which gutsy move by {B} — one you'd never dare make yourself — do you secretly applaud?",
-      "ru": "{A}, какому решению {B}, на которое ты бы в жизни не решился, ты втайне аплодируешь?"
+      "ru": "{A}, какому решению {B}, на которое ты бы в жизни не решился(-ась), ты втайне аплодируешь?"
     },
     "minClinkers": 2
   },
@@ -715,7 +707,7 @@
     "id": "rou-090",
     "text": {
       "en": "{A}, between you and {B}, who got kicked out of a place first — and what exactly did you do?",
-      "ru": "{A}, кого из вас с {B} первым выгоняли из заведения и за что именно?"
+      "ru": "{A}, кого из вас с {B} выгоняли из заведения раньше — и за что именно?"
     },
     "minClinkers": 2
   },
@@ -747,7 +739,7 @@
     "id": "rou-094",
     "text": {
       "en": "{A}, when did it click that {B} would show up at your door at 3 a.m. without asking a single question?",
-      "ru": "{A}, в какой момент ты понял, что {B} приедет к тебе в три ночи без единого вопроса?"
+      "ru": "{A}, в какой момент ты понял(-а), что {B} приедет к тебе в три ночи без единого вопроса?"
     },
     "minClinkers": 2
   },
@@ -786,8 +778,8 @@
   {
     "id": "rou-099",
     "text": {
-      "en": "{A}, what opinion does {B} keep buttoned up in public but unloads as a whole lecture over a drink?",
-      "ru": "{A}, какое мнение {B} держит при себе на людях, но за бутылкой выкатывает целую лекцию?"
+      "en": "{A}, what opinion does {B} keep buttoned up in public but unloads as a whole lecture among friends?",
+      "ru": "{A}, какое мнение {B} держит при себе на людях, но в своей компании выкатывает целую лекцию?"
     },
     "minClinkers": 2
   },
@@ -811,7 +803,7 @@
     "id": "rou-102",
     "text": {
       "en": "{A}, what would you put on {B}'s business card instead of a job title?",
-      "ru": "{A}, что бы ты написал на визитке {B} вместо должности?"
+      "ru": "{A}, что бы ты написал(-а) на визитке {B} вместо должности?"
     },
     "minClinkers": 2
   },
@@ -819,7 +811,7 @@
     "id": "rou-103",
     "text": {
       "en": "{A}, what would even {B}'s exes grudgingly admit is great about them?",
-      "ru": "{A}, что даже бывшие {B} скрепя сердце признали бы за ним классным?"
+      "ru": "{A}, что даже бывшие {B} скрепя сердце признали бы классным?"
     },
     "minClinkers": 2
   },
@@ -827,7 +819,7 @@
     "id": "rou-104",
     "text": {
       "en": "{A}, which of {B}'s traits would you wish onto your future kids?",
-      "ru": "{A}, какую черту {B} ты бы пожелал своим будущим детям?"
+      "ru": "{A}, какую черту {B} ты бы пожелал(-а) своим будущим детям?"
     },
     "minClinkers": 2
   },
@@ -835,7 +827,7 @@
     "id": "rou-105",
     "text": {
       "en": "{A}, which quality of {B}'s would you bottle up and sell?",
-      "ru": "{A}, какое качество {B} ты бы разлил по бутылкам и продавал?"
+      "ru": "{A}, какое качество {B} ты бы разлил(-а) по бутылкам и продавал(-а)?"
     },
     "minClinkers": 2
   },
@@ -843,7 +835,7 @@
     "id": "rou-106",
     "text": {
       "en": "{A}, what ridiculous event would {B} take Olympic gold in, if it ever made the program?",
-      "ru": "{A}, в какой нелепой дисциплине {B} стал бы олимпийским чемпионом, будь она в программе?"
+      "ru": "{A}, в какой нелепой дисциплине {B} взял(-а) бы олимпийское золото, будь она в программе?"
     },
     "minClinkers": 2
   },
@@ -851,7 +843,7 @@
     "id": "rou-107",
     "text": {
       "en": "{A}, how would you open the toast at {B}'s wedding?",
-      "ru": "{A}, с какой фразы ты бы начал тост на свадьбе {B}?"
+      "ru": "{A}, с какой фразы ты бы начал(-а) тост на свадьбе {B}?"
     },
     "minClinkers": 2
   },
@@ -859,7 +851,7 @@
     "id": "rou-108",
     "text": {
       "en": "{A}, if {B} ran for president of your friend group, what would they promise in the campaign speech?",
-      "ru": "{A}, если бы {B} баллотировался в президенты вашей компании, что он пообещал бы в предвыборной речи?"
+      "ru": "{A}, если бы {B} баллотировался(-ась) в президенты вашей компании, что бы {B} пообещал(-а) в предвыборной речи?"
     },
     "minClinkers": 2
   },
@@ -874,8 +866,8 @@
   {
     "id": "rou-110",
     "text": {
-      "en": "{A}, if {B} were a cocktail, what's in the mix and how strong is it?",
-      "ru": "{A}, если бы {B} был коктейлем, что было бы в составе и какой была бы крепость?"
+      "en": "{A}, if {B} were a dessert, what's inside and how sweet is it?",
+      "ru": "{A}, если бы {B} был(-а) десертом, что было бы внутри и насколько сладко?"
     },
     "minClinkers": 2
   },
@@ -891,7 +883,7 @@
     "id": "rou-112",
     "text": {
       "en": "{A}, what single word sums up {B} — and why that exact one?",
-      "ru": "{A}, каким одним словом ты бы описал {B} — и почему именно им?"
+      "ru": "{A}, каким одним словом ты бы описал(-а) {B} — и почему именно им?"
     },
     "minClinkers": 2
   },
@@ -899,7 +891,7 @@
     "id": "rou-113",
     "text": {
       "en": "{A}, what could {B} give a whole talk on right now, without a single slide?",
-      "ru": "{A}, на какую тему {B} мог бы прочитать лекцию прямо сейчас, без единого слайда?"
+      "ru": "{A}, на какую тему {B} мог(-ла) бы прочитать лекцию прямо сейчас, без единого слайда?"
     },
     "minClinkers": 2
   },
@@ -907,7 +899,7 @@
     "id": "rou-114",
     "text": {
       "en": "{A}, which thing {B} pulled off still makes you quietly wonder how they even did it?",
-      "ru": "{A}, какой поступок {B} до сих пор вызывает у тебя тихое «ну как он это провернул»?"
+      "ru": "{A}, какой поступок {B} до сих пор вызывает у тебя тихое «ну как {B} это провернул(-а)»?"
     },
     "minClinkers": 2
   },
@@ -939,7 +931,7 @@
     "id": "rou-118",
     "text": {
       "en": "{A}, what about {B} makes people warm up to them within the first minute?",
-      "ru": "{A}, какая черта {B} располагает к нему людей с первой же минуты?"
+      "ru": "{A}, какая черта {B} располагает к {B} людей с первой же минуты?"
     },
     "minClinkers": 2
   },
@@ -955,7 +947,7 @@
     "id": "rou-120",
     "text": {
       "en": "{A}, if {B} suddenly became your boss, what would they turn out to be surprisingly great at?",
-      "ru": "{A}, если бы {B} вдруг стал твоим начальником, в чём он оказался бы неожиданно хорош?"
+      "ru": "{A}, если бы {B} вдруг стал(-а) твоим начальником, в чём {B} оказался(-ась) бы неожиданно хорош(-а)?"
     },
     "minClinkers": 2
   },
@@ -979,7 +971,7 @@
     "id": "rou-123",
     "text": {
       "en": "{A}, in what situation does {B} stay calm while everyone else is already losing it?",
-      "ru": "{A}, в какой ситуации {B} остаётся спокоен, когда все вокруг уже на нервах?"
+      "ru": "{A}, в какой ситуации {B} остаётся спокоен(-йна), когда все вокруг уже на нервах?"
     },
     "minClinkers": 2
   },
@@ -1003,7 +995,7 @@
     "id": "rou-126",
     "text": {
       "en": "{A}, given thirty seconds to brag about {B} to a stranger, where would you start?",
-      "ru": "{A}, если бы тебе дали тридцать секунд похвастаться {B} перед незнакомцем — с чего бы ты начал?"
+      "ru": "{A}, если бы тебе дали тридцать секунд похвастаться {B} перед незнакомцем — с чего бы ты начал(-а)?"
     },
     "minClinkers": 2
   },
@@ -1011,7 +1003,7 @@
     "id": "rou-127",
     "text": {
       "en": "{A}, what does {B} quietly do for other people and would never bring up themselves?",
-      "ru": "{A}, что {B} делает для других, о чём сам ни за что не станет рассказывать?"
+      "ru": "{A}, что {B} делает для других, о чём сам(-а) ни за что не станет рассказывать?"
     },
     "minClinkers": 2
   },
@@ -1027,7 +1019,7 @@
     "id": "rou-129",
     "text": {
       "en": "{A}, what about {B} makes you exhale and relax the moment they're around?",
-      "ru": "{A}, что в {B} заставляет тебя выдохнуть и расслабиться, стоит ему оказаться рядом?"
+      "ru": "{A}, что в {B} заставляет тебя выдохнуть и расслабиться, стоит {B} оказаться рядом?"
     },
     "minClinkers": 2
   },
@@ -1035,15 +1027,7 @@
     "id": "rou-130",
     "text": {
       "en": "{A}, what truth would you only take from {B}, because everyone else would stay quiet?",
-      "ru": "{A}, какую правду ты готов услышать только от {B}, потому что остальные смолчат?"
-    },
-    "minClinkers": 2
-  },
-  {
-    "id": "rou-131",
-    "text": {
-      "en": "{A}, what does {B} pull off tipsy better than most people manage stone-cold sober?",
-      "ru": "{A}, что {B} навеселе делает лучше, чем большинство на трезвую голову?"
+      "ru": "{A}, какую правду ты готов(-а) услышать только от {B}, потому что остальные смолчат?"
     },
     "minClinkers": 2
   },
@@ -1059,7 +1043,7 @@
     "id": "rou-133",
     "text": {
       "en": "{A}, what skill would you genuinely pay {B} for, like an actual pro?",
-      "ru": "{A}, за какое умение {B} ты бы реально платил ему как профессионалу?"
+      "ru": "{A}, за какое умение {B} ты бы реально платил(-а) как профессионалу?"
     },
     "minClinkers": 2
   },
@@ -1075,15 +1059,15 @@
     "id": "rou-135",
     "text": {
       "en": "{A}, what does {B} stay endlessly curious about that makes them impossible to get bored with?",
-      "ru": "{A}, чем {B} не перестаёт интересоваться, и именно поэтому с ним не скучно?"
+      "ru": "{A}, чем {B} не перестаёт интересоваться, и именно поэтому с {B} не скучно?"
     },
     "minClinkers": 2
   },
   {
     "id": "rou-136",
     "text": {
-      "en": "{A}, what about {B} catches the eye first, even from across the whole bar?",
-      "ru": "{A}, что в {B} цепляет взгляд первым, даже через весь бар?"
+      "en": "{A}, what about {B} catches the eye first, even from across a crowded room?",
+      "ru": "{A}, что в {B} цепляет взгляд первым, даже через весь зал?"
     },
     "minClinkers": 2
   },
@@ -1091,7 +1075,7 @@
     "id": "rou-137",
     "text": {
       "en": "{A}, where does {B} happily look silly and not care, while you'd burn up with shame?",
-      "ru": "{A}, в какой ситуации {B} спокойно выглядит глупо и в ус не дует, а ты бы сгорел со стыда?"
+      "ru": "{A}, в какой ситуации {B} спокойно выглядит глупо и в ус не дует, а ты бы сгорел(-а) со стыда?"
     },
     "minClinkers": 2
   },
@@ -1099,7 +1083,7 @@
     "id": "rou-138",
     "text": {
       "en": "{A}, in an argument, is {B}'s gift staying cool, winning, or making peace?",
-      "ru": "{A}, в споре {B} силён в чём — держит холод, побеждает или мирит всех?"
+      "ru": "{A}, в споре {B} силён(-льна) в чём — держит холод, побеждает или мирит всех?"
     },
     "minClinkers": 2
   },
@@ -1107,7 +1091,7 @@
     "id": "rou-139",
     "text": {
       "en": "{A}, what about {B} only gets better the longer you know them?",
-      "ru": "{A}, что в {B} становится только лучше, чем дольше ты его знаешь?"
+      "ru": "{A}, что в {B} становится только лучше, чем дольше ты знаешь {B}?"
     },
     "minClinkers": 2
   },
@@ -1123,7 +1107,7 @@
     "id": "rou-141",
     "text": {
       "en": "{A}, what hidden talent should {B} be showing off right here at the table tonight?",
-      "ru": "{A}, какой скрытый талант {B} ему стоило бы показать прямо сегодня за столом?"
+      "ru": "{A}, какой скрытый талант {B} стоило бы показать прямо сегодня за столом?"
     },
     "minClinkers": 2
   },
@@ -1139,7 +1123,7 @@
     "id": "rou-143",
     "text": {
       "en": "{A}, what compliment have you never said to {B}'s face, even though they've earned it?",
-      "ru": "{A}, какой комплимент ты {B} в лицо так и не сказал, хотя он его заслужил?"
+      "ru": "{A}, какой комплимент ты {B} в лицо так и не сказал(-а), хотя {B} его заслужил(-а)?"
     },
     "minClinkers": 2
   },
@@ -1147,7 +1131,7 @@
     "id": "rou-144",
     "text": {
       "en": "{A}, what green flag about {B} would you name first to anyone heading out on a date with them?",
-      "ru": "{A}, какую черту {B} ты бы первой назвал тому, кто собрался с ним на свидание?"
+      "ru": "{A}, какую черту {B} ты бы первой назвал(-а) тому, кто собрался на свидание с {B}?"
     },
     "minClinkers": 2
   },
@@ -1155,7 +1139,7 @@
     "id": "rou-145",
     "text": {
       "en": "{A}, what's the smartest thing you've ever heard {B} come out with?",
-      "ru": "{A}, какую самую умную мысль ты когда-либо слышал от {B}?"
+      "ru": "{A}, какую самую умную мысль ты когда-либо слышал(-а) от {B}?"
     },
     "minClinkers": 2
   },
@@ -1163,7 +1147,7 @@
     "id": "rou-146",
     "text": {
       "en": "{A}, what has {B} stayed loyal to for years in a way that earns your respect?",
-      "ru": "{A}, чему {B} остаётся верен годами так, что ты его за это уважаешь?"
+      "ru": "{A}, чему {B} годами остаётся верен(-на) так, что ты за это уважаешь?"
     },
     "minClinkers": 2
   },
@@ -1171,7 +1155,7 @@
     "id": "rou-147",
     "text": {
       "en": "{A}, what's the bravest everyday thing you've watched {B} actually do?",
-      "ru": "{A}, какой самый смелый обычный поступок {B} ты видел своими глазами?"
+      "ru": "{A}, какой самый смелый обычный поступок {B} ты видел(-а) своими глазами?"
     },
     "minClinkers": 2
   },
@@ -1186,8 +1170,8 @@
   {
     "id": "rou-149",
     "text": {
-      "en": "{A}, if {B} were a stranger at the bar, what line would actually get them to stay and talk?",
-      "ru": "{A}, будь {B} незнакомцем в баре — какая фраза реально заставила бы его остаться поболтать?"
+      "en": "{A}, if {B} were a stranger at the next table, what line would actually get them to stay and talk?",
+      "ru": "{A}, будь {B} случайным человеком за соседним столиком — какая фраза заставила бы {B} остаться поболтать?"
     },
     "minClinkers": 2
   },
@@ -1203,7 +1187,7 @@
     "id": "rou-151",
     "text": {
       "en": "{A}, what about {B} would you defend to anyone who dares say a bad word about them?",
-      "ru": "{A}, какую черту {B} ты бы отстаивал перед кем угодно, кто скажет о нём плохое?"
+      "ru": "{A}, какую черту {B} ты бы отстаивал(-а) перед кем угодно, кто скажет о {B} плохое?"
     },
     "minClinkers": 2
   },
@@ -1211,7 +1195,7 @@
     "id": "rou-152",
     "text": {
       "en": "{A}, in a zombie apocalypse, would {B} outlast everyone or fold first?",
-      "ru": "{A}, как думаешь, {B} протянул бы в зомби-апокалипсисе дольше всех или сдался бы первым?"
+      "ru": "{A}, как думаешь, {B} протянул(-а) бы в зомби-апокалипсисе дольше всех или сдался(-ась) бы первым(-ой)?"
     },
     "minClinkers": 2
   },
@@ -1219,7 +1203,7 @@
     "id": "rou-153",
     "text": {
       "en": "{A}, if {B} suddenly got rich, what's the most ridiculous thing they'd buy first?",
-      "ru": "{A}, если бы {B} внезапно разбогател, какую самую нелепую вещь он купил бы первой?"
+      "ru": "{A}, если бы {B} внезапно разбогател(-а), какую самую нелепую вещь {B} купил(-а) бы первой?"
     },
     "minClinkers": 2
   },
@@ -1227,7 +1211,7 @@
     "id": "rou-154",
     "text": {
       "en": "{A}, which reality show would {B} end up on, and how far would they get?",
-      "ru": "{A}, на каком реалити-шоу {B} оказался бы и как далеко прошёл бы?"
+      "ru": "{A}, на каком реалити-шоу {B} оказался(-ась) бы и как далеко прошёл(-шла) бы?"
     },
     "minClinkers": 2
   },
@@ -1235,7 +1219,7 @@
     "id": "rou-155",
     "text": {
       "en": "{A}, if {B} ever landed in a police station, what harmless little stunt would it be for?",
-      "ru": "{A}, если бы {B} однажды загремел в отделение, то за какую самую безобидную глупость?"
+      "ru": "{A}, если бы {B} однажды загремел(-а) в отделение, то за какую самую безобидную глупость?"
     },
     "minClinkers": 2
   },
@@ -1243,7 +1227,7 @@
     "id": "rou-156",
     "text": {
       "en": "{A}, what business would {B} start, and would it survive even a month?",
-      "ru": "{A}, какой бизнес {B} открыл бы — и протянул бы он хоть месяц?"
+      "ru": "{A}, какой бизнес {B} открыл(-а) бы — и протянул бы он хоть месяц?"
     },
     "minClinkers": 2
   },
@@ -1259,7 +1243,7 @@
     "id": "rou-158",
     "text": {
       "en": "{A}, how does {B} usually reply to texts: instantly, three days later, or 'seen and gone'?",
-      "ru": "{A}, как {B} обычно отвечает на сообщения: мгновенно, через три дня или «прочитал и пропал»?"
+      "ru": "{A}, как {B} обычно отвечает на сообщения: мгновенно, через три дня или «прочитал(-а) и пропал(-а)»?"
     },
     "minClinkers": 2
   },
@@ -1267,7 +1251,7 @@
     "id": "rou-159",
     "text": {
       "en": "{A}, drop {B} on a desert island — how many minutes until they're bossing everyone around?",
-      "ru": "{A}, попади {B} на необитаемый остров, через сколько минут он начал бы всеми командовать?"
+      "ru": "{A}, попади {B} на необитаемый остров, через сколько минут {B} начал(-а) бы всеми командовать?"
     },
     "minClinkers": 2
   },
@@ -1275,7 +1259,7 @@
     "id": "rou-160",
     "text": {
       "en": "{A}, if {B} won the lottery, would they tell the whole world or quietly vanish?",
-      "ru": "{A}, выиграй {B} в лотерею, он раструбил бы всем или тихо исчез бы?"
+      "ru": "{A}, выиграй {B} в лотерею, {B} раструбил(-а) бы всем или тихо исчез(-ла) бы?"
     },
     "minClinkers": 2
   },
@@ -1283,7 +1267,7 @@
     "id": "rou-161",
     "text": {
       "en": "{A}, in a horror movie, would {B} die first, be the lone survivor, or go check the suspicious noise?",
-      "ru": "{A}, в фильме ужасов {B} умер бы первым, выжил бы один или пошёл бы проверять подозрительный шум?"
+      "ru": "{A}, в фильме ужасов {B} погибнет в первой сцене, доживёт до титров или пойдёт проверять подозрительный шум?"
     },
     "minClinkers": 2
   },
@@ -1323,7 +1307,7 @@
     "id": "rou-166",
     "text": {
       "en": "{A}, what emoji does {B} use the most, and what are they really trying to say with it?",
-      "ru": "{A}, какой эмодзи {B} ставит чаще всего и что он на самом деле им хочет сказать?"
+      "ru": "{A}, какой эмодзи {B} ставит чаще всего и что {B} на самом деле им хочет сказать?"
     },
     "minClinkers": 2
   },
@@ -1339,7 +1323,7 @@
     "id": "rou-168",
     "text": {
       "en": "{A}, what would {B} happily blow their last cash on?",
-      "ru": "{A}, на что {B} с радостью спустил бы последние деньги?"
+      "ru": "{A}, на что {B} с радостью спустил(-а) бы последние деньги?"
     },
     "minClinkers": 2
   },
@@ -1347,7 +1331,7 @@
     "id": "rou-169",
     "text": {
       "en": "{A}, what compliment would {B} replay in their head for a week?",
-      "ru": "{A}, какой комплимент {B} прокручивал бы в голове ещё неделю?"
+      "ru": "{A}, какой комплимент {B} прокручивал(-а) бы в голове ещё неделю?"
     },
     "minClinkers": 2
   },
@@ -1363,7 +1347,7 @@
     "id": "rou-171",
     "text": {
       "en": "{A}, what does {B} get up to when they think no one's watching?",
-      "ru": "{A}, чем {B} занимается, когда думает, что его никто не видит?"
+      "ru": "{A}, чем {B} занимается, когда думает, что {B} никто не видит?"
     },
     "minClinkers": 2
   },
@@ -1387,7 +1371,7 @@
     "id": "rou-174",
     "text": {
       "en": "{A}, what could {B} brag about endlessly but somehow stays modest about?",
-      "ru": "{A}, чем {B} мог бы хвастаться напропалую, но почему-то скромничает?"
+      "ru": "{A}, чем {B} мог(-ла) бы хвастаться напропалую, но почему-то скромничает?"
     },
     "minClinkers": 2
   },
@@ -1419,7 +1403,7 @@
     "id": "rou-178",
     "text": {
       "en": "{A}, if {B} were a weather forecast, what's today's outlook?",
-      "ru": "{A}, если бы {B} был прогнозом погоды, какой прогноз на сегодня?"
+      "ru": "{A}, если бы {B} был(-а) прогнозом погоды, какой прогноз на сегодня?"
     },
     "minClinkers": 2
   },
@@ -1427,7 +1411,7 @@
     "id": "rou-179",
     "text": {
       "en": "{A}, what nickname has {B} totally earned that no one's brave enough to say to their face?",
-      "ru": "{A}, какое прозвище {B} честно заслужил, но никто не решается сказать ему в лицо?"
+      "ru": "{A}, какое прозвище {B} честно заслужил(-а), но никто не решается сказать {B} в лицо?"
     },
     "minClinkers": 2
   },
@@ -1443,7 +1427,7 @@
     "id": "rou-181",
     "text": {
       "en": "{A}, at a friend's wedding, would {B} cry first or pretend it's just something in their eye?",
-      "ru": "{A}, на свадьбе друга {B} заплакал бы первым или делал бы вид, что соринка в глаз попала?"
+      "ru": "{A}, на свадьбе друга {B} заплакал(-а) бы первым(-ой) или делал(-а) бы вид, что соринка в глаз попала?"
     },
     "minClinkers": 2
   },
@@ -1459,7 +1443,7 @@
     "id": "rou-183",
     "text": {
       "en": "{A}, in a team trivia night, what category would {B} carry single-handedly?",
-      "ru": "{A}, в командной викторине какую тему {B} вытянул бы в одиночку?"
+      "ru": "{A}, в командной викторине какую тему {B} вытянул(-а) бы в одиночку?"
     },
     "minClinkers": 2
   },
@@ -1475,7 +1459,7 @@
     "id": "rou-185",
     "text": {
       "en": "{A}, if {B} could read minds for a day, whose thoughts would they snoop on first?",
-      "ru": "{A}, если бы {B} на день научился читать мысли, чьи он подслушал бы первыми?"
+      "ru": "{A}, если бы {B} на день научился(-ась) читать мысли, чьи мысли {B} подслушал(-а) бы первыми?"
     },
     "minClinkers": 2
   },
@@ -1483,7 +1467,7 @@
     "id": "rou-186",
     "text": {
       "en": "{A}, what does {B} loudly complain about but would secretly miss if it vanished?",
-      "ru": "{A}, на что {B} громко жалуется, но втайне сильно расстроился бы, если бы это исчезло?"
+      "ru": "{A}, на что {B} громко жалуется, но втайне сильно расстроился(-ась) бы, если бы это исчезло?"
     },
     "minClinkers": 2
   },
@@ -1491,7 +1475,7 @@
     "id": "rou-187",
     "text": {
       "en": "{A}, who at this table has {B} probably had a little crush on at some point?",
-      "ru": "{A}, на кого за этим столом {B}, скорее всего, когда-то заглядывался?"
+      "ru": "{A}, на кого за этим столом {B}, скорее всего, когда-то заглядывался(-ась)?"
     },
     "minClinkers": 2
   },
@@ -1499,7 +1483,7 @@
     "id": "rou-188",
     "text": {
       "en": "{A}, if {B} swiped right on everyone here in a dating app, who'd match back?",
-      "ru": "{A}, если бы {B} лайкнул всех за столом в приложении для знакомств, кто ответил бы взаимностью?"
+      "ru": "{A}, если бы {B} лайкнул(-а) всех за столом в приложении для знакомств, кто ответил бы взаимностью?"
     },
     "minClinkers": 2
   },
@@ -1515,7 +1499,7 @@
     "id": "rou-190",
     "text": {
       "en": "{A}, what's {B}'s biggest red flag, and would you still date someone like that?",
-      "ru": "{A}, какой у {B} главный «красный флаг» — и ты всё равно встречался бы с таким?"
+      "ru": "{A}, какой у {B} главный «красный флаг» — и ты всё равно встречался(-ась) бы с таким человеком?"
     },
     "minClinkers": 2
   },
@@ -1531,7 +1515,7 @@
     "id": "rou-192",
     "text": {
       "en": "{A}, if {B} had to marry someone here tomorrow, who would they pick and why?",
-      "ru": "{A}, если бы {B} завтра пришлось жениться на ком-то из присутствующих, кого бы он выбрал и почему?"
+      "ru": "{A}, если бы {B} пришлось прямо завтра пожениться с кем-то из присутствующих, кого бы {B} выбрал(-а) и почему?"
     },
     "minClinkers": 2
   },
@@ -1547,7 +1531,7 @@
     "id": "rou-194",
     "text": {
       "en": "{A}, by the end of the night, will {B} be the first one flirting, or play it cool like it wasn't them?",
-      "ru": "{A}, к концу вечера {B} первым начнёт с кем-то флиртовать или будет делать вид, что он тут ни при чём?"
+      "ru": "{A}, к концу вечера {B} первым(-ой) начнёт с кем-то флиртовать или будет делать вид, что {B} тут ни при чём?"
     },
     "minClinkers": 2
   },
@@ -1555,7 +1539,7 @@
     "id": "rou-195",
     "text": {
       "en": "{A}, what's the one move you can predict {B} will pull at literally any party?",
-      "ru": "{A}, какой поступок {B} на любой тусовке ты готов предсказать со стопроцентной точностью?"
+      "ru": "{A}, какой поступок {B} на любой тусовке ты готов(-а) предсказать со стопроцентной точностью?"
     },
     "minClinkers": 2
   },
