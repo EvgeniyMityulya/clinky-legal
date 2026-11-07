@@ -6,6 +6,7 @@ const assetVer = (file) => {
 };
 
 import { SITE, SHELLS } from './shell_meta.mjs';
+import { BRAND_COPY } from './brand_content.mjs';
 import { FAQ_SUPPORT } from './faq_support.mjs';
 import { FAQ_GAMES } from './faq_games.mjs';
 import { GAMES_META } from './games_meta.mjs';
@@ -29,7 +30,7 @@ const PLAY_RU = {
   never_have_i: '/ru/play/ya-nikogda-ne', roulette: '/ru/play/kto-iz-nas',
   tell_a_moment: '/ru/play/voprosy-druzyam', would_you_rather: '/ru/play/chto-vyberesh'
 };
-const playersLine = (min, loc) => (loc === 'ru' ? `От ${min}+ игроков` : `${min}+ players`);
+const playersLine = (min, loc) => (loc === 'ru' ? `От ${min} игроков` : `${min}+ players`);
 const RU_ACC = {
   never_have_i: '«Я никогда не»', roulette: '«Кто из нас»',
   tell_a_moment: '«Расскажи момент»', would_you_rather: '«Что выберешь»'
@@ -94,14 +95,14 @@ const ogFile = (s) => `assets/og-image${s.loc === 'ru' ? '-ru' : ''}.jpg`;
 const ogImage = (s) => `${SITE}/${ogFile(s)}?v=${createHash('md5').update(readFileSync(ogFile(s))).digest('hex').slice(0, 8)}`;
 
 function faqHtml(faq) {
-  return faq.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a)}</p>`).join('\n');
+  return faq.map((f) => `<h3>${esc(f.q)}</h3><p>${esc(f.a).replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')}</p>`).join('\n');
 }
 
 function faqSchema(faq) {
   return {
     '@type': 'FAQPage',
     mainEntity: faq.map((f) => ({
-      '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a }
+      '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a.replace(/\*\*/g, '') }
     }))
   };
 }
@@ -124,24 +125,24 @@ function homePrerender(loc) {
     ? {
         eyebrow: 'Доступно в App Store', h1: 'Преврати встречи в игру',
         lede: 'Лёгкий повод видеться чаще. Карточки-игры для любой компании и 3D-напиток за каждый «чок».',
-        cta: 'Скачать в App Store', gamesTitle: 'Эти вопросы раскроют любого',
-        gamesSub: 'Это реальные карточки из приложения. Полные наборы можно листать прямо на сайте.',
-        problemTitle: 'Собраться компанией бывает та ещё задачка',
+        cta: 'Скачать в App Store', gamesTitle: 'Эти вопросы раскроют любого!',
+        gamesSub: 'Это реальные карточки из приложения. На сайте 8 бесплатных карточек в день.',
+        problemTitle: 'Собрались, а разговор не клеится?',
         problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт живее. Clinky помогает видеться чаще и проводить время так, что хочется повторить.',
         insideTitle: 'Всё для встреч в одном месте',
-        inside: [['Не теряй друзей', 'Помни, кого и когда видел и с кем давно не пересекался.'], ['Чокнись чем угодно', 'Кофе, чай, бокал вина или пиво. Главное, что вы вместе.'], ['Игры для компании', 'Карточки-игры, которые разговорят любой стол за секунды.']],
+        inside: [['Не теряй друзей', 'Помни, с кем и когда виделись и с кем давно не пересекались.'], ['Чокнись чем угодно', 'Кофе, чай, лимонад или что угодно. Главное, что вы вместе.'], ['Игры для компании', 'Карточки-игры, которые разговорят любой стол за секунды.']],
         hubTitle: 'Бесплатные наборы вопросов',
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']]
       }
     : {
         eyebrow: 'Available on the App Store', h1: 'Turn hangouts into a game',
         lede: 'An easy reason to meet more often. Party-game cards for any table and a 3D drink for every clink.',
-        cta: 'Download on the App Store', gamesTitle: 'Questions that open anyone up',
-        gamesSub: 'These are real cards from the app. You can read the full sets right here on the site.',
-        problemTitle: 'Getting everyone together can be a real quest',
-        problemBody: 'Either everyone is busy and the meet-up drifts to someday, or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun. Clinky helps you meet up more often and have the kind of time you want to repeat.',
+        cta: 'Download on the App Store', gamesTitle: 'Questions that open anyone up!',
+        gamesSub: 'These are real cards from the app. On the site you get 8 free cards a day.',
+        problemTitle: 'Got together and the conversation stalls?',
+        problemBody: 'Either everyone is busy and the meet-up drifts to “someday”, or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun. Clinky helps you meet up more often and have the kind of time you want to repeat.',
         insideTitle: 'Everything for your hangouts in one place',
-        inside: [['Do not lose touch', 'Remember who you saw, when, and who you have not met in a while.'], ['Clink with anything', 'Coffee, tea, a glass of wine or a beer. What matters is you are together.'], ['Party games', 'Icebreaker cards that get any table talking in seconds.']],
+        inside: [["Don't lose touch", "Remember who you saw, when, and who you haven't met in a while."], ['Clink with anything', "Coffee, tea, lemonade or anything you like. What matters is you're together."], ['Party games', 'Icebreaker cards that get any table talking in seconds.']],
         hubTitle: 'Free question packs',
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']]
       };
@@ -270,6 +271,20 @@ function webDeck() {
 
 // Questions shown as plain text on each game page: enough to match list-style results, the full deck stays in the app.
 const PRERENDER_CARDS = 20;
+// a deck split into levels shows exactly its levels, so the text, the page and the ItemList agree
+const shownCards = (entry) => (entry.levels ? entry.levels.reduce((n, lv) => n + lv.n, 0) : PRERENDER_CARDS);
+const brandHtml = (loc) => `<h2>${esc(BRAND_COPY[loc].title)}</h2>\n<p>${esc(BRAND_COPY[loc].text)}</p>`;
+// the visible list, split into the deck's levels when it has them
+function cardsHtml(entry, cards, loc) {
+  const ul = (xs) => `<ul>${xs.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  if (!entry.levels || !entry.levels.length) return ul(cards);
+  let at = 0;
+  return entry.levels.map((lv) => {
+    const part = cards.slice(at, at + lv.n); at += lv.n;
+    const note = lv.note ? `\n<p>${esc(lv.note[loc] || lv.note.en)}</p>` : '';
+    return part.length ? `<h3>${esc(lv[loc] || lv.en)}</h3>${note}\n${ul(part)}` : '';
+  }).filter(Boolean).join('\n');
+}
 // a game's own page in the reader's language, the games hub when the deck has no slug for it
 function playHref(id, loc) {
   const slug = (webDeck().games[id] || {}).slug || {};
@@ -278,7 +293,7 @@ function playHref(id, loc) {
 function playCards(s) {
   const entry = webDeck().games[s.play] || {};
   const nm = (entry.names || {})[s.loc] || ['Alex', 'Sam'];
-  return (entry[s.loc] || []).slice(0, PRERENDER_CARDS)
+  return (entry[s.loc] || []).slice(0, shownCards(entry))
     .map((x) => String(x).replace(/\{A\}/g, () => nm[0]).replace(/\{B\}/g, () => nm[1]).replace(/\*/g, ''));
 }
 
@@ -288,7 +303,7 @@ function playPrerender(s) {
   const game = GAMES_META.find((g) => g.id === s.play) || GAMES_META[0];
   const entry = deck.games[s.play] || {};
   const nm = (entry.names || {})[loc] || ['Alex', 'Sam'];
-  const cards = (entry[loc] || []).slice(0, PRERENDER_CARDS)
+  const cards = (entry[loc] || []).slice(0, shownCards(entry))
     .map((x) => String(x).replace(/\{A\}/g, () => nm[0]).replace(/\{B\}/g, () => nm[1]).replace(/\*/g, ''));
   const t = loc === 'ru'
     ? { h1: RU_H1[s.play] || `Играть в ${RU_ACC[s.play] || '«' + game.title.ru + '»'} онлайн`, lede: GAME_CONTENT[s.play]?.answer?.ru || 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
@@ -311,9 +326,9 @@ function playPrerender(s) {
 <p>${esc(L.fitBest)} ${esc(c.best[loc])}</p>
 <p>${esc(c.intro[loc])}</p>
 <h2>${esc((L.rulesFor || {})[s.play] || L.rules)}</h2>
-<ol>${c.rules[loc].map((r) => `<li>${esc(r)}</li>`).join('')}</ol>
+<ol>${c.rules[loc].map((r) => `<li>${esc(r.replace(/\*\*/g, ''))}</li>`).join('')}</ol>
 <h2>${esc(L.examples)}</h2>
-<ul>${cards.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+${cardsHtml(entry, cards, loc)}
 <p><a href="https://apps.apple.com/app/id6777998850">${loc === 'ru' ? 'Все вопросы этой игры в приложении Clinky для iPhone' : 'Every question of this game is in the Clinky app for iPhone'}</a></p>
 <h2>${esc(L.variants)}</h2>
 <ol>${c.variants[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
@@ -321,6 +336,7 @@ function playPrerender(s) {
 <ol>${c.advice[loc].map((v) => `<li><strong>${esc(v.t)}</strong>, ${esc(v.d)}</li>`).join('')}</ol>
 <h2>${esc(L.faq)}</h2>
 ${faqHtml(c.faq[loc])}
+${brandHtml(loc)}
 </div>`;
 }
 
@@ -341,7 +357,7 @@ function scenarioPrerender(s) {
   return `<div id="prerender">
 <nav>${nav.map(([n, h]) => `<a href="${safeHref(h)}">${esc(n)}</a>`).join('')}</nav>
 <h1>${esc(sc.h1[loc])}</h1>
-<p>${esc(sc.tagline[loc])}</p>
+<p>${esc((sc.lede || sc.tagline)[loc])}</p>
 <p>${esc(sc.players[loc])}</p>
 <p>${esc(sc.intro[loc])}</p>
 <h2>${esc(L.how)}</h2>
@@ -356,6 +372,7 @@ ${sc.groups
 ${faqHtml(sc.faq[loc])}
 <h2>${esc(L.more)}</h2>
 <ul>${[...others, ...games].map(([n, h]) => `<li><a href="${safeHref(h)}">${esc(n)}</a></li>`).join('')}</ul>
+${brandHtml(loc)}
 </div>`;
 }
 
@@ -398,7 +415,7 @@ function jsonld(s) {
   const organization = {
     '@type': 'Organization', '@id': `${SITE}/#org`, name: 'Clinky', url: `${SITE}/`,
     logo: { '@type': 'ImageObject', url: `${SITE}/assets/clinky-icon.png`, width: 512, height: 512 },
-    sameAs: ['https://apps.apple.com/app/id6777998850'],
+    sameAs: ['https://apps.apple.com/app/id6777998850', 'https://www.producthunt.com/products/clinky-friends-drinks-games'],
     contactPoint: { '@type': 'ContactPoint', contactType: 'customer support', email: 'support@clinkyapp.com', availableLanguage: ['en', 'ru'] }
   };
   const author = {
@@ -594,10 +611,11 @@ for (const s of SHELLS) {
 
   // Data the first paint needs ships before site.js: loading it on demand painted a short
   // placeholder first, and the footer jumped twice (CLS 0.73 on the scenario pages).
-  html = html.replace(/\n?<script src="\/assets\/(?:scenarios|game-content)\.js\?v=[a-f0-9]+"><\/script>/g, '');
+  html = html.replace(/\n?<script src="\/assets\/(?:scenarios|game-content|web-deck)\.js\?v=[a-f0-9]+"><\/script>/g, '');
   const DATA = [];
   if (s.scenario) DATA.push('assets/scenarios.js');
   if (s.home || s.scenario || s.play || s.faq === 'games') DATA.push('assets/game-content.js');
+  if (s.play) DATA.push('assets/web-deck.js');
   if (DATA.length) {
     const tags = DATA.map((f) => `<script src="/${f}?v=${assetVer(f)}"></script>`).join('\n');
     html = html.replace(/<script src="\/assets\/site\.min\.js/, (m) => tags + '\n' + m);

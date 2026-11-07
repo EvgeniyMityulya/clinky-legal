@@ -325,11 +325,14 @@ function play() {
   })(performance.now());
 }
 
+let stageObs = null;
 function loop() {
   const mount = document.getElementById('heroMount');
   if (mount) {
     if (canvas.parentElement !== mount) {
       mount.appendChild(canvas); resize(); dirty = true;
+      // the desktop stage stretches to the text column, so follow its size, not only window resizes
+      if (window.ResizeObserver) { if (stageObs) stageObs.disconnect(); stageObs = new ResizeObserver(function () { resize(); dirty = true; }); stageObs.observe(mount); }
       if (ready) { canvas.style.opacity = '1'; const l = document.getElementById('mvLoader'); if (l) l.style.display = 'none'; }
       return;   // the drawing-buffer resize is its own task; draw on the next frame
     }

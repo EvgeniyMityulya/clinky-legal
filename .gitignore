@@ -10,3 +10,6 @@
 # local tooling and OS noise
 node_modules/
 .DS_Store
+
+# local design previews, never published
+_preview/

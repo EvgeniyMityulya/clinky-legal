@@ -1,22 +1,22 @@
 {
   "/": {
-    "hash": "ffca77434960",
+    "hash": "bd484017e2cf",
     "date": "2026-11-07",
     "published": "2026-06-22"
   },
   "/games": {
-    "hash": "21144f5c2b08",
-    "date": "2026-11-06",
+    "hash": "1a2a4350352e",
+    "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/about": {
-    "hash": "ca396a74bae2",
-    "date": "2026-11-06",
+    "hash": "5f073e64bc93",
+    "date": "2026-11-07",
     "published": "2026-06-22"
   },
   "/support": {
-    "hash": "2bb295a9a8a4",
-    "date": "2026-11-06",
+    "hash": "3a844233f517",
+    "date": "2026-11-07",
     "published": "2026-06-29"
   },
   "/privacy": {
@@ -30,23 +30,23 @@
     "published": "2026-06-22"
   },
   "/ru/": {
-    "hash": "1ceae4770729",
+    "hash": "8887353133c5",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/games": {
-    "hash": "e970d04cfbfd",
+    "hash": "cfaf412f5457",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/about": {
-    "hash": "9b065fff3774",
-    "date": "2026-11-06",
+    "hash": "d87fa76b6c52",
+    "date": "2026-11-07",
     "published": "2026-06-22"
   },
   "/ru/support": {
-    "hash": "6066913ce19d",
-    "date": "2026-11-06",
+    "hash": "3cc5865f7a4c",
+    "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/privacy": {
@@ -60,83 +60,83 @@
     "published": "2026-06-22"
   },
   "/play/never-have-i-ever": {
-    "hash": "d96568aeceb7",
+    "hash": "82a64f19d198",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/play/ya-nikogda-ne": {
-    "hash": "5726612cfd3c",
+    "hash": "6198e551c989",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/play/who-knows-better": {
-    "hash": "b8020f6c4393",
+    "hash": "76f5f04bfd3a",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/play/kto-iz-nas": {
-    "hash": "62840e8fe983",
+    "hash": "5c4a7ba8ca9d",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/play/questions-to-ask-friends": {
-    "hash": "8b4fbb694d7f",
+    "hash": "d719104888b1",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/play/voprosy-druzyam": {
-    "hash": "491bd6d32b15",
+    "hash": "4f813edc7852",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/play/would-you-rather": {
-    "hash": "5a478e843fad",
+    "hash": "552e91de8c0a",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/ru/play/chto-vyberesh": {
-    "hash": "bc3b9ef66d95",
+    "hash": "d9a6224df527",
     "date": "2026-11-07",
     "published": "2026-08-20"
   },
   "/questions/for-couples": {
-    "hash": "743383405cad",
-    "date": "2026-11-06",
+    "hash": "598bf6cd759b",
+    "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/ru/voprosy/dlya-pary": {
-    "hash": "5e1e8f1640bf",
+    "hash": "8fd016fb1459",
     "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/questions/party": {
-    "hash": "5ea89ff45649",
-    "date": "2026-11-06",
+    "hash": "de89d84484a5",
+    "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/ru/voprosy/za-stolom": {
-    "hash": "4cbb76e765c5",
+    "hash": "9fe85a29a282",
     "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/questions/first-date": {
-    "hash": "df9ccd450ab6",
-    "date": "2026-11-06",
+    "hash": "6b49c679dadc",
+    "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/ru/voprosy/pervoe-svidanie": {
-    "hash": "3978d307e872",
-    "date": "2026-11-06",
+    "hash": "065f249ddc14",
+    "date": "2026-11-07",
     "published": "2026-08-24"
   },
   "/questions/drinks": {
-    "hash": "9353afe910c9",
-    "date": "2026-11-06",
+    "hash": "4150621bcde0",
+    "date": "2026-11-07",
     "published": "2026-08-27"
   },
   "/ru/voprosy/za-bokalom": {
-    "hash": "6cc3faf26d96",
-    "date": "2026-11-06",
+    "hash": "24573f86a653",
+    "date": "2026-11-07",
     "published": "2026-08-27"
   }
 }

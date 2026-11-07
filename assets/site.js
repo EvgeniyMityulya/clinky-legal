@@ -37,57 +37,56 @@
       heroTitle: 'Turn hangouts into a game',
       heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
       promptTitle: 'Enjoying the questions?', promptSub: 'Every game and deck is in the app.\nPlay right on your phone, even offline', promptNote: 'Free · iPhone · iOS 17+', promptCta: 'Sign me up', promptClose: 'Close',
-      heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'No spam', trust3: 'iOS 17+',
-      heroModel: 'Tap the drink to spin it',
-      counterKicker: 'Live counter', counterLabel: 'clinks from friends around the world. Clink with us!',
+      heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'Offline', trust3: 'iOS 17+',
+      heroModel: 'Tap the drink and add your clink',
+      counterLabel: 'Drinks logged', qCountLabel: 'Questions answered',
       heroDone: "You're on the list. We'll send the App Store link the moment Clinky goes live.",
       heroDup: "This email is already on the list! We'll be in touch on launch day.",
       heroSending: 'One sec, adding you…',
       formSending: 'Sending…', formError: "Couldn't send it. Please try again in a minute.",
       emailPh: 'Your email', beer: 'Beer', coffee: 'Coffee',
-      gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up',
-      gamesSub: 'These are real cards from the app. Pick a game and who you play with',
-      gamesAll: 'See how to play', navPickGame: 'Pick a game', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
-      problemKicker: 'Sound familiar?', problemTitle: 'Getting everyone together can be a real quest!',
+      gamesKicker: 'Try it right now', gamesTitle: 'Questions that open anyone up!',
+      gamesAll: 'See all games', navPickGame: 'Pick a game', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
+      problemKicker: 'Sound familiar?', problemTitle: 'Got together and the conversation stalls?',
       problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
-      problemTurn: 'Clinky helps you meet up more often and have the kind of time you want to repeat!',
-      discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just your people and your moments.',
+      problemTurn: 'Clinky has *games and hundreds of questions* for any group, and gentle reminders help you *meet up more often*',
+      discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just *your people and your moments*',
       finalTitle: 'Round up your friends and clink!', finalSub: 'Clinky is on the App Store. Grab it before your next hangout',
       gamesPageTitle: 'Games for any table',
       gamesPageSub: 'Pick a game, then read the rules and play a few cards right here.',
       howTitle: 'How to play', stepLabel: 'Step',
       playTitle: 'Play {game} online', playSub: 'Tap for a new card. No sign-up, nothing to install.',
-      playNext: 'Next card', playLeft: '{n} cards left today', playHint: 'Free cards reset every day',
-      playLoading: 'Shuffling the deck…', playCta: 'Play online', playOther: 'Other games to play', playRules: 'Rules for all four games',
-      playDoneTitle: 'That is today\u2019s deck',
+      playNext: 'Next card', playLeft: '{n} left today', playHint: 'Free cards reset every day',
+      playLoading: 'Shuffling the deck…', playCta: 'Play online', playOther: 'More games to play', playRules: 'All games and how to play them',
+      playDoneTitle: 'That\u2019s all for today',
       playDoneBody: 'Come back tomorrow for more, or get the full deck in the app.', gamesFaqTitle: 'Questions about the games',
       aboutTitle: 'About Clinky',
       aboutPillarsTitle: 'What the app does',
       aboutStoryTitle: 'Why does this exist?',
-      aboutStory1: 'We see our friends a lot, at home and in bars, and there is almost always someone new at the table. The first twenty minutes go on traffic and weather while the evening quietly waits to start.',
+      aboutStory1: 'We see our friends a lot, at home and in cafés, and there is almost always someone new at the table. The first twenty minutes go on traffic and weather while the evening quietly waits to start.',
       aboutStory2: 'Clinky came out of a trick we kept using. Someone would pull a random question, read it out loud, and the conversation started on its own. The app does that part now, and it also remembers who we have seen lately, so a rare meet-up does not turn into a year of silence.',
       aboutWhoTitle: 'Who makes it?',
       aboutWhoName: 'Evgeniy Mityulya',
-      aboutWhoRole: 'iOS Engineer, Founder of @Clinky',
+      aboutWhoRole: 'iOS engineer, founder of Clinky',
       aboutWho1: 'I built the app for my own table, so an evening starts right away instead of the first awkward twenty minutes. Clinky is mine end to end, the code and the question cards both, so if a card lands badly you know exactly whom to blame \uD83D\uDE42',
       aboutWho2: 'Write to me directly. If you have an idea, or just a question worth asking, send it over and we will talk.',
       aboutDataTitle: 'What happens to your data?',
-      aboutData1: 'There are no accounts and there is no server. Your meet-ups, your friends and your collection stay on your phone, which means I cannot see whom you meet or what you answer. Nothing to leak, because nothing leaves the device.',
+      aboutData1: 'There are no accounts. Your meet-ups, your friends and your collection stay on your phone, so I never see whom you meet or what you answer. The app only sends anonymous usage and stability stats and your subscription status, and none of it includes your friends or answers.',
       aboutDataLink: 'Read the privacy policy',
       aboutAuthorTag: 'From the author',
       aboutMailLead: 'Want to talk to me directly or share an idea?', aboutMail: 'Write to me',
       aboutRows: [
-        { tag: 'Games', title: 'Cards that get the table talking', text: 'Four games and sets for dates, parties and long evenings. Every question is written to [start a story], never a plain yes or no.', art: 'ib-nhi' },
+        { tag: 'Games', title: 'Cards that get the table talking', text: 'Four games and sets for dates, parties and long evenings. Every question is written to [start a story], not just a quick answer.', art: 'ib-nhi' },
         { tag: 'Friends', title: 'Remember who you have not seen', text: 'Clinky keeps every meet-up and nudges you when a friend goes quiet. [A streak] shows how often your people actually meet.', art: 'streak' },
         { tag: 'Collection', title: 'A 3D memento for every clink', text: 'Coffee, tea or anything you like. Each meet-up puts [a new piece on your shelf], and achievements open along the way.', art: 'drink' }
       ],
       slogan: "Bring your friends, we'll bring the fun!",
-      aboutLede: 'An iOS app for the friendships you never want to drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
+      aboutLede: 'An iPhone app for the friendships you never want to let drift. Track who you meet, play party-game cards together, and keep a little 3D memento from every get-together.',
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
       p1t: "Don't lose touch", p1d: "Remember who you saw, when, and who you haven't met in a while.",
-      p2t: 'Clink with anything', p2d: "Coffee, tea, a glass of wine or a beer. What matters is you're together!",
+      p2t: 'Clink with anything', p2d: "Coffee, tea, lemonade or anything you like. What matters is you're together!",
       p3t: 'Party games', p3d: 'Icebreaker cards that get any table talking in seconds.',
-      supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us — we read everything.',
+      supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us, we read every message', supFormTitle: 'Write to us',
       supName: 'Name', supEmailPh: 'Email', supMsgPh: 'Description',
       supSend: 'Send message', supNote: 'We usually reply within a day.',
       supDone: 'Thanks! We got your message and will reply soon.',
@@ -103,63 +102,62 @@
       heroEyebrow: 'Доступно в App Store',
       heroTitle: 'Преврати встречи в игру',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
-      promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении.\nИграйте прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
-      heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Без спама', trust3: 'iOS 17+',
-      heroModel: 'Нажми на напиток, чтобы покрутить',
-      counterKicker: 'Онлайн счётчик', counterLabel: 'чоков от друзей по всему миру. Чокнись с нами!',
+      promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении.\nИграй прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
+      heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Офлайн', trust3: 'iOS 17+',
+      heroModel: 'Жми на напиток и добавь свой чок',
+      counterLabel: 'Напитков отмечено', qCountLabel: 'Вопросов отвечено',
       heroDone: 'Ты в очереди! Пришлём ссылку на App Store, как только Clinky выйдет.',
       heroDup: 'Эта почта уже в списке! Напишем в день релиза.',
       heroSending: 'Секундочку, добавляем…',
       formSending: 'Отправляем…', formError: 'Не получилось отправить. Попробуй ещё раз через минуту.',
       emailPh: 'Твоя почта', beer: 'Пиво', coffee: 'Кофе',
-      gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого',
-      gamesSub: 'Это реальные карточки из приложения. Выбери игру и с кем играешь',
-      gamesAll: 'Как в это играть', navPickGame: 'Выбери игру', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
-      problemKicker: 'Знакомо?', problemTitle: 'Собраться компанией бывает та ещё задачка!',
+      gamesKicker: 'Попробуй прямо сейчас', gamesTitle: 'Эти вопросы раскроют любого!',
+      gamesAll: 'Посмотреть все игры', navPickGame: 'Выбери игру', tapSwipe: 'Тап или свайп по карточке', dislike: 'Назад', like: 'Дальше', cardHint: 'Вправо дальше, влево назад',
+      problemKicker: 'Знакомо?', problemTitle: 'Собрались, а\u00a0разговор не клеится?',
       problemBody: 'То никак не собраться, то собрались, а поговорить не о чем. С лёгким напоминанием и парой игр всё идёт куда веселее!',
-      problemTurn: 'Clinky помогает видеться чаще и проводить время так, что хочется повторить!',
-      discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только твои люди и моменты.',
+      problemTurn: 'В Clinky *игры и сотни вопросов* для любой компании, а напоминания помогают *видеться чаще*',
+      discoverKicker: 'Внутри приложения', discoverTitle: 'Всё для встреч в одном месте', discoverSub: 'Без аккаунтов и лишнего, только *твои люди и моменты*',
       finalTitle: 'Собери друзей и чокнись!', finalSub: 'Clinky уже в App Store. Скачай до следующей встречи',
       gamesPageTitle: 'Игры для компании',
-      gamesPageSub: 'Выбери игру, а внутри правила и карточки, в которые можно сыграть прямо тут.',
+      gamesPageSub: 'Выбери игру, прочитай правила и сыграй пару карточек прямо тут.',
       howTitle: 'Как играть', stepLabel: 'Шаг',
       playTitle: 'Играть в {game} онлайн', playSub: 'Жми, чтобы вытянуть новую карточку. Без регистрации и без установки.',
-      playNext: 'Дальше', playLeft: 'осталось карточек сегодня: {n}', playHint: 'Бесплатные карточки обновляются каждый день',
-      playLoading: 'Тасуем колоду…', playCta: 'Играть онлайн', playOther: 'Другие игры', playRules: 'Правила всех четырёх игр',
+      playNext: 'Дальше', playLeft: 'Осталось на сегодня {n}', playHint: 'Бесплатные карточки обновляются каждый день',
+      playLoading: 'Тасуем колоду…', playCta: 'Играть онлайн', playOther: 'Во что ещё сыграть', playRules: 'Все игры и правила',
       playDoneTitle: 'На сегодня колода закончилась',
       playDoneBody: 'Возвращайся завтра за новыми или забери всю колоду в приложении.', gamesFaqTitle: 'Вопросы про игры',
       aboutTitle: 'О Clinky',
       aboutPillarsTitle: 'Что умеет приложение',
       aboutStoryTitle: 'Зачем это всё?',
-      aboutStory1: 'Мы часто собираемся с друзьями, дома и в барах, и почти всегда за столом оказывается кто-то новый. Первые двадцать минут уходят на пробки и погоду, хотя вечер задумывался совсем не про это.',
+      aboutStory1: 'Мы часто собираемся с друзьями, дома и в кафе, и почти всегда за столом оказывается кто-то новый. Первые двадцать минут уходят на пробки и погоду, хотя вечер задумывался совсем не про это.',
       aboutStory2: 'Clinky вырос из приёма, которым мы пользовались и так. Кто-то вытягивал случайный вопрос, читал его вслух, и разговор запускался сам. Теперь эту часть делает приложение, а заодно помнит, с кем мы виделись недавно, чтобы редкая встреча не превратилась в год тишины.',
       aboutWhoTitle: 'Кто делает?',
       aboutWhoName: 'Евгений Митюля',
-      aboutWhoRole: 'iOS Инженер, Основатель @Clinky',
-      aboutWho1: 'Приложение я сделал для своей компании, чтобы вечер начинался сразу, без неловких первых двадцати минут. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, вы точно знаете, кому жаловаться \uD83D\uDE42',
-      aboutWho2: 'Пишите мне напрямую. Если есть идея или просто интересный вопрос, тоже пишите, пообщаемся.',
-      aboutDataTitle: 'Что с вашими данными?',
-      aboutData1: 'Аккаунтов нет, сервера тоже нет. Встречи, друзья и коллекция лежат на вашем телефоне, поэтому я не вижу, с кем вы встречаетесь и что отвечаете на карточки. Утечь нечему, потому что ничего не уходит с устройства.',
+      aboutWhoRole: 'iOS-разработчик, основатель Clinky',
+      aboutWho1: 'Приложение я сделал для своей компании, чтобы вечер начинался сразу, без неловких первых двадцати минут. Clinky целиком мой, и код, и вопросы на карточках, так что если карточка не зашла, ты точно знаешь, кому жаловаться \uD83D\uDE42',
+      aboutWho2: 'Пиши мне напрямую. Если есть идея или просто интересный вопрос, тоже пиши, пообщаемся.',
+      aboutDataTitle: 'Что с твоими данными?',
+      aboutData1: 'Аккаунтов нет. Встречи, друзья и коллекция хранятся на твоём телефоне, так что я не вижу, с кем ты встречаешься и что отвечаешь на карточки. Приложение отправляет только анонимную статистику использования и стабильности и статус подписки, и там нет ни друзей, ни ответов.',
       aboutDataLink: 'Читать политику приватности',
       aboutAuthorTag: 'От автора',
       aboutMailLead: 'Хочешь поговорить напрямую или предложить идею?', aboutMail: 'Напиши мне на почту',
       aboutRows: [
-        { tag: 'Игры', title: 'Карточки, которые разговорят стол', text: 'Четыре игры и наборы для свиданий, компании и долгих вечеров. Каждый вопрос написан так, чтобы [начать историю], а не получить да или нет.', art: 'ib-nhi' },
-        { tag: 'Друзья', title: 'Помни, с кем давно не виделись', text: 'Clinky хранит каждую встречу и напомнит, если друг пропал. [Серия встреч] показывает, как часто вы на самом деле видитесь.', art: 'streak' },
+        { tag: 'Игры', title: 'Карточки, которые разговорят стол', text: 'Четыре игры и наборы для свиданий, компании и долгих вечеров. Каждый вопрос написан так, чтобы [начать историю], а не отделаться коротким ответом.', art: 'ib-nhi' },
+        { tag: 'Друзья', title: 'Помни, с кем давно не виделись', text: 'Clinky хранит каждую встречу и напомнит, если вы с кем-то давно не виделись. [Серия встреч] показывает, как часто вы на самом деле видитесь.', art: 'streak' },
         { tag: 'Коллекция', title: '3D-сувенир за каждую встречу', text: 'Кофе, чай или что угодно. Каждая встреча ставит [новую вещицу на полку], а по пути открываются достижения.', art: 'drink' }
       ],
       slogan: 'Друзья — с тебя, веселье — с нас!',
       aboutLede: 'iOS-приложение для дружбы, которую не хочется терять. Отмечай встречи, играй вместе в карточки-игры и забирай маленький 3D-сувенир с каждой посиделки.',
       aboutMission: 'Мы сделали Clinky, потому что лучшие моменты случаются вживую — и их так легко упустить. Clinky мягко напоминает видеться чаще и превращает каждую встречу в игру, которую хочется запомнить.',
-      p1t: 'Не теряй друзей', p1d: 'Помни, кого и когда видел и с кем давно не пересекался.',
-      p2t: 'Чокнись чем угодно', p2d: 'Кофе, чай, бокал вина или пиво. Главное, что вы вместе!',
+      p1t: 'Не теряй друзей', p1d: 'Помни, с кем и когда виделись и с кем давно не пересекались.',
+      p2t: 'Чокнись чем угодно', p2d: 'Кофе, чай, лимонад или что угодно. Главное, что вы вместе!',
       p3t: 'Игры для компании', p3d: 'Карточки-игры, которые разговорят любой стол за секунды.',
-      supTitle: 'Поддержка', supSub: 'Нашёл баг или есть идея? Напиши нам — мы читаем всё.',
+      supTitle: 'Поддержка', supSub: 'Заметил(-а) баг или есть идея? Напиши нам, мы читаем каждое письмо', supFormTitle: 'Напиши нам',
       supName: 'Имя', supEmailPh: 'Почта', supMsgPh: 'Описание',
       supSend: 'Отправить', supNote: 'Обычно отвечаем в течение дня.',
       supDone: 'Спасибо! Мы получили твоё сообщение и скоро ответим.',
       privTitle: 'Политика конфиденциальности', termsTitle: 'Условия использования', docUpdated: 'Последнее обновление: 30 июня 2026 г.', privUpdated: 'Последнее обновление: 6 ноября 2026 г.',
-      docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com — поможем.',
+      docContact: 'Вопросы по документу? Напиши на support@clinkyapp.com, и мы поможем.',
       docContactCta: 'Написать в поддержку',
       footNote: 'Отмечай встречи, играй в карточки-игры и собирай 3D-сувениры.',
       footComingSoon: 'Скачать в App Store', footProduct: 'Продукт', footLegalReach: 'Документы и связь', footEmail: 'Написать нам',
@@ -175,11 +173,11 @@
       en: ['Read the card out loud, exactly as written', 'Whoever has done it owns up to the table', 'And tells the story behind that card'],
       ru: ['Читаешь карточку вслух, ровно как написано', 'Кто это делал, тот признаётся всей компании', 'И сразу рассказывает историю за карточкой']
     }, q: [
-      { en: "Never have I ever flirted for a discount or a free drink", ru: 'Я никогда не флиртовал ради скидки или бесплатного напитка' },
-      { en: "Never have I ever liked someone's old photo and panic-unliked it a second later", ru: 'Я никогда не лайкал старое фото человека и тут же в панике убирал лайк' },
-      { en: "Never have I ever texted an ex at 3 a.m.", ru: 'Я никогда не писал бывшим в три часа ночи' },
-      { en: "Never have I ever screenshotted a chat to dissect it with a friend", ru: 'Я никогда не делал скриншот переписки, чтобы разобрать её с другом' },
-      { en: "Never have I ever googled someone before meeting them and then acted surprised to hear it all", ru: 'Я никогда не гуглил человека перед встречей и делал вид, что узнаю всё впервые' }
+      { en: "Never have I ever flirted for a discount or a free dessert", ru: 'Я никогда не флиртовал(-а) ради скидки или бесплатного десерта' },
+      { en: "Never have I ever liked someone's old photo and panic-unliked it a second later", ru: 'Я никогда не лайкал(-а) старое фото человека и тут же в панике убирал(-а) лайк' },
+      { en: "Never have I ever texted an ex at 3 a.m.", ru: 'Я никогда не писал(-а) бывшим в три часа ночи' },
+      { en: "Never have I ever screenshotted a chat to dissect it with a friend", ru: 'Я никогда не делал(-а) скриншот переписки, чтобы разобрать её с другом' },
+      { en: "Never have I ever googled someone before meeting them and then acted surprised to hear it all", ru: 'Я никогда не гуглил(-а) человека перед встречей и делал(-а) вид, что узнаю всё впервые' }
     ]},
     { title: { en: 'Who Knows Better', ru: 'Кто из нас' }, how: {
       en: ['The card picks two people from the table', 'The first answers the question about the second', 'Then the second adds their side of it'],
@@ -197,7 +195,7 @@
     }, q: [
       { en: "Tell us about a decision that changed your whole year", ru: 'Расскажи о решении, которое изменило твой год' },
       { en: "Tell us about a book or film that stuck with you for ages", ru: 'Расскажи о книге или фильме, который застрял в голове надолго' },
-      { en: "Tell us about a time a stranger made your day", ru: 'Расскажи случай, когда незнакомец сделал твой день' },
+      { en: "Tell us about a time a stranger made your day", ru: 'Расскажи случай, когда незнакомец скрасил тебе день' },
       { en: "Tell us about the most spontaneous trip you've ever taken", ru: 'Расскажи о самой спонтанной поездке в твоей жизни' },
       { en: "Tell us about something you got by accident that became a favorite", ru: 'Расскажи о вещи, которая досталась случайно, а стала любимой' }
     ]},
@@ -215,59 +213,51 @@
 
   var FAQ_GAMES = {
     en: [
-      { q: "Is there a limit on how many cards I can draw?", a: "On this site you can draw 8 cards a day for free. In the app the free plan gives three new cards per game every week, and Pro removes the limit. Cards you already drew stay readable either way." },
-      { q: "Can I switch games in the middle of an evening?", a: "Any time. Switching does not reset anything, and the cards you already played stay marked as played." },
-      { q: "Does it work with no internet?", a: "Fully. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing." },
-      { q: "Are the questions we played saved?", a: "Every card you draw is saved to that meet-up, so you can look back at what you talked about. The ones you liked are collected as favourites." },
-      { q: "Do the same cards come round again?", a: "Not inside one evening. And a card you did not like can be hidden so it stops appearing." },
-      { q: "How many people do you need?", a: "Three games work from two people. Who Knows Better needs three, because its cards ask one person about another." }
+      { q: "Is there a limit on how many cards I can draw?", a: "On this site you can draw **8 cards a day for free**. In the app the free plan gives **three new cards per game** every week, and Pro removes the limit. Cards you already drew stay readable either way." },
+      { q: "Can I switch games in the middle of an evening?", a: "**Any time**. Switching does not reset anything, and the cards you already played stay marked as played." },
+      { q: "Does it work with no internet?", a: "**Fully**. Cards, meet-ups and your collection live on the device, so bad signal changes nothing." },
+      { q: "Are the questions we played saved?", a: "Every card you draw is **saved to that meet-up**, so you can look back at what you talked about. The ones you liked are collected as favourites." },
+      { q: "Do the same cards come round again?", a: "**Not inside one evening**. And a card you did not like can be hidden so it stops appearing." },
+      { q: "How many people do you need?", a: "Tell a Moment and Would You Rather work **from two people**. Never Have I Ever and Who Knows Better are best with three or more, because the fun comes from the whole table answering." }
     ],
     ru: [
-      { q: "Есть лимит на количество карточек?", a: "На сайте бесплатно 8 карточек в день. В приложении на бесплатном тарифе три новых карточки в каждой игре за неделю, а Pro снимает лимит. Уже вытянутые карточки остаются доступными в любом случае." },
-      { q: "Можно менять игру посреди вечера?", a: "В любой момент. Переключение ничего не сбрасывает, а карточки, в которые уже играли, остаются отмеченными." },
-      { q: "Работает без интернета?", a: "Полностью. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет." },
-      { q: "Сохраняются ли вопросы, которые мы прошли?", a: "Каждая вытянутая карточка сохраняется к этой встрече, так что можно вернуться и посмотреть, о чём говорили. Понравившиеся собираются в избранных." },
-      { q: "Карточки повторяются?", a: "Внутри одного вечера нет. А карточку, которая не понравилась, можно скрыть, и она перестанет попадаться." },
-      { q: "Сколько нужно человек?", a: "Три игры работают от двух человек. Игре «Кто из нас» нужны трое, потому что её карточки спрашивают одного про другого." }
+      { q: "Есть лимит на количество карточек?", a: "На сайте **бесплатно 8 карточек в день**. В приложении на бесплатном тарифе **три новых карточки в каждой игре** за неделю, а Pro снимает лимит. Уже вытянутые карточки остаются доступными в любом случае." },
+      { q: "Можно менять игру посреди вечера?", a: "**В любой момент**. Переключение ничего не сбрасывает, а карточки, в которые уже играли, остаются отмеченными." },
+      { q: "Работает без интернета?", a: "**Полностью**. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь ничего не меняет." },
+      { q: "Сохраняются ли вопросы, которые мы прошли?", a: "Каждая вытянутая карточка **сохраняется к этой встрече**, так что можно вернуться и посмотреть, о чём говорили. Понравившиеся попадают в избранное." },
+      { q: "Карточки повторяются?", a: "**Внутри одного вечера нет**. А карточку, которая не понравилась, можно скрыть, и она перестанет попадаться." },
+      { q: "Сколько нужно человек?", a: "«Расскажи момент» и «Что выберешь» работают **от двух человек**. «Я никогда не» и «Кто из нас» лучше от трёх, потому что весь интерес в ответах всего стола." }
     ]
   };
 
   var FAQ = {
     en: [
-      { q: "Where can I get Clinky?", a: "Clinky is on the App Store for iPhone with iOS 17 or later." },
-      { q: "Is it free?", a: "Yes, Clinky is free to start. An optional Clinky Pro unlocks a few extras." },
-      { q: "Does the app work without drinking?", a: "Completely. A clink can be coffee, tea or water, and every question game plays the same way. Nothing in the app requires alcohol." },
-      { q: "Does Clinky work offline?", a: "Yes, the whole app does. Cards, meet-ups and your collection live on the device, so bad signal in a bar changes nothing and there is no server to be down." },
-      { q: "What about my data?", a: "Clinky is offline-first with no accounts. Your data stays on your device and we never see it." },
-      { q: "Which devices are supported?", a: "iPhone on iOS 17 and later." }
+      { q: "Where can I get Clinky?", a: "Clinky is on the App Store for **iPhone with iOS 17 or later**." },
+      { q: "Is it free?", a: "Yes, Clinky is **free to download**. The optional Clinky Pro subscription removes the weekly question limit and adds extras." },
+      { q: "Do I need a drink to play?", a: "**Not at all**. A clink can be coffee, tea or water, and every game plays exactly the same." },
+      { q: "Does Clinky work offline?", a: "**Yes, the whole app does**. Cards, meet-ups and your collection live on the device, so bad signal changes nothing." },
+      { q: "What about my data?", a: "Clinky works offline and needs no account. **Your meet-ups, friends and answers stay on your device**. The app only sends anonymous usage stats, crash reports and your subscription status." },
+      { q: "Which devices are supported?", a: "**iPhone on iOS 17 and later**." }
     ],
     ru: [
-      { q: "Где скачать Clinky?", a: "Clinky есть в App Store, для iPhone с iOS 17 и новее." },
-      { q: "Это бесплатно?", a: "Да, Clinky бесплатен на старте. Опциональный Clinky Pro открывает пару дополнений." },
-      { q: "А без алкоголя приложение работает?", a: "Полностью. Чокнуться можно кофе, чаем или водой, и все игры с вопросами идут точно так же. Ничто в приложении не требует алкоголя." },
-      { q: "Clinky работает офлайн?", a: "Да, целиком. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь в баре ничего не меняет, и падать нечему." },
-      { q: "А что с моими данными?", a: "Clinky работает офлайн и без аккаунтов. Данные остаются на твоём устройстве, мы их не видим." },
-      { q: "Какие устройства поддерживаются?", a: "iPhone на iOS 17 и новее." }
+      { q: "Где скачать Clinky?", a: "Clinky есть в App Store, для **iPhone с iOS 17 и новее**." },
+      { q: "Это бесплатно?", a: "Да, Clinky **можно скачать бесплатно**. Подписка Clinky Pro по желанию снимает недельный лимит вопросов и открывает дополнения." },
+      { q: "Нужен ли напиток, чтобы играть?", a: "**Совсем нет**. Чокнуться можно кофе, чаем или водой, и все игры идут точно так же." },
+      { q: "Clinky работает офлайн?", a: "**Да, целиком**. Карточки, встречи и коллекция лежат на устройстве, так что плохая связь ничего не меняет." },
+      { q: "А что с моими данными?", a: "Clinky работает офлайн и без аккаунтов. **Встречи, друзья и ответы остаются на твоём устройстве**. Наружу уходит только анонимная статистика, отчёты о сбоях и статус подписки." },
+      { q: "Какие устройства поддерживаются?", a: "**iPhone на iOS 17 и новее**." }
     ]
   };
 
   // ===== helpers =====
-  function faqAccordion(items) {
-    return '<div class="faq-acc">' + items.map(function (f) {
-      return '<details><summary>' + esc(f.q) + '</summary>' +
-        '<div class="faq-body">' + esc(f.a) + '</div></details>';
-    }).join('') + '</div>';
+  // **phrase** in an answer marks the part people scan for; it renders bold in the ink colour
+  function faqAnswer(s) {
+    return String(s).split('**').map(function (part, i) { return i % 2 ? '<strong class="faq-em">' + esc(part) + '</strong>' : esc(part); }).join('');
   }
   function faqAccordion(items) {
     return '<div class="faq-acc">' + items.map(function (f) {
       return '<details><summary>' + esc(f.q) + '</summary>' +
-        '<div class="faq-body">' + esc(f.a) + '</div></details>';
-    }).join('') + '</div>';
-  }
-  function faqAccordion(items) {
-    return '<div class="faq-acc">' + items.map(function (f) {
-      return '<details><summary>' + esc(f.q) + '</summary>' +
-        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+        '<div class="faq-body">' + faqAnswer(f.a) + '</div></details>';
     }).join('') + '</div>';
   }
   // FAQ items animate both ways; a native <details> only snaps shut, so the height is driven here.
@@ -297,7 +287,9 @@
       navigator.vibrate(ms);
     } catch (e) {}
   }
-  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;'); }
+  var WJ = String.fromCharCode(0x2060);
+  // a word joiner after "(-" keeps gender endings like "делал(-а)" from breaking after the hyphen
+  function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;').replace(/\(-/g, '(-' + WJ); }
   function tdict() {
     var raw = DICT[state.lang], t = {};
     for (var k in raw) t[k] = typeof raw[k] === 'string' ? raw[k].replace(/\.+$/, '') : raw[k];
@@ -353,12 +345,24 @@
       '<span class="chip-ic" style="width:26px;height:26px;flex:none">' + (iconName === 'apple-logo' ? appleMark(14, C) : ph(iconName, 14, C, 'ph-fill')) + '</span>' +
       esc(label) + '</span>';
   }
-  function kicker(s) { return '<div style="font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:#FF4F62;margin-bottom:12px">' + esc(s) + '</div>'; }
-  function h1sec(s) { return '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h1>'; }
-  function h2sec(s) { return '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(27px,3.8vw,44px);line-height:1.08;letter-spacing:-1px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(s) + '</h2>'; }
+  // a coral label above a home section, plain text in sentence case
+  // live odometer with its caption on top: hero clinks, and questions above every card deck
+  function statCounter(id, label, cls) { return '<div class="stat-count' + (cls ? ' ' + cls : '') + '"><div class="stat-box"><p>' + esc(label) + '</p><div id="' + id + '" class="odo"></div></div></div>'; }
+  function questionStat() { return statCounter('qNum', tdict().qCountLabel); }
+  function kicker(s) {
+    return '<div class="kick-row"><span class="kick">' + esc(s) + '</span></div>';
+  }
+  function h1sec(s) { return '<h1 class="t-h1" style="margin:0 0 12px">' + esc(s) + '</h1>'; }
+  function h2sec(s) { return '<h2 class="t-h2" style="margin:0 0 12px">' + esc(s) + '</h2>'; }
+  // *phrase* as bold coral inside running text
+  function accentStrong(line) {
+    return String(line).split(/\*/).map(function (part, i) {
+      return i % 2 ? '<strong style="color:#FF4F62;font-weight:800">' + esc(part) + '</strong>' : esc(part);
+    }).join('');
+  }
   function subsec(s) {
-    var body = esc(s).replace(/\.\s+(?=\S)/g, '. <br class="lede-br">');
-    return '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto;max-width:34em">' + body + '</p>';
+    // balanced wrapping instead of a forced break after every sentence, which left ragged short lines
+    return '<p style="font-size:16.5px;line-height:1.55;color:#6b6b76;margin:0 auto;max-width:36em;text-wrap:balance">' + accentStrong(s) + '</p>';
   }
   function coralBtn(label, act, extra) {
     return '<button data-act="' + act + '" style="border:0;cursor:pointer;border-radius:15px;padding:15px 28px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 28px -10px rgba(255,79,98,.6);transition:transform .2s,box-shadow .2s;' + (extra || '') + '">' + esc(label) + '</button>';
@@ -400,7 +404,7 @@
     return active ? b + 'background:#FF4F62;color:#fff;box-shadow:0 6px 14px -6px rgba(255,79,98,.7);' : b + 'background:transparent;color:#6b6b76;';
   }
   function langSegDark(active) {
-    var b = 'border:1px solid #e9e6ec;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:12.5px;transition:all .2s;';
+    var b = 'border:1px solid #e9e6ec;cursor:pointer;border-radius:8px;padding:5px 11px;font-weight:700;font-size:13px;transition:all .2s;';
     return active ? b + 'background:#FF4F62;color:#fff;border-color:#FF4F62;' : b + 'background:transparent;color:#7a7280;';
   }
   function drinkToggle() {
@@ -435,104 +439,98 @@
   // 3D hero is rendered by assets/hero3d.js (three.js). site.js only drives it via window.ClinkyHero.
   function hero() { return window.ClinkyHero; }
 
-  // ===== global clink counter — rolling odometer (digits fall from above), shared via abacus free API =====
-  var CLINK_BASE = 'https://abacus.jasoncameron.dev', CLINK_NS = 'clinky-clinks-prod', CLINK_KEY = 'total';
-  var CLINK_LOOPS = 2, CLINK_REST = CLINK_LOOPS * 10;   // ribbon: 0-9 repeated, rest digit lives in the last loop
-  var CLINK_CELL = 1.2;                                  // cell height in em (>1 so tall glyphs aren't clipped)
-  var clinkValue = null, clinkCols = 0, clinkBusy = false, clinkTimer = null, clinkRevealed = false, clinkObs = null, clinkPoll = null;
-  function clinkEl() { return document.getElementById('clinkNum'); }
-  function clinkColsFor(v) { return Math.max(1, String(Math.max(0, Math.round(v))).length); }
-  function clinkBuild(cols) {
-    var el = clinkEl(); if (!el) return;
-    var ch = CLINK_CELL + 'em', html = '';
-    for (var pos = 0; pos < cols; pos++) {
-      var pfr = cols - 1 - pos;
-      if (pos > 0 && pfr % 3 === 2) html += '<span class="odo-sep">,</span>';
-      var cells = '';
-      for (var k = 0; k <= CLINK_REST + 9; k++) cells += '<span class="odo-cell" style="height:' + ch + '">' + (k % 10) + '</span>';
-      html += '<span class="odo-col" style="height:' + ch + '"><span class="odo-strip" style="transform:translateY(0)">' + cells + '</span></span>';
-    }
-    el.innerHTML = html; clinkCols = cols;
-  }
-  function clinkRoll(value, fromTop) {
-    var el = clinkEl(); if (!el) return;
-    var s = String(Math.max(0, Math.round(value))), cols = s.length;
-    if (cols !== clinkCols) clinkBuild(cols);
-    var strips = el.querySelectorAll('.odo-strip');
-    // duration scales a bit with digit count so big numbers still read; gentle ease-in start (not abrupt)
-    var dur = fromTop ? (1.1 + cols * 0.16) : 0.95, stag = fromTop ? 210 : 70, ease = 'cubic-bezier(.42,.06,.22,1)';
-    for (var pos = 0; pos < cols; pos++) {
-      var strip = strips[pos]; if (!strip) continue;
-      var d = +s[pos], idx = CLINK_REST + d;
-      if (fromTop) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetWidth; }   // start at the top (shows 0), then drop
-      strip.style.transition = 'transform ' + dur + 's ' + ease + ' ' + (pos * stag) + 'ms';   // left→right cascade
-      strip.style.transform = 'translateY(-' + (idx * CLINK_CELL).toFixed(3) + 'em)';
-    }
-    return dur * 1000 + (cols - 1) * stag;   // total animation time
-  }
-  function clinkPrime(v) { clinkBuild(clinkColsFor(v)); }   // reserve correct width, strips at top (showing 0)
-  function clinkMaybeReveal() { if (clinkRevealed && clinkValue != null) clinkRoll(clinkValue, true); }
-  function bindClinkReveal() {
-    var el = clinkEl(); if (!el) return;
-    clinkRevealed = false;
-    if (typeof IntersectionObserver !== 'function') { clinkRevealed = true; clinkMaybeReveal(); return; }
-    if (clinkObs) clinkObs.disconnect();
-    clinkObs = new IntersectionObserver(function (ents) {
-      ents.forEach(function (e) { if (e.isIntersecting) { clinkRevealed = true; clinkMaybeReveal(); clinkObs.disconnect(); } });
-    }, { threshold: 0.4 });
-    clinkObs.observe(el);
-  }
-  function clinkDebugValue() {   // ?clink=123456 → test the odometer at any width (not sent to server), local preview only
-    if (!isLocalPreview()) return null;
-    try { var q = new URLSearchParams(location.search).get('clink'); if (q != null && /^\d+$/.test(q)) return parseInt(q, 10); } catch (e) {}
-    return null;
-  }
+  // ===== live counters — rolling odometers (digits fall from above), shared via the free abacus API =====
+  // clinks = taps on the 3D drink; questions = a card read for 3s+ and then swiped to the next one
+  var ODO_BASE = 'https://abacus.jasoncameron.dev', ODO_NS = 'clinky-clinks-prod';
+  var ODO_LOOPS = 2, ODO_REST = ODO_LOOPS * 10;   // ribbon: 0-9 repeated, rest digit lives in the last loop
+  var ODO_CELL = 1.2;                              // cell height in em (>1 so tall glyphs aren't clipped)
+  var QUESTION_MIN_MS = 3000;
   // Debug query switches must not let a shared link fake the live counter or a success banner.
   function isLocalPreview() { return location.hostname === 'localhost' || location.hostname === '127.0.0.1'; }
-  function loadClinkCount() {
-    clinkBuild(2);   // placeholder width at "00" (top), rolled in on reveal
-    bindClinkReveal();
-    var dbg = clinkDebugValue();
-    if (dbg != null) { clinkValue = dbg; clinkPrime(dbg); clinkMaybeReveal(); return; }   // debug override, skip server
-    if (typeof fetch !== 'function') return;
-    fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
-      .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number') { clinkValue = d.value; if (!clinkRevealed) clinkPrime(d.value); clinkMaybeReveal(); } })
-      .catch(function () {});
-    startClinkPoll();
+  function makeCounter(o) {   // o: { id, key, debug, gateHits }
+    var value = null, cols = 0, busy = false, busyTimer = null, revealed = false, obs = null, poll = null;
+    function el() { return document.getElementById(o.id); }
+    function colsFor(v) { return Math.max(1, String(Math.max(0, Math.round(v))).length); }
+    function build(n) {
+      var e = el(); if (!e) return;
+      var ch = ODO_CELL + 'em', html = '', sep = state.lang === 'ru' ? '' : ',';
+      for (var pos = 0; pos < n; pos++) {
+        if (pos > 0 && (n - 1 - pos) % 3 === 2) html += '<span class="odo-sep">' + sep + '</span>';
+        var cells = '';
+        for (var k = 0; k <= ODO_REST + 9; k++) cells += '<span class="odo-cell" style="height:' + ch + '">' + (k % 10) + '</span>';
+        html += '<span class="odo-col" style="height:' + ch + '"><span class="odo-strip" style="transform:translateY(0)">' + cells + '</span></span>';
+      }
+      e.innerHTML = html; cols = n;
+    }
+    function roll(v, fromTop) {
+      var e = el(); if (!e) return 0;
+      var s = String(Math.max(0, Math.round(v))), n = s.length;
+      if (n !== cols) build(n);
+      var strips = e.querySelectorAll('.odo-strip');
+      // duration scales a bit with digit count so big numbers still read; gentle ease-in start (not abrupt)
+      var dur = fromTop ? (1.1 + n * 0.16) : 0.95, stag = fromTop ? 210 : 70, ease = 'cubic-bezier(.42,.06,.22,1)';
+      for (var pos = 0; pos < n; pos++) {
+        var strip = strips[pos]; if (!strip) continue;
+        var idx = ODO_REST + (+s[pos]);
+        if (fromTop) { strip.style.transition = 'none'; strip.style.transform = 'translateY(0)'; void strip.offsetWidth; }   // start at the top (shows 0), then drop
+        strip.style.transition = 'transform ' + dur + 's ' + ease + ' ' + (pos * stag) + 'ms';   // left→right cascade
+        strip.style.transform = 'translateY(-' + (idx * ODO_CELL).toFixed(3) + 'em)';
+      }
+      return dur * 1000 + (n - 1) * stag;   // total animation time
+    }
+    function prime(v) { build(colsFor(v)); }   // reserve correct width, strips at top (showing 0)
+    function maybeReveal() { if (revealed && value != null) roll(value, true); }
+    function bindReveal() {
+      var e = el(); if (!e) return;
+      revealed = false;
+      if (typeof IntersectionObserver !== 'function') { revealed = true; maybeReveal(); return; }
+      if (obs) obs.disconnect();
+      obs = new IntersectionObserver(function (ents) {
+        ents.forEach(function (x) { if (x.isIntersecting) { revealed = true; maybeReveal(); obs.disconnect(); } });
+      }, { threshold: 0.4 });
+      obs.observe(e);
+    }
+    function debugValue() {   // ?clink=123456 / ?qcount=123456 → test the odometer at any width, local preview only
+      if (!isLocalPreview()) return null;
+      try { var q = new URLSearchParams(location.search).get(o.debug); if (q != null && /^\d+$/.test(q)) return parseInt(q, 10); } catch (e) {}
+      return null;
+    }
+    function api(op) { return fetch(ODO_BASE + '/' + op + '/' + ODO_NS + '/' + o.key).then(function (r) { return r.json(); }); }
+    function accept(d, animate) {
+      if (typeof d.value !== 'number' || d.value === value) return;
+      value = d.value;
+      if (!revealed) prime(value); else if (animate && !busy) roll(value, false); else if (!animate) maybeReveal();
+    }
+    function load() {
+      stop();
+      build(2);   // placeholder width at "00" (top), rolled in on reveal
+      bindReveal();
+      var dbg = debugValue();
+      if (dbg != null) { value = dbg; prime(dbg); maybeReveal(); return; }   // debug override, skip server
+      if (typeof fetch !== 'function') return;
+      api('get').then(function (d) { accept(d, false); }).catch(function () {});
+      // Poll the shared total so other people's taps roll in live for everyone online.
+      poll = setInterval(function () {
+        if (document.hidden || busy) return;
+        api('get').then(function (d) { accept(d, true); }).catch(function () {});
+      }, 10000);
+    }
+    function stop() { if (poll) { clearInterval(poll); poll = null; } if (obs) { obs.disconnect(); obs = null; } }
+    function bump() {
+      if (o.gateHits && (busy || value == null)) return;   // ignore taps until the roll finishes (no spam / double-count)
+      if (value != null && el()) {
+        busy = true; value += 1;
+        var t = roll(value, false);
+        if (busyTimer) clearTimeout(busyTimer);
+        busyTimer = setTimeout(function () { busy = false; }, (t || 1000) + 100);
+      }
+      if (debugValue() != null || typeof fetch !== 'function') return;   // in debug mode don't touch the server
+      api('hit').then(function (d) { accept(d, true); }).catch(function () {});
+    }
+    return { load: load, stop: stop, bump: bump };
   }
-  // Poll the shared total so other people's clinks roll in live for everyone online.
-  function startClinkPoll() {
-    stopClinkPoll();
-    if (clinkDebugValue() != null || typeof fetch !== 'function') return;
-    clinkPoll = setInterval(function () {
-      if (document.hidden || clinkBusy) return;     // skip when tab hidden or a roll is in progress
-      fetch(CLINK_BASE + '/get/' + CLINK_NS + '/' + CLINK_KEY)
-        .then(function (r) { return r.json(); })
-        .then(function (d) {
-          if (typeof d.value !== 'number' || d.value === clinkValue) return;
-          clinkValue = d.value;
-          if (clinkRevealed && !clinkBusy) clinkRoll(d.value, false);
-          else if (!clinkRevealed) clinkPrime(d.value);
-        })
-        .catch(function () {});
-    }, 10000);
-  }
-  function stopClinkPoll() { if (clinkPoll) { clearInterval(clinkPoll); clinkPoll = null; } }
-  function bumpClink() {
-    if (clinkBusy || clinkValue == null) return;   // ignore taps until the roll finishes (no spam / double-count)
-    clinkBusy = true;
-    clinkValue += 1;
-    var t = clinkRoll(clinkValue, false);          // roll the digit(s) up one notch
-    if (clinkTimer) clearTimeout(clinkTimer);
-    clinkTimer = setTimeout(function () { clinkBusy = false; }, (t || 1000) + 100);
-    if (clinkDebugValue() != null) return;         // in debug mode don't touch the server
-    if (typeof fetch !== 'function') return;
-    fetch(CLINK_BASE + '/hit/' + CLINK_NS + '/' + CLINK_KEY)
-      .then(function (r) { return r.json(); })
-      .then(function (d) { if (typeof d.value === 'number' && d.value !== clinkValue) { clinkValue = d.value; clinkRoll(d.value, false); } })
-      .catch(function () {});
-  }
+  var clinks = makeCounter({ id: 'clinkNum', key: 'total', debug: 'clink', gateHits: true });
+  var questions = makeCounter({ id: 'qNum', key: 'questions', debug: 'qcount' });
 
   // ===== header / footer =====
   function renderHeader() {
@@ -542,7 +540,7 @@
     var navDiv = 'width:1px;height:20px;background:rgba(28,19,38,.12);margin:0 6px;flex:none';
     return '' +
       '<button id="hdrLogo" data-act="home" style="display:flex;align-items:center;gap:10px;background:transparent;border:0;cursor:pointer;padding:0;flex:1 1 0;min-width:0;justify-content:flex-start;transition:opacity .3s ease;' + (state.scrolled || state.page !== 'home' ? '' : 'opacity:0;pointer-events:none') + '">' +
-        '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
+        '<img src="/assets/clinky-icon.png" alt="" style="width:36px;height:36px;border-radius:11px;box-shadow:0 5px 14px -5px rgba(225,29,72,.6)">' +
         '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;letter-spacing:-.5px;color:#1c1326">Clinky</span>' +
       '</button>' +
       '<nav class="nav-mid" style="display:flex;align-items:center;gap:4px;flex:0 1 auto;min-width:0;justify-content:center">' +
@@ -587,12 +585,12 @@
     var lnk = 'background:transparent;border:0;cursor:pointer;font-size:14.5px;color:#6b6b76;padding:0;font-family:DM Sans,sans-serif';
     // real <a href> so crawlers that read the rendered page still find every section; onClick keeps it in-app
     var fl = function (pg, label) { return '<a data-nav data-act="' + pg + '" href="' + pathFor(pg, state.lang) + '" style="' + lnk + ';text-decoration:none">' + esc(label) + '</a>'; };
-    var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:1px;text-transform:uppercase;color:#7a7280;margin-bottom:2px';
+    var head = 'font-family:Nunito,sans-serif;font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;color:#7a7280;margin-bottom:2px';
     return '' +
       '<div style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:34px" class="pillars">' +
         '<div style="max-width:300px">' +
           '<div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">' +
-            '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:36px;height:36px;border-radius:11px">' +
+            '<img src="/assets/clinky-icon.png" alt="" style="width:36px;height:36px;border-radius:11px">' +
             '<span style="font-family:Nunito,sans-serif;font-weight:900;font-size:22px;color:#1c1326">Clinky</span>' +
           '</div>' +
           '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:15px;color:#1c1326;margin:0 0 8px">' + esc(t.slogan) + '</p>' +
@@ -614,7 +612,7 @@
         '</div>' +
       '</div>' +
       '<div style="max-width:' + PAGE_W + 'px;margin:32px auto 0;padding-top:20px;border-top:1px solid #e9e6ec;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap">' +
-        '<span style="font-size:12.5px;color:#7a7280">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
+        '<span style="font-size:13px;color:#7a7280">© 2026 Clinky · ' + esc(t.footRights) + '</span>' +
         '<div style="display:flex;gap:6px">' +
           '<button data-act="en" style="' + langSegDark(state.lang === 'en') + '">EN</button>' +
           '<button data-act="ru" style="' + langSegDark(state.lang === 'ru') + '">RU</button>' +
@@ -676,7 +674,7 @@
       '<div class="hero-grid" style="position:relative;max-width:' + PAGE_W + 'px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
           '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
-            '<img src="/assets/clinky-icon.png" alt="Clinky" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+            '<img src="/assets/clinky-icon.png" alt="" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
           '</div>' +
           '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
             '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#FF4F62);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
@@ -685,8 +683,7 @@
                 '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
               '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
           '</div>' +
-          '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(34px,4.6vw,56px);line-height:1.04;letter-spacing:-1.4px;margin:0 0 12px;color:#1c1326;text-wrap:balance">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
-          '<p style="font-size:clamp(16px,1.5vw,18.5px);line-height:1.5;color:#6b6b76;max-width:30em;margin:0 0 20px">' + esc(t.heroLede) + '</p>' +
+          '<h1 class="t-display" style="margin:0 0 28px">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
           '<div class="hero-cta"><div id="wl1">' + waitlistForm(false, true, null, 'hero') + '</div>' +
           (state.waitlistDone ? '' :
             '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:16px 0 0">' +
@@ -695,6 +692,7 @@
           '</div>' +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
+        statCounter('clinkNum', t.counterLabel, 'hero-count') +
         '<div data-act="play" class="hero-stage" style="position:relative;aspect-ratio:1/0.62;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
           '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
@@ -711,7 +709,7 @@
           '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div></div>' +
           '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div></div>' +
         '</div>' +
-        '<p style="font-size:13.5px;color:#7a7280;text-align:center;margin:10px 0 0">' + esc(t.heroModel) + '</p>' +
+        '<p class="hero-hint">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
       '</div>' +
       '</div>' +
@@ -723,9 +721,8 @@
       sparkle({ s: 14, pos: 'bottom:22%;right:15%', op: 0.4, c: C, glow: 'rgba(255,79,98,.26)', anim: 'twinkle 4s ease-in-out .6s infinite' }) +
       '<div style="position:relative;max-width:680px;margin:0 auto;text-align:center">' +
         kicker(t.problemKicker) +
-        h2sec(t.problemTitle) +
-        '<p style="font-size:clamp(16px,1.6vw,18.5px);line-height:1.6;color:#6b6b76;margin:0 auto 22px;max-width:30em">' + esc(t.problemBody) + '</p>' +
-        '<p style="font-family:Nunito,sans-serif;font-weight:800;font-size:clamp(18px,2vw,22px);line-height:1.35;color:#FF4F62;margin:0 auto;max-width:26em">' + esc(t.problemTurn) + '</p>' +
+        '<h2 class="pq">' + esc(t.problemTitle) + '</h2>' +
+        '<p class="pa">' + accentStrong(t.problemTurn) + '</p>' +
       '</div>' +
     '</section>';
 
@@ -738,7 +735,7 @@
       col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» приносит в коллекцию новый 3D-напиток', 'Every clink adds a new 3D drink to your collection') },
       str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Регулярные встречи с близкими складываются в серию без пропусков', 'Regular meet-ups with your people turn into a streak you won’t want to break') },
       ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и знакомства. Есть и секретные', 'Badges for meet-ups, streaks and new friends. Some of them are secret') },
-      an:  { ic: 'chart-bar', t: L2('Аналитика', 'Analytics'), d: L2('Понятные графики и факты о друзьях, встречах и напитках за любой период', 'Clear charts and facts about your friends, meet-ups and drinks over time') },
+      an:  { ic: 'chart-bar', t: L2('Аналитика', 'Analytics'), d: L2('Понятные графики и факты о друзьях и встречах за любой период', 'Clear charts and facts about your friends and meet-ups over time') },
       rem: { ic: 'bell', t: L2('Умные напоминания', 'Smart reminders'), d: L2('Мягко напомним написать другу, с которым вы давно не виделись', 'A gentle nudge to text a friend you haven’t seen in a while') }
     };
     // Unified bento header: icon BESIDE title (one row), description below.
@@ -747,7 +744,7 @@
       return '<div class="bento-head" style="position:relative;z-index:4;max-width:' + (mw || '100%') + '">' +
         '<div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">' +
           '<span style="display:inline-flex;width:42px;height:42px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;flex:none">' + ph(f.ic, 21, C, 'ph-fill') + '</span>' +
-          '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:18px;margin:0;color:#1c1326">' + esc(f.t) + '</h3>' +
+          '<h3 class="t-h4">' + esc(f.t) + '</h3>' +
         '</div>' +
         '<p class="bento-desc" style="font-size:13.5px;line-height:1.5;color:#6b6b76;margin:0' + (descMw ? ';max-width:' + descMw : '') + '">' + esc(f.d) + '</p>' +
       '</div>';
@@ -808,22 +805,13 @@
     // ---- final CTA (contained coral block) ----
     var finalCta = renderFinalCta();
 
-    // ---- global clink counter (premium odometer) ----
-    var counter = '<section style="padding:clamp(6px,1.5vh,18px) clamp(20px,5vw,72px) clamp(14px,3vh,28px)">' +
-      '<div style="max-width:560px;margin:0 auto;text-align:center">' +
-        kicker(t.counterKicker) +
-        '<div id="clinkNum" class="odo" style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(56px,9vw,104px);line-height:1;color:#FF4F62;margin:2px 0 10px">' + '</div>' +
-        subsec(t.counterLabel) +
-      '</div>' +
-    '</section>';
-
-    return '<div class="page-in">' + hero + counter + problem + discover + card + finalCta + '</div>';
+    return '<div class="page-in">' + hero + card + problem + discover + finalCta + '</div>';
   }
 
-  function renderFinalCta() {
+  function renderFinalCta(width) {
     var t = tdict();
     return '<section style="padding:clamp(20px,3vh,40px) clamp(20px,5vw,72px) clamp(60px,9vh,100px)">' +
-      '<div style="position:relative;max-width:' + PAGE_W + 'px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
+      '<div style="position:relative;max-width:' + (width || pageW()) + 'px;margin:0 auto;border-radius:36px;overflow:hidden;background:#fff;border:1px solid #e9e6ec;padding:clamp(44px,6vw,76px) clamp(24px,5vw,56px);text-align:center;box-shadow:0 30px 60px -34px rgba(255,79,98,.45)">' +
         sparkle({ s: 28, pos: 'top:14%;left:12%', op: 0.55, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4s ease-in-out infinite' }) +
         sparkle({ s: 15, pos: 'top:24%;left:22%', op: 0.45, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 5s ease-in-out .6s infinite' }) +
         sparkle({ s: 14, pos: 'top:18%;right:23%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
@@ -833,8 +821,8 @@
         sparkle({ s: 20, pos: 'top:40%;left:8%', op: 0.5, c: C, glow: 'rgba(255,79,98,.3)', anim: 'twinkle 4.4s ease-in-out .9s infinite' }) +
         sparkle({ s: 16, pos: 'top:46%;right:9%', op: 0.45, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.6s ease-in-out .5s infinite' }) +
         '<div style="position:relative;max-width:540px;margin:0 auto">' +
-          '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-1px;margin:0 0 12px;color:#1c1326">' + esc(t.finalTitle) + '</h2>' +
+          '<img src="/assets/clinky-icon.png" alt="" style="width:68px;height:68px;border-radius:20px;margin:0 auto 18px;box-shadow:0 16px 32px -12px rgba(225,29,72,.55);display:block">' +
+          '<h2 class="t-h2" style="margin:0 0 12px">' + esc(t.finalTitle) + '</h2>' +
           '<p style="font-size:16.5px;color:#6b6b76;margin:0 auto 26px;max-width:30em">' + esc(t.finalSub) + '</p>' +
           '<div id="wl2">' + waitlistForm(false, false, null, 'final') + '</div>' +
           (state.waitlistDone || APP_LIVE ? '' : '<p style="font-size:13px;color:#7a7280;margin:14px 0 0">' + esc(t.heroMicro) + '</p>') +
@@ -855,12 +843,12 @@
             '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">”</span>' +
           '</div>' +
           '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
-            '<div id="qcount" style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
-            '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
+            '<div id="qcount" style="text-align:center;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(renderQcount()) + '</div>' +
+            '<div style="text-align:center;font-size:13px;color:#7a7280;margin-bottom:15px">' + esc(t.tapSwipe) + '</div>' +
             '<div style="display:flex;align-items:center;justify-content:center;gap:20px">' +
               '<button data-act="prevq" aria-label="' + esc(t.dislike) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:54px;height:54px;border-radius:50%;background:#f6eef0;display:flex;align-items:center;justify-content:center">' + ph('arrow-left', 22, '#b9b0b6', 'ph-bold') + '</span>' +
-                '<span style="font-size:12.5px;font-weight:600;color:#7a7280">' + esc(t.dislike) + '</span>' +
+                '<span style="font-size:13px;font-weight:600;color:#7a7280">' + esc(t.dislike) + '</span>' +
               '</button>' +
               '<button data-act="nextq" aria-label="' + esc(t.like) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
                 '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 26, '#fff', 'ph-bold') + '</span>' +
@@ -868,34 +856,33 @@
               '</button>' +
             '</div>' +
           '</div>' +
-        '</div>' +
-        '<p style="text-align:center;font-size:13px;color:#7a7280;margin:16px 0 0">' + esc(t.cardHint) + '</p>';
+        '</div>';
   }
 
   function renderQuestionSection(opts) {
     var t = tdict();
     var tight = opts && opts.hideHeading;
     return '<section style="padding:' + (tight ? 'clamp(18px,3vh,30px)' : 'clamp(50px,8vh,96px)') + ' clamp(16px,4vw,72px) clamp(50px,8vh,96px)">' +
-      ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + subsec(t.gamesSub) + '</div>') +
+      ((opts && opts.hideHeading) ? '' : '<div style="max-width:760px;margin:0 auto;text-align:center">' + kicker(t.gamesKicker) + h2sec(t.gamesTitle) + '</div>') +
+      questionStat() +
       '<div id="gameTabs" class="game-tabs">' + renderGameTabs() + '</div>' +
       '<div style="max-width:430px;margin:0 auto">' +
         questionCard() +
-        '<p style="text-align:center;margin:16px 0 0;display:flex;gap:18px;justify-content:center;flex-wrap:wrap">' +
-          '<a id="playLink" href="' + homeDeckHref() + '" style="font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#FF4F62;text-decoration:none">' + esc(t.playCta) + ' →</a>' +
-          ((opts && opts.hideHeading) ? '' : '<button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.gamesAll) + '</button>') +
-        '</p>' +
+        '<div class="deck-next">' +
+          '<a data-nav data-act="games" href="' + pathFor('games', state.lang) + '" class="games-btn">' + ph('game-controller', 20, '#fff', 'ph-fill') + esc(t.gamesAll) + '</a>' +
+        '</div>' +
       '</div>' +
     '</section>';
   }
   function renderHowStrip() {
     var t = tdict(), L = state.lang, steps = (GAMES[state.gameIndex].how || {})[L] || [];
     if (!steps.length) return '';
-    return '<div id="howStrip" style="max-width:' + PAGE_W + 'px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">' +
+    return '<div id="howStrip" style="max-width:' + pageW() + 'px;margin:0 auto;display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">' +
       steps.map(function (line, i) {
         return '<div class="soft-card" style="padding:18px 20px 20px;text-align:left">' +
           '<div style="display:flex;align-items:center;gap:9px;margin-bottom:10px">' +
-            '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:12.5px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
-            '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#FF4F62">' + esc(t.stepLabel) + '</span>' +
+            '<span style="flex:none;width:26px;height:26px;border-radius:50%;background:#FF4F62;color:#fff;font-family:Nunito,sans-serif;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center">' + (i + 1) + '</span>' +
+            '<span style="font-family:Nunito,sans-serif;font-weight:800;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#FF4F62">' + esc(t.stepLabel) + '</span>' +
           '</div>' +
           '<p style="margin:0;min-height:2.9em;font-size:15.5px;line-height:1.45;color:#6b6b76;text-wrap:balance">' + esc(line) + '</p>' +
         '</div>';
@@ -956,7 +943,7 @@
     var L = contentLabels();
     if (!L) ensureGameContent(function () { paint(); });
     return '<section style="padding:0 clamp(20px,5vw,72px) clamp(26px,4vh,44px)">' +
-      '<div class="hub-grid">' +
+      '<div class="hub-grid" style="max-width:' + (state.page === 'home' ? 880 : ED_W) + 'px">' +
         GAMES.map(function (g, i) {
           var href = playHrefFor(i, state.lang);
           if (!href) return '';
@@ -988,8 +975,8 @@
       gamesHub() +
       scenarioStrip() +
       '<section style="padding:clamp(10px,2vh,26px) clamp(20px,5vw,72px) clamp(30px,5vh,56px)">' +
-        '<div style="max-width:880px;margin:0 auto">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 18px;text-align:center;color:#1c1326">' + esc(t.gamesFaqTitle) + '</h2>' +
+        '<div style="max-width:' + pageW() + 'px;margin:0 auto">' +
+          '<h2 class="t-h3" style="margin:0 0 16px">' + esc(t.gamesFaqTitle) + '</h2>' +
           faqAccordion(FAQ_GAMES[state.lang]) +
         '</div>' +
       '</section>' +
@@ -1025,7 +1012,7 @@
     if (_deckLoading) return;
     _deckLoading = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/web-deck.js?v=6ac0c73d';
+    sc.src = '/assets/web-deck.js?v=9879d91d';
     sc.onload = function () { _deckLoading = false; cb(); };
     sc.onerror = function () { _deckLoading = false; };
     document.head.appendChild(sc);
@@ -1037,7 +1024,7 @@
     if (_gcRequested) return;
     _gcRequested = true;
     var sc = document.createElement('script');
-    sc.src = '/assets/game-content.js?v=38db32e3';
+    sc.src = '/assets/game-content.js?v=23150366';
     sc.onload = function () { cb(); };   // stays set: a file without the global must not be refetched on every paint
     sc.onerror = function () { _gcRequested = false; };
     document.head.appendChild(sc);
@@ -1050,13 +1037,61 @@
     var g = window.CLINKY_GAME_CONTENT;
     return g ? g.labels[state.lang] : null;
   }
-  function sectionWrap(title, inner, tight) {
+  function sectionWrap(title, inner, tight, width) {
     return '<section style="padding:' + (tight ? '0' : 'clamp(8px,1.6vh,18px)') + ' clamp(20px,5vw,72px) clamp(22px,3.6vh,40px)">' +
-      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-        (title ? '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;color:#1c1326">' + esc(title) + '</h2>' : '') +
+      '<div style="max-width:' + (width || pageW()) + 'px;margin:0 auto">' +
+        (title ? '<h2 class="t-h3" style="margin:0 0 16px">' + esc(title) + '</h2>' : '') +
         inner +
       '</div>' +
     '</section>';
+  }
+  // Editorial blocks for the game and question-set pages: each section gets its own shape
+  // instead of one list style for everything.
+  // reading width for the editorial part of game and question-set pages
+  var ED_W = 840;
+  function edSection(title, inner) { return sectionWrap(title, inner, false, ED_W); }
+  function stepsGrid(items) {
+    return '<ol class="steps">' + items.map(function (t, i) {
+      // **phrase** in the rules marks the action to do; the rest of the line is how
+      var html = esc(t).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      return '<li class="step"><span class="step-n">' + (i + 1) + '</span><p>' + html + '</p></li>';
+    }).join('') + '</ol>';
+  }
+  var TILE_ICONS = ['users-three', 'heart', 'chat-teardrop-dots', 'game-controller', 'hand-heart', 'trophy'];
+  // the content files write "title, detail"; on a card the detail stands alone, so it starts a sentence
+  function capFirst(t) { t = String(t); return t.charAt(0).toUpperCase() + t.slice(1); }
+  function tileGrid(items) {
+    return '<div class="tiles">' + items.map(function (v, i) {
+      return '<div class="tile"><span class="tile-ico">' + ph(TILE_ICONS[i % TILE_ICONS.length], 20, '#FF4F62', 'ph-fill') + '</span>' +
+        '<h3>' + esc(v.t) + '</h3><p>' + esc(capFirst(v.d)) + '</p></div>';
+    }).join('') + '</div>';
+  }
+  // a thick check with rounded ends; the icon set's check reads too thin at this size
+  var TIP_CHECK = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#FF4F62" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.6 4.5L19 7.5"/></svg>';
+  function tipsPanel(items) {
+    return '<div class="tips">' + items.map(function (v) {
+      return '<div class="tip"><span class="tip-ico">' + TIP_CHECK + '</span>' +
+        '<p><strong>' + esc(v.t) + '</strong>' + esc(capFirst(v.d)) + '</p></div>';
+    }).join('') + '</div>';
+  }
+  function qCards(lines) {
+    return '<div class="qcards">' + lines.map(function (line) {
+      return '<div class="qcard"><span>' + accented(line) + '</span></div>';
+    }).join('') + '</div>';
+  }
+  function levelPanel(title, note, lines, level, count) {
+    var heat = '';
+    for (var i = 1; i <= 3; i++) heat += '<span class="heat' + (i <= level ? ' on' : '') + '">' + ph('flame', 14, i <= level ? '#FF4F62' : '#f3c9d1', 'ph-fill') + '</span>';
+    return '<div class="level lv' + level + '">' +
+      '<div class="level-head"><span class="heat-row" aria-hidden="true">' + heat + '</span><h3>' + esc(title) + '</h3><span class="level-count">' + count + '</span></div>' +
+      (note ? '<p class="level-note">' + esc(note) + '</p>' : '') +
+      qCards(lines) +
+    '</div>';
+  }
+  function cardCount(n) {
+    if (state.lang !== 'ru') return n + (n === 1 ? ' card' : ' cards');
+    var m10 = n % 10, m100 = n % 100;
+    return n + (m10 === 1 && m100 !== 11 ? ' карточка' : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? ' карточки' : ' карточек');
   }
   function numberedList(items) {
     return '<ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;counter-reset:r">' +
@@ -1072,7 +1107,7 @@
     '</ol>';
   }
   function playersLine(min) {
-    return state.lang === 'ru' ? 'От ' + min + '+ игроков' : min + '+ players';
+    return state.lang === 'ru' ? 'От ' + min + ' игроков' : min + '+ players';
   }
   function fitStrip(c) {
     var L = contentLabels();
@@ -1086,24 +1121,71 @@
           '<span class="fit-ico">' + r[0] + '</span>' +
           '<span>' +
             '<span class="fit-label">' + esc(r[1]) + '</span>' +
-            '<span class="fit-value">' + esc(r[2]).replace(/,\s/, ',<br>') + '</span>' +
+            '<span class="fit-value">' + esc(r[2]) + '</span>' +
           '</span>' +
         '</div>';
       }).join('') +
     '</div>';
   }
+  // the same 20 cards the page ships as text and lists in JSON-LD, so what search reads matches what people see
+  var VISIBLE_CARDS = 20;
   function exampleList(gi) {
-    var deck = window.CLINKY_WEB_DECK, out = [];
+    var deck = window.CLINKY_WEB_DECK, out = [], entry = null;
     if (deck && deck.games) {
-      var entry = deck.games[GAME_IDS[gi]], pack = entry && entry[state.lang];
-      if (pack && pack.length) out = pack.slice(0, 6).map(function (line) { return plainCard(line, entry); });
+      entry = deck.games[GAME_IDS[gi]];
+      var pack = entry && entry[state.lang];
+      var shown = entry && entry.levels ? entry.levels.reduce(function (n, lv) { return n + lv.n; }, 0) : VISIBLE_CARDS;
+      if (pack && pack.length) out = pack.slice(0, shown).map(function (line) { return plainCard(line, entry); });
     }
     if (!out.length) out = (GAMES[gi].q || []).slice(0, 5).map(function (q) { return plainCard(q[state.lang]); });
-    return '<div style="display:flex;flex-direction:column;gap:10px">' +
-      out.map(function (line) {
-        return '<div class="soft-card ex-card" style="padding:16px 20px;font-family:Nunito,sans-serif;font-weight:700;font-size:15.5px;line-height:1.5;color:#1c1326">' + accented(line) + '</div>';
-      }).join('') +
-    '</div>';
+    var levels = entry && entry.levels;
+    if (!levels || !levels.length) return qCards(out);
+    var at = 0;
+    return '<div class="levels">' + levels.map(function (lv, i) {
+      var part = out.slice(at, at + lv.n); at += lv.n;
+      return part.length ? levelPanel(lv[state.lang] || lv.en, lv.note ? (lv.note[state.lang] || lv.note.en) : '', part, i + 1, cardCount(part.length)) : '';
+    }).join('') + '</div>';
+  }
+  // Every game and question-set page ends the same way: three related picks, then the full list.
+  function ogCard(href, icon, title, line) {
+    return '<a href="' + href + '" class="og-card">' +
+      '<span class="og-ico">' + icon + '</span>' +
+      '<span class="og-text"><span class="og-title">' + esc(title) + '</span>' +
+      (line ? '<span class="og-line">' + esc(line) + '</span>' : '') + '</span>' +
+      '<span class="og-arrow" aria-hidden="true">' + ph('arrow-right', 16, '#FF4F62', 'ph-bold') + '</span></a>';
+  }
+  function moreToPlay(cards) {
+    var t = tdict();
+    if (!cards.length) return '';
+    return edSection(t.playOther, '<div class="og-grid">' + cards.slice(0, 3).join('') + '</div>' +
+      '<p class="og-all"><a data-nav data-act="games" href="' + pathFor('games', state.lang) + '">' + esc(t.playRules) + '</a></p>');
+  }
+  function otherGames(gi) {
+    var lang = state.lang, cards = [];
+    for (var i = 0; i < GAMES.length; i++) {
+      if (i === gi) continue;
+      var href = playHrefFor(i, lang), c = gameContent(GAME_IDS[i]);
+      if (href) cards.push(ogCard(href, gameIcon(i, '#FF4F62', 20), GAMES[i].title[lang], c ? c.tagline[lang] : ''));
+    }
+    return moreToPlay(cards);
+  }
+  function otherSets(currentId) {
+    var d = window.CLINKY_SCENARIOS, lang = state.lang, cards = [];
+    if (!d) return '';
+    for (var id in d.scenarios) {
+      if (id === currentId) continue;
+      var sc = d.scenarios[id], href = scenarioHrefFor(id, lang), ic = sc.icon || {};
+      if (href) cards.push(ogCard(href, ph(ic.name || 'heart', 20, '#FF4F62', 'ph-' + (ic.weight || 'fill')), sc.h1[lang], sc.tagline[lang]));
+    }
+    return moreToPlay(cards);
+  }
+  function aboutClinky() {
+    var b = BRAND_COPY[state.lang] || BRAND_COPY.en;
+    if (!b || !b.text) return '';
+    return edSection(null, '<div class="brand-card">' +
+      '<img src="/assets/clinky-icon.png" alt="" width="72" height="72" class="brand-card-ico">' +
+      '<div><h2>' + esc(b.title) + '</h2><p>' + esc(b.text) + '</p></div>' +
+    '</div>');
   }
   function plainCard(line, entry) {
     var names = (entry && entry.names && entry.names[state.lang]) || ['Alex', 'Sam'];
@@ -1145,8 +1227,8 @@
           '<span style="position:absolute;bottom:-20px;right:-2px;font-family:Nunito,sans-serif;font-weight:900;font-size:40px;line-height:1;color:rgba(255,79,98,.13);pointer-events:none">\u201D</span>' +
         '</div>' +
         '<div style="border-top:1px solid #e9e6ec;padding-top:16px">' +
-          '<div style="text-align:center;font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
-          '<div style="text-align:center;font-size:12.5px;color:#7a7280;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
+          '<div style="text-align:center;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#FF4F62;margin-bottom:5px">' + esc(t.playLeft.replace('{n}', String(Math.max(0, limit - st.used)))) + '</div>' +
+          '<div style="text-align:center;font-size:13px;color:#7a7280;margin-bottom:15px">' + esc(t.playHint) + '</div>' +
           '<div style="display:flex;align-items:center;justify-content:center">' +
             '<button data-act="playnext" aria-label="' + esc(t.playNext) + '" style="display:flex;flex-direction:column;align-items:center;gap:6px;background:transparent;border:0;cursor:pointer">' +
               '<span style="width:62px;height:62px;border-radius:50%;background:#FF4F62;display:flex;align-items:center;justify-content:center;box-shadow:0 12px 24px -8px rgba(255,79,98,.8)">' + ph('arrow-right', 24, '#fff', 'ph-bold') + '</span>' +
@@ -1163,7 +1245,8 @@
     en: { never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
   };
   var PLAY_H1 = { en: { roulette: 'Questions about your friends' }, ru: { tell_a_moment: 'Вопросы друзьям, чтобы разговорить компанию' } };
-  var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает признание вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» каждый вопрос друзьям просит историю, момент со временем и местом. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» оба варианта чего-то стоят, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
+  var BRAND_COPY = {"en":{"title":"What is Clinky?","text":"Clinky is a free iPhone app with mini games for any group, whether that's friends, family, a couple or people who just met. Inside you'll find Never Have I Ever, Who Knows Better, Would You Rather, questions to ask friends, date night questions and a finger picker that decides who goes first."},"ru":{"title":"Что такое Clinky?","text":"Clinky это бесплатное приложение для iPhone с мини-играми для любой компании, будь то друзья, семья, пара или люди, которые только познакомились. Внутри «Я никогда не», «Кто из нас», «Что выберешь», «Расскажи момент», вопросы для свиданий и палец-рандомайзер, который решит, кто начинает."}};
+  var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает карточку вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» на каждый вопрос отвечают историей, с местом и временем. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» у каждого варианта есть своя цена, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
   function renderPlay() {
     var t = tdict(), meta = own(PLAY_SLUGS, state.playSlug) || {};
     var gi = typeof meta.game === 'number' ? meta.game : 0;
@@ -1178,6 +1261,7 @@
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
+        questionStat() +
         '<div style="display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:0 auto 22px;max-width:760px">' +
           GAMES.map(function (g, i) {
             var active = i === gi;
@@ -1187,10 +1271,9 @@
         '<div id="playMount">' + renderPlayCard() + '</div>' +
       '</section>' +
       playEditorial(gi, meta.id) +
-      '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
-        '<p style="max-width:720px;margin:0 auto;text-align:center"><button data-act="games" style="background:transparent;border:0;cursor:pointer;font-family:DM Sans,sans-serif;font-size:14.5px;font-weight:700;color:#6b6b76">' + esc(t.playRules) + ' →</button></p>' +
-      '</section>' +
-      renderFinalCta() +
+      otherGames(gi) +
+      aboutClinky() +
+      renderFinalCta(ED_W) +
     '</div>';
   }
   function playEditorial(gi, id) {
@@ -1198,20 +1281,20 @@
     if (!c || !L) {
       ensureGameContent(function () { paint(); });
       return '<section style="padding:clamp(10px,2vh,20px) clamp(20px,5vw,72px) clamp(20px,4vh,40px)">' +
-        '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(22px,2.8vw,30px);letter-spacing:-.6px;margin:0 0 14px;color:#1c1326">' + esc(t.howTitle) + '</h2>' +
+        '<div style="max-width:' + pageW() + 'px;margin:0 auto">' +
+          '<h2 class="t-h3" style="margin:0 0 14px">' + esc(t.howTitle) + '</h2>' +
           '<div id="howWrap">' + renderHowStrip() + '</div>' +
         '</div>' +
       '</section>';
     }
     var lang = state.lang;
     var intro = '<p class="lead-p">' + esc(c.intro[lang]) + '</p>';
-    return sectionWrap((L.aboutFor && L.aboutFor[id]) || L.about, fitStrip(c) + intro) +
-      sectionWrap((L.rulesFor && L.rulesFor[id]) || L.rules, numberedList(c.rules[lang])) +
-      sectionWrap(L.examples, exampleList(gi)) +
-      sectionWrap(L.variants, numberedList(c.variants[lang])) +
-      sectionWrap(L.advice, numberedList(c.advice[lang])) +
-      sectionWrap(L.faq, faqAccordion(c.faq[lang]));
+    return edSection((L.aboutFor && L.aboutFor[id]) || L.about, fitStrip(c) + intro) +
+      edSection((L.rulesFor && L.rulesFor[id]) || L.rules, stepsGrid(c.rules[lang])) +
+      edSection(L.examples, exampleList(gi)) +
+      edSection(L.variants, tileGrid(c.variants[lang])) +
+      edSection(L.advice, tipsPanel(c.advice[lang])) +
+      edSection(L.faq, faqAccordion(c.faq[lang]));
   }
 
   function scenarioStrip() {
@@ -1237,9 +1320,9 @@
     }
     if (!items.length) return '';
     return '<section style="padding:clamp(6px,1.4vh,18px) clamp(20px,5vw,72px) clamp(20px,3vh,32px)">' +
-      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-        '<h2 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(21px,2.6vw,28px);letter-spacing:-.5px;margin:0 0 16px;text-align:center;color:#1c1326">' + esc(lang === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation') + '</h2>' +
-        '<div class="hub-grid">' + items.join('') + '</div>' +
+      '<div style="max-width:' + pageW() + 'px;margin:0 auto">' +
+        '<h2 class="t-h3" style="margin:0 0 16px;text-align:' + (state.page === 'home' ? 'center' : 'left') + '">' + esc(lang === 'ru' ? 'Наборы под ситуацию' : 'Sets for a situation') + '</h2>' +
+        '<div class="hub-grid" style="max-width:' + (state.page === 'home' ? 880 : ED_W) + 'px">' + items.join('') + '</div>' +
       '</div>' +
     '</section>';
   }
@@ -1253,7 +1336,7 @@
     if (window.CLINKY_AUDIENCE || document.getElementById('audData')) return;
     var sc = document.createElement('script');
     sc.id = 'audData';
-    sc.src = '/assets/audience.js?v=e8cc3976';
+    sc.src = '/assets/audience.js?v=f4d239b1';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
   }
@@ -1261,7 +1344,7 @@
     if (window.CLINKY_SCENARIOS || document.getElementById('scData')) return;
     var sc = document.createElement('script');
     sc.id = 'scData';
-    sc.src = '/assets/scenarios.js?v=189eb207';
+    sc.src = '/assets/scenarios.js?v=2589ddf7';
     sc.onload = function () { cb && cb(); };
     document.head.appendChild(sc);
   }
@@ -1278,30 +1361,6 @@
     var d = window.CLINKY_SCENARIOS;
     return d && d.labels ? d.labels[state.lang] : null;
   }
-  function scenarioMore(currentId) {
-    var d = window.CLINKY_SCENARIOS;
-    if (!d) return '';
-    var lang = state.lang, tiles = [];
-    var tile = function (href, title, sub, icon) {
-      return '<a href="' + href + '" class="soft-card" style="display:block;padding:18px;text-decoration:none;text-align:left">' +
-        '<span style="display:flex;width:40px;height:40px;border-radius:13px;background:#FFE2E6;align-items:center;justify-content:center;margin-bottom:12px">' + icon + '</span>' +
-        '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:16px;margin:0 0 5px;color:#1c1326">' + esc(title) + '</h3>' +
-        '<p style="font-size:13.5px;line-height:1.45;color:#6b6b76;margin:0">' + esc(sub) + '</p></a>';
-    };
-    for (var id in d.scenarios) {
-      if (id === currentId) continue;
-      var sc = d.scenarios[id], href = scenarioHrefFor(id, lang);
-      if (href) tiles.push(tile(href, sc.h1[lang], sc.players[lang], ph((sc.icon || {}).name || 'heart', 19, '#FF4F62', 'ph-' + ((sc.icon || {}).weight || 'fill'))));
-    }
-    var haveContent = !!gameContent(GAME_IDS[0]);
-    if (!haveContent) ensureGameContent(function () { paint(); });
-    for (var i = 0; i < GAMES.length; i++) {
-      var ph2 = playHrefFor(i, lang), c = gameContent(GAME_IDS[i]);
-      if (ph2) tiles.push(tile(ph2, GAMES[i].title[lang], c ? c.tagline[lang] : GAMES[i].how[lang][0], gameIcon(i, '#FF4F62', 19)));
-    }
-    if (!tiles.length) return '';
-    return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px">' + tiles.join('') + '</div>';
-  }
   function renderScenario() {
     var meta = own(SCENARIO_SLUGS, state.scenarioSlug) || {};
     var sc = scenarioData(meta.id), L = scenarioLabels();
@@ -1313,31 +1372,30 @@
     var lang = state.lang;
     var cardsBlock;
     if (sc.groups) {
-      cardsBlock = sc.groups.map(function (g) {
-        return '<h3 style="font-family:Nunito,sans-serif;font-weight:800;font-size:17px;margin:26px 0 4px;color:#1c1326">' + esc(g.title[lang]) + '</h3>' +
-          '<p style="font-size:14px;color:#6b6b76;margin:0 0 12px">' + esc(g.note[lang]) + '</p>' +
-          numberedList((g[lang] || []).map(function (q) { return { t: q, d: '' }; }));
-      }).join('');
+      cardsBlock = '<div class="levels">' + sc.groups.map(function (g, i) {
+        var qs = g[lang] || [];
+        return levelPanel(g.title[lang], g.note[lang], qs, Math.min(i + 1, 3), cardCount(qs.length));
+      }).join('') + '</div>';
     } else {
-      cardsBlock = numberedList(scenarioCards(sc, lang).map(function (q) { return { t: q, d: '' }; }));
+      cardsBlock = qCards(scenarioCards(sc, lang));
     }
     return '<div class="page-in">' +
       '<section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(20px,3vh,30px)">' +
         '<div class="play-head" style="margin:0 auto;text-align:center">' +
           '<h1 class="play-h1">' + esc(sc.h1[lang]) + '</h1>' +
-          subsec(sc.tagline[lang]) +
+          subsec((sc.lede || sc.tagline)[lang]) +
         '</div>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px) clamp(24px,4vh,40px)">' +
-        '<div style="max-width:430px;margin:0 auto">' + questionCard() + '</div>' +
+        '<div style="max-width:430px;margin:0 auto">' + questionStat() + questionCard() + '</div>' +
       '</section>' +
-      sectionWrap(null, '<p class="lead-p">' + esc(sc.players[lang]) + '. ' + esc(sc.intro[lang]) + '</p>') +
-      sectionWrap(L.how, numberedList(sc.how[lang])) +
-      sectionWrap(L.cards, cardsBlock) +
-      sectionWrap(L.advice, numberedList(sc.advice[lang])) +
-      sectionWrap(L.faq, faqAccordion(sc.faq[lang])) +
-      sectionWrap(L.more, scenarioMore(meta.id)) +
-      renderFinalCta() +
+      edSection(L.how, stepsGrid(sc.how[lang])) +
+      edSection(L.cards, cardsBlock) +
+      edSection(L.advice, tipsPanel(sc.advice[lang])) +
+      edSection(L.faq, faqAccordion(sc.faq[lang])) +
+      otherSets(meta.id) +
+      aboutClinky() +
+      renderFinalCta(ED_W) +
     '</div>';
   }
 
@@ -1374,12 +1432,12 @@
       '<section style="position:relative;padding:clamp(118px,15vh,150px) clamp(20px,5vw,72px) clamp(30px,4vh,46px);text-align:center;overflow:hidden">' +
         sparkle({ s: 20, pos: 'top:24%;left:16%', op: 0.45, c: '#FF4F62', glow: 'rgba(255,79,98,.3)' }) +
         sparkle({ s: 14, pos: 'top:30%;right:18%', op: 0.4, c: '#FF8A97', glow: 'rgba(255,138,151,.3)', anim: 'twinkle 3.4s ease-in-out .4s infinite' }) +
-        '<img src="/assets/clinky-icon.png" alt="Clinky" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
-        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(32px,4.6vw,52px);letter-spacing:-1.2px;margin:0 0 14px;color:#1c1326">' + esc(t.aboutTitle) + '</h1>' +
+        '<img src="/assets/clinky-icon.png" alt="" style="width:78px;height:78px;border-radius:22px;margin:0 auto 22px;box-shadow:0 18px 34px -14px rgba(225,29,72,.6);display:block">' +
+        '<h1 class="t-h1" style="margin:0 0 14px">' + esc(t.aboutTitle) + '</h1>' +
         '<p style="font-size:clamp(16px,1.6vw,19px);line-height:1.6;color:#6b6b76;max-width:34em;margin:0 auto">' + esc(t.aboutLede) + '</p>' +
       '</section>' +
       '<section style="padding:0 clamp(20px,5vw,72px)">' +
-        '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' + rows + '</div>' +
+        '<div class="ab-stack" style="max-width:' + pageW() + 'px">' + rows + '</div>' +
       '</section>' +
       aboutStory() +
       '<div class="ab-slogan">' + sloganHTML(tdict().slogan) + '</div>' +
@@ -1392,7 +1450,7 @@
       ? '<img src="' + esc(AUTHOR_PHOTO) + '" alt="' + esc(t.aboutWhoName) + '" width="132" height="132" loading="lazy" decoding="async" class="ab-photo">'
       : '<span class="ab-photo" style="display:flex;align-items:center;justify-content:center;background:#FFE2E6">' + ph('user-circle', 64, '#FF4F62', 'ph-fill') + '</span>';
     return '<section style="padding:clamp(14px,2vh,18px) clamp(20px,5vw,72px) clamp(40px,6vh,64px)">' +
-      '<div class="ab-stack" style="max-width:' + PAGE_W + 'px">' +
+      '<div class="ab-stack" style="max-width:' + pageW() + 'px">' +
         '<div class="soft-card ab-author">' +
           '<div class="ab-side">' + photo +
             '<span class="ab-name">' + esc(t.aboutWhoName) + '</span>' +
@@ -1430,19 +1488,20 @@
           '<input name="email" type="email" required placeholder="' + esc(t.supEmailPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none">' +
           '<textarea name="message" required rows="5" placeholder="' + esc(t.supMsgPh) + '" style="border:1px solid #e9e6ec;border-radius:14px;padding:15px 17px;font-size:15px;background:#fff;outline:none;resize:vertical;min-height:120px"></textarea>' +
           '<button type="submit" style="border:0;cursor:pointer;border-radius:14px;padding:16px 24px;font-family:Nunito,sans-serif;font-weight:800;font-size:15.5px;color:#fff;background:#FF4F62;box-shadow:0 12px 26px -10px rgba(255,79,98,.7)">' + esc(t.supSend) + '</button>' +
-          '<p style="font-size:12.5px;color:#7a7280;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
+          '<p style="font-size:13px;color:#7a7280;text-align:center;margin:4px 0 0">' + esc(t.supNote) + '</p>' +
         '</form>';
     var faqHtml = faqAccordion(FAQ[state.lang]);
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
       '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-        '<div style="text-align:center;margin-bottom:30px">' +
+        '<div style="text-align:center;margin-bottom:40px">' +
           '<span style="display:flex;width:56px;height:56px;border-radius:17px;background:#FFE2E6;align-items:center;justify-content:center;margin:0 auto 18px">' + I.chat + '</span>' +
-          '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 10px;color:#1c1326">' + esc(t.supTitle) + '</h1>' +
+          '<h1 class="t-h1" style="margin:0 0 10px">' + esc(t.supTitle) + '</h1>' +
           '<p style="font-size:16px;color:#6b6b76;margin:0">' + esc(t.supSub) + '</p>' +
-        '</div>' + '<div style="max-width:560px;margin:0 auto">' + body + '</div>' +
-        '<div style="margin-top:46px">' +
-          '<h2 style="font-family:Nunito,sans-serif;font-weight:800;font-size:20px;margin:0 0 16px;text-align:center;color:#1c1326">FAQ</h2>' +
-          '<div style="display:flex;flex-direction:column;gap:10px">' + faqHtml + '</div>' +
+        '</div>' +
+        '<div class="sup-grid">' +
+          '<div class="sup-form"><h2 class="t-h3" style="margin:0 0 16px">' + esc(t.supFormTitle) + '</h2><div class="sup-card">' + body + '</div></div>' +
+          '<div class="sup-faq"><h2 class="t-h3" style="margin:0 0 16px">' + esc(state.lang === 'ru' ? 'Частые вопросы' : 'Common questions') + '</h2>' +
+            '<div style="display:flex;flex-direction:column;gap:10px">' + faqHtml + '</div></div>' +
         '</div>' +
       '</div></section></div>';
   }
@@ -1469,7 +1528,7 @@
     var sections = src[state.lang] || [];
     var body = sections.map(function (sec) {
       var inner = '';
-      if (sec.h) inner += '<h2 style="font-family:Nunito,sans-serif;font-weight:800;font-size:19px;margin:0 0 8px;color:#1c1326">' + esc(sec.h) + '</h2>';
+      if (sec.h) inner += '<h2 class="t-h4" style="margin:0 0 8px">' + esc(sec.h) + '</h2>';
       inner += sec.b.map(function (bl) {
         if (bl[0] === 'h3') return '<h3 style="font-family:Nunito,sans-serif;font-weight:700;font-size:16px;margin:18px 0 6px;color:#3a323f">' + esc(bl[1]) + '</h3>';
         if (bl[0] === 'ul') return '<ul style="margin:.5em 0 .9em;padding-left:1.3em">' + bl[1].map(function (li) { return '<li style="font-size:15px;line-height:1.65;color:#5d5660;margin:.35em 0">' + esc(li) + '</li>'; }).join('') + '</ul>';
@@ -1478,8 +1537,8 @@
       return '<div style="margin-bottom:22px">' + inner + '</div>';
     }).join('');
     return '<div class="page-in"><section style="padding:clamp(116px,16vh,158px) clamp(20px,5vw,72px) clamp(56px,9vh,100px)">' +
-      '<div style="max-width:' + PAGE_W + 'px;margin:0 auto">' +
-        '<h1 style="font-family:Nunito,sans-serif;font-weight:900;font-size:clamp(28px,3.8vw,42px);letter-spacing:-.8px;margin:0 0 6px;color:#1c1326">' + esc(title) + '</h1>' +
+      '<div style="max-width:' + pageW() + 'px;margin:0 auto">' +
+        '<h1 class="t-h1" style="margin:0 0 6px">' + esc(title) + '</h1>' +
         '<p style="font-size:13.5px;color:#7a7280;margin:0 0 30px">' + esc(which === 'privacy' ? t.privUpdated : t.docUpdated) + '</p>' + body +
         '<div style="margin-top:30px;text-align:center">' + coralBtn(t.docContactCta, 'support') + '</div>' +
       '</div></section></div>';
@@ -1519,6 +1578,8 @@
   var $hdr, $main, $ftr;
   // One content column for every page: the header, the sections and the footer share these edges.
   var PAGE_W = 1080;
+  // the home page is a wide landing; every other page reads in one 840px column
+  function pageW() { return state.page === 'home' ? PAGE_W : ED_W; }
   function updateHeaderBg() {
     var base = 'position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;gap:12px;padding:12px max(clamp(20px,5vw,40px), calc((100% - ' + PAGE_W + 'px) / 2));transition:background .35s ease,box-shadow .35s ease;';
     var bg = state.scrolled ? 'background:rgba(255,255,255,.9);box-shadow:0 6px 24px -10px rgba(28,19,38,.16);backdrop-filter:blur(12px);' : 'background:transparent;';
@@ -1539,7 +1600,8 @@
     $main.innerHTML = renderMain();
     $ftr.innerHTML = renderFooter();
     updateHeaderBg();
-    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); loadClinkCount(); bindHeroParallax(); bindIcebreakerDeck(); } else { stopAnim(); stopClinkPoll(); }
+    if (state.page === 'home') { if (hero()) hero().setDrink(state.sel); startAnim(); clinks.load(); bindHeroParallax(); bindIcebreakerDeck(); } else { stopAnim(); clinks.stop(); }
+    if (document.getElementById('qNum')) questions.load(); else questions.stop();
   }
 
   // ===== hero fx overlays (sparkles / steam / +1) — the 3D model itself is driven by hero3d.js =====
@@ -2034,6 +2096,7 @@
   function flushCard(reason) {
     if (!_card) return;
     var ms = Date.now() - _cardSince;
+    if (reason === 'next' && ms >= QUESTION_MIN_MS) questions.bump();
     if (ms > 400) track('card', { g: _card.g, i: _card.i, q: String(_card.q).replace(/\*/g, '').slice(0, 160), v: ms, r: reason });
     _card = null;
   }
@@ -2377,7 +2440,7 @@
       case 'joinlimit': joinCta('limit'); break;
       case 'beer': setDrink('beer'); break;
       case 'coffee': setDrink('coffee'); break;
-      case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); bumpClink(); resetAnim(); break;
+      case 'play': if (window.ClinkyHeroBoot) window.ClinkyHeroBoot(); playAnim(); clinks.bump(); resetAnim(); break;
       case 'plusone': plusOne(); break;
       case 'p0': case 'p1': case 'p2': case 'p3': {
         var pgi = parseInt(a.slice(1), 10);

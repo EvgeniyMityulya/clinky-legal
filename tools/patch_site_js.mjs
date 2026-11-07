@@ -7,6 +7,7 @@ import { ICON_PATHS } from './icons_data.mjs';
 import { BRAND_ICONS } from './brand_icons_data.mjs';
 import { AUTHOR_LINKS, AUTHOR_PHOTO } from './about_content.mjs';
 import { GAME_CONTENT } from './game_content.mjs';
+import { BRAND_COPY } from './brand_content.mjs';
 import { assertSafeUrl, assertGeometricSvg, assertPathData } from './guards.mjs';
 
 const FILE = 'assets/site.js';
@@ -29,6 +30,7 @@ const inject = (name, re, value) => {
 const playSub = { en: {}, ru: {} };
 for (const [id, g] of Object.entries(GAME_CONTENT)) for (const l of ['en', 'ru']) if (g.answer?.[l]) playSub[l][id] = g.answer[l];
 inject('PLAY_SUB', /  var PLAY_SUB = [^\n]*;/, JSON.stringify(playSub));
+inject('BRAND_COPY', /  var BRAND_COPY = [^\n]*;/, JSON.stringify(BRAND_COPY));
 
 const faqLiteral = 'var FAQ = {\n' + ['en', 'ru'].map((l) =>
   `    ${l}: [\n` + FAQ_SUPPORT[l].map((f) =>
@@ -52,10 +54,14 @@ if (!/gamesAll:/.test(js)) {
   js = js.replace("tapSwipe: 'Тап или свайп по карточке'", "gamesAll: 'Как в это играть', tapSwipe: 'Тап или свайп по карточке'");
 }
 
-const helpers = `  function faqAccordion(items) {
+const helpers = `  // **phrase** in an answer marks the part people scan for; it renders bold in the ink colour
+  function faqAnswer(s) {
+    return String(s).split('**').map(function (part, i) { return i % 2 ? '<strong class="faq-em">' + esc(part) + '</strong>' : esc(part); }).join('');
+  }
+  function faqAccordion(items) {
     return '<div class="faq-acc">' + items.map(function (f) {
       return '<details><summary>' + esc(f.q) + '</summary>' +
-        '<div class="faq-body">' + esc(f.a) + '</div></details>';
+        '<div class="faq-body">' + faqAnswer(f.a) + '</div></details>';
     }).join('') + '</div>';
   }
 `;
@@ -91,7 +97,7 @@ inject('ICON_PATHS', /  var ICON_PATHS = \{[^;]*\};/, JSON.stringify(ICON_PATHS)
 
 // lazily loaded payloads need their own cache-busting, they are not in the shells
 const lazyVer = (f) => createHash('md5').update(readFileSync(f)).digest('hex').slice(0, 8);
-for (const name of ['game-content.js', 'web-deck.js', 'scenarios.js', 'author.jpg']) {
+for (const name of ['game-content.js', 'web-deck.js', 'scenarios.js', 'audience.js', 'author.jpg']) {
   const re = new RegExp("'/assets/" + name.replace('.', '\\.') + "(\\?v=[a-f0-9]+)?'", 'g');
   const url = `'/assets/${name}?v=${lazyVer('assets/' + name)}'`;
   js = js.replace(re, () => url);
