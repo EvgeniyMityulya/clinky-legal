@@ -276,7 +276,7 @@ function heroDistMul() {
   var w = window.innerWidth;
   if (w < 560) return 0.90;
   if (w < 960) return 0.95;
-  return 1;
+  return 0.9;   // desktop canvas overhangs the stage (see .hero-mount), so the model stays large without clipping
 }
 function resize() {
   const mount = canvas.parentElement; if (!mount) return;

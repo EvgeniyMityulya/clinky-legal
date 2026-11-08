@@ -34,8 +34,8 @@
     en: {
       navHome: 'Home', navAbout: 'About', navSupport: 'Support', navPrivacy: 'Privacy', navTerms: 'Terms', navGames: 'Games', navJoin: 'Download',
       heroEyebrow: 'Available on the App Store',
-      heroTitle: 'Turn hangouts into a game',
-      heroLede: 'An easy reason to meet more often! Party-game cards for any table and a 3D drink for every clink',
+      heroTitle: 'Turn hangouts into a game', heroTitleLead: 'Games and questions', heroTitleAccent: 'for any company', heroAppSub: 'Party & Couples Games', heroGames: 'Never Have I Ever, Who Knows Better, Would You Rather and lots of questions for friends, couples and family',
+      heroLede: 'An easy reason to meet more often! Party-game cards for any company and a 3D drink for every clink',
       promptTitle: 'Enjoying the questions?', promptSub: 'Every game and deck is in the app.\nPlay right on your phone, even offline', promptNote: 'Free · iPhone · iOS 17+', promptCta: 'Sign me up', promptClose: 'Close',
       heroCta: 'Try it first!', heroMicro: 'No spam. One email the day we launch.', storeCta: 'Download on the App Store', trust1: 'No sign-up', trust2: 'Offline', trust3: 'iOS 17+',
       heroModel: 'Tap the drink and add your clink',
@@ -49,10 +49,10 @@
       gamesAll: 'See all games', navPickGame: 'Pick a game', tapSwipe: 'Tap or swipe the card', dislike: 'Back', like: 'Next', cardHint: 'Swipe right for the next card, left to go back',
       problemKicker: 'Sound familiar?', problemTitle: 'Got together and the conversation stalls?',
       problemBody: 'Either everyone is busy and the meet-up drifts to "someday", or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun!',
-      problemTurn: 'Clinky has *games and hundreds of questions* for any group, and gentle reminders help you *meet up more often*',
+      problemTurn: 'Clinky has *games and hundreds of questions* for any company, and gentle reminders help you *meet up more often*',
       discoverKicker: 'Inside the app', discoverTitle: 'Everything for your hangouts in one place', discoverSub: 'No accounts, no clutter, just *your people and your moments*',
       finalTitle: 'Round up your friends and clink!', finalSub: 'Clinky is on the App Store. Grab it before your next hangout',
-      gamesPageTitle: 'Games for any table',
+      gamesPageTitle: 'Games for any company',
       gamesPageSub: 'Pick a game, then read the rules and play a few cards right here.',
       howTitle: 'How to play', stepLabel: 'Step',
       playTitle: 'Play {game} online', playSub: 'Tap for a new card. No sign-up, nothing to install.',
@@ -85,7 +85,7 @@
       aboutMission: "We built Clinky because the best moments happen face to face — and they're easy to let slip. Clinky is a gentle nudge to see your people more often, and a game to make every meet-up worth remembering.",
       p1t: "Don't lose touch", p1d: "Remember who you saw, when, and who you haven't met in a while.",
       p2t: 'Clink with anything', p2d: "Coffee, tea, lemonade or anything you like. What matters is you're together!",
-      p3t: 'Party games', p3d: 'Icebreaker cards that get any table talking in seconds.',
+      p3t: 'Party games', p3d: 'Icebreaker cards that get any company talking in seconds.',
       supTitle: 'Support', supSub: 'Found a bug or have an idea? Write to us, we read every message', supFormTitle: 'Write to us',
       supName: 'Name', supEmailPh: 'Email', supMsgPh: 'Description',
       supSend: 'Send message', supNote: 'We usually reply within a day.',
@@ -100,7 +100,7 @@
     ru: {
       navHome: 'Главная', navAbout: 'О нас', navSupport: 'Поддержка', navPrivacy: 'Приватность', navTerms: 'Условия', navGames: 'Игры', navJoin: 'Скачать',
       heroEyebrow: 'Доступно в App Store',
-      heroTitle: 'Преврати встречи в игру',
+      heroTitle: 'Преврати встречи в игру', heroTitleLead: 'Игры и вопросы', heroTitleAccent: 'для любой компании', heroAppSub: 'Игры для компании и пар', heroGames: '«Я никогда не», «Кто из нас», «Или-или», «Расскажи момент» и сотни вопросов для друзей, пары и семьи',
       heroLede: 'Лёгкий повод видеться чаще! Карточки-игры для любой компании и 3D-напиток за каждый «чок»',
       promptTitle: 'Понравились вопросы?', promptSub: 'Все игры и колоды есть в приложении.\nИграй прямо с телефона, даже без интернета', promptNote: 'Бесплатно · iPhone · iOS 17+', promptCta: 'Записаться', promptClose: 'Закрыть',
       heroCta: 'Хочу первым!', heroMicro: 'Без спама. Одно письмо в день релиза.', storeCta: 'Скачать в App Store', trust1: 'Без регистрации', trust2: 'Офлайн', trust3: 'iOS 17+',
@@ -411,7 +411,7 @@
     var t = tdict();
     var btn = 'position:relative;z-index:1;width:128px;border:0;background:transparent;cursor:pointer;padding:15px 0;font-family:Nunito,sans-serif;font-weight:800;font-size:16.5px;transition:color .25s;display:inline-flex;align-items:center;justify-content:center;gap:8px;';
     var thumbX = state.sel === 'coffee' ? '128px' : '0';
-    return '<div style="display:flex;justify-content:center;margin:18px 0 0">' +
+    return '<div class="drink-toggle" style="position:relative;z-index:3;display:flex;justify-content:center;margin:14px 0 0">' +
       '<div class="drink-toggle" style="position:relative;display:inline-flex;padding:5px;border-radius:999px;background:#fff;border:1px solid #e9e6ec;box-shadow:0 12px 28px -12px rgba(28,19,38,.24)">' +
         '<div id="drinkThumb" style="position:absolute;top:5px;bottom:5px;left:5px;width:128px;border-radius:999px;background:#FF4F62;box-shadow:0 10px 20px -6px rgba(255,79,98,.7);transition:transform .36s cubic-bezier(.34,1.4,.5,1);transform:translateX(' + thumbX + ')"></div>' +
         '<button id="chipBeer" data-act="beer" style="' + btn + 'color:' + (state.sel === 'beer' ? '#fff' : '#6b6b76') + '"><span style="display:inline-flex;transform:rotate(-45deg)">' + ph('beer-bottle', 18, state.sel === 'beer' ? '#fff' : '#b9b0b6', 'ph-fill') + '</span>' + esc(t.beer) + '</button>' +
@@ -673,29 +673,25 @@
       sparkle({ s: 20, pos: 'bottom:30%;right:40%', op: 0.45, c: C, glow: 'rgba(255,79,98,.28)', anim: 'twinkle 5s ease-in-out .55s infinite', cls: 'spark-mid' }) +
       '<div class="hero-grid" style="position:relative;max-width:' + PAGE_W + 'px;margin:0 auto;display:flex;align-items:center;gap:clamp(24px,5vw,64px)">' +
         '<div class="hero-left" style="flex:1.06;min-width:0;text-align:left">' +
-          '<div class="hero-icon" style="display:flex;justify-content:center;max-width:32em;margin:0 0 16px">' +
-            '<img src="/assets/clinky-icon.png" alt="" fetchpriority="high" width="72" height="72" style="width:72px;height:72px;border-radius:20px;box-shadow:0 16px 32px -12px rgba(225,29,72,.5)">' +
+          '<div class="hero-id">' +
+            '<img src="/assets/clinky-icon.png" alt="" fetchpriority="high" width="68" height="68">' +
+            '<div><span class="hero-id-name">Clinky</span><span class="hero-id-sub">' + esc(t.heroAppSub) + '</span></div>' +
           '</div>' +
-          '<div class="hero-eyebrow" style="display:flex;justify-content:center;max-width:32em;margin:0 0 18px">' +
-            '<span style="display:inline-flex;align-items:center;gap:9px;padding:10px 20px;border-radius:999px;background:linear-gradient(135deg,#FF6373,#FF4F62);color:#fff;font-family:Nunito,sans-serif;font-weight:800;font-size:14.5px;box-shadow:0 14px 30px -10px rgba(225,29,72,.6);animation:eyebrowPulse 2.6s ease-in-out infinite">' +
-              '<span style="position:relative;width:9px;height:9px;display:inline-flex;flex:none">' +
-                '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveRing 1.7s ease-out infinite"></span>' +
-                '<span style="position:absolute;inset:0;border-radius:50%;background:#fff;animation:liveBlink 1.7s ease-in-out infinite"></span>' +
-              '</span>' + esc(t.heroEyebrow) + appStoreMark(17, '#fff') + '</span>' +
-          '</div>' +
-          '<h1 class="t-display" style="margin:0 0 28px">' + esc(t.heroTitle) + (L === 'ru' ? ' с ' : ' with ') + '<span style="color:#FF4F62">Clinky</span></h1>' +
-          '<div class="hero-cta"><div id="wl1">' + waitlistForm(false, true, null, 'hero') + '</div>' +
+          '<h1 class="t-display hero-h1">' + esc(t.heroTitleLead) + ' <br><span style="color:#FF4F62">' + esc(t.heroTitleAccent) + '</span></h1>' +
+          '<p class="hero-lede">' + esc(t.heroGames) + '</p>' +
+          '<div class="hero-cta">' +
           (state.waitlistDone ? '' :
-            '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:16px 0 0">' +
+            '<div class="hero-trust" style="display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:0 0 14px">' +
               heroChip('user-circle', t.trust1) + heroChip('shield-check', t.trust2) + heroChip('apple-logo', t.trust3) +
             '</div>') +
+          '<div id="wl1">' + waitlistForm(false, true, null, 'hero') + '</div>' +
           '</div>' +
         '</div>' +
       '<div class="hero-right" style="flex:1;min-width:0;position:relative;max-width:520px;margin:0 auto">' +
         statCounter('clinkNum', t.counterLabel, 'hero-count') +
         '<div data-act="play" class="hero-stage" style="position:relative;aspect-ratio:1/0.62;perspective:1000px;cursor:pointer">' +
           '<div style="position:absolute;inset:2% 4% 0;border-radius:50%;background:radial-gradient(ellipse 60% 56% at 50% 47%,rgba(255,79,98,.4),rgba(255,138,151,.16) 46%,transparent 72%);animation:glowPulse 6s ease-in-out infinite;pointer-events:none"></div>' +
-          '<div id="heroMount" style="position:absolute;inset:0;z-index:1"></div>' +
+          '<div id="heroMount" class="hero-mount"></div>' +
           '<div id="mvLoader" aria-hidden="true" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;z-index:2;transition:opacity .3s ease">' +
             '<div style="position:relative;width:64px;height:64px">' +
               '<svg width="64" height="64" viewBox="0 0 64 64" style="transform:rotate(-90deg)">' +
@@ -706,8 +702,8 @@
             '</div>' +
           '</div>' +
           '<div id="fxLayer" aria-hidden="true" style="position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:6"></div>' +
-          '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '5 недель подряд' : '5-week streak') + '</div></div>' +
-          '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('cube', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 в коллекцию' : '+1 collectible') + '</div></div>' +
+          '<div class="float-card" style="top:16%;left:-2%;animation:bobA 7s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('flame', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? 'Видимся 5 недель подряд' : 'Meeting up 5 weeks running') + '</div></div>' +
+          '<div class="float-card" data-act="plusone" style="bottom:16%;right:-2%;cursor:pointer;pointer-events:auto;animation:bobB 8s ease-in-out infinite"><div class="float-inner"><span class="chip-ic">' + ph('coffee', 17, C, 'ph-fill') + '</span>' + esc(L === 'ru' ? '+1 напиток в коллекцию' : '+1 drink in your collection') + '</div></div>' +
         '</div>' +
         '<p class="hero-hint">' + esc(t.heroModel) + '</p>' +
         drinkToggle() +
@@ -731,7 +727,7 @@
     var capImg = '/assets/bento/drink.png';
     function L2(ru, en) { return L === 'ru' ? ru : en; }
     var FC = {
-      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Четыре игры с живыми вопросами, которые разговорят любой стол', 'Four games with real questions that get any table talking in seconds') },
+      ic:  { ic: 'game-controller', t: L2('Карточки-игры', 'Icebreakers'), d: L2('Четыре игры с живыми вопросами, которые разговорят любой стол', 'Four games with real questions that get any company talking in seconds') },
       col: { ic: 'cube', t: L2('3D-коллекция', '3D collection'), d: L2('Каждый «чок» приносит в коллекцию новый 3D-напиток', 'Every clink adds a new 3D drink to your collection') },
       str: { ic: 'flame', t: L2('Серии встреч', 'Meeting streaks'), d: L2('Регулярные встречи с близкими складываются в серию без пропусков', 'Regular meet-ups with your people turn into a streak you won’t want to break') },
       ach: { ic: 'trophy', t: L2('Достижения', 'Achievements'), d: L2('Награды за встречи, серии и знакомства. Есть и секретные', 'Badges for meet-ups, streaks and new friends. Some of them are secret') },
@@ -1079,19 +1075,14 @@
       return '<div class="qcard"><span>' + accented(line) + '</span></div>';
     }).join('') + '</div>';
   }
-  function levelPanel(title, note, lines, level, count) {
+  function levelPanel(title, note, lines, level) {
     var heat = '';
     for (var i = 1; i <= 3; i++) heat += '<span class="heat' + (i <= level ? ' on' : '') + '">' + ph('flame', 14, i <= level ? '#FF4F62' : '#f3c9d1', 'ph-fill') + '</span>';
     return '<div class="level lv' + level + '">' +
-      '<div class="level-head"><span class="heat-row" aria-hidden="true">' + heat + '</span><h3>' + esc(title) + '</h3><span class="level-count">' + count + '</span></div>' +
+      '<div class="level-head"><span class="heat-row" aria-hidden="true">' + heat + '</span><h3>' + esc(title) + '</h3></div>' +
       (note ? '<p class="level-note">' + esc(note) + '</p>' : '') +
       qCards(lines) +
     '</div>';
-  }
-  function cardCount(n) {
-    if (state.lang !== 'ru') return n + (n === 1 ? ' card' : ' cards');
-    var m10 = n % 10, m100 = n % 100;
-    return n + (m10 === 1 && m100 !== 11 ? ' карточка' : m10 >= 2 && m10 <= 4 && (m100 < 12 || m100 > 14) ? ' карточки' : ' карточек');
   }
   function numberedList(items) {
     return '<ol style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;counter-reset:r">' +
@@ -1143,7 +1134,7 @@
     var at = 0;
     return '<div class="levels">' + levels.map(function (lv, i) {
       var part = out.slice(at, at + lv.n); at += lv.n;
-      return part.length ? levelPanel(lv[state.lang] || lv.en, lv.note ? (lv.note[state.lang] || lv.note.en) : '', part, i + 1, cardCount(part.length)) : '';
+      return part.length ? levelPanel(lv[state.lang] || lv.en, lv.note ? (lv.note[state.lang] || lv.note.en) : '', part, i + 1) : '';
     }).join('') + '</div>';
   }
   // Every game and question-set page ends the same way: three related picks, then the full list.
@@ -1245,7 +1236,7 @@
     en: { never_have_i: 'Never Have I Ever', roulette: 'Who Knows Better', tell_a_moment: 'Questions to Ask Friends', would_you_rather: 'Would You Rather' }
   };
   var PLAY_H1 = { en: { roulette: 'Questions about your friends' }, ru: { tell_a_moment: 'Вопросы друзьям, чтобы разговорить компанию' } };
-  var BRAND_COPY = {"en":{"title":"What is Clinky?","text":"Clinky is a free iPhone app with mini games for any group, whether that's friends, family, a couple or people who just met. Inside you'll find Never Have I Ever, Who Knows Better, Would You Rather, questions to ask friends, date night questions and a finger picker that decides who goes first."},"ru":{"title":"Что такое Clinky?","text":"Clinky это бесплатное приложение для iPhone с мини-играми для любой компании, будь то друзья, семья, пара или люди, которые только познакомились. Внутри «Я никогда не», «Кто из нас», «Что выберешь», «Расскажи момент», вопросы для свиданий и палец-рандомайзер, который решит, кто начинает."}};
+  var BRAND_COPY = {"en":{"title":"What is Clinky?","text":"Clinky is a free iPhone app with mini games for any company, whether that's friends, family, a couple or people who just met. Inside you'll find Never Have I Ever, Who Knows Better, Would You Rather, questions to ask friends, date night questions and a finger picker that decides who goes first."},"ru":{"title":"Что такое Clinky?","text":"Clinky это бесплатное приложение для iPhone с мини-играми для любой компании, будь то друзья, семья, пара или люди, которые только познакомились. Внутри «Я никогда не», «Кто из нас», «Что выберешь», «Расскажи момент», вопросы для свиданий и палец-рандомайзер, который решит, кто начинает."}};
   var PLAY_SUB = {"en":{"never_have_i":"Never Have I Ever is a party game where someone reads a confession out loud and everyone who has done it owns up. You can play it free in the browser on one phone passed around the table, without signing up or installing anything.","roulette":"Who Knows Better is a question game where each card names two players and one of them answers a question about the other. Play it free in the browser on a single phone, without signing up or installing anything.","tell_a_moment":"Each of these questions to ask friends calls for a story, a moment with a time and a place in it. Read a card to one person and let the rest of the table listen. It is free in the browser, with no sign-up or install.","would_you_rather":"Would You Rather is a party game of two options that both cost you something, so whoever picks has to defend the choice. Play it free in the browser on one phone for the whole group, without signing up or installing anything."},"ru":{"never_have_i":"В игре «Я никогда не» один читает карточку вслух, и все, кто так делал, признаются. Играй бесплатно прямо в браузере, передавая телефон по кругу, без регистрации и установки.","roulette":"В игре «Кто из нас» карточка называет двоих, и один отвечает на вопрос про другого. Играй бесплатно в браузере на одном телефоне, без регистрации и установки.","tell_a_moment":"В «Расскажи момент» на каждый вопрос отвечают историей, с местом и временем. Прочитай карточку одному человеку, а остальные пусть слушают. Играй бесплатно в браузере, без регистрации и установки.","would_you_rather":"В игре «Что выберешь» у каждого варианта есть своя цена, поэтому выбравшему приходится свой выбор защищать. Играй бесплатно в браузере на одном телефоне для всей компании, без регистрации и установки."}};
   function renderPlay() {
     var t = tdict(), meta = own(PLAY_SLUGS, state.playSlug) || {};
@@ -1374,7 +1365,7 @@
     if (sc.groups) {
       cardsBlock = '<div class="levels">' + sc.groups.map(function (g, i) {
         var qs = g[lang] || [];
-        return levelPanel(g.title[lang], g.note[lang], qs, Math.min(i + 1, 3), cardCount(qs.length));
+        return levelPanel(g.title[lang], g.note[lang], qs, Math.min(i + 1, 3));
       }).join('') + '</div>';
     } else {
       cardsBlock = qCards(scenarioCards(sc, lang));
@@ -1947,7 +1938,7 @@
     var tail = page === 'home' ? '' : page;
     return lang === 'ru' ? '/ru/' + tail : '/' + tail;
   }
-  var DOC_TITLES = {"/":"Clinky: Party Question Games for Friends & Couples","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky: игры с вопросами для компании и пары","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"Questions About Your Friends — Who Knows Better Game","/ru/play/kto-iz-nas":"Игра «Кто из нас», вопросы онлайн бесплатно","/play/questions-to-ask-friends":"Questions to Ask Friends — 20 Free Cards to Read and Play","/ru/play/voprosy-druzyam":"Вопросы друзьям, много карточек для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары, много карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы для компании друзей, много карточек онлайн","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании, много карточек онлайн","/questions/drinks":"Questions to Ask Over Drinks — Free Card Game","/ru/voprosy/za-bokalom":"Вопросы за бокалом, много карточек для вечера","/404":"Page Not Found — Clinky"};
+  var DOC_TITLES = {"/":"Clinky: Party Question Games for Friends & Couples","/games":"Question Games for Friends — Play Free Online","/about":"About Clinky — An App for Friendships Worth Keeping","/support":"Clinky Support — Report a Bug or Send an Idea","/privacy":"Privacy Policy — Clinky","/terms":"Terms of Use — Clinky","/privacy-ru":"Политика конфиденциальности — Clinky","/terms-ru":"Условия использования — Clinky","/ru/":"Clinky: игры с вопросами для компании и пары","/ru/games":"Игры с вопросами для компании — играть онлайн","/ru/about":"О Clinky — приложение, чтобы не терять друзей","/ru/support":"Поддержка Clinky — вопросы и связь с командой","/ru/privacy":"Политика конфиденциальности — Clinky","/ru/terms":"Условия использования — Clinky","/play/never-have-i-ever":"Never Have I Ever Questions — Play Free Online","/ru/play/ya-nikogda-ne":"Вопросы «Я никогда не» — играть онлайн бесплатно","/play/who-knows-better":"Questions About Your Friends — Who Knows Better Game","/ru/play/kto-iz-nas":"Игра «Кто из нас», вопросы онлайн бесплатно","/play/questions-to-ask-friends":"Questions to Ask Friends — Free Cards to Read and Play","/ru/play/voprosy-druzyam":"Вопросы друзьям, много карточек для разговора","/play/would-you-rather":"Would You Rather Questions — Play Free Online","/ru/play/chto-vyberesh":"Вопросы «Что выберешь» — играть онлайн бесплатно","/questions/for-couples":"Questions for Couples — Free Card Game","/ru/voprosy/dlya-pary":"Вопросы для пары, много карточек онлайн","/questions/party":"Party Game Questions for Friends — Free","/ru/voprosy/za-stolom":"Вопросы для компании друзей, много карточек онлайн","/questions/first-date":"First Date Questions — Free Card Game","/ru/voprosy/pervoe-svidanie":"Вопросы на первом свидании, много карточек онлайн","/questions/drinks":"Questions to Ask Over Drinks — Free Card Game","/ru/voprosy/za-bokalom":"Вопросы за бокалом, много карточек для вечера","/404":"Page Not Found — Clinky"};
   function syncDocTitle() {
     var k = location.pathname.replace(/\.html$/, '').replace(/(.)\/$/, '$1');
     var v = own(DOC_TITLES, k) || own(DOC_TITLES, k + '/');

@@ -3,7 +3,7 @@
 export const BRAND_COPY = {
   en: {
     title: 'What is Clinky?',
-    text: "Clinky is a free iPhone app with mini games for any group, whether that's friends, family, a couple or people who just met. Inside you'll find Never Have I Ever, Who Knows Better, Would You Rather, questions to ask friends, date night questions and a finger picker that decides who goes first."
+    text: "Clinky is a free iPhone app with mini games for any company, whether that's friends, family, a couple or people who just met. Inside you'll find Never Have I Ever, Who Knows Better, Would You Rather, questions to ask friends, date night questions and a finger picker that decides who goes first."
   },
   ru: {
     title: 'Что такое Clinky?',

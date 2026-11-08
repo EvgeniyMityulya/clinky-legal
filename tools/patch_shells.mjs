@@ -136,13 +136,13 @@ function homePrerender(loc) {
       }
     : {
         eyebrow: 'Available on the App Store', h1: 'Turn hangouts into a game',
-        lede: 'An easy reason to meet more often. Party-game cards for any table and a 3D drink for every clink.',
+        lede: 'An easy reason to meet more often. Party-game cards for any company and a 3D drink for every clink.',
         cta: 'Download on the App Store', gamesTitle: 'Questions that open anyone up!',
         gamesSub: 'These are real cards from the app. On the site you get 8 free cards a day.',
         problemTitle: 'Got together and the conversation stalls?',
         problemBody: 'Either everyone is busy and the meet-up drifts to “someday”, or you finally gather and the conversation stalls. A light reminder and a couple of games make it all way more fun. Clinky helps you meet up more often and have the kind of time you want to repeat.',
         insideTitle: 'Everything for your hangouts in one place',
-        inside: [["Don't lose touch", "Remember who you saw, when, and who you haven't met in a while."], ['Clink with anything', "Coffee, tea, lemonade or anything you like. What matters is you're together."], ['Party games', 'Icebreaker cards that get any table talking in seconds.']],
+        inside: [["Don't lose touch", "Remember who you saw, when, and who you haven't met in a while."], ['Clink with anything', "Coffee, tea, lemonade or anything you like. What matters is you're together."], ['Party games', 'Icebreaker cards that get any company talking in seconds.']],
         hubTitle: 'Free question packs',
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']]
       };
@@ -230,7 +230,7 @@ function gamesPrerender(loc) {
     ? { h1: 'Игры для компании', lede: 'Выбери игру, посмотри, как она идёт, и полистай настоящие карточки из приложения.',
         how: 'Как играть', cards: 'Примеры карточек', faq: 'Вопросы про игры',
         nav: [['Главная', '/ru/'], ['Игры', '/ru/games'], ['О нас', '/ru/about'], ['Поддержка', '/ru/support']] }
-    : { h1: 'Games for any table', lede: 'Pick a game, see how it runs and flick through real cards from the app.',
+    : { h1: 'Games for any company', lede: 'Pick a game, see how it runs and flick through real cards from the app.',
         how: 'How to play', cards: 'Example cards', faq: 'Questions about the games',
         nav: [['Home', '/'], ['Games', '/games'], ['About', '/about'], ['Support', '/support']] };
 

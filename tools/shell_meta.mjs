@@ -12,8 +12,8 @@ export const SHELLS = [
   {
     file: 'games.html', loc: 'en', path: '/games', altRu: '/ru/games', robots: 'index,follow,max-image-preview:large', faq: 'games',
     title: 'Question Games for Friends — Play Free Online',
-    description: 'Four sets of questions for any table. Never Have I Ever, Who Knows Better, Questions to Ask Friends and Would You Rather, with rules and real cards.',
-    ogTitle: 'Clinky — four question games for any table',
+    description: 'Four sets of questions for any company. Never Have I Ever, Who Knows Better, Questions to Ask Friends and Would You Rather, with rules and real cards.',
+    ogTitle: 'Clinky — four question games for any company',
     ogDescription: 'Pick a game, read how it runs and play a few cards in the browser.'
   },
   {
@@ -105,7 +105,7 @@ export const SHELLS = [
     file: 'play/never-have-i-ever.html', loc: 'en', path: '/play/never-have-i-ever', altRu: '/ru/play/ya-nikogda-ne',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'never_have_i',
     title: 'Never Have I Ever Questions — Play Free Online',
-    description: 'Never Have I Ever questions you can read straight off the screen. Tap for a fresh card, no sign-up, nothing to install, plus rules and ideas for any table.',
+    description: 'Never Have I Ever questions you can read straight off the screen. Tap for a fresh card, no sign-up, nothing to install, plus rules and ideas for any company.',
     ogTitle: 'Never Have I Ever — play online, free',
     ogDescription: 'Tap for a card and let the table do the rest. Free, no sign-up.'
   },
@@ -136,8 +136,8 @@ export const SHELLS = [
   {
     file: 'play/questions-to-ask-friends.html', loc: 'en', path: '/play/questions-to-ask-friends', altRu: '/ru/play/voprosy-druzyam',
     robots: 'index,follow,max-image-preview:large', faq: 'games', play: 'tell_a_moment',
-    title: 'Questions to Ask Friends — 20 Free Cards to Read and Play',
-    description: 'Questions to ask friends when the talk runs dry, 20 of them free to read. Each one asks for a story instead of a one-word answer. No sign-up needed.',
+    title: 'Questions to Ask Friends — Free Cards to Read and Play',
+    description: 'Questions to ask friends when the talk runs dry, free to read and play. Each one asks for a story instead of a one-word answer. No sign-up needed.',
     ogTitle: 'Questions to ask friends — play online',
     ogDescription: 'Questions that bring out stories. Free, no sign-up.'
   },
